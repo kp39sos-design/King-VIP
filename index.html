@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>اسرع من نتكم🔥 | شحن PUBG + Mobile Legends + Free Fire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
+            color: #f0f3fa;
+            padding: 1rem;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 180, 70, 0.08) 1px, transparent 1px);
+            background-size: 35px 35px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.2rem 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 180, 70, 0.2);
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD966, #FFB347, #ff8c1a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero h1 i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #ffb347;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #b9c7d9;
+        }
+        .brand-name {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffb347, #ff7e05);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-top: 0.6rem;
+            color: #0a0f1e;
+            box-shadow: 0 0 15px rgba(255, 180, 70, 0.5);
+        }
+        .badge-eg {
+            display: inline-block;
+            background: linear-gradient(135deg, #1f2a3e, #162030);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.6rem;
+            border: 1px solid #ffb34760;
+        }
+        .game-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .tab-btn {
+            background: rgba(20, 28, 44, 0.8);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ccddf8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #2e3a55;
+        }
+        .tab-btn i {
+            font-size: 1.2rem;
+        }
+        .tab-btn.active {
+            background: linear-gradient(105deg, #f9a826, #ff7e05);
+            color: #0a0f1e;
+            border-color: #ffb347;
+            box-shadow: 0 8px 18px rgba(255, 126, 5, 0.3);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #232e48;
+            border-color: #ff9f3d;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: rgba(18, 25, 45, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 180, 70, 0.3);
+            text-align: center;
+            min-width: 120px;
+        }
+        .stat-number {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffb347;
+            direction: ltr;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: #b9c3da;
+        }
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .price-card {
+            background: rgba(18, 25, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.3rem;
+            border: 1px solid rgba(255, 180, 70, 0.25);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 180, 70, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        .price-card:hover::before {
+            transform: translateX(100%);
+        }
+        .price-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: #ffb347;
+            box-shadow: 0 20px 35px -12px rgba(255, 140, 26, 0.4);
+        }
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.4rem;
+        }
+        .game-badge {
+            background: linear-gradient(135deg, #ffb34730, #ff8c1a30);
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            border: 1px solid #ffb34760;
+        }
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 0.2rem 0;
+            background: linear-gradient(135deg, #fff, #ffdd99);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .amount-desc {
+            font-size: 0.75rem;
+            color: #b9c3da;
+            margin-bottom: 0.4rem;
+        }
+        .price-eg {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #ffdd99;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+        .price-eg span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #cbd5e6;
+        }
+        .btn-order {
+            background: linear-gradient(105deg, #2d3b5a, #1f2a3e);
+            border: none;
+            width: 100%;
+            padding: 0.7rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            color: #fff2e2;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            border: 1px solid #ffb34750;
+            transition: all 0.3s;
+        }
+        .btn-order:hover {
+            background: linear-gradient(105deg, #ff8c1a, #ffb347);
+            color: #0a0f1e;
+            transform: scale(1.02);
+        }
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-card {
+            background: linear-gradient(135deg, rgba(15, 22, 41, 0.9), rgba(11, 16, 32, 0.9));
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border: 1px solid #ffb34740;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+        .contact-card:hover {
+            border-color: #ffb347;
+            transform: translateY(-3px);
+        }
+        .contact-card i {
+            font-size: 1.8rem;
+            color: #ffb347;
+            margin-bottom: 0.3rem;
+        }
+        .contact-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .contact-number {
+            font-size: 1.2rem;
+            font-weight: 800;
+            direction: ltr;
+            color: #ffe0a3;
+            letter-spacing: 1px;
+        }
+        .contact-wa-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .contact-wa-btn:hover {
+            transform: scale(1.05);
+            background: #128C7E;
+        }
+        .copy-contact {
+            background: #ffb34720;
+            border: 1px solid #ffb347;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+        .payment-section {
+            background: linear-gradient(120deg, rgba(15, 22, 41, 0.9), rgba(11, 16, 32, 0.9));
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #ffb34730;
+            text-align: center;
+        }
+        .vodafone-number {
+            background: linear-gradient(135deg, #01010140, #1a1a2e40);
+            padding: 0.8rem;
+            border-radius: 2rem;
+            margin: 0.8rem auto;
+            display: inline-block;
+            width: 100%;
+            max-width: 360px;
+            border: 1px dashed #ffb347;
+        }
+        .vodafone-number h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            direction: ltr;
+            color: #ffe0a3;
+        }
+        .copy-btn {
+            background: #ffb34720;
+            border: 1px solid #ffb347;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copy-btn:hover {
+            background: #ffb347;
+            color: #0a0f1e;
+        }
+        .payment-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .step {
+            background: rgba(26, 35, 56, 0.8);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+        .step i {
+            margin-left: 5px;
+            color: #ffb347;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6a7a9e;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #1e2a41;
+        }
+        @media (max-width: 680px) {
+            .hero h1 { font-size: 1.5rem; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+            .price-eg { font-size: 1.3rem; }
+            .contact-number { font-size: 1rem; }
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0f1e; }
+        ::-webkit-scrollbar-thumb { background: #ffb347; border-radius: 10px; }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-enter { animation: zoomIn 0.3s ease; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-bolt"></i> اسرع من نتكم 🔥</h1>
+        <p>شحن PUBG + Mobile Legends + Free Fire | أسرع خدمة في مصر</p>
+        <div class="brand-name"><i class="fas fa-rocket"></i> اسرع من نتكم 🔥</div>
+        <div class="badge-eg"><i class="fas fa-phone-alt"></i> دفع عبر فودافون كاش | تسليم فوري</div>
+    </div>
+
+    <!-- Game Tabs (Three Games) -->
+    <div class="game-tabs">
+        <button class="tab-btn active" data-game="pubg"><i class="fab fa-playstation"></i> PUBG MOBILE</button>
+        <button class="tab-btn" data-game="mlbb"><i class="fas fa-skull-crossbones"></i> Mobile Legends</button>
+        <button class="tab-btn" data-game="freefire"><i class="fas fa-fire"></i> Free Fire</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-card"><div class="stat-number" id="statOrders">0</div><div class="stat-label"><i class="fas fa-check-circle"></i> طلب مكتمل</div></div>
+        <div class="stat-card"><div class="stat-number" id="statCustomers">0</div><div class="stat-label"><i class="fas fa-users"></i> عميل سعيد</div></div>
+        <div class="stat-card"><div class="stat-number" id="statDelivery">0</div><div class="stat-label"><i class="fas fa-clock"></i> دقيقة للتسليم</div></div>
+    </div>
+
+    <div id="pricesContainer" class="prices-grid"></div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="contact-card">
+            <i class="fab fa-whatsapp"></i>
+            <h4>خدمة العملاء | واتساب</h4>
+            <div class="contact-number">01017954664</div>
+            <button class="copy-contact" onclick="copyNumber('01017954664', this)"><i class="far fa-copy"></i> نسخ</button>
+            <a href="https://wa.me/201017954664" target="_blank" class="contact-wa-btn"><i class="fab fa-whatsapp"></i> تواصل الآن</a>
+        </div>
+    </div>
+
+    <!-- Payment Section -->
+    <div class="payment-section">
+        <i class="fas fa-money-bill-wave" style="font-size: 1.8rem; color: #ffb347;"></i>
+        <h2 style="margin: 0.4rem 0; font-size: 1.3rem;">طريقة الدفع : فودافون كاش</h2>
+        <div class="vodafone-number">
+            <i class="fas fa-mobile-alt"></i> رقم المحفظة:
+            <h3 dir="ltr">01044049390</h3>
+            <button class="copy-btn" id="copyNumberBtn"><i class="far fa-copy"></i> نسخ الرقم</button>
+        </div>
+        <p style="font-size: 0.8rem;"><i class="fas fa-info-circle"></i> بعد التحويل، أرسل صورة الإيداع + الـ ID على نفس الرقم واتساب</p>
+        <div class="payment-steps">
+            <div class="step"><i class="fas fa-check-circle"></i> 1. افتح فودافون كاش</div>
+            <div class="step"><i class="fas fa-check-circle"></i> 2. اختر تحويل للأرقام</div>
+            <div class="step"><i class="fas fa-check-circle"></i> 3. أدخل الرقم 01044049390</div>
+            <div class="step"><i class="fas fa-check-circle"></i> 4. اكتب المبلغ المطلوب</div>
+            <div class="step"><i class="fas fa-check-circle"></i> 5. أرسل التأكيد واستلم شحنك فوراً</div>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-shield-alt"></i> التسليم خلال 5-20 دقيقة بعد تأكيد الدفع | <i class="fas fa-headset"></i> الدعم الفني: 01017954664
+    </div>
+</div>
+
+<script>
+    // ---------- بيانات PUBG ----------
+    const pubgItems = [
+        { name: "1 + 30 UC", desc: "باقة + بونص", priceEGP: 25.99 },
+        { name: "22 + 60 UC", desc: "باقة + بونص", priceEGP: 46.99 },
+        { name: "54 + 300 UC", desc: "باقة + بونص", priceEGP: 214.99 },
+        { name: "98 + 600 UC", desc: "باقة + بونص", priceEGP: 424.99 },
+        { name: "365 + 1500 UC", desc: "باقة + بونص", priceEGP: 1054.99 },
+        { name: "960 + 3000 UC", desc: "باقة + بونص", priceEGP: 2104.99 },
+        { name: "2300 + 6000 UC", desc: "باقة + بونص", priceEGP: 4204.99 },
+        { name: "4580 + 12000 UC", desc: "باقة + بونص", priceEGP: 8404.99 },
+        { name: "6860 + 18000 UC", desc: "باقة + بونص", priceEGP: 12604.99 },
+        { name: "9140 + 24000 UC", desc: "باقة + بونص", priceEGP: 16804.99 },
+        { name: "11420 + 30000 UC", desc: "باقة + بونص", priceEGP: 21004.99 },
+        { name: "13700 + 36000 UC", desc: "باقة + بونص", priceEGP: 25204.99 },
+        { name: "22820 + 60000 UC", desc: "باقة + بونص", priceEGP: 42004.99 }
+    ];
+
+    // ---------- بيانات Mobile Legends ----------
+    const mlbbItems = [
+        { name: "13 + 1 Diamonds", desc: "باقة + بونص", priceEGP: 25 },
+        { name: "20 + 2 Diamonds", desc: "باقة + بونص", priceEGP: 30 },
+        { name: "51 + 5 Diamonds", desc: "باقة + بونص", priceEGP: 65 },
+        { name: "102 + 10 Diamonds", desc: "باقة + بونص", priceEGP: 120 },
+        { name: "153 + 15 Diamonds", desc: "باقة + بونص", priceEGP: 180 },
+        { name: "203 + 20 Diamonds", desc: "باقة + بونص", priceEGP: 235 },
+        { name: "303 + 33 Diamonds", desc: "باقة + بونص", priceEGP: 350 },
+        { name: "504 + 66 Diamonds", desc: "باقة + بونص", priceEGP: 580 },
+        { name: "1007 + 156 Diamonds", desc: "باقة + بونص", priceEGP: 1150 },
+        { name: "2015 + 383 Diamonds", desc: "باقة + بونص", priceEGP: 2300 },
+        { name: "5035 + 1007 Diamonds", desc: "باقة + بونص", priceEGP: 5730 }
+    ];
+
+    // ---------- بيانات Free Fire (حسب الطلب) ----------
+    const freefireItems = [
+        { name: "50 جوهرة", desc: "شحن فوري", priceEGP: 25 },
+        { name: "100 جوهرة", desc: "شحن فوري", priceEGP: 50 },
+        { name: "210 جوهرة", desc: "شحن فوري", priceEGP: 100 },
+        { name: "310 جوهرة", desc: "شحن فوري", priceEGP: 150 },
+        { name: "520 جوهرة", desc: "شحن فوري", priceEGP: 250 },
+        { name: "1060 جوهرة", desc: "شحن فوري", priceEGP: 500 },
+        { name: "2200 جوهرة", desc: "شحن فوري", priceEGP: 1000 }
+    ];
+
+    const container = document.getElementById('pricesContainer');
+    let currentGame = 'pubg';
+    let ordersCount = 189;
+    let customersCount = 143;
+    let deliveryTime = 8;
+
+    function animateNumber(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            element.innerText = Math.floor(progress * (end - start) + start);
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    setTimeout(() => {
+        animateNumber(document.getElementById('statOrders'), 0, ordersCount, 1300);
+        animateNumber(document.getElementById('statCustomers'), 0, customersCount, 1300);
+        animateNumber(document.getElementById('statDelivery'), 0, deliveryTime, 1300);
+    }, 200);
+
+    function copyNumber(number, btnElement) {
+        navigator.clipboard.writeText(number);
+        let oldText = btnElement.innerHTML;
+        btnElement.innerHTML = '<i class="fas fa-check"></i> تم!';
+        setTimeout(() => btnElement.innerHTML = oldText, 1500);
+    }
+
+    // نافذة الطلب المنبثقة (موحدة)
+    function openOrderPopup(itemName, price) {
+        const modalOverlay = document.createElement('div');
+        modalOverlay.style.position = 'fixed';
+        modalOverlay.style.top = '0';
+        modalOverlay.style.left = '0';
+        modalOverlay.style.width = '100%';
+        modalOverlay.style.height = '100%';
+        modalOverlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
+        modalOverlay.style.backdropFilter = 'blur(8px)';
+        modalOverlay.style.zIndex = '1000';
+        modalOverlay.style.display = 'flex';
+        modalOverlay.style.alignItems = 'center';
+        modalOverlay.style.justifyContent = 'center';
+
+        const modalCard = document.createElement('div');
+        modalCard.className = 'modal-enter';
+        modalCard.style.background = 'linear-gradient(145deg, #0f172f, #0a0f22)';
+        modalCard.style.borderRadius = '2rem';
+        modalCard.style.maxWidth = '420px';
+        modalCard.style.width = '90%';
+        modalCard.style.padding = '1.5rem';
+        modalCard.style.border = '2px solid #ffb347';
+        modalCard.style.textAlign = 'center';
+
+        modalCard.innerHTML = `
+            <i class="fas fa-gem" style="font-size: 2.5rem; color: #ffb347;"></i>
+            <h3 style="margin: 0.5rem 0; color:#ffdd99;">تأكيد الطلب</h3>
+            <p style="background:#00000050; padding:0.5rem; border-radius:1rem; margin:0.6rem 0;">
+                <strong>${itemName}</strong><br>
+                السعر: <span style="color:#FFD966; font-size:1.3rem; font-weight:800;">${parseFloat(price).toLocaleString('eg-EG', {minimumFractionDigits:2})} جنيه</span>
+            </p>
+            <div style="background:#00000040; border-radius:1rem; padding:0.5rem; margin: 0.8rem 0;">
+                <i class="fas fa-phone-alt"></i> الدفع عبر فودافون كاش: <strong>01044049390</strong>
+                <button id="modalCopyBtn" style="background:#ffb34720; border:1px solid #ffb347; border-radius:2rem; padding:0.2rem 0.8rem; margin-right:0.5rem; cursor:pointer;">نسخ</button>
+            </div>
+            <div style="background:#00000030; border-radius:1rem; padding:0.4rem; margin: 0.5rem 0;">
+                <i class="fab fa-whatsapp"></i> للدعم: <strong>01017954664</strong>
+                <button id="modalCopySupportBtn" style="background:#ffb34720; border:1px solid #ffb347; border-radius:2rem; padding:0.2rem 0.8rem; margin-right:0.5rem; cursor:pointer;">نسخ</button>
+            </div>
+            <p style="font-size:0.7rem;">📱 بعد التحويل أرسل تأكيد الدفع + الـ ID على واتساب</p>
+            <div style="display:flex; gap:0.6rem; justify-content:center; margin-top:1rem;">
+                <button id="closeModalBtn" style="background:#2a3650; border:none; padding:0.5rem 1.2rem; border-radius:2rem; cursor:pointer;">إغلاق</button>
+                <a href="https://wa.me/201044049390?text=طلب%20شحن%20${encodeURIComponent(itemName)}%20بمبلغ%20${price}%20جنيه%20(فودافون%20كاش)" target="_blank" style="background:#25D366; color:white; text-decoration:none; padding:0.5rem 1.2rem; border-radius:2rem; display:inline-flex; align-items:center; gap:0.4rem;"><i class="fab fa-whatsapp"></i> واتساب</a>
+            </div>
+        `;
+
+        modalOverlay.appendChild(modalCard);
+        document.body.appendChild(modalOverlay);
+
+        document.getElementById('closeModalBtn')?.addEventListener('click', () => modalOverlay.remove());
+        document.getElementById('modalCopyBtn')?.addEventListener('click', () => {
+            navigator.clipboard.writeText('01044049390');
+            let btn = document.getElementById('modalCopyBtn');
+            btn.innerHTML = '✓ تم';
+            setTimeout(() => btn.innerHTML = 'نسخ', 1200);
+        });
+        document.getElementById('modalCopySupportBtn')?.addEventListener('click', () => {
+            navigator.clipboard.writeText('01017954664');
+            let btn = document.getElementById('modalCopySupportBtn');
+            btn.innerHTML = '✓ تم';
+            setTimeout(() => btn.innerHTML = 'نسخ', 1200);
+        });
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.remove(); });
+    }
+
+    function renderGame(gameKey) {
+        let items = [];
+        let gameIcon = "";
+        let gameName = "";
+
+        if (gameKey === 'pubg') {
+            items = pubgItems;
+            gameIcon = "fab fa-playstation";
+            gameName = "PUBG MOBILE";
+        } else if (gameKey === 'mlbb') {
+            items = mlbbItems;
+            gameIcon = "fas fa-skull-crossbones";
+            gameName = "Mobile Legends";
+        } else {
+            items = freefireItems;
+            gameIcon = "fas fa-fire";
+            gameName = "Free Fire";
+        }
+
+        let html = '';
+        items.forEach((item, idx) => {
+            let formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            html += `
+                <div class="price-card animate__animated animate__fadeInUp" style="animation-delay: ${idx * 0.03}s">
+                    <div class="card-icon"><i class="${gameIcon}"></i></div>
+                    <div class="game-badge">${gameName}</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="amount-desc">${item.desc}</div>
+                    <div class="price-eg">
+                        ${formattedPrice} <span>جنيه مصري</span>
+                    </div>
+                    <button class="btn-order" data-item="${item.name} (${gameName})" data-price="${item.priceEGP}">
+                        <i class="fas fa-shopping-cart"></i> اطلب الآن
+                    </button>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+
+        document.querySelectorAll('.btn-order').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let itemName = btn.getAttribute('data-item');
+                let price = btn.getAttribute('data-price');
+                openOrderPopup(itemName, price);
+                ordersCount++;
+                document.getElementById('statOrders').innerText = ordersCount;
+            });
+        });
+    }
+
+    // التبديل بين التبويبات
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const gameVal = tab.getAttribute('data-game');
+            if (!gameVal) return;
+            tabs.forEach(btn => btn.classList.remove('active'));
+            tab.classList.add('active');
+            currentGame = gameVal;
+            renderGame(currentGame);
+        });
+    });
+
+    // نسخ رقم فودافون كاش الرئيسي
+    const copyMainBtn = document.getElementById('copyNumberBtn');
+    if (copyMainBtn) {
+        copyMainBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('01044049390');
+            let oldHtml = copyMainBtn.innerHTML;
+            copyMainBtn.innerHTML = '<i class="fas fa-check"></i> تم!';
+            setTimeout(() => copyMainBtn.innerHTML = oldHtml, 1500);
+        });
+    }
+
+    // عرض PUBG بشكل افتراضي
+    renderGame('pubg');
+    console.log("%c🔥 اسرع من نتكم | PUBG + MLBB + FREE FIRE | فودافون كاش: 01044049390 | دعم: 01017954664", "color: #ffb347; font-size: 14px;");
+</script>
+</body>
+</html>
