@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>اسرع من نتكم 🔥 | شحن PUBG + ML + FF + يلا لودو (VIP)</title>
+    <title>اسرع من نتكم 🔥 | شحن PUBG + ML + FF + يلا لودو + كروت وفودافون كاش</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -24,7 +24,6 @@
             position: relative;
         }
 
-        /* خلفية متحركة (نجوم) */
         body::before {
             content: '';
             position: fixed;
@@ -52,7 +51,6 @@
             z-index: 1;
         }
 
-        /* هيدر أنيق */
         .hero {
             text-align: center;
             margin-bottom: 2rem;
@@ -107,7 +105,41 @@
             border: 1px solid #ffb34760;
         }
 
-        /* التبويبات الرئيسية */
+        /* أزرار التبديل بين الأقسام */
+        .section-switch {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .switch-btn {
+            background: rgba(20, 28, 44, 0.8);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ccddf8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #2e3a55;
+        }
+        .switch-btn.active {
+            background: linear-gradient(105deg, #f9a826, #ff7e05);
+            color: #0a0f1e;
+            border-color: #ffb347;
+            box-shadow: 0 8px 18px rgba(255, 126, 5, 0.3);
+        }
+        .switch-btn:hover:not(.active) {
+            background: #232e48;
+            border-color: #ff9f3d;
+        }
+
+        /* التبويبات للألعاب */
         .game-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -116,7 +148,16 @@
             margin-bottom: 2rem;
         }
 
-        .tab-btn {
+        /* تبويبات الشحن */
+        .recharge-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1rem 0 1rem;
+        }
+
+        .tab-btn, .recharge-tab {
             background: rgba(20, 28, 44, 0.8);
             border: none;
             padding: 0.8rem 1.8rem;
@@ -133,18 +174,14 @@
             border: 1px solid #2e3a55;
         }
 
-        .tab-btn i {
-            font-size: 1.2rem;
-        }
-
-        .tab-btn.active {
+        .tab-btn.active, .recharge-tab.active {
             background: linear-gradient(105deg, #f9a826, #ff7e05);
             color: #0a0f1e;
             border-color: #ffb347;
             box-shadow: 0 8px 18px rgba(255, 126, 5, 0.3);
         }
 
-        .tab-btn:hover:not(.active) {
+        .tab-btn:hover:not(.active), .recharge-tab:hover:not(.active) {
             background: #232e48;
             border-color: #ff9f3d;
         }
@@ -189,12 +226,11 @@
         /* شبكة البطاقات */
         .prices-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2.5rem;
         }
 
-        /* البطاقة العادية */
         .price-card {
             background: rgba(18, 25, 45, 0.7);
             backdrop-filter: blur(8px);
@@ -206,21 +242,10 @@
             overflow: hidden;
         }
 
-        /* بطاقة VIP مميزة */
         .price-card.vip-card {
             background: linear-gradient(135deg, rgba(255, 180, 70, 0.2), rgba(255, 126, 5, 0.1));
             border: 2px solid #ffd966;
             box-shadow: 0 0 20px rgba(255, 180, 70, 0.4);
-        }
-
-        .price-card.vip-card::before {
-            content: '👑';
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 2rem;
-            opacity: 0.2;
-            pointer-events: none;
         }
 
         .price-card::before {
@@ -248,6 +273,21 @@
         .card-icon {
             font-size: 2.2rem;
             margin-bottom: 0.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background: #ffffff20;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
         .game-badge {
@@ -325,7 +365,6 @@
             transform: scale(1.02);
         }
 
-        /* باقي الأقسام (تواصل، دفع، footer) بنفس الجمال */
         .contact-section {
             display: flex;
             flex-wrap: wrap;
@@ -385,6 +424,22 @@
         .contact-wa-btn:hover {
             transform: scale(1.05);
             background: #128C7E;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .telegram-btn:hover {
+            transform: scale(1.05);
+            background: #006699;
         }
 
         .copy-contact {
@@ -469,9 +524,47 @@
             border-top: 1px solid #1e2a41;
         }
 
+        .section-title {
+            text-align: center;
+            margin: 0.5rem 0 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffdd99, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hidden-section {
+            display: none;
+        }
+        
+        .telegram-link-card {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .telegram-large-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(105deg, #0088cc, #006699);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid #ffb347;
+        }
+        .telegram-large-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #0088cc;
+        }
+
         @media (max-width: 680px) {
             .hero h1 { font-size: 1.5rem; }
-            .tab-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+            .tab-btn, .recharge-tab, .switch-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
             .price-eg { font-size: 1.3rem; }
             .contact-number { font-size: 1rem; }
         }
@@ -491,17 +584,15 @@
 <div class="container">
     <div class="hero">
         <h1><i class="fas fa-bolt"></i> اسرع من نتكم 🔥</h1>
-        <p>شحن PUBG + Mobile Legends + Free Fire + يلا لودو (VIP) | أسرع خدمة في مصر</p>
+        <p>شحن PUBG + Mobile Legends + Free Fire + يلا لودو (VIP) + كروت شحن وفودافون كاش وإنترنت WE</p>
         <div class="brand-name"><i class="fas fa-rocket"></i> اسرع من نتكم 🔥</div>
         <div class="badge-eg"><i class="fas fa-phone-alt"></i> دفع عبر فودافون كاش | تسليم فوري</div>
     </div>
 
-    <!-- Game Tabs (4 Games) -->
-    <div class="game-tabs">
-        <button class="tab-btn active" data-game="pubg"><i class="fab fa-playstation"></i> PUBG MOBILE</button>
-        <button class="tab-btn" data-game="mlbb"><i class="fas fa-skull-crossbones"></i> Mobile Legends</button>
-        <button class="tab-btn" data-game="freefire"><i class="fas fa-fire"></i> Free Fire</button>
-        <button class="tab-btn" data-game="yallaludo"><i class="fas fa-dice-d6"></i> يلا لودو (VIP)</button>
+    <!-- أزرار التبديل بين الأقسام -->
+    <div class="section-switch">
+        <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
+        <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-mobile-alt"></i> 📱 شحن الرصيد والإنترنت</button>
     </div>
 
     <!-- Stats -->
@@ -511,7 +602,28 @@
         <div class="stat-card"><div class="stat-number" id="statDelivery">0</div><div class="stat-label"><i class="fas fa-clock"></i> دقيقة للتسليم</div></div>
     </div>
 
-    <div id="pricesContainer" class="prices-grid"></div>
+    <!-- قسم الألعاب (يظهر بشكل افتراضي) -->
+    <div id="gamesSection">
+        <div class="game-tabs">
+            <button class="tab-btn active" data-game="pubg"><i class="fab fa-playstation"></i> PUBG MOBILE</button>
+            <button class="tab-btn" data-game="mlbb"><i class="fas fa-skull-crossbones"></i> Mobile Legends</button>
+            <button class="tab-btn" data-game="freefire"><i class="fas fa-fire"></i> Free Fire</button>
+            <button class="tab-btn" data-game="yallaludo"><i class="fas fa-dice-d6"></i> يلا لودو (VIP)</button>
+        </div>
+        <div id="pricesContainer" class="prices-grid"></div>
+    </div>
+
+    <!-- قسم شحن الرصيد والإنترنت (مخفي في البداية) -->
+    <div id="rechargeSection" class="hidden-section">
+        <div class="section-title"><i class="fas fa-mobile-alt"></i> شحن الرصيد والإنترنت</div>
+        <div class="recharge-tabs">
+            <button class="recharge-tab active" data-recharge="vodafone"><i class="fas fa-sim-card"></i> فودافون</button>
+            <button class="recharge-tab" data-recharge="etisalat"><i class="fas fa-tower-cell"></i> اتصالات</button>
+            <button class="recharge-tab" data-recharge="we"><i class="fas fa-wifi"></i> وي</button>
+            <button class="recharge-tab" data-recharge="wehome"><i class="fas fa-home"></i> إنترنت WE منزلي</button>
+        </div>
+        <div id="rechargeContainer" class="prices-grid"></div>
+    </div>
 
     <!-- Contact Section -->
     <div class="contact-section">
@@ -521,6 +633,13 @@
             <div class="contact-number">01017954664</div>
             <button class="copy-contact" onclick="copyNumberGeneric('01017954664', this)"><i class="far fa-copy"></i> نسخ</button>
             <a href="https://wa.me/201017954664" target="_blank" class="contact-wa-btn"><i class="fab fa-whatsapp"></i> تواصل الآن</a>
+        </div>
+        <div class="contact-card">
+            <i class="fab fa-telegram"></i>
+            <h4>شحن الرصيد والإنترنت | تلجرام</h4>
+            <div class="contact-number">@BESO125F</div>
+            <button class="copy-contact" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ</button>
+            <a href="https://t.me/BESO125F" target="_blank" class="telegram-btn"><i class="fab fa-telegram"></i> تواصل عبر تلجرام</a>
         </div>
     </div>
 
@@ -548,7 +667,7 @@
 </div>
 
 <script>
-    // ---------- بيانات PUBG ----------
+    // ---------- بيانات الألعاب (نفس السابق) ----------
     const pubgItems = [
         { name: "1 + 30 UC", desc: "باقة + بونص", priceEGP: 25.99 },
         { name: "22 + 60 UC", desc: "باقة + بونص", priceEGP: 46.99 },
@@ -565,7 +684,6 @@
         { name: "22820 + 60000 UC", desc: "باقة + بونص", priceEGP: 42004.99 }
     ];
 
-    // ---------- Mobile Legends ----------
     const mlbbItems = [
         { name: "13 + 1 Diamonds", desc: "باقة + بونص", priceEGP: 25 },
         { name: "20 + 2 Diamonds", desc: "باقة + بونص", priceEGP: 30 },
@@ -580,7 +698,6 @@
         { name: "5035 + 1007 Diamonds", desc: "باقة + بونص", priceEGP: 5730 }
     ];
 
-    // ---------- Free Fire ----------
     const freefireItems = [
         { name: "50 جوهرة", desc: "شحن فوري", priceEGP: 25 },
         { name: "100 جوهرة", desc: "شحن فوري", priceEGP: 50 },
@@ -591,8 +708,6 @@
         { name: "2200 جوهرة", desc: "شحن فوري", priceEGP: 1000 }
     ];
 
-    // ---------- يلا لودو (Yalla Ludo) ----------
-    // شحن عادي (ماس)
     const yallaNormalItems = [
         { name: "830 💎", desc: "شحن عادي", priceEGP: 110, isVip: false },
         { name: "2,320 💎", desc: "شحن عادي", priceEGP: 250, isVip: false },
@@ -618,13 +733,11 @@
         { name: "283,460 💎", desc: "شحن عادي", priceEGP: 24000, isVip: false }
     ];
 
-    // رتب VIP (فارس و لواء)
     const yallaVipItems = [
         { name: "👑 الفارس", desc: "رتبة VIP", priceEGP: 560, isVip: true },
         { name: "👑 اللواء", desc: "رتبة VIP", priceEGP: 1760, isVip: true }
     ];
 
-    // شحن بالاكونت
     const yallaAccountItems = [
         { name: "400 💎", desc: "شحن بالاكونت", priceEGP: 60, isVip: false },
         { name: "1,800 💎", desc: "شحن بالاكونت", priceEGP: 190, isVip: false },
@@ -649,12 +762,13 @@
     ];
 
     const container = document.getElementById('pricesContainer');
+    const rechargeContainer = document.getElementById('rechargeContainer');
     let currentGame = 'pubg';
+    let currentRecharge = 'vodafone';
     let ordersCount = 189;
     let customersCount = 143;
     let deliveryTime = 8;
 
-    // دالة نسخ عامة
     window.copyNumberGeneric = function(number, btnElement) {
         navigator.clipboard.writeText(number).then(() => {
             const originalHTML = btnElement.innerHTML;
@@ -682,7 +796,6 @@
         animateNumber(document.getElementById('statDelivery'), 0, deliveryTime, 1300);
     }, 200);
 
-    // نافذة الطلب المنبثقة (نفسها)
     function openOrderPopup(itemName, price) {
         const modalOverlay = document.createElement('div');
         modalOverlay.style.position = 'fixed';
@@ -765,6 +878,7 @@
         }
     }
 
+    // عرض الألعاب
     function renderGame(gameKey) {
         let items = [];
         let gameIcon = "";
@@ -783,7 +897,6 @@
             gameIcon = "fas fa-fire";
             gameName = "Free Fire";
         } else if (gameKey === 'yallaludo') {
-            // دمج جميع أصناف يلا لودو
             items = [...yallaNormalItems, ...yallaVipItems, ...yallaAccountItems];
             gameIcon = "fas fa-dice-d6";
             gameName = "يلا لودو";
@@ -792,7 +905,6 @@
         let html = '';
         items.forEach((item, idx) => {
             let formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            // إضافة كلاس vip-card إذا كان العنصر من نوع VIP
             const vipClass = (item.isVip === true) ? 'vip-card' : '';
             const vipBadge = (item.isVip === true) ? '<div class="game-badge vip-badge"><i class="fas fa-crown"></i> VIP مميز</div>' : `<div class="game-badge">${gameName}</div>`;
             html += `
@@ -812,7 +924,7 @@
         });
         container.innerHTML = html;
 
-        document.querySelectorAll('.btn-order').forEach(btn => {
+        document.querySelectorAll('#pricesContainer .btn-order').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 let itemName = btn.getAttribute('data-item');
                 let price = btn.getAttribute('data-price');
@@ -823,20 +935,103 @@
         });
     }
 
-    // التبديل بين التبويبات
-    const tabs = document.querySelectorAll('.tab-btn');
-    tabs.forEach(tab => {
+    // عرض شحن الرصيد والإنترنت (بدون أسعار، فقط رابط تلجرام)
+    function renderRecharge(companyKey) {
+        let companyLogo = "";
+        let companyName = "";
+        let companyIcon = "";
+
+        switch(companyKey) {
+            case 'vodafone':
+                companyLogo = '<div class="company-logo" style="background:#e60000;"><i class="fas fa-sim-card" style="color:white;"></i></div>';
+                companyName = "فودافون";
+                companyIcon = "fas fa-sim-card";
+                break;
+            case 'etisalat':
+                companyLogo = '<div class="company-logo" style="background:#007b3d;"><i class="fas fa-tower-cell" style="color:white;"></i></div>';
+                companyName = "اتصالات";
+                companyIcon = "fas fa-tower-cell";
+                break;
+            case 'we':
+                companyLogo = '<div class="company-logo" style="background:#6f2da8;"><i class="fas fa-wifi" style="color:white;"></i></div>';
+                companyName = "وي";
+                companyIcon = "fas fa-wifi";
+                break;
+            case 'wehome':
+                companyLogo = '<div class="company-logo" style="background:#1e88e5;"><i class="fas fa-home" style="color:white;"></i></div>';
+                companyName = "إنترنت WE منزلي";
+                companyIcon = "fas fa-home";
+                break;
+            default: return;
+        }
+
+        // عرض بطاقة واحدة فقط تحتوي على رسالة وتوجيه للتلجرام
+        const html = `
+            <div class="price-card animate__animated animate__fadeInUp" style="grid-column: 1 / -1; text-align: center;">
+                <div class="card-icon">
+                    ${companyLogo}
+                </div>
+                <div class="game-badge">${companyName}</div>
+                <div class="item-name">أسعار متغيرة باستمرار</div>
+                <div class="amount-desc">يرجى التواصل معنا على تلجرام لمعرفة أحدث الأسعار والعروض</div>
+                <div style="margin: 1rem 0;">
+                    <i class="fab fa-telegram" style="font-size: 2rem; color: #0088cc;"></i>
+                </div>
+                <a href="https://t.me/BESO125F" target="_blank" class="telegram-large-btn" style="display: inline-flex; align-items: center; gap: 8px; background: #0088cc; color: white; padding: 0.7rem 1.5rem; border-radius: 40px; text-decoration: none; font-weight: bold;">
+                    <i class="fab fa-telegram"></i> تواصل عبر تلجرام @BESO125F
+                </a>
+                <button class="copy-contact" style="margin-top: 0.8rem; display: inline-block;" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ معرف التلجرام</button>
+            </div>
+        `;
+        rechargeContainer.innerHTML = html;
+    }
+
+    // تبديل الأقسام
+    const gamesSection = document.getElementById('gamesSection');
+    const rechargeSection = document.getElementById('rechargeSection');
+    const showGamesBtn = document.getElementById('showGamesBtn');
+    const showRechargeBtn = document.getElementById('showRechargeBtn');
+
+    showGamesBtn.addEventListener('click', () => {
+        gamesSection.classList.remove('hidden-section');
+        rechargeSection.classList.add('hidden-section');
+        showGamesBtn.classList.add('active');
+        showRechargeBtn.classList.remove('active');
+    });
+
+    showRechargeBtn.addEventListener('click', () => {
+        gamesSection.classList.add('hidden-section');
+        rechargeSection.classList.remove('hidden-section');
+        showRechargeBtn.classList.add('active');
+        showGamesBtn.classList.remove('active');
+    });
+
+    // الأحداث الخاصة بتبويبات الألعاب
+    const gameTabs = document.querySelectorAll('#gamesSection .tab-btn');
+    gameTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const gameVal = tab.getAttribute('data-game');
             if (!gameVal) return;
-            tabs.forEach(btn => btn.classList.remove('active'));
+            gameTabs.forEach(btn => btn.classList.remove('active'));
             tab.classList.add('active');
             currentGame = gameVal;
             renderGame(currentGame);
         });
     });
 
-    // نسخ رقم فودافون كاش الرئيسي
+    // الأحداث الخاصة بتبويبات الشحن (تعيد عرض نفس الرسالة مع تغيير اسم الشركة)
+    const rechargeTabs = document.querySelectorAll('#rechargeSection .recharge-tab');
+    rechargeTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const val = tab.getAttribute('data-recharge');
+            if (!val) return;
+            rechargeTabs.forEach(btn => btn.classList.remove('active'));
+            tab.classList.add('active');
+            currentRecharge = val;
+            renderRecharge(currentRecharge);
+        });
+    });
+
     const copyMainBtn = document.getElementById('copyNumberBtn');
     if (copyMainBtn) {
         copyMainBtn.addEventListener('click', () => {
@@ -847,9 +1042,10 @@
         });
     }
 
-    // عرض PUBG بشكل افتراضي
+    // التهيئة الأولية
     renderGame('pubg');
-    console.log("%c🔥 اسرع من نتكم | إصدار VIP - يلا لودو برتب الفارس واللواء", "color: #ffb347; font-size: 14px;");
+    renderRecharge('vodafone');
+    console.log("%c🔥 اسرع من نتكم | تم إزالة الأسعار المتغيرة من قسم الشحن وإضافة رابط تلجرام", "color: #ffb347; font-size: 14px;");
 </script>
 </body>
 </html>
