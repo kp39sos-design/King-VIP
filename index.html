@@ -6,7 +6,6 @@
     <title>اسرع من نتكم 🔥 | شحن PUBG + ML + FF + يلا لودو + كروت وفودافون كاش</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
@@ -14,16 +13,47 @@
             box-sizing: border-box;
         }
 
+        :root {
+            /* الوضع الداكن (افتراضي) */
+            --bg-gradient: radial-gradient(circle at 10% 20%, #0a0f1e, #03060f);
+            --card-bg: rgba(18, 28, 48, 0.75);
+            --card-border: rgba(255, 190, 70, 0.4);
+            --text-primary: #f0f3fa;
+            --text-secondary: #cbd5f0;
+            --badge-bg: linear-gradient(115deg, #FFB34740, #FF7E0540);
+            --btn-order-bg: linear-gradient(105deg, #2d3b5a, #1f2a3e);
+            --btn-order-hover: linear-gradient(105deg, #FF8C1A, #FFB347);
+            --hero-bg: rgba(10, 20, 35, 0.65);
+            --contact-card-bg: linear-gradient(145deg, rgba(15, 25, 45, 0.9), rgba(10, 18, 32, 0.95));
+            --stat-bg: rgba(15, 25, 45, 0.7);
+        }
+
+        body.light-mode {
+            /* الوضع الفاتح المحسن */
+            --bg-gradient: linear-gradient(135deg, #fef9e6, #fff4e0);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 140, 0, 0.4);
+            --text-primary: #2c2b28;
+            --text-secondary: #4a4a4a;
+            --badge-bg: #ffe0b3;
+            --btn-order-bg: #f0f0f0;
+            --btn-order-hover: linear-gradient(105deg, #FFB347, #FF8C1A);
+            --hero-bg: rgba(255, 250, 240, 0.95);
+            --contact-card-bg: #ffffff;
+            --stat-bg: rgba(255, 245, 235, 0.9);
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
-            color: #f0f3fa;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
             padding: 1rem;
             min-height: 100vh;
-            overflow-x: hidden;
+            transition: background 0.3s, color 0.2s;
             position: relative;
         }
 
+        /* خلفية متحركة بنجوم (تظهر فقط في الداكن) */
         body::before {
             content: '';
             position: fixed;
@@ -31,316 +61,255 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(rgba(255, 180, 70, 0.15) 1px, transparent 1px);
-            background-size: 35px 35px;
+            background-image: radial-gradient(rgba(255, 200, 100, 0.2) 1.5px, transparent 1.5px);
+            background-size: 45px 45px;
             pointer-events: none;
+            animation: driftStars 80s linear infinite;
             z-index: 0;
-            animation: moveStars 50s linear infinite;
+            opacity: 0.5;
         }
+        body.light-mode::before { display: none; }
 
-        @keyframes moveStars {
+        @keyframes driftStars {
             0% { background-position: 0 0; }
-            100% { background-position: 70px 70px; }
+            100% { background-position: 100px 100px; }
         }
 
         .container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 1.2rem 0.8rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            padding: 0.5rem;
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.5rem;
+        }
+        .theme-switch {
+            background: rgba(255,180,70,0.2);
+            border-radius: 40px;
+            padding: 0.3rem 0.8rem;
+            display: inline-flex;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #ffb347;
+            cursor: pointer;
+            align-items: center;
+            transition: 0.2s;
+        }
+        body.light-mode .theme-switch {
+            background: #fff0d0;
+            border-color: #e07c1f;
+        }
+        .theme-switch i {
+            font-size: 1rem;
+            color: #ffb347;
         }
 
         .hero {
             text-align: center;
-            margin-bottom: 2rem;
-            background: rgba(15, 23, 42, 0.5);
+            background: var(--hero-bg);
             backdrop-filter: blur(12px);
             border-radius: 3rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 180, 70, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 1.8rem 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 180, 70, 0.5);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
         }
-
         .hero h1 {
-            font-size: 2rem;
+            font-size: 2.3rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #FFD966, #FFB347, #ff8c1a);
+            background: linear-gradient(125deg, #FFE6B0, #FFB347, #FF7E05);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
-        .hero h1 i {
-            background: none;
-            -webkit-background-clip: unset;
-            color: #ffb347;
-        }
-
-        .hero p {
-            font-size: 1rem;
-            color: #b9c7d9;
-        }
-
         .brand-name {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffb347, #ff7e05);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ffb347, #e05a00);
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
             font-weight: 800;
-            margin-top: 0.6rem;
+            margin-top: 0.8rem;
             color: #0a0f1e;
-            box-shadow: 0 0 15px rgba(255, 180, 70, 0.5);
+            box-shadow: 0 6px 14px rgba(255, 120, 0, 0.4);
         }
-
-        .badge-eg {
-            display: inline-block;
-            background: linear-gradient(135deg, #1f2a3e, #162030);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 0.6rem;
-            border: 1px solid #ffb34760;
-        }
-
-        /* أزرار التبديل بين الأقسام */
         .section-switch {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.2rem;
+            margin: 1.5rem 0 2rem;
         }
         .switch-btn {
-            background: rgba(20, 28, 44, 0.8);
+            background: rgba(20, 28, 44, 0.9);
             border: none;
             padding: 0.8rem 2rem;
             border-radius: 60px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1rem;
-            color: #ccddf8;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid #2e3a55;
+            border: 1px solid #3a4a6e;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+        }
+        body.light-mode .switch-btn {
+            background: #f5f0e0;
+            border-color: #d4b37a;
+            color: #5a4a2e;
         }
         .switch-btn.active {
-            background: linear-gradient(105deg, #f9a826, #ff7e05);
+            background: linear-gradient(105deg, #FFB347, #FF7E05);
             color: #0a0f1e;
-            border-color: #ffb347;
-            box-shadow: 0 8px 18px rgba(255, 126, 5, 0.3);
+            border-color: #FFD966;
+            box-shadow: 0 8px 18px rgba(255, 100, 0, 0.4);
         }
-        .switch-btn:hover:not(.active) {
-            background: #232e48;
-            border-color: #ff9f3d;
+        body.light-mode .switch-btn.active {
+            background: linear-gradient(105deg, #FFB347, #FF8C1A);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,140,0,0.3);
         }
-
-        /* التبويبات للألعاب */
-        .game-tabs {
+        .game-tabs, .recharge-tabs {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.9rem;
             margin-bottom: 2rem;
         }
-
-        /* تبويبات الشحن */
-        .recharge-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 1rem 0 1rem;
-        }
-
         .tab-btn, .recharge-tab {
-            background: rgba(20, 28, 44, 0.8);
-            border: none;
-            padding: 0.8rem 1.8rem;
+            background: rgba(20, 28, 44, 0.85);
+            border: 1px solid #3e4a6e;
+            padding: 0.7rem 1.6rem;
             border-radius: 60px;
-            font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            font-size: 1rem;
-            color: #ccddf8;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            border: 1px solid #2e3a55;
+            gap: 8px;
+            transition: 0.2s;
         }
-
+        body.light-mode .tab-btn, body.light-mode .recharge-tab {
+            background: #fff6ea;
+            border-color: #e0c8a0;
+            color: #5a4a2e;
+        }
         .tab-btn.active, .recharge-tab.active {
-            background: linear-gradient(105deg, #f9a826, #ff7e05);
-            color: #0a0f1e;
-            border-color: #ffb347;
-            box-shadow: 0 8px 18px rgba(255, 126, 5, 0.3);
+            background: linear-gradient(115deg, #F9A826, #FF7E05);
+            color: #0f0f1a;
+            border-color: #FFC107;
+            box-shadow: 0 5px 12px rgba(255,126,5,0.5);
         }
-
-        .tab-btn:hover:not(.active), .recharge-tab:hover:not(.active) {
-            background: #232e48;
-            border-color: #ff9f3d;
+        body.light-mode .tab-btn.active, body.light-mode .recharge-tab.active {
+            background: #FFB347;
+            color: white;
+            border-color: #e07c1f;
         }
-
-        /* الإحصائيات */
         .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0 2rem;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
         .stat-card {
-            background: rgba(18, 25, 45, 0.6);
+            background: var(--stat-bg);
             backdrop-filter: blur(8px);
-            padding: 0.6rem 1.2rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 2rem;
-            border: 1px solid rgba(255, 180, 70, 0.3);
+            border: 1px solid rgba(255, 180, 70, 0.5);
             text-align: center;
             min-width: 120px;
-            transition: all 0.3s;
+            transition: 0.2s;
         }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            border-color: #ffb347;
-        }
-
         .stat-number {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            color: #ffb347;
-            direction: ltr;
+            color: #FFC857;
         }
-
-        .stat-label {
-            font-size: 0.7rem;
-            color: #b9c3da;
+        body.light-mode .stat-number {
+            color: #e07c1f;
         }
-
-        /* شبكة البطاقات */
         .prices-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
         }
-
         .price-card {
-            background: rgba(18, 25, 45, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 1.3rem;
-            border: 1px solid rgba(255, 180, 70, 0.25);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.4rem;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        .price-card.vip-card {
-            background: linear-gradient(135deg, rgba(255, 180, 70, 0.2), rgba(255, 126, 5, 0.1));
-            border: 2px solid #ffd966;
-            box-shadow: 0 0 20px rgba(255, 180, 70, 0.4);
+        body.light-mode .price-card {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-
-        .price-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 180, 70, 0.08), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .price-card:hover::before {
-            transform: translateX(100%);
-        }
-
         .price-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            border-color: #ffb347;
-            box-shadow: 0 20px 35px -12px rgba(255, 140, 26, 0.4);
+            transform: translateY(-8px) scale(1.01);
+            border-color: #FFB347;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
         }
-
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 0.4rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+        .price-card.vip-card {
+            background: linear-gradient(135deg, rgba(255, 190, 70, 0.2), rgba(255, 100, 0, 0.15));
+            border: 2px solid #FFD966;
         }
-        .company-logo {
-            width: 50px;
-            height: 50px;
-            background: #ffffff20;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
+        body.light-mode .price-card.vip-card {
+            background: #fff4e6;
+            border: 2px solid #FFB347;
         }
-
         .game-badge {
-            background: linear-gradient(135deg, #ffb34730, #ff8c1a30);
+            background: var(--badge-bg);
             display: inline-block;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.65rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
             font-weight: 700;
-            margin-bottom: 0.6rem;
-            border: 1px solid #ffb34760;
+            margin-bottom: 0.7rem;
+            border: 1px solid #ffb34770;
         }
-
+        body.light-mode .game-badge {
+            border-color: #e0b070;
+            background: #ffe3c0;
+            color: #5a3a1a;
+        }
         .vip-badge {
-            background: linear-gradient(135deg, #ffd966, #ffb347);
+            background: linear-gradient(115deg, #FFD966, #FFB347);
             color: #0a0f1e;
             border: none;
         }
-
         .item-name {
             font-size: 1.2rem;
             font-weight: 800;
-            margin: 0.2rem 0;
-            background: linear-gradient(135deg, #fff, #ffdd99);
+            margin: 0.3rem 0;
+            background: linear-gradient(135deg, var(--text-primary), #FFE0A3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
-        .amount-desc {
-            font-size: 0.75rem;
-            color: #b9c3da;
-            margin-bottom: 0.4rem;
-        }
-
         .price-eg {
             font-size: 1.7rem;
             font-weight: 800;
-            color: #ffdd99;
-            margin: 0.5rem 0;
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
+            color: #FFE0A3;
+            margin: 0.6rem 0;
         }
-
-        .price-eg span {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #cbd5e6;
+        body.light-mode .price-eg {
+            color: #e07c1f;
         }
-
         .btn-order {
-            background: linear-gradient(105deg, #2d3b5a, #1f2a3e);
+            background: var(--btn-order-bg);
             border: none;
             width: 100%;
             padding: 0.7rem;
@@ -348,122 +317,58 @@
             font-weight: 700;
             font-family: 'Cairo', sans-serif;
             font-size: 0.9rem;
-            color: #fff2e2;
+            color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             margin-top: 0.8rem;
-            border: 1px solid #ffb34750;
-            transition: all 0.3s;
+            border: 1px solid #ffb34780;
+            transition: all 0.25s;
         }
-
+        body.light-mode .btn-order {
+            background: #f0f0f0;
+            color: #3a2a1a;
+            border-color: #e0b070;
+        }
         .btn-order:hover {
-            background: linear-gradient(105deg, #ff8c1a, #ffb347);
-            color: #0a0f1e;
+            background: var(--btn-order-hover);
+            color: #0f0f1a;
             transform: scale(1.02);
         }
-
         .contact-section {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin: 2rem 0 1.5rem;
         }
-
         .contact-card {
-            background: linear-gradient(135deg, rgba(15, 22, 41, 0.9), rgba(11, 16, 32, 0.9));
-            backdrop-filter: blur(12px);
-            border-radius: 1.5rem;
-            padding: 1rem 1.5rem;
+            background: var(--contact-card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 1.8rem;
+            padding: 1.2rem 1.5rem;
             text-align: center;
-            border: 1px solid #ffb34740;
+            border: 1px solid #ffb34770;
             flex: 1;
-            min-width: 200px;
-            transition: all 0.3s;
-        }
-
-        .contact-card:hover {
-            border-color: #ffb347;
-            transform: translateY(-3px);
-        }
-
-        .contact-card i {
-            font-size: 1.8rem;
-            color: #ffb347;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-card h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-number {
-            font-size: 1.2rem;
-            font-weight: 800;
-            direction: ltr;
-            color: #ffe0a3;
-            letter-spacing: 1px;
-        }
-
-        .contact-wa-btn {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            margin-top: 0.5rem;
-            text-decoration: none;
+            min-width: 210px;
             transition: 0.2s;
         }
-
-        .contact-wa-btn:hover {
-            transform: scale(1.05);
-            background: #128C7E;
+        body.light-mode .contact-card {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        
-        .telegram-btn {
-            display: inline-block;
-            background: #0088cc;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            margin-top: 0.5rem;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .telegram-btn:hover {
-            transform: scale(1.05);
-            background: #006699;
-        }
-
-        .copy-contact {
-            background: #ffb34720;
-            border: 1px solid #ffb347;
-            padding: 0.2rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            cursor: pointer;
-            margin-right: 0.5rem;
-        }
-
         .payment-section {
-            background: linear-gradient(120deg, rgba(15, 22, 41, 0.9), rgba(11, 16, 32, 0.9));
+            background: var(--contact-card-bg);
             backdrop-filter: blur(12px);
             border-radius: 2rem;
-            padding: 1.5rem;
+            padding: 1.6rem;
             margin: 1rem 0;
-            border: 1px solid #ffb34730;
+            border: 1px solid #ffb34740;
             text-align: center;
         }
-
         .vodafone-number {
-            background: linear-gradient(135deg, #01010140, #1a1a2e40);
+            background: #00000030;
             padding: 0.8rem;
             border-radius: 2rem;
             margin: 0.8rem auto;
@@ -472,16 +377,11 @@
             max-width: 360px;
             border: 1px dashed #ffb347;
         }
-
-        .vodafone-number h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            direction: ltr;
-            color: #ffe0a3;
+        body.light-mode .vodafone-number {
+            background: #fff0e0;
         }
-
-        .copy-btn {
-            background: #ffb34720;
+        .copy-btn, .copy-contact {
+            background: #ffb34730;
             border: 1px solid #ffb347;
             padding: 0.3rem 1rem;
             border-radius: 2rem;
@@ -489,120 +389,90 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
-        .copy-btn:hover {
+        .copy-btn:hover, .copy-contact:hover {
             background: #ffb347;
             color: #0a0f1e;
-        }
-
-        .payment-steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .step {
-            background: rgba(26, 35, 56, 0.8);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-        }
-
-        .step i {
-            margin-left: 5px;
-            color: #ffb347;
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #6a7a9e;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #1e2a41;
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 0.5rem 0 0.5rem;
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffdd99, #ffb347);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hidden-section {
-            display: none;
-        }
-        
-        .telegram-link-card {
-            text-align: center;
-            margin: 1rem 0;
         }
         .telegram-large-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(105deg, #0088cc, #006699);
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
+            gap: 8px;
+            background: #0088cc;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
             color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
             text-decoration: none;
-            transition: 0.3s;
-            border: 1px solid #ffb347;
+            font-weight: bold;
+            transition: 0.2s;
         }
         .telegram-large-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #0088cc;
+            transform: scale(1.02);
+            background: #006699;
         }
-
-        @media (max-width: 680px) {
-            .hero h1 { font-size: 1.5rem; }
-            .tab-btn, .recharge-tab, .switch-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
-            .price-eg { font-size: 1.3rem; }
-            .contact-number { font-size: 1rem; }
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: #1e2a3a;
+            color: #FFE0A3;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-right: 6px solid #FFB347;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-align: center;
+            white-space: nowrap;
         }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0f1e; }
-        ::-webkit-scrollbar-thumb { background: #ffb347; border-radius: 10px; }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        body.light-mode .toast-notification {
+            background: #fff2e0;
+            color: #8a5a2a;
+            border-right-color: #e07c1f;
         }
-        .modal-enter { animation: zoomIn 0.3s ease; }
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        @media (max-width: 600px) {
+            .toast-notification { white-space: normal; width: 90%; font-size: 0.8rem; }
+        }
+        .hidden-section { display: none; }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-enter { animation: zoomIn 0.25s ease; }
     </style>
 </head>
 <body>
 <div class="container">
+    <div class="theme-switch-wrapper">
+        <div class="theme-switch" id="themeToggle">
+            <i class="fas fa-sun"></i> / <i class="fas fa-moon"></i>
+            <span style="font-size:0.8rem;">الوضع</span>
+        </div>
+    </div>
     <div class="hero">
         <h1><i class="fas fa-bolt"></i> اسرع من نتكم 🔥</h1>
-        <p>شحن PUBG + Mobile Legends + Free Fire + يلا لودو (VIP) + كروت شحن وفودافون كاش وإنترنت WE</p>
+        <p>شحن PUBG - Mobile Legends - Free Fire - يلا لودو VIP - كروت شحن - فودافون كاش - إنترنت WE</p>
         <div class="brand-name"><i class="fas fa-rocket"></i> اسرع من نتكم 🔥</div>
-        <div class="badge-eg"><i class="fas fa-phone-alt"></i> دفع عبر فودافون كاش | تسليم فوري</div>
+        <div class="badge-eg"><i class="fas fa-phone-alt"></i> دفع فودافون كاش | تسليم فوري</div>
     </div>
 
-    <!-- أزرار التبديل بين الأقسام -->
     <div class="section-switch">
         <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
         <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-mobile-alt"></i> 📱 شحن الرصيد والإنترنت</button>
     </div>
 
-    <!-- Stats -->
     <div class="stats-bar">
         <div class="stat-card"><div class="stat-number" id="statOrders">0</div><div class="stat-label"><i class="fas fa-check-circle"></i> طلب مكتمل</div></div>
         <div class="stat-card"><div class="stat-number" id="statCustomers">0</div><div class="stat-label"><i class="fas fa-users"></i> عميل سعيد</div></div>
         <div class="stat-card"><div class="stat-number" id="statDelivery">0</div><div class="stat-label"><i class="fas fa-clock"></i> دقيقة للتسليم</div></div>
     </div>
 
-    <!-- قسم الألعاب (يظهر بشكل افتراضي) -->
     <div id="gamesSection">
         <div class="game-tabs">
             <button class="tab-btn active" data-game="pubg"><i class="fab fa-playstation"></i> PUBG MOBILE</button>
@@ -613,10 +483,8 @@
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
 
-    <!-- قسم شحن الرصيد والإنترنت (مخفي في البداية) -->
     <div id="rechargeSection" class="hidden-section">
-        <div class="section-title"><i class="fas fa-mobile-alt"></i> شحن الرصيد والإنترنت</div>
-        <div class="recharge-tabs">
+        <div class="game-tabs recharge-tabs">
             <button class="recharge-tab active" data-recharge="vodafone"><i class="fas fa-sim-card"></i> فودافون</button>
             <button class="recharge-tab" data-recharge="etisalat"><i class="fas fa-tower-cell"></i> اتصالات</button>
             <button class="recharge-tab" data-recharge="we"><i class="fas fa-wifi"></i> وي</button>
@@ -625,49 +493,46 @@
         <div id="rechargeContainer" class="prices-grid"></div>
     </div>
 
-    <!-- Contact Section -->
     <div class="contact-section">
         <div class="contact-card">
-            <i class="fab fa-whatsapp"></i>
-            <h4>خدمة العملاء | واتساب</h4>
+            <i class="fab fa-whatsapp" style="font-size: 2rem; color:#25D366;"></i>
+            <h4>خدمة العملاء واتساب</h4>
             <div class="contact-number">01017954664</div>
             <button class="copy-contact" onclick="copyNumberGeneric('01017954664', this)"><i class="far fa-copy"></i> نسخ</button>
             <a href="https://wa.me/201017954664" target="_blank" class="contact-wa-btn"><i class="fab fa-whatsapp"></i> تواصل الآن</a>
         </div>
         <div class="contact-card">
-            <i class="fab fa-telegram"></i>
-            <h4>شحن الرصيد والإنترنت | تلجرام</h4>
+            <i class="fab fa-telegram" style="font-size: 2rem; color:#0088cc;"></i>
+            <h4>شحن الرصيد والإنترنت</h4>
             <div class="contact-number">@BESO125F</div>
-            <button class="copy-contact" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ</button>
-            <a href="https://t.me/BESO125F" target="_blank" class="telegram-btn"><i class="fab fa-telegram"></i> تواصل عبر تلجرام</a>
+            <button class="copy-contact" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ المعرف</button>
+            <a href="https://t.me/BESO125F" target="_blank" class="telegram-btn"><i class="fab fa-telegram"></i> تواصل تلجرام</a>
         </div>
     </div>
 
-    <!-- Payment Section -->
     <div class="payment-section">
-        <i class="fas fa-money-bill-wave" style="font-size: 1.8rem; color: #ffb347;"></i>
-        <h2 style="margin: 0.4rem 0; font-size: 1.3rem;">طريقة الدفع : فودافون كاش</h2>
+        <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #FFB347;"></i>
+        <h2 style="margin: 0.5rem 0;">طريقة الدفع : فودافون كاش</h2>
         <div class="vodafone-number">
             <i class="fas fa-mobile-alt"></i> رقم المحفظة:
             <h3 dir="ltr">01044049390</h3>
             <button class="copy-btn" id="copyNumberBtn"><i class="far fa-copy"></i> نسخ الرقم</button>
         </div>
-        <p style="font-size: 0.8rem;"><i class="fas fa-info-circle"></i> بعد التحويل، أرسل صورة الإيداع + الـ ID على نفس الرقم واتساب</p>
-        <div class="payment-steps">
-            <div class="step"><i class="fas fa-check-circle"></i> 1. افتح فودافون كاش</div>
-            <div class="step"><i class="fas fa-check-circle"></i> 2. اختر تحويل للأرقام</div>
-            <div class="step"><i class="fas fa-check-circle"></i> 3. أدخل الرقم 01044049390</div>
-            <div class="step"><i class="fas fa-check-circle"></i> 4. اكتب المبلغ المطلوب</div>
-            <div class="step"><i class="fas fa-check-circle"></i> 5. أرسل التأكيد واستلم شحنك فوراً</div>
+        <p><i class="fas fa-info-circle"></i> بعد التحويل، أرسل صورة الإيداع + الـ ID على واتساب</p>
+        <div class="payment-steps" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 1rem;">
+            <div class="step" style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> افتح فودافون كاش</div>
+            <div class="step" style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> تحويل للأرقام</div>
+            <div class="step" style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> الرقم: 01044049390</div>
+            <div class="step" style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> أرسل التأكيد واستلم الشحن</div>
         </div>
     </div>
-    <div class="footer-note">
-        <i class="fas fa-shield-alt"></i> التسليم خلال 5-20 دقيقة بعد تأكيد الدفع | <i class="fas fa-headset"></i> الدعم الفني: 01017954664
+    <div class="footer-note" style="text-align:center; font-size:0.7rem; margin-top:1.5rem; color:#8a9bce;">
+        <i class="fas fa-shield-alt"></i> التسليم خلال 5-20 دقيقة بعد تأكيد الدفع | الدعم الفني: 01017954664
     </div>
 </div>
 
 <script>
-    // ---------- بيانات الألعاب (نفس السابق) ----------
+    // ======================== البيانات الكاملة ========================
     const pubgItems = [
         { name: "1 + 30 UC", desc: "باقة + بونص", priceEGP: 25.99 },
         { name: "22 + 60 UC", desc: "باقة + بونص", priceEGP: 46.99 },
@@ -683,7 +548,6 @@
         { name: "13700 + 36000 UC", desc: "باقة + بونص", priceEGP: 25204.99 },
         { name: "22820 + 60000 UC", desc: "باقة + بونص", priceEGP: 42004.99 }
     ];
-
     const mlbbItems = [
         { name: "13 + 1 Diamonds", desc: "باقة + بونص", priceEGP: 25 },
         { name: "20 + 2 Diamonds", desc: "باقة + بونص", priceEGP: 30 },
@@ -697,7 +561,6 @@
         { name: "2015 + 383 Diamonds", desc: "باقة + بونص", priceEGP: 2300 },
         { name: "5035 + 1007 Diamonds", desc: "باقة + بونص", priceEGP: 5730 }
     ];
-
     const freefireItems = [
         { name: "50 جوهرة", desc: "شحن فوري", priceEGP: 25 },
         { name: "100 جوهرة", desc: "شحن فوري", priceEGP: 50 },
@@ -707,7 +570,6 @@
         { name: "1060 جوهرة", desc: "شحن فوري", priceEGP: 500 },
         { name: "2200 جوهرة", desc: "شحن فوري", priceEGP: 1000 }
     ];
-
     const yallaNormalItems = [
         { name: "830 💎", desc: "شحن عادي", priceEGP: 110, isVip: false },
         { name: "2,320 💎", desc: "شحن عادي", priceEGP: 250, isVip: false },
@@ -732,12 +594,10 @@
         { name: "223,200 💎", desc: "شحن عادي", priceEGP: 19200, isVip: false },
         { name: "283,460 💎", desc: "شحن عادي", priceEGP: 24000, isVip: false }
     ];
-
     const yallaVipItems = [
         { name: "👑 الفارس", desc: "رتبة VIP", priceEGP: 560, isVip: true },
         { name: "👑 اللواء", desc: "رتبة VIP", priceEGP: 1760, isVip: true }
     ];
-
     const yallaAccountItems = [
         { name: "400 💎", desc: "شحن بالاكونت", priceEGP: 60, isVip: false },
         { name: "1,800 💎", desc: "شحن بالاكونت", priceEGP: 190, isVip: false },
@@ -761,6 +621,7 @@
         { name: "324,000 💎", desc: "شحن بالاكونت", priceEGP: 25500, isVip: false }
     ];
 
+    // ======================== المنطق ========================
     const container = document.getElementById('pricesContainer');
     const rechargeContainer = document.getElementById('rechargeContainer');
     let currentGame = 'pubg';
@@ -769,14 +630,24 @@
     let customersCount = 143;
     let deliveryTime = 8;
 
+    function showDeliveryAlert() {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = '<i class="fas fa-clock"></i> انتظر من دقيقة إلى 4 دقائق لعدم تسليم الشحن. لو واجهتك مشكلة، برجاء التواصل مع خدمة العملاء.';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+        }, 5000);
+    }
+
     window.copyNumberGeneric = function(number, btnElement) {
         navigator.clipboard.writeText(number).then(() => {
             const originalHTML = btnElement.innerHTML;
             btnElement.innerHTML = '<i class="fas fa-check"></i> تم!';
             setTimeout(() => btnElement.innerHTML = originalHTML, 1500);
-        }).catch(() => {
-            alert("فشل النسخ، يمكنك نسخ الرقم يدوياً: " + number);
-        });
+        }).catch(() => alert("فشل النسخ، يمكنك نسخ الرقم يدوياً: " + number));
     };
 
     function animateNumber(element, start, end, duration) {
@@ -789,7 +660,6 @@
         };
         window.requestAnimationFrame(step);
     }
-
     setTimeout(() => {
         animateNumber(document.getElementById('statOrders'), 0, ordersCount, 1300);
         animateNumber(document.getElementById('statCustomers'), 0, customersCount, 1300);
@@ -797,6 +667,8 @@
     }, 200);
 
     function openOrderPopup(itemName, price) {
+        showDeliveryAlert();
+
         const modalOverlay = document.createElement('div');
         modalOverlay.style.position = 'fixed';
         modalOverlay.style.top = '0';
@@ -845,207 +717,115 @@
 
         modalOverlay.appendChild(modalCard);
         document.body.appendChild(modalOverlay);
-
         document.getElementById('closeModalBtn')?.addEventListener('click', () => modalOverlay.remove());
         modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.remove(); });
 
         const copyPaymentBtn = modalCard.querySelector('.modal-copy-payment');
-        if (copyPaymentBtn) {
-            copyPaymentBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText('01044049390');
-                copyPaymentBtn.innerHTML = '✓ تم';
-                setTimeout(() => copyPaymentBtn.innerHTML = 'نسخ', 1200);
-            });
-        }
-
+        if (copyPaymentBtn) copyPaymentBtn.addEventListener('click', () => { navigator.clipboard.writeText('01044049390'); copyPaymentBtn.innerHTML = '✓ تم'; setTimeout(() => copyPaymentBtn.innerHTML = 'نسخ', 1200); });
         const copySupportBtn = modalCard.querySelector('.modal-copy-support');
-        if (copySupportBtn) {
-            copySupportBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText('01017954664');
-                copySupportBtn.innerHTML = '✓ تم';
-                setTimeout(() => copySupportBtn.innerHTML = 'نسخ', 1200);
-            });
-        }
-
+        if (copySupportBtn) copySupportBtn.addEventListener('click', () => { navigator.clipboard.writeText('01017954664'); copySupportBtn.innerHTML = '✓ تم'; setTimeout(() => copySupportBtn.innerHTML = 'نسخ', 1200); });
         const copyAllBtn = document.getElementById('copyAllInfoBtn');
-        if (copyAllBtn) {
-            copyAllBtn.addEventListener('click', () => {
-                const allText = `الطلب: ${itemName}\nالمبلغ: ${price} جنيه\nرقم فودافون كاش للدفع: 01044049390\nرقم الدعم واتساب: 01017954664`;
-                navigator.clipboard.writeText(allText);
-                copyAllBtn.innerHTML = '<i class="fas fa-check"></i> تم نسخ الكل!';
-                setTimeout(() => copyAllBtn.innerHTML = '<i class="fas fa-copy"></i> نسخ جميع معلومات الدفع', 2000);
-            });
-        }
+        if (copyAllBtn) copyAllBtn.addEventListener('click', () => { navigator.clipboard.writeText(`الطلب: ${itemName}\nالمبلغ: ${price} جنيه\nرقم فودافون كاش للدفع: 01044049390\nرقم الدعم واتساب: 01017954664`); copyAllBtn.innerHTML = '<i class="fas fa-check"></i> تم نسخ الكل!'; setTimeout(() => copyAllBtn.innerHTML = '<i class="fas fa-copy"></i> نسخ جميع معلومات الدفع', 2000); });
     }
 
-    // عرض الألعاب
     function renderGame(gameKey) {
-        let items = [];
-        let gameIcon = "";
-        let gameName = "";
-
-        if (gameKey === 'pubg') {
-            items = pubgItems;
-            gameIcon = "fab fa-playstation";
-            gameName = "PUBG MOBILE";
-        } else if (gameKey === 'mlbb') {
-            items = mlbbItems;
-            gameIcon = "fas fa-skull-crossbones";
-            gameName = "Mobile Legends";
-        } else if (gameKey === 'freefire') {
-            items = freefireItems;
-            gameIcon = "fas fa-fire";
-            gameName = "Free Fire";
-        } else if (gameKey === 'yallaludo') {
-            items = [...yallaNormalItems, ...yallaVipItems, ...yallaAccountItems];
-            gameIcon = "fas fa-dice-d6";
-            gameName = "يلا لودو";
-        }
-
+        let items = [], gameIcon = "", gameName = "";
+        if (gameKey === 'pubg') { items = pubgItems; gameIcon = "fab fa-playstation"; gameName = "PUBG MOBILE"; }
+        else if (gameKey === 'mlbb') { items = mlbbItems; gameIcon = "fas fa-skull-crossbones"; gameName = "Mobile Legends"; }
+        else if (gameKey === 'freefire') { items = freefireItems; gameIcon = "fas fa-fire"; gameName = "Free Fire"; }
+        else if (gameKey === 'yallaludo') { items = [...yallaNormalItems, ...yallaVipItems, ...yallaAccountItems]; gameIcon = "fas fa-dice-d6"; gameName = "يلا لودو"; }
         let html = '';
         items.forEach((item, idx) => {
-            let formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            const vipClass = (item.isVip === true) ? 'vip-card' : '';
-            const vipBadge = (item.isVip === true) ? '<div class="game-badge vip-badge"><i class="fas fa-crown"></i> VIP مميز</div>' : `<div class="game-badge">${gameName}</div>`;
-            html += `
-                <div class="price-card animate__animated animate__fadeInUp ${vipClass}" style="animation-delay: ${idx * 0.03}s">
-                    <div class="card-icon"><i class="${gameIcon}"></i></div>
-                    ${vipBadge}
-                    <div class="item-name">${item.name}</div>
-                    <div class="amount-desc">${item.desc}</div>
-                    <div class="price-eg">
-                        ${formattedPrice} <span>جنيه مصري</span>
-                    </div>
-                    <button class="btn-order" data-item="${item.name} (${gameName} - ${item.desc})" data-price="${item.priceEGP}">
-                        <i class="fas fa-shopping-cart"></i> اطلب الآن
-                    </button>
-                </div>
-            `;
+            let formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
+            const vipClass = item.isVip ? 'vip-card' : '';
+            const vipBadge = item.isVip ? '<div class="game-badge vip-badge"><i class="fas fa-crown"></i> VIP مميز</div>' : `<div class="game-badge">${gameName}</div>`;
+            html += `<div class="price-card ${vipClass}" style="animation-delay: ${idx * 0.03}s">
+                        <div class="card-icon"><i class="${gameIcon}"></i></div>
+                        ${vipBadge}
+                        <div class="item-name">${item.name}</div>
+                        <div class="amount-desc">${item.desc}</div>
+                        <div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div>
+                        <button class="btn-order" data-item="${item.name} (${gameName} - ${item.desc})" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+                    </div>`;
         });
         container.innerHTML = html;
-
         document.querySelectorAll('#pricesContainer .btn-order').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                let itemName = btn.getAttribute('data-item');
-                let price = btn.getAttribute('data-price');
-                openOrderPopup(itemName, price);
+            btn.addEventListener('click', () => {
+                openOrderPopup(btn.getAttribute('data-item'), btn.getAttribute('data-price'));
                 ordersCount++;
                 document.getElementById('statOrders').innerText = ordersCount;
             });
         });
     }
 
-    // عرض شحن الرصيد والإنترنت (بدون أسعار، فقط رابط تلجرام)
     function renderRecharge(companyKey) {
-        let companyLogo = "";
-        let companyName = "";
-        let companyIcon = "";
-
+        let companyLogo = "", companyName = "";
         switch(companyKey) {
-            case 'vodafone':
-                companyLogo = '<div class="company-logo" style="background:#e60000;"><i class="fas fa-sim-card" style="color:white;"></i></div>';
-                companyName = "فودافون";
-                companyIcon = "fas fa-sim-card";
-                break;
-            case 'etisalat':
-                companyLogo = '<div class="company-logo" style="background:#007b3d;"><i class="fas fa-tower-cell" style="color:white;"></i></div>';
-                companyName = "اتصالات";
-                companyIcon = "fas fa-tower-cell";
-                break;
-            case 'we':
-                companyLogo = '<div class="company-logo" style="background:#6f2da8;"><i class="fas fa-wifi" style="color:white;"></i></div>';
-                companyName = "وي";
-                companyIcon = "fas fa-wifi";
-                break;
-            case 'wehome':
-                companyLogo = '<div class="company-logo" style="background:#1e88e5;"><i class="fas fa-home" style="color:white;"></i></div>';
-                companyName = "إنترنت WE منزلي";
-                companyIcon = "fas fa-home";
-                break;
+            case 'vodafone': companyLogo = '<div class="company-logo" style="background:#e60000;"><i class="fas fa-sim-card"></i></div>'; companyName = "فودافون"; break;
+            case 'etisalat': companyLogo = '<div class="company-logo" style="background:#007b3d;"><i class="fas fa-tower-cell"></i></div>'; companyName = "اتصالات"; break;
+            case 'we': companyLogo = '<div class="company-logo" style="background:#6f2da8;"><i class="fas fa-wifi"></i></div>'; companyName = "وي"; break;
+            case 'wehome': companyLogo = '<div class="company-logo" style="background:#1e88e5;"><i class="fas fa-home"></i></div>'; companyName = "إنترنت WE منزلي"; break;
             default: return;
         }
-
-        // عرض بطاقة واحدة فقط تحتوي على رسالة وتوجيه للتلجرام
-        const html = `
-            <div class="price-card animate__animated animate__fadeInUp" style="grid-column: 1 / -1; text-align: center;">
-                <div class="card-icon">
-                    ${companyLogo}
-                </div>
-                <div class="game-badge">${companyName}</div>
-                <div class="item-name">أسعار متغيرة باستمرار</div>
-                <div class="amount-desc">يرجى التواصل معنا على تلجرام لمعرفة أحدث الأسعار والعروض</div>
-                <div style="margin: 1rem 0;">
-                    <i class="fab fa-telegram" style="font-size: 2rem; color: #0088cc;"></i>
-                </div>
-                <a href="https://t.me/BESO125F" target="_blank" class="telegram-large-btn" style="display: inline-flex; align-items: center; gap: 8px; background: #0088cc; color: white; padding: 0.7rem 1.5rem; border-radius: 40px; text-decoration: none; font-weight: bold;">
-                    <i class="fab fa-telegram"></i> تواصل عبر تلجرام @BESO125F
-                </a>
-                <button class="copy-contact" style="margin-top: 0.8rem; display: inline-block;" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ معرف التلجرام</button>
-            </div>
-        `;
+        const html = `<div class="price-card" style="grid-column:1/-1; text-align:center;">
+                        <div class="card-icon">${companyLogo}</div>
+                        <div class="game-badge">${companyName}</div>
+                        <div class="item-name">أسعار متغيرة باستمرار 🔄</div>
+                        <div class="amount-desc">للحصول على أحدث الأسعار والعروض، تواصل معنا عبر تلجرام</div>
+                        <div style="margin:1rem 0;"><i class="fab fa-telegram" style="font-size:2rem; color:#0088cc;"></i></div>
+                        <a href="https://t.me/BESO125F" target="_blank" class="telegram-large-btn" style="display:inline-flex; gap:8px; background:#0088cc; padding:0.6rem 1.5rem; border-radius:40px; color:white; text-decoration:none;"><i class="fab fa-telegram"></i> تواصل عبر تلجرام @BESO125F</a>
+                        <button class="copy-contact" style="display:block; margin:0.8rem auto 0;" onclick="copyNumberGeneric('@BESO125F', this)"><i class="far fa-copy"></i> نسخ معرف التلجرام</button>
+                    </div>`;
         rechargeContainer.innerHTML = html;
     }
 
     // تبديل الأقسام
     const gamesSection = document.getElementById('gamesSection');
     const rechargeSection = document.getElementById('rechargeSection');
-    const showGamesBtn = document.getElementById('showGamesBtn');
-    const showRechargeBtn = document.getElementById('showRechargeBtn');
+    document.getElementById('showGamesBtn').addEventListener('click', () => { gamesSection.classList.remove('hidden-section'); rechargeSection.classList.add('hidden-section'); document.getElementById('showGamesBtn').classList.add('active'); document.getElementById('showRechargeBtn').classList.remove('active'); });
+    document.getElementById('showRechargeBtn').addEventListener('click', () => { gamesSection.classList.add('hidden-section'); rechargeSection.classList.remove('hidden-section'); document.getElementById('showRechargeBtn').classList.add('active'); document.getElementById('showGamesBtn').classList.remove('active'); });
 
-    showGamesBtn.addEventListener('click', () => {
-        gamesSection.classList.remove('hidden-section');
-        rechargeSection.classList.add('hidden-section');
-        showGamesBtn.classList.add('active');
-        showRechargeBtn.classList.remove('active');
+    // تبويبات الألعاب
+    document.querySelectorAll('#gamesSection .tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#gamesSection .tab-btn').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGame(btn.getAttribute('data-game'));
+        });
     });
-
-    showRechargeBtn.addEventListener('click', () => {
-        gamesSection.classList.add('hidden-section');
-        rechargeSection.classList.remove('hidden-section');
-        showRechargeBtn.classList.add('active');
-        showGamesBtn.classList.remove('active');
-    });
-
-    // الأحداث الخاصة بتبويبات الألعاب
-    const gameTabs = document.querySelectorAll('#gamesSection .tab-btn');
-    gameTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const gameVal = tab.getAttribute('data-game');
-            if (!gameVal) return;
-            gameTabs.forEach(btn => btn.classList.remove('active'));
-            tab.classList.add('active');
-            currentGame = gameVal;
-            renderGame(currentGame);
+    // تبويبات الشحن
+    document.querySelectorAll('#rechargeSection .recharge-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#rechargeSection .recharge-tab').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            renderRecharge(btn.getAttribute('data-recharge'));
         });
     });
 
-    // الأحداث الخاصة بتبويبات الشحن (تعيد عرض نفس الرسالة مع تغيير اسم الشركة)
-    const rechargeTabs = document.querySelectorAll('#rechargeSection .recharge-tab');
-    rechargeTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const val = tab.getAttribute('data-recharge');
-            if (!val) return;
-            rechargeTabs.forEach(btn => btn.classList.remove('active'));
-            tab.classList.add('active');
-            currentRecharge = val;
-            renderRecharge(currentRecharge);
-        });
+    // نسخ رقم الدفع الرئيسي
+    document.getElementById('copyNumberBtn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText('01044049390');
+        const old = document.getElementById('copyNumberBtn').innerHTML;
+        document.getElementById('copyNumberBtn').innerHTML = '<i class="fas fa-check"></i> تم!';
+        setTimeout(() => document.getElementById('copyNumberBtn').innerHTML = old, 1500);
     });
 
-    const copyMainBtn = document.getElementById('copyNumberBtn');
-    if (copyMainBtn) {
-        copyMainBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText('01044049390');
-            let oldHtml = copyMainBtn.innerHTML;
-            copyMainBtn.innerHTML = '<i class="fas fa-check"></i> تم!';
-            setTimeout(() => copyMainBtn.innerHTML = oldHtml, 1500);
-        });
+    // تبديل الوضع الداكن/الفاتح
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(theme) {
+        if (theme === 'light') document.body.classList.add('light-mode');
+        else document.body.classList.remove('light-mode');
+        localStorage.setItem('theme', theme);
     }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') setTheme('light');
+    themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('light-mode')) setTheme('dark');
+        else setTheme('light');
+    });
 
-    // التهيئة الأولية
     renderGame('pubg');
     renderRecharge('vodafone');
-    console.log("%c🔥 اسرع من نتكم | تم إزالة الأسعار المتغيرة من قسم الشحن وإضافة رابط تلجرام", "color: #ffb347; font-size: 14px;");
 </script>
 </body>
 </html>
