@@ -12,11 +12,6 @@
         body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(rgba(255, 200, 100, 0.2) 1.5px, transparent 1.5px); background-size: 45px 45px; pointer-events: none; animation: driftStars 80s linear infinite; z-index: 0; }
         @keyframes driftStars { 0% { background-position: 0 0; } 100% { background-position: 100px 100px; } }
         .container { max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; padding: 0.5rem; }
-
-        /* Premium Glow Effects */
-        .premium-text { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 20px rgba(255,215,0,0.5); animation: shimmer 3s infinite; letter-spacing: 4px; }
-        @keyframes shimmer { 0% { filter: brightness(1); } 50% { filter: brightness(1.3); } 100% { filter: brightness(1); } }
-
         .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,180,70,0.2); z-index: 9999; }
         .progress-bar { height: 4px; background: #ffb347; width: 0%; transition: width 0.2s; }
         .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #ffb347; color: #0a0f1e; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 999; border: none; font-size: 1.2rem; }
@@ -26,12 +21,12 @@
         .hero h1 { font-size: 2.3rem; font-weight: 800; background: linear-gradient(125deg, #FFE6B0, #FFB347, #FF7E05); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .brand-name { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #ffb347, #e05a00); padding: 0.4rem 1.4rem; border-radius: 60px; font-weight: 800; margin-top: 0.8rem; color: #0a0f1e; box-shadow: 0 6px 14px rgba(255, 120, 0, 0.4); }
         .countdown { background: rgba(0,0,0,0.5); padding: 0.4rem 1rem; border-radius: 40px; display: inline-flex; gap: 10px; margin: 0.5rem auto 0; font-size: 0.9rem; border: 1px solid #ffb347; }
-        .section-switch { display: flex; justify-content: center; gap: 1.2rem; margin: 1.5rem 0 2rem; flex-wrap: wrap; }
+        .section-switch { display: flex; justify-content: center; gap: 1.2rem; margin: 1.5rem 0 2rem; }
         .switch-btn { background: rgba(20, 28, 44, 0.9); border: none; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 800; font-size: 1rem; color: #cbd5f0; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; border: 1px solid #3a4a6e; backdrop-filter: blur(4px); }
         .switch-btn.active { background: linear-gradient(105deg, #FFB347, #FF7E05); color: #0a0f1e; border-color: #FFD966; box-shadow: 0 8px 18px rgba(255, 100, 0, 0.4); }
-        .game-tabs, .recharge-tabs, .design-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin-bottom: 2rem; }
-        .tab-btn, .recharge-tab, .design-tab { background: rgba(20, 28, 44, 0.85); border: 1px solid #3e4a6e; padding: 0.7rem 1.6rem; border-radius: 60px; font-weight: 700; font-size: 0.95rem; color: #cbd5f0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .tab-btn.active, .recharge-tab.active, .design-tab.active { background: linear-gradient(115deg, #F9A826, #FF7E05); color: #0f0f1a; border-color: #FFC107; box-shadow: 0 5px 12px rgba(255,126,5,0.5); }
+        .game-tabs, .recharge-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin-bottom: 2rem; }
+        .tab-btn, .recharge-tab { background: rgba(20, 28, 44, 0.85); border: 1px solid #3e4a6e; padding: 0.7rem 1.6rem; border-radius: 60px; font-weight: 700; font-size: 0.95rem; color: #cbd5f0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .tab-btn.active, .recharge-tab.active { background: linear-gradient(115deg, #F9A826, #FF7E05); color: #0f0f1a; border-color: #FFC107; box-shadow: 0 5px 12px rgba(255,126,5,0.5); }
         .stats-bar { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .stat-card { background: rgba(15, 25, 45, 0.7); backdrop-filter: blur(8px); padding: 0.7rem 1.2rem; border-radius: 2rem; border: 1px solid rgba(255, 180, 70, 0.5); text-align: center; min-width: 120px; }
         .stat-number { font-size: 1.8rem; font-weight: 800; color: #FFC857; }
@@ -47,19 +42,6 @@
         .btn-order { background: linear-gradient(105deg, #2d3b5a, #1f2a3e); border: none; width: 100%; padding: 0.7rem; border-radius: 2rem; font-weight: 700; font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: #f0f3fa; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-top: 0.8rem; border: 1px solid #ffb34780; transition: all 0.25s; }
         .btn-order:hover { background: linear-gradient(105deg, #FF8C1A, #FFB347); color: #0a0f1e; transform: scale(1.02); }
         .btn-order.loading { pointer-events: none; opacity: 0.7; }
-
-        /* تصميم كروت التصميم بدون سعر */
-        .design-card { background: rgba(20, 30, 50, 0.8); backdrop-filter: blur(15px); border-radius: 2.5rem; padding: 2rem 1.5rem; border: 1px solid rgba(255, 215, 0, 0.4); transition: all 0.4s ease; text-align: center; position: relative; overflow: hidden; }
-        .design-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%); animation: rotateGlow 10s linear infinite; z-index: 0; }
-        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .design-card:hover { transform: translateY(-12px) scale(1.03); border-color: #FFD700; box-shadow: 0 20px 40px rgba(255,215,0,0.3); }
-        .design-icon { font-size: 4rem; margin-bottom: 1rem; position: relative; z-index: 1; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-        .design-card .item-name { font-size: 1.5rem; margin: 0.8rem 0; }
-        .design-card .amount-desc { color: #cfd8e8; margin-bottom: 1rem; }
-        .btn-design { background: linear-gradient(105deg, #FFD700, #FFA500); border: none; padding: 0.8rem 1.5rem; border-radius: 3rem; font-weight: 800; color: #0a0f1e; cursor: pointer; transition: 0.3s; position: relative; z-index: 1; }
-        .btn-design:hover { background: linear-gradient(105deg, #FFC107, #FF8C00); transform: scale(1.05); }
-
         .contact-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 2rem 0 1.5rem; }
         .contact-card { background: linear-gradient(145deg, rgba(15, 25, 45, 0.9), rgba(10, 18, 32, 0.95)); backdrop-filter: blur(10px); border-radius: 1.8rem; padding: 1.2rem 1.5rem; text-align: center; border: 1px solid #ffb34770; flex: 1; min-width: 210px; }
         .share-btn, .export-btn, .policy-btn { background: #ffb34720; border: 1px solid #ffb347; padding: 0.4rem 1rem; border-radius: 40px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-top: 0.5rem; }
@@ -91,9 +73,7 @@
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .modal-enter { animation: zoomIn 0.25s ease; }
         .footer-note { text-align: center; font-size: 0.7rem; margin-top: 1.5rem; color: #8a9bce; }
-
-        .site-owner { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #FFD700, #FFA500); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.5rem 0; }
-        @media (max-width: 600px) { .hero h1 { font-size: 1.5rem; } .stat-card { min-width: 100px; } .premium-text { font-size: 2rem; } }
+        @media (max-width: 600px) { .hero h1 { font-size: 1.5rem; } .stat-card { min-width: 100px; } }
     </style>
 </head>
 <body>
@@ -105,7 +85,6 @@
         <h1><i class="fas fa-bolt"></i> اسرع من نتكم 🔥</h1>
         <p>شحن PUBG - Mobile Legends - Free Fire - يلا لودو VIP - كروت شحن - فودافون كاش - إنترنت WE</p>
         <div class="brand-name"><i class="fas fa-rocket"></i> اسرع من نتكم 🔥</div>
-        <div class="site-owner">﷼𝑅 𝐸 𝐴 𝐿</div>
         <div class="badge-eg"><i class="fas fa-phone-alt"></i> دفع فودافون كاش | تسليم فوري</div>
         <div class="countdown" id="countdownTimer"><i class="fas fa-tags"></i> خصم 10% ينتهي بعد: -- : -- : --</div>
     </div>
@@ -113,7 +92,6 @@
     <div class="section-switch">
         <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
         <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-mobile-alt"></i> 📱 شحن الرصيد والإنترنت</button>
-        <button id="showDesignBtn" class="switch-btn"><i class="fas fa-paint-brush"></i> 🎨 خدمات التصميم</button>
     </div>
 
     <div class="stats-bar">
@@ -144,17 +122,6 @@
             <button class="recharge-tab" data-recharge="wehome"><i class="fas fa-home"></i> إنترنت WE منزلي</button>
         </div>
         <div id="rechargeContainer" class="prices-grid"></div>
-    </div>
-
-    <!-- قسم التصميم الجديد بدون أسعار -->
-    <div id="designSection" class="hidden-section">
-        <div class="design-tabs">
-            <button class="design-tab active" data-design="branding"><i class="fas fa-crown"></i> هوية بصرية</button>
-            <button class="design-tab" data-design="social"><i class="fas fa-thumbs-up"></i> سوشيال ميديا</button>
-            <button class="design-tab" data-design="video"><i class="fas fa-video"></i> مونتاج</button>
-            <button class="design-tab" data-design="motion"><i class="fas fa-film"></i> موشن جرافيك</button>
-        </div>
-        <div id="designContainer" class="prices-grid"></div>
     </div>
 
     <div class="recent-orders">
@@ -219,56 +186,6 @@
     const yallaVipItems = [ { name: "👑 الفارس", desc: "رتبة VIP", priceEGP: 560, isVip: true }, { name: "👑 اللواء", desc: "رتبة VIP", priceEGP: 1760, isVip: true } ];
     const yallaAccountItems = [ { name: "400 💎", desc: "شحن بالاكونت", priceEGP: 60, isVip: false }, { name: "1,800 💎", desc: "شحن بالاكونت", priceEGP: 190, isVip: false }, { name: "5,000 💎", desc: "شحن بالاكونت", priceEGP: 450, isVip: false }, { name: "6,800 💎", desc: "شحن بالاكونت", priceEGP: 640, isVip: false }, { name: "7,200 💎", desc: "شحن بالاكونت", priceEGP: 700, isVip: false }, { name: "10,000 💎", desc: "شحن بالاكونت", priceEGP: 900, isVip: false }, { name: "16,000 💎", desc: "شحن بالاكونت", priceEGP: 1310, isVip: false }, { name: "21,000 💎", desc: "شحن بالاكونت", priceEGP: 1780, isVip: false }, { name: "26,000 💎", desc: "شحن بالاكونت", priceEGP: 2230, isVip: false }, { name: "32,000 💎", desc: "شحن بالاكونت", priceEGP: 2660, isVip: false }, { name: "42,000 💎", desc: "شحن بالاكونت", priceEGP: 3560, isVip: false }, { name: "48,000 💎", desc: "شحن بالاكونت", priceEGP: 3990, isVip: false }, { name: "53,700 💎", desc: "شحن بالاكونت", priceEGP: 4250, isVip: false }, { name: "69,700 💎", desc: "شحن بالاكونت", priceEGP: 5700, isVip: false }, { name: "74,700 💎", desc: "شحن بالاكونت", priceEGP: 6150, isVip: false }, { name: "85,700 💎", desc: "شحن بالاكونت", priceEGP: 7000, isVip: false }, { name: "107,000 💎", desc: "شحن بالاكونت", priceEGP: 8500, isVip: false }, { name: "161,000 💎", desc: "شحن بالاكونت", priceEGP: 12750, isVip: false }, { name: "217,000 💎", desc: "شحن بالاكونت", priceEGP: 17000, isVip: false }, { name: "324,000 💎", desc: "شحن بالاكونت", priceEGP: 25500, isVip: false } ];
 
-    // ======================== بيانات التصميم (بدون أسعار) ========================
-    const designItems = {
-        branding: [
-            { name: "تصميم شعار احترافي", desc: "شعار فريد يعبّر عن هويتك", icon: "fas fa-crown" },
-            { name: "هوية بصرية كاملة", desc: "لوجو + كروت + أوراق رسمية", icon: "fas fa-bookmark" },
-            { name: "دليل العلامة التجارية", desc: "ملف PDF مع الألوان والخطوط", icon: "fas fa-book" }
-        ],
-        social: [
-            { name: "تصميم منشورات سوشيال", desc: "فيس بوك، انستجرام، تويتر", icon: "fas fa-thumbs-up" },
-            { name: "تصميم ستوري انستجرام", desc: "موشن + ثابت", icon: "fas fa-image" },
-            { name: "تصميم غلاف فيس بوك", desc: "غلاف متوافق مع الموبايل", icon: "fas fa-cover-page" }
-        ],
-        video: [
-            { name: "مونتاج فيديو احترافي", desc: "تعديل، ألوان، تأثيرات", icon: "fas fa-video" },
-            { name: "مونتاج ريلز / شورت", desc: "فيديوهات عمودية سريعة", icon: "fas fa-mobile-alt" },
-            { name: "تحسين جودة فيديو", desc: "HD / 4K مع تصدير عالي", icon: "fas fa-film" }
-        ],
-        motion: [
-            { name: "موشن جرافيك قصير", desc: "حتى 60 ثانية", icon: "fas fa-play-circle" },
-            { name: "إنترو / أوترو للقناة", desc: "مقدمة احترافية للفيديوهات", icon: "fas fa-youtube" },
-            { name: "إعلان موشن جرافيك", desc: "للإعلانات التجارية", icon: "fas fa-ad" }
-        ]
-    };
-    let currentDesignSub = 'branding';
-
-    function renderDesign(subKey) {
-        const items = designItems[subKey] || [];
-        const container = document.getElementById('designContainer');
-        let html = '';
-        items.forEach(item => {
-            html += `
-                <div class="design-card">
-                    <div class="design-icon"><i class="${item.icon}"></i></div>
-                    <div class="item-name">${item.name}</div>
-                    <div class="amount-desc">${item.desc}</div>
-                    <button class="btn-design" onclick="openDesignOrder('${item.name}')">
-                        <i class="fab fa-whatsapp"></i> اطلب الخدمة
-                    </button>
-                </div>
-            `;
-        });
-        container.innerHTML = html || '<div style="text-align:center;color:#ccc;">لا توجد خدمات حالياً</div>';
-    }
-
-    function openDesignOrder(serviceName) {
-        const phone = '201017954664'; // استخدم رقم الدعم الحالي أو يمكن تغييره
-        const message = `مرحباً، أريد خدمة: ${serviceName} من موقع ﷼𝑅 𝐸 𝐴 𝐿`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
     // ======================== متغيرات عامة ========================
     let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
     let ordersCount = 189, customersCount = 143, deliveryTime = 8, activeVisitors = Math.floor(Math.random() * 50) + 20, satisfactionRate = 94;
@@ -305,7 +222,7 @@
     function animateNumber(el, start, end, dur) { let startTime = null; const step = (t) => { if (!startTime) startTime = t; const prog = Math.min((t-startTime)/dur,1); el.innerText = Math.floor(prog*(end-start)+start); if(prog<1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
     function updateStats() { animateNumber(document.getElementById('statOrders'),0,ordersCount,1300); animateNumber(document.getElementById('statCustomers'),0,customersCount,1300); animateNumber(document.getElementById('statDelivery'),0,deliveryTime,1300); document.getElementById('statActive').innerText = activeVisitors; document.getElementById('statSatisfaction').innerText = satisfactionRate+'%'; document.getElementById('statTotalSales').innerText = totalSales.toLocaleString(); }
 
-    // نافذة الطلب مع كوبون خصم (للألعاب)
+    // نافذة الطلب مع كوبون خصم
     function openOrderPopup(itemName, price) {
         const discountCode = "WELCOME10";
         const discountedPrice = price * 0.9;
@@ -383,16 +300,12 @@
     function initRatingStars() { document.querySelectorAll('#ratingStars i').forEach(star=>{ star.addEventListener('click',()=>{ currentRating=parseInt(star.getAttribute('data-rating')); document.querySelectorAll('#ratingStars i').forEach(s=>{ if(parseInt(s.getAttribute('data-rating'))<=currentRating) s.classList.add('active'); else s.classList.remove('active'); }); }); }); }
     document.getElementById('submitComment')?.addEventListener('click',()=>{ const name=document.getElementById('commentName').value.trim(); const email=document.getElementById('commentEmail').value.trim(); const text=document.getElementById('commentText').value.trim(); if(!name||!text||currentRating===0){ showToast('يرجى ملء الاسم والنص والتقييم'); return; } comments.unshift({name,email,text,rating:currentRating,date:new Date().toLocaleString('ar-EG')}); saveComments(); renderComments(); document.getElementById('commentName').value=''; document.getElementById('commentEmail').value=''; document.getElementById('commentText').value=''; currentRating=0; document.querySelectorAll('#ratingStars i').forEach(s=>s.classList.remove('active')); showToast('تم إضافة تعليقك'); });
 
-    // تبديل الأقسام (ألعاب، شحن، تصميم)
-    const gamesSec=document.getElementById('gamesSection'), rechargeSec=document.getElementById('rechargeSection'), designSec=document.getElementById('designSection');
-    document.getElementById('showGamesBtn').addEventListener('click',()=>{ gamesSec.classList.remove('hidden-section'); rechargeSec.classList.add('hidden-section'); designSec.classList.add('hidden-section'); document.getElementById('showGamesBtn').classList.add('active'); document.getElementById('showRechargeBtn').classList.remove('active'); document.getElementById('showDesignBtn').classList.remove('active'); });
-    document.getElementById('showRechargeBtn').addEventListener('click',()=>{ gamesSec.classList.add('hidden-section'); rechargeSec.classList.remove('hidden-section'); designSec.classList.add('hidden-section'); document.getElementById('showRechargeBtn').classList.add('active'); document.getElementById('showGamesBtn').classList.remove('active'); document.getElementById('showDesignBtn').classList.remove('active'); });
-    document.getElementById('showDesignBtn').addEventListener('click',()=>{ gamesSec.classList.add('hidden-section'); rechargeSec.classList.add('hidden-section'); designSec.classList.remove('hidden-section'); document.getElementById('showDesignBtn').classList.add('active'); document.getElementById('showGamesBtn').classList.remove('active'); document.getElementById('showRechargeBtn').classList.remove('active'); renderDesign(currentDesignSub); });
-
+    // تبديل الأقسام
+    const gamesSec=document.getElementById('gamesSection'), rechargeSec=document.getElementById('rechargeSection');
+    document.getElementById('showGamesBtn').addEventListener('click',()=>{ gamesSec.classList.remove('hidden-section'); rechargeSec.classList.add('hidden-section'); document.getElementById('showGamesBtn').classList.add('active'); document.getElementById('showRechargeBtn').classList.remove('active'); });
+    document.getElementById('showRechargeBtn').addEventListener('click',()=>{ gamesSec.classList.add('hidden-section'); rechargeSec.classList.remove('hidden-section'); document.getElementById('showRechargeBtn').classList.add('active'); document.getElementById('showGamesBtn').classList.remove('active'); });
     document.querySelectorAll('#gamesSection .tab-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('#gamesSection .tab-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderGame(btn.getAttribute('data-game')); }); });
     document.querySelectorAll('#rechargeSection .recharge-tab').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('#rechargeSection .recharge-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderRecharge(btn.getAttribute('data-recharge')); }); });
-    // تبديل التصنيفات داخل التصميم
-    document.querySelectorAll('#designSection .design-tab').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('#designSection .design-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentDesignSub = btn.getAttribute('data-design'); renderDesign(currentDesignSub); }); });
 
     document.getElementById('copyNumberBtn')?.addEventListener('click',()=>{ navigator.clipboard.writeText('01044049390'); showToast('تم نسخ رقم فودافون كاش'); });
     document.getElementById('shareBtn')?.addEventListener('click',()=>{ navigator.clipboard.writeText(window.location.href); showToast('تم نسخ رابط الموقع'); });
@@ -409,4 +322,12 @@
 
     // العد التنازلي
     let endTime = localStorage.getItem('countdownEnd'); if(!endTime){ endTime=Date.now()+2*60*60*1000; localStorage.setItem('countdownEnd',endTime); }
-    function updateCountdown(){ const remaining=Math.max(0,parseInt(endTime)-Date.now()); if(remaining<=0){ document.getElementById('countdownTimer').innerHTML='<i class="fas fa-tags"></i> العرض انتهى!'; return; } const h=Math.floor(remaining/3600000); const m=Math.floor((remaining%3600000)/60000); const s=Math.floor((remaining%60000)/1000); document.ge
+    function updateCountdown(){ const remaining=Math.max(0,parseInt(endTime)-Date.now()); if(remaining<=0){ document.getElementById('countdownTimer').innerHTML='<i class="fas fa-tags"></i> العرض انتهى!'; return; } const h=Math.floor(remaining/3600000); const m=Math.floor((remaining%3600000)/60000); const s=Math.floor((remaining%60000)/1000); document.getElementById('countdownTimer').innerHTML=`<i class="fas fa-tags"></i> خصم 10% ينتهي بعد: ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; requestAnimationFrame(updateCountdown); }
+    updateCountdown();
+
+    // تشغيل
+    renderGame('pubg'); renderRecharge('vodafone'); renderComments(); initRatingStars(); updateStats();
+    setInterval(()=>{ activeVisitors+=Math.floor(Math.random()*3); document.getElementById('statActive').innerText=activeVisitors; },30000);
+</script>
+</body>
+    </html>
