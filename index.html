@@ -62,9 +62,9 @@
         .prices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
         .price-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 1.8rem; padding: 1.4rem; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s; position: relative; overflow: hidden; }
         .price-card:hover { transform: translateY(-6px); border-color: #0ff; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+        .price-card.shabab-card { background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 0, 100, 0.15)); border-color: #ff8c00; }
+        .price-card.shabab-card:hover { border-color: #ff8c00; box-shadow: 0 0 25px rgba(255, 165, 0, 0.4); }
         .price-card.vip-card { background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.1)); border: 1px solid #f0f; box-shadow: 0 0 12px rgba(255,0,255,0.3); }
-        .price-card .app-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; pointer-events: none; }
-        .price-card > * { position: relative; z-index: 1; }
         .game-badge { background: rgba(0, 255, 255, 0.2); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; font-weight: 700; margin-bottom: 0.7rem; border: 1px solid #0ff; }
         .vip-badge { background: linear-gradient(115deg, #f0f, #0ff); color: #0a0a0a; border: none; }
         .item-name { font-size: 1.2rem; font-weight: 800; margin: 0.3rem 0; }
@@ -295,7 +295,7 @@
         { name: "50000 عملة", desc: "شحن عملات تيك توك", priceEGP: 29520 }
     ];
 
-    // ------------------------- بيانات Shabab الصوتي -------------------------
+    // بيانات Shabab الصوتي (تم إزالة الصورة الخلفية المؤقتة)
     const shababItems = {
         egypt: [
             { name: "100 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 75000 },
@@ -396,10 +396,8 @@
         if (gameKey === 'shabab') {
             const container = document.getElementById('pricesContainer');
             if (!container) return;
-            const appImageUrl = 'https://kommodo.ai/i/OeWkKZYLnPXh6RsLyPNZ';
-            let html = `<div class="category-title" style="grid-column:1/-1; text-align:center; font-size:1.8rem; background:linear-gradient(135deg,#0ff,#f0f); -webkit-background-clip:text; background-clip:text; color:transparent;"><i class="fas fa-microphone-alt"></i> Shabab - تطبيق صوتي</div>`;
+            let html = `<div class="category-title" style="grid-column:1/-1; text-align:center; font-size:1.8rem; background:linear-gradient(135deg,#ff8c00,#ff2d55); -webkit-background-clip:text; background-clip:text; color:transparent;"><i class="fas fa-microphone-alt"></i> Shabab - تطبيق صوتي</div>`;
 
-            // عرض الأقسام حسب الدول
             const countries = [
                 { key: 'egypt', label: 'مصر', flag: '🇪🇬', items: shababItems.egypt },
                 { key: 'jordan', label: 'الأردن', flag: '🇯🇴', items: shababItems.jordan },
@@ -410,17 +408,18 @@
                 html += `<div class="category-title"><span class="country-flag">${country.flag}</span> أسعار ${country.label}</div>`;
                 country.items.forEach(item => {
                     const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
-                    html += `<div class="price-card" style="position:relative; overflow:hidden;">
-                        <img src="${appImageUrl}" alt="Shabab App" class="app-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.15; z-index:0; pointer-events:none;" onerror="this.style.display='none'">
-                        <div style="position:relative; z-index:1;">
-                            <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
-                            <div class="game-badge">Shabab ${country.flag}</div>
-                            <div class="item-name">${escapeHtml(item.name)}</div>
-                            <div class="amount-desc">${escapeHtml(item.desc)}</div>
-                            <div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div>
-                            <button class="btn-order" data-item="${escapeHtml(item.name + " (Shabab - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+                    html += `
+                        <div class="price-card shabab-card">
+                            <div style="position:relative; z-index:1;">
+                                <div class="card-icon"><i class="fas fa-microphone-alt" style="color:#ff8c00;"></i></div>
+                                <div class="game-badge" style="border-color:#ff8c00; color:#ff8c00;">Shabab ${country.flag}</div>
+                                <div class="item-name">${escapeHtml(item.name)}</div>
+                                <div class="amount-desc">${escapeHtml(item.desc)}</div>
+                                <div class="price-eg" style="color:#ff8c00;">${formattedPrice} <span>جنيه مصري</span></div>
+                                <button class="btn-order" data-item="${escapeHtml(item.name + " (Shabab - " + item.desc + ")")}" data-price="${item.priceEGP}" style="border-color:#ff8c00; color:#fff;"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+                            </div>
                         </div>
-                    </div>`;
+                    `;
                 });
             });
 
@@ -552,4 +551,6 @@
             const commentDiv = document.createElement('div');
             commentDiv.className = 'comment-item';
             commentDiv.innerHTML = `<button class="delete-comment" data-index="${idx}"><i class="fas fa-trash-alt"></i></button><div><span><i class="fas fa-user-circle"></i> ${escapeHtml(c.name)}</span><div>${stars}</div><span>${c.date}</span></div><div>${escapeHtml(c.text)}</div>`;
-            div.appendChild(comment
+            div.appendChild(commentDiv);
+        });
+        if(comments.length) { satisfactionRate = Math.round((total/comments.length)*20); document.getElementById('statSatisfaction').innerText =
