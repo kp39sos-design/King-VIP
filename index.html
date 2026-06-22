@@ -105,6 +105,7 @@
         .category-title { grid-column: 1 / -1; text-align: center; margin: 1rem 0 0.5rem; padding: 0.5rem; background: rgba(0,255,255,0.1); border-radius: 2rem; border-right: 4px solid #0ff; font-size: 1.3rem; font-weight: 800; }
         .category-title i { margin-left: 0.5rem; }
         .country-flag { font-size: 1.5rem; margin-left: 0.5rem; }
+        .currency-label { font-size: 0.9rem; color: #a0b0d0; margin-right: 0.3rem; }
     </style>
 </head>
 <body>
@@ -295,29 +296,29 @@
         { name: "50000 عملة", desc: "شحن عملات تيك توك", priceEGP: 29520 }
     ];
 
-    // بيانات Shabab الصوتي (تم إزالة الصورة الخلفية المؤقتة)
+    // ✅ بيانات Shabab بعد التعديل (الأسعار الجديدة بالعملات المحلية)
     const shababItems = {
         egypt: [
-            { name: "100 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 75000 },
-            { name: "300 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 225000 },
-            { name: "500 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 375000 },
-            { name: "1000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 750000 },
-            { name: "2000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 1500000 },
-            { name: "3000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 2250000 }
+            { name: "كونزا 75,000", desc: "100 جنيه مصري", priceEGP: 75000 },
+            { name: "كونزا 225,000", desc: "300 جنيه مصري", priceEGP: 225000 },
+            { name: "كونزا 375,000", desc: "500 جنيه مصري", priceEGP: 375000 },
+            { name: "كونزا 750,000", desc: "1000 جنيه مصري", priceEGP: 750000 },
+            { name: "كونزا 1,500,000", desc: "2000 جنيه مصري", priceEGP: 1500000 },
+            { name: "كونزا 2,250,000", desc: "3000 جنيه مصري", priceEGP: 2250000 }
         ],
         jordan: [
-            { name: "10 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 450000 },
-            { name: "20 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 900000 },
-            { name: "30 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 1350000 },
-            { name: "40 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 1800000 },
-            { name: "50 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 2250000 }
+            { name: "كونزا 450,000", desc: "10 دينار أردني", priceEGP: 450000 },
+            { name: "كونزا 900,000", desc: "20 دينار أردني", priceEGP: 900000 },
+            { name: "كونزا 1,350,000", desc: "30 دينار أردني", priceEGP: 1350000 },
+            { name: "كونزا 1,800,000", desc: "40 دينار أردني", priceEGP: 1800000 },
+            { name: "كونزا 2,250,000", desc: "50 دينار أردني", priceEGP: 2250000 }
         ],
         saudi: [
-            { name: "100 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 900000 },
-            { name: "200 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 1800000 },
-            { name: "300 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 2700000 },
-            { name: "400 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 3600000 },
-            { name: "500 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 4500000 }
+            { name: "كونزا 900,000", desc: "100 ريال سعودي", priceEGP: 900000 },
+            { name: "كونزا 1,800,000", desc: "200 ريال سعودي", priceEGP: 1800000 },
+            { name: "كونزا 2,700,000", desc: "300 ريال سعودي", priceEGP: 2700000 },
+            { name: "كونزا 3,600,000", desc: "400 ريال سعودي", priceEGP: 3600000 },
+            { name: "كونزا 4,500,000", desc: "500 ريال سعودي", priceEGP: 4500000 }
         ]
     };
 
@@ -399,13 +400,13 @@
             let html = `<div class="category-title" style="grid-column:1/-1; text-align:center; font-size:1.8rem; background:linear-gradient(135deg,#ff8c00,#ff2d55); -webkit-background-clip:text; background-clip:text; color:transparent;"><i class="fas fa-microphone-alt"></i> Shabab - تطبيق صوتي</div>`;
 
             const countries = [
-                { key: 'egypt', label: 'مصر', flag: '🇪🇬', items: shababItems.egypt },
-                { key: 'jordan', label: 'الأردن', flag: '🇯🇴', items: shababItems.jordan },
-                { key: 'saudi', label: 'السعودية', flag: '🇸🇦', items: shababItems.saudi }
+                { key: 'egypt', label: 'مصر', flag: '🇪🇬', currency: 'جنيه مصري', items: shababItems.egypt },
+                { key: 'jordan', label: 'الأردن', flag: '🇯🇴', currency: 'دينار أردني', items: shababItems.jordan },
+                { key: 'saudi', label: 'السعودية', flag: '🇸🇦', currency: 'ريال سعودي', items: shababItems.saudi }
             ];
 
             countries.forEach(country => {
-                html += `<div class="category-title"><span class="country-flag">${country.flag}</span> أسعار ${country.label}</div>`;
+                html += `<div class="category-title"><span class="country-flag">${country.flag}</span> أسعار ${country.label} (${country.currency})</div>`;
                 country.items.forEach(item => {
                     const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
                     html += `
@@ -415,7 +416,7 @@
                                 <div class="game-badge" style="border-color:#ff8c00; color:#ff8c00;">Shabab ${country.flag}</div>
                                 <div class="item-name">${escapeHtml(item.name)}</div>
                                 <div class="amount-desc">${escapeHtml(item.desc)}</div>
-                                <div class="price-eg" style="color:#ff8c00;">${formattedPrice} <span>جنيه مصري</span></div>
+                                <div class="price-eg" style="color:#ff8c00;">${formattedPrice} <span class="currency-label">جنيه مصري</span></div>
                                 <button class="btn-order" data-item="${escapeHtml(item.name + " (Shabab - " + item.desc + ")")}" data-price="${item.priceEGP}" style="border-color:#ff8c00; color:#fff;"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
                             </div>
                         </div>
@@ -553,4 +554,4 @@
             commentDiv.innerHTML = `<button class="delete-comment" data-index="${idx}"><i class="fas fa-trash-alt"></i></button><div><span><i class="fas fa-user-circle"></i> ${escapeHtml(c.name)}</span><div>${stars}</div><span>${c.date}</span></div><div>${escapeHtml(c.text)}</div>`;
             div.appendChild(commentDiv);
         });
-        if(comments.length) { satisfactionRate = Math.round((total/comments.length)*20); document.getElementById('statSatisfaction').innerText =
+      
