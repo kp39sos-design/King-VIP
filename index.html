@@ -2,603 +2,578 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>اسرع من نتكم 🔥 | Premium Dark Neon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسرع من نتكم 🔥</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg-dark: #05070a;
-            --bg-darker: #030507;
-            --card-bg: rgba(10, 15, 25, 0.75);
-            --neon-cyan: #0ff;
-            --neon-magenta: #f0f;
-            --text-light: #eef5ff;
-            --text-dim: #a0b0d0;
-        }
         body {
             font-family: 'Cairo', sans-serif;
-            background: radial-gradient(circle at 20% 30%, var(--bg-dark), var(--bg-darker));
-            color: var(--text-light);
+            background: #05070a;
+            color: #eef5ff;
             padding: 1rem;
             min-height: 100vh;
-            position: relative;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 0, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
+        .container { max-width: 1300px; margin: 0 auto; }
+        .section-switch { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
+        .switch-btn {
+            background: rgba(10,20,35,0.8);
+            border: 1px solid rgba(0,255,255,0.4);
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 800;
+            color: #a0b0d0;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        .container { max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; padding: 0.5rem; }
-        .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(0, 255, 255, 0.2); z-index: 9999; }
-        .progress-bar { height: 3px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta)); width: 0%; transition: width 0.2s; box-shadow: 0 0 5px var(--neon-cyan); }
-        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 255, 255, 0.2); backdrop-filter: blur(8px); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 999; font-size: 1.2rem; box-shadow: 0 0 8px rgba(0,255,255,0.5); }
-        .scroll-top.show { opacity: 1; }
-        .scroll-top:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px var(--neon-cyan); }
-        .welcome-message { background: rgba(0, 255, 255, 0.05); border-right: 4px solid var(--neon-cyan); border-radius: 1rem; padding: 0.8rem 1rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold; backdrop-filter: blur(8px); box-shadow: 0 0 12px rgba(0,255,255,0.2); }
-        .hero { text-align: center; background: rgba(5, 10, 20, 0.7); backdrop-filter: blur(12px); border-radius: 2rem; padding: 1.8rem 1.2rem; margin-bottom: 2rem; border: 1px solid rgba(0, 255, 255, 0.4); box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); }
-        .hero h1 { font-size: 2.3rem; font-weight: 800; background: linear-gradient(125deg, #0ff, #f0f, #ff0); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .brand-name { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #0ff, #f0f); padding: 0.4rem 1.4rem; border-radius: 60px; font-weight: 800; margin-top: 0.8rem; color: #0a0a0a; box-shadow: 0 0 15px rgba(0,255,255,0.6); }
-        .countdown { background: rgba(0,0,0,0.6); padding: 0.4rem 1rem; border-radius: 40px; display: inline-flex; gap: 10px; margin: 0.5rem auto 0; font-size: 0.9rem; border: 1px solid var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
-        .section-switch { display: flex; justify-content: center; gap: 1.2rem; margin: 1.5rem 0 2rem; flex-wrap: wrap; }
-        .switch-btn { background: rgba(10, 20, 35, 0.8); backdrop-filter: blur(4px); border: 1px solid rgba(0, 255, 255, 0.4); padding: 0.8rem 2rem; border-radius: 60px; font-weight: 800; font-size: 1rem; color: var(--text-dim); cursor: pointer; transition: all 0.3s; }
-        .switch-btn.active { background: linear-gradient(105deg, #0ff, #f0f); color: #0a0a0a; border-color: #fff; box-shadow: 0 0 20px rgba(0,255,255,0.6); }
-        .game-tabs, .recharge-tabs, .shabab-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin-bottom: 2rem; }
-        .tab-btn, .recharge-tab, .shabab-tab { background: rgba(10, 20, 35, 0.85); border: 1px solid rgba(0, 255, 255, 0.3); padding: 0.7rem 1.6rem; border-radius: 60px; font-weight: 700; font-size: 0.95rem; color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
-        .tab-btn.active, .recharge-tab.active, .shabab-tab.active { background: linear-gradient(115deg, #0ff, #f0f); color: #0a0a0a; border-color: #fff; box-shadow: 0 0 15px rgba(0,255,255,0.5); }
-        .stats-bar { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .stat-card { background: rgba(10, 20, 35, 0.6); backdrop-filter: blur(8px); padding: 0.7rem 1.2rem; border-radius: 1.5rem; border: 1px solid rgba(0, 255, 255, 0.4); text-align: center; min-width: 110px; transition: 0.2s; }
-        .stat-card:hover { border-color: #0ff; box-shadow: 0 0 12px rgba(0,255,255,0.4); }
-        .stat-number { font-size: 1.8rem; font-weight: 800; color: #0ff; text-shadow: 0 0 5px #0ff; }
-        .prices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
-        .price-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 1.8rem; padding: 1.4rem; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s; }
-        .price-card:hover { transform: translateY(-6px); border-color: #0ff; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
-        .price-card.vip-card { background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.1)); border: 1px solid #f0f; box-shadow: 0 0 12px rgba(255,0,255,0.3); }
-        .game-badge { background: rgba(0, 255, 255, 0.2); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; font-weight: 700; margin-bottom: 0.7rem; border: 1px solid #0ff; }
-        .vip-badge { background: linear-gradient(115deg, #f0f, #0ff); color: #0a0a0a; border: none; }
-        .item-name { font-size: 1.2rem; font-weight: 800; margin: 0.3rem 0; }
-        .price-eg { font-size: 1.7rem; font-weight: 800; color: #0ff; margin: 0.6rem 0; }
-        .btn-order { background: rgba(0, 255, 255, 0.1); border: 1px solid #0ff; width: 100%; padding: 0.7rem; border-radius: 2rem; font-weight: 700; font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: var(--text-light); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.6rem; transition: all 0.25s; }
-        .btn-order:hover { background: linear-gradient(105deg, #0ff, #f0f); color: #0a0a0a; box-shadow: 0 0 15px rgba(0,255,255,0.6); }
-        .btn-order.loading { opacity: 0.6; pointer-events: none; }
-        .contact-section, .payment-section, .faq-section, .comments-section, .design-section { background: rgba(10, 20, 35, 0.7); backdrop-filter: blur(12px); border-radius: 2rem; padding: 1.5rem; margin: 1.5rem 0; border: 1px solid rgba(0, 255, 255, 0.3); }
-        .contact-card { background: rgba(0, 0, 0, 0.4); border-radius: 1.5rem; padding: 1rem; text-align: center; border: 1px solid rgba(0, 255, 255, 0.4); transition: 0.2s; }
-        .contact-card:hover { border-color: #0ff; box-shadow: 0 0 12px rgba(0,255,255,0.3); }
-        .copy-btn, .copy-contact, .share-btn, .export-btn, .policy-btn { background: rgba(0, 255, 255, 0.1); border: 1px solid #0ff; padding: 0.3rem 1rem; border-radius: 2rem; cursor: pointer; transition: 0.2s; display: inline-block; margin: 0.3rem; }
-        .copy-btn:hover, .copy-contact:hover, .share-btn:hover, .export-btn:hover, .policy-btn:hover { background: #0ff; color: #000; box-shadow: 0 0 8px #0ff; }
-        .vodafone-number { background: rgba(0,0,0,0.5); border-radius: 2rem; padding: 0.8rem; margin: 0.8rem auto; display: inline-block; width: 100%; max-width: 360px; border: 1px dashed #0ff; }
-        .telegram-large-btn { display: inline-flex; gap: 8px; background: #0088cc; padding: 0.6rem 1.2rem; border-radius: 40px; color: white; text-decoration: none; margin-top: 0.8rem; }
-        .faq-question { display: flex; justify-content: space-between; cursor: pointer; padding: 0.7rem 0; border-bottom: 1px solid rgba(0,255,255,0.2); }
-        .faq-answer { display: none; padding: 0.5rem 0; color: #bbd; }
-        .comment-form input, .comment-form textarea { background: rgba(0,0,0,0.5); border: 1px solid #0ff; border-radius: 1rem; padding: 0.7rem; color: white; width: 100%; margin-bottom: 0.8rem; }
-        .rating-stars i { color: #ccc; cursor: pointer; font-size: 1.3rem; }
-        .rating-stars i.active { color: #0ff; text-shadow: 0 0 5px #0ff; }
-        .btn-submit { background: linear-gradient(105deg, #0ff, #f0f); border: none; padding: 0.7rem; border-radius: 2rem; font-weight: bold; color: #000; width: 100%; cursor: pointer; }
-        .recent-orders { background: rgba(0,0,0,0.5); border-radius: 1.5rem; padding: 1rem; text-align: center; margin: 1rem 0; border: 1px solid #0ff; }
-        .design-services { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
-        .design-card { background: rgba(0, 0, 0, 0.5); border-radius: 1.5rem; padding: 1.2rem; text-align: center; flex: 1; min-width: 200px; border: 1px solid #f0f; transition: 0.3s; cursor: pointer; }
-        .design-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(255, 0, 255, 0.4); border-color: #0ff; }
-        .design-card i { font-size: 2.5rem; color: #0ff; margin-bottom: 0.5rem; }
-        .design-card h4 { font-size: 1.2rem; margin: 0.5rem 0; }
-        .btn-design { background: linear-gradient(105deg, #f0f, #0ff); border: none; padding: 0.5rem 1rem; border-radius: 2rem; font-weight: bold; color: #000; cursor: pointer; margin-top: 0.5rem; display: inline-block; }
-        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #111; color: #0ff; padding: 0.8rem 1.5rem; border-radius: 3rem; border-right: 4px solid #0ff; z-index: 2000; opacity: 0; transition: 0.3s; pointer-events: none; }
-        .toast-notification.show { opacity: 1; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index: 3000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: 0.2s; }
-        .modal-overlay.show { visibility: visible; opacity: 1; }
-        .modal-content { background: #0a0f1a; border-radius: 2rem; padding: 1.5rem; max-width: 500px; width: 90%; border: 2px solid #0ff; text-align: center; }
+        .switch-btn.active {
+            background: linear-gradient(105deg, #0ff, #f0f);
+            color: #0a0a0a;
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(0,255,255,0.6);
+        }
         .hidden-section { display: none; }
-        .footer-note { text-align: center; font-size: 0.7rem; margin-top: 1.5rem; color: var(--text-dim); }
-        .owner-name { font-size: 0.9rem; color: #0ff; font-weight: bold; margin-top: 0.5rem; }
-        .comment-item { background: rgba(0,0,0,0.3); margin: 0.8rem 0; padding: 0.7rem; border-radius: 1.2rem; position: relative; }
-        .delete-comment { position: absolute; left: 10px; top: 10px; background: rgba(255,0,0,0.3); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: #fff; }
-        .category-title { grid-column: 1 / -1; text-align: center; margin: 1rem 0 0.5rem; padding: 0.5rem; background: rgba(0,255,255,0.1); border-radius: 2rem; border-right: 4px solid #0ff; font-size: 1.3rem; font-weight: 800; }
-        .category-title i { margin-left: 0.5rem; }
-        .coin-icon { font-size: 1.5rem; margin-left: 0.5rem; }
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .price-card {
+            background: rgba(10,15,25,0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 1.8rem;
+            padding: 1.2rem;
+            border: 1px solid rgba(0,255,255,0.3);
+            transition: 0.3s;
+            text-align: center;
+        }
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+        }
+        .price-card.vip-card {
+            border-color: #f0f;
+            box-shadow: 0 0 12px rgba(255,0,255,0.2);
+        }
+        .game-badge {
+            background: rgba(0,255,255,0.2);
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border: 1px solid #0ff;
+        }
+        .vip-badge {
+            background: linear-gradient(115deg, #f0f, #0ff);
+            color: #0a0a0a;
+            border: none;
+        }
+        .item-name { font-size: 1.2rem; font-weight: 800; margin: 0.5rem 0; }
+        .price-eg { font-size: 1.6rem; font-weight: 800; color: #0ff; margin: 0.5rem 0; }
+        .btn-order {
+            background: rgba(0,255,255,0.1);
+            border: 1px solid #0ff;
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            color: #eef5ff;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-order:hover {
+            background: linear-gradient(105deg, #0ff, #f0f);
+            color: #0a0a0a;
+            box-shadow: 0 0 15px rgba(0,255,255,0.6);
+        }
+        .btn-order.loading { opacity: 0.6; pointer-events: none; }
+        .tab-container { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 1.5rem; }
+        .tab-btn {
+            background: rgba(10,20,35,0.85);
+            border: 1px solid rgba(0,255,255,0.3);
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #a0b0d0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tab-btn.active {
+            background: linear-gradient(115deg, #0ff, #f0f);
+            color: #0a0a0a;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(0,255,255,0.5);
+        }
+        .category-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(0,255,255,0.1);
+            border-radius: 2rem;
+            border-right: 4px solid #0ff;
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+            z-index: 3000;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #0a0f1a;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid #0ff;
+            text-align: center;
+        }
+        .copy-btn {
+            background: rgba(0,255,255,0.1);
+            border: 1px solid #0ff;
+            padding: 0.2rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            color: #fff;
+        }
+        .copy-btn:hover {
+            background: #0ff;
+            color: #000;
+        }
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #111;
+            color: #0ff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3rem;
+            z-index: 2000;
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+        .toast-notification.show { opacity: 1; }
+        .footer-note { text-align: center; font-size: 0.7rem; margin-top: 2rem; color: #a0b0d0; }
+        .owner-name { font-size: 0.9rem; color: #0ff; font-weight: bold; }
     </style>
 </head>
 <body>
-<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-<button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
-<div class="container">
-    <div class="welcome-message" id="welcomeMessage"><i class="fas fa-smile-wink"></i> مرحباً بك في المتجر النيوني 🔥</div>
-    <div class="hero">
-        <h1><i class="fas fa-bolt"></i> اسرع من نتكم 🔥</h1>
-        <p>شحن PUBG - Mobile Legends - Free Fire - يلا لودو VIP - كونات شباب - كروت شحن - فودافون كاش - إنترنت WE</p>
-        <div class="brand-name"><i class="fas fa-rocket"></i> اسرع من نتكم 🔥</div>
-        <div class="countdown" id="countdownTimer"><i class="fas fa-tags"></i> خصم 10% ينتهي بعد: -- : -- : --</div>
-    </div>
 
+<div class="container">
+    <h1 style="text-align:center; background: linear-gradient(125deg,#0ff,#f0f,#ff0); -webkit-background-clip:text; background-clip:text; color:transparent;">اسرع من نتكم 🔥</h1>
+
+    <!-- أزرار التبديل بين الأقسام -->
     <div class="section-switch">
         <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
         <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-mobile-alt"></i> 📱 شحن الرصيد</button>
         <button id="showShababBtn" class="switch-btn"><i class="fas fa-coins"></i> 💎 شباب (كونات)</button>
     </div>
 
-    <div class="stats-bar">
-        <div class="stat-card"><div class="stat-number" id="statOrders">0</div><div class="stat-label"><i class="fas fa-check-circle"></i> طلب مكتمل</div></div>
-        <div class="stat-card"><div class="stat-number" id="statCustomers">0</div><div class="stat-label"><i class="fas fa-users"></i> عميل سعيد</div></div>
-        <div class="stat-card"><div class="stat-number" id="statDelivery">0</div><div class="stat-label"><i class="fas fa-clock"></i> دقيقة للتسليم</div></div>
-        <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label"><i class="fas fa-eye"></i> زوار نشطاء</div></div>
-        <div class="stat-card"><div class="stat-number" id="statSatisfaction">0%</div><div class="stat-label"><i class="fas fa-smile"></i> نسبة الرضا</div></div>
-        <div class="stat-card"><div class="stat-number" id="statTotalSales">0</div><div class="stat-label"><i class="fas fa-chart-line"></i> إجمالي المبيعات</div></div>
-        <div class="stat-card"><div class="stat-number" id="statVisitorsToday">0</div><div class="stat-label"><i class="fas fa-calendar-day"></i> زوار اليوم</div></div>
-    </div>
-
     <!-- قسم الألعاب -->
     <div id="gamesSection">
-        <div class="game-tabs">
-            <button class="tab-btn active" data-game="pubg"><i class="fab fa-playstation"></i> PUBG MOBILE</button>
-            <button class="tab-btn" data-game="mlbb"><i class="fas fa-skull-crossbones"></i> Mobile Legends</button>
-            <button class="tab-btn" data-game="freefire"><i class="fas fa-fire"></i> Free Fire</button>
-            <button class="tab-btn" data-game="yallaludo"><i class="fas fa-dice-d6"></i> يلا لودو (VIP)</button>
-            <button class="tab-btn" data-game="tiktok"><i class="fab fa-tiktok"></i> TikTok Coins</button>
+        <div class="tab-container" id="gameTabs">
+            <button class="tab-btn active" data-game="pubg">PUBG</button>
+            <button class="tab-btn" data-game="mlbb">MLBB</button>
+            <button class="tab-btn" data-game="freefire">Free Fire</button>
+            <button class="tab-btn" data-game="yallaludo">يلا لودو</button>
+            <button class="tab-btn" data-game="tiktok">TikTok</button>
         </div>
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
 
     <!-- قسم شحن الرصيد -->
     <div id="rechargeSection" class="hidden-section">
-        <div class="recharge-tabs">
-            <button class="recharge-tab active" data-recharge="vodafone"><i class="fas fa-sim-card"></i> فودافون</button>
-            <button class="recharge-tab" data-recharge="etisalat"><i class="fas fa-tower-cell"></i> اتصالات</button>
-            <button class="recharge-tab" data-recharge="we"><i class="fas fa-wifi"></i> وي</button>
-            <button class="recharge-tab" data-recharge="wehome"><i class="fas fa-home"></i> إنترنت WE منزلي</button>
+        <div class="tab-container" id="rechargeTabs">
+            <button class="tab-btn active" data-recharge="vodafone">فودافون</button>
+            <button class="tab-btn" data-recharge="etisalat">اتصالات</button>
+            <button class="tab-btn" data-recharge="we">وي</button>
+            <button class="tab-btn" data-recharge="wehome">WE منزلي</button>
         </div>
         <div id="rechargeContainer" class="prices-grid"></div>
     </div>
 
-    <!-- قسم شباب (كونات) الجديد -->
+    <!-- قسم شباب (كونات) -->
     <div id="shababSection" class="hidden-section">
-        <div class="shabab-tabs">
-            <button class="shabab-tab active" data-currency="eg"><i class="fas fa-flag"></i> 🇪🇬 مصر (جنيه)</button>
-            <button class="shabab-tab" data-currency="jo"><i class="fas fa-flag"></i> 🇯🇴 الأردن (دينار)</button>
-            <button class="shabab-tab" data-currency="sa"><i class="fas fa-flag"></i> 🇸🇦 السعودية (ريال)</button>
+        <div class="tab-container" id="shababTabs">
+            <button class="tab-btn active" data-currency="eg">🇪🇬 مصر (جنيه)</button>
+            <button class="tab-btn" data-currency="jo">🇯🇴 الأردن (دينار)</button>
+            <button class="tab-btn" data-currency="sa">🇸🇦 السعودية (ريال)</button>
         </div>
         <div id="shababContainer" class="prices-grid"></div>
     </div>
 
-    <div class="recent-orders">
-        <i class="fas fa-history"></i> آخر الطلبات المكتملة
-        <ul id="recentOrdersList"><li>🟢 PUBG - 30 شدة</li><li>🟢 Free Fire - 500 جوهرة</li><li>🟢 يلا لودو - رتبة الفارس</li></ul>
+    <div class="footer-note">
+        <div class="owner-name">المالك: 𝑅 𝐸 𝐴 𝐿﷼ <i class="fas fa-crown"></i></div>
     </div>
-
-    <div class="contact-section">
-        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
-            <div class="contact-card"><i class="fab fa-whatsapp" style="font-size: 2rem; color:#25D366;"></i><h4>خدمة العملاء واتساب</h4><div class="contact-number">01017954664</div><button class="copy-contact" data-copy="01017954664"><i class="far fa-copy"></i> نسخ</button><a href="https://wa.me/201017954664" target="_blank"><i class="fab fa-whatsapp"></i> تواصل الآن</a></div>
-            <div class="contact-card"><i class="fab fa-telegram" style="font-size: 2rem; color:#0088cc;"></i><h4>شحن الرصيد والإنترنت</h4><div class="contact-number">@BESO125F</div><button class="copy-contact" data-copy="@BESO125F"><i class="far fa-copy"></i> نسخ المعرف</button><a href="https://t.me/BESO125F" target="_blank"><i class="fab fa-telegram"></i> تواصل تلجرام</a></div>
-            <div class="contact-card"><i class="fas fa-share-alt" style="font-size: 2rem; color:#0ff;"></i><h4>مشاركة الموقع</h4><button class="share-btn" id="shareBtn"><i class="fas fa-share"></i> نسخ الرابط</button><button class="export-btn" id="exportCommentsBtn"><i class="fas fa-download"></i> تصدير التعليقات</button><button class="policy-btn" id="policyBtn"><i class="fas fa-file-contract"></i> سياسة الخصوصية</button></div>
-        </div>
-    </div>
-
-    <div class="faq-section">
-        <h3 style="text-align:center;"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h3>
-        <div class="faq-item"><div class="faq-question">❓ كم تستغرق عملية الشحن؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">عادة من 5 إلى 20 دقيقة بعد تأكيد الدفع.</div></div>
-        <div class="faq-item"><div class="faq-question">❓ هل يوجد ضمان على الشحن؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، ضمان 100% أو استرداد كامل المبلغ.</div></div>
-        <div class="faq-item"><div class="faq-question">❓ كيف أتواصل في حالة وجود مشكلة؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">عبر واتساب 01017954664 أو التلجرام @BESO125F.</div></div>
-        <div class="faq-item"><div class="faq-question">❓ ما هي طرق الدفع المتاحة؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">حالياً فودافون كاش فقط، قريباً إنستا باي.</div></div>
-    </div>
-
-    <div class="payment-section">
-        <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #0ff;"></i>
-        <h2>طريقة الدفع : فودافون كاش</h2>
-        <div class="vodafone-number"><i class="fas fa-mobile-alt"></i> رقم المحفظة: <h3 dir="ltr">01044049390</h3><button class="copy-btn" id="copyNumberBtn"><i class="far fa-copy"></i> نسخ الرقم</button></div>
-        <p><i class="fas fa-info-circle"></i> بعد التحويل، أرسل صورة الإيداع + الـ ID على واتساب</p>
-        <div class="payment-steps" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 1rem;">
-            <div style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> افتح فودافون كاش</div>
-            <div style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> تحويل للأرقام</div>
-            <div style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> الرقم: 01044049390</div>
-            <div style="background:#1e2a3a; padding:0.3rem 0.8rem; border-radius: 2rem;"><i class="fas fa-check-circle"></i> أرسل التأكيد واستلم الشحن</div>
-        </div>
-    </div>
-
-    <div class="comments-section">
-        <h3 style="text-align:center;"><i class="fas fa-comments"></i> آرائكم واقتراحاتكم</h3>
-        <div class="comment-form">
-            <input type="text" id="commentName" placeholder="الاسم (مطلوب)">
-            <input type="email" id="commentEmail" placeholder="البريد الإلكتروني (اختياري)">
-            <div style="display: flex; justify-content: space-between;"><span>التقييم:</span><div class="rating-stars" id="ratingStars"><i class="far fa-star" data-rating="1"></i><i class="far fa-star" data-rating="2"></i><i class="far fa-star" data-rating="3"></i><i class="far fa-star" data-rating="4"></i><i class="far fa-star" data-rating="5"></i></div></div>
-            <textarea id="commentText" rows="3" placeholder="اكتب تعليقك..."></textarea>
-            <button class="btn-submit" id="submitComment"><i class="fas fa-paper-plane"></i> إرسال</button>
-        </div>
-        <div id="commentsList" class="comments-list"></div>
-    </div>
-
-    <div class="design-section">
-        <div style="text-align: center; margin-bottom: 1rem;">
-            <i class="fas fa-cube" style="font-size: 2rem; color: #f0f;"></i>
-            <i class="fas fa-paintbrush" style="font-size: 2rem; color: #0ff;"></i>
-            <h2><span style="color:#0ff;">مصمم 3D محترف</span> | بنرات - صور متحركة - جرافيك</h2>
-            <p>أقدم لكم أعلى جودة في التصميم الثلاثي الأبعاد والموشن جرافيك، بخبرة واحترافية.</p>
-        </div>
-        <div class="design-services">
-            <div class="design-card" data-service="بنرات 3D"><i class="fas fa-image"></i><h4>بنرات إعلانية 3D</h4><p>تصميم بنرات ثري دي بأعلى دقة، جاهزة للمواقع والسوشيال ميديا.</p><button class="btn-design">اطلب التصميم</button></div>
-            <div class="design-card" data-service="صور متحركة 3D"><i class="fas fa-film"></i><h4>صور متحركة (موشن)</h4><p>فيديوهات قصيرة و GIFs احترافية بتأثيرات ثلاثية الأبعاد.</p><button class="btn-design">اطلب التصميم</button></div>
-            <div class="design-card" data-service="نماذج 3D"><i class="fas fa-cubes"></i><h4>نماذج ثلاثية الأبعاد</h4><p>تصميم مجسمات 3D للعلامات التجارية والمنتجات.</p><button class="btn-design">اطلب التصميم</button></div>
-            <div class="design-card" data-service="فيديو دعائي"><i class="fas fa-vr-cardboard"></i><h4>فيديوهات دعائية</h4><p>مونتاج احترافي ومؤثرات بصرية عالية الجودة.</p><button class="btn-design">اطلب التصميم</button></div>
-        </div>
-        <div style="text-align: center; margin-top: 1rem;">
-            <p><i class="fas fa-star" style="color: #f0f;"></i> أكثر من 100 مشروع تم تسليمه بجودة 4K <i class="fas fa-star" style="color: #f0f;"></i></p>
-            <p>للطلب أو الاستفسار: تواصل معي عبر واتساب <strong>01017954664</strong> أو تلجرام <strong>@BESO125F</strong></p>
-        </div>
-    </div>
-    <div class="footer-note"><i class="fas fa-shield-alt"></i> التسليم خلال 5-20 دقيقة بعد تأكيد الدفع | الدعم الفني: 01017954664<br><div class="owner-name">المالك: 𝑅 𝐸 𝐴 𝐿﷼ <i class="fas fa-crown"></i></div></div>
 </div>
-<div id="policyModal" class="modal-overlay"><div class="modal-content"><h3>سياسة الخصوصية</h3><p>نحن نلتزم بحماية بياناتك الشخصية. لا نقوم بمشاركة معلوماتك مع أي طرف ثالث.</p><button id="closePolicyBtn" class="copy-btn">إغلاق</button></div></div>
+
+<!-- مودال الطلب -->
+<div id="orderModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3><i class="fas fa-gem" style="color:#0ff;"></i> تأكيد الطلب</h3>
+        <p id="modalItemName" style="font-size:1.2rem; font-weight:bold;"></p>
+        <p id="modalPrice" style="color:#0ff; font-size:1.8rem;"></p>
+        <p style="background:#00000040; padding:0.5rem; border-radius:1rem;">
+            <i class="fas fa-tag"></i> خصم 10%: <span id="modalDiscounted"></span>
+        </p>
+        <div style="margin:0.8rem 0;">
+            <i class="fas fa-phone-alt"></i> الدفع: <strong>01044049390</strong>
+            <button class="copy-btn" onclick="copyText('01044049390')">نسخ</button>
+        </div>
+        <div>
+            <i class="fab fa-whatsapp"></i> الدعم: <strong>01017954664</strong>
+            <button class="copy-btn" onclick="copyText('01017954664')">نسخ</button>
+        </div>
+        <button class="copy-btn" onclick="copyAllInfo()" style="margin:0.5rem 0;"><i class="fas fa-copy"></i> نسخ الكل</button>
+        <div style="display:flex; gap:0.6rem; justify-content:center; margin-top:1rem;">
+            <button class="copy-btn" onclick="closeModal()">إغلاق</button>
+            <a id="whatsappLink" href="#" target="_blank" style="background:#25D366; color:white; padding:0.4rem 1.2rem; border-radius:2rem; text-decoration:none;"><i class="fab fa-whatsapp"></i> واتساب</a>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast-notification"></div>
 
 <script>
-    // ------------------------- بيانات الألعاب (كما هي) -------------------------
-    const pubgItems = [
-        { name: "30 UC", desc: "شحن UC فوري", priceEGP: 23.99 },
-        { name: "60 UC", desc: "شحن UC فوري", priceEGP: 47.99 },
-        { name: "25 + 300 UC", desc: "شحن UC + بونص", priceEGP: 239.99 },
-        { name: "60 + 600 UC", desc: "شحن UC + بونص", priceEGP: 479.99 },
-        { name: "300 + 1500 UC", desc: "شحن UC + بونص", priceEGP: 1199.99 },
-        { name: "850 + 3000 UC", desc: "شحن UC + بونص", priceEGP: 2399.99 },
-        { name: "2100 + 6000 UC", desc: "شحن UC + بونص", priceEGP: 4799.99 },
-        { name: "4200 + 12000 UC", desc: "شحن UC + بونص", priceEGP: 9599.99 },
-        { name: "6300 + 18000 UC", desc: "شحن UC + بونص", priceEGP: 14399.99 },
-        { name: "8400 + 24000 UC", desc: "شحن UC + بونص", priceEGP: 19199.99 },
-        { name: "10500 + 30000 UC", desc: "شحن UC + بونص", priceEGP: 23999.99 },
-        { name: "12600 + 36000 UC", desc: "شحن UC + بونص", priceEGP: 28799.99 },
-        { name: "21000 + 60000 UC", desc: "شحن UC + بونص", priceEGP: 47999.99 }
-    ];
+// ===================== البيانات =====================
 
-    const mlbbItems = [ { name: "13 + 1 Diamonds", desc: "باقة + بونص", priceEGP: 25 }, { name: "20 + 2 Diamonds", desc: "باقة + بونص", priceEGP: 30 }, { name: "51 + 5 Diamonds", desc: "باقة + بونص", priceEGP: 65 }, { name: "102 + 10 Diamonds", desc: "باقة + بونص", priceEGP: 120 }, { name: "153 + 15 Diamonds", desc: "باقة + بونص", priceEGP: 180 }, { name: "203 + 20 Diamonds", desc: "باقة + بونص", priceEGP: 235 }, { name: "303 + 33 Diamonds", desc: "باقة + بونص", priceEGP: 350 }, { name: "504 + 66 Diamonds", desc: "باقة + بونص", priceEGP: 580 }, { name: "1007 + 156 Diamonds", desc: "باقة + بونص", priceEGP: 1150 }, { name: "2015 + 383 Diamonds", desc: "باقة + بونص", priceEGP: 2300 }, { name: "5035 + 1007 Diamonds", desc: "باقة + بونص", priceEGP: 5730 } ];
-    const freefireItems = [ { name: "50 جوهرة", desc: "شحن فوري", priceEGP: 25 }, { name: "100 جوهرة", desc: "شحن فوري", priceEGP: 50 }, { name: "210 جوهرة", desc: "شحن فوري", priceEGP: 100 }, { name: "310 جوهرة", desc: "شحن فوري", priceEGP: 150 }, { name: "520 جوهرة", desc: "شحن فوري", priceEGP: 250 }, { name: "1060 جوهرة", desc: "شحن فوري", priceEGP: 500 }, { name: "2200 جوهرة", desc: "شحن فوري", priceEGP: 1000 } ];
+// بيانات الألعاب
+const pubgItems = [
+    { name: "30 UC", desc: "شحن فوري", price: 23.99 },
+    { name: "60 UC", desc: "شحن فوري", price: 47.99 },
+    { name: "25+300 UC", desc: "بونص", price: 239.99 },
+    { name: "60+600 UC", desc: "بونص", price: 479.99 },
+    { name: "300+1500 UC", desc: "بونص", price: 1199.99 },
+    { name: "850+3000 UC", desc: "بونص", price: 2399.99 },
+    { name: "2100+6000 UC", desc: "بونص", price: 4799.99 },
+    { name: "4200+12000 UC", desc: "بونص", price: 9599.99 },
+    { name: "6300+18000 UC", desc: "بونص", price: 14399.99 },
+    { name: "8400+24000 UC", desc: "بونص", price: 19199.99 },
+    { name: "10500+30000 UC", desc: "بونص", price: 23999.99 },
+    { name: "12600+36000 UC", desc: "بونص", price: 28799.99 },
+    { name: "21000+60000 UC", desc: "بونص", price: 47999.99 }
+];
+const mlbbItems = [
+    { name: "13+1 Diamonds", price: 25 },
+    { name: "20+2 Diamonds", price: 30 },
+    { name: "51+5 Diamonds", price: 65 },
+    { name: "102+10 Diamonds", price: 120 },
+    { name: "153+15 Diamonds", price: 180 },
+    { name: "203+20 Diamonds", price: 235 },
+    { name: "303+33 Diamonds", price: 350 },
+    { name: "504+66 Diamonds", price: 580 },
+    { name: "1007+156 Diamonds", price: 1150 },
+    { name: "2015+383 Diamonds", price: 2300 },
+    { name: "5035+1007 Diamonds", price: 5730 }
+];
+const freefireItems = [
+    { name: "50 جوهرة", price: 25 },
+    { name: "100 جوهرة", price: 50 },
+    { name: "210 جوهرة", price: 100 },
+    { name: "310 جوهرة", price: 150 },
+    { name: "520 جوهرة", price: 250 },
+    { name: "1060 جوهرة", price: 500 },
+    { name: "2200 جوهرة", price: 1000 }
+];
+const yallaAccountItems = [
+    { name: "830 ماسة (حساب)", price: 130 },
+    { name: "2320 ماسة (حساب)", price: 270 },
+    { name: "3150 ماسة (حساب)", price: 390 },
+    { name: "5150 ماسة (حساب)", price: 500 },
+    { name: "7470 ماسة (حساب)", price: 760 },
+    { name: "10300 ماسة (حساب)", price: 990 },
+    { name: "13580 ماسة (حساب)", price: 1235 },
+    { name: "16730 ماسة (حساب)", price: 1610 },
+    { name: "18730 ماسة (حساب)", price: 1730 },
+    { name: "21000 ماسة (حساب)", price: 2010 },
+    { name: "27200 ماسة (حساب)", price: 2460 },
+    { name: "32350 ماسة (حساب)", price: 2960 },
+    { name: "41220 ماسة (حساب)", price: 3660 },
+    { name: "55800 ماسة (حساب)", price: 4860 },
+    { name: "111600 ماسة (حساب)", price: 9710 },
+    { name: "167400 ماسة (حساب)", price: 14610 }
+];
+const yallaIdItems = [
+    { name: "1800 ماسة (ID)", price: 195 },
+    { name: "5000 ماسة (ID)", price: 450 },
+    { name: "10000 ماسة (ID)", price: 900 },
+    { name: "16000 ماسة (ID)", price: 1325 },
+    { name: "21000 ماسة (ID)", price: 1770 },
+    { name: "26000 ماسة (ID)", price: 2225 },
+    { name: "32000 ماسة (ID)", price: 2650 },
+    { name: "37000 ماسة (ID)", price: 3100 },
+    { name: "53700 ماسة (ID)", price: 4350 },
+    { name: "85000 ماسة (ID)", price: 7000 },
+    { name: "107000 ماسة (ID)", price: 8700 },
+    { name: "171000 ماسة (ID)", price: 13950 },
+    { name: "217000 ماسة (ID)", price: 17400 }
+];
+const tiktokItems = [
+    { name: "500 عملة", price: 330 },
+    { name: "800 عملة", price: 520 },
+    { name: "1000 عملة", price: 620 },
+    { name: "1400 عملة", price: 860 },
+    { name: "2000 عملة", price: 1220 },
+    { name: "3500 عملة", price: 2120 },
+    { name: "5000 عملة", price: 3020 },
+    { name: "7500 عملة", price: 4520 },
+    { name: "10000 عملة", price: 5920 },
+    { name: "17500 عملة", price: 10320 },
+    { name: "20000 عملة", price: 11820 },
+    { name: "30000 عملة", price: 17620 },
+    { name: "50000 عملة", price: 29520 }
+];
 
-    const yallaAccountItems = [
-        { name: "830 ماسة", desc: "شحن عبر الحساب", priceEGP: 130 },
-        { name: "2320 ماسة", desc: "شحن عبر الحساب", priceEGP: 270 },
-        { name: "3150 ماسة", desc: "شحن عبر الحساب", priceEGP: 390 },
-        { name: "5150 ماسة", desc: "شحن عبر الحساب", priceEGP: 500 },
-        { name: "7470 ماسة", desc: "شحن عبر الحساب", priceEGP: 760 },
-        { name: "10300 ماسة", desc: "شحن عبر الحساب", priceEGP: 990 },
-        { name: "13580 ماسة", desc: "شحن عبر الحساب", priceEGP: 1235 },
-        { name: "16730 ماسة", desc: "شحن عبر الحساب", priceEGP: 1610 },
-        { name: "18730 ماسة", desc: "شحن عبر الحساب", priceEGP: 1730 },
-        { name: "21000 ماسة", desc: "شحن عبر الحساب", priceEGP: 2010 },
-        { name: "27200 ماسة", desc: "شحن عبر الحساب", priceEGP: 2460 },
-        { name: "32350 ماسة", desc: "شحن عبر الحساب", priceEGP: 2960 },
-        { name: "41220 ماسة", desc: "شحن عبر الحساب", priceEGP: 3660 },
-        { name: "55800 ماسة", desc: "شحن عبر الحساب", priceEGP: 4860 },
-        { name: "111600 ماسة", desc: "شحن عبر الحساب", priceEGP: 9710 },
-        { name: "167400 ماسة", desc: "شحن عبر الحساب", priceEGP: 14610 }
-    ];
-    const yallaIdItems = [
-        { name: "1800 ماسة", desc: "شحن عبر الـ ID", priceEGP: 195 },
-        { name: "5000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 450 },
-        { name: "10000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 900 },
-        { name: "16000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 1325 },
-        { name: "21000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 1770 },
-        { name: "26000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 2225 },
-        { name: "32000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 2650 },
-        { name: "37000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 3100 },
-        { name: "53700 ماسة", desc: "شحن عبر الـ ID", priceEGP: 4350 },
-        { name: "85000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 7000 },
-        { name: "107000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 8700 },
-        { name: "171000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 13950 },
-        { name: "217000 ماسة", desc: "شحن عبر الـ ID", priceEGP: 17400 }
-    ];
+// بيانات شباب (كونات)
+const shababData = {
+    eg: { currency: "جنيه مصري", flag: "🇪🇬", items: [
+        { name: "100 كون", price: 75000 },
+        { name: "300 كون", price: 225000 },
+        { name: "500 كون", price: 375000 },
+        { name: "1000 كون", price: 750000 },
+        { name: "2000 كون", price: 1500000 },
+        { name: "3000 كون", price: 2250000 }
+    ]},
+    jo: { currency: "دينار أردني", flag: "🇯🇴", items: [
+        { name: "10 كون", price: 450000 },
+        { name: "20 كون", price: 900000 },
+        { name: "30 كون", price: 1350000 },
+        { name: "40 كون", price: 1800000 },
+        { name: "50 كون", price: 2250000 }
+    ]},
+    sa: { currency: "ريال سعودي", flag: "🇸🇦", items: [
+        { name: "100 كون", price: 900000 },
+        { name: "200 كون", price: 1800000 },
+        { name: "300 كون", price: 2700000 },
+        { name: "400 كون", price: 3600000 },
+        { name: "500 كون", price: 4500000 }
+    ]}
+};
 
-    const tiktokItems = [
-        { name: "500 عملة", desc: "شحن عملات تيك توك", priceEGP: 330 },
-        { name: "800 عملة", desc: "شحن عملات تيك توك", priceEGP: 520 },
-        { name: "1000 عملة", desc: "شحن عملات تيك توك", priceEGP: 620 },
-        { name: "1400 عملة", desc: "شحن عملات تيك توك", priceEGP: 860 },
-        { name: "2000 عملة", desc: "شحن عملات تيك توك", priceEGP: 1220 },
-        { name: "3500 عملة", desc: "شحن عملات تيك توك", priceEGP: 2120 },
-        { name: "5000 عملة", desc: "شحن عملات تيك توك", priceEGP: 3020 },
-        { name: "7500 عملة", desc: "شحن عملات تيك توك", priceEGP: 4520 },
-        { name: "10000 عملة", desc: "شحن عملات تيك توك", priceEGP: 5920 },
-        { name: "17500 عملة", desc: "شحن عملات تيك توك", priceEGP: 10320 },
-        { name: "20000 عملة", desc: "شحن عملات تيك توك", priceEGP: 11820 },
-        { name: "30000 عملة", desc: "شحن عملات تيك توك", priceEGP: 17620 },
-        { name: "50000 عملة", desc: "شحن عملات تيك توك", priceEGP: 29520 }
-    ];
+// ===================== دوال العرض =====================
 
-    // ------------------------- بيانات شباب (كونات) الجديدة -------------------------
-    const shababData = {
-        eg: { currency: "جنيه مصري", flag: "🇪🇬", items: [
-            { name: "100 كون", price: 75000 },
-            { name: "300 كون", price: 225000 },
-            { name: "500 كون", price: 375000 },
-            { name: "1000 كون", price: 750000 },
-            { name: "2000 كون", price: 1500000 },
-            { name: "3000 كون", price: 2250000 }
-        ]},
-        jo: { currency: "دينار أردني", flag: "🇯🇴", items: [
-            { name: "10 كون", price: 450000 },
-            { name: "20 كون", price: 900000 },
-            { name: "30 كون", price: 1350000 },
-            { name: "40 كون", price: 1800000 },
-            { name: "50 كون", price: 2250000 }
-        ]},
-        sa: { currency: "ريال سعودي", flag: "🇸🇦", items: [
-            { name: "100 كون", price: 900000 },
-            { name: "200 كون", price: 1800000 },
-            { name: "300 كون", price: 2700000 },
-            { name: "400 كون", price: 3600000 },
-            { name: "500 كون", price: 4500000 }
-        ]}
+function renderGame(gameKey) {
+    const container = document.getElementById('pricesContainer');
+    let items = [], title = '', icon = '';
+    if (gameKey === 'pubg') { items = pubgItems; title = 'PUBG MOBILE'; icon = 'fa-playstation'; }
+    else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; icon = 'fa-skull-crossbones'; }
+    else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; icon = 'fa-fire'; }
+    else if (gameKey === 'yallaludo') {
+        // عرض قسمين منفصلين
+        let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - شحن عبر الحساب</div>`;
+        yallaAccountItems.forEach(item => {
+            html += createCardHTML(item.name, item.price, 'يلا لودو (حساب)', 'fa-dice-d6', false);
+        });
+        html += `<div class="category-title"><i class="fas fa-id-card"></i> يلا لودو - شحن عبر الـ ID</div>`;
+        yallaIdItems.forEach(item => {
+            html += createCardHTML(item.name, item.price, 'يلا لودو (ID)', 'fa-dice-d6', false);
+        });
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
+    else if (gameKey === 'tiktok') { items = tiktokItems; title = 'TikTok Coins'; icon = 'fa-tiktok'; }
+    else return;
+
+    let html = `<div class="category-title"><i class="${icon}"></i> ${title}</div>`;
+    items.forEach(item => {
+        html += createCardHTML(item.name, item.price, title, icon, false);
+    });
+    container.innerHTML = html;
+    attachOrderEvents(container);
+}
+
+function renderRecharge(companyKey) {
+    const container = document.getElementById('rechargeContainer');
+    const names = {
+        vodafone: 'فودافون',
+        etisalat: 'اتصالات',
+        we: 'وي',
+        wehome: 'إنترنت WE منزلي'
     };
+    const name = names[companyKey] || 'شحن';
+    container.innerHTML = `
+        <div class="price-card" style="grid-column:1/-1; text-align:center;">
+            <div class="game-badge">${name}</div>
+            <div class="item-name">أسعار متغيرة 🔄</div>
+            <div class="amount-desc">للحصول على أحدث الأسعار تواصل معنا عبر تلجرام</div>
+            <a href="https://t.me/BESO125F" target="_blank" style="display:inline-block; background:#0088cc; padding:0.5rem 1.5rem; border-radius:40px; color:white; text-decoration:none; margin:0.5rem 0;"><i class="fab fa-telegram"></i> تواصل عبر تلجرام</a>
+            <button class="copy-btn" onclick="copyText('@BESO125F')"><i class="far fa-copy"></i> نسخ المعرف</button>
+        </div>
+    `;
+}
 
-    // ------------------------- المتغيرات العامة -------------------------
-    let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-    let ordersCount = 189, customersCount = 143, deliveryTime = 8, activeVisitors = Math.floor(Math.random() * 50) + 20, satisfactionRate = 94;
-    let totalSales = 0;
-    let visitorsToday = parseInt(localStorage.getItem('visitorsToday')) || 0;
-    let lastDate = localStorage.getItem('lastDate');
-    const today = new Date().toDateString();
-    if (lastDate !== today) { visitorsToday = 0; localStorage.setItem('lastDate', today); }
-    visitorsToday++; localStorage.setItem('visitorsToday', visitorsToday);
-    let activeModal = null;
-    let countdownInterval = null;
+function renderShabab(currencyKey) {
+    const data = shababData[currencyKey];
+    if (!data) return;
+    const container = document.getElementById('shababContainer');
+    let html = `<div class="category-title"><i class="fas fa-coins"></i> كونات شباب - ${data.flag} ${data.currency}</div>`;
+    data.items.forEach(item => {
+        html += createCardHTML(item.name, item.price, 'شباب كونات', 'fa-crown', true);
+    });
+    container.innerHTML = html;
+    attachOrderEvents(container);
+}
 
-    // ------------------------- دوال مساعدة -------------------------
-    function showToast(msg) {
-        const toast = document.createElement('div');
-        toast.className = 'toast-notification';
-        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 10);
-        setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 500); }, 3000);
-    }
-    function copyText(text, btnElement) {
-        navigator.clipboard.writeText(text).then(() => {
-            if (btnElement) { let original = btnElement.innerHTML; btnElement.innerHTML = '<i class="fas fa-check"></i> تم'; setTimeout(() => btnElement.innerHTML = original, 1500); }
-            showToast(`تم نسخ: ${text}`);
+// دالة مساعدة لإنشاء بطاقة سعر
+function createCardHTML(name, price, badgeText, icon, isVip) {
+    const formattedPrice = price.toLocaleString('eg-EG');
+    const vipClass = isVip ? 'vip-card' : '';
+    const badgeClass = isVip ? 'vip-badge' : '';
+    const badgeIcon = isVip ? '<i class="fas fa-star"></i> ' : '';
+    return `
+        <div class="price-card ${vipClass}">
+            <div class="game-badge ${badgeClass}">${badgeIcon}${badgeText}</div>
+            <div class="item-name">${name}</div>
+            <div class="price-eg">${formattedPrice} <span style="font-size:0.8rem;">جنيه</span></div>
+            <button class="btn-order" data-item="${name}" data-price="${price}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+        </div>
+    `;
+}
+
+// ربط أحداث أزرار الطلب
+function attachOrderEvents(container) {
+    container.querySelectorAll('.btn-order').forEach(btn => {
+        // إزالة المستمعات القديمة
+        btn.replaceWith(btn.cloneNode(true));
+    });
+    container.querySelectorAll('.btn-order').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.getAttribute('data-item');
+            const price = parseFloat(this.getAttribute('data-price'));
+            openOrderModal(item, price);
         });
-    }
-    function animateNumber(el, start, end, dur) {
-        let startTime = null;
-        function step(t) { if (!startTime) startTime = t; const prog = Math.min((t-startTime)/dur, 1); el.innerText = Math.floor(prog*(end-start)+start); if(prog<1) requestAnimationFrame(step); }
-        requestAnimationFrame(step);
-    }
-    function updateStats() {
-        animateNumber(document.getElementById('statOrders'), 0, ordersCount, 1300);
-        animateNumber(document.getElementById('statCustomers'), 0, customersCount, 1300);
-        animateNumber(document.getElementById('statDelivery'), 0, deliveryTime, 1300);
-        document.getElementById('statActive').innerText = activeVisitors;
-        document.getElementById('statSatisfaction').innerText = satisfactionRate+'%';
-        document.getElementById('statTotalSales').innerText = totalSales.toLocaleString();
-        document.getElementById('statVisitorsToday').innerText = visitorsToday;
-    }
+    });
+}
 
-    // ------------------------- مودال الطلب (مع دعم الأرقام الكبيرة) -------------------------
-    function openOrderPopup(itemName, price) {
-        if (activeModal) { activeModal.remove(); activeModal = null; }
-        const discountCode = "WELCOME10";
-        const discountedPrice = price * 0.9;
-        const modalDiv = document.createElement('div');
-        modalDiv.className = 'modal-overlay show';
-        modalDiv.innerHTML = `
-            <div class="modal-content">
-                <i class="fas fa-gem" style="font-size:2.5rem; color:#0ff;"></i>
-                <h3>تأكيد الطلب</h3>
-                <p><strong>${escapeHtml(itemName)}</strong><br>السعر: <span style="color:#0ff;">${price.toLocaleString('eg-EG')} جنيه</span></p>
-                <div style="background:#00000040; border-radius:1rem; padding:0.5rem;"><i class="fas fa-tag"></i> كود الخصم: <strong>${discountCode}</strong> (10%)<br>بعد الخصم: ${discountedPrice.toLocaleString('eg-EG')} جنيه</div>
-                <div style="margin:0.8rem 0;"><i class="fas fa-phone-alt"></i> الدفع: <strong>01044049390</strong> <button class="copy-payment-btn" style="background:#0ff20; border:1px solid #0ff; border-radius:2rem; padding:0.2rem 0.8rem;">نسخ</button></div>
-                <div><i class="fab fa-whatsapp"></i> الدعم: <strong>01017954664</strong> <button class="copy-support-btn" style="background:#0ff20; border:1px solid #0ff; border-radius:2rem; padding:0.2rem 0.8rem;">نسخ</button></div>
-                <button class="copy-all-info" style="background:#0ff; color:#000; border:none; border-radius:2rem; padding:0.4rem 1rem; margin:0.5rem 0;"><i class="fas fa-copy"></i> نسخ الكل</button>
-                <div style="display:flex; gap:0.6rem; justify-content:center; margin-top:1rem;"><button class="close-modal-btn" style="background:#2a3650; border:none; padding:0.5rem 1.2rem; border-radius:2rem;">إغلاق</button><a href="https://wa.me/201044049390?text=طلب%20شحن%20${encodeURIComponent(itemName)}%20بمبلغ%20${price}%20جنيه" target="_blank" style="background:#25D366; color:white; text-decoration:none; padding:0.5rem 1.2rem; border-radius:2rem;"><i class="fab fa-whatsapp"></i> واتساب</a></div>
-            </div>`;
-        document.body.appendChild(modalDiv);
-        activeModal = modalDiv;
-        modalDiv.querySelector('.copy-payment-btn')?.addEventListener('click', () => copyText('01044049390'));
-        modalDiv.querySelector('.copy-support-btn')?.addEventListener('click', () => copyText('01017954664'));
-        modalDiv.querySelector('.copy-all-info')?.addEventListener('click', () => copyText(`الطلب: ${itemName}\nالمبلغ: ${price} جنيه\nبعد الخصم: ${discountedPrice} جنيه\nرقم فودافون كاش: 01044049390\nالدعم: 01017954664`));
-        modalDiv.querySelector('.close-modal-btn')?.addEventListener('click', () => { modalDiv.remove(); activeModal = null; });
-        modalDiv.addEventListener('click', (e) => { if (e.target === modalDiv) { modalDiv.remove(); activeModal = null; } });
-    }
+// ===================== مودال الطلب =====================
 
-    // ------------------------- عرض الألعاب (نفس الكود السابق مع تحسين) -------------------------
-    function renderGame(gameKey) {
-        if (gameKey === 'tiktok') {
-            const container = document.getElementById('pricesContainer');
-            if (!container) return;
-            let html = `<div class="category-title"><i class="fab fa-tiktok"></i> شحن عملات TikTok (قسم منفصل)</div>`;
-            tiktokItems.forEach(item => {
-                const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
-                html += `<div class="price-card"><div class="card-icon"><i class="fab fa-tiktok"></i></div><div class="game-badge">TikTok</div><div class="item-name">${escapeHtml(item.name)}</div><div class="amount-desc">${escapeHtml(item.desc)}</div><div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div><button class="btn-order" data-item="${escapeHtml(item.name + " (TikTok - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button></div>`;
-            });
-            container.innerHTML = html;
-            attachOrderEvents(container);
-            return;
-        }
+let currentOrderItem = '';
+let currentOrderPrice = 0;
 
-        let items = [], gameIcon = "", gameName = "";
-        if (gameKey === 'pubg') { items = pubgItems; gameIcon = "fab fa-playstation"; gameName = "PUBG MOBILE"; }
-        else if (gameKey === 'mlbb') { items = mlbbItems; gameIcon = "fas fa-skull-crossbones"; gameName = "Mobile Legends"; }
-        else if (gameKey === 'freefire') { items = freefireItems; gameIcon = "fas fa-fire"; gameName = "Free Fire"; }
-        else if (gameKey === 'yallaludo') {
-            gameIcon = "fas fa-dice-d6"; gameName = "يلا لودو";
-            const container = document.getElementById('pricesContainer');
-            if (!container) return;
-            let html = '';
-            html += `<div class="category-title"><i class="fas fa-user-cog"></i> شحن عبر الحساب (مطلوب حساب لودو)</div>`;
-            yallaAccountItems.forEach(item => {
-                const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
-                html += `<div class="price-card"><div class="card-icon"><i class="${gameIcon}"></i></div><div class="game-badge">${gameName}</div><div class="item-name">${escapeHtml(item.name)}</div><div class="amount-desc">${escapeHtml(item.desc)}</div><div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div><button class="btn-order" data-item="${escapeHtml(item.name + " (" + gameName + " - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button></div>`;
-            });
-            html += `<div class="category-title"><i class="fas fa-id-card"></i> شحن عبر الـ ID (أرسل معرفك)</div>`;
-            yallaIdItems.forEach(item => {
-                const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
-                html += `<div class="price-card"><div class="card-icon"><i class="${gameIcon}"></i></div><div class="game-badge">${gameName}</div><div class="item-name">${escapeHtml(item.name)}</div><div class="amount-desc">${escapeHtml(item.desc)}</div><div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div><button class="btn-order" data-item="${escapeHtml(item.name + " (" + gameName + " - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button></div>`;
-            });
-            container.innerHTML = html;
-            attachOrderEvents(container);
-            return;
-        }
-        const container = document.getElementById('pricesContainer');
-        if (!container) return;
-        let html = '';
-        items.forEach(item => {
-            const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
-            const vipClass = item.isVip ? 'vip-card' : '';
-            const vipBadge = item.isVip ? '<div class="game-badge vip-badge"><i class="fas fa-crown"></i> VIP مميز</div>' : `<div class="game-badge">${gameName}</div>`;
-            html += `<div class="price-card ${vipClass}"><div class="card-icon"><i class="${gameIcon}"></i></div>${vipBadge}<div class="item-name">${escapeHtml(item.name)}</div><div class="amount-desc">${escapeHtml(item.desc)}</div><div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div><button class="btn-order" data-item="${escapeHtml(item.name + " (" + gameName + " - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button></div>`;
-        });
-        container.innerHTML = html;
-        attachOrderEvents(container);
-    }
+function openOrderModal(item, price) {
+    currentOrderItem = item;
+    currentOrderPrice = price;
+    const discounted = price * 0.9;
+    document.getElementById('modalItemName').textContent = item;
+    document.getElementById('modalPrice').textContent = price.toLocaleString('eg-EG') + ' جنيه';
+    document.getElementById('modalDiscounted').textContent = discounted.toLocaleString('eg-EG') + ' جنيه';
+    document.getElementById('whatsappLink').href = `https://wa.me/201044049390?text=طلب%20شحن%20${encodeURIComponent(item)}%20بمبلغ%20${price}%20جنيه`;
+    document.getElementById('orderModal').classList.add('show');
+}
 
-    // ------------------------- عرض شحن الرصيد -------------------------
-    function renderRecharge(companyKey) {
-        let name = "";
-        if (companyKey === 'vodafone') name = "فودافون";
-        else if (companyKey === 'etisalat') name = "اتصالات";
-        else if (companyKey === 'we') name = "وي";
-        else name = "إنترنت WE منزلي";
-        const rechargeContainer = document.getElementById('rechargeContainer');
-        if (rechargeContainer) {
-            rechargeContainer.innerHTML = `<div class="price-card" style="grid-column:1/-1; text-align:center;"><div style="background:#0a0f1a; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto;"><i class="fas fa-mobile-alt"></i></div><div class="game-badge">${name}</div><div class="item-name">أسعار متغيرة 🔄</div><div class="amount-desc">للحصول على أحدث الأسعار تواصل معنا عبر تلجرام</div><a href="https://t.me/BESO125F" target="_blank" class="telegram-large-btn"><i class="fab fa-telegram"></i> تواصل عبر تلجرام</a><button class="copy-contact" data-copy="@BESO125F"><i class="far fa-copy"></i> نسخ المعرف</button></div>`;
-            rechargeContainer.querySelectorAll('.copy-contact').forEach(btn => btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy'), btn)));
-        }
-    }
+function closeModal() {
+    document.getElementById('orderModal').classList.remove('show');
+}
 
-    // ------------------------- عرض قسم شباب (كونات) الجديد -------------------------
-    function renderShabab(currencyKey) {
-        const data = shababData[currencyKey];
-        if (!data) return;
-        const container = document.getElementById('shababContainer');
-        if (!container) return;
-        let html = `<div class="category-title"><i class="fas fa-coins coin-icon"></i> كونات شباب - ${data.flag} ${data.currency}</div>`;
-        data.items.forEach(item => {
-            const formattedPrice = item.price.toLocaleString('eg-EG');
-            html += `
-                <div class="price-card vip-card">
-                    <div class="card-icon"><i class="fas fa-crown" style="color:#f0f;"></i></div>
-                    <div class="game-badge vip-badge"><i class="fas fa-star"></i> كونات شباب</div>
-                    <div class="item-name">${escapeHtml(item.name)}</div>
-                    <div class="amount-desc">${data.flag} ${data.currency}</div>
-                    <div class="price-eg">${formattedPrice} <span>${data.currency}</span></div>
-                    <button class="btn-order" data-item="${escapeHtml(item.name + " (شباب - " + data.currency + ")")}" data-price="${item.price}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-        attachOrderEvents(container);
-    }
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('تم نسخ: ' + text);
+    });
+}
 
-    // ------------------------- دالة ربط أحداث الطلب (لتجنب التكرار) -------------------------
-    function attachOrderEvents(container) {
-        container.querySelectorAll('.btn-order').forEach(btn => {
-            // إزالة أي مستمع قديم لتجنب التكرار
-            btn.replaceWith(btn.cloneNode(true));
-        });
-        container.querySelectorAll('.btn-order').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const original = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري...';
-                this.classList.add('loading');
-                setTimeout(() => {
-                    openOrderPopup(this.getAttribute('data-item'), parseFloat(this.getAttribute('data-price')));
-                    this.innerHTML = original;
-                    this.classList.remove('loading');
-                    ordersCount++;
-                    customersCount++;
-                    totalSales += parseFloat(this.getAttribute('data-price'));
-                    document.getElementById('statOrders').innerText = ordersCount;
-                    document.getElementById('statCustomers').innerText = customersCount;
-                    document.getElementById('statTotalSales').innerText = totalSales.toLocaleString();
-                    const recentList = document.getElementById('recentOrdersList');
-                    const newOrder = document.createElement('li');
-                    newOrder.innerHTML = `🟢 ${this.getAttribute('data-item').substring(0,30)}`;
-                    recentList.prepend(newOrder);
-                    if(recentList.children.length > 5) recentList.removeChild(recentList.lastChild);
-                }, 1200);
-            });
-        });
-    }
+function copyAllInfo() {
+    const text = `الطلب: ${currentOrderItem}\nالمبلغ: ${currentOrderPrice} جنيه\nبعد الخصم: ${(currentOrderPrice*0.9).toLocaleString('eg-EG')} جنيه\nرقم فودافون كاش: 01044049390\nالدعم: 01017954664`;
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('تم نسخ جميع المعلومات');
+    });
+}
 
-    // ------------------------- التعليقات -------------------------
-    function saveComments() { localStorage.setItem('websiteComments', JSON.stringify(comments)); }
-    function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
-    function renderComments() {
-        const div = document.getElementById('commentsList');
-        if (!div) return;
-        if(comments.length===0) { div.innerHTML='<div style="text-align:center;">لا توجد تعليقات بعد</div>'; return; }
-        let total=0;
-        div.innerHTML = '';
-        comments.forEach((c,idx) => {
-            total += c.rating;
-            let stars = '';
-            for(let i=1;i<=5;i++) stars+=`<i class="fas fa-star" style="color:${i<=c.rating?'#0ff':'#ccc'};"></i>`;
-            const commentDiv = document.createElement('div');
-            commentDiv.className = 'comment-item';
-            commentDiv.innerHTML = `<button class="delete-comment" data-index="${idx}"><i class="fas fa-trash-alt"></i></button><div><span><i class="fas fa-user-circle"></i> ${escapeHtml(c.name)}</span><div>${stars}</div><span>${c.date}</span></div><div>${escapeHtml(c.text)}</div>`;
-            div.appendChild(commentDiv);
-        });
-        if(comments.length) { satisfactionRate = Math.round((total/comments.length)*20); document.getElementById('statSatisfaction').innerText = satisfactionRate+'%'; }
-        document.querySelectorAll('.delete-comment').forEach(btn => { btn.addEventListener('click', () => { if(confirm('حذف التعليق؟')){ comments.splice(btn.getAttribute('data-index'),1); saveComments(); renderComments(); showToast('تم الحذف'); } }); });
-    }
-    let currentRating=0;
-    function initRatingStars() {
-        const starsContainer = document.getElementById('ratingStars');
-        if(!starsContainer) return;
-        starsContainer.querySelectorAll('i').forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = parseInt(star.getAttribute('data-rating'));
-                starsContainer.querySelectorAll('i').forEach(s => { if(parseInt(s.getAttribute('data-rating')) <= currentRating) s.classList.add('active'); else s.classList.remove('active'); });
-            });
-        });
-    }
+// ===================== توست =====================
 
-    // ------------------------- التهيئة (Initialization) -------------------------
-    function init() {
-        updateStats();
-        renderGame('pubg');
-        renderRecharge('vodafone');
-        renderShabab('eg'); // العرض الافتراضي لمصر
-        renderComments();
-        initRatingStars();
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
 
-        // أزرار التبديل الرئيسية
-        const gamesSec = document.getElementById('gamesSection'), rechargeSec = document.getElementById('rechargeSection'), shababSec = document.getElementById('shababSection');
-        const showGames = document.getElementById('showGamesBtn'), showRecharge = document.getElementById('showRechargeBtn'), showShabab = document.getElementById('showShababBtn');
-        
-        if(showGames && showRecharge && showShabab) {
-            showGames.addEventListener('click', () => { gamesSec.classList.remove('hidden-section'); rechargeSec.classList.add('hidden-section'); shababSec.classList.add('hidden-section'); showGames.classList.add('active'); showRecharge.classList.remove('active'); showShabab.classList.remove('active'); });
-            showRecharge.addEventListener('click', () => { gamesSec.classList.add('hidden-section'); rechargeSec.classList.remove('hidden-section'); shababSec.classList.add('hidden-section'); showRecharge.classList.add('active'); showGames.classList.remove('active'); showShabab.classList.remove('active'); });
-            showShabab.addEventListener('click', () => { gamesSec.classList.add('hidden-section'); rechargeSec.classList.add('hidden-section'); shababSec.classList.remove('hidden-section'); showShabab.classList.add('active'); showGames.classList.remove('active'); showRecharge.classList.remove('active'); });
-        }
+// ===================== تبديل الأقسام والتبويبات =====================
 
-        // تبويبات الألعاب
-        document.querySelectorAll('#gamesSection .tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#gamesSection .tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderGame(btn.getAttribute('data-game'));
-            });
-        });
+// التبديل الرئيسي
+document.getElementById('showGamesBtn').addEventListener('click', function() {
+    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('gamesSection').classList.remove('hidden-section');
+    document.getElementById('rechargeSection').classList.add('hidden-section');
+    document.getElementById('shababSection').classList.add('hidden-section');
+});
+document.getElementById('showRechargeBtn').addEventListener('click', function() {
+    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('gamesSection').classList.add('hidden-section');
+    document.getElementById('rechargeSection').classList.remove('hidden-section');
+    document.getElementById('shababSection').classList.add('hidden-section');
+});
+document.getElementById('showShababBtn').addEventListener('click', function() {
+    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('gamesSection').classList.add('hidden-section');
+    document.getElementById('rechargeSection').classList.add('hidden-section');
+    document.getElementById('shababSection').classList.remove('hidden-section');
+});
 
-        // تبويبات الشحن
-        document.querySelectorAll('#rechargeSection .recharge-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#rechargeSection .recharge-tab').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderRecharge(btn.getAttribute('data-recharge'));
-            });
-        });
+// تبويبات الألعاب
+document.querySelectorAll('#gameTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('#gameTabs .tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderGame(this.getAttribute('data-game'));
+    });
+});
 
-        // تبويبات شباب (كونات)
-        document.querySelectorAll('#shababSection .shabab-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#shababSection .shabab-tab').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderShabab(btn.getAttribute('data-currency'));
-            });
-        });
+// تبويبات الشحن
+document.querySelectorAll('#rechargeTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('#rechargeTabs .tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderRecharge(this.getAttribute('data-recharge'));
+    });
+});
 
-        // باقي الأحداث (نسخ، مشاركة، سياسة، أسئلة، تعليقات، تصميم)
-        document.querySelectorAll('.copy-contact').forEach(btn => btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy'), btn)));
-        document.getElementById('copyNumberBtn')?.addEventListener('click', () => copyText('01044049390', doc
+// تبويبات شباب
+document.querySelectorAll('#shababTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('#shababTabs .tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderShabab(this.getAttribute('data-currency'));
+    });
+});
+
+// ===================== تهيئة أولية =====================
+
+renderGame('pubg');
+renderRecharge('vodafone');
+renderShabab('eg');
+
+// إغلاق المودال عند الضغط على الخلفية
+document.getElementById('orderModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+</script>
+
+</body>
+</html>
