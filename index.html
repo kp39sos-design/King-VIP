@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اسرع من نتكم 🔥</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -16,6 +16,79 @@
             min-height: 100vh;
         }
         .container { max-width: 1300px; margin: 0 auto; }
+
+        /* ===== شاشة الترحيب ===== */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #0a0f1a, #030507);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        #splashScreen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splashScreen h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(125deg, #0ff, #f0f, #ff0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(0,255,255,0.3);
+            margin-bottom: 0.5rem;
+        }
+        #splashScreen p {
+            font-size: 1.8rem;
+            color: #a0b0d0;
+            margin-bottom: 1.5rem;
+        }
+        #splashScreen .splash-icon {
+            font-size: 4rem;
+            color: #0ff;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        #splashScreen .timer {
+            font-size: 1.2rem;
+            color: #0ff;
+            background: rgba(0,255,255,0.1);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #0ff;
+        }
+        #skipSplash {
+            margin-top: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,255,0.3);
+            color: #a0b0d0;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        #skipSplash:hover {
+            background: rgba(0,255,255,0.2);
+            border-color: #0ff;
+            color: #fff;
+        }
+
+        /* ===== باقي التنسيقات ===== */
         .section-switch { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
         .switch-btn {
             background: rgba(10,20,35,0.8);
@@ -181,6 +254,15 @@
 </head>
 <body>
 
+<!-- ===== شاشة الترحيب ===== -->
+<div id="splashScreen">
+    <div class="splash-icon"><i class="fas fa-bolt"></i></div>
+    <h1>🔥 اسرع من نتكم</h1>
+    <p>هلا بيك في متجرنا النيوني</p>
+    <div class="timer" id="splashTimer">10 ثواني</div>
+    <button id="skipSplash"><i class="fas fa-forward"></i> تخطي</button>
+</div>
+
 <div class="container">
     <h1 style="text-align:center; background: linear-gradient(125deg,#0ff,#f0f,#ff0); -webkit-background-clip:text; background-clip:text; color:transparent;">اسرع من نتكم 🔥</h1>
 
@@ -258,23 +340,54 @@
 <div id="toast" class="toast-notification"></div>
 
 <script>
+// ===================== شاشة الترحيب =====================
+(function() {
+    const splash = document.getElementById('splashScreen');
+    const timerEl = document.getElementById('splashTimer');
+    const skipBtn = document.getElementById('skipSplash');
+    let seconds = 10;
+    let interval;
+
+    function hideSplash() {
+        splash.classList.add('hidden');
+        clearInterval(interval);
+    }
+
+    // تحديث العداد
+    interval = setInterval(() => {
+        seconds--;
+        if (seconds <= 0) {
+            clearInterval(interval);
+            timerEl.textContent = '0 ثواني';
+            hideSplash();
+        } else {
+            timerEl.textContent = seconds + ' ثواني';
+        }
+    }, 1000);
+
+    // زر التخطي
+    skipBtn.addEventListener('click', hideSplash);
+
+    // إخفاء تلقائي بعد 10 ثوان (ضمان إضافي)
+    setTimeout(hideSplash, 10000);
+})();
+
 // ===================== البيانات =====================
 
-// بيانات الألعاب
 const pubgItems = [
-    { name: "30 UC", desc: "شحن فوري", price: 23.99 },
-    { name: "60 UC", desc: "شحن فوري", price: 47.99 },
-    { name: "25+300 UC", desc: "بونص", price: 239.99 },
-    { name: "60+600 UC", desc: "بونص", price: 479.99 },
-    { name: "300+1500 UC", desc: "بونص", price: 1199.99 },
-    { name: "850+3000 UC", desc: "بونص", price: 2399.99 },
-    { name: "2100+6000 UC", desc: "بونص", price: 4799.99 },
-    { name: "4200+12000 UC", desc: "بونص", price: 9599.99 },
-    { name: "6300+18000 UC", desc: "بونص", price: 14399.99 },
-    { name: "8400+24000 UC", desc: "بونص", price: 19199.99 },
-    { name: "10500+30000 UC", desc: "بونص", price: 23999.99 },
-    { name: "12600+36000 UC", desc: "بونص", price: 28799.99 },
-    { name: "21000+60000 UC", desc: "بونص", price: 47999.99 }
+    { name: "30 UC", price: 23.99 },
+    { name: "60 UC", price: 47.99 },
+    { name: "25+300 UC", price: 239.99 },
+    { name: "60+600 UC", price: 479.99 },
+    { name: "300+1500 UC", price: 1199.99 },
+    { name: "850+3000 UC", price: 2399.99 },
+    { name: "2100+6000 UC", price: 4799.99 },
+    { name: "4200+12000 UC", price: 9599.99 },
+    { name: "6300+18000 UC", price: 14399.99 },
+    { name: "8400+24000 UC", price: 19199.99 },
+    { name: "10500+30000 UC", price: 23999.99 },
+    { name: "12600+36000 UC", price: 28799.99 },
+    { name: "21000+60000 UC", price: 47999.99 }
 ];
 const mlbbItems = [
     { name: "13+1 Diamonds", price: 25 },
@@ -347,7 +460,6 @@ const tiktokItems = [
     { name: "50000 عملة", price: 29520 }
 ];
 
-// بيانات شباب (كونات)
 const shababData = {
     eg: { currency: "جنيه مصري", flag: "🇪🇬", items: [
         { name: "100 كون", price: 75000 },
@@ -382,7 +494,6 @@ function renderGame(gameKey) {
     else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; icon = 'fa-skull-crossbones'; }
     else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; icon = 'fa-fire'; }
     else if (gameKey === 'yallaludo') {
-        // عرض قسمين منفصلين
         let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - شحن عبر الحساب</div>`;
         yallaAccountItems.forEach(item => {
             html += createCardHTML(item.name, item.price, 'يلا لودو (حساب)', 'fa-dice-d6', false);
@@ -438,7 +549,6 @@ function renderShabab(currencyKey) {
     attachOrderEvents(container);
 }
 
-// دالة مساعدة لإنشاء بطاقة سعر
 function createCardHTML(name, price, badgeText, icon, isVip) {
     const formattedPrice = price.toLocaleString('eg-EG');
     const vipClass = isVip ? 'vip-card' : '';
@@ -454,10 +564,8 @@ function createCardHTML(name, price, badgeText, icon, isVip) {
     `;
 }
 
-// ربط أحداث أزرار الطلب
 function attachOrderEvents(container) {
     container.querySelectorAll('.btn-order').forEach(btn => {
-        // إزالة المستمعات القديمة
         btn.replaceWith(btn.cloneNode(true));
     });
     container.querySelectorAll('.btn-order').forEach(btn => {
@@ -513,7 +621,6 @@ function showToast(msg) {
 
 // ===================== تبديل الأقسام والتبويبات =====================
 
-// التبديل الرئيسي
 document.getElementById('showGamesBtn').addEventListener('click', function() {
     document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
@@ -536,7 +643,6 @@ document.getElementById('showShababBtn').addEventListener('click', function() {
     document.getElementById('shababSection').classList.remove('hidden-section');
 });
 
-// تبويبات الألعاب
 document.querySelectorAll('#gameTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('#gameTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -545,7 +651,6 @@ document.querySelectorAll('#gameTabs .tab-btn').forEach(btn => {
     });
 });
 
-// تبويبات الشحن
 document.querySelectorAll('#rechargeTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('#rechargeTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -554,7 +659,6 @@ document.querySelectorAll('#rechargeTabs .tab-btn').forEach(btn => {
     });
 });
 
-// تبويبات شباب
 document.querySelectorAll('#shababTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('#shababTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -569,7 +673,6 @@ renderGame('pubg');
 renderRecharge('vodafone');
 renderShabab('eg');
 
-// إغلاق المودال عند الضغط على الخلفية
 document.getElementById('orderModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
 });
