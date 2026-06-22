@@ -60,9 +60,11 @@
         .stat-card:hover { border-color: #0ff; box-shadow: 0 0 12px rgba(0,255,255,0.4); }
         .stat-number { font-size: 1.8rem; font-weight: 800; color: #0ff; text-shadow: 0 0 5px #0ff; }
         .prices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
-        .price-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 1.8rem; padding: 1.4rem; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s; }
+        .price-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 1.8rem; padding: 1.4rem; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s; position: relative; overflow: hidden; }
         .price-card:hover { transform: translateY(-6px); border-color: #0ff; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
         .price-card.vip-card { background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.1)); border: 1px solid #f0f; box-shadow: 0 0 12px rgba(255,0,255,0.3); }
+        .price-card .app-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; pointer-events: none; }
+        .price-card > * { position: relative; z-index: 1; }
         .game-badge { background: rgba(0, 255, 255, 0.2); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; font-weight: 700; margin-bottom: 0.7rem; border: 1px solid #0ff; }
         .vip-badge { background: linear-gradient(115deg, #f0f, #0ff); color: #0a0a0a; border: none; }
         .item-name { font-size: 1.2rem; font-weight: 800; margin: 0.3rem 0; }
@@ -102,6 +104,7 @@
         .delete-comment { position: absolute; left: 10px; top: 10px; background: rgba(255,0,0,0.3); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: #fff; }
         .category-title { grid-column: 1 / -1; text-align: center; margin: 1rem 0 0.5rem; padding: 0.5rem; background: rgba(0,255,255,0.1); border-radius: 2rem; border-right: 4px solid #0ff; font-size: 1.3rem; font-weight: 800; }
         .category-title i { margin-left: 0.5rem; }
+        .country-flag { font-size: 1.5rem; margin-left: 0.5rem; }
     </style>
 </head>
 <body>
@@ -138,6 +141,7 @@
             <button class="tab-btn" data-game="freefire"><i class="fas fa-fire"></i> Free Fire</button>
             <button class="tab-btn" data-game="yallaludo"><i class="fas fa-dice-d6"></i> يلا لودو (VIP)</button>
             <button class="tab-btn" data-game="tiktok"><i class="fab fa-tiktok"></i> TikTok Coins</button>
+            <button class="tab-btn" data-game="shabab"><i class="fas fa-microphone-alt"></i> Shabab صوتي</button>
         </div>
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
@@ -291,6 +295,32 @@
         { name: "50000 عملة", desc: "شحن عملات تيك توك", priceEGP: 29520 }
     ];
 
+    // ------------------------- بيانات Shabab الصوتي -------------------------
+    const shababItems = {
+        egypt: [
+            { name: "100 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 75000 },
+            { name: "300 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 225000 },
+            { name: "500 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 375000 },
+            { name: "1000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 750000 },
+            { name: "2000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 1500000 },
+            { name: "3000 ماسة", desc: "شحن عملات Shabab - مصر", priceEGP: 2250000 }
+        ],
+        jordan: [
+            { name: "10 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 450000 },
+            { name: "20 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 900000 },
+            { name: "30 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 1350000 },
+            { name: "40 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 1800000 },
+            { name: "50 ماسة", desc: "شحن عملات Shabab - الأردن", priceEGP: 2250000 }
+        ],
+        saudi: [
+            { name: "100 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 900000 },
+            { name: "200 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 1800000 },
+            { name: "300 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 2700000 },
+            { name: "400 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 3600000 },
+            { name: "500 ماسة", desc: "شحن عملات Shabab - السعودية", priceEGP: 4500000 }
+        ]
+    };
+
     // ------------------------- المتغيرات العامة -------------------------
     let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
     let ordersCount = 189, customersCount = 143, deliveryTime = 8, activeVisitors = Math.floor(Math.random() * 50) + 20, satisfactionRate = 94;
@@ -360,8 +390,56 @@
         modalDiv.addEventListener('click', (e) => { if (e.target === modalDiv) { modalDiv.remove(); activeModal = null; } });
     }
 
-    // ------------------------- عرض الألعاب والشحن -------------------------
+    // ------------------------- عرض الألعاب -------------------------
     function renderGame(gameKey) {
+        // معالجة Shabab
+        if (gameKey === 'shabab') {
+            const container = document.getElementById('pricesContainer');
+            if (!container) return;
+            const appImageUrl = 'https://kommodo.ai/i/OeWkKZYLnPXh6RsLyPNZ';
+            let html = `<div class="category-title" style="grid-column:1/-1; text-align:center; font-size:1.8rem; background:linear-gradient(135deg,#0ff,#f0f); -webkit-background-clip:text; background-clip:text; color:transparent;"><i class="fas fa-microphone-alt"></i> Shabab - تطبيق صوتي</div>`;
+
+            // عرض الأقسام حسب الدول
+            const countries = [
+                { key: 'egypt', label: 'مصر', flag: '🇪🇬', items: shababItems.egypt },
+                { key: 'jordan', label: 'الأردن', flag: '🇯🇴', items: shababItems.jordan },
+                { key: 'saudi', label: 'السعودية', flag: '🇸🇦', items: shababItems.saudi }
+            ];
+
+            countries.forEach(country => {
+                html += `<div class="category-title"><span class="country-flag">${country.flag}</span> أسعار ${country.label}</div>`;
+                country.items.forEach(item => {
+                    const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
+                    html += `<div class="price-card" style="position:relative; overflow:hidden;">
+                        <img src="${appImageUrl}" alt="Shabab App" class="app-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.15; z-index:0; pointer-events:none;" onerror="this.style.display='none'">
+                        <div style="position:relative; z-index:1;">
+                            <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
+                            <div class="game-badge">Shabab ${country.flag}</div>
+                            <div class="item-name">${escapeHtml(item.name)}</div>
+                            <div class="amount-desc">${escapeHtml(item.desc)}</div>
+                            <div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div>
+                            <button class="btn-order" data-item="${escapeHtml(item.name + " (Shabab - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+                        </div>
+                    </div>`;
+                });
+            });
+
+            container.innerHTML = html;
+            document.querySelectorAll('#pricesContainer .btn-order').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const original = this.innerHTML; this.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري...'; this.classList.add('loading');
+                    setTimeout(() => {
+                        openOrderPopup(this.getAttribute('data-item'), parseFloat(this.getAttribute('data-price')));
+                        this.innerHTML = original; this.classList.remove('loading');
+                        ordersCount++; customersCount++; totalSales += parseFloat(this.getAttribute('data-price'));
+                        document.getElementById('statOrders').innerText = ordersCount; document.getElementById('statCustomers').innerText = customersCount; document.getElementById('statTotalSales').innerText = totalSales.toLocaleString();
+                        const recentList = document.getElementById('recentOrdersList'); const newOrder = document.createElement('li'); newOrder.innerHTML = `🟢 ${this.getAttribute('data-item').substring(0,30)}`; recentList.prepend(newOrder); if(recentList.children.length>5) recentList.removeChild(recentList.lastChild);
+                    }, 1200);
+                });
+            });
+            return;
+        }
+
         // معالجة تيك توك
         if (gameKey === 'tiktok') {
             const container = document.getElementById('pricesContainer');
@@ -396,13 +474,11 @@
             const container = document.getElementById('pricesContainer');
             if (!container) return;
             let html = '';
-            // القائمة الأولى: شحن عبر الحساب
             html += `<div class="category-title"><i class="fas fa-user-cog"></i> شحن عبر الحساب (مطلوب حساب لودو)</div>`;
             yallaAccountItems.forEach(item => {
                 const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
                 html += `<div class="price-card"><div class="card-icon"><i class="${gameIcon}"></i></div><div class="game-badge">${gameName}</div><div class="item-name">${escapeHtml(item.name)}</div><div class="amount-desc">${escapeHtml(item.desc)}</div><div class="price-eg">${formattedPrice} <span>جنيه مصري</span></div><button class="btn-order" data-item="${escapeHtml(item.name + " (" + gameName + " - " + item.desc + ")")}" data-price="${item.priceEGP}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button></div>`;
             });
-            // القائمة الثانية: شحن عبر الـ ID
             html += `<div class="category-title"><i class="fas fa-id-card"></i> شحن عبر الـ ID (أرسل معرفك)</div>`;
             yallaIdItems.forEach(item => {
                 const formattedPrice = item.priceEGP.toLocaleString('eg-EG', { minimumFractionDigits: 2 });
@@ -476,107 +552,4 @@
             const commentDiv = document.createElement('div');
             commentDiv.className = 'comment-item';
             commentDiv.innerHTML = `<button class="delete-comment" data-index="${idx}"><i class="fas fa-trash-alt"></i></button><div><span><i class="fas fa-user-circle"></i> ${escapeHtml(c.name)}</span><div>${stars}</div><span>${c.date}</span></div><div>${escapeHtml(c.text)}</div>`;
-            div.appendChild(commentDiv);
-        });
-        if(comments.length) { satisfactionRate = Math.round((total/comments.length)*20); document.getElementById('statSatisfaction').innerText = satisfactionRate+'%'; }
-        document.querySelectorAll('.delete-comment').forEach(btn => { btn.addEventListener('click', () => { if(confirm('حذف التعليق؟')){ comments.splice(btn.getAttribute('data-index'),1); saveComments(); renderComments(); showToast('تم الحذف'); } }); });
-    }
-    let currentRating=0;
-    function initRatingStars() {
-        const starsContainer = document.getElementById('ratingStars');
-        if(!starsContainer) return;
-        starsContainer.querySelectorAll('i').forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = parseInt(star.getAttribute('data-rating'));
-                starsContainer.querySelectorAll('i').forEach(s => { if(parseInt(s.getAttribute('data-rating')) <= currentRating) s.classList.add('active'); else s.classList.remove('active'); });
-            });
-        });
-    }
-
-    // ------------------------- تهيئة الموقع -------------------------
-    function init() {
-        updateStats();
-        renderGame('pubg');
-        renderRecharge('vodafone');
-        renderComments();
-        initRatingStars();
-
-        const gamesSec = document.getElementById('gamesSection'), rechargeSec = document.getElementById('rechargeSection');
-        const showGames = document.getElementById('showGamesBtn'), showRecharge = document.getElementById('showRechargeBtn');
-        if(showGames && showRecharge) {
-            showGames.addEventListener('click', () => { gamesSec.classList.remove('hidden-section'); rechargeSec.classList.add('hidden-section'); showGames.classList.add('active'); showRecharge.classList.remove('active'); });
-            showRecharge.addEventListener('click', () => { gamesSec.classList.add('hidden-section'); rechargeSec.classList.remove('hidden-section'); showRecharge.classList.add('active'); showGames.classList.remove('active'); });
-        }
-        document.querySelectorAll('#gamesSection .tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#gamesSection .tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderGame(btn.getAttribute('data-game'));
-            });
-        });
-        document.querySelectorAll('#rechargeSection .recharge-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#rechargeSection .recharge-tab').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderRecharge(btn.getAttribute('data-recharge'));
-            });
-        });
-        document.querySelectorAll('.copy-contact').forEach(btn => btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy'), btn)));
-        document.getElementById('copyNumberBtn')?.addEventListener('click', () => copyText('01044049390', document.getElementById('copyNumberBtn')));
-        document.getElementById('shareBtn')?.addEventListener('click', () => { copyText(window.location.href, document.getElementById('shareBtn')); showToast('تم نسخ رابط الموقع'); });
-        document.getElementById('exportCommentsBtn')?.addEventListener('click', () => { const blob = new Blob([JSON.stringify(comments,null,2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'comments.json'; a.click(); URL.revokeObjectURL(url); showToast('تم تصدير التعليقات'); });
-        const policyModal = document.getElementById('policyModal'); const policyBtn = document.getElementById('policyBtn'); const closePolicy = document.getElementById('closePolicyBtn');
-        if(policyBtn && policyModal && closePolicy) {
-            policyBtn.addEventListener('click', () => policyModal.classList.add('show'));
-            closePolicy.addEventListener('click', () => policyModal.classList.remove('show'));
-            policyModal.addEventListener('click', (e) => { if(e.target === policyModal) policyModal.classList.remove('show'); });
-        }
-        document.querySelectorAll('.faq-question').forEach(q => { q.addEventListener('click', () => { const ans = q.nextElementSibling; ans.style.display = ans.style.display === 'block' ? 'none' : 'block'; }); });
-        document.getElementById('submitComment')?.addEventListener('click', () => {
-            const name = document.getElementById('commentName').value.trim();
-            const email = document.getElementById('commentEmail').value.trim();
-            const text = document.getElementById('commentText').value.trim();
-            if(!name || !text || currentRating===0) { showToast('يرجى ملء الاسم والنص والتقييم'); return; }
-            comments.unshift({ name, email, text, rating: currentRating, date: new Date().toLocaleString('ar-EG') });
-            saveComments(); renderComments();
-            document.getElementById('commentName').value = ''; document.getElementById('commentEmail').value = ''; document.getElementById('commentText').value = '';
-            currentRating = 0; document.querySelectorAll('#ratingStars i').forEach(s => s.classList.remove('active'));
-            showToast('تم إضافة تعليقك');
-        });
-        document.querySelectorAll('.design-card .btn-design').forEach(btn => {
-            const card = btn.closest('.design-card');
-            const service = card ? card.getAttribute('data-service') : 'خدمة تصميم';
-            btn.addEventListener('click', () => {
-                showToast(`✨ شكراً لاهتمامك بخدمة "${service}"، سيتم التواصل معك خلال دقائق عبر واتساب`);
-                setTimeout(() => { window.open('https://wa.me/201017954664?text=أريد%20طلب%20خدمة%20تصميم%20' + encodeURIComponent(service), '_blank'); }, 1500);
-            });
-        });
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll/height)*100;
-            document.getElementById('progressBar').style.width = scrolled+'%';
-            const scrollBtn = document.getElementById('scrollTopBtn');
-            if(winScroll > 300) scrollBtn.classList.add('show'); else scrollBtn.classList.remove('show');
-        });
-        document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-        let endTime = localStorage.getItem('countdownEnd');
-        if(!endTime) { endTime = Date.now() + 2*60*60*1000; localStorage.setItem('countdownEnd', endTime); }
-        function updateTimer() {
-            const remaining = Math.max(0, parseInt(endTime) - Date.now());
-            const timerEl = document.getElementById('countdownTimer');
-            if(remaining <= 0) { timerEl.innerHTML = '<i class="fas fa-tags"></i> العرض انتهى!'; if(countdownInterval) clearInterval(countdownInterval); return; }
-            const h = Math.floor(remaining/3600000), m = Math.floor((remaining%3600000)/60000), s = Math.floor((remaining%60000)/1000);
-            timerEl.innerHTML = `<i class="fas fa-tags"></i> خصم 10% ينتهي بعد: ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-        }
-        updateTimer();
-        if(countdownInterval) clearInterval(countdownInterval);
-        countdownInterval = setInterval(updateTimer, 1000);
-        if(!localStorage.getItem('welcomeShown')) {
-            setTimeout(() => { showToast('🔥 اهلاً بك في اسرع من نتكم 🔥 استخدم كود الخصم WELCOME10'); localStorage.setItem('welcomeShown', 'true'); }, 500);
-        }
-    }
-    document.addEventListener('DOMContentLoaded', init);
-</script>
-</body>
-</html>
+            div.appendChild(comment
