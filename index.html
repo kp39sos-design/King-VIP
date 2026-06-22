@@ -3,209 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اسرع من نتكم 🔥</title>
+    <title>اسرع من نتكم 🔥 | نيون فريد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* ===== إعادة ضبط وقواعد أساسية فريدة ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a12; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#00d4ff, #ff007f); border-radius: 10px; }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background: #05070a;
+            background: #0a0a12;
             color: #eef5ff;
             padding: 1rem;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
-        .container { max-width: 1300px; margin: 0 auto; }
+
+        /* ===== خلفية كروية متحركة (جرافيكس فريد) ===== */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            z-index: 0;
+            animation: orbFloat 8s infinite alternate ease-in-out;
+        }
+        body::before {
+            width: 400px;
+            height: 400px;
+            background: #4d00ff;
+            top: -100px;
+            left: -100px;
+        }
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: #ff007f;
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 2s;
+        }
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 40px) scale(1.3); }
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
 
         /* ===== شاشة الترحيب ===== */
         #splashScreen {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #0a0f1a, #030507);
+            background: radial-gradient(circle at 30% 40%, #1a0b2e, #0a0a12);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
             text-align: center;
             padding: 1.5rem;
+            border: 2px solid rgba(0, 212, 255, 0.2);
         }
         #splashScreen.hidden {
             opacity: 0;
             pointer-events: none;
         }
         #splashScreen h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
-            background: linear-gradient(125deg, #0ff, #f0f, #ff0);
+            background: linear-gradient(135deg, #00d4ff, #ff007f, #00ff87);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(0,255,255,0.3);
-            margin-bottom: 0.5rem;
+            text-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            letter-spacing: 2px;
         }
         #splashScreen p {
-            font-size: 1.8rem;
-            color: #a0b0d0;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #b8b0d0;
+            margin: 0.5rem 0 1.5rem;
+            text-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
         }
         #splashScreen .splash-icon {
-            font-size: 4rem;
-            color: #0ff;
-            margin-bottom: 1rem;
-            animation: pulse 1.5s infinite;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff007f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 1.2s infinite;
         }
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
+            0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+            50% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
         }
         #splashScreen .timer {
-            font-size: 1.2rem;
-            color: #0ff;
-            background: rgba(0,255,255,0.1);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            border: 1px solid #0ff;
+            font-size: 1.3rem;
+            color: #00ff87;
+            background: rgba(0, 255, 135, 0.1);
+            padding: 0.4rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid #00ff87;
+            box-shadow: 0 0 25px rgba(0, 255, 135, 0.2);
         }
         #skipSplash {
-            margin-top: 1.5rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(0,255,255,0.3);
+            margin-top: 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.3);
             color: #a0b0d0;
-            padding: 0.5rem 1.8rem;
+            padding: 0.6rem 2.2rem;
             border-radius: 60px;
             cursor: pointer;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            transition: 0.3s;
+            transition: 0.4s;
+            letter-spacing: 1px;
         }
         #skipSplash:hover {
-            background: rgba(0,255,255,0.2);
-            border-color: #0ff;
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
             color: #fff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
         }
 
-        /* ===== باقي التنسيقات ===== */
-        .section-switch { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
+        /* ===== أزرار التبديل (لون أيقوني جديد) ===== */
+        .section-switch { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; }
         .switch-btn {
-            background: rgba(10,20,35,0.8);
-            border: 1px solid rgba(0,255,255,0.4);
-            padding: 0.7rem 1.8rem;
+            background: rgba(10, 10, 18, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 0.8rem 2rem;
             border-radius: 60px;
             font-weight: 800;
-            color: #a0b0d0;
+            color: #8a8aa0;
+            cursor: pointer;
+            transition: 0.4s;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .switch-btn i { margin-left: 8px; }
+        .switch-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #ff007f);
+            color: #0a0a12;
+            border-color: #fff;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* ===== تبويبات ===== */
+        .tab-container { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 2rem; }
+        .tab-btn {
+            background: rgba(10, 10, 18, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #8a8aa0;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 0.9rem;
         }
-        .switch-btn.active {
-            background: linear-gradient(105deg, #0ff, #f0f);
-            color: #0a0a0a;
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00ff87, #00d4ff);
+            color: #0a0a12;
             border-color: #fff;
-            box-shadow: 0 0 20px rgba(0,255,255,0.6);
+            box-shadow: 0 0 30px rgba(0, 255, 135, 0.3);
         }
-        .hidden-section { display: none; }
+
+        /* ===== شبكة البطاقات بتأثير زجاجي نيوني ===== */
         .prices-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
             margin: 1.5rem 0;
         }
         .price-card {
-            background: rgba(10,15,25,0.75);
-            backdrop-filter: blur(10px);
-            border-radius: 1.8rem;
-            padding: 1.2rem;
-            border: 1px solid rgba(0,255,255,0.3);
-            transition: 0.3s;
+            background: rgba(10, 10, 18, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.03), transparent, rgba(255, 0, 127, 0.03), transparent);
+            animation: rotateBorder 8s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .price-card:hover {
-            transform: translateY(-5px);
-            border-color: #0ff;
-            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff007f;
+            box-shadow: 0 0 50px rgba(255, 0, 127, 0.2), 0 0 80px rgba(0, 212, 255, 0.1);
         }
         .price-card.vip-card {
-            border-color: #f0f;
-            box-shadow: 0 0 12px rgba(255,0,255,0.2);
+            border-color: #ff007f;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.15);
         }
+        .price-card.vip-card::before {
+            background: conic-gradient(from 90deg, transparent, rgba(255, 0, 127, 0.05), transparent, rgba(0, 255, 135, 0.05), transparent);
+        }
+
         .game-badge {
-            background: rgba(0,255,255,0.2);
             display: inline-block;
-            padding: 0.2rem 0.8rem;
+            padding: 0.2rem 1rem;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 700;
-            border: 1px solid #0ff;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            letter-spacing: 0.5px;
         }
         .vip-badge {
-            background: linear-gradient(115deg, #f0f, #0ff);
-            color: #0a0a0a;
+            background: linear-gradient(135deg, #ff007f, #00ff87);
+            color: #0a0a12;
             border: none;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
         }
-        .item-name { font-size: 1.2rem; font-weight: 800; margin: 0.5rem 0; }
-        .price-eg { font-size: 1.6rem; font-weight: 800; color: #0ff; margin: 0.5rem 0; }
+        .item-name { font-size: 1.3rem; font-weight: 800; margin: 0.7rem 0; color: #fff; }
+        .price-eg {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff, #ff007f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0.5rem 0;
+        }
         .btn-order {
-            background: rgba(0,255,255,0.1);
-            border: 1px solid #0ff;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid #00d4ff;
             width: 100%;
-            padding: 0.6rem;
-            border-radius: 2rem;
+            padding: 0.7rem;
+            border-radius: 3rem;
             font-weight: 700;
             color: #eef5ff;
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
         .btn-order:hover {
-            background: linear-gradient(105deg, #0ff, #f0f);
-            color: #0a0a0a;
-            box-shadow: 0 0 15px rgba(0,255,255,0.6);
-        }
-        .btn-order.loading { opacity: 0.6; pointer-events: none; }
-        .tab-container { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 1.5rem; }
-        .tab-btn {
-            background: rgba(10,20,35,0.85);
-            border: 1px solid rgba(0,255,255,0.3);
-            padding: 0.5rem 1.4rem;
-            border-radius: 60px;
-            font-weight: 700;
-            color: #a0b0d0;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tab-btn.active {
-            background: linear-gradient(115deg, #0ff, #f0f);
-            color: #0a0a0a;
+            background: linear-gradient(135deg, #00d4ff, #ff007f);
+            color: #0a0a12;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
             border-color: #fff;
-            box-shadow: 0 0 15px rgba(0,255,255,0.5);
         }
-        .category-title {
-            grid-column: 1 / -1;
+
+        /* ===== قسم الشحن التفاعلي (ميزات خاصة) ===== */
+        .recharge-tool {
+            background: rgba(10, 10, 18, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 2.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 135, 0.2);
+            box-shadow: 0 0 60px rgba(0, 255, 135, 0.05);
             text-align: center;
-            padding: 0.5rem;
-            background: rgba(0,255,255,0.1);
-            border-radius: 2rem;
-            border-right: 4px solid #0ff;
-            font-size: 1.3rem;
-            font-weight: 800;
+            grid-column: 1 / -1;
         }
+        .recharge-tool h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00ff87, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .recharge-tool .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.2rem 0;
+        }
+        .recharge-tool input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 3rem;
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            width: 200px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .recharge-tool input:focus {
+            border-color: #00ff87;
+            box-shadow: 0 0 30px rgba(0, 255, 135, 0.1);
+        }
+        .recharge-tool .quick-amounts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+        }
+        .recharge-tool .quick-amounts button {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 3rem;
+            color: #b0b0c8;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .recharge-tool .quick-amounts button:hover {
+            background: rgba(0, 255, 135, 0.15);
+            border-color: #00ff87;
+            color: #00ff87;
+            box-shadow: 0 0 20px rgba(0, 255, 135, 0.1);
+        }
+        .recharge-tool .total-display {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 1.2rem 0;
+            background: linear-gradient(135deg, #ff007f, #00ff87);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .recharge-tool .total-display span { font-size: 1rem; color: #8a8aa0; background: none; -webkit-background-clip: unset; background-clip: unset; }
+        .btn-recharge {
+            background: linear-gradient(135deg, #ff007f, #4d00ff);
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 3rem;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 0 40px rgba(255, 0, 127, 0.2);
+            font-family: 'Cairo', sans-serif;
+        }
+        .btn-recharge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 70px rgba(255, 0, 127, 0.4);
+        }
+        .recharge-fee-note {
+            font-size: 0.85rem;
+            color: #8a8aa0;
+            margin-top: 0.8rem;
+        }
+        .recharge-fee-note i { color: #00ff87; }
+
+        /* ===== مودال ===== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
             visibility: hidden;
             opacity: 0;
-            transition: 0.2s;
+            transition: 0.3s;
             z-index: 3000;
         }
         .modal-overlay.show {
@@ -213,43 +400,68 @@
             opacity: 1;
         }
         .modal-content {
-            background: #0a0f1a;
-            border-radius: 2rem;
-            padding: 1.5rem;
+            background: #12121e;
+            border-radius: 2.5rem;
+            padding: 2rem;
             max-width: 500px;
-            width: 90%;
-            border: 2px solid #0ff;
+            width: 92%;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
             text-align: center;
         }
-        .copy-btn {
-            background: rgba(0,255,255,0.1);
-            border: 1px solid #0ff;
-            padding: 0.2rem 1rem;
+        .modal-content h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #00d4ff, #ff007f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .modal-content .copy-btn {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 0.2rem 1.2rem;
             border-radius: 2rem;
             cursor: pointer;
             color: #fff;
+            transition: 0.3s;
         }
-        .copy-btn:hover {
-            background: #0ff;
-            color: #000;
+        .modal-content .copy-btn:hover {
+            background: #00d4ff;
+            color: #0a0a12;
         }
+        .hidden-section { display: none; }
+        .footer-note { text-align: center; font-size: 0.8rem; margin-top: 3rem; color: #5a5a70; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 1.5rem; }
+        .owner-name { font-size: 1rem; color: #00d4ff; font-weight: bold; letter-spacing: 1px; }
+        .category-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(0, 212, 255, 0.03);
+            border-radius: 3rem;
+            border-right: 4px solid #ff007f;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #b0b0d0;
+            letter-spacing: 1px;
+        }
+        .category-title i { margin-left: 0.8rem; color: #00d4ff; }
         .toast-notification {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #111;
-            color: #0ff;
-            padding: 0.8rem 1.5rem;
+            background: #12121e;
+            border: 1px solid #00ff87;
+            color: #00ff87;
+            padding: 0.8rem 2rem;
             border-radius: 3rem;
             z-index: 2000;
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.4s;
             pointer-events: none;
+            box-shadow: 0 0 40px rgba(0, 255, 135, 0.1);
         }
         .toast-notification.show { opacity: 1; }
-        .footer-note { text-align: center; font-size: 0.7rem; margin-top: 2rem; color: #a0b0d0; }
-        .owner-name { font-size: 0.9rem; color: #0ff; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -257,19 +469,19 @@
 <!-- ===== شاشة الترحيب ===== -->
 <div id="splashScreen">
     <div class="splash-icon"><i class="fas fa-bolt"></i></div>
-    <h1>🔥 اسرع من نتكم</h1>
-    <p>هلا بيك في متجرنا النيوني</p>
+    <h1>اسرع من نتكم</h1>
+    <p>هلا بيك في متجرنا النيوني 💎</p>
     <div class="timer" id="splashTimer">10 ثواني</div>
     <button id="skipSplash"><i class="fas fa-forward"></i> تخطي</button>
 </div>
 
 <div class="container">
-    <h1 style="text-align:center; background: linear-gradient(125deg,#0ff,#f0f,#ff0); -webkit-background-clip:text; background-clip:text; color:transparent;">اسرع من نتكم 🔥</h1>
+    <h1 style="text-align:center; font-size:2.8rem; font-weight:900; background:linear-gradient(135deg,#00d4ff,#ff007f,#00ff87); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:2px; text-shadow:0 0 60px rgba(0,212,255,0.1);">اسرع من نتكم 🔥</h1>
 
-    <!-- أزرار التبديل بين الأقسام -->
+    <!-- أزرار التبديل -->
     <div class="section-switch">
         <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
-        <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-mobile-alt"></i> 📱 شحن الرصيد</button>
+        <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-bolt"></i> ⚡ شحن سريع</button>
         <button id="showShababBtn" class="switch-btn"><i class="fas fa-coins"></i> 💎 شباب (كونات)</button>
     </div>
 
@@ -285,7 +497,7 @@
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
 
-    <!-- قسم شحن الرصيد -->
+    <!-- قسم الشحن التفاعلي -->
     <div id="rechargeSection" class="hidden-section">
         <div class="tab-container" id="rechargeTabs">
             <button class="tab-btn active" data-recharge="vodafone">فودافون</button>
@@ -296,29 +508,29 @@
         <div id="rechargeContainer" class="prices-grid"></div>
     </div>
 
-    <!-- قسم شباب (كونات) -->
+    <!-- قسم شباب -->
     <div id="shababSection" class="hidden-section">
         <div class="tab-container" id="shababTabs">
-            <button class="tab-btn active" data-currency="eg">🇪🇬 مصر (جنيه)</button>
-            <button class="tab-btn" data-currency="jo">🇯🇴 الأردن (دينار)</button>
-            <button class="tab-btn" data-currency="sa">🇸🇦 السعودية (ريال)</button>
+            <button class="tab-btn active" data-currency="eg">🇪🇬 مصر</button>
+            <button class="tab-btn" data-currency="jo">🇯🇴 الأردن</button>
+            <button class="tab-btn" data-currency="sa">🇸🇦 السعودية</button>
         </div>
         <div id="shababContainer" class="prices-grid"></div>
     </div>
 
     <div class="footer-note">
-        <div class="owner-name">المالك: 𝑅 𝐸 𝐴 𝐿﷼ <i class="fas fa-crown"></i></div>
+        <div class="owner-name">⚡ 𝑅 𝐸 𝐴 𝐿﷼ <i class="fas fa-crown" style="color:#ff007f;"></i></div>
     </div>
 </div>
 
 <!-- مودال الطلب -->
 <div id="orderModal" class="modal-overlay">
     <div class="modal-content">
-        <h3><i class="fas fa-gem" style="color:#0ff;"></i> تأكيد الطلب</h3>
-        <p id="modalItemName" style="font-size:1.2rem; font-weight:bold;"></p>
-        <p id="modalPrice" style="color:#0ff; font-size:1.8rem;"></p>
-        <p style="background:#00000040; padding:0.5rem; border-radius:1rem;">
-            <i class="fas fa-tag"></i> خصم 10%: <span id="modalDiscounted"></span>
+        <h3><i class="fas fa-gem" style="color:#00d4ff;"></i> تأكيد الطلب</h3>
+        <p id="modalItemName" style="font-size:1.2rem; font-weight:bold; margin:0.5rem 0;"></p>
+        <p id="modalPrice" style="color:#00d4ff; font-size:2rem; font-weight:900;"></p>
+        <p style="background:#00000040; padding:0.6rem; border-radius:1rem;">
+            <i class="fas fa-tag"></i> خصم 10%: <span id="modalDiscounted" style="color:#00ff87;"></span>
         </p>
         <div style="margin:0.8rem 0;">
             <i class="fas fa-phone-alt"></i> الدفع: <strong>01044049390</strong>
@@ -331,7 +543,7 @@
         <button class="copy-btn" onclick="copyAllInfo()" style="margin:0.5rem 0;"><i class="fas fa-copy"></i> نسخ الكل</button>
         <div style="display:flex; gap:0.6rem; justify-content:center; margin-top:1rem;">
             <button class="copy-btn" onclick="closeModal()">إغلاق</button>
-            <a id="whatsappLink" href="#" target="_blank" style="background:#25D366; color:white; padding:0.4rem 1.2rem; border-radius:2rem; text-decoration:none;"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a id="whatsappLink" href="#" target="_blank" style="background:#25D366; color:#fff; padding:0.4rem 1.5rem; border-radius:2rem; text-decoration:none;"><i class="fab fa-whatsapp"></i> واتساب</a>
         </div>
     </div>
 </div>
@@ -353,203 +565,32 @@
         clearInterval(interval);
     }
 
-    // تحديث العداد
     interval = setInterval(() => {
         seconds--;
-        if (seconds <= 0) {
-            clearInterval(interval);
-            timerEl.textContent = '0 ثواني';
-            hideSplash();
-        } else {
-            timerEl.textContent = seconds + ' ثواني';
-        }
+        if (seconds <= 0) { clearInterval(interval); timerEl.textContent = '0 ثواني'; hideSplash(); }
+        else timerEl.textContent = seconds + ' ثواني';
     }, 1000);
 
-    // زر التخطي
     skipBtn.addEventListener('click', hideSplash);
-
-    // إخفاء تلقائي بعد 10 ثوان (ضمان إضافي)
     setTimeout(hideSplash, 10000);
 })();
 
 // ===================== البيانات =====================
-
-const pubgItems = [
-    { name: "30 UC", price: 23.99 },
-    { name: "60 UC", price: 47.99 },
-    { name: "25+300 UC", price: 239.99 },
-    { name: "60+600 UC", price: 479.99 },
-    { name: "300+1500 UC", price: 1199.99 },
-    { name: "850+3000 UC", price: 2399.99 },
-    { name: "2100+6000 UC", price: 4799.99 },
-    { name: "4200+12000 UC", price: 9599.99 },
-    { name: "6300+18000 UC", price: 14399.99 },
-    { name: "8400+24000 UC", price: 19199.99 },
-    { name: "10500+30000 UC", price: 23999.99 },
-    { name: "12600+36000 UC", price: 28799.99 },
-    { name: "21000+60000 UC", price: 47999.99 }
-];
-const mlbbItems = [
-    { name: "13+1 Diamonds", price: 25 },
-    { name: "20+2 Diamonds", price: 30 },
-    { name: "51+5 Diamonds", price: 65 },
-    { name: "102+10 Diamonds", price: 120 },
-    { name: "153+15 Diamonds", price: 180 },
-    { name: "203+20 Diamonds", price: 235 },
-    { name: "303+33 Diamonds", price: 350 },
-    { name: "504+66 Diamonds", price: 580 },
-    { name: "1007+156 Diamonds", price: 1150 },
-    { name: "2015+383 Diamonds", price: 2300 },
-    { name: "5035+1007 Diamonds", price: 5730 }
-];
-const freefireItems = [
-    { name: "50 جوهرة", price: 25 },
-    { name: "100 جوهرة", price: 50 },
-    { name: "210 جوهرة", price: 100 },
-    { name: "310 جوهرة", price: 150 },
-    { name: "520 جوهرة", price: 250 },
-    { name: "1060 جوهرة", price: 500 },
-    { name: "2200 جوهرة", price: 1000 }
-];
-const yallaAccountItems = [
-    { name: "830 ماسة (حساب)", price: 130 },
-    { name: "2320 ماسة (حساب)", price: 270 },
-    { name: "3150 ماسة (حساب)", price: 390 },
-    { name: "5150 ماسة (حساب)", price: 500 },
-    { name: "7470 ماسة (حساب)", price: 760 },
-    { name: "10300 ماسة (حساب)", price: 990 },
-    { name: "13580 ماسة (حساب)", price: 1235 },
-    { name: "16730 ماسة (حساب)", price: 1610 },
-    { name: "18730 ماسة (حساب)", price: 1730 },
-    { name: "21000 ماسة (حساب)", price: 2010 },
-    { name: "27200 ماسة (حساب)", price: 2460 },
-    { name: "32350 ماسة (حساب)", price: 2960 },
-    { name: "41220 ماسة (حساب)", price: 3660 },
-    { name: "55800 ماسة (حساب)", price: 4860 },
-    { name: "111600 ماسة (حساب)", price: 9710 },
-    { name: "167400 ماسة (حساب)", price: 14610 }
-];
-const yallaIdItems = [
-    { name: "1800 ماسة (ID)", price: 195 },
-    { name: "5000 ماسة (ID)", price: 450 },
-    { name: "10000 ماسة (ID)", price: 900 },
-    { name: "16000 ماسة (ID)", price: 1325 },
-    { name: "21000 ماسة (ID)", price: 1770 },
-    { name: "26000 ماسة (ID)", price: 2225 },
-    { name: "32000 ماسة (ID)", price: 2650 },
-    { name: "37000 ماسة (ID)", price: 3100 },
-    { name: "53700 ماسة (ID)", price: 4350 },
-    { name: "85000 ماسة (ID)", price: 7000 },
-    { name: "107000 ماسة (ID)", price: 8700 },
-    { name: "171000 ماسة (ID)", price: 13950 },
-    { name: "217000 ماسة (ID)", price: 17400 }
-];
-const tiktokItems = [
-    { name: "500 عملة", price: 330 },
-    { name: "800 عملة", price: 520 },
-    { name: "1000 عملة", price: 620 },
-    { name: "1400 عملة", price: 860 },
-    { name: "2000 عملة", price: 1220 },
-    { name: "3500 عملة", price: 2120 },
-    { name: "5000 عملة", price: 3020 },
-    { name: "7500 عملة", price: 4520 },
-    { name: "10000 عملة", price: 5920 },
-    { name: "17500 عملة", price: 10320 },
-    { name: "20000 عملة", price: 11820 },
-    { name: "30000 عملة", price: 17620 },
-    { name: "50000 عملة", price: 29520 }
-];
+const pubgItems = [ { name: "30 UC", price: 23.99 }, { name: "60 UC", price: 47.99 }, { name: "25+300 UC", price: 239.99 }, { name: "60+600 UC", price: 479.99 }, { name: "300+1500 UC", price: 1199.99 }, { name: "850+3000 UC", price: 2399.99 }, { name: "2100+6000 UC", price: 4799.99 }, { name: "4200+12000 UC", price: 9599.99 }, { name: "6300+18000 UC", price: 14399.99 }, { name: "8400+24000 UC", price: 19199.99 }, { name: "10500+30000 UC", price: 23999.99 }, { name: "12600+36000 UC", price: 28799.99 }, { name: "21000+60000 UC", price: 47999.99 } ];
+const mlbbItems = [ { name: "13+1 Diamonds", price: 25 }, { name: "20+2 Diamonds", price: 30 }, { name: "51+5 Diamonds", price: 65 }, { name: "102+10 Diamonds", price: 120 }, { name: "153+15 Diamonds", price: 180 }, { name: "203+20 Diamonds", price: 235 }, { name: "303+33 Diamonds", price: 350 }, { name: "504+66 Diamonds", price: 580 }, { name: "1007+156 Diamonds", price: 1150 }, { name: "2015+383 Diamonds", price: 2300 }, { name: "5035+1007 Diamonds", price: 5730 } ];
+const freefireItems = [ { name: "50 جوهرة", price: 25 }, { name: "100 جوهرة", price: 50 }, { name: "210 جوهرة", price: 100 }, { name: "310 جوهرة", price: 150 }, { name: "520 جوهرة", price: 250 }, { name: "1060 جوهرة", price: 500 }, { name: "2200 جوهرة", price: 1000 } ];
+const yallaAccountItems = [ { name: "830 ماسة (حساب)", price: 130 }, { name: "2320 ماسة (حساب)", price: 270 }, { name: "3150 ماسة (حساب)", price: 390 }, { name: "5150 ماسة (حساب)", price: 500 }, { name: "7470 ماسة (حساب)", price: 760 }, { name: "10300 ماسة (حساب)", price: 990 }, { name: "13580 ماسة (حساب)", price: 1235 }, { name: "16730 ماسة (حساب)", price: 1610 }, { name: "18730 ماسة (حساب)", price: 1730 }, { name: "21000 ماسة (حساب)", price: 2010 }, { name: "27200 ماسة (حساب)", price: 2460 }, { name: "32350 ماسة (حساب)", price: 2960 }, { name: "41220 ماسة (حساب)", price: 3660 }, { name: "55800 ماسة (حساب)", price: 4860 }, { name: "111600 ماسة (حساب)", price: 9710 }, { name: "167400 ماسة (حساب)", price: 14610 } ];
+const yallaIdItems = [ { name: "1800 ماسة (ID)", price: 195 }, { name: "5000 ماسة (ID)", price: 450 }, { name: "10000 ماسة (ID)", price: 900 }, { name: "16000 ماسة (ID)", price: 1325 }, { name: "21000 ماسة (ID)", price: 1770 }, { name: "26000 ماسة (ID)", price: 2225 }, { name: "32000 ماسة (ID)", price: 2650 }, { name: "37000 ماسة (ID)", price: 3100 }, { name: "53700 ماسة (ID)", price: 4350 }, { name: "85000 ماسة (ID)", price: 7000 }, { name: "107000 ماسة (ID)", price: 8700 }, { name: "171000 ماسة (ID)", price: 13950 }, { name: "217000 ماسة (ID)", price: 17400 } ];
+const tiktokItems = [ { name: "500 عملة", price: 330 }, { name: "800 عملة", price: 520 }, { name: "1000 عملة", price: 620 }, { name: "1400 عملة", price: 860 }, { name: "2000 عملة", price: 1220 }, { name: "3500 عملة", price: 2120 }, { name: "5000 عملة", price: 3020 }, { name: "7500 عملة", price: 4520 }, { name: "10000 عملة", price: 5920 }, { name: "17500 عملة", price: 10320 }, { name: "20000 عملة", price: 11820 }, { name: "30000 عملة", price: 17620 }, { name: "50000 عملة", price: 29520 } ];
 
 const shababData = {
-    eg: { currency: "جنيه مصري", flag: "🇪🇬", items: [
-        { name: "100 كون", price: 75000 },
-        { name: "300 كون", price: 225000 },
-        { name: "500 كون", price: 375000 },
-        { name: "1000 كون", price: 750000 },
-        { name: "2000 كون", price: 1500000 },
-        { name: "3000 كون", price: 2250000 }
-    ]},
-    jo: { currency: "دينار أردني", flag: "🇯🇴", items: [
-        { name: "10 كون", price: 450000 },
-        { name: "20 كون", price: 900000 },
-        { name: "30 كون", price: 1350000 },
-        { name: "40 كون", price: 1800000 },
-        { name: "50 كون", price: 2250000 }
-    ]},
-    sa: { currency: "ريال سعودي", flag: "🇸🇦", items: [
-        { name: "100 كون", price: 900000 },
-        { name: "200 كون", price: 1800000 },
-        { name: "300 كون", price: 2700000 },
-        { name: "400 كون", price: 3600000 },
-        { name: "500 كون", price: 4500000 }
-    ]}
+    eg: { currency: "جنيه", flag: "🇪🇬", items: [ { name: "100 كون", price: 75000 }, { name: "300 كون", price: 225000 }, { name: "500 كون", price: 375000 }, { name: "1000 كون", price: 750000 }, { name: "2000 كون", price: 1500000 }, { name: "3000 كون", price: 2250000 } ] },
+    jo: { currency: "دينار", flag: "🇯🇴", items: [ { name: "10 كون", price: 450000 }, { name: "20 كون", price: 900000 }, { name: "30 كون", price: 1350000 }, { name: "40 كون", price: 1800000 }, { name: "50 كون", price: 2250000 } ] },
+    sa: { currency: "ريال", flag: "🇸🇦", items: [ { name: "100 كون", price: 900000 }, { name: "200 كون", price: 1800000 }, { name: "300 كون", price: 2700000 }, { name: "400 كون", price: 3600000 }, { name: "500 كون", price: 4500000 } ] }
 };
 
-// ===================== دوال العرض =====================
-
-function renderGame(gameKey) {
-    const container = document.getElementById('pricesContainer');
-    let items = [], title = '', icon = '';
-    if (gameKey === 'pubg') { items = pubgItems; title = 'PUBG MOBILE'; icon = 'fa-playstation'; }
-    else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; icon = 'fa-skull-crossbones'; }
-    else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; icon = 'fa-fire'; }
-    else if (gameKey === 'yallaludo') {
-        let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - شحن عبر الحساب</div>`;
-        yallaAccountItems.forEach(item => {
-            html += createCardHTML(item.name, item.price, 'يلا لودو (حساب)', 'fa-dice-d6', false);
-        });
-        html += `<div class="category-title"><i class="fas fa-id-card"></i> يلا لودو - شحن عبر الـ ID</div>`;
-        yallaIdItems.forEach(item => {
-            html += createCardHTML(item.name, item.price, 'يلا لودو (ID)', 'fa-dice-d6', false);
-        });
-        container.innerHTML = html;
-        attachOrderEvents(container);
-        return;
-    }
-    else if (gameKey === 'tiktok') { items = tiktokItems; title = 'TikTok Coins'; icon = 'fa-tiktok'; }
-    else return;
-
-    let html = `<div class="category-title"><i class="${icon}"></i> ${title}</div>`;
-    items.forEach(item => {
-        html += createCardHTML(item.name, item.price, title, icon, false);
-    });
-    container.innerHTML = html;
-    attachOrderEvents(container);
-}
-
-function renderRecharge(companyKey) {
-    const container = document.getElementById('rechargeContainer');
-    const names = {
-        vodafone: 'فودافون',
-        etisalat: 'اتصالات',
-        we: 'وي',
-        wehome: 'إنترنت WE منزلي'
-    };
-    const name = names[companyKey] || 'شحن';
-    container.innerHTML = `
-        <div class="price-card" style="grid-column:1/-1; text-align:center;">
-            <div class="game-badge">${name}</div>
-            <div class="item-name">أسعار متغيرة 🔄</div>
-            <div class="amount-desc">للحصول على أحدث الأسعار تواصل معنا عبر تلجرام</div>
-            <a href="https://t.me/BESO125F" target="_blank" style="display:inline-block; background:#0088cc; padding:0.5rem 1.5rem; border-radius:40px; color:white; text-decoration:none; margin:0.5rem 0;"><i class="fab fa-telegram"></i> تواصل عبر تلجرام</a>
-            <button class="copy-btn" onclick="copyText('@BESO125F')"><i class="far fa-copy"></i> نسخ المعرف</button>
-        </div>
-    `;
-}
-
-function renderShabab(currencyKey) {
-    const data = shababData[currencyKey];
-    if (!data) return;
-    const container = document.getElementById('shababContainer');
-    let html = `<div class="category-title"><i class="fas fa-coins"></i> كونات شباب - ${data.flag} ${data.currency}</div>`;
-    data.items.forEach(item => {
-        html += createCardHTML(item.name, item.price, 'شباب كونات', 'fa-crown', true);
-    });
-    container.innerHTML = html;
-    attachOrderEvents(container);
-}
-
-function createCardHTML(name, price, badgeText, icon, isVip) {
+// ===================== دوال العرض العامة =====================
+function createCardHTML(name, price, badgeText, isVip) {
     const formattedPrice = price.toLocaleString('eg-EG');
     const vipClass = isVip ? 'vip-card' : '';
     const badgeClass = isVip ? 'vip-badge' : '';
@@ -558,7 +599,7 @@ function createCardHTML(name, price, badgeText, icon, isVip) {
         <div class="price-card ${vipClass}">
             <div class="game-badge ${badgeClass}">${badgeIcon}${badgeText}</div>
             <div class="item-name">${name}</div>
-            <div class="price-eg">${formattedPrice} <span style="font-size:0.8rem;">جنيه</span></div>
+            <div class="price-eg">${formattedPrice} <span style="font-size:0.8rem; color:#8a8aa0;">جنيه</span></div>
             <button class="btn-order" data-item="${name}" data-price="${price}"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
         </div>
     `;
@@ -570,15 +611,117 @@ function attachOrderEvents(container) {
     });
     container.querySelectorAll('.btn-order').forEach(btn => {
         btn.addEventListener('click', function() {
-            const item = this.getAttribute('data-item');
-            const price = parseFloat(this.getAttribute('data-price'));
-            openOrderModal(item, price);
+            openOrderModal(this.getAttribute('data-item'), parseFloat(this.getAttribute('data-price')));
         });
     });
 }
 
-// ===================== مودال الطلب =====================
+// ===================== عرض الألعاب =====================
+function renderGame(gameKey) {
+    const container = document.getElementById('pricesContainer');
+    let items = [], title = '';
+    if (gameKey === 'pubg') { items = pubgItems; title = 'PUBG MOBILE'; }
+    else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; }
+    else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; }
+    else if (gameKey === 'yallaludo') {
+        let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - حساب</div>`;
+        yallaAccountItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
+        html += `<div class="category-title"><i class="fas fa-id-card"></i> يلا لودو - ID</div>`;
+        yallaIdItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
+        container.innerHTML = html; attachOrderEvents(container); return;
+    }
+    else if (gameKey === 'tiktok') { items = tiktokItems; title = 'TikTok Coins'; }
+    else return;
+    let html = `<div class="category-title"><i class="fab fa-${gameKey === 'tiktok' ? 'tiktok' : 'fa-'}"></i> ${title}</div>`;
+    items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+    container.innerHTML = html; attachOrderEvents(container);
+}
 
+// ===================== عرض الشحن (ميزات تفاعلية) =====================
+let rechargePhone = '';
+let rechargeAmount = 50;
+
+function renderRecharge(companyKey) {
+    const container = document.getElementById('rechargeContainer');
+    const names = { vodafone: 'فودافون', etisalat: 'اتصالات', we: 'وي', wehome: 'WE منزلي' };
+    const name = names[companyKey] || 'شحن';
+
+    container.innerHTML = `
+        <div class="recharge-tool">
+            <h3><i class="fas fa-bolt" style="color:#ff007f;"></i> شحن ${name} سريع</h3>
+            <p style="color:#8a8aa0; margin-bottom:0.5rem;">أدخل رقم الهاتف واختر المبلغ</p>
+            <div class="input-group">
+                <input type="tel" id="rechargePhoneInput" placeholder="رقم الهاتف (مثال 010...)" dir="ltr">
+                <input type="number" id="rechargeAmountInput" placeholder="المبلغ بالجنيه" value="50" min="1" dir="ltr">
+            </div>
+            <div class="quick-amounts">
+                <button onclick="setQuickAmount(10)">10 ج</button>
+                <button onclick="setQuickAmount(20)">20 ج</button>
+                <button onclick="setQuickAmount(50)">50 ج</button>
+                <button onclick="setQuickAmount(100)">100 ج</button>
+                <button onclick="setQuickAmount(200)">200 ج</button>
+            </div>
+            <div class="total-display" id="rechargeTotalDisplay">
+                ${(50 * 0.95).toFixed(2)} <span>جنيه (بعد خصم 5%)</span>
+            </div>
+            <p class="recharge-fee-note"><i class="fas fa-info-circle"></i> رسوم خدمة 5% فقط، والباقي يضاف رصيدك</p>
+            <button class="btn-recharge" onclick="requestRecharge('${name}')"><i class="fas fa-check-circle"></i> اطلب الشحن الآن</button>
+            <p style="margin-top:0.5rem; font-size:0.8rem; color:#5a5a70;"><i class="fas fa-lock"></i> سيتم توجيهك للدفع عبر فودافون كاش</p>
+        </div>
+    `;
+
+    // ربط الأحداث
+    const phoneInput = document.getElementById('rechargePhoneInput');
+    const amountInput = document.getElementById('rechargeAmountInput');
+    if (phoneInput) phoneInput.addEventListener('input', (e) => rechargePhone = e.target.value);
+    if (amountInput) {
+        amountInput.addEventListener('input', (e) => {
+            let val = parseFloat(e.target.value) || 0;
+            if (val < 1) val = 1;
+            rechargeAmount = val;
+            updateRechargeDisplay(val);
+        });
+        // تعيين القيمة الافتراضية
+        rechargeAmount = 50;
+        updateRechargeDisplay(50);
+    }
+}
+
+function setQuickAmount(val) {
+    rechargeAmount = val;
+    const input = document.getElementById('rechargeAmountInput');
+    if (input) input.value = val;
+    updateRechargeDisplay(val);
+}
+
+function updateRechargeDisplay(amount) {
+    const display = document.getElementById('rechargeTotalDisplay');
+    if (!display) return;
+    const afterFee = amount * 0.95; // 5% رسوم
+    display.innerHTML = `${afterFee.toFixed(2)} <span>جنيه (بعد خصم 5%)</span>`;
+}
+
+function requestRecharge(provider) {
+    const phone = document.getElementById('rechargePhoneInput')?.value.trim();
+    const amount = parseFloat(document.getElementById('rechargeAmountInput')?.value) || 0;
+    if (!phone || phone.length < 10) { showToast('⚠️ يرجى إدخال رقم هاتف صحيح'); return; }
+    if (amount < 1) { showToast('⚠️ يرجى إدخال مبلغ صحيح'); return; }
+    const afterFee = (amount * 0.95).toFixed(2);
+    const itemName = `شحن ${provider} - ${phone} (${amount} ج, يصلك ${afterFee} ج)`;
+    openOrderModal(itemName, amount);
+}
+
+// ===================== عرض شباب =====================
+function renderShabab(currencyKey) {
+    const data = shababData[currencyKey];
+    if (!data) return;
+    const container = document.getElementById('shababContainer');
+    let html = `<div class="category-title"><i class="fas fa-coins"></i> كونات شباب - ${data.flag} ${data.currency}</div>`;
+    data.items.forEach(i => html += createCardHTML(i.name, i.price, 'شباب كونات', true));
+    container.innerHTML = html; attachOrderEvents(container);
+}
+
+// ===================== مودال الطلب =====================
 let currentOrderItem = '';
 let currentOrderPrice = 0;
 
@@ -592,35 +735,20 @@ function openOrderModal(item, price) {
     document.getElementById('whatsappLink').href = `https://wa.me/201044049390?text=طلب%20شحن%20${encodeURIComponent(item)}%20بمبلغ%20${price}%20جنيه`;
     document.getElementById('orderModal').classList.add('show');
 }
-
-function closeModal() {
-    document.getElementById('orderModal').classList.remove('show');
-}
-
-function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('تم نسخ: ' + text);
-    });
-}
-
+function closeModal() { document.getElementById('orderModal').classList.remove('show'); }
+function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('✅ تم نسخ: ' + text)); }
 function copyAllInfo() {
     const text = `الطلب: ${currentOrderItem}\nالمبلغ: ${currentOrderPrice} جنيه\nبعد الخصم: ${(currentOrderPrice*0.9).toLocaleString('eg-EG')} جنيه\nرقم فودافون كاش: 01044049390\nالدعم: 01017954664`;
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('تم نسخ جميع المعلومات');
-    });
+    navigator.clipboard.writeText(text).then(() => showToast('✅ تم نسخ الكل'));
 }
-
-// ===================== توست =====================
-
 function showToast(msg) {
     const toast = document.getElementById('toast');
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
+    setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ===================== تبديل الأقسام والتبويبات =====================
-
+// ===================== التبديلات =====================
 document.getElementById('showGamesBtn').addEventListener('click', function() {
     document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
@@ -650,7 +778,6 @@ document.querySelectorAll('#gameTabs .tab-btn').forEach(btn => {
         renderGame(this.getAttribute('data-game'));
     });
 });
-
 document.querySelectorAll('#rechargeTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('#rechargeTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -658,7 +785,6 @@ document.querySelectorAll('#rechargeTabs .tab-btn').forEach(btn => {
         renderRecharge(this.getAttribute('data-recharge'));
     });
 });
-
 document.querySelectorAll('#shababTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('#shababTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -667,16 +793,14 @@ document.querySelectorAll('#shababTabs .tab-btn').forEach(btn => {
     });
 });
 
-// ===================== تهيئة أولية =====================
-
-renderGame('pubg');
-renderRecharge('vodafone');
-renderShabab('eg');
-
 document.getElementById('orderModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
 });
-</script>
 
+// ===================== تهيئة أولية =====================
+renderGame('pubg');
+renderRecharge('vodafone');
+renderShabab('eg');
+</script>
 </body>
 </html>
