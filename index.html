@@ -143,6 +143,16 @@
             box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
             transform: scale(1.05);
         }
+        .switch-btn.missing-btn {
+            background: linear-gradient(135deg, #ff8800, #ff4400);
+            color: #fff;
+            border-color: #ff8800;
+            box-shadow: 0 0 30px rgba(255, 136, 0, 0.3);
+        }
+        .switch-btn.missing-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 136, 0, 0.5);
+        }
 
         .tab-container { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 2rem; }
         .tab-btn {
@@ -402,6 +412,52 @@
             background: #00d4ff;
             color: #0a0a12;
         }
+        .modal-content .input-field {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 2rem;
+            padding: 0.7rem 1.2rem;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            width: 100%;
+            margin: 0.4rem 0;
+            outline: none;
+            transition: 0.3s;
+        }
+        .modal-content .input-field:focus {
+            border-color: #ff8800;
+            box-shadow: 0 0 20px rgba(255, 136, 0, 0.1);
+        }
+        .modal-content .input-field::placeholder {
+            color: #6a6a80;
+        }
+        .modal-content select.input-field {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1rem;
+        }
+        .modal-content .btn-send-missing {
+            background: linear-gradient(135deg, #ff8800, #ff4400);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 0 40px rgba(255, 136, 0, 0.2);
+            font-family: 'Cairo', sans-serif;
+            margin-top: 0.5rem;
+        }
+        .modal-content .btn-send-missing:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 70px rgba(255, 136, 0, 0.4);
+        }
+
         .hidden-section { display: none; }
         .footer-note { text-align: center; font-size: 0.8rem; margin-top: 3rem; color: #5a5a70; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 1.5rem; }
         .owner-name { font-size: 1rem; color: #00d4ff; font-weight: bold; }
@@ -476,6 +532,7 @@
         <button id="showGamesBtn" class="switch-btn active"><i class="fas fa-gamepad"></i> 🎮 الألعاب</button>
         <button id="showRechargeBtn" class="switch-btn"><i class="fas fa-bolt"></i> ⚡ شحن سريع</button>
         <button id="showShababBtn" class="switch-btn"><i class="fas fa-coins"></i> 💎 شباب (كونات)</button>
+        <button id="showMissingBtn" class="switch-btn missing-btn"><i class="fas fa-plus-circle"></i> طلب منتج غير موجود</button>
     </div>
 
     <!-- قسم الألعاب -->
@@ -516,7 +573,7 @@
     </div>
 </div>
 
-<!-- مودال الطلب -->
+<!-- مودال الطلب العادي -->
 <div id="orderModal" class="modal-overlay">
     <div class="modal-content">
         <h3><i class="fas fa-gem" style="color:#00d4ff;"></i> تأكيد الطلب</h3>
@@ -538,6 +595,29 @@
             <button class="copy-btn" onclick="closeModal()">إغلاق</button>
             <a id="whatsappLink" href="#" target="_blank" style="background:#25D366; color:#fff; padding:0.4rem 1.5rem; border-radius:2rem; text-decoration:none;"><i class="fab fa-whatsapp"></i> واتساب</a>
         </div>
+    </div>
+</div>
+
+<!-- مودال طلب منتج غير موجود -->
+<div id="missingModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3 style="background:linear-gradient(135deg,#ff8800,#ff4400); -webkit-background-clip:text; background-clip:text; color:transparent;">
+            <i class="fas fa-plus-circle" style="color:#ff8800;"></i> طلب منتج غير موجود
+        </h3>
+        <p style="color:#b0b0c8; margin-bottom:0.8rem;">املأ التفاصيل وسيتم إرسال طلبك عبر واتساب</p>
+        
+        <input type="text" id="missingProductName" class="input-field" placeholder="اسم المنتج / اللعبة (مثال: Fortnite)" dir="rtl">
+        <select id="missingProductType" class="input-field">
+            <option value="لعبة">🎮 لعبة</option>
+            <option value="شحن">📱 شحن</option>
+            <option value="كونات">💎 كونات</option>
+            <option value="أخرى">❓ أخرى</option>
+        </select>
+        <input type="text" id="missingProductDetails" class="input-field" placeholder="تفاصيل إضافية (الكمية، السعر، ...)" dir="rtl">
+        <input type="tel" id="missingUserPhone" class="input-field" placeholder="رقم هاتفك (اختياري)" dir="ltr">
+        
+        <button class="btn-send-missing" onclick="sendMissingRequest()"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
+        <button class="copy-btn" onclick="closeMissingModal()" style="margin-top:0.5rem;">إغلاق</button>
     </div>
 </div>
 
@@ -744,7 +824,6 @@ function renderShabab(currencyKey) {
     data.items.forEach(item => {
         const priceFormatted = item.price.toLocaleString('eg-EG');
         const coinsFormatted = item.coins.toLocaleString('eg-EG');
-        // إنشاء اسم العنصر لعرضه في المودال
         const displayName = `${item.price} ${data.currency} → ${coinsFormatted} كون`;
         
         html += `
@@ -777,6 +856,39 @@ function openOrderModal(item, price) {
     document.getElementById('orderModal').classList.add('show');
 }
 function closeModal() { document.getElementById('orderModal').classList.remove('show'); }
+
+// ===================== مودال المنتج غير الموجود =====================
+function openMissingModal() {
+    document.getElementById('missingModal').classList.add('show');
+}
+function closeMissingModal() {
+    document.getElementById('missingModal').classList.remove('show');
+}
+function sendMissingRequest() {
+    const name = document.getElementById('missingProductName').value.trim();
+    const type = document.getElementById('missingProductType').value;
+    const details = document.getElementById('missingProductDetails').value.trim();
+    const phone = document.getElementById('missingUserPhone').value.trim();
+
+    if (!name) {
+        showToast('⚠️ يرجى إدخال اسم المنتج');
+        return;
+    }
+
+    let message = `📦 طلب منتج غير موجود\n`;
+    message += `المنتج: ${name}\n`;
+    message += `النوع: ${type}\n`;
+    if (details) message += `التفاصيل: ${details}\n`;
+    if (phone) message += `رقم العميل: ${phone}\n`;
+    message += `📲 الرجاء التواصل معي لتأكيد الطلب`;
+
+    const url = `https://wa.me/201044049390?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    closeMissingModal();
+    showToast('✅ تم إرسال الطلب عبر واتساب');
+}
+
+// ===================== دوال مساعدة =====================
 function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('✅ تم نسخ: ' + text)); }
 function copyAllInfo() {
     const text = `الطلب: ${currentOrderItem}\nالمبلغ: ${currentOrderPrice} جنيه\nبعد الخصم: ${(currentOrderPrice*0.9).toLocaleString('eg-EG')} جنيه\nرقم فودافون كاش: 01044049390\nالدعم: 01017954664`;
@@ -811,6 +923,10 @@ document.getElementById('showShababBtn').addEventListener('click', function() {
     document.getElementById('rechargeSection').classList.add('hidden-section');
     document.getElementById('shababSection').classList.remove('hidden-section');
 });
+document.getElementById('showMissingBtn').addEventListener('click', function() {
+    // فتح مودال المنتج غير الموجود مباشرة دون تغيير الأقسام
+    openMissingModal();
+});
 
 document.querySelectorAll('#gameTabs .tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
@@ -834,8 +950,12 @@ document.querySelectorAll('#shababTabs .tab-btn').forEach(btn => {
     });
 });
 
+// إغلاق المودالات عند النقر خارجها
 document.getElementById('orderModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
+});
+document.getElementById('missingModal').addEventListener('click', function(e) {
+    if (e.target === this) closeMissingModal();
 });
 
 // ===================== تهيئة أولية =====================
@@ -844,4 +964,4 @@ renderRecharge('vodafone');
 renderShabab('eg');
 </script>
 </body>
-    </html>
+</html>
