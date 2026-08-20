@@ -543,6 +543,7 @@
             <button class="tab-btn" data-game="freefire">Free Fire</button>
             <button class="tab-btn" data-game="yallaludo">يلا لودو</button>
             <button class="tab-btn" data-game="tiktok">TikTok</button>
+            <button class="tab-btn" data-game="gangstar">Gangstar Mirage</button> <!-- جديد -->
         </div>
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
@@ -656,7 +657,17 @@ const yallaAccountItems = [ { name: "830 ماسة (حساب)", price: 130 }, { n
 const yallaIdItems = [ { name: "1800 ماسة (ID)", price: 195 }, { name: "5000 ماسة (ID)", price: 450 }, { name: "10000 ماسة (ID)", price: 900 }, { name: "16000 ماسة (ID)", price: 1325 }, { name: "21000 ماسة (ID)", price: 1770 }, { name: "26000 ماسة (ID)", price: 2225 }, { name: "32000 ماسة (ID)", price: 2650 }, { name: "37000 ماسة (ID)", price: 3100 }, { name: "53700 ماسة (ID)", price: 4350 }, { name: "85000 ماسة (ID)", price: 7000 }, { name: "107000 ماسة (ID)", price: 8700 }, { name: "171000 ماسة (ID)", price: 13950 }, { name: "217000 ماسة (ID)", price: 17400 } ];
 const tiktokItems = [ { name: "500 عملة", price: 330 }, { name: "800 عملة", price: 520 }, { name: "1000 عملة", price: 620 }, { name: "1400 عملة", price: 860 }, { name: "2000 عملة", price: 1220 }, { name: "3500 عملة", price: 2120 }, { name: "5000 عملة", price: 3020 }, { name: "7500 عملة", price: 4520 }, { name: "10000 عملة", price: 5920 }, { name: "17500 عملة", price: 10320 }, { name: "20000 عملة", price: 11820 }, { name: "30000 عملة", price: 17620 }, { name: "50000 عملة", price: 29520 } ];
 
-// بيانات شباب (كونات) الجديدة - المبلغ المطلوب دفعه هو السعر، والكونات هي القيمة الكبيرة
+// بيانات Gangstar Mirage City الجديدة
+const gangstarItems = [
+    { name: "60 ماسة", price: 57.5 },
+    { name: "300 + 20 ماسة", price: 247.5 },
+    { name: "680 + 60 ماسة", price: 485 },
+    { name: "1280 + 220 ماسة", price: 960 },
+    { name: "3280 + 580 ماسة", price: 2385 },
+    { name: "6480 + 1280 ماسة", price: 4760 }
+];
+
+// بيانات شباب (كونات) الجديدة
 const shababData = {
     eg: { 
         currency: "جنيه", 
@@ -728,6 +739,7 @@ function renderGame(gameKey) {
     if (gameKey === 'pubg') { items = pubgItems; title = 'PUBG MOBILE'; }
     else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; }
     else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; }
+    else if (gameKey === 'gangstar') { items = gangstarItems; title = 'Gangstar Mirage City'; } // جديد
     else if (gameKey === 'yallaludo') {
         let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - حساب</div>`;
         yallaAccountItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
@@ -737,7 +749,7 @@ function renderGame(gameKey) {
     }
     else if (gameKey === 'tiktok') { items = tiktokItems; title = 'TikTok Coins'; }
     else return;
-    let html = `<div class="category-title"><i class="fab fa-${gameKey === 'tiktok' ? 'tiktok' : 'fa-'}"></i> ${title}</div>`;
+    let html = `<div class="category-title"><i class="fas fa-${gameKey === 'gangstar' ? 'car' : gameKey === 'tiktok' ? 'tiktok' : 'gamepad'}"></i> ${title}</div>`;
     items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
     container.innerHTML = html; attachOrderEvents(container);
 }
@@ -924,7 +936,6 @@ document.getElementById('showShababBtn').addEventListener('click', function() {
     document.getElementById('shababSection').classList.remove('hidden-section');
 });
 document.getElementById('showMissingBtn').addEventListener('click', function() {
-    // فتح مودال المنتج غير الموجود مباشرة دون تغيير الأقسام
     openMissingModal();
 });
 
