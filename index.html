@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اسرع من نتكم 🔥 | نيون فريد</title>
+    <title>اسرع من نتكم 🔥 |  𝑅 𝐸 𝐴 𝐿</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -471,8 +471,20 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: #b0b0d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
-        .category-title i { margin-left: 0.8rem; color: #00d4ff; }
+        .category-title i { color: #00d4ff; }
+        .category-title img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+        }
+
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -543,7 +555,7 @@
             <button class="tab-btn" data-game="freefire">Free Fire</button>
             <button class="tab-btn" data-game="yallaludo">يلا لودو</button>
             <button class="tab-btn" data-game="tiktok">TikTok</button>
-            <button class="tab-btn" data-game="gangstar">Gangstar Mirage</button> <!-- جديد -->
+            <button class="tab-btn" data-game="gangstar">Gangstar Mirage</button>
         </div>
         <div id="pricesContainer" class="prices-grid"></div>
     </div>
@@ -657,7 +669,7 @@ const yallaAccountItems = [ { name: "830 ماسة (حساب)", price: 130 }, { n
 const yallaIdItems = [ { name: "1800 ماسة (ID)", price: 195 }, { name: "5000 ماسة (ID)", price: 450 }, { name: "10000 ماسة (ID)", price: 900 }, { name: "16000 ماسة (ID)", price: 1325 }, { name: "21000 ماسة (ID)", price: 1770 }, { name: "26000 ماسة (ID)", price: 2225 }, { name: "32000 ماسة (ID)", price: 2650 }, { name: "37000 ماسة (ID)", price: 3100 }, { name: "53700 ماسة (ID)", price: 4350 }, { name: "85000 ماسة (ID)", price: 7000 }, { name: "107000 ماسة (ID)", price: 8700 }, { name: "171000 ماسة (ID)", price: 13950 }, { name: "217000 ماسة (ID)", price: 17400 } ];
 const tiktokItems = [ { name: "500 عملة", price: 330 }, { name: "800 عملة", price: 520 }, { name: "1000 عملة", price: 620 }, { name: "1400 عملة", price: 860 }, { name: "2000 عملة", price: 1220 }, { name: "3500 عملة", price: 2120 }, { name: "5000 عملة", price: 3020 }, { name: "7500 عملة", price: 4520 }, { name: "10000 عملة", price: 5920 }, { name: "17500 عملة", price: 10320 }, { name: "20000 عملة", price: 11820 }, { name: "30000 عملة", price: 17620 }, { name: "50000 عملة", price: 29520 } ];
 
-// بيانات Gangstar Mirage City الجديدة
+// بيانات Gangstar Mirage City
 const gangstarItems = [
     { name: "60 ماسة", price: 57.5 },
     { name: "300 + 20 ماسة", price: 247.5 },
@@ -736,20 +748,83 @@ function attachOrderEvents(container) {
 function renderGame(gameKey) {
     const container = document.getElementById('pricesContainer');
     let items = [], title = '';
-    if (gameKey === 'pubg') { items = pubgItems; title = 'PUBG MOBILE'; }
-    else if (gameKey === 'mlbb') { items = mlbbItems; title = 'Mobile Legends'; }
-    else if (gameKey === 'freefire') { items = freefireItems; title = 'Free Fire'; }
-    else if (gameKey === 'gangstar') { items = gangstarItems; title = 'Gangstar Mirage City'; } // جديد
-    else if (gameKey === 'yallaludo') {
-        let html = `<div class="category-title"><i class="fas fa-dice-d6"></i> يلا لودو - حساب</div>`;
-        yallaAccountItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
-        html += `<div class="category-title"><i class="fas fa-id-card"></i> يلا لودو - ID</div>`;
-        yallaIdItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
-        container.innerHTML = html; attachOrderEvents(container); return;
+    if (gameKey === 'pubg') { 
+        items = pubgItems; 
+        title = 'PUBG MOBILE';
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp" alt="PUBG">
+            ${title}
+        </div>`;
+        items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
     }
-    else if (gameKey === 'tiktok') { items = tiktokItems; title = 'TikTok Coins'; }
+    else if (gameKey === 'mlbb') { 
+        items = mlbbItems; 
+        title = 'Mobile Legends';
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg" alt="MLBB">
+            ${title}
+        </div>`;
+        items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
+    else if (gameKey === 'freefire') { 
+        items = freefireItems; 
+        title = 'Free Fire';
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp" alt="Free Fire">
+            ${title}
+        </div>`;
+        items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
+    else if (gameKey === 'gangstar') { 
+        items = gangstarItems; 
+        title = 'Gangstar Mirage City';
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp" alt="Gangstar">
+            ${title}
+        </div>`;
+        items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
+    else if (gameKey === 'yallaludo') {
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو">
+            يلا لودو - حساب
+        </div>`;
+        yallaAccountItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
+        html += `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو">
+            يلا لودو - ID
+        </div>`;
+        yallaIdItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
+    else if (gameKey === 'tiktok') { 
+        items = tiktokItems; 
+        title = 'TikTok Coins';
+        let html = `<div class="category-title">
+            <img src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png" alt="TikTok">
+            ${title}
+        </div>`;
+        items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
+        container.innerHTML = html;
+        attachOrderEvents(container);
+        return;
+    }
     else return;
-    let html = `<div class="category-title"><i class="fas fa-${gameKey === 'gangstar' ? 'car' : gameKey === 'tiktok' ? 'tiktok' : 'gamepad'}"></i> ${title}</div>`;
+    let html = `<div class="category-title"><i class="fas fa-gamepad"></i> ${title}</div>`;
     items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
     container.innerHTML = html; attachOrderEvents(container);
 }
