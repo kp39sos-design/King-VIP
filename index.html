@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اسرع من نتكم 🔥 |  𝑅 𝐸 𝐴 𝐿</title>
+    <title>اسرع من نتكم 🔥 | نيون فريد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -483,6 +483,12 @@
             border-radius: 50%;
             border: 2px solid #ff007f;
             box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .category-title img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.6);
         }
 
         .toast-notification {
@@ -523,6 +529,79 @@
             font-size: 1.1rem;
             color: #00ff87;
             font-weight: 700;
+        }
+
+        /* ===== مودال تكبير الصورة ===== */
+        .image-lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 20px;
+        }
+        .image-lightbox.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .image-lightbox .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes zoomIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .image-lightbox .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 70px rgba(0, 212, 255, 0.3), 0 0 150px rgba(255, 0, 127, 0.15);
+            display: block;
+        }
+        .image-lightbox .close-lightbox {
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(8px);
+        }
+        .image-lightbox .close-lightbox:hover {
+            background: rgba(255, 0, 127, 0.3);
+            border-color: #ff007f;
+            transform: rotate(90deg);
+        }
+        @media (max-width: 600px) {
+            .image-lightbox .close-lightbox {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+            .image-lightbox .lightbox-content img {
+                max-height: 70vh;
+            }
         }
     </style>
 </head>
@@ -583,6 +662,14 @@
 
     <div class="footer-note">
         <div class="owner-name">⚡ 𝑅 𝐸 𝐴 𝐿﷼ <i class="fas fa-crown" style="color:#ff007f;"></i></div>
+    </div>
+</div>
+
+<!-- ===== مودال تكبير الصورة ===== -->
+<div id="imageLightbox" class="image-lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation();">
+        <div class="close-lightbox" onclick="closeLightbox()"><i class="fas fa-times"></i></div>
+        <img id="lightboxImg" src="" alt="صورة مكبرة">
     </div>
 </div>
 
@@ -744,6 +831,21 @@ function attachOrderEvents(container) {
     });
 }
 
+// ===================== تكبير الصورة =====================
+function openLightbox(imageSrc) {
+    document.getElementById('lightboxImg').src = imageSrc;
+    document.getElementById('imageLightbox').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('imageLightbox').classList.remove('show');
+    document.body.style.overflow = '';
+}
+// إغلاق بالضغط على Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+});
+
 // ===================== عرض الألعاب =====================
 function renderGame(gameKey) {
     const container = document.getElementById('pricesContainer');
@@ -752,7 +854,7 @@ function renderGame(gameKey) {
         items = pubgItems; 
         title = 'PUBG MOBILE';
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp" alt="PUBG">
+            <img src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp" alt="PUBG" onclick="openLightbox(this.src)">
             ${title}
         </div>`;
         items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
@@ -764,7 +866,7 @@ function renderGame(gameKey) {
         items = mlbbItems; 
         title = 'Mobile Legends';
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg" alt="MLBB">
+            <img src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg" alt="MLBB" onclick="openLightbox(this.src)">
             ${title}
         </div>`;
         items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
@@ -776,7 +878,7 @@ function renderGame(gameKey) {
         items = freefireItems; 
         title = 'Free Fire';
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp" alt="Free Fire">
+            <img src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp" alt="Free Fire" onclick="openLightbox(this.src)">
             ${title}
         </div>`;
         items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
@@ -788,7 +890,7 @@ function renderGame(gameKey) {
         items = gangstarItems; 
         title = 'Gangstar Mirage City';
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp" alt="Gangstar">
+            <img src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp" alt="Gangstar" onclick="openLightbox(this.src)">
             ${title}
         </div>`;
         items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
@@ -798,12 +900,12 @@ function renderGame(gameKey) {
     }
     else if (gameKey === 'yallaludo') {
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو">
+            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو" onclick="openLightbox(this.src)">
             يلا لودو - حساب
         </div>`;
         yallaAccountItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
         html += `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو">
+            <img src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png" alt="يلا لودو" onclick="openLightbox(this.src)">
             يلا لودو - ID
         </div>`;
         yallaIdItems.forEach(i => html += createCardHTML(i.name, i.price, 'يلا لودو', false));
@@ -815,7 +917,7 @@ function renderGame(gameKey) {
         items = tiktokItems; 
         title = 'TikTok Coins';
         let html = `<div class="category-title">
-            <img src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png" alt="TikTok">
+            <img src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png" alt="TikTok" onclick="openLightbox(this.src)">
             ${title}
         </div>`;
         items.forEach(i => html += createCardHTML(i.name, i.price, title, false));
