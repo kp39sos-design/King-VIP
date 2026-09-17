@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<title>اسرع من نتكم 🔥</title>
+<title>أسرع من نتكم 🔥 | المتجر الأسرع للشحن الرقمي</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -30,11 +30,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     --text-sub: #94a3b8;
     --accent-color: #3b82f6;
     --accent-glow: rgba(59, 130, 246, 0.25);
-    --gold-glow: #eab308;
+    --gold-glow: #facc15;
     --shadow-3d: 0 20px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
     --btn-bg: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     --btn-text: #ffffff;
     --btn-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    
+    /* BRAND GRADIENT */
+    --brand-gradient: linear-gradient(135deg, #ffffff 0%, #facc15 50%, #f97316 100%);
+    --brand-glow: drop-shadow(0 0 12px rgba(245, 158, 11, 0.4));
+    
+    /* PREMIUM PRICE BADGE STYLES */
+    --price-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%);
+    --price-border: rgba(59, 130, 246, 0.3);
+    --price-text: #38bdf8;
+    --price-glow: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
 }
 
 [data-theme="light"] {
@@ -51,6 +61,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     --btn-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     --btn-text: #ffffff;
     --btn-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+    
+    --brand-gradient: linear-gradient(135deg, #0f172a 0%, #d97706 50%, #ea580c 100%);
+    --brand-glow: drop-shadow(0 0 8px rgba(217, 119, 6, 0.25));
+
+    --price-bg: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(29, 78, 216, 0.03) 100%);
+    --price-border: rgba(37, 99, 235, 0.25);
+    --price-text: #1d4ed8;
+    --price-glow: none;
 }
 
 *{
@@ -100,6 +118,32 @@ a{
     padding:20px 15px;
 }
 
+/* ================= PRO BRAND STYLE ================= */
+
+.pro-brand-text {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: var(--brand-glow);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fire-icon {
+    color: #f97316;
+    -webkit-text-fill-color: initial;
+    filter: drop-shadow(0 0 8px #f97316);
+    animation: pulseFire 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseFire {
+    0% { transform: scale(1); filter: drop-shadow(0 0 6px #f97316); }
+    100% { transform: scale(1.18); filter: drop-shadow(0 0 14px #ef4444); }
+}
+
 /* SPLASH */
 
 #splash{
@@ -112,6 +156,7 @@ a{
     align-items:center;
     text-align:center;
     backdrop-filter: blur(10px);
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .splash-content{
@@ -140,9 +185,7 @@ a{
 
 .splash-title{
     margin-top:25px;
-    font-size:34px;
-    font-weight:900;
-    letter-spacing: -0.5px;
+    font-size:36px;
 }
 
 .splash-sub{
@@ -190,16 +233,17 @@ a{
 }
 
 .brand-name{
-    font-size:19px;
-    font-weight:900;
+    font-size:20px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .verified-icon {
     color: #3b82f6;
     font-size: 16px;
+    -webkit-text-fill-color: initial;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
 }
 
 .brand-sub{
@@ -309,20 +353,8 @@ a{
 }
 
 .hero h1{
-    font-size:32px;
-    font-weight:900;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-[data-theme="light"] .hero h1 {
-    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size:36px;
+    margin-bottom: 4px;
 }
 
 .hero p{
@@ -345,7 +377,7 @@ a{
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding: 16px 50px 16px 20px;
+    padding: 16px 50px 16px 45px;
     border-radius: 22px;
     font-size: 14px;
     outline: none;
@@ -364,6 +396,19 @@ a{
     transform: translateY(-50%);
     color: var(--text-sub);
     font-size: 18px;
+}
+
+.clear-search-btn {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-sub);
+    font-size: 16px;
+    background: transparent;
+    cursor: pointer;
+    display: none;
+    padding: 5px;
 }
 
 /* TABS */
@@ -549,35 +594,47 @@ a{
     font-weight:800;
     min-height:40px;
     font-size:14px;
+    display: flex;
+    align-items: center;
 }
 
+/* ================= ULTRA PRO PRICE BADGE ================= */
+
 .product-price-badge {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(29, 78, 216, 0.2));
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #60a5fa;
+    background: var(--price-bg);
+    border: 1px solid var(--price-border);
+    color: var(--price-text);
     padding: 8px 14px;
-    border-radius: 14px;
+    border-radius: 16px;
     font-size: 16px;
     font-weight: 900;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin: 10px 0 14px;
-    width: fit-content;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 12px 0 14px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
 }
 
-[data-theme="light"] .product-price-badge {
-    color: #1d4ed8;
+.product-price-badge .price-val {
+    filter: var(--price-glow);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .product-price-badge i {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--gold-glow);
+    filter: drop-shadow(0 0 6px var(--gold-glow));
 }
 
 .currency{
     font-size:11px;
     opacity: 0.85;
+    font-weight: 700;
 }
 
 .buy{
@@ -957,12 +1014,12 @@ textarea.input{
 <i class="fa-solid fa-bolt"></i>
 </div>
 
-<div class="splash-title">
-اسرع من نتكم 🔥
+<div class="splash-title pro-brand-text">
+أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i>
 </div>
 
 <div class="splash-sub">
-هلا بيك في متجرنا (﷼𝑅 𝐸 𝐴 𝐿) 💎
+أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎
 </div>
 
 <button class="skip" onclick="hideSplash()">
@@ -991,12 +1048,15 @@ textarea.input{
 <div class="brand">
 
 <img class="avatar"
+loading="lazy"
+alt="Avatar Logo"
 src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
 
 <div>
 
 <div class="brand-name">
-اسرع من نتكم 🔥 <i class="fa-solid fa-circle-check verified-icon"></i>
+<span class="pro-brand-text">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
 <div class="brand-sub">
@@ -1009,7 +1069,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 
 <div class="header-controls">
 
-<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="تبديل المظهر">
 <i class="fa-solid fa-moon"></i>
 </button>
 
@@ -1028,7 +1088,8 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <section class="hero">
 
 <h1>
-اسرع من نتكم 🔥 <i class="fa-solid fa-circle-check verified-icon"></i>
+<span class="pro-brand-text">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
 
 <p>
@@ -1095,6 +1156,9 @@ onclick="showSection('request',this)">
 <div class="search-box">
 <i class="fa-solid fa-magnifying-glass search-icon"></i>
 <input type="text" class="search-input" id="gameSearch" placeholder="ابحث عن لعبة أو تطبيق..." onkeyup="filterGames()">
+<button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" aria-label="مسح البحث">
+<i class="fa-solid fa-xmark"></i>
+</button>
 </div>
 
 <div class="game-grid" id="gameGrid">
@@ -1104,6 +1168,8 @@ onclick="showSection('request',this)">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="PUBG Mobile"
 src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp">
 </div>
 
@@ -1118,8 +1184,8 @@ PUBG Mobile
 </div>
 
 <button class="open-game"
-onclick="openGame('pubg')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('pubg', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1131,6 +1197,8 @@ onclick="openGame('pubg')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="Mobile Legends"
 src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg">
 </div>
 
@@ -1145,8 +1213,8 @@ Mobile Legends
 </div>
 
 <button class="open-game"
-onclick="openGame('mlbb')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('mlbb', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1158,6 +1226,8 @@ onclick="openGame('mlbb')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="Free Fire"
 src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp">
 </div>
 
@@ -1172,8 +1242,8 @@ Free Fire
 </div>
 
 <button class="open-game"
-onclick="openGame('ff')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('ff', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1185,6 +1255,8 @@ onclick="openGame('ff')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="يلا لودو"
 src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png">
 </div>
 
@@ -1199,8 +1271,8 @@ src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e8
 </div>
 
 <button class="open-game"
-onclick="openGame('yalla')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('yalla', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1212,6 +1284,8 @@ onclick="openGame('yalla')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="TikTok"
 src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png">
 </div>
 
@@ -1226,8 +1300,8 @@ TikTok
 </div>
 
 <button class="open-game"
-onclick="openGame('tiktok')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('tiktok', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1239,6 +1313,8 @@ onclick="openGame('tiktok')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="Gangstar"
 src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp">
 </div>
 
@@ -1253,8 +1329,8 @@ Gangstar
 </div>
 
 <button class="open-game"
-onclick="openGame('gangstar')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('gangstar', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1266,6 +1342,8 @@ onclick="openGame('gangstar')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="WePlay"
 src="https://www.image2url.com/r2/default/images/1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg">
 </div>
 
@@ -1280,8 +1358,8 @@ WePlay
 </div>
 
 <button class="open-game"
-onclick="openGame('weplay')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('weplay', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1293,6 +1371,8 @@ onclick="openGame('weplay')">
 
 <div class="game-img-wrapper">
 <img class="game-img"
+loading="lazy"
+alt="Roblox"
 src="https://www.image2url.com/r2/default/images/1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png">
 </div>
 
@@ -1307,8 +1387,8 @@ Robux و Gift Cards
 </div>
 
 <button class="open-game"
-onclick="openGame('roblox')">
-<i class="fa-solid fa-tag"></i> عرض الأسعار
+onclick="toggleGamePrices('roblox', this)">
+<i class="fa-solid fa-gamepad"></i> عرض الباقات
 </button>
 
 </div>
@@ -1531,8 +1611,9 @@ onclick="sendRequest()">
 
 <footer class="footer">
 
-<div>
-اسرع من نتكم 🔥 <i class="fa-solid fa-circle-check verified-icon"></i>
+<div style="margin-bottom: 6px;">
+<span class="pro-brand-text" style="font-size: 16px;">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
 <div>
@@ -1545,11 +1626,11 @@ onclick="sendRequest()">
 
 <div class="footer-social">
 
-<a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام">
+<a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام">
 <i class="fa-brands fa-telegram" style="color: #38bdf8;"></i>
 </a>
 
-<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب">
+<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب" aria-label="قناة الواتساب">
 <i class="fa-brands fa-whatsapp" style="color: #4ade80;"></i>
 </a>
 
@@ -1575,7 +1656,7 @@ onclick="sendRequest()">
 </h2>
 
 <button class="close"
-onclick="closeModal()">
+onclick="closeModal()" aria-label="إغلاق">
 ×
 </button>
 
@@ -1687,123 +1768,85 @@ function toggleTheme() {
 /* ================= SPLASH ================= */
 
 function hideSplash(){
-
-document.getElementById("splash").style.display="none";
-
-document.getElementById("app").style.display="block";
-
+    const splash = document.getElementById("splash");
+    splash.style.opacity = "0";
+    splash.style.visibility = "hidden";
+    setTimeout(() => {
+        splash.style.display = "none";
+        document.getElementById("app").style.display = "block";
+    }, 400);
 }
 
-setTimeout(hideSplash,10000);
+// تسريع الشاشة الافتتاحية بدلاً من 10 ثوانٍ
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(hideSplash, 1500);
+});
 
 
 /* ================= TOAST ================= */
 
+let toastTimeout;
 function showToast(text){
+    let toast = document.getElementById("toast");
+    toast.innerText = text;
+    toast.style.display = "block";
 
-let toast=document.getElementById("toast");
-
-toast.innerText=text;
-
-toast.style.display="block";
-
-setTimeout(function(){
-
-toast.style.display="none";
-
-},1800);
-
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function(){
+        toast.style.display = "none";
+    }, 1800);
 }
 
 
 /* ================= COPY ================= */
 
 function copyText(text){
+    if (window.Android && Android.copyText) {
+        Android.copyText(text);
+        return;
+    }
 
-if(window.Android && Android.copyText){
-
-Android.copyText(text);
-
-return;
-
-}
-
-if(navigator.clipboard){
-
-navigator.clipboard.writeText(text)
-.then(function(){
-
-showToast("✅ تم النسخ");
-
-})
-.catch(function(){
-
-fallbackCopy(text);
-
-});
-
-}else{
-
-fallbackCopy(text);
-
-}
-
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text)
+            .then(() => showToast("✅ تم النسخ"))
+            .catch(() => fallbackCopy(text));
+    } else {
+        fallbackCopy(text);
+    }
 }
 
 function fallbackCopy(text){
+    let area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
 
-let area=document.createElement("textarea");
-
-area.value=text;
-
-area.style.position="fixed";
-
-area.style.opacity="0";
-
-document.body.appendChild(area);
-
-area.select();
-
-try{
-
-document.execCommand("copy");
-
-showToast("✅ تم النسخ");
-
-}catch(e){
-
-showToast("❌ لم يتم النسخ");
-
-}
-
-document.body.removeChild(area);
-
+    try {
+        document.execCommand("copy");
+        showToast("✅ تم النسخ");
+    } catch(e) {
+        showToast("❌ لم يتم النسخ");
+    }
+    document.body.removeChild(area);
 }
 
 
 /* ================= SECTIONS ================= */
 
-function showSection(id,btn){
+function showSection(id, btn){
+    document.querySelectorAll(".section").forEach(function(section){
+        section.classList.remove("active");
+    });
 
-document.querySelectorAll(".section")
-.forEach(function(section){
+    document.getElementById(id).classList.add("active");
 
-section.classList.remove("active");
+    document.querySelectorAll(".tab").forEach(function(tab){
+        tab.classList.remove("active");
+    });
 
-});
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll(".tab")
-.forEach(function(tab){
-
-tab.classList.remove("active");
-
-});
-
-btn.classList.add("active");
-
+    btn.classList.add("active");
 }
 
 
@@ -1812,7 +1855,10 @@ btn.classList.add("active");
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.querySelectorAll('#gameGrid .game-card');
+    let clearBtn = document.getElementById('clearSearchBtn');
     
+    clearBtn.style.display = input.length > 0 ? "block" : "none";
+
     cards.forEach(function(card) {
         let name = card.getAttribute('data-name').toLowerCase();
         if (name.includes(input)) {
@@ -1821,6 +1867,13 @@ function filterGames() {
             card.style.display = "none";
         }
     });
+}
+
+function clearSearch() {
+    let searchInput = document.getElementById('gameSearch');
+    searchInput.value = "";
+    filterGames();
+    searchInput.focus();
 }
 
 
@@ -1953,6 +2006,28 @@ roblox:[
 
 };
 
+let currentOpenGame = null;
+
+/* ================= TOGGLE GAME PRICES ================= */
+
+function toggleGamePrices(game, btn) {
+    const productsDiv = document.getElementById("products");
+
+    if (currentOpenGame === game && productsDiv.style.display !== "none" && productsDiv.innerHTML !== "") {
+        productsDiv.style.display = "none";
+        btn.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
+        currentOpenGame = null;
+    } else {
+        document.querySelectorAll('.open-game').forEach(b => {
+            b.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
+        });
+
+        openGame(game);
+        productsDiv.style.display = "block";
+        btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> إغلاق الباقات';
+        currentOpenGame = game;
+    }
+}
 
 /* ================= OPEN GAME ================= */
 
@@ -1992,7 +2067,8 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<i class="fa-solid fa-coins"></i> ${item[1]} <span class="currency">جنيه</span>
+<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
+<span class="price-val"><i class="fa-solid fa-coins"></i> ${item[1]} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
@@ -2067,6 +2143,14 @@ document.getElementById("orderModal")
 
 }
 
+// إغلاق النافذة عند الضغط على الخلفية الخارجية
+window.addEventListener('click', function(event) {
+    let modal = document.getElementById("orderModal");
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
 
 /* ================= WHATSAPP ORDER ================= */
 
@@ -2080,7 +2164,7 @@ encodeURIComponent(selectedProduct)+
 "السعر:%20"+
 encodeURIComponent(selectedPrice+" جنيه")+
 "%0A%0A"+
-"من متجر اسرع من نتكم 🔥";
+"من متجر أسرع من نتكم 🔥";
 
 let url=
 "https://wa.me/201044049390?text="+text;
@@ -2151,7 +2235,8 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">جنيه</span>
+<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
+<span class="price-val"><i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
@@ -2238,11 +2323,8 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<i class="fa-solid fa-bolt"></i> ${after} <span class="currency">جنيه</span>
-</div>
-
-<div style="font-size:11px;color:var(--text-sub);margin-bottom:10px;">
-بعد خصم 5%
+<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
+<span class="price-val"><i class="fa-solid fa-bolt"></i> ${after} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
@@ -2321,7 +2403,8 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span>
+<span style="font-size:12px; opacity:0.8; font-weight:700;">الكمية</span>
+<span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span>
 </div>
 
 <button class="buy"
@@ -2360,16 +2443,18 @@ let details=
 document.getElementById("requestDetails").value.trim();
 
 if(!name){
+    showToast("⚠️ اكتب اسم المنتج");
+    return;
+}
 
-showToast("اكتب اسم المنتج");
-
-return;
-
+if(!phone || phone.length < 8){
+    showToast("⚠️ ادخل رقم هاتف صحيح");
+    return;
 }
 
 let text=
 "السلام عليكم 👋%0A%0A"+
-"طلب منتج من متجر اسرع من نتكم 🔥%0A%0A"+
+"طلب منتج من متجر أسرع من نتكم 🔥%0A%0A"+
 "المنتج: "+encodeURIComponent(name)+
 "%0Aالنوع: "+encodeURIComponent(type)+
 "%0Aالهاتف: "+encodeURIComponent(phone)+
@@ -2412,3 +2497,4 @@ document.querySelector("#shabab .subtab")
 
 </body>
 </html>
+
