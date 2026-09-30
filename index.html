@@ -89,8 +89,8 @@ a{text-decoration:none;color:inherit;}
 @keyframes pulseFire{0%{transform:scale(1);filter:drop-shadow(0 0 6px #FF8A00);}100%{transform:scale(1.15);filter:drop-shadow(0 0 14px var(--neon-blue));}}
 #splash{position:absolute;inset:0;z-index:99999;background:var(--bg-main);display:flex;justify-content:center;align-items:center;text-align:center;backdrop-filter:blur(15px);transition:opacity 0.4s ease, visibility 0.4s ease;}
 .splash-content{width:90%;}
-.logo-icon{width:90px;height:90px;border-radius:26px;margin:auto;display:flex;align-items:center;justify-content:center;background:var(--dark-gradient);border:1px solid var(--neon-blue);box-shadow:var(--glow-blue);backdrop-filter:blur(10px);}
-.logo-icon i{font-size:42px;color:var(--neon-blue);filter:drop-shadow(0 0 12px var(--neon-blue));}
+.logo-icon{width:100px;height:100px;border-radius:26px;margin:auto;display:flex;align-items:center;justify-content:center;background:var(--dark-gradient);border:1px solid var(--neon-blue);box-shadow:var(--glow-blue);backdrop-filter:blur(10px);overflow:hidden;padding:4px;}
+.splash-img-logo{width:100%;height:100%;object-fit:cover;border-radius:22px;}
 .splash-title{margin-top:20px;font-size:26px;}
 .splash-sub{color:var(--text-sub);margin:8px 0 25px;font-size:13px;}
 .skip{background:var(--btn-bg);color:var(--btn-text);padding:12px 30px;border-radius:25px;font-weight:800;box-shadow:var(--btn-shadow);font-size:13px;}
@@ -203,7 +203,10 @@ textarea.input{min-height:90px;resize:none;}
 <div id="mobile-frame">
 <div id="splash">
 <div class="splash-content">
-<div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+<!-- تم استبدال أيقونة البرق بصورتك الجديدة في واجهة البداية -->
+<div class="logo-icon">
+<img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار استور أسرع من نتكم" class="splash-img-logo">
+</div>
 <div class="splash-title pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></div>
 <div class="splash-sub">أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
 <button class="skip" onclick="hideSplash()">تخطي</button>
@@ -473,7 +476,7 @@ function toggleTheme() {
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
         themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        showToast("☀️ التبديل للوضع الفاتح الأنيق");
+        showToast("☀️️ التبديل للوضع الفاتح الأنيق");
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
