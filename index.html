@@ -1,1924 +1,453 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
-
 <head>
-
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NFSC6ZR431"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXPERY72FM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-NFSC6ZR431');
+  gtag('config', 'G-VXPERY72FM');
 </script>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>استور أسرع من نتكم 🔥 | المتجر الأسرع للشحن الرقمي</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-
 :root {
-    /* LIGHT THEME PALETTE (DEFAULT) */
     --bg-main: #F1F5F9;
     --bg-card: rgba(255, 255, 255, 0.92);
     --bg-card-inner: rgba(241, 245, 249, 0.85);
     --border-color: rgba(37, 99, 235, 0.18);
     --border-accent: rgba(37, 99, 235, 0.4);
-    
     --text-main: #0F172A;
     --text-sub: #475569;
-    
     --neon-blue: #2563EB;
     --neon-purple: #7C3AED;
     --gold: #D97706;
     --success: #16A34A;
     --warning: #F59E0B;
     --danger: #EF4444;
-    
     --main-gradient: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
     --gold-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
     --dark-gradient: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
-    
     --glow-blue: 0 4px 20px rgba(37, 99, 235, 0.15);
     --glow-purple: 0 4px 20px rgba(124, 58, 237, 0.15);
     --glow-gold: 0 4px 15px rgba(217, 119, 6, 0.2);
     --shadow-3d: 0 8px 18px -4px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-    
     --btn-bg: var(--main-gradient);
     --btn-text: #FFFFFF;
     --btn-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
-    
     --brand-gradient: linear-gradient(135deg, #0F172A 0%, #2563EB 50%, #7C3AED 100%);
     --brand-glow: drop-shadow(0 0 8px rgba(37, 99, 235, 0.3));
-    
     --price-bg: rgba(217, 119, 6, 0.08);
     --price-border: rgba(217, 119, 6, 0.25);
     --price-text: #D97706;
     --price-glow: none;
-
     --modal-bg: #FFFFFF;
 }
-
-/* DARK NEON GAMING PALETTE (SECONDARY) */
 [data-theme="dark"] {
     --bg-main: #080A0F;
     --bg-card: rgba(17, 21, 29, 0.85);
     --bg-card-inner: rgba(8, 10, 15, 0.7);
     --border-color: rgba(0, 217, 255, 0.15);
     --border-accent: rgba(0, 217, 255, 0.4);
-    
     --text-main: #FFFFFF;
     --text-sub: #A7B0C0;
-    
     --neon-blue: #00D9FF;
     --neon-purple: #8B5CF6;
     --gold: #FFB800;
     --success: #22C55E;
-    
     --main-gradient: linear-gradient(135deg, #00D9FF 0%, #8B5CF6 100%);
     --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FF8A00 100%);
     --dark-gradient: linear-gradient(135deg, #11151D 0%, #080A0F 100%);
-    
     --glow-blue: 0 0 25px rgba(0, 217, 255, 0.25);
     --glow-purple: 0 0 25px rgba(139, 92, 246, 0.25);
     --glow-gold: 0 0 25px rgba(255, 184, 0, 0.25);
     --shadow-3d: 0 12px 24px -6px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
-    
     --btn-shadow: 0 4px 20px rgba(0, 217, 255, 0.35);
     --brand-gradient: linear-gradient(135deg, #FFFFFF 0%, #00D9FF 50%, #8B5CF6 100%);
     --brand-glow: drop-shadow(0 0 12px rgba(0, 217, 255, 0.5));
-    
     --price-bg: rgba(255, 184, 0, 0.08);
     --price-border: rgba(255, 184, 0, 0.3);
     --price-text: #FFB800;
     --price-glow: drop-shadow(0 0 8px rgba(255, 184, 0, 0.4));
-
     --modal-bg: var(--dark-gradient);
 }
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, color 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body {
-    background: #030407;
-    color: var(--text-main);
-    font-family:'Cairo',sans-serif;
-    min-height:100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-#mobile-frame {
-    width: 100%;
-    max-width: 480px;
-    min-height: 100vh;
-    background: var(--bg-main);
-    background-image: 
-        radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 40%),
-        radial-gradient(circle at 90% 100%, rgba(124, 58, 237, 0.08) 0px, transparent 40%);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.15), 0 0 2px rgba(37, 99, 235, 0.2);
-    position: relative;
-    overflow-x: hidden;
-}
-
-button,
-input,
-textarea{
-    font-family:inherit;
-}
-
-button{
-    border:0;
-    outline:0;
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-.container{
-    width:100%;
-    padding: 15px 12px;
-}
-
-/* PRO BRAND STYLE */
-
-.pro-brand-text {
-    background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: var(--brand-glow);
-    font-weight: 900;
-    letter-spacing: -0.3px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-}
-
-.fire-icon {
-    color: #FF8A00;
-    -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 8px #FF8A00);
-    animation: pulseFire 1.8s infinite alternate ease-in-out;
-}
-
-@keyframes pulseFire {
-    0% { transform: scale(1); filter: drop-shadow(0 0 6px #FF8A00); }
-    100% { transform: scale(1.15); filter: drop-shadow(0 0 14px var(--neon-blue)); }
-}
-
-/* SPLASH */
-
-#splash{
-    position:absolute;
-    inset:0;
-    z-index:99999;
-    background: var(--bg-main);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    backdrop-filter: blur(15px);
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.splash-content{
-    width:90%;
-}
-
-.logo-icon{
-    width:90px;
-    height:90px;
-    border-radius:26px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: var(--dark-gradient);
-    border: 1px solid var(--neon-blue);
-    box-shadow: var(--glow-blue);
-    backdrop-filter: blur(10px);
-}
-
-.logo-icon i{
-    font-size:42px;
-    color: var(--neon-blue);
-    filter: drop-shadow(0 0 12px var(--neon-blue));
-}
-
-.splash-title{
-    margin-top:20px;
-    font-size:26px;
-}
-
-.splash-sub{
-    color: var(--text-sub);
-    margin:8px 0 25px;
-    font-size:13px;
-}
-
-.skip{
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    padding:12px 30px;
-    border-radius:25px;
-    font-weight:800;
-    box-shadow: var(--btn-shadow);
-    font-size: 13px;
-}
-
-.skip:active {
-    transform: scale(0.95);
-}
-
-/* HEADER */
-
-.header{
-    padding: 5px 0 12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.avatar{
-    width:44px;
-    height:44px;
-    object-fit:cover;
-    border-radius:50%;
-    border:2px solid var(--neon-blue);
-    box-shadow: var(--glow-blue);
-}
-
-.brand-name{
-    font-size:16px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.verified-icon {
-    color: var(--neon-blue);
-    font-size: 13px;
-    -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 6px var(--neon-blue));
-}
-
-.brand-sub{
-    color: var(--text-sub);
-    font-size:10px;
-    font-weight: 600;
-}
-
-.header-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.theme-toggle-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--bg-card);
-    color: var(--neon-blue);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    box-shadow: var(--shadow-3d);
-}
-
-.theme-toggle-btn:active {
-    transform: scale(0.9);
-}
-
-.live-badge {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: var(--success);
-    padding: 5px 10px;
-    border-radius: 16px;
-    font-size: 10px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
-}
-
-.live-dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--success);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--success);
-}
-
-/* SOCIAL BUTTONS */
-
-.social-channels {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 12px 0 8px;
-}
-
-.social-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 14px;
-    font-size: 11px;
-    font-weight: 800;
-    backdrop-filter: blur(10px);
-    flex: 1;
-    justify-content: center;
-}
-
-.btn-telegram {
-    background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(37, 99, 235, 0.3);
-    color: var(--neon-blue);
-    box-shadow: 0 0 12px rgba(37, 99, 235, 0.15);
-}
-
-.btn-whatsapp-channel {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: var(--success);
-    box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
-}
-
-.social-btn:active {
-    transform: scale(0.96);
-}
-
-/* HERO */
-
-.hero{
-    text-align:center;
-    padding:5px 0 12px;
-}
-
-.hero h1{
-    font-size:24px;
-    margin-bottom: 2px;
-}
-
-.hero p{
-    color: var(--text-sub);
-    margin-top:2px;
-    font-size:12px;
-    font-weight: 600;
-}
-
-/* SEARCH BAR */
-
-.search-box {
-    position: relative;
-    margin: 10px 0 16px;
-}
-
-.search-input {
-    width: 100%;
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 12px 42px 12px 38px;
-    border-radius: 18px;
-    font-size: 13px;
-    outline: none;
-    box-shadow: var(--shadow-3d);
-}
-
-.search-input:focus {
-    border-color: var(--neon-blue);
-    box-shadow: var(--glow-blue);
-}
-
-.search-icon {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--neon-blue);
-    font-size: 15px;
-}
-
-.clear-search-btn {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-sub);
-    font-size: 14px;
-    background: transparent;
-    cursor: pointer;
-    display: none;
-    padding: 4px;
-}
-
-/* TABS */
-
-.tabs{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding:2px 2px 14px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.tabs::-webkit-scrollbar{
-    display:none;
-}
-
-.tab{
-    flex-shrink:0;
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    color: var(--text-sub);
-    border: 1px solid var(--border-color);
-    padding:9px 16px;
-    border-radius:16px;
-    font-weight:800;
-    font-size:12px;
-    box-shadow: var(--shadow-3d);
-}
-
-.tab.active{
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    border-color: transparent;
-    box-shadow: var(--btn-shadow);
-}
-
-/* SECTIONS */
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* GAME GRID */
-
-.game-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-}
-
-.game-card{
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow: var(--shadow-3d);
-    display:flex;
-    flex-direction:column;
-}
-
-.game-card:hover {
-    border-color: var(--neon-blue);
-    box-shadow: var(--glow-blue);
-}
-
-.game-card:active {
-    transform: scale(0.98);
-}
-
-.game-img-wrapper {
-    width: 100%;
-    height: 110px;
-    background: var(--bg-card-inner);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.game-img{
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
-}
-
-.game-info{
-    padding:10px;
-    display:flex;
-    flex-direction:column;
-    flex-grow:1;
-    justify-content:space-between;
-}
-
-.game-name{
-    font-weight:900;
-    margin-bottom:2px;
-    font-size: 13px;
-    color: var(--text-main);
-}
-
-.game-desc{
-    color: var(--text-sub);
-    font-size:10px;
-    margin-bottom:10px;
-    font-weight: 600;
-}
-
-.open-game{
-    width:100%;
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    padding:8px;
-    border-radius:12px;
-    font-weight:800;
-    font-size: 11px;
-    box-shadow: var(--btn-shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.open-game:active {
-    transform: scale(0.95);
-}
-
-/* PRODUCTS */
-
-.product-title{
-    font-size:18px;
-    font-weight:900;
-    margin: 15px 0 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-main);
-}
-
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-}
-
-.product{
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius:18px;
-    padding:12px;
-    box-shadow: var(--shadow-3d);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.product:hover {
-    border-color: var(--neon-purple);
-    box-shadow: var(--glow-purple);
-}
-
-.product-name{
-    font-weight:800;
-    min-height:36px;
-    font-size:12px;
-    display: flex;
-    align-items: center;
-    line-height: 1.3;
-    color: var(--text-main);
-}
-
-/* PRICE BADGE STYLES */
-
-.product-price-badge {
-    background: var(--price-bg);
-    border: 1px solid var(--price-border);
-    color: var(--price-text);
-    padding: 6px 10px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 900;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    margin: 8px 0 10px;
-    width: 100%;
-    box-shadow: var(--glow-gold);
-    backdrop-filter: blur(6px);
-}
-
-.product-price-badge .price-val {
-    filter: var(--price-glow);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--gold);
-}
-
-.product-price-badge i {
-    font-size: 13px;
-    color: var(--gold);
-    filter: drop-shadow(0 0 5px var(--gold));
-}
-
-.uc-badge-icon {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px var(--gold));
-    vertical-align: middle;
-}
-
-.ff-diamond-icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px var(--neon-blue));
-    vertical-align: middle;
-}
-
-.tiktok-coin-icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px var(--gold));
-    vertical-align: middle;
-}
-
-.mlbb-diamond-icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px var(--neon-blue));
-    vertical-align: middle;
-}
-
-.currency{
-    font-size:10px;
-    opacity: 0.85;
-    font-weight: 700;
-}
-
-.buy{
-    width:100%;
-    background: var(--gold-gradient);
-    color: #FFFFFF;
-    border-radius:12px;
-    padding:9px;
-    font-weight:900;
-    font-size: 12px;
-    box-shadow: var(--glow-gold);
-}
-
-.buy:active {
-    transform: scale(0.95);
-}
-
-/* SUB TABS */
-
-.subtabs{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    margin:8px 0 14px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.subtabs::-webkit-scrollbar{
-    display:none;
-}
-
-.subtab{
-    flex-shrink:0;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    color: var(--text-sub);
-    border-radius:20px;
-    padding:7px 14px;
-    font-size:11px;
-    font-weight:800;
-    box-shadow: var(--shadow-3d);
-}
-
-.subtab.active{
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    border-color: transparent;
-    box-shadow: var(--btn-shadow);
-}
-
-/* PAYMENT */
-
-.payment{
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius:20px;
-    padding:18px;
-    margin-top:20px;
-    box-shadow: var(--shadow-3d);
-}
-
-.payment h3{
-    margin-bottom:12px;
-    font-size: 15px;
-    color: var(--text-main);
-}
-
-.payment-number{
-    background: var(--bg-card-inner);
-    border: 1px solid var(--border-accent);
-    border-radius:14px;
-    padding:12px;
-    font-size:18px;
-    font-weight:900;
-    direction:ltr;
-    text-align:center;
-    letter-spacing: 2px;
-    color: var(--neon-blue);
-    box-shadow: var(--glow-blue);
-}
-
-.copy{
-    width:100%;
-    margin-top:10px;
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    padding:11px;
-    border-radius:12px;
-    font-weight:800;
-    font-size: 13px;
-    box-shadow: var(--btn-shadow);
-}
-
-.copy:active {
-    transform: scale(0.95);
-}
-
-.whatsapp{
-    display:block;
-    text-align:center;
-    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
-    color:#fff;
-    padding:11px;
-    border-radius:12px;
-    margin-top:10px;
-    font-weight:800;
-    font-size: 13px;
-    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
-}
-
-.whatsapp:active {
-    transform: scale(0.95);
-}
-
-/* SECRET DASHBOARD CARD STYLES */
-
-.admin-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.admin-stat-card {
-    background: var(--bg-card-inner);
-    border: 1px solid var(--border-color);
-    padding: 15px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: var(--shadow-3d);
-}
-
-.admin-stat-num {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--neon-blue);
-    margin-top: 5px;
-}
-
-.admin-stat-title {
-    font-size: 11px;
-    color: var(--text-sub);
-    font-weight: 700;
-}
-
-/* SOON */
-
-.soon-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-}
-
-.soon-card{
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius:18px;
-    padding:20px 10px;
-    text-align:center;
-    box-shadow: var(--shadow-3d);
-}
-
-.soon-card i{
-    font-size:28px;
-    margin-bottom:8px;
-    color: var(--neon-purple);
-    filter: drop-shadow(0 0 8px var(--neon-purple));
-}
-
-.soon-card h3 {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text-main);
-}
-
-.soon-card p{
-    color: var(--text-sub);
-    font-size:10px;
-    margin-top:2px;
-    font-weight: 600;
-}
-
-/* REQUEST */
-
-.form{
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius:20px;
-    padding:18px;
-    box-shadow: var(--shadow-3d);
-}
-
-.input{
-    width:100%;
-    background: var(--bg-card-inner);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding:12px;
-    border-radius:14px;
-    margin-bottom:10px;
-    outline:none;
-    font-size: 13px;
-}
-
-.input:focus {
-    border-color: var(--neon-blue);
-    box-shadow: var(--glow-blue);
-}
-
-textarea.input{
-    min-height:90px;
-    resize:none;
-}
-
-.send{
-    width:100%;
-    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
-    color:#fff;
-    padding:12px;
-    border-radius:14px;
-    font-weight:800;
-    font-size: 13px;
-    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
-}
-
-.send:active {
-    transform: scale(0.95);
-}
-
-/* MODAL */
-
-.modal{
-    position:absolute;
-    inset:0;
-    z-index:99998;
-    background:rgba(3, 4, 7, 0.65);
-    backdrop-filter: blur(12px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:12px;
-}
-
-.modal.show{
-    display:flex;
-    animation: fadeIn 0.25s ease;
-}
-
-.modal-box{
-    width:100%;
-    max-height:85vh;
-    overflow-y:auto;
-    background: var(--modal-bg);
-    border: 1px solid var(--border-accent);
-    border-radius:24px;
-    padding:20px;
-    box-shadow: var(--glow-purple);
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
-
-.modal-head h2 {
-    font-size: 17px;
-    font-weight: 900;
-    color: var(--text-main);
-}
-
-.close{
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    background: var(--bg-card-inner);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    font-size:18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info{
-    background: var(--bg-card-inner);
-    border: 1px solid var(--border-color);
-    border-radius:14px;
-    padding:12px;
-    margin-bottom:10px;
-}
-
-.info-label{
-    color: var(--text-sub);
-    font-size:11px;
-    font-weight: 600;
-}
-
-.info-value{
-    font-weight:900;
-    margin-top:2px;
-    font-size: 14px;
-    color: var(--text-main);
-}
-
-.discount{
-    background: var(--bg-card-inner);
-    padding:14px;
-    border-radius:14px;
-    text-align:center;
-    margin-bottom:10px;
-    border: 1px dashed var(--gold);
-}
-
-.old-price{
-    color: var(--text-sub);
-    text-decoration:line-through;
-    margin-top: 2px;
-    font-size: 12px;
-}
-
-.new-price{
-    font-size:24px;
-    font-weight:900;
-    color: var(--gold);
-    margin-top: 2px;
-    filter: drop-shadow(0 0 8px rgba(255, 184, 0, 0.4));
-}
-
-.order{
-    width:100%;
-    background: var(--gold-gradient);
-    color: #FFFFFF;
-    padding:13px;
-    border-radius:14px;
-    font-weight:900;
-    margin-top:6px;
-    font-size: 13px;
-    box-shadow: var(--glow-gold);
-}
-
-.order:active {
-    transform: scale(0.95);
-}
-
-/* TOAST */
-
-#toast{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:100000;
-    background: var(--dark-gradient);
-    border: 1px solid var(--neon-blue);
-    color: var(--text-main);
-    padding:10px 22px;
-    border-radius:25px;
-    font-weight:800;
-    font-size: 12px;
-    display:none;
-    box-shadow: var(--glow-blue);
-    white-space: nowrap;
-}
-
-/* FOOTER */
-
-.footer{
-    text-align:center;
-    padding:30px 10px 20px;
-    color: var(--text-sub);
-    font-size:11px;
-    font-weight: 600;
-}
-
-.footer-social {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 14px;
-}
-
-.footer-social a {
-    font-size: 20px;
-    color: var(--text-main);
-}
-
-.footer-social a:active {
-    transform: scale(0.9);
-}
-
+*{box-sizing:border-box;margin:0;padding:0;transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, color 0.3s ease;-webkit-tap-highlight-color: transparent;}
+html{scroll-behavior:smooth;}
+body{background:#030407;color:var(--text-main);font-family:'Cairo',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;}
+#mobile-frame{width:100%;max-width:480px;min-height:100vh;background:var(--bg-main);background-image:radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 40%),radial-gradient(circle at 90% 100%, rgba(124, 58, 237, 0.08) 0px, transparent 40%);box-shadow:0 0 50px rgba(0, 0, 0, 0.15), 0 0 2px rgba(37, 99, 235, 0.2);position:relative;overflow-x:hidden;}
+button,input,textarea{font-family:inherit;}
+button{border:0;outline:0;cursor:pointer;}
+a{text-decoration:none;color:inherit;}
+.container{width:100%;padding:15px 12px;}
+.pro-brand-text{background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:var(--brand-glow);font-weight:900;letter-spacing:-0.3px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;}
+.fire-icon{color:#FF8A00;-webkit-text-fill-color:initial;filter:drop-shadow(0 0 8px #FF8A00);animation:pulseFire 1.8s infinite alternate ease-in-out;}
+@keyframes pulseFire{0%{transform:scale(1);filter:drop-shadow(0 0 6px #FF8A00);}100%{transform:scale(1.15);filter:drop-shadow(0 0 14px var(--neon-blue));}}
+#splash{position:absolute;inset:0;z-index:99999;background:var(--bg-main);display:flex;justify-content:center;align-items:center;text-align:center;backdrop-filter:blur(15px);transition:opacity 0.4s ease, visibility 0.4s ease;}
+.splash-content{width:90%;}
+.logo-icon{width:90px;height:90px;border-radius:26px;margin:auto;display:flex;align-items:center;justify-content:center;background:var(--dark-gradient);border:1px solid var(--neon-blue);box-shadow:var(--glow-blue);backdrop-filter:blur(10px);}
+.logo-icon i{font-size:42px;color:var(--neon-blue);filter:drop-shadow(0 0 12px var(--neon-blue));}
+.splash-title{margin-top:20px;font-size:26px;}
+.splash-sub{color:var(--text-sub);margin:8px 0 25px;font-size:13px;}
+.skip{background:var(--btn-bg);color:var(--btn-text);padding:12px 30px;border-radius:25px;font-weight:800;box-shadow:var(--btn-shadow);font-size:13px;}
+.skip:active{transform:scale(0.95);}
+.header{padding:5px 0 12px;display:flex;justify-content:space-between;align-items:center;}
+.brand{display:flex;align-items:center;gap:10px;}
+.avatar{width:44px;height:44px;object-fit:cover;border-radius:50%;border:2px solid var(--neon-blue);box-shadow:var(--glow-blue);}
+.brand-name{font-size:16px;display:flex;align-items:center;gap:5px;}
+.verified-icon{color:var(--neon-blue);font-size:13px;-webkit-text-fill-color:initial;filter:drop-shadow(0 0 6px var(--neon-blue));}
+.brand-sub{color:var(--text-sub);font-size:10px;font-weight:600;}
+.header-controls{display:flex;align-items:center;gap:8px;}
+.theme-toggle-btn{width:38px;height:38px;border-radius:50%;background:var(--bg-card);color:var(--neon-blue);border:1px solid var(--border-color);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:var(--shadow-3d);}
+.theme-toggle-btn:active{transform:scale(0.9);}
+.live-badge{background:rgba(34, 197, 94, 0.1);border:1px solid rgba(34, 197, 94, 0.3);color:var(--success);padding:5px 10px;border-radius:16px;font-size:10px;font-weight:800;display:flex;align-items:center;gap:5px;box-shadow:0 0 10px rgba(34, 197, 94, 0.2);}
+.live-dot{width:6px;height:6px;background-color:var(--success);border-radius:50%;box-shadow:0 0 8px var(--success);}
+.social-channels{display:flex;justify-content:center;gap:8px;margin:12px 0 8px;}
+.social-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:14px;font-size:11px;font-weight:800;backdrop-filter:blur(10px);flex:1;justify-content:center;}
+.btn-telegram{background:rgba(37, 99, 235, 0.1);border:1px solid rgba(37, 99, 235, 0.3);color:var(--neon-blue);box-shadow:0 0 12px rgba(37, 99, 235, 0.15);}
+.btn-whatsapp-channel{background:rgba(34, 197, 94, 0.1);border:1px solid rgba(34, 197, 94, 0.3);color:var(--success);box-shadow:0 0 12px rgba(34, 197, 94, 0.15);}
+.social-btn:active{transform:scale(0.96);}
+.hero{text-align:center;padding:5px 0 12px;}
+.hero h1{font-size:24px;margin-bottom:2px;}
+.hero p{color:var(--text-sub);margin-top:2px;font-size:12px;font-weight:600;}
+.search-box{position:relative;margin:10px 0 16px;}
+.search-input{width:100%;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);color:var(--text-main);padding:12px 42px 12px 38px;border-radius:18px;font-size:13px;outline:none;box-shadow:var(--shadow-3d);}
+.search-input:focus{border-color:var(--neon-blue);box-shadow:var(--glow-blue);}
+.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--neon-blue);font-size:15px;}
+.clear-search-btn{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-sub);font-size:14px;background:transparent;cursor:pointer;display:none;padding:4px;}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;-webkit-overflow-scrolling:touch;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{flex-shrink:0;background:var(--bg-card);backdrop-filter:blur(10px);color:var(--text-sub);border:1px solid var(--border-color);padding:9px 16px;border-radius:16px;font-weight:800;font-size:12px;box-shadow:var(--shadow-3d);}
+.tab.active{background:var(--btn-bg);color:var(--btn-text);border-color:transparent;box-shadow:var(--btn-shadow);}
+.section{display:none;}
+.section.active{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.game-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
+.game-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-3d);display:flex;flex-direction:column;}
+.game-card:hover{border-color:var(--neon-blue);box-shadow:var(--glow-blue);}
+.game-card:active{transform:scale(0.98);}
+.game-img-wrapper{width:100%;height:110px;background:var(--bg-card-inner);display:flex;align-items:center;justify-content:center;padding:8px;border-bottom:1px solid var(--border-color);}
+.game-img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.15));}
+.game-info{padding:10px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;}
+.game-name{font-weight:900;margin-bottom:2px;font-size:13px;color:var(--text-main);}
+.game-desc{color:var(--text-sub);font-size:10px;margin-bottom:10px;font-weight:600;}
+.open-game{width:100%;background:var(--btn-bg);color:var(--btn-text);padding:8px;border-radius:12px;font-weight:800;font-size:11px;box-shadow:var(--btn-shadow);display:flex;align-items:center;justify-content:center;gap:6px;}
+.open-game:active{transform:scale(0.95);}
+.product-title{font-size:18px;font-weight:900;margin:15px 0 10px;display:flex;align-items:center;gap:6px;color:var(--text-main);}
+.product-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
+.product{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:18px;padding:12px;box-shadow:var(--shadow-3d);position:relative;display:flex;flex-direction:column;justify-content:space-between;}
+.product:hover{border-color:var(--neon-purple);box-shadow:var(--glow-purple);}
+.product-name{font-weight:800;min-height:36px;font-size:12px;display:flex;align-items:center;line-height:1.3;color:var(--text-main);}
+.product-price-badge{background:var(--price-bg);border:1px solid var(--price-border);color:var(--price-text);padding:6px 10px;border-radius:12px;font-size:14px;font-weight:900;display:inline-flex;align-items:center;justify-content:space-between;gap:6px;margin:8px 0 10px;width:100%;box-shadow:var(--glow-gold);backdrop-filter:blur(6px);}
+.product-price-badge .price-val{filter:var(--price-glow);display:flex;align-items:center;gap:5px;color:var(--gold);}
+.product-price-badge i{font-size:13px;color:var(--gold);filter:drop-shadow(0 0 5px var(--gold));}
+.uc-badge-icon{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 6px var(--gold));vertical-align:middle;}
+.ff-diamond-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--neon-blue));vertical-align:middle;}
+.tiktok-coin-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--gold));vertical-align:middle;}
+.mlbb-diamond-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--neon-blue));vertical-align:middle;}
+.currency{font-size:10px;opacity:0.85;font-weight:700;}
+.buy{width:100%;background:var(--gold-gradient);color:#FFFFFF;border-radius:12px;padding:9px;font-weight:900;font-size:12px;box-shadow:var(--glow-gold);}
+.buy:active{transform:scale(0.95);}
+.subtabs{display:flex;gap:8px;overflow-x:auto;margin:8px 0 14px;-webkit-overflow-scrolling:touch;}
+.subtabs::-webkit-scrollbar{display:none;}
+.subtab{flex-shrink:0;background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-sub);border-radius:20px;padding:7px 14px;font-size:11px;font-weight:800;box-shadow:var(--shadow-3d);}
+.subtab.active{background:var(--btn-bg);color:var(--btn-text);border-color:transparent;box-shadow:var(--btn-shadow);}
+.payment{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:20px;padding:18px;margin-top:20px;box-shadow:var(--shadow-3d);}
+.payment h3{margin-bottom:12px;font-size:15px;color:var(--text-main);}
+.payment-number{background:var(--bg-card-inner);border:1px solid var(--border-accent);border-radius:14px;padding:12px;font-size:18px;font-weight:900;direction:ltr;text-align:center;letter-spacing:2px;color:var(--neon-blue);box-shadow:var(--glow-blue);}
+.copy{width:100%;margin-top:10px;background:var(--btn-bg);color:var(--btn-text);padding:11px;border-radius:12px;font-weight:800;font-size:13px;box-shadow:var(--btn-shadow);}
+.copy:active{transform:scale(0.95);}
+.whatsapp{display:block;text-align:center;background:linear-gradient(135deg, #22c55e 0%, #15803d 100%);color:#fff;padding:11px;border-radius:12px;margin-top:10px;font-weight:800;font-size:13px;box-shadow:0 4px 20px rgba(34, 197, 94, 0.35);}
+.whatsapp:active{transform:scale(0.95);}
+.admin-stats-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;margin-top:15px;}
+.admin-stat-card{background:var(--bg-card-inner);border:1px solid var(--border-color);padding:15px;border-radius:16px;text-align:center;box-shadow:var(--shadow-3d);}
+.admin-stat-num{font-size:22px;font-weight:900;color:var(--neon-blue);margin-top:5px;}
+.admin-stat-title{font-size:11px;color:var(--text-sub);font-weight:700;}
+.soon-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
+.soon-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:18px;padding:20px 10px;text-align:center;box-shadow:var(--shadow-3d);}
+.soon-card i{font-size:28px;margin-bottom:8px;color:var(--neon-purple);filter:drop-shadow(0 0 8px var(--neon-purple));}
+.soon-card h3{font-size:14px;font-weight:800;color:var(--text-main);}
+.soon-card p{color:var(--text-sub);font-size:10px;margin-top:2px;font-weight:600;}
+.form{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:20px;padding:18px;box-shadow:var(--shadow-3d);}
+.input{width:100%;background:var(--bg-card-inner);border:1px solid var(--border-color);color:var(--text-main);padding:12px;border-radius:14px;margin-bottom:10px;outline:none;font-size:13px;}
+.input:focus{border-color:var(--neon-blue);box-shadow:var(--glow-blue);}
+textarea.input{min-height:90px;resize:none;}
+.send{width:100%;background:linear-gradient(135deg, #22c55e 0%, #15803d 100%);color:#fff;padding:12px;border-radius:14px;font-weight:800;font-size:13px;box-shadow:0 4px 20px rgba(34, 197, 94, 0.35);}
+.send:active{transform:scale(0.95);}
+.modal{position:absolute;inset:0;z-index:99998;background:rgba(3, 4, 7, 0.65);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:12px;}
+.modal.show{display:flex;animation:fadeIn 0.25s ease;}
+.modal-box{width:100%;max-height:85vh;overflow-y:auto;background:var(--modal-bg);border:1px solid var(--border-accent);border-radius:24px;padding:20px;box-shadow:var(--glow-purple);}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
+.modal-head h2{font-size:17px;font-weight:900;color:var(--text-main);}
+.close{width:34px;height:34px;border-radius:50%;background:var(--bg-card-inner);border:1px solid var(--border-color);color:var(--text-main);font-size:18px;display:flex;align-items:center;justify-content:center;}
+.info{background:var(--bg-card-inner);border:1px solid var(--border-color);border-radius:14px;padding:12px;margin-bottom:10px;}
+.info-label{color:var(--text-sub);font-size:11px;font-weight:600;}
+.info-value{font-weight:900;margin-top:2px;font-size:14px;color:var(--text-main);}
+.discount{background:var(--bg-card-inner);padding:14px;border-radius:14px;text-align:center;margin-bottom:10px;border:1px dashed var(--gold);}
+.old-price{color:var(--text-sub);text-decoration:line-through;margin-top:2px;font-size:12px;}
+.new-price{font-size:24px;font-weight:900;color:var(--gold);margin-top:2px;filter:drop-shadow(0 0 8px rgba(255, 184, 0, 0.4));}
+.order{width:100%;background:var(--gold-gradient);color:#FFFFFF;padding:13px;border-radius:14px;font-weight:900;margin-top:6px;font-size:13px;box-shadow:var(--glow-gold);}
+.order:active{transform:scale(0.95);}
+#toast{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:100000;background:var(--dark-gradient);border:1px solid var(--neon-blue);color:var(--text-main);padding:10px 22px;border-radius:25px;font-weight:800;font-size:12px;display:none;box-shadow:var(--glow-blue);white-space:nowrap;}
+.footer{text-align:center;padding:30px 10px 20px;color:var(--text-sub);font-size:11px;font-weight:600;}
+.footer-social{display:flex;justify-content:center;gap:16px;margin-top:14px;}
+.footer-social a{font-size:20px;color:var(--text-main);}
+.footer-social a:active{transform:scale(0.9);}
 </style>
-
 </head>
-
 <body>
-
 <div id="mobile-frame">
-
-<!-- SPLASH -->
-
 <div id="splash">
-
 <div class="splash-content">
-
-<div class="logo-icon">
-<i class="fa-solid fa-bolt"></i>
+<div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+<div class="splash-title pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></div>
+<div class="splash-sub">أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<button class="skip" onclick="hideSplash()">تخطي</button>
 </div>
-
-<div class="splash-title pro-brand-text">
-استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i>
 </div>
-
-<div class="splash-sub">
-أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎
-</div>
-
-<button class="skip" onclick="hideSplash()">
-تخطي
-</button>
-
-</div>
-
-</div>
-
-
 <div id="toast"></div>
-
-
-<!-- APP -->
-
 <div id="app" style="display:none;">
-
 <div class="container">
-
-
-<!-- HEADER -->
-
 <header class="header">
-
 <div class="brand">
-
-<img class="avatar"
-loading="lazy"
-alt="Avatar Logo"
-src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
-
+<img class="avatar" loading="lazy" alt="Avatar Logo" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
 <div>
-
 <div class="brand-name">
 <span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
-
-<div class="brand-sub">
-متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎
+<div class="brand-sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
 </div>
-
 </div>
-
-</div>
-
 <div class="header-controls">
-
-<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="تبديل المظهر">
-<i class="fa-solid fa-sun"></i>
-</button>
-
-<div class="live-badge">
-<span class="live-dot"></span>
-فوري
+<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="تبديل المظهر"><i class="fa-solid fa-sun"></i></button>
+<div class="live-badge"><span class="live-dot"></span>فوري</div>
 </div>
-
-</div>
-
 </header>
-
-
-<!-- HERO -->
-
 <section class="hero">
-
 <h1>
 <span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
-
-<p>
-متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎
-</p>
-
-<!-- قنوات التواصل -->
+<p>متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</p>
 <div class="social-channels">
-
-<a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram">
-<i class="fa-brands fa-telegram"></i> التليجرام
-</a>
-
-<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel">
-<i class="fa-brands fa-whatsapp"></i> الواتساب
-</a>
-
+<a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram"><i class="fa-brands fa-telegram"></i> التليجرام</a>
+<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel"><i class="fa-brands fa-whatsapp"></i> الواتساب</a>
 </div>
-
 </section>
-
-
-<!-- MAIN TABS -->
-
 <div class="tabs">
-
-<button class="tab active"
-onclick="showSection('games',this)">
-🎮 الألعاب
-</button>
-
-<button class="tab"
-onclick="showSection('cards',this)">
-💳 بطاقات هدايا
-</button>
-
-<button class="tab"
-onclick="showSection('recharge',this)">
-⚡ شحن سريع
-</button>
-
-<button class="tab"
-onclick="showSection('shabab',this)">
-🪙 شباب كونات
-</button>
-
-<button class="tab"
-onclick="showSection('soon',this)">
-🔜 قريباً
-</button>
-
-<button class="tab"
-onclick="showSection('request',this)">
-📦 طلب منتج
-</button>
-
-<button class="tab" id="secretTab" style="display:none; border-color: var(--gold); color: var(--gold);"
-onclick="showSection('secretDashboard',this)">
-👑 القسم السري
-</button>
-
+<button class="tab active" onclick="showSection('games',this)">🎮 الألعاب</button>
+<button class="tab" onclick="showSection('cards',this)">💳 بطاقات هدايا</button>
+<button class="tab" onclick="showSection('recharge',this)">⚡ شحن سريع</button>
+<button class="tab" onclick="showSection('shabab',this)">🪙 شباب كونات</button>
+<button class="tab" onclick="showSection('soon',this)">🔜 قريباً</button>
+<button class="tab" onclick="showSection('request',this)">📦 طلب منتج</button>
+<button class="tab" id="secretTab" style="display:none; border-color: var(--gold); color: var(--gold);" onclick="showSection('secretDashboard',this)">👑 القسم السري</button>
 </div>
-
-
-<!-- ================= الألعاب ================= -->
-
 <section id="games" class="section active">
-
 <div class="search-box">
 <i class="fa-solid fa-magnifying-glass search-icon"></i>
 <input type="text" class="search-input" id="gameSearch" placeholder="ابحث عن لعبة أو تطبيق..." onkeyup="filterGames()">
-<button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" aria-label="مسح البحث">
-<i class="fa-solid fa-xmark"></i>
-</button>
+<button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" aria-label="مسح البحث"><i class="fa-solid fa-xmark"></i></button>
 </div>
-
 <div class="game-grid" id="gameGrid">
-
-
 <div class="game-card" data-name="pubg mobile ببجي">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="PUBG Mobile"
-src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="PUBG Mobile" src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp"></div>
 <div class="game-info">
-
-<div class="game-name">
-PUBG Mobile
+<div class="game-name">PUBG Mobile</div>
+<div class="game-desc">شحن UC وشعبية وبطاقات</div>
+<button class="open-game" onclick="toggleGamePrices('pubg', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-شحن UC وشعبية وبطاقات
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('pubg', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="mobile legends موبايل ليجند">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="Mobile Legends"
-src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Mobile Legends" src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg"></div>
 <div class="game-info">
-
-<div class="game-name">
-Mobile Legends
+<div class="game-name">Mobile Legends</div>
+<div class="game-desc">شحن Diamonds</div>
+<button class="open-game" onclick="toggleGamePrices('mlbb', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-شحن Diamonds
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('mlbb', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="free fire فري فاير">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="Free Fire"
-src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Free Fire" src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp"></div>
 <div class="game-info">
-
-<div class="game-name">
-Free Fire
+<div class="game-name">Free Fire</div>
+<div class="game-desc">شحن جواهر</div>
+<button class="open-game" onclick="toggleGamePrices('ff', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-شحن جواهر
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('ff', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="yalla ludo يلا لودو">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="يلا لودو"
-src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="يلا لودو" src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png"></div>
 <div class="game-info">
-
-<div class="game-name">
-يلا لودو
+<div class="game-name">يلا لودو</div>
+<div class="game-desc">حسابات و ID و VIP</div>
+<button class="open-game" onclick="toggleGamePrices('yalla', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-حسابات و ID و VIP
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('yalla', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="tiktok تيك توك">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="TikTok"
-src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="TikTok" src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png"></div>
 <div class="game-info">
-
-<div class="game-name">
-TikTok
+<div class="game-name">TikTok</div>
+<div class="game-desc">شحن عملات</div>
+<button class="open-game" onclick="toggleGamePrices('tiktok', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-شحن عملات
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('tiktok', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="gangstar جانجستر">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="Gangstar"
-src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Gangstar" src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp"></div>
 <div class="game-info">
-
-<div class="game-name">
-Gangstar
+<div class="game-name">Gangstar</div>
+<div class="game-desc">شحن ماسات</div>
+<button class="open-game" onclick="toggleGamePrices('gangstar', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-شحن ماسات
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('gangstar', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="weplay وي بلاي">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="WePlay"
-src="https://www.image2url.com/r2/default/images/1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="WePlay" src="https://www.image2url.com/r2/default/images/1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg"></div>
 <div class="game-info">
-
-<div class="game-name">
-WePlay
+<div class="game-name">WePlay</div>
+<div class="game-desc">ذهب و VIP</div>
+<button class="open-game" onclick="toggleGamePrices('weplay', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-ذهب و VIP
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('weplay', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
-</div>
-
-</div>
-
-
 <div class="game-card" data-name="roblox روبلوكس">
-
-<div class="game-img-wrapper">
-<img class="game-img"
-loading="lazy"
-alt="Roblox"
-src="https://www.image2url.com/r2/default/images/1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png">
-</div>
-
+<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Roblox" src="https://www.image2url.com/r2/default/images/1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png"></div>
 <div class="game-info">
-
-<div class="game-name">
-Roblox
+<div class="game-name">Roblox</div>
+<div class="game-desc">Robux و Gift Cards</div>
+<button class="open-game" onclick="toggleGamePrices('roblox', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
 </div>
-
-<div class="game-desc">
-Robux و Gift Cards
 </div>
-
-<button class="open-game"
-onclick="toggleGamePrices('roblox', this)">
-<i class="fa-solid fa-gamepad"></i> عرض الباقات
-</button>
-
 </div>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCTS -->
-
 <div id="products" style="margin-top:20px;"></div>
-
 </section>
-
-
-<!-- ================= بطاقات هدايا ================= -->
-
 <section id="cards" class="section">
-
-<div class="product-title">
-💳 بطاقات شحن وهدايا
-</div>
-
+<div class="product-title">💳 بطاقات شحن وهدايا</div>
 <div class="subtabs">
-
-<button class="subtab active"
-onclick="cardsTab('google',this)">
-Google Play
-</button>
-
-<button class="subtab"
-onclick="cardsTab('itunes',this)">
-iTunes
-</button>
-
-<button class="subtab"
-onclick="cardsTab('steam',this)">
-Steam
-</button>
-
+<button class="subtab active" onclick="cardsTab('google',this)">Google Play</button>
+<button class="subtab" onclick="cardsTab('itunes',this)">iTunes</button>
+<button class="subtab" onclick="cardsTab('steam',this)">Steam</button>
 </div>
-
 <div id="cardsProducts"></div>
-
 </section>
-
-
-<!-- ================= شحن سريع ================= -->
-
 <section id="recharge" class="section">
-
-<div class="product-title">
-⚡ شحن الرصيد والإنترنت
-</div>
-
+<div class="product-title">⚡ شحن الرصيد والإنترنت</div>
 <div class="subtabs">
-
-<button class="subtab active"
-onclick="rechargeTab('we',this)">
-WE
-</button>
-
-<button class="subtab"
-onclick="rechargeTab('vodafone',this)">
-Vodafone
-</button>
-
-<button class="subtab"
-onclick="rechargeTab('etisalat',this)">
-اتصالات
-</button>
-
-<button class="subtab"
-onclick="rechargeTab('gas',this)">
-شحن الغاز
-</button>
-
+<button class="subtab active" onclick="rechargeTab('we',this)">WE</button>
+<button class="subtab" onclick="rechargeTab('vodafone',this)">Vodafone</button>
+<button class="subtab" onclick="rechargeTab('etisalat',this)">اتصالات</button>
+<button class="subtab" onclick="rechargeTab('gas',this)">شحن الغاز</button>
 </div>
-
 <div id="rechargeProducts"></div>
-
 <div class="payment">
-
 <h3>💳 الدفع</h3>
-
-<div class="payment-number">
-01044049390
+<div class="payment-number">01044049390</div>
+<button class="copy" onclick="copyText('01044049390')">📋 نسخ رقم فودافون كاش</button>
+<a class="whatsapp" href="https://wa.me/201044049390?text=السلام%20عليكم%20عايز%20شحن">💬 إرسال الطلب على واتساب</a>
 </div>
-
-<button class="copy"
-onclick="copyText('01044049390')">
-📋 نسخ رقم فودافون كاش
-</button>
-
-<a class="whatsapp"
-href="https://wa.me/201044049390?text=السلام%20عليكم%20عايز%20شحن"
->
-💬 إرسال الطلب على واتساب
-</a>
-
-</div>
-
 </section>
-
-
-<!-- ================= شباب ================= -->
-
 <section id="shabab" class="section">
-
-<div class="product-title">
-🪙 شباب كونات
-</div>
-
+<div class="product-title">🪙 شباب كونات</div>
 <div class="subtabs">
-
-<button class="subtab active"
-onclick="shababTab('eg',this)">
-🇪🇬 مصر
-</button>
-
-<button class="subtab"
-onclick="shababTab('jo',this)">
-🇯🇴 الأردن
-</button>
-
-<button class="subtab"
-onclick="shababTab('sa',this)">
-🇸🇦 السعودية
-</button>
-
+<button class="subtab active" onclick="shababTab('eg',this)">🇪🇬 مصر</button>
+<button class="subtab" onclick="shababTab('jo',this)">🇯🇴 الأردن</button>
+<button class="subtab" onclick="shababTab('sa',this)">🇸🇦 السعودية</button>
 </div>
-
 <div id="shababProducts"></div>
-
 </section>
-
-
-<!-- ================= قريباً ================= -->
-
 <section id="soon" class="section">
-
-<div class="product-title">
-🔜 قريباً
-</div>
-
+<div class="product-title">🔜 قريباً</div>
 <div class="soon-grid">
-
-<div class="soon-card">
-<i class="fa-brands fa-fort-awesome"></i>
-<h3>Fortnite</h3>
-<p>قريباً</p>
+<div class="soon-card"><i class="fa-brands fa-fort-awesome"></i><h3>Fortnite</h3><p>قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-crosshairs"></i><h3>Call of Duty</h3><p>قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-gamepad"></i><h3>Valorant</h3><p>قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-film"></i><h3>Netflix</h3><p>قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-fire"></i><h3>Free Fire MAX</h3><p>قريباً</p></div>
 </div>
-
-<div class="soon-card">
-<i class="fa-solid fa-crosshairs"></i>
-<h3>Call of Duty</h3>
-<p>قريباً</p>
-</div>
-
-<div class="soon-card">
-<i class="fa-solid fa-gamepad"></i>
-<h3>Valorant</h3>
-<p>قريباً</p>
-</div>
-
-<div class="soon-card">
-<i class="fa-solid fa-film"></i>
-<h3>Netflix</h3>
-<p>قريباً</p>
-</div>
-
-<div class="soon-card">
-<i class="fa-solid fa-fire"></i>
-<h3>Free Fire MAX</h3>
-<p>قريباً</p>
-</div>
-
-</div>
-
 </section>
-
-
-<!-- ================= طلب منتج ================= -->
-
 <section id="request" class="section">
-
-<div class="product-title">
-📦 اطلب منتج
-</div>
-
+<div class="product-title">📦 اطلب منتج</div>
 <div class="form">
-
-<input id="requestName"
-class="input"
-placeholder="اسم المنتج">
-
-<input id="requestType"
-class="input"
-placeholder="نوع المنتج">
-
-<input id="requestPhone"
-class="input"
-placeholder="رقم الهاتف"
-type="tel">
-
-<textarea id="requestDetails"
-class="input"
-placeholder="اكتب تفاصيل طلبك"></textarea>
-
-<button class="send"
-onclick="sendRequest()">
-💬 إرسال الطلب على واتساب
-</button>
-
+<input id="requestName" class="input" placeholder="اسم المنتج">
+<input id="requestType" class="input" placeholder="نوع المنتج">
+<input id="requestPhone" class="input" placeholder="رقم الهاتف" type="tel">
+<textarea id="requestDetails" class="input" placeholder="اكتب تفاصيل طلبك"></textarea>
+<button class="send" onclick="sendRequest()">💬 إرسال الطلب على واتساب</button>
 </div>
-
 </section>
-
-
-<!-- ================= SECRET ADMIN DASHBOARD ================= -->
-
 <section id="secretDashboard" class="section">
-
-<div class="product-title" style="color: var(--gold);">
-👑 إحصائيات صاحب المتجر
-</div>
-
+<div class="product-title" style="color: var(--gold);">👑 إحصائيات صاحب المتجر</div>
 <div class="form">
-
 <div class="admin-stats-grid">
-
-<div class="admin-stat-card">
-<div class="admin-stat-title">إجمالي الزيارات</div>
-<div class="admin-stat-num" id="statVisits">0</div>
+<div class="admin-stat-card"><div class="admin-stat-title">إجمالي الزيارات</div><div class="admin-stat-num" id="statVisits">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title">الزوار اليوم الفريدين</div><div class="admin-stat-num" id="statUnique">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title">عرض الباقات</div><div class="admin-stat-num" id="statPackageViews">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title">الطلبات للواتس</div><div class="admin-stat-num" id="statOrdersSent">0</div></div>
 </div>
-
-<div class="admin-stat-card">
-<div class="admin-stat-title">الزوار اليوم الفريدين</div>
-<div class="admin-stat-num" id="statUnique">0</div>
+<button class="buy" style="margin-top:20px; background: var(--main-gradient);" onclick="resetAdminStats()">🔄 إعادة ضبط الإحصائيات</button>
 </div>
-
-<div class="admin-stat-card">
-<div class="admin-stat-title">عرض الباقات</div>
-<div class="admin-stat-num" id="statPackageViews">0</div>
-</div>
-
-<div class="admin-stat-card">
-<div class="admin-stat-title">الطلبات للواتس</div>
-<div class="admin-stat-num" id="statOrdersSent">0</div>
-</div>
-
-</div>
-
-<button class="buy" style="margin-top:20px; background: var(--main-gradient);" onclick="resetAdminStats()">
-🔄 إعادة ضبط الإحصائيات
-</button>
-
-</div>
-
 </section>
-
-
 <footer class="footer">
-
 <div style="margin-bottom: 4px;">
 <span class="pro-brand-text" style="font-size: 14px;" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
-
-<div>
-متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎
-</div>
-
-<div style="margin-top:4px;">
-تسليم سريع بعد تأكيد الدفع
-</div>
-
+<div>متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<div style="margin-top:4px;">تسليم سريع بعد تأكيد الدفع</div>
 <div class="footer-social">
-
-<a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام">
-<i class="fa-brands fa-telegram" style="color: var(--neon-blue);"></i>
-</a>
-
-<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب" aria-label="قناة الواتساب">
-<i class="fa-brands fa-whatsapp" style="color: var(--success);"></i>
-</a>
-
+<a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام"><i class="fa-brands fa-telegram" style="color: var(--neon-blue);"></i></a>
+<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب" aria-label="قناة الواتساب"><i class="fa-brands fa-whatsapp" style="color: var(--success);"></i></a>
 </div>
-
 </footer>
-
-
 </div>
 </div>
-
-
-<!-- ================= MODAL ================= -->
-
 <div id="orderModal" class="modal">
-
 <div class="modal-box">
-
 <div class="modal-head">
-
-<h2>
-تأكيد الطلب
-</h2>
-
-<button class="close"
-onclick="closeModal()" aria-label="إغلاق">
-×
-</button>
-
+<h2>تأكيد الطلب</h2>
+<button class="close" onclick="closeModal()" aria-label="إغلاق">×</button>
 </div>
-
 <div class="info">
-
-<div class="info-label">
-المنتج
+<div class="info-label">المنتج</div>
+<div id="modalProduct" class="info-value">-</div>
 </div>
-
-<div id="modalProduct"
-class="info-value">
--
-</div>
-
-</div>
-
-
 <div class="discount">
-
 <div style="font-size: 11px; color: var(--text-sub); margin-bottom: 2px;">السعر بعد الخصم (5%)</div>
-
-<div id="modalPrice"
-class="new-price">
-0 جنيه
+<div id="modalPrice" class="new-price">0 جنيه</div>
+<div id="modalAfter" class="old-price">-</div>
 </div>
-
-<div id="modalAfter"
-class="old-price">
--
-</div>
-
-</div>
-
-
 <div class="info">
-
-<div class="info-label">
-فودافون كاش
+<div class="info-label">فودافون كاش</div>
+<div class="info-value">01044049390</div>
+<button class="copy" onclick="copyText('01044049390')">📋 نسخ الرقم</button>
 </div>
-
-<div class="info-value">
-01044049390
-</div>
-
-<button class="copy"
-onclick="copyText('01044049390')">
-📋 نسخ الرقم
-</button>
-
-</div>
-
-
 <div class="info">
-
-<div class="info-label">
-الدعم
+<div class="info-label">الدعم</div>
+<div class="info-value">01017954664</div>
+<button class="copy" onclick="copyText('01017954664')">📋 نسخ رقم الدعم</button>
 </div>
-
-<div class="info-value">
-01017954664
+<button class="order" onclick="sendOrder()">💬 تأكيد الطلب على واتساب</button>
 </div>
-
-<button class="copy"
-onclick="copyText('01017954664')">
-📋 نسخ رقم الدعم
-</button>
-
 </div>
-
-
-<button class="order"
-onclick="sendOrder()">
-💬 تأكيد الطلب على واتساب
-</button>
-
 </div>
-
-</div>
-
-</div>
-
 <script>
-
-/* ================= VISITOR TRACKER & ADMIN DASHBOARD ================= */
-
 function initVisitorStats() {
     let visits = parseInt(localStorage.getItem('admin_total_visits') || '0') + 1;
     localStorage.setItem('admin_total_visits', visits.toString());
-
     if (!sessionStorage.getItem('session_active')) {
         sessionStorage.setItem('session_active', 'true');
         let uniqueVisits = parseInt(localStorage.getItem('admin_unique_visits') || '0') + 1;
         localStorage.setItem('admin_unique_visits', uniqueVisits.toString());
     }
-
     updateAdminUI();
 }
-
 function updateAdminUI() {
     document.getElementById('statVisits').innerText = localStorage.getItem('admin_total_visits') || '0';
     document.getElementById('statUnique').innerText = localStorage.getItem('admin_unique_visits') || '0';
     document.getElementById('statPackageViews').innerText = localStorage.getItem('admin_package_views') || '0';
     document.getElementById('statOrdersSent').innerText = localStorage.getItem('admin_orders_sent') || '0';
 }
-
 function resetAdminStats() {
     if(confirm("هل أنت تأكد من صفر جميع الإحصائيات؟")) {
         localStorage.setItem('admin_total_visits', '0');
@@ -1929,7 +458,6 @@ function resetAdminStats() {
         showToast("✅ تم إعادة ضبط الإحصائيات");
     }
 }
-
 let secretClickCount = 0;
 function handleSecretClick() {
     secretClickCount++;
@@ -1939,14 +467,9 @@ function handleSecretClick() {
         showToast("👑 مرحباً بك في القسم السري");
     }
 }
-
-
-/* ================= THEME TOGGLE (LIGHT DEFAULT) ================= */
-
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const themeBtn = document.getElementById('themeBtn');
-    
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
         themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
@@ -1957,10 +480,6 @@ function toggleTheme() {
         showToast("🌙 التبديل للوضع الداكن");
     }
 }
-
-
-/* ================= SPLASH ================= */
-
 function hideSplash(){
     const splash = document.getElementById("splash");
     if(!splash) return;
@@ -1971,45 +490,31 @@ function hideSplash(){
         document.getElementById("app").style.display = "block";
     }, 400);
 }
-
 window.addEventListener('DOMContentLoaded', () => {
     initVisitorStats();
     setTimeout(hideSplash, 1500);
 });
-
-
-/* ================= TOAST ================= */
-
 let toastTimeout;
 function showToast(text){
     let toast = document.getElementById("toast");
     toast.innerText = text;
     toast.style.display = "block";
-
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(function(){
         toast.style.display = "none";
     }, 1800);
 }
-
-
-/* ================= COPY ================= */
-
 function copyText(text){
     if (window.Android && Android.copyText) {
         Android.copyText(text);
         return;
     }
-
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text)
-            .then(() => showToast("✅ تم النسخ"))
-            .catch(() => fallbackCopy(text));
+        navigator.clipboard.writeText(text).then(() => showToast("✅ تم النسخ")).catch(() => fallbackCopy(text));
     } else {
         fallbackCopy(text);
     }
 }
-
 function fallbackCopy(text){
     let area = document.createElement("textarea");
     area.value = text;
@@ -2017,7 +522,6 @@ function fallbackCopy(text){
     area.style.opacity = "0";
     document.body.appendChild(area);
     area.select();
-
     try {
         document.execCommand("copy");
         showToast("✅ تم النسخ");
@@ -2026,521 +530,166 @@ function fallbackCopy(text){
     }
     document.body.removeChild(area);
 }
-
-
-/* ================= SECTIONS ================= */
-
 function showSection(id, btn){
-    document.querySelectorAll(".section").forEach(function(section){
-        section.classList.remove("active");
-    });
-
+    document.querySelectorAll(".section").forEach(function(section){ section.classList.remove("active"); });
     document.getElementById(id).classList.add("active");
-
-    document.querySelectorAll(".tab").forEach(function(tab){
-        tab.classList.remove("active");
-    });
-
+    document.querySelectorAll(".tab").forEach(function(tab){ tab.classList.remove("active"); });
     btn.classList.add("active");
 }
-
-
-/* ================= SEARCH FILTER ================= */
-
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.querySelectorAll('#gameGrid .game-card');
     let clearBtn = document.getElementById('clearSearchBtn');
-    
     clearBtn.style.display = input.length > 0 ? "block" : "none";
-
     cards.forEach(function(card) {
         let name = card.getAttribute('data-name').toLowerCase();
-        if (name.includes(input)) {
-            card.style.display = "flex";
-        } else {
-            card.style.display = "none";
-        }
+        card.style.display = name.includes(input) ? "flex" : "none";
     });
 }
-
 function clearSearch() {
     let searchInput = document.getElementById('gameSearch');
     searchInput.value = "";
     filterGames();
     searchInput.focus();
 }
-
-
-/* ================= PRODUCTS DATA ================= */
-
 const data={
-
-pubg:[
-["30 UC",28.99],
-["60 UC",52.99],
-["25 + 300 UC",244.99],
-["60 + 600 UC",484.99],
-["300 + 1500 UC",1204.99],
-["850 + 3000 UC",2404.99],
-["2100 + 6000 UC",4804.99],
-["4200 + 12000 UC",9604.99],
-["6300 + 18000 UC",14404.99],
-["8400 + 24000 UC",19204.99],
-["10500 + 30000 UC",24004.99],
-["12600 + 36000 UC",28804.99],
-["21000 + 60000 UC",48004.99]
-],
-
-mlbb:[
-["13 + 1 Diamonds",25],
-["20 + 2 Diamonds",30],
-["51 + 5 Diamonds",65],
-["102 + 10 Diamonds",120],
-["153 + 15 Diamonds",180],
-["203 + 20 Diamonds",235],
-["303 + 33 Diamonds",350],
-["504 + 66 Diamonds",580],
-["1007 + 156 Diamonds",1150],
-["2015 + 383 Diamonds",2300],
-["5035 + 1007 Diamonds",5730]
-],
-
-ff:[
-["50 جوهرة",25],
-["100 جوهرة",50],
-["210 جوهرة",100],
-["310 جوهرة",150],
-["520 جوهرة",250],
-["1060 جوهرة",500],
-["2200 جوهرة",1000]
-],
-
-yalla:[
-["830 ID",110],
-["2320 ID",260],
-["3150 ID",370],
-["5150 ID",480],
-["VIP 🦅 الفارس",500],
-["7480 ID",740],
-["8300 ID",850],
-["10300 ID",960],
-["13580 ID",1200],
-["VIP 👑 اللواء",1500],
-["16700 ID",1570],
-["18700 ID",1680],
-["21000 ID",1950],
-["27640 ID",2400],
-["32790 ID",2880],
-["37900 ID",3360],
-["43090 ID",3840],
-["55800 ID",4800],
-["69380 ID",6000],
-["74530 ID",6500],
-["111600 ID",9600],
-["168860 ID",14400],
-["223200 ID",19200],
-["283460 ID",24000]
-],
-
-tiktok:[
-["500 عملة",330],
-["800 عملة",520],
-["1000 عملة",620],
-["1400 عملة",860],
-["2000 عملة",1220],
-["3500 عملة",2120],
-["5000 عملة",3020],
-["7500 عملة",4520],
-["10000 عملة",5920],
-["17500 عملة",10320],
-["20000 عملة",11820],
-["30000 عملة",17620],
-["50000 عملة",29520]
-],
-
-gangstar:[
-["60 ماسة",57.5],
-["300 + 20",247.5],
-["680 + 60",485],
-["1280 + 220",960],
-["3280 + 580",2385],
-["6480 + 1280",4760]
-],
-
-weplay:[
-["300 ذهب",30],
-["600 ذهب",55],
-["1800 ذهب",200],
-["3000 + 600 بونص",280],
-["VIP الشهر الأول",410],
-["Fun Card Level 10",610],
-["10000 + 2000 بونص",680],
-["VIP الشهر الثاني",1110],
-["Fun Card Level 50",3010],
-["50000 + 10000 بونص",3010],
-["VIP 12 شهر",4510],
-["100000 + 20000 بونص",6010],
-["25000 + 50000 بونص",15010]
-],
-
-roblox:[
-["80 Robux",60],
-["200~300 Robux / 2~3$",200],
-["500 Robux",265],
-["400 Robux / 5$",315],
-["1000 Robux",525],
-["1000 Robux / 10$",540],
-["2000 Robux",1000],
-["2500 Robux / 25$",1350],
-["4500 Robux",2250],
-["5250 Robux / 50$",2650],
-["10000 Robux",4800],
-["22500 Robux",9650]
-]
-
+pubg:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]],
+mlbb:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]],
+ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]],
+yalla:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]],
+tiktok:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]],
+gangstar:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]],
+weplay:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]],
+roblox:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]
 };
-
 let currentOpenGame = null;
-
-/* ================= TOGGLE GAME PRICES ================= */
-
 function toggleGamePrices(game, btn) {
     const productsDiv = document.getElementById("products");
-
     let views = parseInt(localStorage.getItem('admin_package_views') || '0') + 1;
     localStorage.setItem('admin_package_views', views.toString());
     updateAdminUI();
-
     if (currentOpenGame === game && productsDiv.style.display !== "none" && productsDiv.innerHTML !== "") {
         productsDiv.style.display = "none";
         btn.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
         currentOpenGame = null;
     } else {
-        document.querySelectorAll('.open-game').forEach(b => {
-            b.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
-        });
-
+        document.querySelectorAll('.open-game').forEach(b => { b.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات'; });
         openGame(game);
         productsDiv.style.display = "block";
         btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> إغلاق الباقات';
         currentOpenGame = game;
     }
 }
-
-/* ================= OPEN GAME ================= */
-
 function openGame(game){
-
-let names={
-pubg:"PUBG Mobile",
-mlbb:"Mobile Legends",
-ff:"Free Fire",
-yalla:"يلا لودو",
-tiktok:"TikTok",
-gangstar:"Gangstar",
-weplay:"WePlay",
-roblox:"Roblox"
-};
-
-let products=data[game] || [];
-
-let html="";
-
-html+=`
-<div class="product-title">
-${names[game]}
-</div>
-
-<div class="product-grid">
-`;
-
-products.forEach(function(item){
-
-let priceIconHtml = '<i class="fa-solid fa-coins"></i>';
-
-if (game === 'pubg') {
-    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">`;
-} else if (game === 'mlbb') {
-    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png" class="mlbb-diamond-icon" alt="MLBB Diamond Icon">`;
-} else if (game === 'ff' || game === 'yalla') {
-    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png" class="ff-diamond-icon" alt="Diamond Icon">`;
-} else if (game === 'tiktok') {
-    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png" class="tiktok-coin-icon" alt="TikTok Coin Icon">`;
+    let names={pubg:"PUBG Mobile",mlbb:"Mobile Legends",ff:"Free Fire",yalla:"يلا لودو",tiktok:"TikTok",gangstar:"Gangstar",weplay:"WePlay",roblox:"Roblox"};
+    let products=data[game] || [];
+    let html=`<div class="product-title">${names[game]}</div><div class="product-grid">`;
+    products.forEach(function(item){
+        let priceIconHtml = '<i class="fa-solid fa-coins"></i>';
+        if (game === 'pubg') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">`; }
+        else if (game === 'mlbb') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png" class="mlbb-diamond-icon" alt="MLBB Diamond Icon">`; }
+        else if (game === 'ff' || game === 'yalla') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png" class="ff-diamond-icon" alt="Diamond Icon">`; }
+        else if (game === 'tiktok') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png" class="tiktok-coin-icon" alt="TikTok Coin Icon">`; }
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span><span class="price-val">${priceIconHtml} ${item[1]} <span class="currency">ج.م</span></span></div><button class="buy" onclick="openOrder('${escapeText(names[game]+' - '+item[0])}', ${item[1]}, 'ج.م')">شراء الآن</button></div>`;
+    });
+    html+=`</div>`;
+    document.getElementById("products").innerHTML=html;
+    document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
 }
-
-html+=`
-
-<div class="product">
-
-<div class="product-name">
-${item[0]}
-</div>
-
-<div class="product-price-badge">
-<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
-<span class="price-val">${priceIconHtml} ${item[1]} <span class="currency">ج.م</span></span>
-</div>
-
-<button class="buy"
-onclick="openOrder('${escapeText(names[game]+' - '+item[0])}', ${item[1]}, 'ج.م')">
-شراء الآن
-</button>
-
-</div>
-
-`;
-
-});
-
-html+=`
-</div>
-`;
-
-document.getElementById("products").innerHTML=html;
-
-document.getElementById("products")
-.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-}
-
-
-/* ================= ESCAPE ================= */
-
-function escapeText(text){
-
-return text
-.replace(/'/g,"\\'")
-.replace(/"/g,'&quot;');
-
-}
-
-
-/* ================= ORDER ================= */
-
+function escapeText(text){ return text.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 let selectedProduct="";
 let selectedPriceText="";
-
 function openOrder(product, price, currency = "جنيه"){
-
-selectedProduct = product;
-
-if (typeof price === "number") {
-    let numPrice = parseFloat(price);
-    let finalPrice = (numPrice * 0.95).toFixed(2);
-    selectedPriceText = `${finalPrice} ${currency}`;
-
-    document.getElementById("modalProduct").innerText = product;
-    document.getElementById("modalPrice").innerText = finalPrice + " " + currency;
-    document.getElementById("modalAfter").innerText = "السعر الأصلي: " + price + " " + currency;
-    document.getElementById("modalAfter").style.display = "block";
-} else {
-    selectedPriceText = price ? `${price} ${currency}` : product;
-
-    document.getElementById("modalProduct").innerText = product;
-    document.getElementById("modalPrice").innerText = price ? `${price} ${currency}` : product;
-    document.getElementById("modalAfter").style.display = "none";
-}
-
-document.getElementById("orderModal").classList.add("show");
-
-}
-
-function closeModal(){
-
-document.getElementById("orderModal")
-.classList.remove("show");
-
-}
-
-window.addEventListener('click', function(event) {
-    let modal = document.getElementById("orderModal");
-    if (event.target === modal) {
-        closeModal();
+    selectedProduct = product;
+    if (typeof price === "number") {
+        let numPrice = parseFloat(price);
+        let finalPrice = (numPrice * 0.95).toFixed(2);
+        selectedPriceText = `${finalPrice} ${currency}`;
+        document.getElementById("modalProduct").innerText = product;
+        document.getElementById("modalPrice").innerText = finalPrice + " " + currency;
+        document.getElementById("modalAfter").innerText = "السعر الأصلي: " + price + " " + currency;
+        document.getElementById("modalAfter").style.display = "block";
+    } else {
+        selectedPriceText = price ? `${price} ${currency}` : product;
+        document.getElementById("modalProduct").innerText = product;
+        document.getElementById("modalPrice").innerText = price ? `${price} ${currency}` : product;
+        document.getElementById("modalAfter").style.display = "none";
     }
-});
-
-
-/* ================= WHATSAPP ORDER ================= */
-
+    document.getElementById("orderModal").classList.add("show");
+}
+function closeModal(){ document.getElementById("orderModal").classList.remove("show"); }
+window.addEventListener('click', function(event) { if (event.target === document.getElementById("orderModal")) { closeModal(); } });
 function sendOrder(){
-
-let orders = parseInt(localStorage.getItem('admin_orders_sent') || '0') + 1;
-localStorage.setItem('admin_orders_sent', orders.toString());
-updateAdminUI();
-
-let text=
-"السلام عليكم 👋%0A%0A"+
-"عايز أطلب:%20"+
-encodeURIComponent(selectedProduct)+
-"%0A"+
-"السعر:%20"+
-encodeURIComponent(selectedPriceText)+
-"%0A%0A"+
-"من استور أسرع من نتكم 🔥";
-
-let url=
-"https://wa.me/201044049390?text="+text;
-
-if(window.Android && Android.openUrl){
-
-Android.openUrl(url);
-
-}else{
-
-window.location.href=url;
-
+    let orders = parseInt(localStorage.getItem('admin_orders_sent') || '0') + 1;
+    localStorage.setItem('admin_orders_sent', orders.toString());
+    updateAdminUI();
+    let text="السلام عليكم 👋%0A%0Aعايز أطلب:%20"+encodeURIComponent(selectedProduct)+"%0Aالسعر:%20"+encodeURIComponent(selectedPriceText)+"%0A%0Aمن استور أسرع من نتكم 🔥";
+    let url="https://wa.me/201044049390?text="+text;
+    if(window.Android && Android.openUrl){ Android.openUrl(url); } else { window.location.href=url; }
 }
-
-}
-
-
-/* ================= CARDS ================= */
-
 const cardsData={
-
-google:[
-["بطاقة 5$ متجر أمريكي",275],
-["بطاقة 10$ متجر أمريكي",530],
-["بطاقة 25$ متجر أمريكي",1320],
-["بطاقة 50$ متجر أمريكي",2600]
-],
-
-itunes:[
-["بطاقة 5$ متجر أمريكي",275],
-["بطاقة 10$ متجر أمريكي",530],
-["بطاقة 25$ متجر أمريكي",1320],
-["بطاقة 50$ متجر أمريكي",2600]
-],
-
-steam:[
-["بطاقة 5$ global",270],
-["بطاقة 10$ global",525],
-["بطاقة 20$ global",1040],
-["بطاقة 50$ global",2580]
-]
-
+google:[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]],
+itunes:[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]],
+steam:[["بطاقة 5$ global",270],["بطاقة 10$ global",525],["بطاقة 20$ global",1040],["بطاقة 50$ global",2580]]
 };
-
 function cardsTab(type,btn){
-
-btn.parentElement.querySelectorAll(".subtab")
-.forEach(function(x){
-
-x.classList.remove("active");
-
-});
-
-btn.classList.add("active");
-
-let list=cardsData[type];
-
-let html='<div class="product-grid">';
-
-list.forEach(function(item){
-
-html+=`
-
-<div class="product">
-
-<div class="product-name">
-${item[0]}
-</div>
-
-<div class="product-price-badge">
-<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
-<span class="price-val"><i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">ج.م</span></span>
-</div>
-
-<button class="buy"
-onclick="openOrder('${escapeText(item[0])}', ${item[1]}, 'ج.م')">
-شراء الآن
-</button>
-
-</div>
-
-`;
-
-});
-
-html+="</div>";
-
-document.getElementById("cardsProducts")
-.innerHTML=html;
-
+    btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
+    btn.classList.add("active");
+    let list=cardsData[type];
+    let html='<div class="product-grid">';
+    list.forEach(function(item){
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span><span class="price-val"><i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">ج.م</span></span></div><button class="buy" onclick="openOrder('${escapeText(item[0])}', ${item[1]}, 'ج.م')">شراء الآن</button></div>`;
+    });
+    html+="</div>";
+    document.getElementById("cardsProducts").innerHTML=html;
 }
-
-
-/* ================= RECHARGE ================= */
-
 const rechargeData={
-
-we:[
-["شحن رصيد WE"],
-["شحن كروت فكة WE"]
-],
-
-vodafone:[
-["شحن رصيد Vodafone"],
-["شحن كروت فكة Vodafone"]
-],
-
-etisalat:[
-["شحن رصيد اتصالات"],
-["شحن كروت فكة اتصالات"]
-],
-
-gas:[
-["شحن كارت الغاز الطبيعي"]
-]
-
+we:[["شحن رصيد WE"],["شحن كروت فكة WE"]],
+vodafone:[["شحن رصيد Vodafone"],["شحن كروت فكة Vodafone"]],
+etisalat:[["شحن رصيد اتصالات"],["شحن كروت فكة اتصالات"]],
+gas:[["شحن كارت الغاز الطبيعي"]]
 };
-
 function rechargeTab(type,btn){
-
-btn.parentElement.querySelectorAll(".subtab")
-.forEach(function(x){
-
-x.classList.remove("active");
-
-});
-
-btn.classList.add("active");
-
-let list=rechargeData[type];
-
-let html='<div class="product-grid">';
-
-list.forEach(function(item){
-
-html+=`
-
-<div class="product">
-
-<div class="product-name">
-${item[0]}
-</div>
-
-<button class="buy" style="margin-top:10px;"
-onclick="openOrder('${escapeText(item[0])}', null, '')">
-طلب الشحن
-</button>
-
-</div>
-
-`;
-
-});
-
-html+="</div>";
-
-document.getElementById("rechargeProducts")
-.innerHTML=html;
-
+    btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
+    btn.classList.add("active");
+    let list=rechargeData[type];
+    let html='<div class="product-grid">';
+    list.forEach(function(item){
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><button class="buy" style="margin-top:10px;" onclick="openOrder('${escapeText(item[0])}', null, '')">طلب الشحن</button></div>`;
+    });
+    html+="</div>";
+    document.getElementById("rechargeProducts").innerHTML=html;
 }
-
-
-/* =
+const shababData={
+eg:[["100 جنيه",75000, "100 جنيه"],["300 جنيه",225000, "300 جنيه"],["500 جنيه",375000, "500 جنيه"],["1000 جنيه",750000, "1000 جنيه"],["2000 جنيه",1500000, "2000 جنيه"],["3000 جنيه",2250000, "3000 جنيه"]],
+jo:[["10 دينار",450000, "10 دينار"],["20 دينار",900000, "20 دينار"],["30 دينار",1350000, "30 دينار"],["40 دينار",1800000, "40 دينار"],["50 دينار",2250000, "50 دينار"]],
+sa:[["100 ريال",900000, "100 ريال"],["200 ريال",1800000, "200 ريال"],["300 ريال",2700000, "300 ريال"],["400 ريال",3600000, "400 ريال"],["500 ريال",4500000, "500 ريال"]]
+};
+function shababTab(type,btn){
+    btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
+    btn.classList.add("active");
+    let list=shababData[type];
+    let html='<div class="product-grid">';
+    list.forEach(function(item){
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">الكمية</span><span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span></div><button class="buy" onclick="openOrder('شباب كونات - ${item[0]}', '${item[2]}', '')">شراء</button></div>`;
+    });
+    html+="</div>";
+    document.getElementById("shababProducts").innerHTML=html;
+}
+function sendRequest(){
+    let name=document.getElementById("requestName").value.trim();
+    let type=document.getElementById("requestType").value.trim();
+    let phone=document.getElementById("requestPhone").value.trim();
+    let details=document.getElementById("requestDetails").value.trim();
+    if(!name){ showToast("⚠️ اكتب اسم المنتج"); return; }
+    if(!phone || phone.length < 8){ showToast("⚠️ ادخل رقم هاتف صحيح"); return; }
+    let text="السلام عليكم 👋%0A%0Aطلب منتج من استور أسرع من نتكم 🔥%0A%0Aالمنتج: "+encodeURIComponent(name)+"%0Aالنوع: "+encodeURIComponent(type)+"%0Aالهاتف: "+encodeURIComponent(phone)+"%0Aالتفاصيل: "+encodeURIComponent(details);
+    let url="https://wa.me/201044049390?text="+text;
+    if(window.Android && Android.openUrl){ Android.openUrl(url); } else { window.location.href=url; }
+}
+cardsTab("google", document.querySelector("#cards .subtab"));
+rechargeTab("we", document.querySelector("#recharge .subtab"));
+shababTab("eg", document.querySelector("#shabab .subtab"));
+</script>
+</body>
+</html>
