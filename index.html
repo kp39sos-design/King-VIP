@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 
 <head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NFSC6ZR431"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NFSC6ZR431');
+</script>
 
 <meta charset="UTF-8">
 
@@ -21,61 +31,89 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <style>
 
 :root {
-    --bg-main: #0b0f19;
-    --bg-card: rgba(22, 29, 45, 0.75);
-    --bg-card-inner: rgba(15, 23, 42, 0.6);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-accent: rgba(59, 130, 246, 0.3);
-    --text-main: #f8fafc;
-    --text-sub: #94a3b8;
-    --accent-color: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.25);
-    --gold-glow: #facc15;
-    --shadow-3d: 0 12px 20px -5px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-    --btn-bg: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    --btn-text: #ffffff;
-    --btn-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+    /* LIGHT THEME PALETTE (DEFAULT) */
+    --bg-main: #F1F5F9;
+    --bg-card: rgba(255, 255, 255, 0.92);
+    --bg-card-inner: rgba(241, 245, 249, 0.85);
+    --border-color: rgba(37, 99, 235, 0.18);
+    --border-accent: rgba(37, 99, 235, 0.4);
     
-    /* BRAND GRADIENT */
-    --brand-gradient: linear-gradient(135deg, #ffffff 0%, #facc15 50%, #f97316 100%);
-    --brand-glow: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4));
+    --text-main: #0F172A;
+    --text-sub: #475569;
     
-    /* PREMIUM PRICE BADGE STYLES */
-    --price-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%);
-    --price-border: rgba(59, 130, 246, 0.3);
-    --price-text: #38bdf8;
-    --price-glow: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
+    --neon-blue: #2563EB;
+    --neon-purple: #7C3AED;
+    --gold: #D97706;
+    --success: #16A34A;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    
+    --main-gradient: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+    --gold-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    --dark-gradient: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+    
+    --glow-blue: 0 4px 20px rgba(37, 99, 235, 0.15);
+    --glow-purple: 0 4px 20px rgba(124, 58, 237, 0.15);
+    --glow-gold: 0 4px 15px rgba(217, 119, 6, 0.2);
+    --shadow-3d: 0 8px 18px -4px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    
+    --btn-bg: var(--main-gradient);
+    --btn-text: #FFFFFF;
+    --btn-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+    
+    --brand-gradient: linear-gradient(135deg, #0F172A 0%, #2563EB 50%, #7C3AED 100%);
+    --brand-glow: drop-shadow(0 0 8px rgba(37, 99, 235, 0.3));
+    
+    --price-bg: rgba(217, 119, 6, 0.08);
+    --price-border: rgba(217, 119, 6, 0.25);
+    --price-text: #D97706;
+    --price-glow: none;
+
+    --modal-bg: #FFFFFF;
 }
 
-[data-theme="light"] {
-    --bg-main: #f1f5f9;
-    --bg-card: rgba(255, 255, 255, 0.85);
-    --bg-card-inner: rgba(241, 245, 249, 0.8);
-    --border-color: rgba(0, 0, 0, 0.06);
-    --border-accent: rgba(37, 99, 235, 0.3);
-    --text-main: #0f172a;
-    --text-sub: #64748b;
-    --accent-color: #2563eb;
-    --accent-glow: rgba(37, 99, 235, 0.15);
-    --shadow-3d: 0 10px 20px -5px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-    --btn-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    --btn-text: #ffffff;
-    --btn-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+/* DARK NEON GAMING PALETTE (SECONDARY) */
+[data-theme="dark"] {
+    --bg-main: #080A0F;
+    --bg-card: rgba(17, 21, 29, 0.85);
+    --bg-card-inner: rgba(8, 10, 15, 0.7);
+    --border-color: rgba(0, 217, 255, 0.15);
+    --border-accent: rgba(0, 217, 255, 0.4);
     
-    --brand-gradient: linear-gradient(135deg, #0f172a 0%, #d97706 50%, #ea580c 100%);
-    --brand-glow: drop-shadow(0 0 8px rgba(217, 119, 6, 0.25));
+    --text-main: #FFFFFF;
+    --text-sub: #A7B0C0;
+    
+    --neon-blue: #00D9FF;
+    --neon-purple: #8B5CF6;
+    --gold: #FFB800;
+    --success: #22C55E;
+    
+    --main-gradient: linear-gradient(135deg, #00D9FF 0%, #8B5CF6 100%);
+    --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FF8A00 100%);
+    --dark-gradient: linear-gradient(135deg, #11151D 0%, #080A0F 100%);
+    
+    --glow-blue: 0 0 25px rgba(0, 217, 255, 0.25);
+    --glow-purple: 0 0 25px rgba(139, 92, 246, 0.25);
+    --glow-gold: 0 0 25px rgba(255, 184, 0, 0.25);
+    --shadow-3d: 0 12px 24px -6px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    
+    --btn-shadow: 0 4px 20px rgba(0, 217, 255, 0.35);
+    --brand-gradient: linear-gradient(135deg, #FFFFFF 0%, #00D9FF 50%, #8B5CF6 100%);
+    --brand-glow: drop-shadow(0 0 12px rgba(0, 217, 255, 0.5));
+    
+    --price-bg: rgba(255, 184, 0, 0.08);
+    --price-border: rgba(255, 184, 0, 0.3);
+    --price-text: #FFB800;
+    --price-glow: drop-shadow(0 0 8px rgba(255, 184, 0, 0.4));
 
-    --price-bg: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(29, 78, 216, 0.03) 100%);
-    --price-border: rgba(37, 99, 235, 0.25);
-    --price-text: #1d4ed8;
-    --price-glow: none;
+    --modal-bg: var(--dark-gradient);
 }
 
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, color 0.3s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -83,9 +121,8 @@ html{
     scroll-behavior:smooth;
 }
 
-/* MOBILE FRAME WRAPPER */
 body {
-    background: #05070c;
+    background: #030407;
     color: var(--text-main);
     font-family:'Cairo',sans-serif;
     min-height:100vh;
@@ -96,13 +133,13 @@ body {
 
 #mobile-frame {
     width: 100%;
-    max-width: 480px; /* العرض المخصص للموبايل */
+    max-width: 480px;
     min-height: 100vh;
     background: var(--bg-main);
     background-image: 
-        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.08) 0px, transparent 50%);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+        radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 40%),
+        radial-gradient(circle at 90% 100%, rgba(124, 58, 237, 0.08) 0px, transparent 40%);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.15), 0 0 2px rgba(37, 99, 235, 0.2);
     position: relative;
     overflow-x: hidden;
 }
@@ -141,18 +178,19 @@ a{
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
 }
 
 .fire-icon {
-    color: #f97316;
+    color: #FF8A00;
     -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 6px #f97316);
+    filter: drop-shadow(0 0 8px #FF8A00);
     animation: pulseFire 1.8s infinite alternate ease-in-out;
 }
 
 @keyframes pulseFire {
-    0% { transform: scale(1); filter: drop-shadow(0 0 5px #f97316); }
-    100% { transform: scale(1.15); filter: drop-shadow(0 0 12px #ef4444); }
+    0% { transform: scale(1); filter: drop-shadow(0 0 6px #FF8A00); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 14px var(--neon-blue)); }
 }
 
 /* SPLASH */
@@ -166,7 +204,7 @@ a{
     justify-content:center;
     align-items:center;
     text-align:center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
@@ -182,16 +220,16 @@ a{
     display:flex;
     align-items:center;
     justify-content:center;
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-    border: 1px solid var(--border-accent);
-    box-shadow: 0 0 25px var(--accent-glow);
+    background: var(--dark-gradient);
+    border: 1px solid var(--neon-blue);
+    box-shadow: var(--glow-blue);
     backdrop-filter: blur(10px);
 }
 
 .logo-icon i{
     font-size:42px;
-    color: var(--gold-glow);
-    filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.6));
+    color: var(--neon-blue);
+    filter: drop-shadow(0 0 12px var(--neon-blue));
 }
 
 .splash-title{
@@ -239,8 +277,8 @@ a{
     height:44px;
     object-fit:cover;
     border-radius:50%;
-    border:2px solid var(--border-accent);
-    box-shadow: 0 0 10px var(--accent-glow);
+    border:2px solid var(--neon-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .brand-name{
@@ -251,10 +289,10 @@ a{
 }
 
 .verified-icon {
-    color: #3b82f6;
+    color: var(--neon-blue);
     font-size: 13px;
     -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6));
+    filter: drop-shadow(0 0 6px var(--neon-blue));
 }
 
 .brand-sub{
@@ -274,7 +312,7 @@ a{
     height: 38px;
     border-radius: 50%;
     background: var(--bg-card);
-    color: var(--text-main);
+    color: var(--neon-blue);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
     display: flex;
@@ -289,9 +327,9 @@ a{
 }
 
 .live-badge {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--success);
     padding: 5px 10px;
     border-radius: 16px;
     font-size: 10px;
@@ -299,14 +337,15 @@ a{
     display: flex;
     align-items: center;
     gap: 5px;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
 }
 
 .live-dot {
     width: 6px;
     height: 6px;
-    background-color: #10b981;
+    background-color: var(--success);
     border-radius: 50%;
-    box-shadow: 0 0 8px #10b981;
+    box-shadow: 0 0 8px var(--success);
 }
 
 /* SOCIAL BUTTONS */
@@ -332,15 +371,17 @@ a{
 }
 
 .btn-telegram {
-    background: rgba(0, 136, 204, 0.15);
-    border: 1px solid rgba(0, 136, 204, 0.4);
-    color: #38bdf8;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: var(--neon-blue);
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.15);
 }
 
 .btn-whatsapp-channel {
-    background: rgba(37, 211, 102, 0.15);
-    border: 1px solid rgba(37, 211, 102, 0.4);
-    color: #4ade80;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--success);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
 }
 
 .social-btn:active {
@@ -387,7 +428,8 @@ a{
 }
 
 .search-input:focus {
-    border-color: var(--accent-color);
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .search-icon {
@@ -395,7 +437,7 @@ a{
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-sub);
+    color: var(--neon-blue);
     font-size: 15px;
 }
 
@@ -462,7 +504,7 @@ a{
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* GAME GRID (2 columns for Mobile) */
+/* GAME GRID */
 
 .game-grid{
     display:grid;
@@ -479,6 +521,11 @@ a{
     box-shadow: var(--shadow-3d);
     display:flex;
     flex-direction:column;
+}
+
+.game-card:hover {
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .game-card:active {
@@ -501,7 +548,7 @@ a{
     max-height: 100%;
     object-fit: contain;
     border-radius: 10px;
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
 }
 
 .game-info{
@@ -516,6 +563,7 @@ a{
     font-weight:900;
     margin-bottom:2px;
     font-size: 13px;
+    color: var(--text-main);
 }
 
 .game-desc{
@@ -553,6 +601,7 @@ a{
     display: flex;
     align-items: center;
     gap: 6px;
+    color: var(--text-main);
 }
 
 .product-grid{
@@ -574,6 +623,11 @@ a{
     justify-content: space-between;
 }
 
+.product:hover {
+    border-color: var(--neon-purple);
+    box-shadow: var(--glow-purple);
+}
+
 .product-name{
     font-weight:800;
     min-height:36px;
@@ -581,9 +635,10 @@ a{
     display: flex;
     align-items: center;
     line-height: 1.3;
+    color: var(--text-main);
 }
 
-/* ================= ULTRA PRO PRICE BADGE ================= */
+/* PRICE BADGE STYLES */
 
 .product-price-badge {
     background: var(--price-bg);
@@ -599,7 +654,7 @@ a{
     gap: 6px;
     margin: 8px 0 10px;
     width: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--glow-gold);
     backdrop-filter: blur(6px);
 }
 
@@ -608,20 +663,44 @@ a{
     display: flex;
     align-items: center;
     gap: 5px;
+    color: var(--gold);
 }
 
 .product-price-badge i {
     font-size: 13px;
-    color: var(--gold-glow);
-    filter: drop-shadow(0 0 5px var(--gold-glow));
+    color: var(--gold);
+    filter: drop-shadow(0 0 5px var(--gold));
 }
 
-/* تكبير وتنسيق صورة الشدات بشكل متناسق ومناسب للموبايل */
 .uc-badge-icon {
     width: 30px;
     height: 30px;
     object-fit: contain;
-    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.7));
+    filter: drop-shadow(0 0 6px var(--gold));
+    vertical-align: middle;
+}
+
+.ff-diamond-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--neon-blue));
+    vertical-align: middle;
+}
+
+.tiktok-coin-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--gold));
+    vertical-align: middle;
+}
+
+.mlbb-diamond-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--neon-blue));
     vertical-align: middle;
 }
 
@@ -633,13 +712,13 @@ a{
 
 .buy{
     width:100%;
-    background: var(--btn-bg);
-    color: var(--btn-text);
+    background: var(--gold-gradient);
+    color: #FFFFFF;
     border-radius:12px;
     padding:9px;
-    font-weight:800;
+    font-weight:900;
     font-size: 12px;
-    box-shadow: var(--btn-shadow);
+    box-shadow: var(--glow-gold);
 }
 
 .buy:active {
@@ -694,11 +773,12 @@ a{
 .payment h3{
     margin-bottom:12px;
     font-size: 15px;
+    color: var(--text-main);
 }
 
 .payment-number{
     background: var(--bg-card-inner);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-accent);
     border-radius:14px;
     padding:12px;
     font-size:18px;
@@ -706,11 +786,8 @@ a{
     direction:ltr;
     text-align:center;
     letter-spacing: 2px;
-    color: #60a5fa;
-}
-
-[data-theme="light"] .payment-number {
-    color: #1d4ed8;
+    color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .copy{
@@ -732,18 +809,49 @@ a{
 .whatsapp{
     display:block;
     text-align:center;
-    background: linear-gradient(135deg, #22c55e, #15803d);
+    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
     color:#fff;
     padding:11px;
     border-radius:12px;
     margin-top:10px;
     font-weight:800;
     font-size: 13px;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
 }
 
 .whatsapp:active {
     transform: scale(0.95);
+}
+
+/* SECRET DASHBOARD CARD STYLES */
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.admin-stat-card {
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-3d);
+}
+
+.admin-stat-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--neon-blue);
+    margin-top: 5px;
+}
+
+.admin-stat-title {
+    font-size: 11px;
+    color: var(--text-sub);
+    font-weight: 700;
 }
 
 /* SOON */
@@ -767,12 +875,14 @@ a{
 .soon-card i{
     font-size:28px;
     margin-bottom:8px;
-    color: var(--gold-glow);
+    color: var(--neon-purple);
+    filter: drop-shadow(0 0 8px var(--neon-purple));
 }
 
 .soon-card h3 {
     font-size: 14px;
     font-weight: 800;
+    color: var(--text-main);
 }
 
 .soon-card p{
@@ -806,7 +916,8 @@ a{
 }
 
 .input:focus {
-    border-color: var(--accent-color);
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
 }
 
 textarea.input{
@@ -816,13 +927,13 @@ textarea.input{
 
 .send{
     width:100%;
-    background: linear-gradient(135deg, #22c55e, #15803d);
+    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
     color:#fff;
     padding:12px;
     border-radius:14px;
     font-weight:800;
     font-size: 13px;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
 }
 
 .send:active {
@@ -835,8 +946,8 @@ textarea.input{
     position:absolute;
     inset:0;
     z-index:99998;
-    background:rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
+    background:rgba(3, 4, 7, 0.65);
+    backdrop-filter: blur(12px);
     display:none;
     align-items:center;
     justify-content:center;
@@ -852,12 +963,11 @@ textarea.input{
     width:100%;
     max-height:85vh;
     overflow-y:auto;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    background: var(--modal-bg);
+    border: 1px solid var(--border-accent);
     border-radius:24px;
     padding:20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    backdrop-filter: blur(16px);
+    box-shadow: var(--glow-purple);
 }
 
 .modal-head{
@@ -870,6 +980,7 @@ textarea.input{
 .modal-head h2 {
     font-size: 17px;
     font-weight: 900;
+    color: var(--text-main);
 }
 
 .close{
@@ -903,6 +1014,7 @@ textarea.input{
     font-weight:900;
     margin-top:2px;
     font-size: 14px;
+    color: var(--text-main);
 }
 
 .discount{
@@ -911,7 +1023,7 @@ textarea.input{
     border-radius:14px;
     text-align:center;
     margin-bottom:10px;
-    border: 1px dashed var(--accent-color);
+    border: 1px dashed var(--gold);
 }
 
 .old-price{
@@ -924,24 +1036,21 @@ textarea.input{
 .new-price{
     font-size:24px;
     font-weight:900;
-    color: #60a5fa;
+    color: var(--gold);
     margin-top: 2px;
-}
-
-[data-theme="light"] .new-price {
-    color: #1d4ed8;
+    filter: drop-shadow(0 0 8px rgba(255, 184, 0, 0.4));
 }
 
 .order{
     width:100%;
-    background: var(--btn-bg);
-    color: var(--btn-text);
+    background: var(--gold-gradient);
+    color: #FFFFFF;
     padding:13px;
     border-radius:14px;
     font-weight:900;
     margin-top:6px;
     font-size: 13px;
-    box-shadow: var(--btn-shadow);
+    box-shadow: var(--glow-gold);
 }
 
 .order:active {
@@ -956,14 +1065,15 @@ textarea.input{
     left:50%;
     transform:translateX(-50%);
     z-index:100000;
-    background: var(--btn-bg);
-    color: var(--btn-text);
+    background: var(--dark-gradient);
+    border: 1px solid var(--neon-blue);
+    color: var(--text-main);
     padding:10px 22px;
     border-radius:25px;
     font-weight:800;
     font-size: 12px;
     display:none;
-    box-shadow: var(--btn-shadow);
+    box-shadow: var(--glow-blue);
     white-space: nowrap;
 }
 
@@ -1052,7 +1162,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <div>
 
 <div class="brand-name">
-<span class="pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
@@ -1067,7 +1177,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <div class="header-controls">
 
 <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="تبديل المظهر">
-<i class="fa-solid fa-moon"></i>
+<i class="fa-solid fa-sun"></i>
 </button>
 
 <div class="live-badge">
@@ -1085,7 +1195,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <section class="hero">
 
 <h1>
-<span class="pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
 
@@ -1141,6 +1251,11 @@ onclick="showSection('soon',this)">
 <button class="tab"
 onclick="showSection('request',this)">
 📦 طلب منتج
+</button>
+
+<button class="tab" id="secretTab" style="display:none; border-color: var(--gold); color: var(--gold);"
+onclick="showSection('secretDashboard',this)">
+👑 القسم السري
 </button>
 
 </div>
@@ -1445,8 +1560,13 @@ Steam
 <div class="subtabs">
 
 <button class="subtab active"
+onclick="rechargeTab('we',this)">
+WE
+</button>
+
+<button class="subtab"
 onclick="rechargeTab('vodafone',this)">
-فودافون
+Vodafone
 </button>
 
 <button class="subtab"
@@ -1455,13 +1575,8 @@ onclick="rechargeTab('etisalat',this)">
 </button>
 
 <button class="subtab"
-onclick="rechargeTab('we',this)">
-WE
-</button>
-
-<button class="subtab"
-onclick="rechargeTab('home',this)">
-WE منزلي
+onclick="rechargeTab('gas',this)">
+شحن الغاز
 </button>
 
 </div>
@@ -1606,10 +1721,53 @@ onclick="sendRequest()">
 </section>
 
 
+<!-- ================= SECRET ADMIN DASHBOARD ================= -->
+
+<section id="secretDashboard" class="section">
+
+<div class="product-title" style="color: var(--gold);">
+👑 إحصائيات صاحب المتجر
+</div>
+
+<div class="form">
+
+<div class="admin-stats-grid">
+
+<div class="admin-stat-card">
+<div class="admin-stat-title">إجمالي الزيارات</div>
+<div class="admin-stat-num" id="statVisits">0</div>
+</div>
+
+<div class="admin-stat-card">
+<div class="admin-stat-title">الزوار اليوم الفريدين</div>
+<div class="admin-stat-num" id="statUnique">0</div>
+</div>
+
+<div class="admin-stat-card">
+<div class="admin-stat-title">عرض الباقات</div>
+<div class="admin-stat-num" id="statPackageViews">0</div>
+</div>
+
+<div class="admin-stat-card">
+<div class="admin-stat-title">الطلبات للواتس</div>
+<div class="admin-stat-num" id="statOrdersSent">0</div>
+</div>
+
+</div>
+
+<button class="buy" style="margin-top:20px; background: var(--main-gradient);" onclick="resetAdminStats()">
+🔄 إعادة ضبط الإحصائيات
+</button>
+
+</div>
+
+</section>
+
+
 <footer class="footer">
 
 <div style="margin-bottom: 4px;">
-<span class="pro-brand-text" style="font-size: 14px;">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<span class="pro-brand-text" style="font-size: 14px;" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
@@ -1624,11 +1782,11 @@ onclick="sendRequest()">
 <div class="footer-social">
 
 <a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام">
-<i class="fa-brands fa-telegram" style="color: #38bdf8;"></i>
+<i class="fa-brands fa-telegram" style="color: var(--neon-blue);"></i>
 </a>
 
 <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب" aria-label="قناة الواتساب">
-<i class="fa-brands fa-whatsapp" style="color: #4ade80;"></i>
+<i class="fa-brands fa-whatsapp" style="color: var(--success);"></i>
 </a>
 
 </div>
@@ -1739,20 +1897,64 @@ onclick="sendOrder()">
 
 <script>
 
-/* ================= THEME TOGGLE ================= */
+/* ================= VISITOR TRACKER & ADMIN DASHBOARD ================= */
+
+function initVisitorStats() {
+    let visits = parseInt(localStorage.getItem('admin_total_visits') || '0') + 1;
+    localStorage.setItem('admin_total_visits', visits.toString());
+
+    if (!sessionStorage.getItem('session_active')) {
+        sessionStorage.setItem('session_active', 'true');
+        let uniqueVisits = parseInt(localStorage.getItem('admin_unique_visits') || '0') + 1;
+        localStorage.setItem('admin_unique_visits', uniqueVisits.toString());
+    }
+
+    updateAdminUI();
+}
+
+function updateAdminUI() {
+    document.getElementById('statVisits').innerText = localStorage.getItem('admin_total_visits') || '0';
+    document.getElementById('statUnique').innerText = localStorage.getItem('admin_unique_visits') || '0';
+    document.getElementById('statPackageViews').innerText = localStorage.getItem('admin_package_views') || '0';
+    document.getElementById('statOrdersSent').innerText = localStorage.getItem('admin_orders_sent') || '0';
+}
+
+function resetAdminStats() {
+    if(confirm("هل أنت تأكد من صفر جميع الإحصائيات؟")) {
+        localStorage.setItem('admin_total_visits', '0');
+        localStorage.setItem('admin_unique_visits', '0');
+        localStorage.setItem('admin_package_views', '0');
+        localStorage.setItem('admin_orders_sent', '0');
+        updateAdminUI();
+        showToast("✅ تم إعادة ضبط الإحصائيات");
+    }
+}
+
+let secretClickCount = 0;
+function handleSecretClick() {
+    secretClickCount++;
+    if (secretClickCount >= 5) {
+        secretClickCount = 0;
+        document.getElementById('secretTab').style.display = 'inline-block';
+        showToast("👑 مرحباً بك في القسم السري");
+    }
+}
+
+
+/* ================= THEME TOGGLE (LIGHT DEFAULT) ================= */
 
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const themeBtn = document.getElementById('themeBtn');
     
-    if (currentTheme === 'light') {
-        document.documentElement.removeAttribute('data-theme');
-        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-        showToast("🌙 التبديل للوضع الداكن");
-    } else {
+    if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
         themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        showToast("☀️ التبديل للوضع الفاتح");
+        showToast("☀️ التبديل للوضع الفاتح الأنيق");
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        showToast("🌙 التبديل للوضع الداكن");
     }
 }
 
@@ -1771,6 +1973,7 @@ function hideSplash(){
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    initVisitorStats();
     setTimeout(hideSplash, 1500);
 });
 
@@ -2005,6 +2208,10 @@ let currentOpenGame = null;
 function toggleGamePrices(game, btn) {
     const productsDiv = document.getElementById("products");
 
+    let views = parseInt(localStorage.getItem('admin_package_views') || '0') + 1;
+    localStorage.setItem('admin_package_views', views.toString());
+    updateAdminUI();
+
     if (currentOpenGame === game && productsDiv.style.display !== "none" && productsDiv.innerHTML !== "") {
         productsDiv.style.display = "none";
         btn.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
@@ -2050,9 +2257,17 @@ ${names[game]}
 
 products.forEach(function(item){
 
-let priceIconHtml = game === 'pubg' 
-    ? `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">` 
-    : `<i class="fa-solid fa-coins"></i>`;
+let priceIconHtml = '<i class="fa-solid fa-coins"></i>';
+
+if (game === 'pubg') {
+    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">`;
+} else if (game === 'mlbb') {
+    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png" class="mlbb-diamond-icon" alt="MLBB Diamond Icon">`;
+} else if (game === 'ff' || game === 'yalla') {
+    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png" class="ff-diamond-icon" alt="Diamond Icon">`;
+} else if (game === 'tiktok') {
+    priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png" class="tiktok-coin-icon" alt="TikTok Coin Icon">`;
+}
 
 html+=`
 
@@ -2113,25 +2328,20 @@ function openOrder(product, price, currency = "جنيه"){
 
 selectedProduct = product;
 
-let numPrice = parseFloat(price);
-let finalPrice = numPrice;
-let hasDiscount = false;
+if (typeof price === "number") {
+    let numPrice = parseFloat(price);
+    let finalPrice = (numPrice * 0.95).toFixed(2);
+    selectedPriceText = `${finalPrice} ${currency}`;
 
-if(!isNaN(numPrice)) {
-    finalPrice = (numPrice * 0.95).toFixed(2);
-    hasDiscount = true;
-}
-
-selectedPriceText = hasDiscount ? `${finalPrice} ${currency}` : `${price} ${currency}`;
-
-document.getElementById("modalProduct").innerText = product;
-
-if (hasDiscount) {
+    document.getElementById("modalProduct").innerText = product;
     document.getElementById("modalPrice").innerText = finalPrice + " " + currency;
     document.getElementById("modalAfter").innerText = "السعر الأصلي: " + price + " " + currency;
     document.getElementById("modalAfter").style.display = "block";
 } else {
-    document.getElementById("modalPrice").innerText = price + " " + currency;
+    selectedPriceText = price ? `${price} ${currency}` : product;
+
+    document.getElementById("modalProduct").innerText = product;
+    document.getElementById("modalPrice").innerText = price ? `${price} ${currency}` : product;
     document.getElementById("modalAfter").style.display = "none";
 }
 
@@ -2157,6 +2367,10 @@ window.addEventListener('click', function(event) {
 /* ================= WHATSAPP ORDER ================= */
 
 function sendOrder(){
+
+let orders = parseInt(localStorage.getItem('admin_orders_sent') || '0') + 1;
+localStorage.setItem('admin_orders_sent', orders.toString());
+updateAdminUI();
 
 let text=
 "السلام عليكم 👋%0A%0A"+
@@ -2264,35 +2478,23 @@ document.getElementById("cardsProducts")
 
 const rechargeData={
 
+we:[
+["شحن رصيد WE"],
+["شحن كروت فكة WE"]
+],
+
 vodafone:[
-["10 جنيه",10],
-["20 جنيه",20],
-["50 جنيه",50],
-["100 جنيه",100],
-["200 جنيه",200]
+["شحن رصيد Vodafone"],
+["شحن كروت فكة Vodafone"]
 ],
 
 etisalat:[
-["10 جنيه",10],
-["20 جنيه",20],
-["50 جنيه",50],
-["100 جنيه",100],
-["200 جنيه",200]
+["شحن رصيد اتصالات"],
+["شحن كروت فكة اتصالات"]
 ],
 
-we:[
-["10 جنيه",10],
-["20 جنيه",20],
-["50 جنيه",50],
-["100 جنيه",100],
-["200 جنيه",200]
-],
-
-home:[
-["باقة إنترنت WE منزلي",100],
-["باقة إنترنت WE منزلي",200],
-["باقة إنترنت WE منزلي",300],
-["باقة إنترنت WE منزلي",500]
+gas:[
+["شحن كارت الغاز الطبيعي"]
 ]
 
 };
@@ -2314,8 +2516,6 @@ let html='<div class="product-grid">';
 
 list.forEach(function(item){
 
-let after=(item[1]*.95).toFixed(2);
-
 html+=`
 
 <div class="product">
@@ -2324,13 +2524,8 @@ html+=`
 ${item[0]}
 </div>
 
-<div class="product-price-badge">
-<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
-<span class="price-val"><i class="fa-solid fa-bolt"></i> ${after} <span class="currency">ج.م</span></span>
-</div>
-
-<button class="buy"
-onclick="openOrder('شحن ${item[0]}', ${item[1]}, 'ج.م')">
+<button class="buy" style="margin-top:10px;"
+onclick="openOrder('${escapeText(item[0])}', null, '')">
 طلب الشحن
 </button>
 
@@ -2348,154 +2543,4 @@ document.getElementById("rechargeProducts")
 }
 
 
-/* ================= SHABAB ================= */
-
-const shababData={
-
-eg:[
-["100 جنيه",75000, "100 جنيه"],
-["300 جنيه",225000, "300 جنيه"],
-["500 جنيه",375000, "500 جنيه"],
-["1000 جنيه",750000, "1000 جنيه"],
-["2000 جنيه",1500000, "2000 جنيه"],
-["3000 جنيه",2250000, "3000 جنيه"]
-],
-
-jo:[
-["10 دينار",450000, "10 دينار"],
-["20 دينار",900000, "20 دينار"],
-["30 دينار",1350000, "30 دينار"],
-["40 دينار",1800000, "40 دينار"],
-["50 دينار",2250000, "50 دينار"]
-],
-
-sa:[
-["100 ريال",900000, "100 ريال"],
-["200 ريال",1800000, "200 ريال"],
-["300 ريال",2700000, "300 ريال"],
-["400 ريال",3600000, "400 ريال"],
-["500 ريال",4500000, "500 ريال"]
-]
-
-};
-
-function shababTab(type,btn){
-
-btn.parentElement.querySelectorAll(".subtab")
-.forEach(function(x){
-
-x.classList.remove("active");
-
-});
-
-btn.classList.add("active");
-
-let list=shababData[type];
-
-let html='<div class="product-grid">';
-
-list.forEach(function(item){
-
-html+=`
-
-<div class="product">
-
-<div class="product-name">
-${item[0]}
-</div>
-
-<div class="product-price-badge">
-<span style="font-size:10px; opacity:0.8; font-weight:700;">الكمية</span>
-<span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span>
-</div>
-
-<button class="buy"
-onclick="openOrder('شباب كونات - ${item[0]}', '${item[2]}', '')">
-شراء
-</button>
-
-</div>
-
-`;
-
-});
-
-html+="</div>";
-
-document.getElementById("shababProducts")
-.innerHTML=html;
-
-}
-
-
-/* ================= REQUEST ================= */
-
-function sendRequest(){
-
-let name=
-document.getElementById("requestName").value.trim();
-
-let type=
-document.getElementById("requestType").value.trim();
-
-let phone=
-document.getElementById("requestPhone").value.trim();
-
-let details=
-document.getElementById("requestDetails").value.trim();
-
-if(!name){
-    showToast("⚠️ اكتب اسم المنتج");
-    return;
-}
-
-if(!phone || phone.length < 8){
-    showToast("⚠️ ادخل رقم هاتف صحيح");
-    return;
-}
-
-let text=
-"السلام عليكم 👋%0A%0A"+
-"طلب منتج من استور أسرع من نتكم 🔥%0A%0A"+
-"المنتج: "+encodeURIComponent(name)+
-"%0Aالنوع: "+encodeURIComponent(type)+
-"%0Aالهاتف: "+encodeURIComponent(phone)+
-"%0Aالتفاصيل: "+encodeURIComponent(details);
-
-let url=
-"https://wa.me/201044049390?text="+text;
-
-if(window.Android && Android.openUrl){
-
-Android.openUrl(url);
-
-}else{
-
-window.location.href=url;
-
-}
-
-}
-
-
-/* ================= START ================= */
-
-cardsTab(
-"google",
-document.querySelector("#cards .subtab")
-);
-
-rechargeTab(
-"vodafone",
-document.querySelector("#recharge .subtab")
-);
-
-shababTab(
-"eg",
-document.querySelector("#shabab .subtab")
-);
-
-</script>
-
-</body>
-</html>
+/* =
