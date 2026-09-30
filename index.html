@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<title>أسرع من نتكم 🔥 | المتجر الأسرع للشحن الرقمي</title>
+<title>استور أسرع من نتكم 🔥 | المتجر الأسرع للشحن الرقمي</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -31,14 +31,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     --accent-color: #3b82f6;
     --accent-glow: rgba(59, 130, 246, 0.25);
     --gold-glow: #facc15;
-    --shadow-3d: 0 20px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    --shadow-3d: 0 12px 20px -5px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
     --btn-bg: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     --btn-text: #ffffff;
-    --btn-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    --btn-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
     
     /* BRAND GRADIENT */
     --brand-gradient: linear-gradient(135deg, #ffffff 0%, #facc15 50%, #f97316 100%);
-    --brand-glow: drop-shadow(0 0 12px rgba(245, 158, 11, 0.4));
+    --brand-glow: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4));
     
     /* PREMIUM PRICE BADGE STYLES */
     --price-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%);
@@ -57,10 +57,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     --text-sub: #64748b;
     --accent-color: #2563eb;
     --accent-glow: rgba(37, 99, 235, 0.15);
-    --shadow-3d: 0 15px 25px -5px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    --shadow-3d: 0 10px 20px -5px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
     --btn-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     --btn-text: #ffffff;
-    --btn-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+    --btn-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
     
     --brand-gradient: linear-gradient(135deg, #0f172a 0%, #d97706 50%, #ea580c 100%);
     --brand-glow: drop-shadow(0 0 8px rgba(217, 119, 6, 0.25));
@@ -75,23 +75,36 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     box-sizing:border-box;
     margin:0;
     padding:0;
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html{
     scroll-behavior:smooth;
 }
 
-body{
+/* MOBILE FRAME WRAPPER */
+body {
+    background: #05070c;
+    color: var(--text-main);
+    font-family:'Cairo',sans-serif;
+    min-height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#mobile-frame {
+    width: 100%;
+    max-width: 480px; /* العرض المخصص للموبايل */
+    min-height: 100vh;
     background: var(--bg-main);
     background-image: 
         radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.08) 0px, transparent 50%);
-    background-attachment: fixed;
-    color: var(--text-main);
-    font-family:'Cairo',sans-serif;
-    min-height:100vh;
-    overflow-x:hidden;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow-x: hidden;
 }
 
 button,
@@ -113,12 +126,10 @@ a{
 
 .container{
     width:100%;
-    max-width:1100px;
-    margin:auto;
-    padding:20px 15px;
+    padding: 15px 12px;
 }
 
-/* ================= PRO BRAND STYLE ================= */
+/* PRO BRAND STYLE */
 
 .pro-brand-text {
     background: var(--brand-gradient);
@@ -126,28 +137,28 @@ a{
     -webkit-text-fill-color: transparent;
     filter: var(--brand-glow);
     font-weight: 900;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .fire-icon {
     color: #f97316;
     -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 8px #f97316);
+    filter: drop-shadow(0 0 6px #f97316);
     animation: pulseFire 1.8s infinite alternate ease-in-out;
 }
 
 @keyframes pulseFire {
-    0% { transform: scale(1); filter: drop-shadow(0 0 6px #f97316); }
-    100% { transform: scale(1.18); filter: drop-shadow(0 0 14px #ef4444); }
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px #f97316); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 12px #ef4444); }
 }
 
 /* SPLASH */
 
 #splash{
-    position:fixed;
+    position:absolute;
     inset:0;
     z-index:99999;
     background: var(--bg-main);
@@ -164,54 +175,54 @@ a{
 }
 
 .logo-icon{
-    width:110px;
-    height:110px;
-    border-radius:32px;
+    width:90px;
+    height:90px;
+    border-radius:26px;
     margin:auto;
     display:flex;
     align-items:center;
     justify-content:center;
     background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
     border: 1px solid var(--border-accent);
-    box-shadow: 0 0 30px var(--accent-glow);
+    box-shadow: 0 0 25px var(--accent-glow);
     backdrop-filter: blur(10px);
 }
 
 .logo-icon i{
-    font-size:55px;
+    font-size:42px;
     color: var(--gold-glow);
-    filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.6));
+    filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.6));
 }
 
 .splash-title{
-    margin-top:25px;
-    font-size:36px;
+    margin-top:20px;
+    font-size:26px;
 }
 
 .splash-sub{
     color: var(--text-sub);
-    margin:10px 0 30px;
-    font-size:15px;
+    margin:8px 0 25px;
+    font-size:13px;
 }
 
 .skip{
     background: var(--btn-bg);
     color: var(--btn-text);
-    padding:13px 35px;
-    border-radius:30px;
+    padding:12px 30px;
+    border-radius:25px;
     font-weight:800;
     box-shadow: var(--btn-shadow);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .skip:active {
     transform: scale(0.95);
 }
 
-/* HEADER & THEME TOGGLE & LIVE BADGE */
+/* HEADER */
 
 .header{
-    padding:10px 0 20px;
+    padding: 5px 0 12px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -220,47 +231,47 @@ a{
 .brand{
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:10px;
 }
 
 .avatar{
-    width:52px;
-    height:52px;
+    width:44px;
+    height:44px;
     object-fit:cover;
     border-radius:50%;
     border:2px solid var(--border-accent);
-    box-shadow: 0 0 15px var(--accent-glow);
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .brand-name{
-    font-size:20px;
+    font-size:16px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
 }
 
 .verified-icon {
     color: #3b82f6;
-    font-size: 16px;
+    font-size: 13px;
     -webkit-text-fill-color: initial;
-    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6));
 }
 
 .brand-sub{
     color: var(--text-sub);
-    font-size:12px;
+    font-size:10px;
     font-weight: 600;
 }
 
 .header-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .theme-toggle-btn {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: var(--bg-card);
     color: var(--text-main);
@@ -269,12 +280,8 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 15px;
     box-shadow: var(--shadow-3d);
-}
-
-.theme-toggle-btn:hover {
-    border-color: var(--border-accent);
 }
 
 .theme-toggle-btn:active {
@@ -285,22 +292,21 @@ a{
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid rgba(16, 185, 129, 0.3);
     color: #10b981;
-    padding: 7px 14px;
-    border-radius: 20px;
-    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-size: 10px;
     font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    gap: 5px;
 }
 
 .live-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background-color: #10b981;
     border-radius: 50%;
-    box-shadow: 0 0 10px #10b981;
+    box-shadow: 0 0 8px #10b981;
 }
 
 /* SOCIAL BUTTONS */
@@ -308,20 +314,21 @@ a{
 .social-channels {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin: 20px 0 10px;
+    gap: 8px;
+    margin: 12px 0 8px;
 }
 
 .social-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 16px;
-    font-size: 13px;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 14px;
+    font-size: 11px;
     font-weight: 800;
     backdrop-filter: blur(10px);
-    transition: all 0.3s;
+    flex: 1;
+    justify-content: center;
 }
 
 .btn-telegram {
@@ -336,31 +343,26 @@ a{
     color: #4ade80;
 }
 
-.social-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
 .social-btn:active {
-    transform: translateY(0);
+    transform: scale(0.96);
 }
 
 /* HERO */
 
 .hero{
     text-align:center;
-    padding:15px 0 20px;
+    padding:5px 0 12px;
 }
 
 .hero h1{
-    font-size:36px;
-    margin-bottom: 4px;
+    font-size:24px;
+    margin-bottom: 2px;
 }
 
 .hero p{
     color: var(--text-sub);
-    margin-top:6px;
-    font-size:14px;
+    margin-top:2px;
+    font-size:12px;
     font-weight: 600;
 }
 
@@ -368,7 +370,7 @@ a{
 
 .search-box {
     position: relative;
-    margin: 15px 0 25px;
+    margin: 10px 0 16px;
 }
 
 .search-input {
@@ -377,47 +379,47 @@ a{
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding: 16px 50px 16px 45px;
-    border-radius: 22px;
-    font-size: 14px;
+    padding: 12px 42px 12px 38px;
+    border-radius: 18px;
+    font-size: 13px;
     outline: none;
     box-shadow: var(--shadow-3d);
 }
 
 .search-input:focus {
     border-color: var(--accent-color);
-    box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .search-icon {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-sub);
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .clear-search-btn {
     position: absolute;
-    left: 15px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-sub);
-    font-size: 16px;
+    font-size: 14px;
     background: transparent;
     cursor: pointer;
     display: none;
-    padding: 5px;
+    padding: 4px;
 }
 
 /* TABS */
 
 .tabs{
     display:flex;
-    gap:10px;
+    gap:8px;
     overflow-x:auto;
-    padding:5px 5px 20px;
+    padding:2px 2px 14px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .tabs::-webkit-scrollbar{
@@ -430,16 +432,11 @@ a{
     backdrop-filter: blur(10px);
     color: var(--text-sub);
     border: 1px solid var(--border-color);
-    padding:12px 22px;
-    border-radius:20px;
+    padding:9px 16px;
+    border-radius:16px;
     font-weight:800;
-    font-size:13px;
+    font-size:12px;
     box-shadow: var(--shadow-3d);
-}
-
-.tab:hover {
-    border-color: var(--border-accent);
-    color: var(--text-main);
 }
 
 .tab.active{
@@ -447,7 +444,6 @@ a{
     color: var(--btn-text);
     border-color: transparent;
     box-shadow: var(--btn-shadow);
-    transform: translateY(-2px);
 }
 
 /* SECTIONS */
@@ -458,53 +454,45 @@ a{
 
 .section.active{
     display:block;
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* GAME GRID & CARDS */
+/* GAME GRID (2 columns for Mobile) */
 
 .game-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-}
-
-@media(min-width:700px){
-    .game-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
 }
 
 .game-card{
     background: var(--bg-card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius:24px;
+    border-radius:18px;
     overflow:hidden;
     box-shadow: var(--shadow-3d);
     display:flex;
     flex-direction:column;
 }
 
-.game-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-accent);
-    box-shadow: 0 15px 30px var(--accent-glow);
+.game-card:active {
+    transform: scale(0.98);
 }
 
 .game-img-wrapper {
     width: 100%;
-    height: 140px;
+    height: 110px;
     background: var(--bg-card-inner);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 8px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -512,12 +500,12 @@ a{
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 14px;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+    border-radius: 10px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
 }
 
 .game-info{
-    padding:16px;
+    padding:10px;
     display:flex;
     flex-direction:column;
     flex-grow:1;
@@ -526,14 +514,14 @@ a{
 
 .game-name{
     font-weight:900;
-    margin-bottom:4px;
-    font-size: 15px;
+    margin-bottom:2px;
+    font-size: 13px;
 }
 
 .game-desc{
     color: var(--text-sub);
-    font-size:12px;
-    margin-bottom:14px;
+    font-size:10px;
+    margin-bottom:10px;
     font-weight: 600;
 }
 
@@ -541,44 +529,44 @@ a{
     width:100%;
     background: var(--btn-bg);
     color: var(--btn-text);
-    padding:11px;
-    border-radius:16px;
+    padding:8px;
+    border-radius:12px;
     font-weight:800;
-    font-size: 12px;
+    font-size: 11px;
     box-shadow: var(--btn-shadow);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .open-game:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* PRODUCTS */
 
 .product-title{
-    font-size:22px;
+    font-size:18px;
     font-weight:900;
-    margin:20px 0 15px;
+    margin: 15px 0 10px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .product-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
 }
 
 .product{
     background: var(--bg-card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius:22px;
-    padding:18px;
+    border-radius:18px;
+    padding:12px;
     box-shadow: var(--shadow-3d);
     position: relative;
     display: flex;
@@ -586,16 +574,13 @@ a{
     justify-content: space-between;
 }
 
-.product:hover {
-    border-color: var(--border-accent);
-}
-
 .product-name{
     font-weight:800;
-    min-height:40px;
-    font-size:14px;
+    min-height:36px;
+    font-size:12px;
     display: flex;
     align-items: center;
+    line-height: 1.3;
 }
 
 /* ================= ULTRA PRO PRICE BADGE ================= */
@@ -604,17 +589,17 @@ a{
     background: var(--price-bg);
     border: 1px solid var(--price-border);
     color: var(--price-text);
-    padding: 8px 14px;
-    border-radius: 16px;
-    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 14px;
     font-weight: 900;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    margin: 12px 0 14px;
+    gap: 6px;
+    margin: 8px 0 10px;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
 }
 
@@ -622,17 +607,26 @@ a{
     filter: var(--price-glow);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 }
 
 .product-price-badge i {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--gold-glow);
-    filter: drop-shadow(0 0 6px var(--gold-glow));
+    filter: drop-shadow(0 0 5px var(--gold-glow));
+}
+
+/* تكبير وتنسيق صورة الشدات بشكل متناسق ومناسب للموبايل */
+.uc-badge-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.7));
+    vertical-align: middle;
 }
 
 .currency{
-    font-size:11px;
+    font-size:10px;
     opacity: 0.85;
     font-weight: 700;
 }
@@ -641,24 +635,25 @@ a{
     width:100%;
     background: var(--btn-bg);
     color: var(--btn-text);
-    border-radius:14px;
-    padding:11px;
+    border-radius:12px;
+    padding:9px;
     font-weight:800;
-    font-size: 13px;
+    font-size: 12px;
     box-shadow: var(--btn-shadow);
 }
 
 .buy:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* SUB TABS */
 
 .subtabs{
     display:flex;
-    gap:10px;
+    gap:8px;
     overflow-x:auto;
-    margin:10px 0 20px;
+    margin:8px 0 14px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .subtabs::-webkit-scrollbar{
@@ -670,9 +665,9 @@ a{
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     color: var(--text-sub);
-    border-radius:25px;
-    padding:9px 18px;
-    font-size:13px;
+    border-radius:20px;
+    padding:7px 14px;
+    font-size:11px;
     font-weight:800;
     box-shadow: var(--shadow-3d);
 }
@@ -690,23 +685,23 @@ a{
     background: var(--bg-card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius:24px;
-    padding:24px;
-    margin-top:25px;
+    border-radius:20px;
+    padding:18px;
+    margin-top:20px;
     box-shadow: var(--shadow-3d);
 }
 
 .payment h3{
-    margin-bottom:15px;
-    font-size: 18px;
+    margin-bottom:12px;
+    font-size: 15px;
 }
 
 .payment-number{
     background: var(--bg-card-inner);
     border: 1px solid var(--border-color);
-    border-radius:18px;
-    padding:16px;
-    font-size:22px;
+    border-radius:14px;
+    padding:12px;
+    font-size:18px;
     font-weight:900;
     direction:ltr;
     text-align:center;
@@ -720,18 +715,18 @@ a{
 
 .copy{
     width:100%;
-    margin-top:12px;
+    margin-top:10px;
     background: var(--btn-bg);
     color: var(--btn-text);
-    padding:13px;
-    border-radius:14px;
+    padding:11px;
+    border-radius:12px;
     font-weight:800;
-    font-size: 14px;
+    font-size: 13px;
     box-shadow: var(--btn-shadow);
 }
 
 .copy:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 .whatsapp{
@@ -739,51 +734,51 @@ a{
     text-align:center;
     background: linear-gradient(135deg, #22c55e, #15803d);
     color:#fff;
-    padding:13px;
-    border-radius:14px;
-    margin-top:12px;
+    padding:11px;
+    border-radius:12px;
+    margin-top:10px;
     font-weight:800;
-    font-size: 14px;
-    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+    font-size: 13px;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
 }
 
 .whatsapp:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* SOON */
 
 .soon-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
 }
 
 .soon-card{
     background: var(--bg-card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius:22px;
-    padding:30px 15px;
+    border-radius:18px;
+    padding:20px 10px;
     text-align:center;
     box-shadow: var(--shadow-3d);
 }
 
 .soon-card i{
-    font-size:36px;
-    margin-bottom:12px;
+    font-size:28px;
+    margin-bottom:8px;
     color: var(--gold-glow);
 }
 
 .soon-card h3 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 800;
 }
 
 .soon-card p{
     color: var(--text-sub);
-    font-size:12px;
-    margin-top:4px;
+    font-size:10px;
+    margin-top:2px;
     font-weight: 600;
 }
 
@@ -793,8 +788,8 @@ a{
     background: var(--bg-card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius:24px;
-    padding:24px;
+    border-radius:20px;
+    padding:18px;
     box-shadow: var(--shadow-3d);
 }
 
@@ -803,11 +798,11 @@ a{
     background: var(--bg-card-inner);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding:15px;
-    border-radius:16px;
-    margin-bottom:14px;
+    padding:12px;
+    border-radius:14px;
+    margin-bottom:10px;
     outline:none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .input:focus {
@@ -815,7 +810,7 @@ a{
 }
 
 textarea.input{
-    min-height:120px;
+    min-height:90px;
     resize:none;
 }
 
@@ -823,21 +818,21 @@ textarea.input{
     width:100%;
     background: linear-gradient(135deg, #22c55e, #15803d);
     color:#fff;
-    padding:14px;
-    border-radius:16px;
+    padding:12px;
+    border-radius:14px;
     font-weight:800;
-    font-size: 14px;
-    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+    font-size: 13px;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
 }
 
 .send:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* MODAL */
 
 .modal{
-    position:fixed;
+    position:absolute;
     inset:0;
     z-index:99998;
     background:rgba(0, 0, 0, 0.75);
@@ -845,24 +840,23 @@ textarea.input{
     display:none;
     align-items:center;
     justify-content:center;
-    padding:15px;
+    padding:12px;
 }
 
 .modal.show{
     display:flex;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.25s ease;
 }
 
 .modal-box{
     width:100%;
-    max-width:480px;
-    max-height:90vh;
+    max-height:85vh;
     overflow-y:auto;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius:28px;
-    padding:25px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    border-radius:24px;
+    padding:20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     backdrop-filter: blur(16px);
 }
 
@@ -870,22 +864,22 @@ textarea.input{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .modal-head h2 {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 900;
 }
 
 .close{
-    width:40px;
-    height:40px;
+    width:34px;
+    height:34px;
     border-radius:50%;
     background: var(--bg-card-inner);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    font-size:20px;
+    font-size:18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -894,41 +888,41 @@ textarea.input{
 .info{
     background: var(--bg-card-inner);
     border: 1px solid var(--border-color);
-    border-radius:18px;
-    padding:16px;
-    margin-bottom:14px;
+    border-radius:14px;
+    padding:12px;
+    margin-bottom:10px;
 }
 
 .info-label{
     color: var(--text-sub);
-    font-size:12px;
+    font-size:11px;
     font-weight: 600;
 }
 
 .info-value{
     font-weight:900;
-    margin-top:4px;
-    font-size: 15px;
+    margin-top:2px;
+    font-size: 14px;
 }
 
 .discount{
     background: var(--bg-card-inner);
-    padding:18px;
-    border-radius:18px;
+    padding:14px;
+    border-radius:14px;
     text-align:center;
-    margin-bottom:14px;
+    margin-bottom:10px;
     border: 1px dashed var(--accent-color);
 }
 
 .old-price{
     color: var(--text-sub);
     text-decoration:line-through;
-    margin-top: 4px;
-    font-size: 13px;
+    margin-top: 2px;
+    font-size: 12px;
 }
 
 .new-price{
-    font-size:28px;
+    font-size:24px;
     font-weight:900;
     color: #60a5fa;
     margin-top: 2px;
@@ -942,60 +936,61 @@ textarea.input{
     width:100%;
     background: var(--btn-bg);
     color: var(--btn-text);
-    padding:15px;
-    border-radius:16px;
+    padding:13px;
+    border-radius:14px;
     font-weight:900;
-    margin-top:8px;
-    font-size: 14px;
+    margin-top:6px;
+    font-size: 13px;
     box-shadow: var(--btn-shadow);
 }
 
 .order:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* TOAST */
 
 #toast{
-    position:fixed;
-    bottom:30px;
+    position:absolute;
+    bottom:20px;
     left:50%;
     transform:translateX(-50%);
     z-index:100000;
     background: var(--btn-bg);
     color: var(--btn-text);
-    padding:12px 28px;
-    border-radius:30px;
+    padding:10px 22px;
+    border-radius:25px;
     font-weight:800;
-    font-size: 13px;
+    font-size: 12px;
     display:none;
     box-shadow: var(--btn-shadow);
+    white-space: nowrap;
 }
 
 /* FOOTER */
 
 .footer{
     text-align:center;
-    padding:40px 10px 20px;
+    padding:30px 10px 20px;
     color: var(--text-sub);
-    font-size:13px;
+    font-size:11px;
     font-weight: 600;
 }
 
 .footer-social {
     display: flex;
     justify-content: center;
-    gap: 18px;
-    margin-top: 18px;
+    gap: 16px;
+    margin-top: 14px;
 }
 
 .footer-social a {
-    font-size: 22px;
+    font-size: 20px;
     color: var(--text-main);
 }
 
-.footer-social a:hover {
-    transform: translateY(-3px);
+.footer-social a:active {
+    transform: scale(0.9);
 }
 
 </style>
@@ -1003,6 +998,8 @@ textarea.input{
 </head>
 
 <body>
+
+<div id="mobile-frame">
 
 <!-- SPLASH -->
 
@@ -1015,7 +1012,7 @@ textarea.input{
 </div>
 
 <div class="splash-title pro-brand-text">
-أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i>
+استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i>
 </div>
 
 <div class="splash-sub">
@@ -1055,7 +1052,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <div>
 
 <div class="brand-name">
-<span class="pro-brand-text">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<span class="pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
@@ -1075,7 +1072,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 
 <div class="live-badge">
 <span class="live-dot"></span>
-تسليم فوري
+فوري
 </div>
 
 </div>
@@ -1088,7 +1085,7 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <section class="hero">
 
 <h1>
-<span class="pro-brand-text">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<span class="pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
 
@@ -1100,11 +1097,11 @@ src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee
 <div class="social-channels">
 
 <a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram">
-<i class="fa-brands fa-telegram"></i> قناة التليجرام
+<i class="fa-brands fa-telegram"></i> التليجرام
 </a>
 
 <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel">
-<i class="fa-brands fa-whatsapp"></i> قناة الواتساب
+<i class="fa-brands fa-whatsapp"></i> الواتساب
 </a>
 
 </div>
@@ -1400,7 +1397,7 @@ onclick="toggleGamePrices('roblox', this)">
 
 <!-- PRODUCTS -->
 
-<div id="products" style="margin-top:25px;"></div>
+<div id="products" style="margin-top:20px;"></div>
 
 </section>
 
@@ -1611,8 +1608,8 @@ onclick="sendRequest()">
 
 <footer class="footer">
 
-<div style="margin-bottom: 6px;">
-<span class="pro-brand-text" style="font-size: 16px;">أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
+<div style="margin-bottom: 4px;">
+<span class="pro-brand-text" style="font-size: 14px;">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
 
@@ -1620,7 +1617,7 @@ onclick="sendRequest()">
 متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎
 </div>
 
-<div style="margin-top:6px;">
+<div style="margin-top:4px;">
 تسليم سريع بعد تأكيد الدفع
 </div>
 
@@ -1678,17 +1675,11 @@ class="info-value">
 
 <div class="discount">
 
-<div>
-السعر
-</div>
+<div style="font-size: 11px; color: var(--text-sub); margin-bottom: 2px;">السعر بعد الخصم (5%)</div>
 
 <div id="modalPrice"
 class="new-price">
 0 جنيه
-</div>
-
-<div style="margin-top: 6px;">
-خصم 5%
 </div>
 
 <div id="modalAfter"
@@ -1744,6 +1735,7 @@ onclick="sendOrder()">
 
 </div>
 
+</div>
 
 <script>
 
@@ -1769,6 +1761,7 @@ function toggleTheme() {
 
 function hideSplash(){
     const splash = document.getElementById("splash");
+    if(!splash) return;
     splash.style.opacity = "0";
     splash.style.visibility = "hidden";
     setTimeout(() => {
@@ -1777,7 +1770,6 @@ function hideSplash(){
     }, 400);
 }
 
-// تسريع الشاشة الافتتاحية بدلاً من 10 ثوانٍ
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(hideSplash, 1500);
 });
@@ -2058,6 +2050,10 @@ ${names[game]}
 
 products.forEach(function(item){
 
+let priceIconHtml = game === 'pubg' 
+    ? `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">` 
+    : `<i class="fa-solid fa-coins"></i>`;
+
 html+=`
 
 <div class="product">
@@ -2067,12 +2063,12 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
-<span class="price-val"><i class="fa-solid fa-coins"></i> ${item[1]} <span class="currency">ج.م</span></span>
+<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
+<span class="price-val">${priceIconHtml} ${item[1]} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
-onclick="openOrder('${escapeText(names[game]+' - '+item[0])}',${item[1]})">
+onclick="openOrder('${escapeText(names[game]+' - '+item[0])}', ${item[1]}, 'ج.م')">
 شراء الآن
 </button>
 
@@ -2111,28 +2107,35 @@ return text
 /* ================= ORDER ================= */
 
 let selectedProduct="";
-let selectedPrice=0;
+let selectedPriceText="";
 
-function openOrder(product,price){
+function openOrder(product, price, currency = "جنيه"){
 
-selectedProduct=product;
+selectedProduct = product;
 
-selectedPrice=price;
+let numPrice = parseFloat(price);
+let finalPrice = numPrice;
+let hasDiscount = false;
 
-document.getElementById("modalProduct")
-.innerText=product;
+if(!isNaN(numPrice)) {
+    finalPrice = (numPrice * 0.95).toFixed(2);
+    hasDiscount = true;
+}
 
-document.getElementById("modalPrice")
-.innerText=price+" جنيه";
+selectedPriceText = hasDiscount ? `${finalPrice} ${currency}` : `${price} ${currency}`;
 
-let after=price*0.95;
+document.getElementById("modalProduct").innerText = product;
 
-document.getElementById("modalAfter")
-.innerText=
-"بعد الخصم: "+after.toFixed(2)+" جنيه";
+if (hasDiscount) {
+    document.getElementById("modalPrice").innerText = finalPrice + " " + currency;
+    document.getElementById("modalAfter").innerText = "السعر الأصلي: " + price + " " + currency;
+    document.getElementById("modalAfter").style.display = "block";
+} else {
+    document.getElementById("modalPrice").innerText = price + " " + currency;
+    document.getElementById("modalAfter").style.display = "none";
+}
 
-document.getElementById("orderModal")
-.classList.add("show");
+document.getElementById("orderModal").classList.add("show");
 
 }
 
@@ -2143,7 +2146,6 @@ document.getElementById("orderModal")
 
 }
 
-// إغلاق النافذة عند الضغط على الخلفية الخارجية
 window.addEventListener('click', function(event) {
     let modal = document.getElementById("orderModal");
     if (event.target === modal) {
@@ -2162,9 +2164,9 @@ let text=
 encodeURIComponent(selectedProduct)+
 "%0A"+
 "السعر:%20"+
-encodeURIComponent(selectedPrice+" جنيه")+
+encodeURIComponent(selectedPriceText)+
 "%0A%0A"+
-"من متجر أسرع من نتكم 🔥";
+"من استور أسرع من نتكم 🔥";
 
 let url=
 "https://wa.me/201044049390?text="+text;
@@ -2235,12 +2237,12 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
+<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
 <span class="price-val"><i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
-onclick="openOrder('${escapeText(item[0])}',${item[1]})">
+onclick="openOrder('${escapeText(item[0])}', ${item[1]}, 'ج.م')">
 شراء الآن
 </button>
 
@@ -2323,12 +2325,12 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<span style="font-size:12px; opacity:0.8; font-weight:700;">السعر</span>
+<span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span>
 <span class="price-val"><i class="fa-solid fa-bolt"></i> ${after} <span class="currency">ج.م</span></span>
 </div>
 
 <button class="buy"
-onclick="openOrder('شحن ${item[0]}',${item[1]})">
+onclick="openOrder('شحن ${item[0]}', ${item[1]}, 'ج.م')">
 طلب الشحن
 </button>
 
@@ -2351,28 +2353,28 @@ document.getElementById("rechargeProducts")
 const shababData={
 
 eg:[
-["100 جنيه",75000],
-["300 جنيه",225000],
-["500 جنيه",375000],
-["1000 جنيه",750000],
-["2000 جنيه",1500000],
-["3000 جنيه",2250000]
+["100 جنيه",75000, "100 جنيه"],
+["300 جنيه",225000, "300 جنيه"],
+["500 جنيه",375000, "500 جنيه"],
+["1000 جنيه",750000, "1000 جنيه"],
+["2000 جنيه",1500000, "2000 جنيه"],
+["3000 جنيه",2250000, "3000 جنيه"]
 ],
 
 jo:[
-["10 دينار",450000],
-["20 دينار",900000],
-["30 دينار",1350000],
-["40 دينار",1800000],
-["50 دينار",2250000]
+["10 دينار",450000, "10 دينار"],
+["20 دينار",900000, "20 دينار"],
+["30 دينار",1350000, "30 دينار"],
+["40 دينار",1800000, "40 دينار"],
+["50 دينار",2250000, "50 دينار"]
 ],
 
 sa:[
-["100 ريال",900000],
-["200 ريال",1800000],
-["300 ريال",2700000],
-["400 ريال",3600000],
-["500 ريال",4500000]
+["100 ريال",900000, "100 ريال"],
+["200 ريال",1800000, "200 ريال"],
+["300 ريال",2700000, "300 ريال"],
+["400 ريال",3600000, "400 ريال"],
+["500 ريال",4500000, "500 ريال"]
 ]
 
 };
@@ -2403,12 +2405,12 @@ ${item[0]}
 </div>
 
 <div class="product-price-badge">
-<span style="font-size:12px; opacity:0.8; font-weight:700;">الكمية</span>
+<span style="font-size:10px; opacity:0.8; font-weight:700;">الكمية</span>
 <span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span>
 </div>
 
 <button class="buy"
-onclick="openOrder('شباب كونات ${item[0]}',${item[0].match(/[0-9]+/)[0]})">
+onclick="openOrder('شباب كونات - ${item[0]}', '${item[2]}', '')">
 شراء
 </button>
 
@@ -2454,7 +2456,7 @@ if(!phone || phone.length < 8){
 
 let text=
 "السلام عليكم 👋%0A%0A"+
-"طلب منتج من متجر أسرع من نتكم 🔥%0A%0A"+
+"طلب منتج من استور أسرع من نتكم 🔥%0A%0A"+
 "المنتج: "+encodeURIComponent(name)+
 "%0Aالنوع: "+encodeURIComponent(type)+
 "%0Aالهاتف: "+encodeURIComponent(phone)+
@@ -2497,4 +2499,3 @@ document.querySelector("#shabab .subtab")
 
 </body>
 </html>
-
