@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>استور أسرع من نتكم 🔥 | المتجر الأسرع للشحن الرقمي</title>
+<title>شحن جميع الألعاب 🔥 | المتجر الأسرع للشحن الرقمي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -85,17 +85,26 @@ button{border:0;outline:0;cursor:pointer;}
 a{text-decoration:none;color:inherit;}
 .container{width:100%;padding:12px 10px;}
 
-/* تصحيح وتصغير حجم العنوان والماركة لمنع التداخل */
 .pro-brand-text{background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:var(--brand-glow);font-weight:800;letter-spacing:-0.2px;display:inline-flex;align-items:center;gap:3px;cursor:pointer;font-size:13px;white-space:nowrap;}
 .fire-icon{color:#FF8A00;-webkit-text-fill-color:initial;filter:drop-shadow(0 0 6px #FF8A00);font-size:11px;animation:pulseFire 1.8s infinite alternate ease-in-out;}
 @keyframes pulseFire{0%{transform:scale(1);filter:drop-shadow(0 0 5px #FF8A00);}100%{transform:scale(1.12);filter:drop-shadow(0 0 10px var(--neon-blue));}}
+
+/* تعديل حجم الوصف الفرعي ليصبح أصغر */
+.brand-sub, .splash-sub {
+    font-size: 8.5px !important;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-sub);
+}
 
 #splash{position:absolute;inset:0;z-index:99999;background:var(--bg-main);display:flex;justify-content:center;align-items:center;text-align:center;backdrop-filter:blur(15px);transition:opacity 0.4s ease, visibility 0.4s ease;}
 .splash-content{width:90%;}
 .logo-icon{width:85px;height:85px;border-radius:22px;margin:auto;display:flex;align-items:center;justify-content:center;background:var(--dark-gradient);border:1px solid var(--neon-blue);box-shadow:var(--glow-blue);backdrop-filter:blur(10px);overflow:hidden;padding:4px;}
 .splash-img-logo{width:100%;height:100%;object-fit:cover;border-radius:18px;}
 .splash-title{margin-top:15px;font-size:20px!important;}
-.splash-sub{color:var(--text-sub);margin:6px 0 20px;font-size:12px;}
+.splash-sub{margin:6px 0 20px;}
 .skip{background:var(--btn-bg);color:var(--btn-text);padding:10px 25px;border-radius:22px;font-weight:800;box-shadow:var(--btn-shadow);font-size:12px;}
 .skip:active{transform:scale(0.95);}
 
@@ -104,7 +113,6 @@ a{text-decoration:none;color:inherit;}
 .avatar{width:36px;height:36px;object-fit:cover;border-radius:50%;border:2px solid var(--neon-blue);box-shadow:var(--glow-blue);flex-shrink:0;}
 .brand-name{font-size:13px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;}
 .verified-icon{color:var(--neon-blue);font-size:11px;-webkit-text-fill-color:initial;filter:drop-shadow(0 0 4px var(--neon-blue));flex-shrink:0;}
-.brand-sub{color:var(--text-sub);font-size:9.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 .header-controls{display:flex;align-items:center;gap:5px;flex-shrink:0;}
 .theme-toggle-btn{width:34px;height:34px;border-radius:50%;background:var(--bg-card);color:var(--neon-blue);border:1px solid var(--border-color);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:var(--shadow-3d);}
@@ -128,7 +136,7 @@ a{text-decoration:none;color:inherit;}
 
 .hero{text-align:center;padding:4px 0 10px;}
 .hero h1{font-size:16px;margin-bottom:2px;display:flex;align-items:center;justify-content:center;gap:4px;}
-.hero p{color:var(--text-sub);margin-top:1px;font-size:11px;font-weight:600;}
+.hero p{margin-top:1px;}
 
 .search-box{position:relative;margin:8px 0 12px;}
 .search-input{width:100%;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);color:var(--text-main);padding:10px 38px 10px 34px;border-radius:16px;font-size:12px;outline:none;box-shadow:var(--shadow-3d);}
@@ -145,7 +153,6 @@ a{text-decoration:none;color:inherit;}
 .section.active{display:block;animation:fadeIn 0.3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
 
-/* تصميم الألعاب المحسن */
 .game-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;}
 .game-card-wrapper{display:flex;flex-direction:column;grid-column: span 1;}
 .game-card-wrapper.expanded{grid-column: span 2;}
@@ -298,7 +305,7 @@ textarea.input{min-height:75px;resize:none;}
 <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار استور أسرع من نتكم" class="splash-img-logo">
 </div>
 <div class="splash-title pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></div>
-<div class="splash-sub" data-i18n="splash_sub">أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<div class="splash-sub" data-i18n="splash_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
 <button class="skip" onclick="hideSplash()" data-i18n="skip">تخطي</button>
 </div>
 </div>
@@ -334,7 +341,7 @@ textarea.input{min-height:75px;resize:none;}
 <span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
-<p data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</p>
+<p class="brand-sub" data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</p>
 <div class="social-channels">
 <a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram"><i class="fa-brands fa-telegram"></i> <span data-i18n="telegram">التليجرام</span></a>
 <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="whatsapp">الواتساب</span></a>
@@ -533,7 +540,7 @@ textarea.input{min-height:75px;resize:none;}
 <span class="pro-brand-text" style="font-size: 12px;" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
-<div data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<div class="brand-sub" data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
 <div style="margin-top:3px;" data-i18n="footer_speed">تسليم سريع بعد تأكيد الدفع</div>
 <div class="footer-social">
 <a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام"><i class="fa-brands fa-telegram" style="color: var(--neon-blue);"></i></a>
@@ -697,7 +704,7 @@ let currentLang = 'ar';
 const translations = {
     ar: {
         current_lang_label: "العربية",
-        splash_sub: "أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        splash_sub: "متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         skip: "تخطي",
         brand_sub: "متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         live: "فوري",
@@ -753,7 +760,7 @@ const translations = {
     },
     en: {
         current_lang_label: "English",
-        splash_sub: "Welcome to the fastest and most secure recharge store (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        splash_sub: "The fastest & cheapest recharge store (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         skip: "Skip",
         brand_sub: "The fastest & cheapest recharge store (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         live: "Instant",
@@ -809,7 +816,7 @@ const translations = {
     },
     ja: {
         current_lang_label: "日本語",
-        splash_sub: "最速かつ最も安全なチャージストアへようこそ (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        splash_sub: "最速かつ最安値のチャージストア (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         skip: "スキップ",
         brand_sub: "最速かつ最安値のチャージストア (﷼𝑅 𝐸 𝐴 𝐿) 💎",
         live: "即時",
@@ -1210,3 +1217,4 @@ shababTab("eg", document.querySelector("#shabab .subtab"));
 </script>
 </body>
 </html>
+ح
