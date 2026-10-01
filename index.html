@@ -104,6 +104,12 @@ a{text-decoration:none;color:inherit;}
 .header-controls{display:flex;align-items:center;gap:8px;}
 .theme-toggle-btn{width:38px;height:38px;border-radius:50%;background:var(--bg-card);color:var(--neon-blue);border:1px solid var(--border-color);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:var(--shadow-3d);}
 .theme-toggle-btn:active{transform:scale(0.9);}
+.lang-dropdown-wrapper { position: relative; display: inline-block; }
+.lang-btn { height: 38px; padding: 0 10px; border-radius: 50px; background: var(--bg-card); color: var(--neon-blue); border: 1px solid var(--border-color); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 13px; font-weight: 800; box-shadow: var(--shadow-3d); }
+.lang-menu { position: absolute; top: 45px; left: 0; background: var(--modal-bg); border: 1px solid var(--border-accent); border-radius: 14px; box-shadow: var(--glow-purple); display: none; flex-direction: column; overflow: hidden; z-index: 1000; min-width: 110px; }
+.lang-menu.show { display: flex; animation: fadeIn 0.2s ease; }
+.lang-option { padding: 8px 12px; font-size: 12px; font-weight: 800; color: var(--text-main); background: transparent; text-align: right; display: flex; align-items: center; gap: 6px; }
+.lang-option:hover { background: var(--bg-card-inner); color: var(--neon-blue); }
 .live-badge{background:rgba(34, 197, 94, 0.1);border:1px solid rgba(34, 197, 94, 0.3);color:var(--success);padding:5px 10px;border-radius:16px;font-size:10px;font-weight:800;display:flex;align-items:center;gap:5px;box-shadow:0 0 10px rgba(34, 197, 94, 0.2);}
 .live-dot{width:6px;height:6px;background-color:var(--success);border-radius:50%;box-shadow:0 0 8px var(--success);}
 .social-channels{display:flex;justify-content:center;gap:8px;margin:12px 0 8px;}
@@ -126,31 +132,117 @@ a{text-decoration:none;color:inherit;}
 .section{display:none;}
 .section.active{display:block;animation:fadeIn 0.3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-.game-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
-.game-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-3d);display:flex;flex-direction:column;}
-.game-card:hover{border-color:var(--neon-blue);box-shadow:var(--glow-blue);}
-.game-card:active{transform:scale(0.98);}
-.game-img-wrapper{width:100%;height:110px;background:var(--bg-card-inner);display:flex;align-items:center;justify-content:center;padding:8px;border-bottom:1px solid var(--border-color);}
-.game-img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.15));}
-.game-info{padding:10px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;}
-.game-name{font-weight:900;margin-bottom:2px;font-size:13px;color:var(--text-main);}
-.game-desc{color:var(--text-sub);font-size:10px;margin-bottom:10px;font-weight:600;}
-.open-game{width:100%;background:var(--btn-bg);color:var(--btn-text);padding:8px;border-radius:12px;font-weight:800;font-size:11px;box-shadow:var(--btn-shadow);display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* 🎮 تصميم أيقونات الألعاب الجديد (Gaming Premium UI) - تم تكبير الحجم */
+.game-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:14px;}
+.game-card-wrapper{display:flex;flex-direction:column;grid-column: span 1;}
+.game-card-wrapper.expanded{grid-column: span 2;}
+.game-card{
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform: perspective(1000px) translateZ(0);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.game-card:hover{
+    transform: translateY(-4px) scale(1.01);
+    border-color: var(--neon-blue);
+    box-shadow: 0 15px 30px -5px rgba(0, 217, 255, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* حاوية الأيقونة الفخمة (تم تكبير الارتفاع لتناسب الأيقونة الكبيرة) */
+.game-img-wrapper{
+    width: 100%;
+    height: 155px;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, #0b0f19 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+}
+/* إضاءة Glow خلفية مخصصة حسب هوية اللعبة */
+.game-img-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: var(--glow-color, var(--neon-blue));
+    filter: blur(35px);
+    opacity: 0.6;
+    z-index: 1;
+}
+/* انعكاس زجاجي راقي فوق الأيقونة */
+.game-img-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.06) 50%, transparent 55%);
+    pointer-events: none;
+}
+/* تم تكبير الأيقونة لتصبح واضحة وكبيرة */
+.game-img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 22px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+.game-info{padding: 12px 14px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;background: rgba(15, 23, 42, 0.6);backdrop-filter: blur(10px);}
+.game-name{font-weight:900;margin-bottom:2px;font-size:13px;color:#FFFFFF;letter-spacing:0.2px;}
+.game-desc{color:#94a3b8;font-size:10px;margin-bottom:10px;font-weight:600;}
+.open-game{width:100%;background:var(--btn-bg);color:var(--btn-text);padding:9px;border-radius:12px;font-weight:800;font-size:11px;box-shadow:var(--btn-shadow);display:flex;align-items:center;justify-content:center;gap:6px;}
 .open-game:active{transform:scale(0.95);}
+
+/* حاوية الباقات المنسدلة تحت كل لعبة مباشرة */
+.inline-packages-container{display:none;margin-top:10px;background:var(--bg-card-inner);border:1px solid var(--border-accent);border-radius:18px;padding:12px;animation: fadeIn 0.3s ease;}
+.inline-packages-container.show{display:block;}
+.inline-packages-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
+
 .product-title{font-size:18px;font-weight:900;margin:15px 0 10px;display:flex;align-items:center;gap:6px;color:var(--text-main);}
-.product-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
-.product{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:18px;padding:12px;box-shadow:var(--shadow-3d);position:relative;display:flex;flex-direction:column;justify-content:space-between;}
-.product:hover{border-color:var(--neon-purple);box-shadow:var(--glow-purple);}
-.product-name{font-weight:800;min-height:36px;font-size:12px;display:flex;align-items:center;line-height:1.3;color:var(--text-main);}
-.product-price-badge{background:var(--price-bg);border:1px solid var(--price-border);color:var(--price-text);padding:6px 10px;border-radius:12px;font-size:14px;font-weight:900;display:inline-flex;align-items:center;justify-content:space-between;gap:6px;margin:8px 0 10px;width:100%;box-shadow:var(--glow-gold);backdrop-filter:blur(6px);}
-.product-price-badge .price-val{filter:var(--price-glow);display:flex;align-items:center;gap:5px;color:var(--gold);}
-.product-price-badge i{font-size:13px;color:var(--gold);filter:drop-shadow(0 0 5px var(--gold));}
-.uc-badge-icon{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 6px var(--gold));vertical-align:middle;}
-.ff-diamond-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--neon-blue));vertical-align:middle;}
-.tiktok-coin-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--gold));vertical-align:middle;}
-.mlbb-diamond-icon{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 6px var(--neon-blue));vertical-align:middle;}
-.currency{font-size:10px;opacity:0.85;font-weight:700;}
-.buy{width:100%;background:var(--gold-gradient);color:#FFFFFF;border-radius:12px;padding:9px;font-weight:900;font-size:12px;box-shadow:var(--glow-gold);}
+.product-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;perspective: 1000px;}
+
+/* 3D Modern Product Card Styles */
+.product{
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(2deg) rotateY(0deg) translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.product:hover{
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-4px) translateZ(10px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+.product-name{font-weight:800;min-height:30px;font-size:11px;display:flex;align-items:center;line-height:1.3;color:var(--text-main);}
+.product-price-badge{background:var(--price-bg);border:1px solid var(--price-border);color:var(--price-text);padding:6px 8px;border-radius:12px;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:space-between;gap:4px;margin:6px 0 8px;width:100%;box-shadow:var(--glow-gold);backdrop-filter:blur(6px);}
+.product-price-badge .price-val{filter:var(--price-glow);display:flex;align-items:center;gap:4px;color:var(--gold);}
+.uc-badge-icon{width:24px;height:24px;object-fit:contain;filter:drop-shadow(0 0 5px var(--gold));vertical-align:middle;}
+.ff-diamond-icon{width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 0 5px var(--neon-blue));vertical-align:middle;}
+.tiktok-coin-icon{width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 0 5px var(--gold));vertical-align:middle;}
+.mlbb-diamond-icon{width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 0 5px var(--neon-blue));vertical-align:middle;}
+.currency{font-size:9px;opacity:0.85;font-weight:700;}
+.buy{width:100%;background:var(--gold-gradient);color:#FFFFFF;border-radius:10px;padding:8px;font-weight:900;font-size:11px;box-shadow:var(--glow-gold);cursor:pointer;}
 .buy:active{transform:scale(0.95);}
 .subtabs{display:flex;gap:8px;overflow-x:auto;margin:8px 0 14px;-webkit-overflow-scrolling:touch;}
 .subtabs::-webkit-scrollbar{display:none;}
@@ -203,13 +295,12 @@ textarea.input{min-height:90px;resize:none;}
 <div id="mobile-frame">
 <div id="splash">
 <div class="splash-content">
-<!-- تم استبدال أيقونة البرق بصورتك الجديدة في واجهة البداية -->
 <div class="logo-icon">
 <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار استور أسرع من نتكم" class="splash-img-logo">
 </div>
 <div class="splash-title pro-brand-text">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></div>
-<div class="splash-sub">أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
-<button class="skip" onclick="hideSplash()">تخطي</button>
+<div class="splash-sub" data-i18n="splash_sub">أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<button class="skip" onclick="hideSplash()" data-i18n="skip">تخطي</button>
 </div>
 </div>
 <div id="toast"></div>
@@ -223,12 +314,20 @@ textarea.input{min-height:90px;resize:none;}
 <span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
-<div class="brand-sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<div class="brand-sub" data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
 </div>
 </div>
 <div class="header-controls">
+<div class="lang-dropdown-wrapper">
+<button class="lang-btn" onclick="toggleLangMenu()" id="langBtn"><i class="fa-solid fa-globe"></i> <span id="currentLangLabel">العربية</span></button>
+<div class="lang-menu" id="langMenu">
+<button class="lang-option" onclick="changeLanguage('ar')">🇪🇬 العربية</button>
+<button class="lang-option" onclick="changeLanguage('en')">🇺🇸 English</button>
+<button class="lang-option" onclick="changeLanguage('ja')">🇯🇵 日本語</button>
+</div>
+</div>
 <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="تبديل المظهر"><i class="fa-solid fa-sun"></i></button>
-<div class="live-badge"><span class="live-dot"></span>فوري</div>
+<div class="live-badge"><span class="live-dot"></span><span data-i18n="live">فوري</span></div>
 </div>
 </header>
 <section class="hero">
@@ -236,97 +335,136 @@ textarea.input{min-height:90px;resize:none;}
 <span class="pro-brand-text" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </h1>
-<p>متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</p>
+<p data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</p>
 <div class="social-channels">
-<a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram"><i class="fa-brands fa-telegram"></i> التليجرام</a>
-<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel"><i class="fa-brands fa-whatsapp"></i> الواتساب</a>
+<a href="https://t.me/ReAL_126" target="_blank" class="social-btn btn-telegram"><i class="fa-brands fa-telegram"></i> <span data-i18n="telegram">التليجرام</span></a>
+<a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" class="social-btn btn-whatsapp-channel"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="whatsapp">الواتساب</span></a>
 </div>
 </section>
 <div class="tabs">
-<button class="tab active" onclick="showSection('games',this)">🎮 الألعاب</button>
-<button class="tab" onclick="showSection('cards',this)">💳 بطاقات هدايا</button>
-<button class="tab" onclick="showSection('recharge',this)">⚡ شحن سريع</button>
-<button class="tab" onclick="showSection('shabab',this)">🪙 شباب كونات</button>
-<button class="tab" onclick="showSection('soon',this)">🔜 قريباً</button>
-<button class="tab" onclick="showSection('request',this)">📦 طلب منتج</button>
-<button class="tab" id="secretTab" style="display:none; border-color: var(--gold); color: var(--gold);" onclick="showSection('secretDashboard',this)">👑 القسم السري</button>
+<button class="tab active" onclick="showSection('games',this)" data-i18n="tab_games">🎮 الألعاب</button>
+<button class="tab" onclick="showSection('cards',this)" data-i18n="tab_cards">💳 بطاقات هدايا</button>
+<button class="tab" onclick="showSection('recharge',this)" data-i18n="tab_recharge">⚡ شحن سريع</button>
+<button class="tab" onclick="showSection('shabab',this)" data-i18n="tab_shabab">🪙 شباب كونات</button>
+<button class="tab" onclick="showSection('soon',this)" data-i18n="tab_soon">🔜 قريباً</button>
+<button class="tab" onclick="showSection('request',this)" data-i18n="tab_request">📦 طلب منتج</button>
+<button class="tab" id="secretTab" style="display:none; border-color: var(--gold); color: var(--gold);" onclick="showSection('secretDashboard',this)" data-i18n="tab_secret">👑 القسم السري</button>
 </div>
 <section id="games" class="section active">
 <div class="search-box">
 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-<input type="text" class="search-input" id="gameSearch" placeholder="ابحث عن لعبة أو تطبيق..." onkeyup="filterGames()">
+<input type="text" class="search-input" id="gameSearch" placeholder="ابحث عن لعبة أو تطبيق..." onkeyup="filterGames()" data-i18n_placeholder="search_placeholder">
 <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" aria-label="مسح البحث"><i class="fa-solid fa-xmark"></i></button>
 </div>
 <div class="game-grid" id="gameGrid">
-<div class="game-card" data-name="pubg mobile ببجي">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="PUBG Mobile" src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp"></div>
+<!-- PUBG -->
+<div class="game-card-wrapper" id="wrap-pubg" data-name="pubg mobile ببجي">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #FFB800;"><img class="game-img" loading="lazy" alt="PUBG Mobile" src="https://www.image2url.com/r2/default/images/1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp"></div>
 <div class="game-info">
 <div class="game-name">PUBG Mobile</div>
-<div class="game-desc">شحن UC وشعبية وبطاقات</div>
-<button class="open-game" onclick="toggleGamePrices('pubg', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_pubg">شحن UC وشعبية وبطاقات</div>
+<button class="open-game" onclick="toggleInlinePackages('pubg', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="mobile legends موبايل ليجند">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Mobile Legends" src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg"></div>
+<div class="inline-packages-container" id="inline-pubg"></div>
+</div>
+
+<!-- Mobile Legends -->
+<div class="game-card-wrapper" id="wrap-mlbb" data-name="mobile legends موبايل ليجند">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #00D9FF;"><img class="game-img" loading="lazy" alt="Mobile Legends" src="https://www.image2url.com/r2/default/images/1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg"></div>
 <div class="game-info">
 <div class="game-name">Mobile Legends</div>
-<div class="game-desc">شحن Diamonds</div>
-<button class="open-game" onclick="toggleGamePrices('mlbb', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_mlbb">شحن Diamonds</div>
+<button class="open-game" onclick="toggleInlinePackages('mlbb', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="free fire فري فاير">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Free Fire" src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp"></div>
+<div class="inline-packages-container" id="inline-mlbb"></div>
+</div>
+
+<!-- Free Fire -->
+<div class="game-card-wrapper" id="wrap-ff" data-name="free fire فري فاير">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #FF4D00;"><img class="game-img" loading="lazy" alt="Free Fire" src="https://www.image2url.com/r2/default/images/1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp"></div>
 <div class="game-info">
 <div class="game-name">Free Fire</div>
-<div class="game-desc">شحن جواهر</div>
-<button class="open-game" onclick="toggleGamePrices('ff', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_ff">شحن جواهر</div>
+<button class="open-game" onclick="toggleInlinePackages('ff', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="yalla ludo يلا لودو">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="يلا لودو" src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png"></div>
+<div class="inline-packages-container" id="inline-ff"></div>
+</div>
+
+<!-- Yalla Ludo -->
+<div class="game-card-wrapper" id="wrap-yalla" data-name="yalla ludo يلا لودو">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #0088FF;"><img class="game-img" loading="lazy" alt="يلا لودو" src="https://www.image2url.com/r2/default/images/1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png"></div>
 <div class="game-info">
 <div class="game-name">يلا لودو</div>
-<div class="game-desc">حسابات و ID و VIP</div>
-<button class="open-game" onclick="toggleGamePrices('yalla', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_yalla">حسابات و ID و VIP</div>
+<button class="open-game" onclick="toggleInlinePackages('yalla', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="tiktok تيك توك">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="TikTok" src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png"></div>
+<div class="inline-packages-container" id="inline-yalla"></div>
+</div>
+
+<!-- TikTok -->
+<div class="game-card-wrapper" id="wrap-tiktok" data-name="tiktok تيك توك">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #FE2C55;"><img class="game-img" loading="lazy" alt="TikTok" src="https://www.image2url.com/r2/default/images/1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png"></div>
 <div class="game-info">
 <div class="game-name">TikTok</div>
-<div class="game-desc">شحن عملات</div>
-<button class="open-game" onclick="toggleGamePrices('tiktok', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_tiktok">شحن عملات</div>
+<button class="open-game" onclick="toggleInlinePackages('tiktok', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="gangstar جانجستر">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Gangstar" src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp"></div>
+<div class="inline-packages-container" id="inline-tiktok"></div>
+</div>
+
+<!-- Gangstar -->
+<div class="game-card-wrapper" id="wrap-gangstar" data-name="gangstar جانجستر">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #8B5CF6;"><img class="game-img" loading="lazy" alt="Gangstar" src="https://www.image2url.com/r2/default/images/1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp"></div>
 <div class="game-info">
 <div class="game-name">Gangstar</div>
-<div class="game-desc">شحن ماسات</div>
-<button class="open-game" onclick="toggleGamePrices('gangstar', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_gangstar">شحن ماسات</div>
+<button class="open-game" onclick="toggleInlinePackages('gangstar', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="weplay وي بلاي">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="WePlay" src="https://www.image2url.com/r2/default/images/1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg"></div>
+<div class="inline-packages-container" id="inline-gangstar"></div>
+</div>
+
+<!-- WePlay -->
+<div class="game-card-wrapper" id="wrap-weplay" data-name="weplay وي بلاي">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #EC4899;"><img class="game-img" loading="lazy" alt="WePlay" src="https://www.image2url.com/r2/default/images/1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg"></div>
 <div class="game-info">
 <div class="game-name">WePlay</div>
-<div class="game-desc">ذهب و VIP</div>
-<button class="open-game" onclick="toggleGamePrices('weplay', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_weplay">ذهب و VIP</div>
+<button class="open-game" onclick="toggleInlinePackages('weplay', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
-<div class="game-card" data-name="roblox روبلوكس">
-<div class="game-img-wrapper"><img class="game-img" loading="lazy" alt="Roblox" src="https://www.image2url.com/r2/default/images/1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png"></div>
+<div class="inline-packages-container" id="inline-weplay"></div>
+</div>
+
+<!-- Roblox -->
+<div class="game-card-wrapper" id="wrap-roblox" data-name="roblox روبلوكس">
+<div class="game-card">
+<div class="game-img-wrapper" style="--glow-color: #EF4444;"><img class="game-img" loading="lazy" alt="Roblox" src="https://www.image2url.com/r2/default/images/1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png"></div>
 <div class="game-info">
 <div class="game-name">Roblox</div>
-<div class="game-desc">Robux و Gift Cards</div>
-<button class="open-game" onclick="toggleGamePrices('roblox', this)"><i class="fa-solid fa-gamepad"></i> عرض الباقات</button>
+<div class="game-desc" data-i18n="desc_roblox">Robux و Gift Cards</div>
+<button class="open-game" onclick="toggleInlinePackages('roblox', this)"><i class="fa-solid fa-gamepad"></i> <span data-i18n="show_packages">عرض الباقات</span></button>
 </div>
 </div>
+<div class="inline-packages-container" id="inline-roblox"></div>
 </div>
-<div id="products" style="margin-top:20px;"></div>
+
+</div>
 </section>
 <section id="cards" class="section">
-<div class="product-title">💳 بطاقات شحن وهدايا</div>
+<div class="product-title" data-i18n="tab_cards">💳 بطاقات شحن وهدايا</div>
 <div class="subtabs">
 <button class="subtab active" onclick="cardsTab('google',this)">Google Play</button>
 <button class="subtab" onclick="cardsTab('itunes',this)">iTunes</button>
@@ -335,60 +473,60 @@ textarea.input{min-height:90px;resize:none;}
 <div id="cardsProducts"></div>
 </section>
 <section id="recharge" class="section">
-<div class="product-title">⚡ شحن الرصيد والإنترنت</div>
+<div class="product-title" data-i18n="tab_recharge">⚡ شحن الرصيد والإنترنت</div>
 <div class="subtabs">
 <button class="subtab active" onclick="rechargeTab('we',this)">WE</button>
 <button class="subtab" onclick="rechargeTab('vodafone',this)">Vodafone</button>
-<button class="subtab" onclick="rechargeTab('etisalat',this)">اتصالات</button>
-<button class="subtab" onclick="rechargeTab('gas',this)">شحن الغاز</button>
+<button class="subtab" onclick="rechargeTab('etisalat',this)" data-i18n="sub_etisalat">اتصالات</button>
+<button class="subtab" onclick="rechargeTab('gas',this)" data-i18n="sub_gas">شحن الغاز</button>
 </div>
 <div id="rechargeProducts"></div>
 <div class="payment">
-<h3>💳 الدفع</h3>
+<h3 data-i18n="payment_title">💳 الدفع</h3>
 <div class="payment-number">01044049390</div>
-<button class="copy" onclick="copyText('01044049390')">📋 نسخ رقم فودافون كاش</button>
-<a class="whatsapp" href="https://wa.me/201044049390?text=السلام%20عليكم%20عايز%20شحن">💬 إرسال الطلب على واتساب</a>
+<button class="copy" onclick="copyText('01044049390')" data-i18n="copy_vodafone">📋 نسخ رقم فودافون كاش</button>
+<a class="whatsapp" href="https://wa.me/201044049390?text=السلام%20عليكم%20عايز%20شحن" data-i18n="send_whatsapp">💬 إرسال الطلب على واتساب</a>
 </div>
 </section>
 <section id="shabab" class="section">
-<div class="product-title">🪙 شباب كونات</div>
+<div class="product-title" data-i18n="tab_shabab">🪙 شباب كونات</div>
 <div class="subtabs">
-<button class="subtab active" onclick="shababTab('eg',this)">🇪🇬 مصر</button>
-<button class="subtab" onclick="shababTab('jo',this)">🇯🇴 الأردن</button>
-<button class="subtab" onclick="shababTab('sa',this)">🇸🇦 السعودية</button>
+<button class="subtab active" onclick="shababTab('eg',this)" data-i18n="sub_egypt">🇪🇬 مصر</button>
+<button class="subtab" onclick="shababTab('jo',this)" data-i18n="sub_jordan">🇯🇴 الأردن</button>
+<button class="subtab" onclick="shababTab('sa',this)" data-i18n="sub_saudi">🇸🇦 السعودية</button>
 </div>
 <div id="shababProducts"></div>
 </section>
 <section id="soon" class="section">
-<div class="product-title">🔜 قريباً</div>
+<div class="product-title" data-i18n="tab_soon">🔜 قريباً</div>
 <div class="soon-grid">
-<div class="soon-card"><i class="fa-brands fa-fort-awesome"></i><h3>Fortnite</h3><p>قريباً</p></div>
-<div class="soon-card"><i class="fa-solid fa-crosshairs"></i><h3>Call of Duty</h3><p>قريباً</p></div>
-<div class="soon-card"><i class="fa-solid fa-gamepad"></i><h3>Valorant</h3><p>قريباً</p></div>
-<div class="soon-card"><i class="fa-solid fa-film"></i><h3>Netflix</h3><p>قريباً</p></div>
-<div class="soon-card"><i class="fa-solid fa-fire"></i><h3>Free Fire MAX</h3><p>قريباً</p></div>
+<div class="soon-card"><i class="fa-brands fa-fort-awesome"></i><h3>Fortnite</h3><p data-i18n="soon_text">قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-crosshairs"></i><h3>Call of Duty</h3><p data-i18n="soon_text">قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-gamepad"></i><h3>Valorant</h3><p data-i18n="soon_text">قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-film"></i><h3>Netflix</h3><p data-i18n="soon_text">قريباً</p></div>
+<div class="soon-card"><i class="fa-solid fa-fire"></i><h3>Free Fire MAX</h3><p data-i18n="soon_text">قريباً</p></div>
 </div>
 </section>
 <section id="request" class="section">
-<div class="product-title">📦 اطلب منتج</div>
+<div class="product-title" data-i18n="tab_request">📦 اطلب منتج</div>
 <div class="form">
-<input id="requestName" class="input" placeholder="اسم المنتج">
-<input id="requestType" class="input" placeholder="نوع المنتج">
-<input id="requestPhone" class="input" placeholder="رقم الهاتف" type="tel">
-<textarea id="requestDetails" class="input" placeholder="اكتب تفاصيل طلبك"></textarea>
-<button class="send" onclick="sendRequest()">💬 إرسال الطلب على واتساب</button>
+<input id="requestName" class="input" placeholder="اسم المنتج" data-i18n_placeholder="req_name">
+<input id="requestType" class="input" placeholder="نوع المنتج" data-i18n_placeholder="req_type">
+<input id="requestPhone" class="input" placeholder="رقم الهاتف" type="tel" data-i18n_placeholder="req_phone">
+<textarea id="requestDetails" class="input" placeholder="اكتب تفاصيل طلبك" data-i18n_placeholder="req_details"></textarea>
+<button class="send" onclick="sendRequest()" data-i18n="send_whatsapp">💬 إرسال الطلب على واتساب</button>
 </div>
 </section>
 <section id="secretDashboard" class="section">
-<div class="product-title" style="color: var(--gold);">👑 إحصائيات صاحب المتجر</div>
+<div class="product-title" style="color: var(--gold);" data-i18n="tab_secret">👑 إحصائيات صاحب المتجر</div>
 <div class="form">
 <div class="admin-stats-grid">
-<div class="admin-stat-card"><div class="admin-stat-title">إجمالي الزيارات</div><div class="admin-stat-num" id="statVisits">0</div></div>
-<div class="admin-stat-card"><div class="admin-stat-title">الزوار اليوم الفريدين</div><div class="admin-stat-num" id="statUnique">0</div></div>
-<div class="admin-stat-card"><div class="admin-stat-title">عرض الباقات</div><div class="admin-stat-num" id="statPackageViews">0</div></div>
-<div class="admin-stat-card"><div class="admin-stat-title">الطلبات للواتس</div><div class="admin-stat-num" id="statOrdersSent">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title" data-i18n="stat_visits">إجمالي الزيارات</div><div class="admin-stat-num" id="statVisits">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title" data-i18n="stat_unique">الزوار اليوم الفريدين</div><div class="admin-stat-num" id="statUnique">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title" data-i18n="stat_packages">عرض الباقات</div><div class="admin-stat-num" id="statPackageViews">0</div></div>
+<div class="admin-stat-card"><div class="admin-stat-title" data-i18n="stat_orders">الطلبات للواتس</div><div class="admin-stat-num" id="statOrdersSent">0</div></div>
 </div>
-<button class="buy" style="margin-top:20px; background: var(--main-gradient);" onclick="resetAdminStats()">🔄 إعادة ضبط الإحصائيات</button>
+<button class="buy" style="margin-top:20px; background: var(--main-gradient);" onclick="resetAdminStats()" data-i18n="reset_stats">🔄 إعادة ضبط الإحصائيات</button>
 </div>
 </section>
 <footer class="footer">
@@ -396,8 +534,8 @@ textarea.input{min-height:90px;resize:none;}
 <span class="pro-brand-text" style="font-size: 14px;" onclick="handleSecretClick()">استور أسرع من نتكم <i class="fa-solid fa-fire fire-icon"></i></span>
 <i class="fa-solid fa-circle-check verified-icon"></i>
 </div>
-<div>متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
-<div style="margin-top:4px;">تسليم سريع بعد تأكيد الدفع</div>
+<div data-i18n="brand_sub">متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎</div>
+<div style="margin-top:4px;" data-i18n="footer_speed">تسليم سريع بعد تأكيد الدفع</div>
 <div class="footer-social">
 <a href="https://t.me/ReAL_126" target="_blank" title="قناة التليجرام" aria-label="قناة التليجرام"><i class="fa-brands fa-telegram" style="color: var(--neon-blue);"></i></a>
 <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" title="قناة الواتساب" aria-label="قناة الواتساب"><i class="fa-brands fa-whatsapp" style="color: var(--success);"></i></a>
@@ -408,29 +546,29 @@ textarea.input{min-height:90px;resize:none;}
 <div id="orderModal" class="modal">
 <div class="modal-box">
 <div class="modal-head">
-<h2>تأكيد الطلب</h2>
+<h2 data-i18n="modal_title">تأكيد الطلب</h2>
 <button class="close" onclick="closeModal()" aria-label="إغلاق">×</button>
 </div>
 <div class="info">
-<div class="info-label">المنتج</div>
+<div class="info-label" data-i18n="modal_product">المنتج</div>
 <div id="modalProduct" class="info-value">-</div>
 </div>
 <div class="discount">
-<div style="font-size: 11px; color: var(--text-sub); margin-bottom: 2px;">السعر بعد الخصم (5%)</div>
+<div style="font-size: 11px; color: var(--text-sub); margin-bottom: 2px;" data-i18n="modal_discount">السعر بعد الخصم (5%)</div>
 <div id="modalPrice" class="new-price">0 جنيه</div>
 <div id="modalAfter" class="old-price">-</div>
 </div>
 <div class="info">
-<div class="info-label">فودافون كاش</div>
+<div class="info-label" data-i18n="modal_vodafone">فودافون كاش</div>
 <div class="info-value">01044049390</div>
-<button class="copy" onclick="copyText('01044049390')">📋 نسخ الرقم</button>
+<button class="copy" onclick="copyText('01044049390')" data-i18n="copy_number">📋 نسخ الرقم</button>
 </div>
 <div class="info">
-<div class="info-label">الدعم</div>
+<div class="info-label" data-i18n="modal_support">الدعم</div>
 <div class="info-value">01017954664</div>
-<button class="copy" onclick="copyText('01017954664')">📋 نسخ رقم الدعم</button>
+<button class="copy" onclick="copyText('01017954664')" data-i18n="copy_support">📋 نسخ رقم الدعم</button>
 </div>
-<button class="order" onclick="sendOrder()">💬 تأكيد الطلب على واتساب</button>
+<button class="order" onclick="sendOrder()" data-i18n="modal_confirm">💬 تأكيد الطلب على واتساب</button>
 </div>
 </div>
 </div>
@@ -476,7 +614,7 @@ function toggleTheme() {
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
         themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        showToast("☀️️ التبديل للوضع الفاتح الأنيق");
+        showToast("☀ التبديل للوضع الفاتح الأنيق");
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
@@ -541,12 +679,12 @@ function showSection(id, btn){
 }
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
-    let cards = document.querySelectorAll('#gameGrid .game-card');
+    let wrappers = document.querySelectorAll('#gameGrid .game-card-wrapper');
     let clearBtn = document.getElementById('clearSearchBtn');
     clearBtn.style.display = input.length > 0 ? "block" : "none";
-    cards.forEach(function(card) {
-        let name = card.getAttribute('data-name').toLowerCase();
-        card.style.display = name.includes(input) ? "flex" : "none";
+    wrappers.forEach(function(wrap) {
+        let name = wrap.getAttribute('data-name').toLowerCase();
+        wrap.style.display = name.includes(input) ? "flex" : "none";
     });
 }
 function clearSearch() {
@@ -555,67 +693,440 @@ function clearSearch() {
     filterGames();
     searchInput.focus();
 }
-const data={
-pubg:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]],
-mlbb:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]],
-ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]],
-yalla:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]],
-tiktok:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]],
-gangstar:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]],
-weplay:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]],
-roblox:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]
+
+let currentLang = 'ar';
+const translations = {
+    ar: {
+        current_lang_label: "العربية",
+        splash_sub: "أهلاً بك في متجر الشحن الأسرع والأضمن (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        skip: "تخطي",
+        brand_sub: "متجر الشحن الأسرع والأرخص (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        live: "فوري",
+        telegram: "التليجرام",
+        whatsapp: "الواتساب",
+        tab_games: "🎮 الألعاب",
+        tab_cards: "💳 بطاقات هدايا",
+        tab_recharge: "⚡ شحن سريع",
+        tab_shabab: "🪙 شباب كونات",
+        tab_soon: "🔜 قريباً",
+        tab_request: "📦 طلب منتج",
+        tab_secret: "👑 القسم السري",
+        search_placeholder: "ابحث عن لعبة أو تطبيق...",
+        show_packages: "عرض الباقات",
+        close_packages: "إغلاق الباقات",
+        buy_now: "شراء الآن",
+        currency: "ج.م",
+        sub_etisalat: "اتصالات",
+        sub_gas: "شحن الغاز",
+        sub_egypt: "🇪🇬 مصر",
+        sub_jordan: "🇯🇴 الأردن",
+        sub_saudi: "🇸🇦 السعودية",
+        payment_title: "💳 الدفع",
+        copy_vodafone: "📋 نسخ رقم فودافون كاش",
+        send_whatsapp: "💬 إرسال الطلب على واتساب",
+        soon_text: "قريباً",
+        req_name: "اسم المنتج",
+        req_type: "نوع المنتج",
+        req_phone: "رقم الهاتف",
+        req_details: "اكتب تفاصيل طلبك",
+        stat_visits: "إجمالي الزيارات",
+        stat_unique: "الزوار اليوم الفريدين",
+        stat_packages: "عرض الباقات",
+        stat_orders: "الطلبات للواتس",
+        reset_stats: "🔄 إعادة ضبط الإحصائيات",
+        footer_speed: "تسليم سريع بعد تأكيد الدفع",
+        modal_title: "تأكيد الطلب",
+        modal_product: "المنتج",
+        modal_discount: "السعر بعد الخصم (5%)",
+        modal_vodafone: "فودافون كاش",
+        copy_number: "📋 نسخ الرقم",
+        modal_support: "الدعم",
+        copy_support: "📋 نسخ رقم الدعم",
+        modal_confirm: "💬 تأكيد الطلب على واتساب",
+        desc_pubg: "شحن UC وشعبية وبطاقات",
+        desc_mlbb: "شحن Diamonds",
+        desc_ff: "شحن جواهر",
+        desc_yalla: "حسابات و ID و VIP",
+        desc_tiktok: "شحن عملات",
+        desc_gangstar: "شحن ماسات",
+        desc_weplay: "ذهب و VIP",
+        desc_roblox: "Robux و Gift Cards"
+    },
+    en: {
+        current_lang_label: "English",
+        splash_sub: "Welcome to the fastest and most secure recharge store (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        skip: "Skip",
+        brand_sub: "The fastest & cheapest recharge store (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        live: "Instant",
+        telegram: "Telegram",
+        whatsapp: "WhatsApp",
+        tab_games: "🎮 Games",
+        tab_cards: "💳 Gift Cards",
+        tab_recharge: "⚡ Fast Top-up",
+        tab_shabab: "🪙 Shabab Coins",
+        tab_soon: "🔜 Coming Soon",
+        tab_request: "📦 Request Product",
+        tab_secret: "👑 Secret Section",
+        search_placeholder: "Search for a game or app...",
+        show_packages: "View Packages",
+        close_packages: "Close Packages",
+        buy_now: "Buy Now",
+        currency: "EGP",
+        sub_etisalat: "Etisalat",
+        sub_gas: "Gas Top-up",
+        sub_egypt: "🇪🇬 Egypt",
+        sub_jordan: "🇯🇴 Jordan",
+        sub_saudi: "🇸🇦 Saudi Arabia",
+        payment_title: "💳 Payment",
+        copy_vodafone: "📋 Copy Vodafone Cash",
+        send_whatsapp: "💬 Send Order on WhatsApp",
+        soon_text: "Coming Soon",
+        req_name: "Product Name",
+        req_type: "Product Type",
+        req_phone: "Phone Number",
+        req_details: "Write your request details",
+        stat_visits: "Total Visits",
+        stat_unique: "Unique Today",
+        stat_packages: "Package Views",
+        stat_orders: "Orders to WhatsApp",
+        reset_stats: "🔄 Reset Statistics",
+        footer_speed: "Fast delivery after payment confirmation",
+        modal_title: "Confirm Order",
+        modal_product: "Product",
+        modal_discount: "Price after discount (5%)",
+        modal_vodafone: "Vodafone Cash",
+        copy_number: "📋 Copy Number",
+        modal_support: "Support",
+        copy_support: "📋 Copy Support Number",
+        modal_confirm: "💬 Confirm Order on WhatsApp",
+        desc_pubg: "UC, Popularity & Cards",
+        desc_mlbb: "Diamonds Top-up",
+        desc_ff: "Diamonds Top-up",
+        desc_yalla: "Accounts, ID & VIP",
+        desc_tiktok: "Coins Top-up",
+        desc_gangstar: "Diamonds Top-up",
+        desc_weplay: "Gold & VIP",
+        desc_roblox: "Robux & Gift Cards"
+    },
+    ja: {
+        current_lang_label: "日本語",
+        splash_sub: "最速かつ最も安全なチャージストアへようこそ (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        skip: "スキップ",
+        brand_sub: "最速かつ最安値のチャージストア (﷼𝑅 𝐸 𝐴 𝐿) 💎",
+        live: "即時",
+        telegram: "テレグラム",
+        whatsapp: "WhatsApp",
+        tab_games: "🎮 ゲーム",
+        tab_cards: "💳 ギフトカード",
+        tab_recharge: "⚡ 高速チャージ",
+        tab_shabab: "🪙 シャバブコイン",
+        tab_soon: "🔜 近日公開",
+        tab_request: "📦 商品リクエスト",
+        tab_secret: "👑 シークレットセクション",
+        search_placeholder: "ゲームやアプリを検索...",
+        show_packages: "パッケージを表示",
+        close_packages: "パッケージを閉じる",
+        buy_now: "今すぐ購入",
+        currency: "EGP",
+        sub_etisalat: "エティサラート",
+        sub_gas: "ガスチャージ",
+        sub_egypt: "🇪🇬 エジプト",
+        sub_jordan: "🇯🇴 ヨルダン",
+        sub_saudi: "🇸🇦 サウジアラビア",
+        payment_title: "💳 お支払い",
+        copy_vodafone: "📋 ボーダフォンキャッシュをコピー",
+        send_whatsapp: "💬 WhatsAppで注文を送信",
+        soon_text: "近日公開",
+        req_name: "商品名",
+        req_type: "商品の種類",
+        req_phone: "電話番号",
+        req_details: "リクエストの詳細を入力",
+        stat_visits: "総訪問数",
+        stat_unique: "今日のユニーク訪問",
+        stat_packages: "パッケージ閲覧数",
+        stat_orders: "WhatsApp注文数",
+        reset_stats: "🔄 統計をリセット",
+        footer_speed: "入金確認後すぐにお届け",
+        modal_title: "注文の確認",
+        modal_product: "商品",
+        modal_discount: "割引後の価格 (5%)",
+        modal_vodafone: "ボーダフォンキャッシュ",
+        copy_number: "📋 番号をコピー",
+        modal_support: "サポート",
+        copy_support: "📋 サポート番号をコピー",
+        modal_confirm: "💬 WhatsAppで注文を確認",
+        desc_pubg: "UC、人気度、カード",
+        desc_mlbb: "ダイヤチャージ",
+        desc_ff: "ダイヤチャージ",
+        desc_yalla: "アカウント、ID、VIP",
+        desc_tiktok: "コインチャージ",
+        desc_gangstar: "ダイヤチャージ",
+        desc_weplay: "ゴールドとVIP",
+        desc_roblox: "Robuxとギフトカード"
+    }
 };
+
+function toggleLangMenu() {
+    let menu = document.getElementById('langMenu');
+    menu.classList.toggle('show');
+}
+
+window.addEventListener('click', function(e) {
+    if (!e.target.closest('.lang-dropdown-wrapper')) {
+        document.getElementById('langMenu').classList.remove('show');
+    }
+});
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    document.getElementById('currentLangLabel').innerText = translations[lang].current_lang_label;
+    document.getElementById('langMenu').classList.remove('show');
+    
+    if (lang === 'en' || lang === 'ja') {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', lang);
+    } else {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+    }
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        let key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            el.innerText = translations[lang][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n_placeholder]').forEach(el => {
+        let key = el.getAttribute('data-i18n_placeholder');
+        if (translations[lang][key]) {
+            el.setAttribute('placeholder', translations[lang][key]);
+        }
+    });
+
+    if (currentOpenGame) {
+        let activeBtn = document.querySelector(`#wrap-${currentOpenGame} .open-game`);
+        if (activeBtn) {
+            renderInlinePackages(currentOpenGame);
+        }
+    }
+
+    cardsTab(document.querySelector("#cards .subtab.active") ? document.querySelector("#cards .subtab.active").getAttribute('onclick').match(/'([^']+)'/)[1] : 'google', document.querySelector("#cards .subtab.active"));
+    rechargeTab(document.querySelector("#recharge .subtab.active") ? document.querySelector("#recharge .subtab.active").getAttribute('onclick').match(/'([^']+)'/)[1] : 'we', document.querySelector("#recharge .subtab.active"));
+    shababTab(document.querySelector("#shabab .subtab.active") ? document.querySelector("#shabab .subtab.active").getAttribute('onclick').match(/'([^']+)'/)[1] : 'eg', document.querySelector("#shabab .subtab.active"));
+
+    showToast(lang === 'ar' ? "✅ تم التبديل إلى العربية" : (lang === 'en' ? "✅ Switched to English" : "✅ 日本語に切り替えました"));
+}
+
+function getMultiplier() {
+    if (currentLang === 'en') return 0.032;
+    if (currentLang === 'ja') return 4.9;
+    return 1;
+}
+
+function getCurrencySymbol() {
+    if (currentLang === 'en') return '$';
+    if (currentLang === 'ja') return '¥';
+    return translations[currentLang].currency;
+}
+
+const data = {
+    pubg: [
+        ["30 UC", 28.99],
+        ["60 UC", 52.99],
+        ["25 + 300 UC", 244.99],
+        ["60 + 600 UC", 484.99],
+        ["300 + 1500 UC", 1204.99],
+        ["850 + 3000 UC", 2404.99],
+        ["2100 + 6000 UC", 4804.99],
+        ["4200 + 12000 UC", 9604.99],
+        ["6300 + 18000 UC", 14404.99],
+        ["8400 + 24000 UC", 19204.99],
+        ["10500 + 30000 UC", 24004.99],
+        ["12600 + 36000 UC", 28804.99],
+        ["21000 + 60000 UC", 48004.99]
+    ],
+    mlbb: [
+        ["13 + 1 Diamonds", 25],
+        ["20 + 2 Diamonds", 30],
+        ["51 + 5 Diamonds", 65],
+        ["102 + 10 Diamonds", 120],
+        ["153 + 15 Diamonds", 180],
+        ["203 + 20 Diamonds", 235],
+        ["303 + 33 Diamonds", 350],
+        ["504 + 66 Diamonds", 580],
+        ["1007 + 156 Diamonds", 1150],
+        ["2015 + 383 Diamonds", 2300],
+        ["5035 + 1007 Diamonds", 5730]
+    ],
+    ff: [
+        ["50 جوهرة", 25],
+        ["100 جوهرة", 50],
+        ["210 جوهرة", 100],
+        ["310 جوهرة", 150],
+        ["520 جوهرة", 250],
+        ["1060 جوهرة", 500],
+        ["2200 جوهرة", 1000]
+    ],
+    yalla: [
+        ["830 ID", 110],
+        ["2320 ID", 260],
+        ["3150 ID", 370],
+        ["5150 ID", 480],
+        ["VIP 🦅 الفارس", 500],
+        ["7480 ID", 740],
+        ["8300 ID", 850],
+        ["10300 ID", 960],
+        ["13580 ID", 1200],
+        ["VIP 👑 اللواء", 1500],
+        ["16700 ID", 1570],
+        ["18700 ID", 1680],
+        ["21000 ID", 1950],
+        ["27640 ID", 2400],
+        ["32790 ID", 2880],
+        ["37900 ID", 3360],
+        ["43090 ID", 3840],
+        ["55800 ID", 4800],
+        ["69380 ID", 6000],
+        ["74530 ID", 6500],
+        ["111600 ID", 9600],
+        ["168860 ID", 14400],
+        ["223200 ID", 19200],
+        ["283460 ID", 24000]
+    ],
+    tiktok: [
+        ["500 عملة", 330],
+        ["800 عملة", 520],
+        ["1000 عملة", 620],
+        ["1400 عملة", 860],
+        ["2000 عملة", 1220],
+        ["3500 عملة", 2120],
+        ["5000 عملة", 3020],
+        ["7500 عملة", 4520],
+        ["10000 عملة", 5920],
+        ["17500 عملة", 10320],
+        ["20000 عملة", 11820],
+        ["30000 عملة", 17620],
+        ["50000 عملة", 29520]
+    ],
+    gangstar: [
+        ["60 ماسة", 57.5],
+        ["300 + 20", 247.5],
+        ["680 + 60", 485],
+        ["1280 + 220", 960],
+        ["3280 + 580", 2385],
+        ["6480 + 1280", 4760]
+    ],
+    weplay: [
+        ["300 ذهب", 30],
+        ["600 ذهب", 55],
+        ["1800 ذهب", 200],
+        ["3000 + 600 بونص", 280],
+        ["VIP الشهر الأول", 410],
+        ["Fun Card Level 10", 610],
+        ["10000 + 2000 بونص", 680],
+        ["VIP الشهر الثاني", 1110],
+        ["Fun Card Level 50", 3010],
+        ["50000 + 10000 بونص", 3010],
+        ["VIP 12 شهر", 4510],
+        ["100000 + 20000 بونص", 6010],
+        ["25000 + 50000 بونص", 15010]
+    ],
+    roblox: [
+        ["80 Robux", 60],
+        ["200~300 Robux / 2~3$", 200],
+        ["500 Robux", 265],
+        ["400 Robux / 5$", 315],
+        ["1000 Robux", 525],
+        ["1000 Robux / 10$", 540],
+        ["2000 Robux", 1000],
+        ["2500 Robux / 25$", 1350],
+        ["4500 Robux", 2250],
+        ["5250 Robux / 50$", 2650],
+        ["10000 Robux", 4800],
+        ["22500 Robux", 9650]
+    ]
+};
+
 let currentOpenGame = null;
-function toggleGamePrices(game, btn) {
-    const productsDiv = document.getElementById("products");
+
+function toggleInlinePackages(game, btn) {
     let views = parseInt(localStorage.getItem('admin_package_views') || '0') + 1;
     localStorage.setItem('admin_package_views', views.toString());
     updateAdminUI();
-    if (currentOpenGame === game && productsDiv.style.display !== "none" && productsDiv.innerHTML !== "") {
-        productsDiv.style.display = "none";
-        btn.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات';
-        currentOpenGame = null;
+
+    let wrapper = document.getElementById(`wrap-${game}`);
+    let container = document.getElementById(`inline-${game}`);
+    let showText = translations[currentLang].show_packages;
+    let closeText = translations[currentLang].close_packages;
+
+    if (container.classList.contains('show')) {
+        container.classList.remove('show');
+        wrapper.classList.remove('expanded');
+        btn.innerHTML = `<i class="fa-solid fa-gamepad"></i> <span>${showText}</span>`;
+        if (currentOpenGame === game) currentOpenGame = null;
     } else {
-        document.querySelectorAll('.open-game').forEach(b => { b.innerHTML = '<i class="fa-solid fa-gamepad"></i> عرض الباقات'; });
-        openGame(game);
-        productsDiv.style.display = "block";
-        btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> إغلاق الباقات';
+        document.querySelectorAll('.inline-packages-container').forEach(c => c.classList.remove('show'));
+        document.querySelectorAll('.game-card-wrapper').forEach(w => w.classList.remove('expanded'));
+        document.querySelectorAll('.open-game').forEach(b => {
+            b.innerHTML = `<i class="fa-solid fa-gamepad"></i> <span>${showText}</span>`;
+        });
+
+        renderInlinePackages(game);
+        container.classList.add('show');
+        wrapper.classList.add('expanded');
+        btn.innerHTML = `<i class="fa-solid fa-chevron-up"></i> <span>${closeText}</span>`;
         currentOpenGame = game;
     }
 }
-function openGame(game){
+
+function renderInlinePackages(game) {
     let names={pubg:"PUBG Mobile",mlbb:"Mobile Legends",ff:"Free Fire",yalla:"يلا لودو",tiktok:"TikTok",gangstar:"Gangstar",weplay:"WePlay",roblox:"Roblox"};
-    let products=data[game] || [];
-    let html=`<div class="product-title">${names[game]}</div><div class="product-grid">`;
+    let products = data[game] || [];
+    let curSym = getCurrencySymbol();
+    let mult = getMultiplier();
+    let buyText = translations[currentLang].buy_now;
+    
+    let html = `<div class="inline-packages-grid">`;
     products.forEach(function(item){
+        let calculatedPrice = (item[1] * mult).toFixed(currentLang === 'en' ? 2 : (currentLang === 'ja' ? 0 : 2));
         let priceIconHtml = '<i class="fa-solid fa-coins"></i>';
-        if (game === 'pubg') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC Icon">`; }
-        else if (game === 'mlbb') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png" class="mlbb-diamond-icon" alt="MLBB Diamond Icon">`; }
-        else if (game === 'ff' || game === 'yalla') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png" class="ff-diamond-icon" alt="Diamond Icon">`; }
-        else if (game === 'tiktok') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png" class="tiktok-coin-icon" alt="TikTok Coin Icon">`; }
-        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span><span class="price-val">${priceIconHtml} ${item[1]} <span class="currency">ج.م</span></span></div><button class="buy" onclick="openOrder('${escapeText(names[game]+' - '+item[0])}', ${item[1]}, 'ج.م')">شراء الآن</button></div>`;
+        if (game === 'pubg') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png" class="uc-badge-icon" alt="UC">`; }
+        else if (game === 'mlbb') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png" class="mlbb-diamond-icon" alt="MLBB">`; }
+        else if (game === 'ff' || game === 'yalla') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png" class="ff-diamond-icon" alt="Diamond">`; }
+        else if (game === 'tiktok') { priceIconHtml = `<img src="https://www.image2url.com/r2/default/images/1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png" class="tiktok-coin-icon" alt="Coin">`; }
+        
+        html += `<div class="product">
+            <div class="product-name">${item[0]}</div>
+            <div class="product-price-badge">
+                <span style="font-size:9px; opacity:0.8; font-weight:700;">${currentLang==='ar'?'السعر':(currentLang==='en'?'Price':'価格')}</span>
+                <span class="price-val">${priceIconHtml} ${calculatedPrice} <span class="currency">${curSym}</span></span>
+            </div>
+            <button class="buy" onclick="openOrder('${escapeText(names[game]+' - '+item[0])}', ${calculatedPrice}, '${curSym}')">${buyText}</button>
+        </div>`;
     });
-    html+=`</div>`;
-    document.getElementById("products").innerHTML=html;
-    document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+    html += `</div>`;
+    document.getElementById(`inline-${game}`).innerHTML = html;
 }
+
 function escapeText(text){ return text.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 let selectedProduct="";
 let selectedPriceText="";
-function openOrder(product, price, currency = "جنيه"){
+function openOrder(product, price, currency){
     selectedProduct = product;
+    let curSym = currency || getCurrencySymbol();
     if (typeof price === "number") {
         let numPrice = parseFloat(price);
         let finalPrice = (numPrice * 0.95).toFixed(2);
-        selectedPriceText = `${finalPrice} ${currency}`;
+        selectedPriceText = `${finalPrice} ${curSym}`;
         document.getElementById("modalProduct").innerText = product;
-        document.getElementById("modalPrice").innerText = finalPrice + " " + currency;
-        document.getElementById("modalAfter").innerText = "السعر الأصلي: " + price + " " + currency;
+        document.getElementById("modalPrice").innerText = finalPrice + " " + curSym;
+        document.getElementById("modalAfter").innerText = (currentLang==='ar'?"السعر الأصلي: ":(currentLang==='en'?"Original Price: ":"元の価格: ")) + price + " " + curSym;
         document.getElementById("modalAfter").style.display = "block";
     } else {
-        selectedPriceText = price ? `${price} ${currency}` : product;
+        selectedPriceText = price ? `${price} ${curSym}` : product;
         document.getElementById("modalProduct").innerText = product;
-        document.getElementById("modalPrice").innerText = price ? `${price} ${currency}` : product;
+        document.getElementById("modalPrice").innerText = price ? `${price} ${curSym}` : product;
         document.getElementById("modalAfter").style.display = "none";
     }
     document.getElementById("orderModal").classList.add("show");
@@ -639,9 +1150,13 @@ function cardsTab(type,btn){
     btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
     btn.classList.add("active");
     let list=cardsData[type];
+    let curSym = getCurrencySymbol();
+    let mult = getMultiplier();
+    let buyText = translations[currentLang].buy_now;
     let html='<div class="product-grid">';
     list.forEach(function(item){
-        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">السعر</span><span class="price-val"><i class="fa-solid fa-credit-card"></i> ${item[1]} <span class="currency">ج.م</span></span></div><button class="buy" onclick="openOrder('${escapeText(item[0])}', ${item[1]}, 'ج.م')">شراء الآن</button></div>`;
+        let calculatedPrice = (item[1] * mult).toFixed(2);
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">${currentLang==='ar'?'السعر':(currentLang==='en'?'Price':'価格')}</span><span class="price-val"><i class="fa-solid fa-credit-card"></i> ${calculatedPrice} <span class="currency">${curSym}</span></span></div><button class="buy" onclick="openOrder('${escapeText(item[0])}', ${calculatedPrice}, '${curSym}')">${buyText}</button></div>`;
     });
     html+="</div>";
     document.getElementById("cardsProducts").innerHTML=html;
@@ -656,9 +1171,10 @@ function rechargeTab(type,btn){
     btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
     btn.classList.add("active");
     let list=rechargeData[type];
+    let reqText = currentLang==='ar'?'طلب الشحن':(currentLang==='en'?'Request Top-up':'チャージリクエスト');
     let html='<div class="product-grid">';
     list.forEach(function(item){
-        html+=`<div class="product"><div class="product-name">${item[0]}</div><button class="buy" style="margin-top:10px;" onclick="openOrder('${escapeText(item[0])}', null, '')">طلب الشحن</button></div>`;
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><button class="buy" style="margin-top:10px;" onclick="openOrder('${escapeText(item[0])}', null, '')">${reqText}</button></div>`;
     });
     html+="</div>";
     document.getElementById("rechargeProducts").innerHTML=html;
@@ -672,9 +1188,10 @@ function shababTab(type,btn){
     btn.parentElement.querySelectorAll(".subtab").forEach(function(x){ x.classList.remove("active"); });
     btn.classList.add("active");
     let list=shababData[type];
+    let buyText = translations[currentLang].buy_now;
     let html='<div class="product-grid">';
     list.forEach(function(item){
-        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">الكمية</span><span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span></div><button class="buy" onclick="openOrder('شباب كونات - ${item[0]}', '${item[2]}', '')">شراء</button></div>`;
+        html+=`<div class="product"><div class="product-name">${item[0]}</div><div class="product-price-badge"><span style="font-size:10px; opacity:0.8; font-weight:700;">${currentLang==='ar'?'الكمية':(currentLang==='en'?'Quantity':'数量')}</span><span class="price-val"><i class="fa-solid fa-gem"></i> ${item[1].toLocaleString()} <span class="currency">كوين</span></span></div><button class="buy" onclick="openOrder('شباب كونات - ${item[0]}', '${item[2]}', '')">${buyText}</button></div>`;
     });
     html+="</div>";
     document.getElementById("shababProducts").innerHTML=html;
