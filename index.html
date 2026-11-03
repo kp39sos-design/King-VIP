@@ -229,6 +229,13 @@ body:has(#modal.on) #botDock{display:none}
 #uBox{display:none;padding:8px 10px 10px;border-bottom:1px solid var(--bd);margin-bottom:4px}
 #uName{display:block;font-size:12px;font-weight:800}
 #uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
+#gate{position:fixed;inset:0;z-index:97;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center}
+#gate.on{display:flex}
+#gate img{width:90px;height:90px;border-radius:24px;border:2px solid var(--a)}
+#gate h2{font-size:18px;font-weight:900}
+#gate p{font-size:12px;color:var(--sub);font-weight:600;max-width:300px;line-height:1.7}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:300px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;padding:13px;border-radius:14px;font-weight:800;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.gbtn i{color:#EA4335;font-size:18px}
 </style>
 </head>
 <body>
@@ -237,6 +244,13 @@ body:has(#modal.on) #botDock{display:none}
   <div class="brand-t" style="font-size:18px">استور أسرع من نتكم 🔥</div>
   <div class="sub" data-i="brand_sub"></div>
   <button class="skip" id="skip" data-i="skip"></button>
+</div>
+<div id="gate" class="on">
+  <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="">
+  <h2 data-i="gate_title"></h2>
+  <p data-i="gate_sub"></p>
+  <div id="dom" style="display:none;direction:ltr;user-select:all;-webkit-user-select:all;font-weight:800;color:var(--gold);font-size:14px;word-break:break-all;border:1px dashed var(--gold);border-radius:12px;padding:10px"></div>
+  <button class="gbtn" id="gBtn"><i class="fa-brands fa-google"></i><span data-i="gate_btn"></span></button>
 </div>
 <div id="toast" role="status"></div>
 
@@ -638,9 +652,9 @@ const firebaseConfig={
   projectId:"real-store-c91ec",
   appId:"1:315828860330:web:3b2fb64a105ebb1ae627d3"
 };
-Object.assign(T.ar,{logout:"تسجيل الخروج"});
-Object.assign(T.en,{logout:"Sign out"});
-Object.assign(T.ja,{logout:"ログアウト"});
+Object.assign(T.ar,{logout:"تسجيل الخروج",gate_title:"أهلاً بيك في استور أسرع من نتكم 🔥",gate_sub:"سجّل دخولك بحساب جيميل عشان تقدر تفتح المتجر وتطلب.",gate_btn:"تسجيل الدخول بجيميل"});
+Object.assign(T.en,{logout:"Sign out",gate_title:"Welcome to the store 🔥",gate_sub:"Sign in with your Google account to open the store and order.",gate_btn:"Sign in with Google"});
+Object.assign(T.ja,{logout:"ログアウト",gate_title:"ストアへようこそ 🔥",gate_sub:"Googleアカウントでログインしてください。",gate_btn:"Googleでログイン"});
 applyLang();
 
 var user=null,auth=null,provider=null;
@@ -651,7 +665,10 @@ try{
   provider.setCustomParameters({prompt:"select_account"});
 }catch(e){console.error("Firebase:",e)}
 
+if(!auth)$("#gate").classList.remove("on");
+$("#gBtn").onclick=()=>login();
 function renderUser(){
+  $("#gate").classList.toggle("on",!user);
   const b=$("#loginBtn");
   if(user){
     b.innerHTML="";
@@ -674,6 +691,11 @@ function login(){
   if(!auth)return toast("❌ Firebase");
   auth.signInWithPopup(provider).catch(err=>{
     if(err.code==="auth/popup-closed-by-user"||err.code==="auth/cancelled-popup-request")return;
+    if(err.code==="auth/unauthorized-domain"){
+      const d=$("#dom");d.style.display="block";
+      d.textContent=location.hostname;
+      $("#gate").classList.add("on");
+    }
     toast("❌ "+err.code);
   });
 }
