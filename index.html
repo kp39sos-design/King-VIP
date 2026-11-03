@@ -14,7 +14,7 @@
 [data-theme=dark]{--bg:#080A0F;--card:rgba(17,21,29,.88);--inner:rgba(8,10,15,.7);--bd:rgba(0,217,255,.15);--bd2:rgba(0,217,255,.4);--tx:#fff;--sub:#A7B0C0;--a:#00D9FF;--b:#8B5CF6;--gold:#FFB800;--ok:#22C55E;--g1:linear-gradient(135deg,#00D9FF,#8B5CF6);--g2:linear-gradient(135deg,#FFD700,#FF8A00);--sh:0 12px 24px -6px rgba(0,0,0,.8);--modal:#11151D}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:#030407;color:var(--tx);font-family:Cairo,sans-serif;min-height:100vh;display:flex;justify-content:center}
-#app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden;padding:12px 10px}
+#app{width:100%;max-width:520px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden;padding:14px 12px}
 button,input,textarea{font-family:inherit}button{border:0;cursor:pointer}a{text-decoration:none;color:inherit}
 button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--a);outline-offset:2px}
 .brand-t{background:linear-gradient(135deg,var(--tx),var(--a),var(--b));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:13px;cursor:pointer}
@@ -23,20 +23,16 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #splash.hide{opacity:0;pointer-events:none}
 #splash img{width:85px;height:85px;border-radius:22px;border:1px solid var(--a)}
 .skip{background:var(--g1);color:#fff;padding:9px 24px;border-radius:22px;font-weight:800;font-size:12px}
-header{display:flex;justify-content:space-between;align-items:center;gap:6px;padding-bottom:10px}
-.brand{display:flex;align-items:center;gap:7px;min-width:0}
-.avatar{width:34px;height:34px;border-radius:50%;border:2px solid var(--a);object-fit:cover}
-.ctl{display:flex;gap:4px;align-items:center}
-.ibtn{height:30px;min-width:30px;padding:0 7px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:10px;font-weight:800;box-shadow:var(--sh)}
-.live{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--ok);padding:3px 7px;border-radius:12px;font-size:9px;font-weight:800}
+header{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:10px 12px;margin-bottom:12px;border-radius:16px}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.avatar{width:38px;height:38px;border-radius:50%;border:2px solid var(--a);object-fit:cover}
+.ctl{display:flex;gap:5px;align-items:center}
+.ibtn{height:32px;min-width:32px;padding:0 8px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:10px;font-weight:800;box-shadow:var(--sh)}
 select.ibtn{appearance:none;background:var(--card);color:var(--a)}
-.social{display:flex;gap:8px;margin:8px 0}
-.soc{flex:1;text-align:center;padding:8px;border-radius:12px;font-size:11px;font-weight:800;border:1px solid var(--bd2);color:var(--a);background:var(--inner)}
-.soc.w{color:var(--ok)}
-.search{position:relative;margin:6px 0 10px}
-.search input{width:100%;padding:10px 36px;border-radius:16px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:12px}
-.search i{position:absolute;top:50%;transform:translateY(-50%);color:var(--a);inset-inline-start:13px;font-size:13px}
-.tabs,.subtabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none}
+.search{position:relative;margin:6px 0 12px}
+.search input{width:100%;padding:11px 38px;border-radius:16px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:12.5px}
+.search i{position:absolute;top:50%;transform:translateY(-50%);color:var(--a);inset-inline-start:14px;font-size:13px}
+.tabs,.subtabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
 .tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
 .tab,.subtab{flex-shrink:0;background:var(--card);color:var(--sub);border:1px solid var(--bd);padding:8px 14px;border-radius:14px;font-weight:800;font-size:11.5px}
 .subtab{padding:6px 12px;font-size:10.5px;border-radius:16px}
@@ -86,15 +82,14 @@ textarea.in{min-height:75px;resize:none}
 .order{width:100%;background:var(--g2);color:#fff;padding:11px;border-radius:12px;font-weight:900;font-size:12px}
 .err{border-color:#EF4444!important}
 #toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:100;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;white-space:nowrap}
-footer{text-align:center;padding:20px 8px 12px;color:var(--sub);font-size:10px;font-weight:600}
-footer .fs{display:flex;justify-content:center;gap:16px;margin-top:8px;font-size:20px}
+footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;font-weight:600}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ===== 3D احترافي + أداء ===== */
 body{background:radial-gradient(circle at 50% 0,#0b1224,#030407 70%)}
 #app{box-shadow:0 0 60px rgba(37,99,235,.25)}
 *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-.gc,.pr,.sc,.st,.pay,.form,.info,.tab,.subtab,.ibtn,.soc{transform-style:preserve-3d;transition:transform .2s ease,box-shadow .2s ease}
+.gc,.pr,.sc,.st,.pay,.form,.info,.tab,.subtab,.ibtn{transform-style:preserve-3d;transition:transform .2s ease,box-shadow .2s ease}
 .gc{box-shadow:0 14px 24px -8px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.12) inset,0 -4px 0 rgba(0,0,0,.35) inset;border:1px solid rgba(255,255,255,.1)}
 .gc:hover{transform:translateY(-4px) perspective(700px) rotateX(3deg)}
 .gi img{filter:drop-shadow(0 12px 12px rgba(0,0,0,.6));transform:translateZ(30px)}
@@ -117,9 +112,6 @@ body{background:radial-gradient(circle at 15% 10%,#172554 0,transparent 35%),rad
 header{background:var(--card);border:1px solid var(--bd2);box-shadow:0 8px 25px rgba(37,99,235,.08)}
 .brand-t{background:linear-gradient(90deg,var(--neon-cyan),var(--neon-purple),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .avatar{border-color:var(--a);box-shadow:0 0 15px rgba(56,189,248,.35)}
-.soc{background:var(--card);border:1px solid var(--bd2)}
-.soc:first-child{color:#229ED9}.soc.w{color:#22C55E}
-.soc:hover{transform:translateY(-3px);box-shadow:0 0 18px rgba(56,189,248,.20)}
 .search input{background:var(--card);border:1px solid var(--bd);color:var(--tx)}
 .search input:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(56,189,248,.15);outline:none}
 .tab,.subtab{background:var(--card);color:var(--sub);border:1px solid var(--bd)}
@@ -151,7 +143,6 @@ header{background:var(--card);border:1px solid var(--bd2);box-shadow:0 8px 25px 
 .sc i{background:linear-gradient(135deg,#06B6D4,#9333EA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .st{background:var(--inner);border:1px solid var(--bd)}.st b{color:var(--a)}
 .ttl{color:var(--tx);border-inline-start:4px solid var(--a);padding-inline-start:9px}
-.live{background:rgba(34,197,94,.12);color:var(--ok);border:1px solid rgba(34,197,94,.35)}
 .modal{background:rgba(2,6,23,.85)}
 .mb{background:var(--modal);border:1px solid var(--bd2);box-shadow:0 25px 70px rgba(0,0,0,.55),0 0 30px rgba(56,189,248,.12)}
 .info{background:var(--inner);border:1px solid var(--bd)}
@@ -162,14 +153,14 @@ footer{color:var(--sub)}
 #splash img{border:2px solid var(--a);box-shadow:0 0 25px rgba(56,189,248,.25)}
 .skip{background:var(--g1);color:#fff}
 @keyframes neonPulse{0%,100%{box-shadow:0 0 8px rgba(56,189,248,.10)}50%{box-shadow:0 0 20px rgba(147,51,234,.25)}}
-@media(min-width:481px){.gc:hover{animation:neonPulse 2s infinite}}
-@media(max-width:480px){.gc:hover,.pr:hover{transform:none}}
+@media(min-width:521px){.gc:hover{animation:neonPulse 2s infinite}}
+@media(max-width:520px){.gc:hover,.pr:hover{transform:none}}
 
 /* ===== صور موحدة + أزرار خفيفة وسريعة ===== */
 .gi{height:116px;padding:0}
 .gi::before{width:92px;height:92px;opacity:.45;filter:blur(26px)}
 .gi img{width:84px;height:84px;aspect-ratio:1/1;object-fit:cover;object-position:center;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:#0B1020;box-shadow:0 10px 20px rgba(0,0,0,.5);transform:none;filter:none}
-button,.soc,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,transform .1s}
+button,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,transform .1s}
 .buy,.open-b,.copy,.order,.wa,.skip{box-shadow:0 2px 8px rgba(0,0,0,.25);border-radius:10px}
 .buy{box-shadow:0 2px 8px rgba(245,158,11,.35)}
 .tab,.subtab,.tab.on,.subtab.on{box-shadow:none}
@@ -183,7 +174,7 @@ button,.soc,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,tra
 .gi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(11,16,32,.65));pointer-events:none}
 .gi img:not(.ghost){position:relative;z-index:2}
 /* ===== بوت ذكي ===== */
-#botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:90;pointer-events:none}
+#botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:90;pointer-events:none}
 #botFab{pointer-events:auto;position:absolute;bottom:16px;inset-inline-end:14px;width:56px;height:56px;border-radius:50%;background:var(--g1);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,99,235,.45);animation:botPulse 2.4s infinite}
 @keyframes botPulse{0%,100%{box-shadow:0 8px 20px rgba(37,99,235,.45),0 0 0 0 rgba(56,189,248,.5)}50%{box-shadow:0 8px 20px rgba(37,99,235,.45),0 0 0 12px rgba(56,189,248,0)}}
 #botPanel{pointer-events:auto;display:none;flex-direction:column;height:min(80vh,580px);background:var(--modal);border:1px solid var(--bd2);border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45);overflow:hidden}
@@ -205,27 +196,23 @@ button,.soc,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,tra
 #botIn{flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:999px;font-size:12px}
 #botIn:focus{outline:none;border-color:var(--a)}
 #botSend{width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;font-size:14px}
-#botSend i{transform:scaleX(var(--flip,1))}
 [dir=rtl] #botSend i{transform:scaleX(-1)}
 body:has(#modal.on) #botDock{display:none}
 
 /* ===== قائمة النقاط الثلاث ===== */
-.soc.f{color:#1877F2}
 .dots-wrap{position:relative}
-.dots{width:30px;padding:0;display:flex;align-items:center;justify-content:center;font-size:14px}
-.dmenu{position:absolute;top:38px;inset-inline-end:0;z-index:95;min-width:230px;background:var(--modal);border:1px solid var(--bd2);border-radius:16px;padding:6px;box-shadow:0 20px 45px rgba(0,0,0,.5);display:none;transform-origin:top}
+.dots{width:32px;padding:0;display:flex;align-items:center;justify-content:center;font-size:15px}
+.dmenu{position:absolute;top:40px;inset-inline-end:0;z-index:95;min-width:240px;background:var(--modal);border:1px solid var(--bd2);border-radius:16px;padding:6px;box-shadow:0 20px 45px rgba(0,0,0,.5);display:none;transform-origin:top}
 .dmenu.on{display:block;animation:dm .15s ease-out}
 @keyframes dm{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
 .dm-t{font-size:10px;font-weight:800;color:var(--sub);padding:8px 10px 6px;letter-spacing:.3px}
 .dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
 .dmenu button:hover,.dmenu a:hover,.dmenu button:active,.dmenu a:active{background:var(--inner)}
 .di{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:var(--c);flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.25)}
-.dmenu .di{background:var(--c)}
-@media(max-width:380px){.live{display:none}.soc{font-size:10px;padding:8px 4px}}
 
 /* ===== تسجيل الدخول ===== */
 #loginBtn{padding:0 6px}
-.uimg{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block}
+.uimg{width:26px;height:26px;border-radius:50%;object-fit:cover;display:block}
 #uBox{display:none;padding:8px 10px 10px;border-bottom:1px solid var(--bd);margin-bottom:4px}
 #uName{display:block;font-size:12px;font-weight:800}
 #uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
@@ -333,7 +320,6 @@ body:has(#modal.on) #botDock{display:none}
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Light theme */
 [data-theme=light] #gate{
   background:
     radial-gradient(circle at 18% 12%,rgba(37,99,235,.35),transparent 45%),
@@ -424,15 +410,8 @@ body:has(#modal.on) #botDock{display:none}
         <button role="menuitem" id="logoutItem" data-act="logout" style="display:none"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></span><span data-i="logout"></span></button>
       </div>
     </div>
-    <span class="live">● <span data-i="live"></span></span>
   </div>
 </header>
-
-<div class="social">
-  <a class="soc" href="https://t.me/ReAL_126" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> <span data-i="telegram"></span></a>
-  <a class="soc w" href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i="whatsapp"></span></a>
-  <a class="soc f" href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i> <span data-i="facebook"></span></a>
-</div>
 
 <nav class="tabs" id="tabs" role="tablist"></nav>
 
@@ -466,9 +445,6 @@ body:has(#modal.on) #botDock{display:none}
   <span class="brand-t secret">استور أسرع من نتكم 🔥</span>
   <div class="sub" data-i="brand_sub"></div>
   <div style="margin-top:4px" data-i="footer_speed"></div>
-  <div class="fs"><a href="https://t.me/ReAL_126" target="_blank" rel="noopener" aria-label="Telegram" style="color:var(--a)"><i class="fa-brands fa-telegram"></i></a>
-  <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" rel="noopener" aria-label="WhatsApp" style="color:var(--ok)"><i class="fa-brands fa-whatsapp"></i></a>
-  <a href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener" aria-label="Facebook" style="color:#1877F2"><i class="fa-brands fa-facebook"></i></a></div>
 </footer>
 </div>
 
@@ -524,9 +500,9 @@ const SHAB={eg:{n:"🇪🇬 مصر",items:mk([100,300,500,1000,2000,3000],"جن�
 const SOON=[["fa-brands fa-fort-awesome","Fortnite"],["fa-solid fa-crosshairs","Call of Duty"],["fa-solid fa-gamepad","Valorant"],["fa-solid fa-film","Netflix"],["fa-solid fa-fire","Free Fire MAX"]];
 
 const T={
-ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",live:"فوري",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج 🔍",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم (5%)",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: "},
-en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",live:"Instant",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results 🔍",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount (5%)",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"from ",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: "},
-ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",live:"即時",facebook:"Facebook",menu_title:"カスタマーサービス",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: "}
+ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج 🔍",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم (5%)",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: "},
+en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results 🔍",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount (5%)",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"from ",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: "},
+ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: "}
 };
 
 Object.assign(T.ar,{logout:"تسجيل الخروج",gate_title:"أهلاً بيك في استور أسرع من نتكم 🔥",gate_sub:"سجّل دخولك بحساب جيميل عشان تقدر تفتح المتجر وتطلب.",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google"});
@@ -700,7 +676,7 @@ const KB=[
 {k:["خصم","خصومات","عروض","عرض","discount","offer","offers","sale"],ar:"في خصم 5% 🎁 بيتحسب تلقائياً على سعر المنتج، وهتشوفه في شاشة «تأكيد عملية الشحن» (السعر بعد الخصم والسعر الأصلي). وتابع القنوات عشان تعرف العروض الجديدة.",en:"There's an automatic 5% discount 🎁 shown in the confirm window (discounted and original price). Follow our channels for new offers."},
 {k:["ايدي","id","player id","اي دي","ازاي الاقي"],ar:"ID اللاعب بتلاقيه غالباً جوه اللعبة في صفحة البروفايل. بنحتاجه عشان نشحن على حسابك بالظبط.\nملحوظة: Roblox وTikTok مش بيحتاجوا ID هنا.",en:"The Player ID is usually on your in-game profile page. We need it to top up the right account.\nNote: Roblox and TikTok don't need an ID here."},
 {k:["امان","موثوق","نصب","ضمان","ثقه","safe","trust","scam","legit","real"],ar:"المتجر بيتابع من 2022 ✅ وتقدر تتأكد من قنواتنا على التليجرام والواتساب. التسليم بعد تأكيد الدفع، وأي مشكلة تواصل مع الدعم.",en:"The store has been running since 2022 ✅. Check our Telegram and WhatsApp channels. Delivery follows payment confirmation; contact support for any issue."},
-{k:["قناه","قنوات","تليجرام","telegram","channel","channels","متابعه","فيسبوك","فيس","facebook","جروب","مجموعه","group"],ar:"تابعنا على قناة التليجرام وقناة الواتساب ومجموعة الفيسبوك 📢 من الأيقونات في أعلى الصفحة وأسفلها أو من قائمة النقاط الثلاث ⋮",en:"Follow our Telegram channel, WhatsApp channel and Facebook group 📢 from the icons on the page or the three-dots menu ⋮",go:[["fb","👥 Facebook"]]},
+{k:["قناه","قنوات","تليجرام","telegram","channel","channels","متابعه","فيسبوك","فيس","facebook","جروب","مجموعه","group"],ar:"تابعنا على قناة التليجرام وقناة الواتساب ومجموعة الفيسبوك 📢 من قائمة النقاط الثلاث ⋮ أعلى الصفحة",en:"Follow our Telegram channel, WhatsApp channel and Facebook group 📢 from the three-dots menu ⋮ at the top",go:[["fb","👥 Facebook"]]},
 {k:["رصيد","كروت","كارت","غاز","اتصالات","we","etisalat","top up","gas"],ar:"في قسم «⚡ شحن سريع» تلاقي شحن رصيد وكروت فكة لـ WE وVodafone واتصالات، وكارت الغاز الطبيعي. اضغط «طلب الشحن» واكتب الرقم المراد شحنه.",en:"In “⚡ Fast Top-up” you'll find balance and cards for WE, Vodafone, Etisalat and the gas card. Tap “Request Top-up” and enter the number.",go:[["sec:recharge","⚡ شحن سريع"]]},
 {k:["شباب","كونات","كوين","coins","shabab"],ar:"شباب كونات متاحة لمصر 🇪🇬 والأردن 🇯🇴 والسعودية 🇸🇦 بباقات مختلفة من قسم «🪙 شباب كونات».",en:"Shabab coins are available for Egypt, Jordan and Saudi in the “🪙 Shabab Coins” tab.",go:[["sec:shabab","🪙 شباب كونات"]]},
 {k:["بطاقه","بطاقات","هديه","gift","cards","card"],ar:"عندنا بطاقات Google Play وiTunes وSteam بفئات 5$ و10$ و25$ و50$ (Steam: 5$ و10$ و20$ و50$) 💳",en:"We have Google Play, iTunes and Steam cards in several values 💳",go:[["sec:cards","💳 بطاقات هدايا"]]},
@@ -837,18 +813,10 @@ function login(){
   const btn=$("#gBtn");
   if(btn) btn.classList.add("loading");
 
-  // ✅ نجرب Popup أولاً (أكثر استقرارًا على أندرويد)
   auth.signInWithPopup(provider)
     .then(()=>{ if(btn) btn.classList.remove("loading"); })
     .catch(err=>{
-      // لو الـ Popup اتحظر أو المتصفح مش داعمه → نستخدم Redirect
-      const fallbackCodes=[
-        "auth/popup-blocked",
-        "auth/popup-closed-by-user",
-        "auth/cancelled-popup-request",
-        "auth/operation-not-supported-in-this-environment",
-        "auth/operation-not-allowed"
-      ];
+      const fallbackCodes=["auth/popup-blocked","auth/popup-closed-by-user","auth/cancelled-popup-request","auth/operation-not-supported-in-this-environment","auth/operation-not-allowed"];
       if(fallbackCodes.includes(err.code)){
         auth.signInWithRedirect(provider).catch(e2=>{
           if(btn) btn.classList.remove("loading");
@@ -867,24 +835,15 @@ function login(){
 }
 
 $("#gBtn").onclick=login;
-
-$("#loginBtn").onclick=e=>{
-  e.stopPropagation();
-  if(user)dmToggle(true);else login();
-};
-document.addEventListener("click",e=>{
-  if(e.target.closest('[data-act="logout"]')&&auth)auth.signOut();
-});
+$("#loginBtn").onclick=e=>{e.stopPropagation();if(user)dmToggle(true);else login()};
+document.addEventListener("click",e=>{if(e.target.closest('[data-act="logout"]')&&auth)auth.signOut()});
 
 if(auth){
-  // استقبال نتيجة الـ Redirect لو حصل fallback
   auth.getRedirectResult().then(res=>{
     if(res && res.user){ console.log("✅ Logged in via redirect:", res.user.displayName); }
   }).catch(err=>{
     if(err && err.code && err.code!=="auth/no-auth-event") console.warn("Redirect error:", err.code);
   });
-
-  // المستمع الرئيسي لحالة المستخدم
   auth.onAuthStateChanged(u=>{user=u;renderUser()});
 }
 </script>
