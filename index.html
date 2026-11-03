@@ -792,7 +792,7 @@ stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== تسجيل الدخول بجيميل (3D + Android Redirect) ===== */
+/* ===== تسجيل الدخول بجيميل (Popup أولاً + Redirect احتياطي) ===== */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -829,25 +829,41 @@ function renderUser(){
     $("#uBox").style.display="none";
     $("#logoutItem").style.display="none";
   }
-  $("#gBtn").classList.remove("loading");
+  const gb=$("#gBtn"); if(gb) gb.classList.remove("loading");
 }
 
 function login(){
-  if(!auth)return toast("❌ Firebase");
-  $("#gBtn").classList.add("loading");
-  const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  const p=isMobile?auth.signInWithRedirect(provider):auth.signInWithPopup(provider);
-  p.catch(err=>{
-    $("#gBtn").classList.remove("loading");
-    if(err.code==="auth/popup-closed-by-user"||err.code==="auth/cancelled-popup-request")return;
-    if(err.code==="auth/unauthorized-domain"){
-      const d=$("#dom");
-      d.style.display="block";
-      d.textContent=location.hostname;
-      $("#gate").classList.add("on");
-    }
-    toast("❌ "+err.code);
-  });
+  if(!auth) return toast("❌ Firebase غير مهيأ");
+  const btn=$("#gBtn");
+  if(btn) btn.classList.add("loading");
+
+  // ✅ نجرب Popup أولاً (أكثر استقرارًا على أندرويد)
+  auth.signInWithPopup(provider)
+    .then(()=>{ if(btn) btn.classList.remove("loading"); })
+    .catch(err=>{
+      // لو الـ Popup اتحظر أو المتصفح مش داعمه → نستخدم Redirect
+      const fallbackCodes=[
+        "auth/popup-blocked",
+        "auth/popup-closed-by-user",
+        "auth/cancelled-popup-request",
+        "auth/operation-not-supported-in-this-environment",
+        "auth/operation-not-allowed"
+      ];
+      if(fallbackCodes.includes(err.code)){
+        auth.signInWithRedirect(provider).catch(e2=>{
+          if(btn) btn.classList.remove("loading");
+          toast("❌ "+(e2.code||e2.message));
+        });
+        return;
+      }
+      if(btn) btn.classList.remove("loading");
+      if(err.code==="auth/unauthorized-domain"){
+        const d=$("#dom");
+        if(d){ d.style.display="block"; d.textContent=location.hostname; }
+        $("#gate").classList.add("on");
+      }
+      toast("❌ "+err.code);
+    });
 }
 
 $("#gBtn").onclick=login;
@@ -861,7 +877,14 @@ document.addEventListener("click",e=>{
 });
 
 if(auth){
-  auth.getRedirectResult().catch(err=>{ if(err&&err.code&&err.code!=="auth/no-auth-event") toast("❌ "+err.code); });
+  // استقبال نتيجة الـ Redirect لو حصل fallback
+  auth.getRedirectResult().then(res=>{
+    if(res && res.user){ console.log("✅ Logged in via redirect:", res.user.displayName); }
+  }).catch(err=>{
+    if(err && err.code && err.code!=="auth/no-auth-event") console.warn("Redirect error:", err.code);
+  });
+
+  // المستمع الرئيسي لحالة المستخدم
   auth.onAuthStateChanged(u=>{user=u;renderUser()});
 }
 </script>
