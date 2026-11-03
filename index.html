@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="متجر شحن الألعاب الأسرع والأرخص: PUBG, Free Fire, Mobile Legends, TikTok, Roblox وبطاقات هدايا">
+<meta name="description" content="أسرع من نتكم — شحن الألعاب الأسرع والأرخص: PUBG, Free Fire, Mobile Legends, TikTok, Roblox وبطاقات هدايا">
 <meta name="theme-color" content="#2563EB">
-<title>استور أسرع من نتكم | شحن جميع الألعاب</title>
+<title>أسرع من نتكم | شحن جميع الألعاب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -28,7 +28,6 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .avatar{width:38px;height:38px;border-radius:50%;border:2px solid var(--a);object-fit:cover}
 .ctl{display:flex;gap:5px;align-items:center}
 .ibtn{height:32px;min-width:32px;padding:0 8px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:10px;font-weight:800;box-shadow:var(--sh)}
-select.ibtn{appearance:none;background:var(--card);color:var(--a)}
 .search{position:relative;margin:6px 0 12px}
 .search input{width:100%;padding:11px 38px;border-radius:16px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:12.5px}
 .search i{position:absolute;top:50%;transform:translateY(-50%);color:var(--a);inset-inline-start:14px;font-size:13px}
@@ -167,12 +166,12 @@ button,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,transfor
 .buy:active,.open-b:active,.copy:active,.order:active,.wa:active,.skip:active{transform:scale(.96)!important;box-shadow:0 1px 3px rgba(0,0,0,.25)}
 .modal.on .mb{animation:none}
 .gc,.pr{transition:none}
-/* ===== صورة شفافة خلف صورة اللعبة ===== */
 .gi{overflow:hidden}
 .gi::before{display:none}
 .gi .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.6);filter:blur(16px) saturate(1.5);opacity:.38;border:0;border-radius:0;box-shadow:none;background:none;pointer-events:none}
 .gi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(11,16,32,.65));pointer-events:none}
 .gi img:not(.ghost){position:relative;z-index:2}
+
 /* ===== بوت ذكي ===== */
 #botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:90;pointer-events:none}
 #botFab{pointer-events:auto;position:absolute;bottom:16px;inset-inline-end:14px;width:56px;height:56px;border-radius:50%;background:var(--g1);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,99,235,.45);animation:botPulse 2.4s infinite}
@@ -209,6 +208,15 @@ body:has(#modal.on) #botDock{display:none}
 .dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
 .dmenu button:hover,.dmenu a:hover,.dmenu button:active,.dmenu a:active{background:var(--inner)}
 .di{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:var(--c);flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+
+/* ===== قائمة اللغات داخل الثلاث نقاط ===== */
+.dm-lang{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 8px 8px}
+.lang-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:11px;background:var(--inner);color:var(--tx);font-size:10px;font-weight:800;border:1px solid var(--bd);transition:filter .12s,transform .12s,background .15s,color .15s}
+.lang-btn .flag{font-size:15px;line-height:1}
+.lang-btn:hover{filter:brightness(1.08)}
+.lang-btn:active{transform:scale(.95)}
+.lang-btn.on{background:var(--g1);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(37,99,235,.35)}
+.dm-divider{height:1px;background:var(--bd);margin:4px 8px}
 
 /* ===== تسجيل الدخول ===== */
 #loginBtn{padding:0 6px}
@@ -347,7 +355,7 @@ body:has(#modal.on) #botDock{display:none}
 
 <div id="splash">
   <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار">
-  <div class="brand-t" style="font-size:18px">استور أسرع من نتكم 🔥</div>
+  <div class="brand-t" style="font-size:18px">أسرع من نتكم 🔥</div>
   <div class="sub" data-i="brand_sub"></div>
   <button class="skip" id="skip" data-i="skip"></button>
 </div>
@@ -389,11 +397,10 @@ body:has(#modal.on) #botDock{display:none}
 <header>
   <div class="brand">
     <img class="avatar" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
-    <div><span class="brand-t secret">استور أسرع من نتكم 🔥</span> <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
+    <div><span class="brand-t secret">أسرع من نتكم 🔥</span> <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
     <div class="sub" data-i="brand_sub"></div></div>
   </div>
   <div class="ctl">
-    <select class="ibtn" id="lang" aria-label="Language"><option value="ar">🇪🇬 العربية</option><option value="en">🇺🇸 English</option><option value="ja">🇯🇵 日本語</option></select>
     <button class="ibtn" id="loginBtn" aria-label="Login"><i class="fa-brands fa-google"></i></button>
     <button class="ibtn" id="theme" aria-label="Theme"><i class="fa-solid fa-moon"></i></button>
     <div class="dots-wrap">
@@ -401,6 +408,16 @@ body:has(#modal.on) #botDock{display:none}
       <div class="dmenu" id="dMenu" role="menu">
         <div class="dm-t" data-i="menu_title"></div>
         <div id="uBox"><span id="uName"></span><span id="uMail"></span></div>
+
+        <!-- 🌐 اختيار اللغة داخل القائمة -->
+        <div class="dm-t" data-i="menu_lang"></div>
+        <div class="dm-lang">
+          <button class="lang-btn" data-lang="ar"><span class="flag">🇪🇬</span><span>العربية</span></button>
+          <button class="lang-btn" data-lang="en"><span class="flag">🇺🇸</span><span>English</span></button>
+          <button class="lang-btn" data-lang="ja"><span class="flag">🇯🇵</span><span>日本語</span></button>
+        </div>
+        <div class="dm-divider"></div>
+
         <button role="menuitem" data-act="support"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span data-i="menu_support"></span></button>
         <button role="menuitem" data-act="bot"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-robot"></i></span><span data-i="menu_bot"></span></button>
         <a role="menuitem" href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener"><span class="di" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i></span><span data-i="menu_fb"></span></a>
@@ -442,7 +459,7 @@ body:has(#modal.on) #botDock{display:none}
 </section>
 
 <footer>
-  <span class="brand-t secret">استور أسرع من نتكم 🔥</span>
+  <span class="brand-t secret">أسرع من نتكم 🔥</span>
   <div class="sub" data-i="brand_sub"></div>
   <div style="margin-top:4px" data-i="footer_speed"></div>
 </footer>
@@ -477,7 +494,7 @@ body:has(#modal.on) #botDock{display:none}
 /* ========= الإعدادات: عدّل هنا فقط ========= */
 const CFG={
   wa:"201044049390", pay:"01044049390", support:"01017954664",
-  discount:0.05, storeName:"استور أسرع من نتكم",
+  discount:0.05, storeName:"أسرع من نتكم",
   rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
 };
 const IMG="https://www.image2url.com/r2/default/images/";
@@ -500,14 +517,14 @@ const SHAB={eg:{n:"🇪🇬 مصر",items:mk([100,300,500,1000,2000,3000],"جن�
 const SOON=[["fa-brands fa-fort-awesome","Fortnite"],["fa-solid fa-crosshairs","Call of Duty"],["fa-solid fa-gamepad","Valorant"],["fa-solid fa-film","Netflix"],["fa-solid fa-fire","Free Fire MAX"]];
 
 const T={
-ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج 🔍",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم (5%)",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: "},
-en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results 🔍",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount (5%)",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"from ",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: "},
-ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: "}
+ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_lang:"اللغة",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج 🔍",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم (5%)",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: "},
+en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_lang:"Language",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results 🔍",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount (5%)",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"from ",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: "},
+ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_lang:"言語",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: "}
 };
 
-Object.assign(T.ar,{logout:"تسجيل الخروج",gate_title:"أهلاً بيك في استور أسرع من نتكم 🔥",gate_sub:"سجّل دخولك بحساب جيميل عشان تقدر تفتح المتجر وتطلب.",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google"});
-Object.assign(T.en,{logout:"Sign out",gate_title:"Welcome to the store 🔥",gate_sub:"Sign in with your Google account to open the store and order.",gate_btn:"Sign in with Google",gate_secure:"Secure sign-in powered by Google"});
-Object.assign(T.ja,{logout:"ログアウト",gate_title:"ストアへようこそ 🔥",gate_sub:"Googleアカウントでログインしてください。",gate_btn:"Googleでログイン",gate_secure:"Googleによる安全なログイン"});
+Object.assign(T.ar,{logout:"تسجيل الخروج",gate_title:"أهلاً بيك في أسرع من نتكم 🔥",gate_sub:"سجّل دخولك بحساب جيميل عشان تقدر تفتح المتجر وتطلب.",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google"});
+Object.assign(T.en,{logout:"Sign out",gate_title:"Welcome to أسرع من نتكم 🔥",gate_sub:"Sign in with your Google account to open the store and order.",gate_btn:"Sign in with Google",gate_secure:"Secure sign-in powered by Google"});
+Object.assign(T.ja,{logout:"ログアウト",gate_title:"アスラ・ミン・ネトクムへようこそ 🔥",gate_sub:"Googleアカウントでログインしてください。",gate_btn:"Googleでログイン",gate_secure:"Googleによる安全なログイン"});
 
 /* ========= أدوات ========= */
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -623,8 +640,9 @@ function applyLang(){
   document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
   $$("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));
   $$("[data-ip]").forEach(e=>e.placeholder=t(e.dataset.ip));
+  // تحديد اللغة النشطة في القائمة
+  $$(".lang-btn").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
   $("#soonGrid").innerHTML=SOON.map(([ic,n])=>`<div class="sc"><i class="${ic}"></i><h3>${esc(n)}</h3><p>${esc(t("soon"))}</p></div>`).join("");
-  $("#lang").value=lang;
   renderTabs();renderGames();renderSubs();renderStats();
   if(typeof botInit==="function"&&$("#botPanel").classList.contains("on"))botInit();
 }
@@ -647,7 +665,6 @@ document.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 $("#mx").onclick=closeModal;$("#confirm").onclick=confirmOrder;$("#sendReq").onclick=sendRequest;
 $("#q").addEventListener("input",filterGames);
-$("#lang").onchange=e=>{lang=e.target.value;store.set("lang",lang);applyLang()};
 $("#theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
 $("#reset").onclick=()=>{if(confirm(t("confirm_reset"))){["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0"));renderStats();toast(t("reset_done"))}};
 let sc=0;$$(".secret").forEach(el=>el.onclick=()=>{if(++sc>=5){sc=0;$("#tabs").dataset.secret="1";renderTabs();toast(t("secret_on"))}});
@@ -656,7 +673,7 @@ $("#skip").onclick=hideSplash;
 
 /* ========= بوت ذكي: مساعد العملاء ========= */
 const BUI={
-ar:{sub:"مساعد استور أسرع من نتكم",ph:"اكتب سؤالك...",hi:"أهلاً بيك! 👋 أنا «ذكي» مساعد المتجر. اسألني عن الأسعار، طريقة الطلب، الدفع، أو عن صاحب الموقع.",chips:["مين صاحب الموقع؟","ازاي أطلب؟","طرق الدفع","وقت التسليم","كام سعر 60 UC؟","الخصومات","تواصل مع الدعم"]},
+ar:{sub:"مساعد أسرع من نتكم",ph:"اكتب سؤالك...",hi:"أهلاً بيك! 👋 أنا «ذكي» مساعد المتجر. اسألني عن الأسعار، طريقة الطلب، الدفع، أو عن صاحب الموقع.",chips:["مين صاحب الموقع؟","ازاي أطلب؟","طرق الدفع","وقت التسليم","كام سعر 60 UC؟","الخصومات","تواصل مع الدعم"]},
 en:{sub:"Store assistant",ph:"Type your question...",hi:"Hi! 👋 I'm “Zaki”, the store assistant. Ask me about prices, ordering, payment, or the site owner.",chips:["Who owns this site?","How to order?","Payment","Delivery time","Price of 60 UC?","Discounts","Contact support"]}
 };
 BUI.ja=BUI.en;
@@ -751,6 +768,14 @@ const FB="https://www.facebook.com/share/g/1GuX3V5JRS/";
 function dmToggle(on){const m=$("#dMenu");m.classList.toggle("on",on);$("#dotsBtn").setAttribute("aria-expanded",on)}
 $("#dotsBtn").onclick=e=>{e.stopPropagation();dmToggle(!$("#dMenu").classList.contains("on"))};
 document.addEventListener("click",e=>{
+  // تغيير اللغة من داخل القائمة
+  const lb=e.target.closest(".lang-btn");
+  if(lb){
+    lang=lb.dataset.lang;store.set("lang",lang);applyLang();
+    dmToggle(false);
+    return;
+  }
+
   const a=e.target.closest("[data-act]");
   if(a){dmToggle(false);const k=a.dataset.act;
     if(k==="support")openWA(t("hello"));
