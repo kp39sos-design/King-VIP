@@ -223,37 +223,15 @@ body:has(#modal.on) #botDock{display:none}
 .dmenu .di{background:var(--c)}
 @media(max-width:380px){.live{display:none}.soc{font-size:10px;padding:8px 4px}}
 
-/* ===== شاشة تسجيل الدخول الإجبارية (Google Login Overlay) ===== */
-#authOverlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 30%,#172554 0,#030712 80%);display:flex;align-items:center;justify-content:center;padding:16px;transition:opacity .3s ease}
-#authOverlay.hide{opacity:0;pointer-events:none}
-.auth-box{width:100%;max-width:400px;background:var(--modal);border:1px solid var(--bd2);border-radius:24px;padding:24px 20px;text-align:center;box-shadow:0 25px 50px -12px rgba(0,0,0,.7),0 0 30px rgba(37,99,235,.2)}
-.auth-logo{width:75px;height:75px;border-radius:20px;border:2px solid var(--a);object-fit:cover;margin-bottom:12px;box-shadow:0 0 20px rgba(56,189,248,.3)}
-.auth-title{font-size:18px;font-weight:900;margin-bottom:6px;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-purple),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.auth-desc{font-size:12px;color:var(--sub);margin-bottom:20px;line-height:1.6}
-.google-btn{width:100%;background:#fff;color:#3c4043;border:1px solid #dadce0;border-radius:14px;padding:12px 16px;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .12s,background .12s}
-.google-btn:hover{background:#f8f9fa;transform:translateY(-2px)}
-.google-btn:active{transform:translateY(1px)}
-.google-btn img{width:20px;height:20px}
-.user-badge{display:flex;align-items:center;gap:8px;background:var(--inner);border:1px solid var(--bd);padding:4px 10px;border-radius:50px;font-size:11px;font-weight:700}
-.user-badge img{width:24px;height:24px;border-radius:50%;border:1px solid var(--a)}
-.logout-btn{background:rgba(239,68,68,.1);color:#EF4444;border:1px solid rgba(239,68,68,.3);padding:4px 10px;border-radius:50px;font-size:10px;font-weight:800;cursor:pointer}
+/* ===== تسجيل الدخول ===== */
+#loginBtn{padding:0 6px}
+.uimg{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block}
+#uBox{display:none;padding:8px 10px 10px;border-bottom:1px solid var(--bd);margin-bottom:4px}
+#uName{display:block;font-size:12px;font-weight:800}
+#uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
-
-<!-- شاشة تسجيل الدخول الإجبارية (Google Login) -->
-<div id="authOverlay">
-  <div class="auth-box">
-    <img class="auth-logo" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" alt="REAL STORE">
-    <div class="auth-title">REAL STORE 💎</div>
-    <div class="auth-desc">يجب تسجيل الدخول باستخدام حساب Google (Gmail) للمتابعة والوصول إلى متجر شحن الألعاب.</div>
-    <button class="google-btn" id="googleLoginBtn">
-      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-      <span>المتابعة باستخدام Google</span>
-    </button>
-  </div>
-</div>
-
 <div id="splash">
   <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار">
   <div class="brand-t" style="font-size:18px">استور أسرع من نتكم 🔥</div>
@@ -265,29 +243,26 @@ body:has(#modal.on) #botDock{display:none}
 <div id="app">
 <header>
   <div class="brand">
-    <img class="avatar" alt="" id="userAvatar" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
-    <div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span class="brand-t secret" id="userName">استور أسرع من نتكم 🔥</span>
-        <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
-      </div>
-      <div class="sub" id="userEmail" data-i="brand_sub"></div>
-    </div>
+    <img class="avatar" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
+    <div><span class="brand-t secret">استور أسرع من نتكم 🔥</span> <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
+    <div class="sub" data-i="brand_sub"></div></div>
   </div>
   <div class="ctl">
-    <button class="logout-btn" id="logoutBtn" title="تسجيل الخروج"><i class="fa-solid fa-right-from-bracket"></i></button>
     <select class="ibtn" id="lang" aria-label="Language"><option value="ar">🇪🇬 العربية</option><option value="en">🇺🇸 English</option><option value="ja">🇯🇵 日本語</option></select>
+    <button class="ibtn" id="loginBtn" aria-label="Login"><i class="fa-brands fa-google"></i></button>
     <button class="ibtn" id="theme" aria-label="Theme"><i class="fa-solid fa-moon"></i></button>
     <div class="dots-wrap">
       <button class="ibtn dots" id="dotsBtn" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></button>
       <div class="dmenu" id="dMenu" role="menu">
         <div class="dm-t" data-i="menu_title"></div>
+        <div id="uBox"><span id="uName"></span><span id="uMail"></span></div>
         <button role="menuitem" data-act="support"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span data-i="menu_support"></span></button>
         <button role="menuitem" data-act="bot"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-robot"></i></span><span data-i="menu_bot"></span></button>
         <a role="menuitem" href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener"><span class="di" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i></span><span data-i="menu_fb"></span></a>
         <a role="menuitem" href="https://t.me/ReAL_126" target="_blank" rel="noopener"><span class="di" style="--c:#229ED9"><i class="fa-brands fa-telegram"></i></span><span data-i="telegram"></span></a>
         <a role="menuitem" href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" rel="noopener"><span class="di" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i></span><span data-i="whatsapp"></span></a>
         <button role="menuitem" data-act="request"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-box"></i></span><span data-i="tab_request"></span></button>
+        <button role="menuitem" id="logoutItem" data-act="logout" style="display:none"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></span><span data-i="logout"></span></button>
       </div>
     </div>
     <span class="live">● <span data-i="live"></span></span>
@@ -360,58 +335,8 @@ body:has(#modal.on) #botDock{display:none}
   </div>
 </div>
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script>
-  // إعدادات Firebase الخاصة بمتجر REAL STORE
-  const firebaseConfig = {
-    apiKey: "AIzaSyD-REALSTORE-API-KEY-PLACEHOLDER",
-    authDomain: "kp39sos-design.github.io",
-    projectId: "real-store-project",
-    storageBucket: "real-store-project.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef"
-  };
-  
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-  const auth = firebase.auth();
-
-  // نظام حماية وشاشة تسجيل الدخول الإجبارية
-  auth.onAuthStateChanged(user => {
-    const overlay = document.getElementById("authOverlay");
-    if (user) {
-      // المستخدم مسجل دخوله بنجاح
-      overlay.classList.add("hide");
-      document.getElementById("userName").textContent = user.displayName || "مستخدم REAL STORE";
-      document.getElementById("userEmail").textContent = user.email;
-      if (user.photoURL) {
-        document.getElementById("userAvatar").src = user.photoURL;
-      }
-    } else {
-      // لم يتم تسجيل الدخول -> إظهار شاشة الحماية
-      overlay.classList.remove("hide");
-    }
-  });
-
-  // زر تسجيل الدخول باستخدام Google
-  document.getElementById("googleLoginBtn").onclick = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).catch(error => {
-      alert("خطأ في تسجيل الدخول: " + error.message);
-    });
-  };
-
-  // زر تسجيل الخروج
-  document.getElementById("logoutBtn").onclick = () => {
-    auth.signOut().then(() => {
-      location.reload();
-    });
-  };
-</script>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 "use strict";
 /* ========= الإعدادات: عدّل هنا فقط ========= */
@@ -544,6 +469,7 @@ function confirmOrder(){
   const priceTxt=$("#mDisc").style.display==="none"?"":$("#mPrice").textContent;
   let msg=t("hello")+"\n\n"+t("want")+sel.title+"\n"+t("pricel")+priceTxt;
   if(sel.need)msg+="\n"+t("idl")+need;
+  if(user)msg+="\n👤 "+(user.displayName||"")+" - "+user.email;
   msg+="\n\n"+t("from")+CFG.storeName+" 🔥";
   if(sel.need==="id")store.set("lastId",need);stat.inc("ord");openWA(msg);closeModal();
 }
@@ -608,7 +534,7 @@ const KB=[
 {k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","الالعاب المتاحه","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ شحن رصيد وإنترنت: WE, Vodafone, اتصالات وكارت الغاز\n🪙 شباب كونات: مصر, الأردن, السعودية\n🔜 قريباً: Fortnite, Call of Duty, Valorant, Netflix",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi\n🔜 Soon: Fortnite, Call of Duty, Valorant, Netflix"},
 {k:["ازاي اطلب","طريقه الطلب","اطلب","اشتري","شراء","اطلب ازاي","كيف اطلب","how to order","how to buy","order"],ar:"الطلب بسيط وبضغطة:\n1) اختار اللعبة واضغط «عرض الباقات».\n2) اضغط «شراء الآن» على الباقة.\n3) اكتب ID اللاعب (لو اللعبة بتحتاجه).\n4) اضغط «تأكيد عملية الشحن» وهيفتحلك الواتساب برسالة جاهزة.\nبعد الدفع بيتم التسليم.",en:"Ordering is easy:\n1) Pick a game and tap “View Packages”.\n2) Tap “Buy Now” on a package.\n3) Enter the Player ID (if needed).\n4) Tap “Confirm Top-up” and WhatsApp opens with a ready message.\nDelivery follows payment confirmation."},
 {k:["دفع","ادفع","فودافون كاش","فودافون","تحويل","payment","pay","vodafone cash"],ar:"الدفع بيتم عن طريق فودافون كاش 💳\nرقم الدفع مخفي في الموقع، لكن تقدر تنسخه بضغطة من زر «نسخ رقم فودافون كاش» (في نافذة التأكيد أو قسم الشحن السريع). وبعد التحويل بيتم التسليم بعد تأكيد الدفع.",en:"Payment is via Vodafone Cash 💳\nThe number is hidden on the site but you can copy it with one tap from the “Copy Vodafone Cash” button (in the confirm window or Fast Top-up tab). Delivery follows payment confirmation."},
-{k:["وقت","مده","تسليم","كام دقيقه","هيوصل","بياخد","سريع","delivery","how long","how fast","time"],ar:"التسليم سريع ⚡ بعد تأكيد الدفع. المتجر معروف بيته «أسرع من نتكم».",en:"Delivery is fast ⚡ right after payment confirmation."},
+{k:["وقت","مده","تسليم","كام دقيقه","هيوصل","بياخد","سريع","delivery","how long","how fast","time"],ar:"التسليم سريع ⚡ بعد تأكيد الدفع. المتجر معروف بإنه «أسرع من نتكم».",en:"Delivery is fast ⚡ right after payment confirmation."},
 {k:["خصم","خصومات","عروض","عرض","discount","offer","offers","sale"],ar:"في خصم 5% 🎁 بيتحسب تلقائياً على سعر المنتج، وهتشوفه في شاشة «تأكيد عملية الشحن» (السعر بعد الخصم والسعر الأصلي). وتابع القنوات عشان تعرف العروض الجديدة.",en:"There's an automatic 5% discount 🎁 shown in the confirm window (discounted and original price). Follow our channels for new offers."},
 {k:["ايدي","id","player id","اي دي","ازاي الاقي"],ar:"ID اللاعب بتلاقيه غالباً جوه اللعبة في صفحة البروفايل. بنحتاجه عشان نشحن على حسابك بالظبط.\nملحوظة: Roblox وTikTok مش بيحتاجوا ID هنا.",en:"The Player ID is usually on your in-game profile page. We need it to top up the right account.\nNote: Roblox and TikTok don't need an ID here."},
 {k:["امان","موثوق","نصب","ضمان","ثقه","safe","trust","scam","legit","real"],ar:"المتجر بيتابع من 2022 ✅ وتقدر تتأكد من قنواتنا على التليجرام والواتساب. التسليم بعد تأكيد الدفع، وأي مشكلة تواصل مع الدعم.",en:"The store has been running since 2022 ✅. Check our Telegram and WhatsApp channels. Delivery follows payment confirmation; contact support for any issue."},
@@ -682,6 +608,7 @@ document.addEventListener("click",e=>{
   const c=e.target.closest("[data-chip]");if(c)botAsk(c.dataset.chip);
 });
 
+
 /* ===== قائمة النقاط الثلاث ===== */
 const FB="https://www.facebook.com/share/g/1GuX3V5JRS/";
 function dmToggle(on){const m=$("#dMenu");m.classList.toggle("on",on);$("#dotsBtn").setAttribute("aria-expanded",on)}
@@ -701,8 +628,63 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")dmToggle(false)});
 setTheme(store.get("theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
 applyLang();
 stat.inc("visits");
-try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1";stat.inc("unique")}}catch(e){}
+try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
+
+/* ===== تسجيل الدخول بجيميل ===== */
+const firebaseConfig={
+  apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
+  authDomain:"real-store-c91ec.firebaseapp.com",
+  projectId:"real-store-c91ec",
+  appId:"1:315828860330:web:3b2fb64a105ebb1ae627d3"
+};
+Object.assign(T.ar,{logout:"تسجيل الخروج"});
+Object.assign(T.en,{logout:"Sign out"});
+Object.assign(T.ja,{logout:"ログアウト"});
+applyLang();
+
+var user=null,auth=null,provider=null;
+try{
+  firebase.initializeApp(firebaseConfig);
+  auth=firebase.auth();
+  provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:"select_account"});
+}catch(e){console.error("Firebase:",e)}
+
+function renderUser(){
+  const b=$("#loginBtn");
+  if(user){
+    b.innerHTML="";
+    if(user.photoURL){
+      const im=document.createElement("img");
+      im.src=user.photoURL;im.alt="";im.className="uimg";im.referrerPolicy="no-referrer";
+      b.appendChild(im);
+    }else b.innerHTML='<i class="fa-solid fa-user"></i>';
+    $("#uName").textContent=user.displayName||"";
+    $("#uMail").textContent=user.email||"";
+    $("#uBox").style.display="block";
+    $("#logoutItem").style.display="flex";
+  }else{
+    b.innerHTML='<i class="fa-brands fa-google"></i>';
+    $("#uBox").style.display="none";
+    $("#logoutItem").style.display="none";
+  }
+}
+function login(){
+  if(!auth)return toast("❌ Firebase");
+  auth.signInWithPopup(provider).catch(err=>{
+    if(err.code==="auth/popup-closed-by-user"||err.code==="auth/cancelled-popup-request")return;
+    toast("❌ "+err.code);
+  });
+}
+$("#loginBtn").onclick=e=>{
+  e.stopPropagation();
+  if(user)dmToggle(true);else login();
+};
+document.addEventListener("click",e=>{
+  if(e.target.closest('[data-act="logout"]')&&auth)auth.signOut();
+});
+if(auth)auth.onAuthStateChanged(u=>{user=u;renderUser()});
 </script>
 </body>
 </html>
