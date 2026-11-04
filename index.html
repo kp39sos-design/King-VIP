@@ -622,10 +622,17 @@ function confirmOrder(){
   const need=$("#mNeed").value.trim();
   if(sel.need&&need.length<3){$("#mNeed").classList.add("err");$("#mNeed").focus();toast(t("need_req"));return}
   const priceTxt=$("#mDisc").style.display==="none"?"":$("#mPrice").textContent;
-  let msg=t("hello")+"\n\n"+t("want")+sel.title+"\n"+t("pricel")+priceTxt;
-  if(sel.need)msg+="\n"+t("idl")+need;
-  if(user)msg+="\n👤 "+(user.displayName||"");
-  msg+="\n\n"+t("from")+CFG.storeName+" 🔥";
+  
+  // رسالة منسقة ومنظمة بشكل شيك جداً بدون إيميل
+  let msg="🛒 *طلب شحن جديد*\n";
+  msg+="━━━━━━━━━━━━━━━\n";
+  msg+="🎮 *المنتج:* "+sel.title+"\n";
+  msg+="💰 *السعر:* "+priceTxt+"\n";
+  if(sel.need)msg+="🆔 *البيانات:* "+need+"\n";
+  if(user&&user.displayName)msg+="👤 *العميل:* "+user.displayName+"\n";
+  msg+="━━━━━━━━━━━━━━━\n";
+  msg+="⚡ "+t("from")+CFG.storeName+" 🔥";
+
   fetch("https://real-store-orders.krop39sos.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({product:sel.title,price:priceTxt,need:need,name:user?user.displayName:"",email:user?user.email:""})}).catch(()=>{});
   if(sel.need==="id")store.set("lastId",need);stat.inc("ord");openWA(msg);closeModal();
 }
