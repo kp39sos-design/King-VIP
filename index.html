@@ -835,7 +835,7 @@ stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== تسجيل الدخول بجيميل (Popup أولاً + Redirect احتياطي) ===== */
+/* ===== تسجيل الدخول بجيميل (تعديل لفتح قائمة اختيار الحسابات مباشرة) ===== */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -848,7 +848,10 @@ try{
   firebase.initializeApp(firebaseConfig);
   auth=firebase.auth();
   provider=new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({prompt:"select_account"});
+  // إجبار ظهور قائمة حسابات جوجل لتجنب الإدخال اليدوي
+  provider.setCustomParameters({
+    prompt: "select_account"
+  });
 }catch(e){console.error("Firebase:",e)}
 
 if(!auth)$("#gate").classList.remove("on");
@@ -888,7 +891,6 @@ function login(){
   auth.signInWithPopup(provider)
     .then(res=>{
       if(btn) btn.classList.remove("loading");
-      // أول مرة يسجل دخول، لو مفيش اسم مخصص محفوظ، نعرض نافذة إدخال الاسم
       if(res && res.user && !store.get("custom_username", "")){
         setTimeout(()=>openNameModal(), 300);
       }
