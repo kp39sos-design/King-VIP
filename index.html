@@ -621,7 +621,6 @@ function login(){
       setTimeout(()=>openNameModal(), 300);
     }
   }).catch(err=>{
-    // Fallback لـ Redirect لو النافذة المنبثقة محظورة
     auth.signInWithRedirect(provider).catch(e2=>toast("❌ "+(e2.code||e2.message)));
   });
 }
