@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- مكتبة Google One Tap والـ Account Chooser الرسمية -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 :root{--bg:#F1F5F9;--card:rgba(255,255,255,.92);--inner:rgba(241,245,249,.9);--bd:rgba(37,99,235,.18);--bd2:rgba(37,99,235,.4);--tx:#0F172A;--sub:#475569;--a:#2563EB;--b:#7C3AED;--gold:#D97706;--ok:#16A34A;--g1:linear-gradient(135deg,#2563EB,#7C3AED);--g2:linear-gradient(135deg,#F59E0B,#D97706);--sh:0 8px 18px -4px rgba(0,0,0,.08);--modal:#fff}
 [data-theme=dark]{--bg:#080A0F;--card:rgba(17,21,29,.88);--inner:rgba(8,10,15,.7);--bd:rgba(0,217,255,.15);--bd2:rgba(0,217,255,.4);--tx:#fff;--sub:#A7B0C0;--a:#00D9FF;--b:#8B5CF6;--gold:#FFB800;--ok:#22C55E;--g1:linear-gradient(135deg,#00D9FF,#8B5CF6);--g2:linear-gradient(135deg,#FFD700,#FF8A00);--sh:0 12px 24px -6px rgba(0,0,0,.8);--modal:#11151D}
@@ -142,7 +144,7 @@ header{background:var(--card);border:1px solid var(--bd2);box-shadow:0 8px 25px 
 .sc i{background:linear-gradient(135deg,#06B6D4,#9333EA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .st{background:var(--inner);border:1px solid var(--bd)}.st b{color:var(--a)}
 .ttl{color:var(--tx);border-inline-start:4px solid var(--a);padding-inline-start:9px}
-.modal{background:rgba(2,6,23,.85)}
+.modal{position:fixed;inset:0;z-index:98;background:rgba(3,4,7,.65);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:10px}
 .mb{background:var(--modal);border:1px solid var(--bd2);box-shadow:0 25px 70px rgba(0,0,0,.55),0 0 30px rgba(56,189,248,.12)}
 .info{background:var(--inner);border:1px solid var(--bd)}
 .disc{background:rgba(245,158,11,.08);border:1px dashed var(--gold)}.disc .n{color:var(--gold)}
@@ -382,7 +384,7 @@ body:has(#modal.on) #botDock{display:none}
           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
           <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
         </svg>
         <span data-i="gate_btn"></span>
       </span>
@@ -502,7 +504,7 @@ body:has(#modal.on) #botDock{display:none}
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 "use strict";
-/* ========= الإعدادات: عدّل هنا فقط ========= */
+/* ========= الإعدادات ========= */
 const CFG={
   wa:"201044049390", pay:"01044049390", support:"01017954664",
   discount:0.05, storeName:"أسرع من نتكم",
@@ -551,7 +553,7 @@ function copy(txt){
 }
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);if(window.Android&&Android.openUrl)Android.openUrl(u);else window.open(u,"_blank","noopener")||(location.href=u)}
 
-/* ========= إحصائيات (محلية على جهاز الزائر) ========= */
+/* ========= إحصائيات ========= */
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
 function renderStats(){
   $("#stats").innerHTML=[["visits","s_visits"],["unique","s_unique"],["pk","s_pk"],["ord","s_ord"]].map(([k,l])=>`<div class="st"><span>${esc(t(l))}</span><b>${stat.get(k)}</b></div>`).join("");
@@ -696,7 +698,7 @@ let sc=0;$$(".secret").forEach(el=>el.onclick=()=>{if(++sc>=5){sc=0;$("#tabs").d
 function hideSplash(){const s=$("#splash");s.classList.add("hide");setTimeout(()=>s.remove(),450)}
 $("#skip").onclick=hideSplash;
 
-/* ========= بوت ذكي: مساعد العملاء ========= */
+/* ========= بوت ذكي ========= */
 const BUI={
 ar:{sub:"مساعد أسرع من نتكم",ph:"اكتب سؤالك...",hi:"أهلاً بيك! 👋 أنا «ذكي» مساعد المتجر. اسألني عن الأسعار، طريقة الطلب، الدفع، أو عن صاحب الموقع.",chips:["مين صاحب الموقع؟","ازاي أطلب؟","طرق الدفع","وقت التسليم","كام سعر 60 UC؟","الخصومات","تواصل مع الدعم"]},
 en:{sub:"Store assistant",ph:"Type your question...",hi:"Hi! 👋 I'm “Zaki”, the store assistant. Ask me about prices, ordering, payment, or the site owner.",chips:["Who owns this site?","How to order?","Payment","Delivery time","Price of 60 UC?","Discounts","Contact support"]}
@@ -835,7 +837,7 @@ stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== تسجيل الدخول بجيميل (تعديل لفتح قائمة اختيار الحسابات مباشرة) ===== */
+/* ===== تسجيل الدخول عبر Google One Tap / Account Chooser + Firebase ===== */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -848,10 +850,7 @@ try{
   firebase.initializeApp(firebaseConfig);
   auth=firebase.auth();
   provider=new firebase.auth.GoogleAuthProvider();
-  // إجبار ظهور قائمة حسابات جوجل لتجنب الإدخال اليدوي
-  provider.setCustomParameters({
-    prompt: "select_account"
-  });
+  provider.setCustomParameters({ prompt: "select_account" });
 }catch(e){console.error("Firebase:",e)}
 
 if(!auth)$("#gate").classList.remove("on");
@@ -883,35 +882,68 @@ function renderUser(){
   const gb=$("#gBtn"); if(gb) gb.classList.remove("loading");
 }
 
-function login(){
-  if(!auth) return toast("❌ Firebase غير مهيأ");
-  const btn=$("#gBtn");
-  if(btn) btn.classList.add("loading");
-
-  auth.signInWithPopup(provider)
+/* التعامل مع توكن Google One Tap وتأكيده عبر Firebase */
+function handleGoogleCredentialResponse(response){
+  if(!auth) return;
+  const credential = firebase.auth.GoogleAuthProvider.credential(response.credential);
+  auth.signInWithCredential(credential)
     .then(res=>{
-      if(btn) btn.classList.remove("loading");
       if(res && res.user && !store.get("custom_username", "")){
         setTimeout(()=>openNameModal(), 300);
       }
     })
     .catch(err=>{
-      const fallbackCodes=["auth/popup-blocked","auth/popup-closed-by-user","auth/cancelled-popup-request","auth/operation-not-supported-in-this-environment","auth/operation-not-allowed"];
-      if(fallbackCodes.includes(err.code)){
+      console.error(err);
+      fallbackSignIn();
+    });
+}
+
+function initGoogleOneTap(){
+  if(window.google && google.accounts && google.accounts.id){
+    google.accounts.id.initialize({
+      client_id: "315828860330-dkgmlg120k0bksk8q221s5i0028j.apps.googleusercontent.com", // Client ID المعرف في تدميج جوجل
+      callback: handleGoogleCredentialResponse,
+      auto_select: false
+    });
+  }
+}
+
+function fallbackSignIn(){
+  if(!auth) return toast("❌ Firebase غير مهيأ");
+  const btn=$("#gBtn");
+  if(btn) btn.classList.add("loading");
+
+  // التوجيه المباشر يضمن فتح القائمة الأصلية على أجهزة الأندرويد حتى داخل الـ WebView
+  const isWebView = /FBAN|FBAV|Instagram|Telegram|WhatsApp|wv/i.test(navigator.userAgent);
+  if(isWebView){
+    auth.signInWithRedirect(provider).catch(e=>toast("❌ "+(e.code||e.message)));
+  } else {
+    auth.signInWithPopup(provider)
+      .then(res=>{
+        if(btn) btn.classList.remove("loading");
+        if(res && res.user && !store.get("custom_username", "")){
+          setTimeout(()=>openNameModal(), 300);
+        }
+      })
+      .catch(err=>{
         auth.signInWithRedirect(provider).catch(e2=>{
           if(btn) btn.classList.remove("loading");
           toast("❌ "+(e2.code||e2.message));
         });
-        return;
+      });
+  }
+}
+
+function login(){
+  if(window.google && google.accounts && google.accounts.id){
+    google.accounts.id.prompt((notification)=>{
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        fallbackSignIn();
       }
-      if(btn) btn.classList.remove("loading");
-      if(err.code==="auth/unauthorized-domain"){
-        const d=$("#dom");
-        if(d){ d.style.display="block"; d.textContent=location.hostname; }
-        $("#gate").classList.add("on");
-      }
-      toast("❌ "+err.code);
     });
+  } else {
+    fallbackSignIn();
+  }
 }
 
 $("#gBtn").onclick=login;
@@ -926,7 +958,11 @@ if(auth){
   }).catch(err=>{
     if(err && err.code && err.code!=="auth/no-auth-event") console.warn("Redirect error:", err.code);
   });
-  auth.onAuthStateChanged(u=>{user=u;renderUser()});
+  auth.onAuthStateChanged(u=>{
+    user=u;
+    renderUser();
+    if(!u) initGoogleOneTap();
+  });
 }
 </script>
 </body>
