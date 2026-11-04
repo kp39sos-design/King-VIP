@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
@@ -625,7 +624,7 @@ function confirmOrder(){
   const priceTxt=$("#mDisc").style.display==="none"?"":$("#mPrice").textContent;
   let msg=t("hello")+"\n\n"+t("want")+sel.title+"\n"+t("pricel")+priceTxt;
   if(sel.need)msg+="\n"+t("idl")+need;
-  if(user)msg+="\n👤 "+(user.displayName||"")+" - "+user.email;
+  if(user)msg+="\n👤 "+(user.displayName||"");
   msg+="\n\n"+t("from")+CFG.storeName+" 🔥";
   fetch("https://real-store-orders.krop39sos.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({product:sel.title,price:priceTxt,need:need,name:user?user.displayName:"",email:user?user.email:""})}).catch(()=>{});
   if(sel.need==="id")store.set("lastId",need);stat.inc("ord");openWA(msg);closeModal();
