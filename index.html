@@ -82,7 +82,6 @@ textarea.in{min-height:75px;resize:none}
 .err{border-color:#EF4444!important}
 #toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:100;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;white-space:nowrap}
 footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;font-weight:600}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ===== 3D احترافي + أداء ===== */
 body{background:radial-gradient(circle at 50% 0,#0b1224,#030407 70%)}
@@ -350,25 +349,68 @@ body:has(#modal.on) #botDock{display:none}
   .g-card,.g-logo-wrap,.orb,.g-logo-ring,.gbtn-shine{animation:none!important}
 }
 
-/* ===== Premium Banner Slider ===== */
-#hero{display:none;margin:0 0 12px}
-body:has(#games.on) #hero{display:block}
-.hs{direction:ltr}
-.hs-v{position:relative;aspect-ratio:var(--ar,16/7);border-radius:20px;overflow:hidden;background:#0B1020;perspective:1100px;touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:grab;outline:none;
-  box-shadow:0 14px 30px -10px rgba(37,99,235,.5),0 0 0 1px rgba(56,189,248,.28),0 0 26px rgba(147,51,234,.2)}
-.hs-v:focus-visible{box-shadow:0 0 0 2px var(--a),0 14px 30px -10px rgba(37,99,235,.5)}
-.hs-v.drag{cursor:grabbing}
-.hs-s{position:absolute;inset:0;will-change:transform,opacity;backface-visibility:hidden;
-  transition:transform .75s cubic-bezier(.22,.8,.24,1),opacity .75s ease,visibility .75s}
-.hs-v.drag .hs-s{transition:none}
-.hs-s img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
-.hs-v::after{content:"";position:absolute;inset:0;z-index:20;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(115deg,rgba(255,255,255,.14) 0,transparent 32%),linear-gradient(0deg,rgba(8,11,24,.28),transparent 35%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 0 0 1px rgba(255,255,255,.07)}
-.hs-d{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:9px}
-.hs-d button{width:7px;height:7px;padding:0;border-radius:99px;background:var(--bd2);transition:width .35s,background .35s,box-shadow .35s}
-.hs-d button.on{width:22px;background:var(--g1);box-shadow:0 0 10px rgba(56,189,248,.55)}
-@media(min-width:521px){.hs-v{border-radius:22px}}
+/* ===== Premium Slider (البنرات الإعلانية) ===== */
+.premium-slider-wrap {
+    position: relative;
+    margin: 0 0 14px 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4), 0 0 0 1px var(--bd2);
+    background: var(--card);
+    transform: translateZ(0);
+    touch-action: pan-y;
+}
+.premium-slider-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+.premium-slide {
+    min-width: 100%;
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 16 / 7;
+}
+.premium-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+.premium-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+}
+.premium-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.premium-dot.on {
+    background: #fff;
+    width: 18px;
+    border-radius: 3px;
+}
+.premium-slider-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4));
+    pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -429,7 +471,6 @@ body:has(#games.on) #hero{display:block}
         <div class="dm-t" data-i="menu_title"></div>
         <div id="uBox"><span id="uName"></span><span id="uMail"></span></div>
 
-        <!-- 🌐 اختيار اللغة داخل القائمة -->
         <div class="dm-t" data-i="menu_lang"></div>
         <div class="dm-lang">
           <button class="lang-btn" data-lang="ar"><span class="flag">🇪🇬</span><span>العربية</span></button>
@@ -451,12 +492,11 @@ body:has(#games.on) #hero{display:block}
   </div>
 </header>
 
-<section id="hero" role="region" aria-roledescription="carousel" aria-label="العروض">
-  <div class="hs">
-    <div class="hs-v" id="hsV" tabindex="0"></div>
-    <div class="hs-d" id="hsD"></div>
-  </div>
-</section>
+<!-- Premium Banner Slider -->
+<div class="premium-slider-wrap" id="bannerSlider">
+  <div class="premium-slider-track" id="bannerTrack"></div>
+  <div class="premium-dots" id="bannerDots"></div>
+</div>
 
 <nav class="tabs" id="tabs" role="tablist"></nav>
 
@@ -847,7 +887,7 @@ function openNameModal(){
 }
 function closeNameModal(){$("#nameModal").classList.remove("on")}
 $("#saveNameBtn").onclick=()=>{
-  const val = $("#customNameInput.value").trim();
+  const val = $("#customNameInput").value.trim();
   if(!val)return toast("⚠️ اكتب اسماً صحيحاً");
   store.set("custom_username", val);
   renderUser();
@@ -855,14 +895,155 @@ $("#saveNameBtn").onclick=()=>{
   toast(t("name_updated"));
 };
 
-/* ========= تشغيل ========= */
+/* ========= Premium Slider Logic ========= */
+const BANNERS = [
+  { img: "https://cdn.imagetourls.com/uploads/tyImg/OTVFsepS.png", target: "game:pubg" },
+  { img: "https://cdn.imagetourls.com/uploads/tyImg/185ya1XjC.png", target: "game:ff" },
+  { img: "https://cdn.imagetourls.com/uploads/tyImg/174dv6OkZ.png", target: "game:roblox" },
+  { img: "https://cdn.imagetourls.com/uploads/tyImg/S32m5Lhy.png", target: "game:yalla" },
+  { img: "https://cdn.imagetourls.com/uploads/tyImg/5YbcUnOQ.png", target: "sec:games" }
+];
+
+let currentSlide = 0;
+let slideInterval;
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+let track;
+
+function initSlider() {
+    const trackEl = document.getElementById('bannerTrack');
+    const dotsEl = document.getElementById('bannerDots');
+    const wrapEl = document.getElementById('bannerSlider');
+    if(!trackEl || !dotsEl || !wrapEl) return;
+
+    track = trackEl;
+    
+    // Build HTML
+    track.innerHTML = BANNERS.map((b, i) => `
+        <div class="premium-slide" data-idx="${i}" onclick="handleBannerClick('${b.target}')">
+            <img src="${b.img}" alt="Banner ${i+1}" loading="${i===0?'eager':'lazy'}">
+        </div>
+    `).join('');
+
+    dotsEl.innerHTML = BANNERS.map((_, i) => `
+        <div class="premium-dot ${i===0?'on':''}" onclick="goToSlide(${i}); event.stopPropagation();"></div>
+    `).join('');
+
+    // Event Listeners for drag/swipe
+    wrapEl.addEventListener('touchstart', handleTouchStart, {passive: true});
+    wrapEl.addEventListener('touchmove', handleTouchMove, {passive: true});
+    wrapEl.addEventListener('touchend', handleTouchEnd);
+    
+    // Mouse drag for desktop
+    wrapEl.addEventListener('mousedown', handleTouchStart);
+    wrapEl.addEventListener('mousemove', handleTouchMove);
+    wrapEl.addEventListener('mouseup', handleTouchEnd);
+    wrapEl.addEventListener('mouseleave', handleTouchEnd);
+
+    startAutoPlay();
+}
+
+function goToSlide(index) {
+    if(index < 0) index = BANNERS.length - 1;
+    if(index >= BANNERS.length) index = 0;
+    currentSlide = index;
+    
+    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    // Update dots
+    document.querySelectorAll('.premium-dot').forEach((dot, i) => {
+        dot.classList.toggle('on', i === currentSlide);
+    });
+}
+
+function startAutoPlay() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, 4000);
+}
+
+function stopAutoPlay() {
+    clearInterval(slideInterval);
+}
+
+function handleBannerClick(target) {
+    if(isDragging) return; // Prevent click if dragging
+    if(target.startsWith('game:')) {
+        const gameId = target.split(':')[1];
+        showSec('games');
+        const wrap = document.getElementById('w-' + gameId);
+        if(wrap) {
+            if(!wrap.classList.contains('open')) {
+                togglePk(gameId);
+            }
+            wrap.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+    } else if(target.startsWith('sec:')) {
+        const secId = target.split(':')[1];
+        showSec(secId);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+}
+
+// Swipe Logic
+function handleTouchStart(e) {
+    isDragging = false;
+    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    track.style.transition = 'none';
+    stopAutoPlay();
+}
+
+function handleTouchMove(e) {
+    if(startX === 0) return;
+    currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    const diff = currentX - startX;
+    
+    if(Math.abs(diff) > 10) {
+        isDragging = true;
+    }
+    
+    // Basic bounds checking for resistance
+    const percentage = (diff / track.offsetWidth) * 100;
+    track.style.transform = `translateX(calc(-${currentSlide * 100}% + ${percentage}%))`;
+}
+
+function handleTouchEnd(e) {
+    if(startX === 0) return;
+    const endX = e.type.includes('mouse') ? e.pageX : (e.changedTouches ? e.changedTouches[0].clientX : startX);
+    const diff = endX - startX;
+    
+    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+    
+    if(Math.abs(diff) > 50) { // Swipe threshold
+        if(diff > 0) {
+            goToSlide(currentSlide - 1); // Swipe Right
+        } else {
+            goToSlide(currentSlide + 1); // Swipe Left
+        }
+    } else {
+        goToSlide(currentSlide); // Snap back
+    }
+    
+    startX = 0;
+    currentX = 0;
+    startAutoPlay();
+    
+    // Reset isDragging after a slight delay to avoid triggering click
+    setTimeout(() => { isDragging = false; }, 50);
+}
+
+/* ===== تشغيل التطبيق الأساسي ===== */
 setTheme(store.get("theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
 applyLang();
+initSlider(); // تشغيل البنرات
 stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== تسجيل الدخول (مع فرض إعادة التوجيه لمتصفح خارجي إن أمكن) ===== */
+/* ===== تسجيل الدخول ===== */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -912,7 +1093,6 @@ function login(){
   const btn=$("#gBtn");
   if(btn) btn.classList.add("loading");
 
-  // باستخدام signInWithRedirect مباشرة مع حسابات جوجل يفرض فتح صفحة اختيار الحسابات بشكل أوضح في بيئات الأندرويد
   auth.signInWithRedirect(provider).catch(err=>{
     if(btn) btn.classList.remove("loading");
     if(err.code==="auth/unauthorized-domain"){
@@ -938,104 +1118,6 @@ if(auth){
   });
   auth.onAuthStateChanged(u=>{user=u;renderUser()});
 }
-
-/* ========= Premium Banner Slider ========= */
-(function(){
-  // [رابط الصورة, الوصف, معرّف اللعبة في GAMES (فارغ = تمرير لقائمة الألعاب)]
-  const U="https://cdn.imagetourls.com/uploads/tyImg/";
-  const B=[
-    ["OTVFsepS.png","PUBG Mobile","pubg"],
-    ["185ya1XjC.png","Free Fire","ff"],
-    ["174dv6OkZ.png","Roblox","roblox"],
-    ["S32m5Lhy.png","Yalla Ludo","yalla"],
-    ["5YbcUnOQ.png","شحن جميع التطبيقات والألعاب",""]
-  ];
-  const v=$("#hsV"),dots=$("#hsD"),n=B.length,DELAY=4000;
-  let cur=0,dx=0,w=1,sx=0,t0=0,drag=false,moved=false,timer=null;
-
-  const S=B.map((b,i)=>{
-    const s=document.createElement("div");s.className="hs-s";
-    s.setAttribute("aria-label",b[1]);
-    const im=document.createElement("img");
-    im.alt=b[1];im.decoding="async";im.draggable=false;
-    if(i===0){im.fetchPriority="high";im.src=U+b[0];im.dataset.l="1";
-      const setAr=()=>{if(im.naturalWidth){v.style.setProperty("--ar",Math.max(im.naturalWidth/im.naturalHeight,1.6)+"/1");lay()}};
-      im.complete?setAr():im.addEventListener("load",setAr,{once:true});
-    }
-    s.appendChild(im);v.appendChild(s);return s;
-  });
-  const D=B.map((b,i)=>{
-    const d=document.createElement("button");d.type="button";d.setAttribute("aria-label",(i+1)+"/"+n);
-    d.onclick=()=>go(i);dots.appendChild(d);return d;
-  });
-
-  function load(i){
-    const im=S[(i+n)%n].firstChild;
-    if(!im.dataset.l){im.dataset.l="1";im.src=U+B[(i+n)%n][0]}
-  }
-  function lay(){
-    w=v.clientWidth||1;
-    S.forEach((s,i)=>{
-      const o=((i-cur+n+(n>>1))%n)-(n>>1),p=o+dx/w,a=Math.min(Math.abs(p),1);
-      s.style.transform="translate3d("+(p*100)+"%,0,0) rotateY("+(-p*16)+"deg) scale("+(1-a*.08)+")";
-      s.style.opacity=1-a;
-      s.style.visibility=Math.abs(p)>1.05?"hidden":"visible";
-      s.style.zIndex=10-Math.round(a*5);
-    });
-    D.forEach((d,i)=>{d.classList.toggle("on",i===cur);d.setAttribute("aria-current",i===cur)});
-  }
-  function go(k){cur=(k%n+n)%n;dx=0;load(cur);load(cur+1);load(cur-1);lay();play()}
-  function stop(){clearInterval(timer);timer=null}
-  function play(){stop();if(!document.hidden)timer=setInterval(()=>go(cur+1),DELAY)}
-
-  // السحب باللمس والماوس
-  v.addEventListener("pointerdown",e=>{
-    if(e.pointerType==="mouse"&&e.button!==0)return;
-    drag=true;moved=false;sx=e.clientX;dx=0;t0=Date.now();stop();
-    try{v.setPointerCapture(e.pointerId)}catch(_){}
-  });
-  v.addEventListener("pointermove",e=>{
-    if(!drag)return;
-    dx=e.clientX-sx;
-    if(!moved&&Math.abs(dx)>6){moved=true;v.classList.add("drag")}
-    if(moved)lay();
-  });
-  const end=()=>{
-    if(!drag)return;drag=false;v.classList.remove("drag");
-    const fast=Math.abs(dx)/(Date.now()-t0+1)>.5;
-    if(moved&&(Math.abs(dx)>w*.18||fast&&Math.abs(dx)>24))go(cur+(dx<0?1:-1));
-    else{dx=0;lay();play()}
-  };
-  v.addEventListener("pointerup",end);
-  v.addEventListener("pointercancel",end);
-
-  // الضغط على البنر → صفحة شحن اللعبة
-  function open(){
-    const id=B[cur][2];
-    showSec("games");
-    if($("#q").value){$("#q").value="";filterGames()}
-    if(id&&$("#w-"+id)){
-      if(!$("#w-"+id).classList.contains("open"))togglePk(id);
-      else $("#w-"+id).scrollIntoView({behavior:"smooth",block:"start"});
-    }else $("#gameGrid").scrollIntoView({behavior:"smooth",block:"start"});
-  }
-  v.addEventListener("click",()=>{if(!moved)open();moved=false});
-  v.addEventListener("keydown",e=>{
-    if(e.key==="ArrowRight")go(cur+1);
-    else if(e.key==="ArrowLeft")go(cur-1);
-    else if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}
-  });
-
-  // إيقاف مؤقت عند التمرير بالماوس أو إخفاء التبويب
-  v.addEventListener("mouseenter",stop);
-  v.addEventListener("mouseleave",()=>{if(!drag)play()});
-  document.addEventListener("visibilitychange",()=>document.hidden?stop():play());
-  addEventListener("resize",lay);
-
-  lay();play();
-  // تحميل باقي البنرات بعد استقرار الصفحة
-  (window.requestIdleCallback||(f=>setTimeout(f,900)))(()=>{load(1);load(n-1);setTimeout(()=>B.forEach((_,i)=>load(i)),2500)});
-})();
 </script>
 </body>
 </html>
