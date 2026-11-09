@@ -225,131 +225,6 @@ body:has(#modal.on) #botDock{display:none}
 #uName{display:block;font-size:12px;font-weight:800}
 #uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
 
-/* ===== Gate / Login 3D Pro ===== */
-#gate{
-  position:fixed;inset:0;z-index:97;display:none;
-  flex-direction:column;align-items:center;justify-content:center;
-  padding:26px 18px;overflow:hidden;text-align:center;
-  background:
-    radial-gradient(circle at 18% 12%,rgba(37,99,235,.55),transparent 45%),
-    radial-gradient(circle at 82% 88%,rgba(147,51,234,.55),transparent 45%),
-    radial-gradient(circle at 50% 50%,rgba(6,182,212,.12),transparent 60%),
-    #04060d;
-  perspective:1400px;
-}
-#gate.on{display:flex;animation:gateIn .45s ease-out}
-@keyframes gateIn{from{opacity:0}to{opacity:1}}
-
-.g-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.orb{position:absolute;border-radius:50%;filter:blur(44px);opacity:.55;animation:orbFloat 10s ease-in-out infinite;will-change:transform}
-.orb.o1{width:240px;height:240px;background:#2563EB;top:-70px;left:-70px}
-.orb.o2{width:200px;height:200px;background:#9333EA;bottom:-60px;right:-60px;animation-delay:-3s}
-.orb.o3{width:150px;height:150px;background:#06B6D4;top:44%;right:-50px;animation-delay:-5.5s}
-.orb.o4{width:130px;height:130px;background:#EC4899;bottom:16%;left:-50px;animation-delay:-7.5s}
-@keyframes orbFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-22px,0) scale(1.18)}}
-
-.g-card{
-  position:relative;z-index:1;width:100%;max-width:360px;
-  background:linear-gradient(160deg,rgba(20,28,48,.88),rgba(10,15,30,.92));
-  border:1px solid rgba(120,170,255,.22);
-  border-radius:26px;padding:26px 20px 20px;
-  box-shadow:
-    0 30px 70px -22px rgba(0,0,0,.85),
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 1px 0 rgba(255,255,255,.20) inset,
-    0 -22px 44px -30px rgba(56,189,248,.55) inset,
-    0 0 60px -10px rgba(37,99,235,.35);
-  backdrop-filter:blur(18px) saturate(1.5)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.5)!important;
-  transform-style:preserve-3d;
-  animation:cardIn .7s cubic-bezier(.2,.8,.3,1.2) both;
-}
-@keyframes cardIn{from{opacity:0;transform:translateY(24px) rotateX(-10deg) scale(.94)}to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
-
-.g-logo-wrap{position:relative;width:96px;height:96px;margin:0 auto 14px;transform-style:preserve-3d;animation:logoFloat 4.5s ease-in-out infinite;will-change:transform}
-.g-logo-ring{position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from 0deg,#2563EB,#06B6D4,#9333EA,#EC4899,#2563EB);filter:blur(12px);opacity:.75;animation:ringSpin 7s linear infinite;will-change:transform}
-@keyframes ringSpin{to{transform:rotate(360deg)}}
-@keyframes logoFloat{0%,100%{transform:translateY(0) rotateY(0)}50%{transform:translateY(-7px) rotateY(8deg)}}
-.g-logo{
-  position:relative;width:96px;height:96px;border-radius:24px;
-  border:2px solid rgba(255,255,255,.35);
-  box-shadow:0 16px 32px rgba(0,0,0,.65),0 0 26px rgba(56,189,248,.55);
-  display:block;object-fit:cover;
-}
-
-#gate h2{font-size:19px;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-.2px}
-#gate p{font-size:12px;color:#A5B4D0;font-weight:600;max-width:290px;margin:0 auto 18px;line-height:1.75}
-#gate #dom{margin:0 auto 14px;max-width:300px}
-
-.gbtn{
-  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  width:100%;max-width:300px;margin:0 auto;padding:14px 18px;border-radius:16px;
-  background:linear-gradient(180deg,#ffffff 0%,#eef2f8 100%);
-  color:#1f1f1f;font-weight:800;font-size:14.5px;
-  border:1px solid #d0d7e2;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.95) inset,
-    0 2px 0 #c3cbd8,
-    0 4px 0 #a7b1c1,
-    0 6px 0 #8b95a8,
-    0 14px 26px -10px rgba(37,99,235,.55),
-    0 10px 22px rgba(0,0,0,.35);
-  transform:translateZ(0);
-  transition:transform .12s ease,box-shadow .12s ease,filter .15s ease;
-  cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
-}
-.gbtn-content{position:relative;z-index:2;display:flex;align-items:center;gap:10px}
-.gbtn:hover{filter:brightness(1.04);transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 0 #c3cbd8,0 5px 0 #a7b1c1,0 7px 0 #8b95a8,0 18px 32px -10px rgba(37,99,235,.65),0 12px 26px rgba(0,0,0,.4)}
-.gbtn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 1px 0 #c3cbd8,0 2px 0 #a7b1c1,0 3px 0 #8b95a8,0 6px 14px -4px rgba(37,99,235,.5),0 3px 8px rgba(0,0,0,.3)}
-.gbtn[disabled]{opacity:.7;pointer-events:none}
-
-.gbtn-shine{
-  position:absolute;top:0;left:-70%;width:65%;height:100%;z-index:1;
-  background:linear-gradient(100deg,transparent 0,rgba(255,255,255,.95) 50%,transparent 100%);
-  transform:skewX(-22deg);animation:shine 3.6s ease-in-out infinite;pointer-events:none;opacity:.7;
-}
-@keyframes shine{0%{left:-80%}55%{left:140%}100%{left:140%}}
-
-.g-ico{display:block;flex-shrink:0}
-
-.g-secure{
-  margin-top:16px;display:inline-flex;align-items:center;gap:6px;
-  font-size:10.5px;font-weight:700;color:#8b9ab8;
-  padding:6px 12px;border-radius:999px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);
-}
-.g-secure i{color:#22C55E;font-size:11px}
-
-.gbtn.loading .gbtn-content{opacity:.55}
-.gbtn.loading::after{
-  content:"";position:absolute;width:18px;height:18px;border-radius:50%;
-  border:2px solid #2563EB;border-top-color:transparent;
-  animation:spin .7s linear infinite;right:16px;z-index:3;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-[data-theme=light] #gate{
-  background:
-    radial-gradient(circle at 18% 12%,rgba(37,99,235,.35),transparent 45%),
-    radial-gradient(circle at 82% 88%,rgba(147,51,234,.35),transparent 45%),
-    #eef2ff;
-}
-[data-theme=light] #gate h2{color:#0f172a}
-[data-theme=light] #gate p{color:#475569}
-[data-theme=light] .g-card{
-  background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(255,255,255,.78));
-  border-color:rgba(37,99,235,.18);
-  box-shadow:
-    0 30px 70px -22px rgba(37,99,235,.35),
-    0 0 0 1px rgba(255,255,255,.7) inset,
-    0 1px 0 rgba(255,255,255,.95) inset;
-}
-[data-theme=light] .g-secure{color:#64748b;background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.15)}
-
-@media(prefers-reduced-motion:reduce){
-  .g-card,.g-logo-wrap,.orb,.g-logo-ring,.gbtn-shine{animation:none!important}
-}
-
 /* ===== Premium Banner Slider ===== */
 #hero{display:none;margin:0 0 12px}
 body:has(#games.on) #hero{display:block}
@@ -379,37 +254,6 @@ body:has(#games.on) #hero{display:block}
   <div class="brand-t" style="font-size:18px">أسرع من نتكم 🔥</div>
   <div class="sub" data-i="brand_sub"></div>
   <button class="skip" id="skip" data-i="skip"></button>
-</div>
-
-<div id="gate" class="on">
-  <div class="g-bg" aria-hidden="true">
-    <span class="orb o1"></span>
-    <span class="orb o2"></span>
-    <span class="orb o3"></span>
-    <span class="orb o4"></span>
-  </div>
-  <div class="g-card">
-    <div class="g-logo-wrap">
-      <div class="g-logo-ring" aria-hidden="true"></div>
-      <img class="g-logo" src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="شعار">
-    </div>
-    <h2 data-i="gate_title"></h2>
-    <p data-i="gate_sub"></p>
-    <div id="dom" style="display:none;direction:ltr;user-select:all;-webkit-user-select:all;font-weight:800;color:var(--gold);font-size:13px;word-break:break-all;border:1px dashed var(--gold);border-radius:12px;padding:10px"></div>
-    <button class="gbtn" id="gBtn" aria-label="تسجيل الدخول بجوجل">
-      <span class="gbtn-shine" aria-hidden="true"></span>
-      <span class="gbtn-content">
-        <svg class="g-ico" viewBox="0 0 48 48" width="22" height="22" aria-hidden="true">
-          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        </svg>
-        <span data-i="gate_btn"></span>
-      </span>
-    </button>
-    <div class="g-secure"><i class="fa-solid fa-lock"></i><span data-i="gate_secure"></span></div>
-  </div>
 </div>
 
 <div id="toast" role="status"></div>
@@ -561,9 +405,9 @@ en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:
 ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_lang:"言語",menu_edit_name:"ユーザー名を変更",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: ",name_modal_title:"ユーザー名変更",name_modal_sub:"お名前を入力してください:",name_modal_save:"💾 保存",name_updated:"✅ 更新しました"}
 };
 
-Object.assign(T.ar,{logout:"تسجيل الخروج",gate_title:"أهلاً بيك في أسرع من نتكم 🔥",gate_sub:"سجّل دخولك بحساب جيميل عشان تقدر تفتح المتجر وتطلب.",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google"});
-Object.assign(T.en,{logout:"Sign out",gate_title:"Welcome to أسرع من نتكم 🔥",gate_sub:"Sign in with your Google account to open the store and order.",gate_btn:"Sign in with Google",gate_secure:"Secure sign-in powered by Google"});
-Object.assign(T.ja,{logout:"ログアウト",gate_title:"アスラ・ミン・ネトクムへようこそ 🔥",gate_sub:"Googleアカウントでログインしてください。",gate_btn:"Googleでログイン",gate_secure:"Googleによる安全なログイン"});
+Object.assign(T.ar,{logout:"تسجيل الخروج"});
+Object.assign(T.en,{logout:"Sign out"});
+Object.assign(T.ja,{logout:"ログアウト"});
 
 /* ========= أدوات ========= */
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -661,17 +505,14 @@ function confirmOrder(){
   const need=$("#mNeed").value.trim();
   if(sel.need&&need.length<3){$("#mNeed").classList.add("err");$("#mNeed").focus();toast(t("need_req"));return}
   const priceTxt=$("#mDisc").style.display==="none"?"":$("#mPrice").textContent;
-  
   let currentUserName = store.get("custom_username", "") || (user ? user.displayName : "");
 
-  let msg="🛒 *طلب شحن جديد*\n";
-  msg+="━━━━━━━━━━━━━━━\n";
+  let msg="🛒 *طلب شحن جديد*\n━━━━━━━━━━━━━━━\n";
   msg+="🎮 *المنتج:* "+sel.title+"\n";
   msg+="💰 *السعر:* "+priceTxt+"\n";
   if(sel.need)msg+="🆔 *البيانات:* "+need+"\n";
   if(currentUserName)msg+="👤 *العميل:* "+currentUserName+"\n";
-  msg+="━━━━━━━━━━━━━━━\n";
-  msg+="⚡ "+t("from")+CFG.storeName+" 🔥";
+  msg+="━━━━━━━━━━━━━━━\n⚡ "+t("from")+CFG.storeName+" 🔥";
 
   fetch("https://real-store-orders.krop39sos.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({product:sel.title,price:priceTxt,need:need,name:currentUserName,email:user?user.email:""})}).catch(()=>{});
   if(sel.need==="id")store.set("lastId",need);stat.inc("ord");openWA(msg);closeModal();
@@ -710,9 +551,7 @@ document.addEventListener("click",e=>{
   if(e.target===$("#modal"))closeModal();
   if(e.target===$("#nameModal"))closeNameModal();
 });
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){closeModal();closeNameModal()}
-});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeNameModal()}});
 $("#mx").onclick=closeModal;
 $("#nameMx").onclick=closeNameModal;
 $("#confirm").onclick=confirmOrder;
@@ -721,7 +560,7 @@ $("#q").addEventListener("input",filterGames);
 $("#theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
 $("#reset").onclick=()=>{if(confirm(t("confirm_reset"))){["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0"));renderStats();toast(t("reset_done"))}};
 let sc=0;$$(".secret").forEach(el=>el.onclick=()=>{if(++sc>=5){sc=0;$("#tabs").dataset.secret="1";renderTabs();toast(t("secret_on"))}});
-function hideSplash(){const s=$("#splash");s.classList.add("hide");setTimeout(()=>s.remove(),450)}
+function hideSplash(){const s=$("#splash");if(s){s.classList.add("hide");setTimeout(()=>s.remove(),450)}}
 $("#skip").onclick=hideSplash;
 
 /* ========= بوت ذكي ========= */
@@ -735,26 +574,17 @@ const hasAr=s=>/[\u0600-\u06FF]/.test(s);
 const kw=(q,w)=>{const tk=q.split(" ");return w.some(x=>x.length<=3?tk.some(y=>y===x||y==="ال"+x):q.includes(x))};
 const GK={pubg:["pubg","ببجي","uc"],mlbb:["mobile legends","mlbb","موبايل ليجند","ml"],ff:["free fire","freefire","فري فاير","فري"],yalla:["yalla","يلا لودو","لودو"],tiktok:["tiktok","تيك توك","تيك"],gangstar:["gangstar","جانجستر"],weplay:["weplay","وي بلاي"],roblox:["roblox","روبلوكس","robux","روبكس"]};
 const CK={google:["google","جوجل","قوقل"],itunes:["itunes","ايتونز","ايتونس","apple","ابل"],steam:["steam","ستيم"]};
-const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده.\n• مبرمج ومطور ألعاب.\n• بيشتغل على الموقع ده من سنة 2022.\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص.\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات.\n• تقدر تتابعه من قناة التليجرام وقناة الواتساب.";
-const OWNER_EN="Real 👨‍💻 is the owner of this store.\n• Programmer and game developer.\n• Has been working on this website since 2022.\n• The idea: faster and cheaper game top-ups.\n• The store offers PUBG, Free Fire, Mobile Legends, Roblox, TikTok, Yalla Ludo and more, plus gift cards, mobile top-ups and Shabab coins.\n• Follow him on the Telegram and WhatsApp channels.";
+const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده.\n• مبرمج ومطور ألعاب.\n• بيشتغل على الموقع ده من سنة 2022.\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص.\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات.";
+const OWNER_EN="Real 👨‍💻 is the owner of this store.\n• Programmer and game developer.\n• Has been working on this website since 2022.\n• The idea: faster and cheaper game top-ups.\n• Offers PUBG, Free Fire, Mobile Legends, Roblox, TikTok, Yalla Ludo and more, gift cards, mobile top-ups and Shabab coins.";
 const KB=[
-{k:["صاحب","مالك","المالك","مين عمل","مين صمم","مين صنع","مين المطور","مين مبرمج","مبرمج","مطور","owner","who made","who owns","who built","developer","who is real","مين ريال","ريال"],ar:OWNER_AR,en:OWNER_EN,chips:["ايه اللي بيقدمه المتجر؟","قنوات التواصل"]},
-{k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","الالعاب المتاحه","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ شحن رصيد وإنترنت: WE, Vodafone, اتصالات وكارت الغاز\n🪙 شباب كونات: مصر, الأردن, السعودية\n🔜 قريباً: Fortnite, Call of Duty, Valorant, Netflix",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi\n🔜 Soon: Fortnite, Call of Duty, Valorant, Netflix"},
-{k:["ازاي اطلب","طريقه الطلب","اطلب","اشتري","شراء","اطلب ازاي","كيف اطلب","how to order","how to buy","order"],ar:"الطلب بسيط وبضغطة:\n1) اختار اللعبة واضغط «عرض الباقات».\n2) اضغط «شراء الآن» على الباقة.\n3) اكتب ID اللاعب (لو اللعبة بتحتاجه).\n4) اضغط «تأكيد عملية الشحن» وهيفتحلك الواتساب برسالة جاهزة.\nبعد الدفع بيتم التسليم.",en:"Ordering is easy:\n1) Pick a game and tap “View Packages”.\n2) Tap “Buy Now” on a package.\n3) Enter the Player ID (if needed).\n4) Tap “Confirm Top-up” and WhatsApp opens with a ready message.\nDelivery follows payment confirmation."},
-{k:["دفع","ادفع","فودافون كاش","فودافون","تحويل","payment","pay","vodafone cash"],ar:"الدفع بيتم عن طريق فودافون كاش 💳\nرقم الدفع مخفي في الموقع، لكن تقدر تنسخه بضغطة من زر «نسخ رقم فودافون كاش» (في نافذة التأكيد أو قسم الشحن السريع). وبعد التحويل بيتم التسليم بعد تأكيد الدفع.",en:"Payment is via Vodafone Cash 💳\nThe number is hidden on the site but you can copy it with one tap from the “Copy Vodafone Cash” button (in the confirm window or Fast Top-up tab). Delivery follows payment confirmation."},
-{k:["وقت","مده","تسليم","كام دقيقه","هيوصل","بياخد","سريع","delivery","how long","how fast","time"],ar:"التسليم سريع ⚡ بعد تأكيد الدفع. المتجر معروف بإنه «أسرع من نتكم».",en:"Delivery is fast ⚡ right after payment confirmation."},
-{k:["خصم","خصومات","عروض","عرض","discount","offer","offers","sale"],ar:"في خصم 5% 🎁 بيتحسب تلقائياً على سعر المنتج، وهتشوفه في شاشة «تأكيد عملية الشحن» (السعر بعد الخصم والسعر الأصلي). وتابع القنوات عشان تعرف العروض الجديدة.",en:"There's an automatic 5% discount 🎁 shown in the confirm window (discounted and original price). Follow our channels for new offers."},
-{k:["ايدي","id","player id","اي دي","ازاي الاقي"],ar:"ID اللاعب بتلاقيه غالباً جوه اللعبة في صفحة البروفايل. بنحتاجه عشان نشحن على حسابك بالظبط.\nملحوظة: Roblox وTikTok مش بيحتاجوا ID هنا.",en:"The Player ID is usually on your in-game profile page. We need it to top up the right account.\nNote: Roblox and TikTok don't need an ID here."},
-{k:["امان","موثوق","نصب","ضمان","ثقه","safe","trust","scam","legit","real"],ar:"المتجر بيتابع من 2022 ✅ وتقدر تتأكد من قنواتنا على التليجرام والواتساب. التسليم بعد تأكيد الدفع، وأي مشكلة تواصل مع الدعم.",en:"The store has been running since 2022 ✅. Check our Telegram and WhatsApp channels. Delivery follows payment confirmation; contact support for any issue."},
-{k:["قناه","قنوات","تليجرام","telegram","channel","channels","متابعه","فيسبوك","فيس","facebook","جروب","مجموعه","group"],ar:"تابعنا على قناة التليجرام وقناة الواتساب ومجموعة الفيسبوك 📢 من قائمة النقاط الثلاث ⋮ أعلى الصفحة",en:"Follow our Telegram channel, WhatsApp channel and Facebook group 📢 from the three-dots menu ⋮ at the top",go:[["fb","👥 Facebook"]]},
-{k:["رصيد","كروت","كارت","غاز","اتصالات","we","etisalat","top up","gas"],ar:"في قسم «⚡ شحن سريع» تلاقي شحن رصيد وكروت فكة لـ WE وVodafone واتصالات، وكارت الغاز الطبيعي. اضغط «طلب الشحن» واكتب الرقم المراد شحنه.",en:"In “⚡ Fast Top-up” you'll find balance and cards for WE, Vodafone, Etisalat and the gas card. Tap “Request Top-up” and enter the number.",go:[["sec:recharge","⚡ شحن سريع"]]},
-{k:["شباب","كونات","كوين","coins","shabab"],ar:"شباب كونات متاحة لمصر 🇪🇬 والأردن 🇯🇴 والسعودية 🇸🇦 بباقات مختلفة من قسم «🪙 شباب كونات».",en:"Shabab coins are available for Egypt, Jordan and Saudi in the “🪙 Shabab Coins” tab.",go:[["sec:shabab","🪙 شباب كونات"]]},
-{k:["بطاقه","بطاقات","هديه","gift","cards","card"],ar:"عندنا بطاقات Google Play وiTunes وSteam بفئات 5$ و10$ و25$ و50$ (Steam: 5$ و10$ و20$ و50$) 💳",en:"We have Google Play, iTunes and Steam cards in several values 💳",go:[["sec:cards","💳 بطاقات هدايا"]]},
-{k:["دعم","تواصل","واتساب","واتس","كلم","مشكله","support","contact","whatsapp","help"],ar:"تقدر تكلم الدعم على واتساب مباشرة 💬",en:"You can chat with support on WhatsApp 💬",go:[["wa","💬 تواصل على واتساب"]]},
-{k:["لغه","انجليزي","ياباني","مظهر","داكن","فاتح","language","dark","theme"],ar:"تقدر تغيّر اللغة (عربي/English/日本語) والوضع الفاتح أو الداكن من أزرار أعلى الصفحة 🌗",en:"You can change language and light/dark mode from the buttons at the top 🌗"},
-{k:["شكرا","تسلم","thanks","thank","thx"],ar:"العفو! أي وقت 🌹",en:"You're welcome! 🌹"},
-{k:["انت مين","اسمك","ذكي","who are you","your name","bot","بوت"],ar:"أنا «ذكي» 🤖 المساعد الآلي لمتجر «أسرع من نتكم». بجاوب على أسئلتك عن الأسعار والطلب والدفع والمتجر.",en:"I'm “Zaki” 🤖, the automated assistant of this store. I answer questions about prices, ordering, payment and the store."},
-{k:["سلام","مرحبا","اهلا","هلا","صباح","مساء","hi","hello","hey"],ar:"أهلاً وسهلاً 👋 اسألني عن أي حاجة في المتجر.",en:"Hello 👋 Ask me anything about the store."}
+{k:["صاحب","مالك","المالك","مين عمل","مين صمم","مين صنع","مين المطور","مين مبرمج","مبرمج","مطور","owner","who made","who owns","developer","مين ريال","ريال"],ar:OWNER_AR,en:OWNER_EN,chips:["ايه اللي بيقدمه المتجر؟","قنوات التواصل"]},
+{k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ رصيد وإنترنت: WE, Vodafone, اتصالات، كارت الغاز\n🪙 شباب كونات: مصر، الأردن، السعودية",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi"},
+{k:["ازاي اطلب","طريقه الطلب","اطلب","اشتري","شراء","how to order","how to buy","order"],ar:"الطلب بسيط وبضغطة:\n1) اختار اللعبة واضغط «عرض الباقات».\n2) اضغط «شراء الآن» واكتب ايدي اللاعب.\n3) اضغط تأكيد وهيفتحلك الواتساب برسالة الطلب الجاهزة.",en:"Ordering is easy:\n1) Pick a game and tap View Packages.\n2) Tap Buy Now and enter your Player ID.\n3) Tap confirm and WhatsApp opens with your ready message."},
+{k:["دفع","ادفع","فودافون كاش","فودافون","تحويل","payment","pay","vodafone cash"],ar:"الدفع بيتم عن طريق فودافون كاش 💳\nانسخ رقم فودافون كاش من زر النسخ الموجود في الموقع، وبعد التحويل بيتم التسليم فوراً.",en:"Payment is via Vodafone Cash 💳\nCopy the Vodafone Cash number from the site, and delivery follows confirmation."},
+{k:["وقت","مده","تسليم","سريع","delivery","how long","time"],ar:"التسليم سريع جداً ⚡ بعد تأكيد الدفع.",en:"Delivery is very fast ⚡ after payment confirmation."},
+{k:["خصم","خصومات","عروض","discount","offer"],ar:"في خصم 5% 🎁 بيتحسب تلقائياً على سعر المنتج ويظهر في نافذة تأكيد الطلب.",en:"There is an automatic 5% discount 🎁 shown in the confirm window."},
+{k:["ايدي","id","player id"],ar:"ID اللاعب بتلاقيه جوه اللعبة في صفحة البروفايل الخاص بك.",en:"Your Player ID is found in your in-game profile page."},
+{k:["دعم","تواصل","واتساب","واتس","support","contact","whatsapp"],ar:"تقدر تكلم الدعم على واتساب مباشرة 💬",en:"You can chat with support on WhatsApp 💬",go:[["wa","💬 تواصل على واتساب꼭"]]}
 ];
 function priceAnswer(q,en){
   let g=Object.keys(GK).find(id=>kw(q,GK[id])),c=Object.keys(CK).find(id=>kw(q,CK[id]));
@@ -764,18 +594,17 @@ function priceAnswer(q,en){
   const m=nums.length?items.filter(([l])=>(l.match(/\d+(?:\.\d+)?/g)||[]).includes(nums[0])):[];
   let txt;
   if(m.length)txt=(en?"Prices for ":"أسعار ")+name+(en?" (after 5% discount):\n":" (بعد خصم 5%):\n")+m.slice(0,4).map(([l,p])=>"• "+l+" ← "+f(p)).join("\n");
-  else{const ps=items.map(i=>i[1]);txt=name+(en?`: ${items.length} packages from ${f(Math.min(...ps))} to ${f(Math.max(...ps))} (after 5% discount).\nOpen the packages to see all.`:`: ${items.length} باقة من ${f(Math.min(...ps))} إلى ${f(Math.max(...ps))} (بعد خصم 5%).\nافتح الباقات وشوف الكل.`)}
+  else{const ps=items.map(i=>i[1]);txt=name+(en?`: ${items.length} packages from ${f(Math.min(...ps))} to ${f(Math.max(...ps))} (after 5% discount).`:`: ${items.length} باقة من ${f(Math.min(...ps))} إلى ${f(Math.max(...ps))} (بعد خصم 5%).`)}
   return{txt,go:[[g?"game:"+g:"sec:cards",(en?"View ":"عرض ")+name]]};
 }
 function botReply(raw){
   const q=norm(raw),en=!hasAr(raw);
   if(!q)return null;
-  const pr=(kw(q,["سعر","بكام","كام","اسعار","price","prices","cost","how much"])||/\d/.test(q))?priceAnswer(q,en):null;
+  const pr=(kw(q,["سعر","بكام","كام","اسعار","price","prices","cost"])||/\d/.test(q))?priceAnswer(q,en):null;
   if(pr)return pr;
   const hit=KB.find(e=>kw(q,e.k.map(norm)));
-  if(hit){return{txt:en?hit.en:hit.ar,go:(hit.go||[]).map(([a,l])=>[a,l]),chips:hit.chips}}
-  const g2=priceAnswer(q,en);if(g2)return g2;
-  return{txt:en?"I didn't quite get that 🤔 Try asking about prices, how to order, payment, delivery, or who owns the site — or contact support.":"مفهمتش سؤالك كويس 🤔 جرّب تسأل عن الأسعار، طريقة الطلب، الدفع، التسليم، أو صاحب الموقع — أو كلم الدعم.",go:[["wa",en?"💬 Contact support":"💬 كلم الدعم"]]};
+  if(hit)return{txt:en?hit.en:hit.ar,go:(hit.go||[]).map(([a,l])=>[a,l]),chips:hit.chips};
+  return{txt:en?"I didn't quite get that 🤔 Try asking about prices, how to order, payment, delivery, or contact support.":"مفهمتش سؤالك كويس 🤔 جرّب تسأل عن الأسعار، طريقة الطلب، الدفع، أو كلم الدعم.",go:[["wa",en?"💬 Contact support":"💬 كلم الدعم"]]};
 }
 const bm=$("#botMsgs");
 function botAdd(who,txt,go){
@@ -783,9 +612,7 @@ function botAdd(who,txt,go){
   (go||[]).forEach(([a,l])=>{const b=document.createElement("button");b.className="bgo";b.dataset.bot=a;b.textContent=l;d.appendChild(b)});
   bm.appendChild(d);bm.scrollTop=bm.scrollHeight;
 }
-function botChips(list){
-  $("#botChips").innerHTML=list.map(c=>`<button class="chip" data-chip="${esc(c)}">${esc(c)}</button>`).join("");
-}
+function botChips(list){$("#botChips").innerHTML=list.map(c=>`<button class="chip" data-chip="${esc(c)}">${esc(c)}</button>`).join("")}
 function botAsk(text){
   text=text.trim().slice(0,200);if(!text)return;
   botAdd("u",text);const r=botReply(text);
@@ -803,7 +630,6 @@ function botToggle(on){
 }
 function botGo(a){
   if(a==="wa"){openWA(t("hello"));return}
-  if(a==="fb"){window.open(FB,"_blank","noopener");return}
   botToggle(false);
   if(a.startsWith("sec:")){showSec(a.slice(4));scrollTo({top:0})}
   else if(a.startsWith("game:")){showSec("games");const id=a.slice(5);if(!$("#w-"+id).classList.contains("open"))togglePk(id);$("#w-"+id).scrollIntoView({block:"start"})}
@@ -816,18 +642,12 @@ document.addEventListener("click",e=>{
   const c=e.target.closest("[data-chip]");if(c)botAsk(c.dataset.chip);
 });
 
-/* ===== قائمة النقاط الثلاث ===== */
-const FB="https://www.facebook.com/share/g/1GuX3V5JRS/";
+/* ===== القائمة الثلاثية ===== */
 function dmToggle(on){const m=$("#dMenu");m.classList.toggle("on",on);$("#dotsBtn").setAttribute("aria-expanded",on)}
 $("#dotsBtn").onclick=e=>{e.stopPropagation();dmToggle(!$("#dMenu").classList.contains("on"))};
 document.addEventListener("click",e=>{
   const lb=e.target.closest(".lang-btn");
-  if(lb){
-    lang=lb.dataset.lang;store.set("lang",lang);applyLang();
-    dmToggle(false);
-    return;
-  }
-
+  if(lb){lang=lb.dataset.lang;store.set("lang",lang);applyLang();dmToggle(false);return}
   const a=e.target.closest("[data-act]");
   if(a){dmToggle(false);const k=a.dataset.act;
     if(k==="support")openWA(t("hello"));
@@ -837,9 +657,8 @@ document.addEventListener("click",e=>{
     return}
   if(!e.target.closest(".dots-wrap"))dmToggle(false);
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape")dmToggle(false)});
 
-/* ========= تعديل الاسم الشخصي ========= */
+/* ===== تعديل اسم المستخدم ===== */
 function openNameModal(){
   const current = store.get("custom_username","") || (user ? user.displayName : "");
   $("#customNameInput").value = current;
@@ -848,7 +667,7 @@ function openNameModal(){
 }
 function closeNameModal(){$("#nameModal").classList.remove("on")}
 $("#saveNameBtn").onclick=()=>{
-  const val = $("#customNameInput.value").trim();
+  const val = $("#customNameInput").value.trim();
   if(!val)return toast("⚠️ اكتب اسماً صحيحاً");
   store.set("custom_username", val);
   renderUser();
@@ -863,7 +682,7 @@ stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== تسجيل الدخول (مع فرض إعادة التوجيه لمتصفح خارجي إن أمكن) ===== */
+/* ===== Firebase & Google Auth (تسجيل دخول اختياري) ===== */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -879,12 +698,10 @@ try{
   provider.setCustomParameters({ prompt: "select_account" });
 }catch(e){console.error("Firebase:",e)}
 
-if(!auth)$("#gate").classList.remove("on");
-
 function renderUser(){
-  $("#gate").classList.toggle("on",!user);
+  const hasUser = !!user;
   const b=$("#loginBtn");
-  if(user){
+  if(hasUser){
     b.innerHTML="";
     if(user.photoURL){
       const im=document.createElement("img");
@@ -905,44 +722,34 @@ function renderUser(){
     $("#logoutItem").style.display="none";
     $("#editNameItem").style.display="none";
   }
-  const gb=$("#gBtn"); if(gb) gb.classList.remove("loading");
 }
 
 function login(){
   if(!auth) return toast("❌ Firebase غير مهيأ");
-  const btn=$("#gBtn");
-  if(btn) btn.classList.add("loading");
-
-  // باستخدام signInWithRedirect مباشرة مع حسابات جوجل يفرض فتح صفحة اختيار الحسابات بشكل أوضح في بيئات الأندرويد
-  auth.signInWithRedirect(provider).catch(err=>{
-    if(btn) btn.classList.remove("loading");
-    if(err.code==="auth/unauthorized-domain"){
-      const d=$("#dom");
-      if(d){ d.style.display="block"; d.textContent=location.hostname; }
-      $("#gate").classList.add("on");
+  auth.signInWithPopup(provider).then(res=>{
+    if(res && res.user && !store.get("custom_username", "")){
+      setTimeout(()=>openNameModal(), 300);
     }
-    toast("❌ "+err.code);
+    toast("✅ تم تسجيل الدخول بنجاح");
+  }).catch(err=>{
+    auth.signInWithRedirect(provider).catch(e2=>toast("❌ "+(e2.code||e2.message)));
   });
 }
 
-$("#gBtn").onclick=login;
 $("#loginBtn").onclick=e=>{e.stopPropagation();if(user)dmToggle(true);else login()};
-document.addEventListener("click",e=>{if(e.target.closest('[data-act="logout"]')&&auth)auth.signOut()});
+document.addEventListener("click",e=>{if(e.target.closest('[data-act="logout"]')&&auth){auth.signOut();toast("تم تسجل الخروج");}});
 
 if(auth){
   auth.getRedirectResult().then(res=>{
-    if(res && res.user){ 
-      if(!store.get("custom_username", "")){ setTimeout(()=>openNameModal(), 300); }
+    if(res && res.user && !store.get("custom_username", "")){
+      setTimeout(()=>openNameModal(), 300);
     }
-  }).catch(err=>{
-    if(err && err.code && err.code!=="auth/no-auth-event") console.warn("Redirect error:", err.code);
-  });
+  }).catch(()=>{});
   auth.onAuthStateChanged(u=>{user=u;renderUser()});
 }
 
 /* ========= Premium Banner Slider ========= */
 (function(){
-  // [رابط الصورة, الوصف, معرّف اللعبة في GAMES (فارغ = تمرير لقائمة الألعاب)]
   const U="https://cdn.imagetourls.com/uploads/tyImg/";
   const B=[
     ["OTVFsepS.png","PUBG Mobile","pubg"],
@@ -990,7 +797,6 @@ if(auth){
   function stop(){clearInterval(timer);timer=null}
   function play(){stop();if(!document.hidden)timer=setInterval(()=>go(cur+1),DELAY)}
 
-  // السحب باللمس والماوس
   v.addEventListener("pointerdown",e=>{
     if(e.pointerType==="mouse"&&e.button!==0)return;
     drag=true;moved=false;sx=e.clientX;dx=0;t0=Date.now();stop();
@@ -1011,7 +817,6 @@ if(auth){
   v.addEventListener("pointerup",end);
   v.addEventListener("pointercancel",end);
 
-  // الضغط على البنر → صفحة شحن اللعبة
   function open(){
     const id=B[cur][2];
     showSec("games");
@@ -1022,20 +827,12 @@ if(auth){
     }else $("#gameGrid").scrollIntoView({behavior:"smooth",block:"start"});
   }
   v.addEventListener("click",()=>{if(!moved)open();moved=false});
-  v.addEventListener("keydown",e=>{
-    if(e.key==="ArrowRight")go(cur+1);
-    else if(e.key==="ArrowLeft")go(cur-1);
-    else if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}
-  });
-
-  // إيقاف مؤقت عند التمرير بالماوس أو إخفاء التبويب
   v.addEventListener("mouseenter",stop);
   v.addEventListener("mouseleave",()=>{if(!drag)play()});
   document.addEventListener("visibilitychange",()=>document.hidden?stop():play());
   addEventListener("resize",lay);
 
   lay();play();
-  // تحميل باقي البنرات بعد استقرار الصفحة
   (window.requestIdleCallback||(f=>setTimeout(f,900)))(()=>{load(1);load(n-1);setTimeout(()=>B.forEach((_,i)=>load(i)),2500)});
 })();
 </script>
