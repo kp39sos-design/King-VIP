@@ -391,7 +391,7 @@ body:has(#games.on) #hero{display:block}
 </div>
 
 <!-- واجهة البداية الاحترافية (Gate) -->
-<div id="gate" class="on">
+<div id="gate">
   <div class="g-bg" aria-hidden="true">
     <span class="orb o1"></span>
     <span class="orb o2"></span>
@@ -407,7 +407,7 @@ body:has(#games.on) #hero{display:block}
     <p data-i="gate_sub"></p>
     <div id="dom" style="display:none;direction:ltr;user-select:all;-webkit-user-select:all;font-weight:800;color:var(--gold);font-size:13px;word-break:break-all;border:1px dashed var(--gold);border-radius:12px;padding:10px"></div>
 
-    <!-- 1️⃣ زر الدخول كزائر (بدون تسجيل) فوق زر جوجل ليكون الاختيار الأسرع والأبرز -->
+    <!-- 1️⃣ زر الدخول كزائر (بدون تسجيل) فوق زر جوجل -->
     <button class="gbtn guest" id="guestBtn" aria-label="الدخول بدون تسجيل">
       <span class="gbtn-shine" aria-hidden="true"></span>
       <span class="gbtn-content">
@@ -853,6 +853,16 @@ $("#saveNameBtn").onclick=()=>{
   toast(t("name_updated"));
 };
 
+/* ========= إدارة واجهة الترحيب (Gate) لا تظهر سوى مرة واحدة أو عند عدم الاختيار ========= */
+function checkGate(){
+  const status = store.get("gate_passed", "");
+  if(!status && !user){
+    $("#gate").classList.add("on");
+  } else {
+    $("#gate").classList.remove("on");
+  }
+}
+
 /* ========= تشغيل ========= */
 setTheme(store.get("theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
 applyLang();
@@ -905,8 +915,11 @@ function renderUser(){
 function login(){
   if(!auth) return toast("❌ Firebase غير مهيأ");
   auth.signInWithPopup(provider).then(res=>{
-    if(res && res.user && !store.get("custom_username", "")){
-      setTimeout(()=>openNameModal(), 300);
+    if(res && res.user){
+      store.set("gate_passed", "google");
+      if(!store.get("custom_username", "")){
+        setTimeout(()=>openNameModal(), 300);
+      }
     }
     $("#gate").classList.remove("on");
     toast("✅ تم تسجيل الدخول بنجاح");
@@ -917,17 +930,19 @@ function login(){
 
 /* زر الدخول كزائر من الواجهة الخارجية */
 $("#guestBtn").onclick=()=>{
+  store.set("gate_passed", "guest");
   $("#gate").classList.remove("on");
   toast("🚀 أهلاً بك! تصفح المتجر بحرية");
 };
 
 $("#loginBtn").onclick=e=>{e.stopPropagation();if(user)dmToggle(true);else login()}
 $("#gBtn").onclick=login;
-document.addEventListener("click",e=>{if(e.target.closest('[data-act="logout"]')&&auth){auth.signOut();toast("تم تسجيل الخروج");}});
+document.addEventListener("click",e=>{if(e.target.closest('[data-act="logout"]')&&auth){auth.signOut();store.set("gate_passed","");$("#gate").classList.add("on");toast("تم تسجيل الخروج");}});
 
 if(auth){
   auth.getRedirectResult().then(res=>{
     if(res && res.user){
+      store.set("gate_passed", "google");
       $("#gate").classList.remove("on");
       if(!store.get("custom_username", "")){setTimeout(()=>openNameModal(), 300);}
     }
@@ -935,8 +950,15 @@ if(auth){
   auth.onAuthStateChanged(u=>{
     user=u;
     renderUser();
-    if(u) $("#gate").classList.remove("on");
+    if(u) {
+      store.set("gate_passed", "google");
+      $("#gate").classList.remove("on");
+    } else {
+      checkGate();
+    }
   });
+} else {
+  checkGate();
 }
 
 /* ========= Premium Banner Slider ========= */
