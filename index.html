@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="أسرع من نتكم — شحن الألعاب الأسرع والأرخص: PUBG, Free Fire, Mobile Legends, TikTok, Roblox وبطاقات هدايا">
+<meta name="description" content="أسرع من نتكم — شحن الألعاب الأسرع والأرخص: PUBG, Free Fire, Mobile Legends, TikTok, Roblox, Arena Breakout وبطاقات هدايا">
 <meta name="theme-color" content="#2563EB">
 <title>أسرع من نتكم | شحن جميع الألعاب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@ header{background:var(--card);border:1px solid var(--bd2);box-shadow:0 8px 25px 
 .gi{background:radial-gradient(circle at center,rgba(56,189,248,.20),transparent 65%),#0B1020}
 .gi::before{opacity:.8;filter:blur(30px)}
 .gn b{color:#fff}.gn small{color:#A5B4D0}
-#w-pubg{--game-color:#FFB800}#w-mlbb{--game-color:#00D9FF}#w-ff{--game-color:#FF5722}#w-yalla{--game-color:#3B82F6}#w-tiktok{--game-color:#FE2C55}#w-gangstar{--game-color:#A855F7}#w-weplay{--game-color:#EC4899}#w-roblox{--game-color:#EF4444}
+#w-pubg{--game-color:#FFB800}#w-mlbb{--game-color:#00D9FF}#w-ff{--game-color:#FF5722}#w-yalla{--game-color:#3B82F6}#w-tiktok{--game-color:#FE2C55}#w-gangstar{--game-color:#A855F7}#w-weplay{--game-color:#EC4899}#w-roblox{--game-color:#EF4444}#w-arena{--game-color:#10B981}
 .gw .gc{border-color:rgba(56,189,248,.35);border-color:color-mix(in srgb,var(--game-color,#38BDF8) 35%,transparent)}
 .gw .gi{background:radial-gradient(circle,var(--game-color,#38BDF8) 0%,transparent 65%),#0B1020}
 .gw .gi::before{background:var(--game-color,#38BDF8)}
@@ -171,6 +171,9 @@ button,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,transfor
 .gi .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.6);filter:blur(16px) saturate(1.5);opacity:.38;border:0;border-radius:0;box-shadow:none;background:none;pointer-events:none}
 .gi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(11,16,32,.65));pointer-events:none}
 .gi img:not(.ghost){position:relative;z-index:2}
+
+/* ===== عرض صورة المنتج داخل المودال (إن وجدت) ===== */
+.modal-pimg{width:75px;height:75px;object-fit:cover;border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block;box-shadow:0 8px 16px rgba(0,0,0,.4)}
 
 /* ===== بوت ذكي ===== */
 #botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:90;pointer-events:none}
@@ -529,6 +532,7 @@ body:has(#games.on) #hero{display:block}
 <div id="modal" class="modal" role="dialog" aria-modal="true">
   <div class="mb">
     <div class="mh"><h2 data-i="modal_title"></h2><button class="x" id="mx" aria-label="close">×</button></div>
+    <div id="mImgBox"></div>
     <div class="info"><small data-i="modal_product"></small><b id="mProd"></b></div>
     <div class="disc" id="mDisc"><small data-i="modal_discount"></small><div class="n" id="mPrice"></div><div class="o" id="mOld"></div></div>
     <div class="info" id="mNeedBox"><small id="mNeedLbl"></small><input id="mNeed" class="in" style="margin:6px 0 0" maxlength="40" autocomplete="off"></div>
@@ -559,11 +563,33 @@ const CFG={
   rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
 };
 const IMG="https://www.image2url.com/r2/default/images/";
+const imgUrl=u=>u.startsWith("http")?u:IMG+u;
 const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",yalla:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 const GAMES={
  pubg:{n:"PUBG Mobile",k:"ببجي",img:"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp",gl:"#FFB800",items:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]]},
  mlbb:{n:"Mobile Legends",k:"موبايل ليجند",img:"1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg",gl:"#00D9FF",items:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]]},
  ff:{n:"Free Fire",k:"فري فاير",img:"1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp",gl:"#FF4D00",items:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]]},
+ arena:{
+   n:"Arena Breakout",
+   k:"ارينا بريك اوت",
+   img:"https://cdn.imagetourls.com/uploads/tyImg/5o64IKfT.webp",
+   gl:"#10B981",
+   items:[
+     ["60 + 60 Bonds", 61],
+     ["310 + 310 Bonds", 266],
+     ["630 + 630 Bonds", 522],
+     ["1580 + 1580 Bonds", 1292],
+     ["3200 + 3200 Bonds", 2574],
+     ["6500 + 6500 Bonds", 5138],
+     /* العروض الخاصة المضافة حديثاً مع صورها المخصصة */
+     ["اختيار المبتدئين", 61, "https://cdn.imagetourls.com/uploads/tyImg/18kK3zTAs.jpg"],
+     ["امتيازات الحقيبة المضادة للرصاص", 163, "https://cdn.imagetourls.com/uploads/tyImg/13WLSTv6c.jpg"],
+     ["امتيازات القضايا المركبة", 471, "https://cdn.imagetourls.com/uploads/tyImg/1hQguTBQn.jpg"],
+     ["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية", 61, "https://cdn.imagetourls.com/uploads/tyImg/1g0iATQiR.jpg"],
+     ["تفعيل تذكرة المعركة المميزة الشهرية", 215, "https://cdn.imagetourls.com/uploads/tyImg/1gFhuKgwX.jpg"],
+     ["حزمة تذكرة المعركة المميزة ربع السنوية، حزمة تفعيل تذكرة المعركة", 625, "https://cdn.imagetourls.com/uploads/tyImg/dNqNEyMT.jpg"]
+   ]
+ },
  yalla:{n:"يلا لودو",k:"yalla ludo",img:"1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png",gl:"#0088FF",items:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]]},
  tiktok:{noid:1,n:"TikTok",k:"تيك توك",img:"1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png",gl:"#FE2C55",items:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]]},
  gangstar:{n:"Gangstar",k:"جانجستر",img:"1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp",gl:"#8B5CF6",items:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]]},
@@ -609,23 +635,30 @@ function renderStats(){
 
 /* ========= الواجهة ========= */
 const REG=[];
-function productCard(title,label,base,need,iconHtml,qtyMode){
-  const i=REG.push({title,label,base,need})-1;
+function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc=''){
+  const i=REG.push({title,label,base,need,imgSrc})-1;
   const price=base==null?"":`<div class="pp"><small>${esc(t(qtyMode?"qty":"price"))}</small><span>${iconHtml} ${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${esc(qtyMode?t("coin"):CFG.cur[lang])}</small></span></div>`;
-  return `<div class="pr"><div class="pn">${esc(label)}</div>${price}<button class="buy" data-buy="${i}">${esc(t(base==null?"ask":"buy"))}</button></div>`;
+  const imgTag=imgSrc?`<img src="${imgSrc}" alt="${esc(label)}" style="width:100%;height:90px;object-fit:cover;border-radius:10px;margin-bottom:6px">`:'';
+  return `<div class="pr">${imgTag}<div class="pn">${esc(label)}</div>${price}<button class="buy" data-buy="${i}">${esc(t(base==null?"ask":"buy"))}</button></div>`;
 }
 function renderGames(){
-  $("#gameGrid").innerHTML=Object.entries(GAMES).map(([id,g])=>`
+  $("#gameGrid").innerHTML=Object.entries(GAMES).map(([id,g])=>{
+    const src=imgUrl(g.img);
+    return `
   <div class="gw" id="w-${id}" data-name="${esc((g.n+" "+g.k).toLowerCase())}">
-    <div class="gc"><div class="gi" style="--gl:${g.gl}"><img class="ghost" alt="" aria-hidden="true" loading="lazy" decoding="async" src="${IMG+g.img}"><img loading="lazy" decoding="async" width="84" height="84" alt="${esc(g.n)}" src="${IMG+g.img}" onerror="this.style.visibility='hidden'"></div>
+    <div class="gc"><div class="gi" style="--gl:${g.gl}"><img class="ghost" alt="" aria-hidden="true" loading="lazy" decoding="async" src="${src}"><img loading="lazy" decoding="async" width="84" height="84" alt="${esc(g.n)}" src="${src}" onerror="this.style.visibility='hidden'"></div>
     <div class="gn"><b>${esc(g.n)}</b><small>${esc(g.items.length)} ${lang==="ar"?"باقة":"packages"}</small>
     <button class="open-b" data-open="${id}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>${esc(t("show"))}</span></button></div></div>
-    <div class="pk" id="pk-${id}"></div></div>`).join("");
+    <div class="pk" id="pk-${id}"></div></div>`;
+  }).join("");
   filterGames();
 }
 function renderPackages(id){
   const g=GAMES[id],ic=ICON[id]?`<img src="${ICON[id]}" alt="" loading="lazy">`:'<i class="fa-solid fa-coins"></i>';
-  $("#pk-"+id).innerHTML='<div class="grid">'+g.items.map(([l,p])=>productCard(g.n+" - "+l,l,p,g.noid?null:"id",ic)).join("")+"</div>";
+  $("#pk-"+id).innerHTML='<div class="grid">'+g.items.map(item=>{
+    const l=item[0],p=item[1],im=item[2]||'';
+    return productCard(g.n+" - "+l,l,p,g.noid?null:"id",ic,false,im);
+  }).join("")+"</div>";
 }
 function togglePk(id){
   const w=$("#w-"+id),was=w.classList.contains("open");
@@ -667,6 +700,15 @@ let sel=null;
 function openOrder(i){
   sel=REG[i];const hasP=sel.base!=null;
   $("#mProd").textContent=sel.title;
+  
+  // عرض صورة المنتج في المودال إن وجدت
+  const imgBox=$("#mImgBox");
+  if(sel.imgSrc){
+    imgBox.innerHTML=`<img src="${sel.imgSrc}" alt="" class="modal-pimg">`;
+  } else {
+    imgBox.innerHTML="";
+  }
+
   $("#mDisc").style.display=hasP?"block":"none";
   if(hasP&&sel.title.indexOf("شباب كونات")!==0){
     $("#mPrice").textContent=fmtPrice(sel.base*(1-CFG.discount))+" "+CFG.cur[lang];
@@ -750,13 +792,13 @@ BUI.ja=BUI.en;
 const norm=s=>s.toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[؟?!.,،:]/g," ").replace(/\s+/g," ").trim();
 const hasAr=s=>/[\u0600-\u06FF]/.test(s);
 const kw=(q,w)=>{const tk=q.split(" ");return w.some(x=>x.length<=3?tk.some(y=>y===x||y==="ال"+x):q.includes(x))};
-const GK={pubg:["pubg","ببجي","uc"],mlbb:["mobile legends","mlbb","موبايل ليجند","ml"],ff:["free fire","freefire","فري فاير","فري"],yalla:["yalla","يلا لودو","لودو"],tiktok:["tiktok","تيك توك","تيك"],gangstar:["gangstar","جانجستر"],weplay:["weplay","وي بلاي"],roblox:["roblox","روبلوكس","robux","روبكس"]};
-const CK={google:["google","جوجل","قوقل"],itunes:["itunes","ايتونز","ايتونس","apple","ابل"],steam:["steam","ستيم"]};
-const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده.\n• مبرمج ومطور ألعاب.\n• بيشتغل على الموقع ده من سنة 2022.\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص.\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات.";
-const OWNER_EN="Real 👨‍💻 is the owner of this store.\n• Programmer and game developer.\n• Has been working on this website since 2022.\n• The idea: faster and cheaper game top-ups.\n• Offers PUBG, Free Fire, Mobile Legends, Roblox, TikTok, Yalla Ludo and more, gift cards, mobile top-ups and Shabab coins.";
+const GK={pubg:[".pubg","ببجي","uc"],mlbb:["mobile legends","mlbb","موبايل ليجند","ml"],ff:[".free fire","freefire","فري فاير","فري"],arena:[".arena","arena breakout","ارينا","ارينا بريك اوت","بريك اوت"],yalla:[".yalla","يلا لودو","لودو"],tiktok:[".tiktok","تيك توك","تيك"],gangstar:[".gangstar","جانجستر"],weplay:[".weplay","وي بلاي"],roblox:[".roblox","روبلوكس","robux","روبكس"]};
+const CK={google:[".google","جوجل","قوقل"],itunes:[".itunes","ايتونز","ايتونس","apple","ابل"],steam:[".steam","ستيم"]};
+const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده.\n• مبرمج ومطور ألعاب.\n• بيشتغل على الموقع ده من سنة 2022.\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص.\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وArena Breakout وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات.";
+const OWNER_EN="Real 👨‍💻 is the owner of this store.\n• Programmer and game developer.\n• Has been working on this website since 2022.\n• The idea: faster and cheaper game top-ups.\n• Offers PUBG, Free Fire, Mobile Legends, Arena Breakout, Roblox, TikTok, Yalla Ludo and more, gift cards, mobile top-ups and Shabab coins.";
 const KB=[
 {k:["صاحب","مالك","المالك","مين عمل","مين صمم","مين صنع","مين المطور","مين مبرمج","مبرمج","مطور","owner","who made","who owns","developer","مين ريال","ريال"],ar:OWNER_AR,en:OWNER_EN,chips:["ايه اللي بيقدمه المتجر؟","قنوات التواصل"]},
-{k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ رصيد وإنترنت: WE, Vodafone, اتصالات، كارت الغاز\n🪙 شباب كونات: مصر، الأردن، السعودية",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi"},
+{k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, Arena Breakout, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ رصيد وإنترنت: WE, Vodafone, اتصالات، كارت الغاز\n🪙 شباب كونات: مصر، الأردن، السعودية",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Arena Breakout, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi"},
 {k:["ازاي اطلب","طريقه الطلب","اطلب","اشتري","شراء","how to order","how to buy","order"],ar:"الطلب بسيط وبضغطة:\n1) اختار اللعبة واضغط «عرض الباقات».\n2) اضغط «شراء الآن» واكتب ايدي اللاعب.\n3) اضغط تأكيد وهيفتحلك الواتساب برسالة الطلب الجاهزة.",en:"Ordering is easy:\n1) Pick a game and tap View Packages.\n2) Tap Buy Now and enter your Player ID.\n3) Tap confirm and WhatsApp opens with your ready message."},
 {k:["دفع","ادفع","فودافون كاش","فودافون","تحويل","payment","pay","vodafone cash"],ar:"الدفع بيتم عن طريق فودافون كاش 💳\nانسخ رقم فودافون كاش من زر النسخ الموجود في الموقع، وبعد التحويل بيتم التسليم فوراً.",en:"Payment is via Vodafone Cash 💳\nCopy the Vodafone Cash number from the site, and delivery follows confirmation."},
 {k:["وقت","مده","تسليم","سريع","delivery","how long","time"],ar:"التسليم سريع جداً ⚡ بعد تأكيد الدفع.",en:"Delivery is very fast ⚡ after payment confirmation."},
