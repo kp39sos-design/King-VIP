@@ -549,7 +549,7 @@ function listenWallet(){
   db.ref('users/' + uniqueUid + '/points').on('value', s=>{ userPoints = s.val()||0; const lv = userPoints>=10000?"👑 VIP":userPoints>=5000?"💎 Diamond":userPoints>=2000?"🥇 Gold":userPoints>=500?"🥈 Silver":"🥉 Bronze"; $("#profPoints").textContent = userPoints + " نقطة"; $("#profLevel").textContent = lv; });
 }
 
-/* ═══════════ Auth ═══════════ */
+/* ═══════════ Auth (Redirect Mode) ═══════════ */
 function updateUserUI(){
   const box = $("#uBox");
   if(user){
@@ -570,12 +570,31 @@ function updateUserUI(){
 function loginGoogle(){
   if(!firebaseOK || !auth){ toast("⚠️ Firebase غير مفعّل — تصفح كزائر"); return; }
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).then(res=>{
-    user = res.user;
-    if(db) db.ref('users/'+uniqueUid+'/profile').set({name:user.displayName, email:user.email, photo:user.photoURL, updated:Date.now()}).catch(()=>{});
-    updateUserUI(); renderProfile(); toast("✅ تم تسجيل الدخول");
-  }).catch(err=>{ toast("❌ " + err.message); });
+  auth.signInWithRedirect(provider).catch(err => { toast("❌ " + err.message); });
 }
+
+function checkRedirectResult() {
+  if(!firebaseOK || !auth) return;
+  auth.getRedirectResult().then((result) => {
+    if (result.user) {
+      user = result.user;
+      if(db) {
+        db.ref('users/'+uniqueUid+'/profile').set({
+          name: user.displayName, 
+          email: user.email, 
+          photo: user.photoURL, 
+          updated: Date.now()
+        }).catch(()=>{});
+      }
+      updateUserUI(); 
+      renderProfile(); 
+      toast("✅ تم تسجيل الدخول بنجاح");
+    }
+  }).catch((error) => {
+    toast("❌ خطأ في تسجيل الدخول: " + error.message);
+  });
+}
+
 $("#loginBtn").onclick = loginGoogle;
 $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); loginGoogle(); };
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); };
@@ -584,6 +603,7 @@ $("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=
 
 if(firebaseOK && auth){
   auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
+  checkRedirectResult();
 }
 
 function renderProfile(){
