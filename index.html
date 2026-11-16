@@ -591,9 +591,22 @@ body:has(#modal.on) #botDock{display:none}
     <button class="wa" id="sendReq" data-i="send_whatsapp"></button>
   </div>
 </section>
-<section id="admin" class="sec"><div class="ttl" style="color:var(--gold)" data-i="tab_secret"></div>
-  <div class="form"><div class="stats" id="stats"></div>
-  <button class="copy" id="reset" data-i="reset_stats"></button></div>
+<section id="admin" class="sec">
+  <div class="ttl" style="color:var(--gold)" data-i="tab_secret"></div>
+  <div class="form">
+    <div class="stats" id="stats" style="margin-bottom:12px"></div>
+    
+    <!-- خانة شحن الرصيد بالـ ID في قاعدة البيانات -->
+    <div style="background:var(--inner);border:1px solid var(--bd2);border-radius:14px;padding:12px;margin-bottom:12px">
+      <b style="display:block;font-size:12.5px;color:var(--a);margin-bottom:8px">⚡ شحن رصيد تلقائي للعميل عبر الـ ID</b>
+      <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456 أو الـ UID)" style="margin-bottom:8px;direction:ltr">
+      <input id="adminAmount" class="in" type="number" placeholder="المبلغ المراد إضافته" style="margin-bottom:8px">
+      <button class="copy" id="adminSendBalanceBtn" style="background:var(--g2);margin-top:0">🚀 شحن رصيد العميل فوراً</button>
+      <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px;min-height:16px"></div>
+    </div>
+
+    <button class="copy" id="reset" data-i="reset_stats"></button>
+  </div>
 </section>
 
 <!-- أيقونة علامة الاستفهام أسفل المتجر -->
@@ -680,6 +693,7 @@ body:has(#modal.on) #botDock{display:none}
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
 /* ========= الإعدادات ========= */
@@ -754,8 +768,8 @@ function copy(txt){
 }
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);if(window.Android&&Android.openUrl)Android.openUrl(u);else window.open(u,"_blank","noopener")||(location.href=u)}
 
-/* ========= محفظة المستخدم ========= */
-let userWallet = parseFloat(store.get("user_wallet", "0")) || 0;
+/* ========= محفظة المستخدم عبر Firebase Database ========= */
+let userWallet = 0;
 function updateWalletUI(){
   $("#walletBalance").textContent = userWallet.toFixed(2) + " " + CFG.cur[currency];
 }
@@ -763,11 +777,56 @@ $("#topupWalletBtn").onclick = ()=>{
   openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥 بمبلغ: 200 جنيه عبر فودافون كاش.");
 };
 
+function listenToUserWallet(uid){
+  if(!uid) return;
+  const dbRef = firebase.database().ref('users/' + uid + '/wallet');
+  dbRef.on('value', (snapshot) => {
+    userWallet = snapshot.val() || 0;
+    updateWalletUI();
+  });
+}
+
 /* ========= إحصائيات ========= */
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
 function renderStats(){
   $("#stats").innerHTML=[["visits","s_visits"],["unique","s_unique"],["pk","s_pk"],["ord","s_ord"]].map(([k,l])=>`<div class="st"><span>${esc(t(l))}</span><b>${stat.get(k)}</b></div>`).join("");
 }
+
+/* ========= التحكم في شحن رصيد العملاء عبر الـ ID (لوحة التحكم) ========= */
+$("#adminSendBalanceBtn").onclick = ()=>{
+  const targetId = $("#adminTargetUid").value.trim();
+  const amount = parseFloat($("#adminAmount").value);
+  const feedback = $("#adminFeedback");
+
+  if(!targetId){
+    feedback.style.color = "#EF4444";
+    feedback.textContent = "❌ يرجى إدخال ID العميل أولاً";
+    return;
+  }
+  if(!amount || isNaN(amount)){
+    feedback.style.color = "#EF4444";
+    feedback.textContent = "❌ يرجى إدخال مبلغ صحيح";
+    return;
+  }
+
+  // تحديث الرصيد مباشرة في قاعدة البيانات للـ ID المحدد
+  const userWalletRef = firebase.database().ref('users/' + targetId + '/wallet');
+  userWalletRef.once('value').then((snapshot) => {
+    const currentBalance = snapshot.val() || 0;
+    const newBalance = currentBalance + amount;
+
+    userWalletRef.set(newBalance).then(() => {
+      feedback.style.color = "var(--ok)";
+      feedback.textContent = `✅ تمت إضافة (${amount}) للـ ID: (${targetId}) وأصبح رصيده الجديد: (${newBalance})`;
+      toast("🚀 تم شحن الرصيد تلقائياً بنجاح");
+      $("#adminTargetUid").value = "";
+      $("#adminAmount").value = "";
+    }).catch((err) => {
+      feedback.style.color = "#EF4444";
+      feedback.textContent = "❌ خطأ: " + err.message;
+    });
+  });
+};
 
 /* ========= الواجهة ========= */
 const REG=[];
@@ -907,7 +966,6 @@ $("#applyPromoBtn").onclick=()=>{
 
 const closeModal=()=>$("#modal").classList.remove("on");
 
-// دوال مودال معلومات عن التطبيق
 const openAboutModal=()=>$("#aboutModal").classList.add("on");
 const closeAboutModal=()=>$("#aboutModal").classList.remove("on");
 $("#appHelpBtn").onclick=openAboutModal;
@@ -1133,7 +1191,10 @@ const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
   projectId:"real-store-c91ec",
-  appId:"1:315828860330:web:3b2fb64a105ebb1ae627d3"
+  storageBucket:"real-store-c91ec.appspot.com",
+  messagingSenderId:"315828860330",
+  appId:"1:315828860330:web:3b2fb64a105ebb1ae627d3",
+  databaseURL: "https://real-store-a99a0-default-rtdb.firebaseio.com"
 };
 
 var user=null,auth=null,provider=null;
@@ -1160,13 +1221,15 @@ function renderUser(){
     $("#uName").textContent = displayName;
     $("#uMail").textContent = user.email||"";
 
-    // توليد أو جلب الـ ID الخاص بالمستخدم عند تسجيل الدخول
     let uniqueId = store.get("user_unique_id", "");
     if(!uniqueId){
       uniqueId = "REAL-" + Math.floor(100000 + Math.random() * 900000);
       store.set("user_unique_id", uniqueId);
     }
     $("#uUniqueId").textContent = uniqueId;
+
+    // تفعيل مراقبة رصيد المستخدم من قاعدة البيانات بناءً على الـ ID الخاص به
+    listenToUserWallet(uniqueId);
 
     $("#uBox").style.display="block";
     $("#logoutItem").style.display="flex";
@@ -1197,6 +1260,15 @@ function login(){
 
 $("#guestBtn").onclick=()=>{
   store.set("gate_passed", "guest");
+  // حتى للزوار ننشئ ID مؤقت لو أحب شحن محفظته
+  let guestId = store.get("user_unique_id", "");
+  if(!guestId){
+    guestId = "GUEST-" + Math.floor(100000 + Math.random() * 900000);
+    store.set("user_unique_id", guestId);
+  }
+  $("#uUniqueId").textContent = guestId;
+  listenToUserWallet(guestId);
+
   $("#gate").classList.remove("on");
   toast("🚀 أهلاً بك! تصفح المتجر بحرية");
 };
@@ -1221,6 +1293,12 @@ if(auth){
       $("#gate").classList.remove("on");
     } else {
       checkGate();
+      // حتى لو لم تسجل دخول، اسحب الـ ID المخزن وتتبع محفظته
+      let savedId = store.get("user_unique_id", "");
+      if(savedId){
+        $("#uUniqueId").textContent = savedId;
+        listenToUserWallet(savedId);
+      }
     }
   });
 } else {
@@ -1232,7 +1310,7 @@ setInterval(()=>{
   $("#tickerText").textContent=orders[Math.floor(Math.random()*orders.length)];
 },4500);
 
-/* ========= Premium Banner Slider (بنرات جديدة بالترتيب المطلُوب) ========= */
+/* ========= Premium Banner Slider ========= */
 (function(){
   const B=[
     ["https://cdn.imagetourls.com/uploads/tyImg/jMDCy25v.png","جهَات التطبيق",""],
