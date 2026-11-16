@@ -175,6 +175,26 @@ button,.wa,.tab,.subtab{touch-action:manipulation;transition:filter .1s,transfor
 /* ===== عرض صورة المنتج داخل المودال (إن وجدت) ===== */
 .modal-pimg{width:75px;height:75px;object-fit:cover;border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block;box-shadow:0 8px 16px rgba(0,0,0,.4)}
 
+/* ===== سكشن المحفظة البروازية الجديدة ===== */
+.wallet-box{background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(147,51,234,.1));border:1px solid var(--bd2);border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.wallet-info small{color:var(--sub);font-size:10px;font-weight:700}
+.wallet-info b{font-size:16px;color:var(--a);display:block}
+.wallet-btn{background:var(--g1);color:#fff;padding:8px 14px;border-radius:12px;font-size:11px;font-weight:900}
+
+/* ===== شريط الإشعارات الحية الجديد ===== */
+#liveTicker{background:var(--card);border:1px solid var(--bd2);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;box-shadow:var(--sh);overflow:hidden}
+#liveTicker i{color:var(--ok);animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+#tickerText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx)}
+
+/* ===== سكشن تقييمات العملاء 3D ===== */
+.reviews-grid{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.review-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;box-shadow:var(--sh)}
+.review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.review-name{font-weight:900;font-size:12px;color:var(--tx)}
+.review-stars{color:var(--gold);font-size:11px}
+.review-text{font-size:11px;color:var(--sub);line-height:1.6}
+
 /* ===== بوت ذكي ===== */
 #botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:90;pointer-events:none}
 #botFab{pointer-events:auto;position:absolute;bottom:16px;inset-inline-end:14px;width:56px;height:56px;border-radius:50%;background:var(--g1);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,99,235,.45);animation:botPulse 2.4s infinite}
@@ -212,7 +232,7 @@ body:has(#modal.on) #botDock{display:none}
 .dmenu button:hover,.dmenu a:hover,.dmenu button:active,.dmenu a:active{background:var(--inner)}
 .di{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:var(--c);flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.25)}
 
-/* ===== قائمة اللغات داخل الثلاث نقاط ===== */
+/* ===== قائمة اللغات والعملات داخل الثلاث نقاط ===== */
 .dm-lang{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 8px 8px}
 .lang-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:11px;background:var(--inner);color:var(--tx);font-size:10px;font-weight:800;border:1px solid var(--bd);transition:filter .12s,transform .12s,background .15s,color .15s}
 .lang-btn .flag{font-size:15px;line-height:1}
@@ -227,6 +247,8 @@ body:has(#modal.on) #botDock{display:none}
 #uBox{display:none;padding:8px 10px 10px;border-bottom:1px solid var(--bd);margin-bottom:4px}
 #uName{display:block;font-size:12px;font-weight:800}
 #uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
+.user-id-box{display:flex;align-items:center;justify-content:space-between;background:var(--inner);border:1px solid var(--bd2);border-radius:8px;padding:4px 8px;margin-top:6px;font-size:10.5px;direction:ltr}
+.user-id-box b{color:var(--a)}
 
 /* ===== Gate / Welcome 3D Pro (واجهة الترحيب الاحترافية) ===== */
 #gate{
@@ -304,7 +326,6 @@ body:has(#modal.on) #botDock{display:none}
 .gbtn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .gbtn:active{transform:translateY(3px)}
 
-/* زر الدخول بدون تسجيل (احترافي بخلفية متدرجة فوق جوجل) */
 .gbtn.guest{
   background:linear-gradient(135deg,#2563EB,#9333EA);
   color:#fff;border:1px solid rgba(255,255,255,.2);
@@ -331,14 +352,6 @@ body:has(#modal.on) #botDock{display:none}
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);
 }
 .g-secure i{color:#22C55E;font-size:10.5px}
-
-.gbtn.loading .gbtn-content{opacity:.55}
-.gbtn.loading::after{
-  content:"";position:absolute;width:18px;height:18px;border-radius:50%;
-  border:2px solid #2563EB;border-top-color:transparent;
-  animation:spin .7s linear infinite;right:16px;z-index:3;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
 
 [data-theme=light] #gate{
   background:
@@ -382,6 +395,36 @@ body:has(#games.on) #hero{display:block}
 .hs-d button{width:7px;height:7px;padding:0;border-radius:99px;background:var(--bd2);transition:width .35s,background .35s,box-shadow .35s}
 .hs-d button.on{width:22px;background:var(--g1);box-shadow:0 0 10px rgba(56,189,248,.55)}
 @media(min-width:521px){.hs-v{border-radius:22px}}
+
+/* ===== أيقونة علامة الاستفهام السفلية ===== */
+.app-help-wrap {
+  text-align: center;
+  margin: 16px 0 8px;
+}
+.app-help-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--bd2);
+  color: var(--a);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: var(--sh);
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+.app-help-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+.app-help-btn i {
+  font-size: 13px;
+  color: var(--gold);
+}
 </style>
 </head>
 <body>
@@ -410,7 +453,6 @@ body:has(#games.on) #hero{display:block}
     <p data-i="gate_sub"></p>
     <div id="dom" style="display:none;direction:ltr;user-select:all;-webkit-user-select:all;font-weight:800;color:var(--gold);font-size:13px;word-break:break-all;border:1px dashed var(--gold);border-radius:12px;padding:10px"></div>
 
-    <!-- 1️⃣ زر الدخول كزائر (بدون تسجيل) فوق زر جوجل -->
     <button class="gbtn guest" id="guestBtn" aria-label="الدخول بدون تسجيل">
       <span class="gbtn-shine" aria-hidden="true"></span>
       <span class="gbtn-content">
@@ -419,7 +461,6 @@ body:has(#games.on) #hero{display:block}
       </span>
     </button>
 
-    <!-- 2️⃣ زر تسجيل الدخول بحساب جوجل -->
     <button class="gbtn" id="gBtn" aria-label="تسجيل الدخول بجوجل">
       <span class="gbtn-shine" aria-hidden="true"></span>
       <span class="gbtn-content">
@@ -453,9 +494,25 @@ body:has(#games.on) #hero{display:block}
       <button class="ibtn dots" id="dotsBtn" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></button>
       <div class="dmenu" id="dMenu" role="menu">
         <div class="dm-t" data-i="menu_title"></div>
-        <div id="uBox"><span id="uName"></span><span id="uMail"></span></div>
+        <div id="uBox">
+          <span id="uName"></span>
+          <span id="uMail"></span>
+          <div class="user-id-box">
+            <span>ID: <b id="uUniqueId">------</b></span>
+            <button class="ibtn" id="copyUserIdBtn" style="height:22px;font-size:9px;padding:0 6px">نسخ</button>
+          </div>
+        </div>
 
-        <!-- 🌐 اختيار اللغة داخل القائمة -->
+        <!-- محول العملات الجديد داخل القائمة -->
+        <div class="dm-t">العملة</div>
+        <div class="dm-lang" id="currencySelector">
+          <button class="lang-btn on" data-cur="ar">🇪🇬 جنيه</button>
+          <button class="lang-btn" data-cur="en">🇺🇸 دولار</button>
+          <button class="lang-btn" data-cur="ja">🇯🇵 ين</button>
+        </div>
+        <div class="dm-divider"></div>
+
+        <!-- اختيار اللغة داخل القائمة -->
         <div class="dm-t" data-i="menu_lang"></div>
         <div class="dm-lang">
           <button class="lang-btn" data-lang="ar"><span class="flag">🇪🇬</span><span>العربية</span></button>
@@ -477,6 +534,21 @@ body:has(#games.on) #hero{display:block}
   </div>
 </header>
 
+<!-- شريط الإشعارات الحية -->
+<div id="liveTicker">
+  <i class="fa-solid fa-bolt"></i>
+  <span id="tickerText">⚡ جاري تحميل أحدث العروض وعمليات الشحن الفورية</span>
+</div>
+
+<!-- محفظة العميل البروازية الجديدة -->
+<div class="wallet-box">
+  <div class="wallet-info">
+    <small>رصيد المحفظة الحالي</small>
+    <b id="walletBalance">0.00 ج.م</b>
+  </div>
+  <button class="wallet-btn" id="topupWalletBtn">شحن المحفظة</button>
+</div>
+
 <section id="hero" role="region" aria-roledescription="carousel" aria-label="العروض">
   <div class="hs">
     <div class="hs-v" id="hsV" tabindex="0"></div>
@@ -490,6 +562,19 @@ body:has(#games.on) #hero{display:block}
   <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" data-ip="search" autocomplete="off"></div>
   <div class="grid" id="gameGrid"></div>
   <p id="noRes" class="sub" style="display:none;text-align:center;padding:20px" data-i="no_results"></p>
+
+  <!-- قسم آراء وتقييمات العملاء الموثقة -->
+  <div class="ttl" style="margin-top:20px">آراء وتقييمات العملاء الموثقة</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-top"><span class="review-name">محمود عبد الله (ببجي)</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+      <div class="review-text">"خدمة صاروخية! طلبت 60 شدة ووصلتني خلال دقيقتين بالضبط على الايدي. شكراً لأسرع من نتكم 🔥"</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top"><span class="review-name">كريم الهواري (فري فاير)</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+      <div class="review-text">"أسعار أرخص بكتير من أي مكان تاني، والتحويل اتقبل في ثواني. أنصح الكل يتعامل معاهم."</div>
+    </div>
+  </div>
 </section>
 <section id="cards" class="sec"><div class="ttl" data-i="tab_cards"></div><div class="subtabs" id="st-cards"></div><div id="out-cards"></div></section>
 <section id="recharge" class="sec">
@@ -511,6 +596,14 @@ body:has(#games.on) #hero{display:block}
   <div class="form"><div class="stats" id="stats"></div>
   <button class="copy" id="reset" data-i="reset_stats"></button></div>
 </section>
+
+<!-- أيقونة علامة الاستفهام أسفل المتجر -->
+<div class="app-help-wrap">
+  <button class="app-help-btn" id="appHelpBtn">
+    <i class="fa-solid fa-circle-question"></i>
+    <span data-i="help_btn_text">عن التطبيق ومعلومات المتجر</span>
+  </button>
+</div>
 
 <footer>
   <span class="brand-t secret">أسرع من نتكم 🔥</span>
@@ -535,6 +628,14 @@ body:has(#games.on) #hero{display:block}
     <div id="mImgBox"></div>
     <div class="info"><small data-i="modal_product"></small><b id="mProd"></b></div>
     <div class="disc" id="mDisc"><small data-i="modal_discount"></small><div class="n" id="mPrice"></div><div class="o" id="mOld"></div></div>
+    
+    <!-- حقل كود الخصم (Promo Code) -->
+    <div class="info" style="display:flex;gap:6px;align-items:center">
+      <input id="promoCodeInput" class="in" placeholder="كود الخصم" style="margin:0;font-size:11px">
+      <button class="buy" id="applyPromoBtn" style="width:105px;padding:9px">تطبيق الكود</button>
+    </div>
+    <div id="promoFeedback" style="font-size:10px;font-weight:700;margin:-4px 0 8px 4px;min-height:14px"></div>
+
     <div class="info" id="mNeedBox"><small id="mNeedLbl"></small><input id="mNeed" class="in" style="margin:6px 0 0" maxlength="40" autocomplete="off"></div>
     <div class="info"><small data-i="modal_vodafone"></small><button class="copy" data-copy="pay" data-i="copy_number"></button></div>
     <div class="info"><small data-i="modal_support"></small><button class="copy" data-copy="support" data-i="copy_support"></button></div>
@@ -542,11 +643,37 @@ body:has(#games.on) #hero{display:block}
   </div>
 </div>
 
+<!-- مودال معلومات عن التطبيق -->
+<div id="aboutModal" class="modal" role="dialog" aria-modal="true">
+  <div class="mb" style="max-width:440px;">
+    <div class="mh">
+      <h2><i class="fa-solid fa-circle-info" style="color:var(--a);margin-inline-end:6px"></i> <span data-i="about_modal_title">معلومات عن التطبيق</span></h2>
+      <button class="x" id="aboutMx" aria-label="close">×</button>
+    </div>
+    <div style="font-size:12px;line-height:1.8;color:var(--tx);padding:4px 0">
+      <p style="margin-bottom:10px;font-weight:700" data-i="about_desc_1">🔥 <b>أسرع من نتكم</b> هو متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان والثقة.</p>
+      
+      <div style="background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:10px">
+        <b style="color:var(--a);display:block;margin-bottom:4px" data-i="about_feat_title">مميزات المتجر:</b>
+        <ul style="padding-inline-start:16px;display:flex;flex-direction:column;gap:4px;color:var(--sub);font-size:11px">
+          <li data-i="about_feat_1"><b>شحن فوري وصاروخي:</b> تنفيذ الطلبات خلال دقائق معدودة مباشرة على الايدي أو الحساب.</li>
+          <li data-i="about_feat_2"><b>أسعار تنافسية:</b> أرخص أسعار بالسوق مع عروض وخصومات حصرية مستمرة.</li>
+          <li data-i="about_feat_3"><b>دعم فني متواصل:</b> خدمة عملاء متاحة على مدار الساعة للإجابة عن استفساراتكم عبر الواتساب.</li>
+          <li data-i="about_feat_4"><b>دفع آمن:</b> إتمام المعاملات المالية بكل سهولة عبر فودافون كاش.</li>
+        </ul>
+      </div>
+
+      <p style="font-size:10.5px;color:var(--sub);text-align:center" data-i="about_footer">جميع الحقوق محفوظة © 2026 - أسرع من نتكم 🔥</p>
+    </div>
+    <button class="order" id="closeAboutBtn" style="margin-top:12px" data-i="about_close_btn">حسناً، فهمت</button>
+  </div>
+</div>
+
 <!-- مودال تعديل اسم المستخدم -->
 <div id="nameModal" class="modal" role="dialog" aria-modal="true">
   <div class="mb" style="max-width:380px;text-align:center">
     <div class="mh"><h2 data-i="name_modal_title">تعديل اسم المستخدم</h2><button class="x" id="nameMx" aria-label="close">×</button></div>
-    <p class="sub" style="margin-bottom:10px" data-i="name_modal_sub">اكتب اسمك المفضّل ليظهر في حسابك وفي الطلبات:</p>
+    <p class="sub" style="margin-bottom:10px" data-i="name_modal_sub">اكتب اسمك المفضّل ليظهر في حسابك وفي الطلبات</p>
     <input id="customNameInput" class="in" maxlength="40" autocomplete="off" style="text-align:center;font-weight:800">
     <button class="order" id="saveNameBtn" data-i="name_modal_save" style="margin-top:10px">💾 حفظ الاسم</button>
   </div>
@@ -581,7 +708,6 @@ const GAMES={
      ["1580 + 1580 Bonds", 1292],
      ["3200 + 3200 Bonds", 2574],
      ["6500 + 6500 Bonds", 5138],
-     /* العروض الخاصة المضافة حديثاً مع صورها المخصصة */
      ["اختيار المبتدئين", 61, "https://cdn.imagetourls.com/uploads/tyImg/18kK3zTAs.jpg"],
      ["امتيازات الحقيبة المضادة للرصاص", 163, "https://cdn.imagetourls.com/uploads/tyImg/13WLSTv6c.jpg"],
      ["امتيازات القضايا المركبة", 471, "https://cdn.imagetourls.com/uploads/tyImg/1hQguTBQn.jpg"],
@@ -604,9 +730,9 @@ const SHAB={eg:{n:"🇪🇬 مصر",items:mk([100,300,500,1000,2000,3000],"جن�
 const SOON=[["fa-brands fa-fort-awesome","Fortnite"],["fa-solid fa-crosshairs","Call of Duty"],["fa-solid fa-gamepad","Valorant"],["fa-solid fa-film","Netflix"],["fa-solid fa-fire","Free Fire MAX"]];
 
 const T={
-ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_lang:"اللغة",menu_edit_name:"تعديل اسم المستخدم",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج 🔍",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم (5%)",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: ",name_modal_title:"تعديل اسم المستخدم",name_modal_sub:"اكتب اسمك المفضّل ليظهر في حسابك وفي الطلبات:",name_modal_save:"💾 حفظ الاسم",name_updated:"✅ تم تحديث اسم المستخدم بنجاح",gate_title:"أهلاً بيك في أسرع من نتكم 🔥",gate_sub:"اختر طريقة الدخول للمتابعة إلى المتجر:",gate_guest:"تصفح المتجر بدون تسجيل 🚀",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google"},
-en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_lang:"Language",menu_edit_name:"Edit Username",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results 🔍",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount (5%)",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: ",name_modal_title:"Edit Username",name_modal_sub:"Enter your preferred name to show in your account & orders:",name_modal_save:"💾 Save Name",name_updated:"✅ Username updated successfully",gate_title:"Welcome to أسرع من نتكم 🔥",gate_sub:"Choose how you want to proceed:",gate_guest:"Browse store as guest 🚀",gate_btn:"Sign in with Google",gate_secure:"Secure sign-in powered by Google"},
-ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_lang:"言語",menu_edit_name:"ユーザー名を変更",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし 🔍",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格 (5%)",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: ",name_modal_title:"ユーザー名変更",name_modal_sub:"お名前を入力してください:",name_modal_save:"💾 保存",name_updated:"✅ 更新しました",gate_title:"アスラ・ミン・ネトクムへようこそ 🔥",gate_sub:"ストアへのアクセス方法を選択してください：",gate_guest:"ゲストとして閲覧する 🚀",gate_btn:"Googleでログイン",gate_secure:"Googleによる安全なログイン"}
+ar:{brand_sub:"متجر الشحن الأسرع والأرخص 💎",skip:"تخطي",facebook:"فيسبوك",menu_title:"خدمة العملاء والتواصل",menu_lang:"اللغة",menu_edit_name:"تعديل اسم المستخدم",menu_support:"خدمة العملاء (واتساب)",menu_bot:"اسأل «ذكي» المساعد",menu_fb:"مجموعتنا على فيسبوك",telegram:"التليجرام",whatsapp:"الواتساب",tab_games:"🎮 الألعاب",tab_cards:"💳 بطاقات هدايا",tab_recharge:"⚡ شحن سريع",tab_shabab:"🪙 شباب كونات",tab_soon:"🔜 قريباً",tab_request:"📦 طلب منتج",tab_secret:"👑 القسم السري",search:"ابحث عن لعبة أو تطبيق...",no_results:"لا توجد نتائج",show:"عرض الباقات",hide:"إغلاق الباقات",buy:"شراء الآن",ask:"طلب الشحن",price:"السعر",qty:"الكمية",coin:"كوين",payment_title:"💳 الدفع",copy_vodafone:"📋 نسخ رقم فودافون كاش",send_whatsapp:"💬 إرسال الطلب على واتساب",req_name:"اسم المنتج",req_type:"نوع المنتج",req_phone:"رقم الهاتف",req_details:"اكتب تفاصيل طلبك",footer_speed:"تسليم سريع بعد تأكيد الدفع",modal_title:"تأكيد عملية الشحن",modal_product:"المنتج",modal_discount:"السعر بعد الخصم",modal_vodafone:"الدفع عبر فودافون كاش",copy_number:"📋 نسخ الرقم",modal_support:"الدعم الفني",copy_support:"📋 نسخ رقم الدعم",modal_confirm:"✅ تأكيد عملية الشحن",orig:"السعر الأصلي: ",need_id:"ايدي اللاعب (Player ID)",need_phone:"رقم الهاتف المراد شحنه",need_req:"⚠️ اكتب البيانات المطلوبة",copied:"✅ تم النسخ",copyfail:"❌ لم يتم النسخ",reset_stats:"🔄 إعادة ضبط الإحصائيات",confirm_reset:"هل أنت متأكد من تصفير جميع الإحصائيات؟",reset_done:"✅ تم إعادة ضبط الإحصائيات",secret_on:"👑 مرحباً بك في القسم السري",s_visits:"إجمالي الزيارات",s_unique:"الزوار الفريدين",s_pk:"عرض الباقات",s_ord:"الطلبات للواتس",soon:"قريباً",hello:"السلام عليكم 👋",want:"عايز أطلب: ",pricel:"السعر: ",idl:"البيانات: ",from:"من ",bad_name:"⚠️ اكتب اسم المنتج",bad_phone:"⚠️ ادخل رقم هاتف صحيح",reqt:"طلب منتج من ",pl:"المنتج: ",tl:"النوع: ",phl:"الهاتف: ",dl:"التفاصيل: ",name_modal_title:"تعديل اسم المستخدم",name_modal_sub:"اكتب اسمك المفضّل ليظهر في حسابك وفي الطلبات",name_modal_save:"💾 حفظ الاسم",name_updated:"✅ تم تحديث اسم المستخدم بنجاح",gate_title:"أهلاً بيك في أسرع من نتكم 🔥",gate_sub:"اختر طريقة الدخول للمتابعة إلى المتجر",gate_guest:"تصفح المتجر بدون تسجيل 🚀",gate_btn:"تسجيل الدخول بجيميل",gate_secure:"تسجيل آمن ومشفر بواسطة Google",help_btn_text:"عن التطبيق ومعلومات المتجر",about_modal_title:"معلومات عن التطبيق",about_desc_1:"🔥 <b>أسرع من نتكم</b> هو متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان والثقة.",about_feat_title:"مميزات المتجر:",about_feat_1:"<b>شحن فوري وصاروخي:</b> تنفيذ الطلبات خلال دقائق معدودة مباشرة على الايدي أو الحساب.",about_feat_2:"<b>أسعار تنافسية:</b> أرخص أسعار بالسوق مع عروض وخصومات حصرية مستمرة.",about_feat_3:"<b>دعم فني متواصل:</b> خدمة عملاء متاحة على مدار الساعة للإجابة عن استفساراتكم عبر الواتساب.",about_feat_4:"<b>دفع آمن:</b> إتمام المعاملات المالية بكل سهولة عبر فودافون كاش.",about_footer:"جميع الحقوق محفوظة © 2026 - أسرع من نتكم 🔥",about_close_btn:"حسناً، فهمت"},
+en:{brand_sub:"The fastest & cheapest recharge store 💎",skip:"Skip",facebook:"Facebook",menu_title:"Customer Service & Contact",menu_lang:"Language",menu_edit_name:"Edit Username",menu_support:"Customer Service (WhatsApp)",menu_bot:"Ask “Zaki” assistant",menu_fb:"Our Facebook group",telegram:"Telegram",whatsapp:"WhatsApp",tab_games:"🎮 Games",tab_cards:"💳 Gift Cards",tab_recharge:"⚡ Fast Top-up",tab_shabab:"🪙 Shabab Coins",tab_soon:"🔜 Coming Soon",tab_request:"📦 Request Product",tab_secret:"👑 Secret Section",search:"Search for a game or app...",no_results:"No results",show:"View Packages",hide:"Close Packages",buy:"Buy Now",ask:"Request Top-up",price:"Price",qty:"Quantity",coin:"coins",payment_title:"💳 Payment",copy_vodafone:"📋 Copy Vodafone Cash",send_whatsapp:"💬 Send Order on WhatsApp",req_name:"Product Name",req_type:"Product Type",req_phone:"Phone Number",req_details:"Write your request details",footer_speed:"Fast delivery after payment confirmation",modal_title:"Confirm Top-up",modal_product:"Product",modal_discount:"Price after discount",modal_vodafone:"Vodafone Cash",copy_number:"📋 Copy Number",modal_support:"Support",copy_support:"📋 Copy Support Number",modal_confirm:"✅ Confirm Top-up",orig:"Original Price: ",need_id:"Player ID",need_phone:"Phone number to top up",need_req:"⚠️ Please fill the required field",copied:"✅ Copied",copyfail:"❌ Copy failed",reset_stats:"🔄 Reset Statistics",confirm_reset:"Reset all statistics?",reset_done:"✅ Statistics reset",secret_on:"👑 Welcome to the secret section",s_visits:"Total Visits",s_unique:"Unique Visitors",s_pk:"Package Views",s_ord:"Orders to WhatsApp",soon:"Coming Soon",hello:"Hello 👋",want:"I want to order: ",pricel:"Price: ",idl:"Details: ",from:"",bad_name:"⚠️ Enter product name",bad_phone:"⚠️ Enter a valid phone",reqt:"Product request from ",pl:"Product: ",tl:"Type: ",phl:"Phone: ",dl:"Details: ",name_modal_title:"Edit Username",name_modal_sub:"Enter your preferred name to show in your account & orders",name_modal_save:"💾 Save Name",name_updated:"✅ Username updated successfully",gate_title:"Welcome to أسرع من نتكم 🔥",gate_sub:"Choose how you want to proceed",gate_guest:"Browse store as guest 🚀",gate_btn:"Sign in with Google",gate_secure:"Secure sign-in powered by Google",help_btn_text:"About App & Store Info",about_modal_title:"About the App",about_desc_1:"🔥 <b>أسرع من نتكم</b> is your ultimate store for game top-ups, gift cards, mobile recharges, and Shabab coins at the best prices with top security.",about_feat_title:"Store Features:",about_feat_1:"<b>Instant Delivery:</b> Orders processed within minutes directly to your ID.",about_feat_2:"<b>Competitive Prices:</b> Best market prices with ongoing exclusive offers.",about_feat_3:"<b>24/7 Support:</b> Customer service ready via WhatsApp.",about_feat_4:"<b>Secure Payment:</b> Easy transactions via Vodafone Cash.",about_footer:"All rights reserved © 2026 - أسرع من نتكم 🔥",about_close_btn:"Got it"},
+ja:{brand_sub:"最速かつ最安値のチャージストア 💎",skip:"スキップ",facebook:"Facebook",menu_title:"カスタマーサービス",menu_lang:"言語",menu_edit_name:"ユーザー名を変更",menu_support:"サポート (WhatsApp)",menu_bot:"アシスタントに質問",menu_fb:"Facebookグループ",telegram:"テレグラム",whatsapp:"WhatsApp",tab_games:"🎮 ゲーム",tab_cards:"💳 ギフトカード",tab_recharge:"⚡ 高速チャージ",tab_shabab:"🪙 シャバブコイン",tab_soon:"🔜 近日公開",tab_request:"📦 商品リクエスト",tab_secret:"👑 シークレット",search:"ゲームやアプリを検索...",no_results:"結果なし",show:"パッケージを表示",hide:"閉じる",buy:"今すぐ購入",ask:"チャージ依頼",price:"価格",qty:"数量",coin:"コイン",payment_title:"💳 お支払い",copy_vodafone:"📋 ボーダフォンキャッシュをコピー",send_whatsapp:"💬 WhatsAppで注文を送信",req_name:"商品名",req_type:"商品の種類",req_phone:"電話番号",req_details:"詳細を入力",footer_speed:"入金確認後すぐにお届け",modal_title:"チャージの確認",modal_product:"商品",modal_discount:"割引後の価格",modal_vodafone:"ボーダフォンキャッシュ",copy_number:"📋 番号をコピー",modal_support:"サポート",copy_support:"📋 サポート番号をコピー",modal_confirm:"✅ チャージを確認",orig:"元の価格: ",need_id:"プレイヤーID",need_phone:"チャージする電話番号",need_req:"⚠️ 必須項目を入力してください",copied:"✅ コピーしました",copyfail:"❌ コピー失敗",reset_stats:"🔄 統計をリセット",confirm_reset:"統計をリセットしますか？",reset_done:"✅ リセットしました",secret_on:"👑 シークレットへようこそ",s_visits:"総訪問数",s_unique:"ユニーク訪問",s_pk:"パッケージ閲覧",s_ord:"WhatsApp注文数",soon:"近日公開",hello:"こんにちは 👋",want:"注文します: ",pricel:"価格: ",idl:"情報: ",from:"",bad_name:"⚠️ 商品名を入力",bad_phone:"⚠️ 正しい電話番号を入力",reqt:"商品リクエスト ",pl:"商品: ",tl:"種類: ",phl:"電話: ",dl:"詳細: ",name_modal_title:"ユーザー名変更",name_modal_sub:"お名前を入力してください",name_modal_save:"💾 保存",name_updated:"✅ 更新しました",gate_title:"アスラ・ミン・ネトクムへようこそ 🔥",gate_sub:"ストアへのアクセス方法を選択してください",gate_guest:"ゲストとして閲覧する 🚀",gate_btn:"Googleでログイン",gate_secure:"Googleによる安全なログイン",help_btn_text:"アプリについて & ストア情報",about_modal_title:"アプリについて",about_desc_1:"🔥 <b>أسرع من نتكم</b> は、ゲームのチャージ、ギフトカード、モバイルリチャージを最安値で提供するストアです。",about_feat_title:"ストアの特徴:",about_feat_1:"<b>即時配信:</b> IDへ直接数分以内に迅速に処理します。",about_feat_2:"<b>競争力のある価格:</b> 市場最安値と限定オファー。",about_feat_3:"<b>24時間体制のサポート:</b> WhatsAppでいつでも対応。",about_feat_4:"<b>安全な決済:</b> 簡単で安全な取引。",about_footer:"All rights reserved © 2026 - أسرع من نتكم 🔥",about_close_btn:"了解"}
 };
 
 Object.assign(T.ar,{logout:"تسجيل الخروج"});
@@ -617,15 +743,26 @@ Object.assign(T.ja,{logout:"ログアウト"});
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
 let lang=store.get("lang","ar"); if(!T[lang])lang="ar";
+let currency=store.get("currency","ar");
 const t=k=>T[lang][k]??T.ar[k]??k;
-const fmtPrice=n=>(n*CFG.rates[lang]).toLocaleString("en",{minimumFractionDigits:lang==="ja"?0:2,maximumFractionDigits:lang==="ja"?0:2});
+const fmtPrice=n=>(n*(CFG.rates[currency]||1)).toLocaleString("en",{minimumFractionDigits:currency==="ja"?0:2,maximumFractionDigits:currency==="ja"?0:2});
 let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",1800)}
 function copy(txt){
   const ok=()=>toast(t("copied")),fail=()=>{try{const a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){toast(t("copyfail"))}};
   if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok).catch(fail);else fail();
 }
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);if(window.Android&&Android.openUrl)Android.openUrl(u);else window.open(u,"_blank","noopener")||(location.href=u)}
+
+/* ========= محفظة المستخدم ========= */
+let userWallet = parseFloat(store.get("user_wallet", "0")) || 0;
+function updateWalletUI(){
+  $("#walletBalance").textContent = userWallet.toFixed(2) + " " + CFG.cur[currency];
+}
+$("#topupWalletBtn").onclick = ()=>{
+  openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥 بمبلغ: 200 جنيه عبر فودافون كاش.");
+};
 
 /* ========= إحصائيات ========= */
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
@@ -637,7 +774,7 @@ function renderStats(){
 const REG=[];
 function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc=''){
   const i=REG.push({title,label,base,need,imgSrc})-1;
-  const price=base==null?"":`<div class="pp"><small>${esc(t(qtyMode?"qty":"price"))}</small><span>${iconHtml} ${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${esc(qtyMode?t("coin"):CFG.cur[lang])}</small></span></div>`;
+  const price=base==null?"":`<div class="pp"><small>${esc(t(qtyMode?"qty":"price"))}</small><span>${iconHtml} ${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${esc(qtyMode?t("coin"):CFG.cur[currency])}</small></span></div>`;
   const imgTag=imgSrc?`<img src="${imgSrc}" alt="${esc(label)}" style="width:100%;height:90px;object-fit:cover;border-radius:10px;margin-bottom:6px">`:'';
   return `<div class="pr">${imgTag}<div class="pn">${esc(label)}</div>${price}<button class="buy" data-buy="${i}">${esc(t(base==null?"ask":"buy"))}</button></div>`;
 }
@@ -695,13 +832,12 @@ function showSec(id){
   if(id==="admin")renderStats();
 }
 
-/* ========= الطلب ========= */
-let sel=null;
+/* ========= الطلب والبروموكود ========= */
+let sel=null, activeDiscount=CFG.discount, appliedPromoCode="";
 function openOrder(i){
   sel=REG[i];const hasP=sel.base!=null;
   $("#mProd").textContent=sel.title;
   
-  // عرض صورة المنتج في المودال إن وجدت
   const imgBox=$("#mImgBox");
   if(sel.imgSrc){
     imgBox.innerHTML=`<img src="${sel.imgSrc}" alt="" class="modal-pimg">`;
@@ -710,31 +846,91 @@ function openOrder(i){
   }
 
   $("#mDisc").style.display=hasP?"block":"none";
-  if(hasP&&sel.title.indexOf("شباب كونات")!==0){
-    $("#mPrice").textContent=fmtPrice(sel.base*(1-CFG.discount))+" "+CFG.cur[lang];
-    $("#mOld").textContent=t("orig")+fmtPrice(sel.base)+" "+CFG.cur[lang];$("#mOld").style.display="block";
-  }else{$("#mPrice").textContent=sel.label;$("#mOld").style.display="none"}
+  activeDiscount=CFG.discount;
+  appliedPromoCode="";
+  $("#promoCodeInput").value="";
+  $("#promoFeedback").textContent="";
+  updateModalPrice();
+
   $("#mNeedBox").style.display=sel.need?"block":"none";
   $("#mNeedLbl").textContent=sel.need==="phone"?t("need_phone"):t("need_id");
   $("#mNeed").value=sel.need==="id"?store.get("lastId",""):"";$("#mNeed").classList.remove("err");
   $("#modal").classList.add("on");
   if(sel.need&&!$("#mNeed").value)setTimeout(()=>$("#mNeed").focus(),30);
 }
+function updateModalPrice(){
+  const hasP=sel.base!=null;
+  if(hasP && sel.title.indexOf("شباب كونات")!==0){
+    const finalPrice = sel.base * (1 - activeDiscount);
+    $("#mPrice").textContent = fmtPrice(finalPrice) + " " + CFG.cur[currency];
+    $("#mOld").textContent = t("orig") + fmtPrice(sel.base) + " " + CFG.cur[currency];
+    $("#mOld").style.display = "block";
+  } else if(hasP){
+    $("#mPrice").textContent = fmtPrice(sel.base) + " " + CFG.cur[currency];
+    $("#mOld").style.display = "none";
+  } else {
+    $("#mPrice").textContent = sel.label;
+    $("#mOld").style.display = "none";
+  }
+}
+
+$("#applyPromoBtn").onclick=()=>{
+  const code = $("#promoCodeInput").value.trim();
+  const codeUpper = code.toUpperCase();
+  const feedback = $("#promoFeedback");
+  
+  if(codeUpper === "BESO47"){
+    activeDiscount = 0.01;
+    appliedPromoCode = code;
+    updateModalPrice();
+    feedback.style.color = "var(--ok)";
+    feedback.textContent = "✅ تم تفعيل كود الخصم بنجاح";
+    toast("🎉 تم تفعيل الخصم بنجاح");
+  } else if(codeUpper === "BESO41O" || codeUpper === "BESO410"){
+    activeDiscount = 0.10;
+    appliedPromoCode = code;
+    updateModalPrice();
+    feedback.style.color = "var(--ok)";
+    feedback.textContent = "✅ تم تفعيل كود الخصم بنجاح";
+    toast("🎉 تم تفعيل الخصم بنجاح");
+  } else if(code === "") {
+    feedback.style.color = "var(--sub)";
+    feedback.textContent = "⚠️ الرجاء إدخال كود الخصم أولاً";
+  } else {
+    activeDiscount = CFG.discount;
+    appliedPromoCode = "";
+    updateModalPrice();
+    feedback.style.color = "#EF4444";
+    feedback.textContent = "❌ كود الخصم غير صحيح";
+    toast("❌ كود الخصم غير صحيح");
+  }
+};
+
 const closeModal=()=>$("#modal").classList.remove("on");
+
+// دوال مودال معلومات عن التطبيق
+const openAboutModal=()=>$("#aboutModal").classList.add("on");
+const closeAboutModal=()=>$("#aboutModal").classList.remove("on");
+$("#appHelpBtn").onclick=openAboutModal;
+$("#closeAboutBtn").onclick=closeAboutModal;
+
 function confirmOrder(){
   const need=$("#mNeed").value.trim();
   if(sel.need&&need.length<3){$("#mNeed").classList.add("err");$("#mNeed").focus();toast(t("need_req"));return}
   const priceTxt=$("#mDisc").style.display==="none"?"":$("#mPrice").textContent;
   let currentUserName = store.get("custom_username", "") || (user ? user.displayName : "");
+  let currentUserUid = store.get("user_unique_id", "") || "";
 
   let msg="🛒 *طلب شحن جديد*\n━━━━━━━━━━━━━━━\n";
   msg+="🎮 *المنتج:* "+sel.title+"\n";
-  msg+="💰 *السعر:* "+priceTxt+"\n";
+  msg+="💰 *السعر بعد الخصم:* "+priceTxt+"\n";
+  if(appliedPromoCode)msg+="🏷️ *كود الخصم المستخدم:* "+appliedPromoCode+"\n";
   if(sel.need)msg+="🆔 *البيانات:* "+need+"\n";
   if(currentUserName)msg+="👤 *العميل:* "+currentUserName+"\n";
+  if(currentUserUid)msg+="🔑 *معرف الحساب (ID):* "+currentUserUid+"\n";
   msg+="━━━━━━━━━━━━━━━\n⚡ "+t("from")+CFG.storeName+" 🔥";
 
-  fetch("https://real-store-orders.krop39sos.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({product:sel.title,price:priceTxt,need:need,name:currentUserName,email:user?user.email:""})}).catch(()=>{});
+  fetch("https://real-store-orders.krop39sos.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({product:sel.title,price:priceTxt,need:need,promo:appliedPromoCode,name:currentUserName,uid:currentUserUid,email:user?user.email:""})}).catch(()=>{});
   if(sel.need==="id")store.set("lastId",need);stat.inc("ord");openWA(msg);closeModal();
 }
 function sendRequest(){
@@ -744,12 +940,12 @@ function sendRequest(){
   openWA(t("hello")+"\n\n"+t("reqt")+CFG.storeName+" 🔥\n\n"+t("pl")+name+"\n"+t("tl")+v("rType")+"\n"+t("phl")+phone+"\n"+t("dl")+v("rDet"));
 }
 
-/* ========= اللغة والمظهر ========= */
+/* ========= اللغة والمظهر والعملات ========= */
 function applyLang(){
   document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
   $$("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));
   $$("[data-ip]").forEach(e=>e.placeholder=t(e.dataset.ip));
-  $$(".lang-btn").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  $$(".lang-btn[data-lang]").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
   $("#soonGrid").innerHTML=SOON.map(([ic,n])=>`<div class="sc"><i class="${ic}"></i><h3>${esc(n)}</h3><p>${esc(t("soon"))}</p></div>`).join("");
   renderTabs();renderGames();renderSubs();renderStats();
   if(typeof botInit==="function"&&$("#botPanel").classList.contains("on"))botInit();
@@ -769,10 +965,12 @@ document.addEventListener("click",e=>{
   if(el=c("[data-sub]")){const[s,k]=el.dataset.sub.split(":");$("#st-"+s).dataset.cur=k;$$(".subtab",$("#st-"+s)).forEach(b=>b.classList.toggle("on",b===el));return R[s](k)}
   if(el=c("[data-copy]"))return copy(CFG[el.dataset.copy]);
   if(e.target===$("#modal"))closeModal();
+  if(e.target===$("#aboutModal"))closeAboutModal();
   if(e.target===$("#nameModal"))closeNameModal();
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeNameModal()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeAboutModal();closeNameModal()}});
 $("#mx").onclick=closeModal;
+$("#aboutMx").onclick=closeAboutModal;
 $("#nameMx").onclick=closeNameModal;
 $("#confirm").onclick=confirmOrder;
 $("#sendReq").onclick=sendRequest;
@@ -783,38 +981,49 @@ let sc=0;$$(".secret").forEach(el=>el.onclick=()=>{if(++sc>=5){sc=0;$("#tabs").d
 function hideSplash(){const s=$("#splash");if(s){s.classList.add("hide");setTimeout(()=>s.remove(),450)}}
 $("#skip").onclick=hideSplash;
 
+/* محول العملات */
+$$("#currencySelector .lang-btn").forEach(btn=>{
+  btn.onclick=()=>{
+    currency=btn.dataset.cur;store.set("currency",currency);
+    $$("#currencySelector .lang-btn").forEach(b=>b.classList.toggle("on",b===btn));
+    renderGames();renderSubs();updateWalletUI();
+    toast("💱 تم تغيير العملة بنجاح");
+  }
+});
+
 /* ========= بوت ذكي ========= */
 const BUI={
-ar:{sub:"مساعد أسرع من نتكم",ph:"اكتب سؤالك...",hi:"أهلاً بيك! 👋 أنا «ذكي» مساعد المتجر. اسألني عن الأسعار، طريقة الطلب، الدفع، أو عن صاحب الموقع.",chips:["مين صاحب الموقع؟","ازاي أطلب؟","طرق الدفع","وقت التسليم","كام سعر 60 UC؟","الخصومات","تواصل مع الدعم"]},
-en:{sub:"Store assistant",ph:"Type your question...",hi:"Hi! 👋 I'm “Zaki”, the store assistant. Ask me about prices, ordering, payment, or the site owner.",chips:["Who owns this site?","How to order?","Payment","Delivery time","Price of 60 UC?","Discounts","Contact support"]}
+ar:{sub:"مساعد أسرع من نتكم",ph:"اكتب سؤالك...",hi:"أهلاً بيك! 👋 أنا «ذكي» مساعد المتجر. اسألني عن الأسعار، طريقة الطلب، الدفع، أو عن صاحب الموقع",chips:["مين صاحب الموقع","ازاي أطلب","طرق الدفع","وقت التسليم","كام سعر 60 UC","العروض","تواصل مع الدعم"]},
+en:{sub:"Store assistant",ph:"Type your question...",hi:"Hi! 👋 I'm “Zaki”, the store assistant. Ask me about prices, ordering, payment, or the site owner",chips:["Who owns this site","How to order","Payment","Delivery time","Price of 60 UC","Discounts","Contact support"]}
 };
 BUI.ja=BUI.en;
-const norm=s=>s.toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[؟?!.,،:]/g," ").replace(/\s+/g," ").trim();
+const norm=s=>s.toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[?!.,،:]/g," ").replace(/\s+/g," ").trim();
 const hasAr=s=>/[\u0600-\u06FF]/.test(s);
 const kw=(q,w)=>{const tk=q.split(" ");return w.some(x=>x.length<=3?tk.some(y=>y===x||y==="ال"+x):q.includes(x))};
-const GK={pubg:[".pubg","ببجي","uc"],mlbb:["mobile legends","mlbb","موبايل ليجند","ml"],ff:[".free fire","freefire","فري فاير","فري"],arena:[".arena","arena breakout","ارينا","ارينا بريك اوت","بريك اوت"],yalla:[".yalla","يلا لودو","لودو"],tiktok:[".tiktok","تيك توك","تيك"],gangstar:[".gangstar","جانجستر"],weplay:[".weplay","وي بلاي"],roblox:[".roblox","روبلوكس","robux","روبكس"]};
-const CK={google:[".google","جوجل","قوقل"],itunes:[".itunes","ايتونز","ايتونس","apple","ابل"],steam:[".steam","ستيم"]};
-const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده.\n• مبرمج ومطور ألعاب.\n• بيشتغل على الموقع ده من سنة 2022.\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص.\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وArena Breakout وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات.";
-const OWNER_EN="Real 👨‍💻 is the owner of this store.\n• Programmer and game developer.\n• Has been working on this website since 2022.\n• The idea: faster and cheaper game top-ups.\n• Offers PUBG, Free Fire, Mobile Legends, Arena Breakout, Roblox, TikTok, Yalla Ludo and more, gift cards, mobile top-ups and Shabab coins.";
+const GK={pubg:[".pubg","ببجي","uc"],mlbb:[".mlbb","mobile legends","موبايل ليجند"],ff:[".free fire","فري فاير"],arena:[".arena","arena breakout","ارينا"],yalla:[".yalla","يلا لودو"],tiktok:[".tiktok","تيك توك"],gangstar:[".gangstar","جانجستر"],weplay:[".weplay","وي بلاي"],roblox:[".roblox","روبلوكس"]};
+const CK={google:[".google","جوجل"],itunes:[".itunes","ايتونز"],steam:[".steam","ستيم"]};
+const OWNER_AR="ريـال 👨‍💻 هو صاحب المتجر ده\n• مبرمج ومطور ألعاب\n• بيشتغل على الموقع ده من سنة 2022\n• فكرة المتجر: شحن الألعاب بشكل أسرع وأرخص\n• المتجر بيقدم شحن PUBG وFree Fire وMobile Legends وArena Breakout وRoblox وTikTok وYalla Ludo وغيرهم، وبطاقات هدايا، وشحن رصيد وإنترنت، وشباب كونات";
+const OWNER_EN="Real 👨‍💻 is the owner of this store\n• Programmer and game developer\n• Has been working on this website since 2022\n• The idea: faster and cheaper game top-ups\n• Offers PUBG, Free Fire, Mobile Legends, Arena Breakout, Roblox, TikTok, Yalla Ludo and more, gift cards, mobile top-ups and Shabab coins";
 const KB=[
-{k:["صاحب","مالك","المالك","مين عمل","مين صمم","مين صنع","مين المطور","مين مبرمج","مبرمج","مطور","owner","who made","who owns","developer","مين ريال","ريال"],ar:OWNER_AR,en:OWNER_EN,chips:["ايه اللي بيقدمه المتجر؟","قنوات التواصل"]},
+{k:["صاحب","مالك","المالك","مين عمل","مين صمم","مين صنع","مين المطور","مين مبرمج","مبرمج","مطور","owner","who made","who owns","developer","مين ريال","ريال"],ar:OWNER_AR,en:OWNER_EN,chips:["ايه اللي بيقدمه المتجر","قنوات التواصل"]},
 {k:["بتقدمو","بيقدم","المتجر بيقدم","ايه المتاح","الالعاب","games","what do you offer","available"],ar:"المتاح عندنا:\n🎮 شحن: PUBG, Mobile Legends, Free Fire, Arena Breakout, يلا لودو, TikTok, Gangstar, WePlay, Roblox\n💳 بطاقات: Google Play, iTunes, Steam\n⚡ رصيد وإنترنت: WE, Vodafone, اتصالات، كارت الغاز\n🪙 شباب كونات: مصر، الأردن، السعودية",en:"We offer:\n🎮 Top-ups: PUBG, Mobile Legends, Free Fire, Arena Breakout, Yalla Ludo, TikTok, Gangstar, WePlay, Roblox\n💳 Gift cards: Google Play, iTunes, Steam\n⚡ Mobile top-ups: WE, Vodafone, Etisalat, gas card\n🪙 Shabab coins: Egypt, Jordan, Saudi"},
 {k:["ازاي اطلب","طريقه الطلب","اطلب","اشتري","شراء","how to order","how to buy","order"],ar:"الطلب بسيط وبضغطة:\n1) اختار اللعبة واضغط «عرض الباقات».\n2) اضغط «شراء الآن» واكتب ايدي اللاعب.\n3) اضغط تأكيد وهيفتحلك الواتساب برسالة الطلب الجاهزة.",en:"Ordering is easy:\n1) Pick a game and tap View Packages.\n2) Tap Buy Now and enter your Player ID.\n3) Tap confirm and WhatsApp opens with your ready message."},
 {k:["دفع","ادفع","فودافون كاش","فودافون","تحويل","payment","pay","vodafone cash"],ar:"الدفع بيتم عن طريق فودافون كاش 💳\nانسخ رقم فودافون كاش من زر النسخ الموجود في الموقع، وبعد التحويل بيتم التسليم فوراً.",en:"Payment is via Vodafone Cash 💳\nCopy the Vodafone Cash number from the site, and delivery follows confirmation."},
-{k:["وقت","مده","تسليم","سريع","delivery","how long","time"],ar:"التسليم سريع جداً ⚡ بعد تأكيد الدفع.",en:"Delivery is very fast ⚡ after payment confirmation."},
-{k:["خصم","خصومات","عروض","discount","offer"],ar:"في خصم 5% 🎁 بيتحسب تلقائياً على سعر المنتج ويظهر في نافذة تأكيد الطلب.",en:"There is an automatic 5% discount 5% shown in the confirm window."},
-{k:["ايدي","id","player id"],ar:"ID اللاعب بتلاقيه جوه اللعبة في صفحة البروفايل الخاص بك.",en:"Your Player ID is found in your in-game profile page."},
-{k:["دعم","تواصل","واتساب","واتس","support","contact","whatsapp"],ar:"تقدر تكلم الدعم على واتساب مباشرة 💬",en:"You can chat with support on WhatsApp 💬",go:[["wa","💬 تواصل على واتساب"]]}
+{k:["وقت","مده","تسليم","سريع","delivery","how long","time"],ar:"التسليم سريع جداً ⚡ بعد تأكيد الدفع",en:"Delivery is very fast ⚡ after payment confirmation"},
+{k:["خصم","خصومات","عروض","discount","offer"],ar:"في عروض وخصومات خاصة بتنزل في مسابقات الجروبات والواتساب 🎁",en:"Special offers and discounts are available through group contests and WhatsApp 🎁"},
+{k:["ايدي","id","player id"],ar:"ID اللاعب بتلاقيه جوه اللعبة في صفحة البروفايل الخاص بك",en:"Your Player ID is found in your in-game profile page"},
+{k:["دعم","تواصل","واتساب","واتس","support","contact","whatsapp"],ar:"تقدر تكلم الدعم على واتساب مباشرة 💬",en:"You can chat with support on WhatsApp 💬",go:[["wa","💬 تواصل على واتساب"]]
+}
 ];
 function priceAnswer(q,en){
   let g=Object.keys(GK).find(id=>kw(q,GK[id])),c=Object.keys(CK).find(id=>kw(q,CK[id]));
-  const nums=q.match(/\d+(?:\.\d+)?/g)||[],cur=CFG.cur[lang],f=p=>fmtPrice(p*(1-CFG.discount))+" "+cur;
+  const nums=q.match(/\d+(?:\.\d+)?/g)||[],cur=CFG.cur[currency],f=p=>fmtPrice(p*(1-activeDiscount))+" "+cur;
   let name,items;
   if(g){name=GAMES[g].n;items=GAMES[g].items}else if(c){name=CARDS[c].n;items=CARDS[c].items}else return null;
   const m=nums.length?items.filter(([l])=>(l.match(/\d+(?:\.\d+)?/g)||[]).includes(nums[0])):[];
   let txt;
-  if(m.length)txt=(en?"Prices for ":"أسعار ")+name+(en?" (after 5% discount):\n":" (بعد خصم 5%):\n")+m.slice(0,4).map(([l,p])=>"• "+l+" ← "+f(p)).join("\n");
-  else{const ps=items.map(i=>i[1]);txt=name+(en?`: ${items.length} packages from ${f(Math.min(...ps))} to ${f(Math.max(...ps))} (after 5% discount).`:`: ${items.length} باقة من ${f(Math.min(...ps))} إلى ${f(Math.max(...ps))} (بعد خصم 5%).`)}
+  if(m.length)txt=(en?"Prices for ":"أسعار ")+name+(en?" (after discount):\n":" (بعد الخصم):\n")+m.slice(0,4).map(([l,p])=>"• "+l+" ← "+f(p)).join("\n");
+  else{const ps=items.map(i=>i[1]);txt=name+(en?`: ${items.length} packages from ${f(Math.min(...ps))} to ${f(Math.max(...ps))}.`:`: ${items.length} باقة من ${f(Math.min(...ps))} إلى ${f(Math.max(...ps))}.`)}
   return{txt,go:[[g?"game:"+g:"sec:cards",(en?"View ":"عرض ")+name]]};
 }
 function botReply(raw){
@@ -824,7 +1033,7 @@ function botReply(raw){
   if(pr)return pr;
   const hit=KB.find(e=>kw(q,e.k.map(norm)));
   if(hit)return{txt:en?hit.en:hit.ar,go:(hit.go||[]).map(([a,l])=>[a,l]),chips:hit.chips};
-  return{txt:en?"I didn't quite get that 🤔 Try asking about prices, how to order, payment, delivery, or contact support.":"مفهمتش سؤالك كويس 🤔 جرّب تسأل عن الأسعار، طريقة الطلب، الدفع، أو كلم الدعم.",go:[["wa",en?"💬 Contact support":"💬 كلم الدعم"]]};
+  return{txt:en?"I didn't quite get that. Try asking about prices, how to order, payment, delivery, or contact support":"مفهمتش سؤالك كويس. جرّب تسأل عن الأسعار، طريقة الطلب، الدفع، أو كلم الدعم.",go:[["wa",en?"💬 Contact support":"💬 كلم الدعم"]]};
 }
 const bm=$("#botMsgs");
 function botAdd(who,txt,go){
@@ -866,7 +1075,7 @@ document.addEventListener("click",e=>{
 function dmToggle(on){const m=$("#dMenu");m.classList.toggle("on",on);$("#dotsBtn").setAttribute("aria-expanded",on)}
 $("#dotsBtn").onclick=e=>{e.stopPropagation();dmToggle(!$("#dMenu").classList.contains("on"))};
 document.addEventListener("click",e=>{
-  const lb=e.target.closest(".lang-btn");
+  const lb=e.target.closest(".lang-btn[data-lang]");
   if(lb){lang=lb.dataset.lang;store.set("lang",lang);applyLang();dmToggle(false);return}
   const a=e.target.closest("[data-act]");
   if(a){dmToggle(false);const k=a.dataset.act;
@@ -877,6 +1086,14 @@ document.addEventListener("click",e=>{
     return}
   if(!e.target.closest(".dots-wrap"))dmToggle(false);
 });
+
+/* ===== نسخ الـ ID الخاص بالمستخدم ===== */
+$("#copyUserIdBtn").onclick=()=>{
+  const uid = $("#uUniqueId").textContent;
+  if(uid && uid !== "------"){
+    copy(uid);
+  }
+};
 
 /* ===== تعديل اسم المستخدم ===== */
 function openNameModal(){
@@ -895,7 +1112,6 @@ $("#saveNameBtn").onclick=()=>{
   toast(t("name_updated"));
 };
 
-/* ========= إدارة واجهة الترحيب (Gate) لا تظهر سوى مرة واحدة أو عند عدم الاختيار ========= */
 function checkGate(){
   const status = store.get("gate_passed", "");
   if(!status && !user){
@@ -908,11 +1124,12 @@ function checkGate(){
 /* ========= تشغيل ========= */
 setTheme(store.get("theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
 applyLang();
+updateWalletUI();
 stat.inc("visits");
 try{if(!sessionStorage.getItem("seen")){sessionStorage.setItem("seen","1");stat.inc("unique")}}catch(e){}
 setTimeout(hideSplash,1200);
 
-/* ===== Firebase & Google Auth (تسجيل دخول اختياري واختيار زائر) ===== */
+/* ========= Firebase & Google Auth ========= */
 const firebaseConfig={
   apiKey:"AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain:"real-store-c91ec.firebaseapp.com",
@@ -926,7 +1143,7 @@ try{
   auth=firebase.auth();
   provider=new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
-}catch(e){console.error("Firebase:",e)}
+}catch(e){}
 
 function renderUser(){
   const hasUser = !!user;
@@ -943,6 +1160,15 @@ function renderUser(){
     const displayName = customName || user.displayName || "";
     $("#uName").textContent = displayName;
     $("#uMail").textContent = user.email||"";
+
+    // توليد أو جلب الـ ID الخاص بالمستخدم عند تسجيل الدخول
+    let uniqueId = store.get("user_unique_id", "");
+    if(!uniqueId){
+      uniqueId = "REAL-" + Math.floor(100000 + Math.random() * 900000);
+      store.set("user_unique_id", uniqueId);
+    }
+    $("#uUniqueId").textContent = uniqueId;
+
     $("#uBox").style.display="block";
     $("#logoutItem").style.display="flex";
     $("#editNameItem").style.display="flex";
@@ -970,7 +1196,6 @@ function login(){
   });
 }
 
-/* زر الدخول كزائر من الواجهة الخارجية */
 $("#guestBtn").onclick=()=>{
   store.set("gate_passed", "guest");
   $("#gate").classList.remove("on");
@@ -1002,6 +1227,11 @@ if(auth){
 } else {
   checkGate();
 }
+
+setInterval(()=>{
+  const orders=["⚡ تم بنجاح شحن (60 UC) لـ (محمد ك.)","🔥 تم تسليم طلب (Free Fire) لـ (أحمد م.)","💎 تم شحن (يلا لودو) لـ (كريم س.) فوراً"];
+  $("#tickerText").textContent=orders[Math.floor(Math.random()*orders.length)];
+},4500);
 
 /* ========= Premium Banner Slider ========= */
 (function(){
