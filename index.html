@@ -1232,15 +1232,14 @@ setInterval(()=>{
   $("#tickerText").textContent=orders[Math.floor(Math.random()*orders.length)];
 },4500);
 
-/* ========= Premium Banner Slider ========= */
+/* ========= Premium Banner Slider (بنرات جديدة بالترتيب المطلُوب) ========= */
 (function(){
-  const U="https://cdn.imagetourls.com/uploads/tyImg/";
   const B=[
-    ["OTVFsepS.png","PUBG Mobile","pubg"],
-    ["185ya1XjC.png","Free Fire","ff"],
-    ["174dv6OkZ.png","Roblox","roblox"],
-    ["S32m5Lhy.png","Yalla Ludo","yalla"],
-    ["5YbcUnOQ.png","شحن جميع التطبيقات والألعاب",""]
+    ["https://cdn.imagetourls.com/uploads/tyImg/jMDCy25v.png","جهَات التطبيق",""],
+    ["https://cdn.imagetourls.com/uploads/tyImg/LJv03YtR.png","Yalla Ludo","yalla"],
+    ["https://cdn.imagetourls.com/uploads/tyImg/swbD7etT.png","Roblox","roblox"],
+    ["https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png","PUBG Mobile","pubg"],
+    ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png","Free Fire","ff"]
   ];
   const v=$("#hsV"),dots=$("#hsD"),n=B.length,DELAY=4000;
   let cur=0,dx=0,w=1,sx=0,t0=0,drag=false,moved=false,timer=null;
@@ -1251,7 +1250,7 @@ setInterval(()=>{
     const im=document.createElement("img");
     im.alt=b[1];im.decoding="async";im.draggable=false;
     const bg=document.createElement("div");bg.className="hs-bg";s.appendChild(bg);
-    if(i===0){im.fetchPriority="high";im.src=U+b[0];im.dataset.l="1";bg.style.backgroundImage="url("+U+b[0]+")";
+    if(i===0){im.fetchPriority="high";im.src=b[0];im.dataset.l="1";bg.style.backgroundImage="url("+b[0]+")";
       const setAr=()=>{if(im.naturalWidth){v.style.setProperty("--ar",im.naturalWidth+"/"+im.naturalHeight);lay()}};
       im.complete?setAr():im.addEventListener("load",setAr,{once:true});
     }
@@ -1264,7 +1263,7 @@ setInterval(()=>{
 
   function load(i){
     const s=S[(i+n)%n],im=s.querySelector("img");
-    if(!im.dataset.l){im.dataset.l="1";im.src=U+B[(i+n)%n][0];s.firstChild.style.backgroundImage="url("+im.src+")"}
+    if(!im.dataset.l){im.dataset.l="1";im.src=B[(i+n)%n][0];s.firstChild.style.backgroundImage="url("+im.src+")"}
   }
   function lay(){
     w=v.clientWidth||1;
