@@ -34,7 +34,8 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .tabs,.subtabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
 .tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
 .tab,.subtab{flex-shrink:0;background:var(--card);color:var(--sub);border:1px solid var(--bd);padding:8px 14px;border-radius:14px;font-weight:800;font-size:11.5px}
-.subtab{padding:6px 12px;font-size:10.5px;border-radius:16px}
+.subtab{padding:6px 12px;font-size:10.5px;border-radius:16px;display:flex;align-items:center;gap:6px}
+.subtab img{width:22px;height:22px;border-radius:6px;object-fit:contain;background:#fff;padding:1px}
 .tab.on,.subtab.on{background:var(--g1);color:#fff;border-color:transparent}
 .sec{display:none}.sec.on{display:block;animation:fi .3s}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -333,9 +334,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 </section>
 
 <section id="cards" class="sec"><div class="ttl">💳 بطاقات هدايا</div><div class="subtabs" id="st-cards"></div><div id="out-cards"></div></section>
-<section id="recharge" class="sec"><div class="ttl">⚡ شحن سريع</div><div class="subtabs" id="st-recharge"></div><div id="out-recharge"></div>
-  <div class="pay"><h3>💳 الدفع</h3><button class="copy" data-copy="pay">📋 نسخ رقم فودافون كاش</button></div>
-</section>
+<section id="recharge" class="sec"><div class="ttl">⚡ شحن سريع</div><div class="subtabs" id="st-recharge"></div><div id="out-recharge"></div></section>
 <section id="shabab" class="sec"><div class="ttl">🪙 شباب كونات</div><div class="subtabs" id="st-shabab"></div><div id="out-shabab"></div></section>
 <section id="soon" class="sec"><div class="ttl">🔜 قريباً</div><div class="soon" id="soonGrid"></div></section>
 <section id="request" class="sec"><div class="ttl">📦 طلب منتج</div>
@@ -433,7 +432,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
   </div>
   <div id="promoFeedback" style="font-size:10px;font-weight:700;margin:-4px 0 8px 4px;min-height:14px"></div>
   <div class="info" id="mNeedBox"><small id="mNeedLbl"></small><input id="mNeed" class="in" style="margin:6px 0 0" maxlength="40"></div>
-  <div class="info"><small>الدفع عبر فودافون كاش</small><button class="copy" data-copy="pay">📋 نسخ الرقم</button></div>
   <div class="info"><small>الدعم الفني</small><button class="copy" data-copy="support">📋 نسخ رقم الدعم</button></div>
   <div class="info"><small>📸 رفع إيصال التحويل (اختياري)</small><input type="file" id="receiptFile" accept="image/*" style="margin-top:6px;font-size:10px"></div>
   <button class="order" id="confirm">✅ تأكيد عملية الشحن</button>
@@ -497,7 +495,7 @@ const CFG={
 };
 const IMG="https://www.image2url.com/r2/default/images/";
 const imgUrl=u=>u.startsWith("http")?u:IMG+u;
-const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.png",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
+const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.jpg",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 
 /* ═══════════ Data ═══════════ */
 const GAMES={
@@ -513,7 +511,15 @@ const GAMES={
 };
 const US=[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]];
 const CARDS={google:{n:"Google Play",items:US},itunes:{n:"iTunes",items:US},steam:{n:"Steam",items:[["بطاقة 5$ global",270],["بطاقة 10$ global",525],["بطاقة 20$ global",1040],["بطاقة 50$ global",2580]]}};
-const RECH={we:{n:"WE",items:["شحن رصيد WE","شحن كروت فكة WE"]},vodafone:{n:"Vodafone",items:["شحن رصيد Vodafone","شحن كروت فكة Vodafone"]},etisalat:{n:"اتصالات",items:["شحن رصيد اتصالات","شحن كروت فكة اتصالات"]},gas:{n:"شحن الغاز",items:["شحن كارت الغاز الطبيعي"]}};
+
+/* Updated RECH with custom image icons */
+const RECH={
+  vodafone:{n:"Vodafone",img:"https://cdn.imagetourls.com/uploads/tyImg/7fiMx3MJ.webp",items:["شحن رصيد Vodafone","شحن كروت فكة Vodafone"]},
+  we:{n:"WE",img:"https://cdn.imagetourls.com/uploads/tyImg/1dDn2rei3.jpg",items:["شحن رصيد WE","شحن كروت فكة WE"]},
+  etisalat:{n:"اتصالات",img:"https://cdn.imagetourls.com/uploads/tyImg/qlv47BMu.jpg",items:["شحن رصيد اتصالات","شحن كروت فكة اتصالات"]},
+  gas:{n:"شحن الغاز",img:"https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png",items:["شحن كارت الغاز الطبيعي"]}
+};
+
 const mk=(a,u,m)=>a.map(v=>[v+" "+u,v*m]);
 const SHAB={eg:{n:"🇪🇬 مصر",items:mk([100,300,500,1000,2000,3000],"جنيه",750)},jo:{n:"🇯🇴 الأردن",items:mk([10,20,30,40,50],"دينار",45000)},sa:{n:"🇸🇦 السعودية",items:mk([100,200,300,400,500],"ريال",9000)}};
 const SOON=[["fa-brands fa-fort-awesome","Fortnite"],["fa-solid fa-crosshairs","Call of Duty"],["fa-solid fa-gamepad","Valorant"],["fa-solid fa-film","Netflix"],["fa-solid fa-fire","Free Fire MAX"]];
@@ -733,7 +739,7 @@ function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc){
   imgSrc = imgSrc || '';
   const i = REG.push({title,label,base,need,imgSrc}) - 1;
   const price = base==null ? "" : `<div class="pp"><small>${qtyMode?"الكمية":"السعر"}</small><span>${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${qtyMode?"كوين":CFG.cur[currency]}</small></span></div>`;
-  const imgTag = imgSrc ? `<img src="${imgSrc}" alt="" style="width:100%;height:90px;object-fit:cover;border-radius:10px;margin-bottom:6px" loading="lazy">` : '';
+  const imgTag = imgSrc ? `<img src="${imgSrc}" alt="" style="width:100%;height:120px;object-fit:contain;background:var(--card);border-radius:10px;margin-bottom:6px;padding:4px" loading="lazy">` : '';
   const isFav = favs.includes(title);
   return `<div class="pr" data-title="${esc(title)}">
     <button class="fav-btn ${isFav?'on':''}" data-fav="${esc(title)}" aria-label="fav"><i class="fa-solid fa-heart"></i></button>
@@ -792,42 +798,30 @@ $("#q").addEventListener("change", ()=>{
 /* Home sections */
 function renderHomeSections(){
   const arr = Object.entries(GAMES);
-  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-gamedetail="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
-  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-gamedetail="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${g.items.length} باقة</small></div>`).join("");
-  $("#limitedoffers").innerHTML = arr.filter(([id])=>["pubg","ff","arena"].includes(id)).map(([id,g])=>`<div class="mini-card" data-gamedetail="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">-${Math.round(CFG.discount*100)}%</small></div>`).join("");
+  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
+  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${g.items.length} باقة</small></div>`).join("");
+  $("#limitedoffers").innerHTML = arr.filter(([id])=>["pubg","ff","arena"].includes(id)).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">-${Math.round(CFG.discount*100)}%</small></div>`).join("");
 }
-document.addEventListener("click", e=>{ const el = e.target.closest("[data-gamedetail]"); if(el){ openGameDetail(el.dataset.gamedetail); } });
-
-function openGameDetail(id){
-  const g = GAMES[id]; if(!g) return;
-  $("#gmTitle").textContent = g.n;
-  $("#gmBody").innerHTML = `
-    <div style="text-align:center;margin-bottom:10px"><img src="${imgUrl(g.img)}" style="width:100px;height:100px;border-radius:20px;object-fit:cover;border:2px solid var(--bd2)" loading="lazy"></div>
-    <div class="info"><small>الوصف</small><b>شحن ${esc(g.n)} مباشر على الايدي بأسرع وقت وأقل سعر.</b></div>
-    <div class="info"><small>⏱️ مدة التنفيذ</small><b>5-15 دقيقة بعد تأكيد الدفع</b></div>
-    <div class="info"><small>🔑 البيانات المطلوبة</small><b>${g.noid?"معرف الحساب":"Player ID"}</b></div>
-    <div class="ttl" style="font-size:13px;margin-top:12px">الباقات المتاحة (${g.items.length})</div>
-    <div class="grid" style="margin-top:8px">${g.items.map(item=>productCard(g.n+" - "+item[0], item[0], item[1], g.noid?null:"id", '', false, item[2]||'')).join("")}</div>
-    <div class="ttl" style="font-size:13px;margin-top:12px">الأسئلة الشائعة</div>
-    <details class="faq-item"><summary>كيف يتم الشحن؟</summary><p>أدخل Player ID، أكد الطلب، وادفع عبر فودافون كاش. سيتم الشحن خلال دقائق.</p></details>
-    <details class="faq-item"><summary>هل البيانات آمنة؟</summary><p>نعم، بياناتك محفوظة ولن تُشارك مع أي طرف ثالث.</p></details>
-    <details class="faq-item"><summary>ماذا لو تأخر الشحن؟</summary><p>تواصل مع الدعم على واتساب وسنحل المشكلة فوراً.</p></details>`;
-  $("#gameModal").classList.add("on");
-}
-$("#gmClose").onclick = ()=>$("#gameModal").classList.remove("on");
-$("#gameModal").onclick = e=>{ if(e.target.id==="gameModal") $("#gameModal").classList.remove("on"); };
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-openhome]");
+  if(el){
+    const id = el.dataset.openhome;
+    showSec("games");
+    setTimeout(()=>{ togglePk(id); }, 100);
+  }
+});
 
 function subtabs(sec,data,render,def){
   const box = $("#st-"+sec); const cur = box.dataset.cur || def; box.dataset.cur = cur;
-  box.innerHTML = Object.entries(data).map(([k,v])=>`<button class="subtab${k===cur?" on":""}" data-sub="${sec}:${k}">${esc(v.n)}</button>`).join("");
+  box.innerHTML = Object.entries(data).map(([k,v])=>`<button class="subtab${k===cur?" on":""}" data-sub="${sec}:${k}">${v.img?`<img src="${v.img}" alt="">`:""}<span>${esc(v.n)}</span></button>`).join("");
   render(cur);
 }
 const R={
   cards:k=>{ $("#out-cards").innerHTML = '<div class="grid">' + CARDS[k].items.map(([l,p])=>productCard(CARDS[k].n+" - "+l, l, p, null, '', false)).join("") + "</div>"; },
-  recharge:k=>{ $("#out-recharge").innerHTML = '<div class="grid">' + RECH[k].items.map(l=>productCard(l, l, null, "phone", '', false)).join("") + "</div>"; },
+  recharge:k=>{ $("#out-recharge").innerHTML = '<div class="grid">' + RECH[k].items.map(l=>productCard(l, l, null, "phone", '', false, RECH[k].img)).join("") + "</div>"; },
   shabab:k=>{ $("#out-shabab").innerHTML = '<div class="grid">' + SHAB[k].items.map(([l,p])=>productCard("شباب كونات - "+l, l, p, "id", '', true)).join("") + "</div>"; }
 };
-const SRC = { cards:[CARDS,"google"], recharge:[RECH,"we"], shabab:[SHAB,"eg"] };
+const SRC = { cards:[CARDS,"google"], recharge:[RECH,"vodafone"], shabab:[SHAB,"eg"] };
 function renderSubs(){ for(const s in SRC) subtabs(s, SRC[s][0], R[s], SRC[s][1]); }
 
 /* Tabs */
@@ -890,7 +884,7 @@ function openOrder(i){
   sel = REG[i]; if(!sel) return;
   const hasP = sel.base != null;
   $("#mProd").textContent = sel.title;
-  $("#mImgBox").innerHTML = sel.imgSrc ? `<img src="${sel.imgSrc}" alt="" class="modal-pimg" style="width:75px;height:75px;object-fit:cover;border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block">` : "";
+  $("#mImgBox").innerHTML = sel.imgSrc ? `<img src="${sel.imgSrc}" alt="" class="modal-pimg" style="width:75px;height:75px;object-fit:contain;background:var(--card);border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block;padding:2px" loading="lazy">` : "";
   $("#mDisc").style.display = hasP ? "block" : "none";
   activeDiscount = CFG.discount; appliedPromoCode = "";
   $("#promoCodeInput").value = ""; $("#promoFeedback").textContent = "";
@@ -951,7 +945,7 @@ $("#sendReq").onclick = ()=>{
 
 /* ═══════════ About / Policy / FAQ ═══════════ */
 const PAGES = {
-  about:{title:"معلومات عن التطبيق", body:`<p><b>🔥 أسرع من نتكم</b> متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان.</p><h4>المميزات</h4><ul><li>شحن فوري خلال دقائق</li><li>أسعار تنافسية وعروض حصرية</li><li>دعم فني 24/7 عبر واتساب</li><li>دفع آمن عبر فودافون كاش</li></ul><p style="text-align:center;margin-top:10px">© 2026 أسرع من نتكم 🔥</p>`},
+  about:{title:"معلومات عن التطبيق", body:`<p><b>🔥 أسرع من نتكم</b> متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان.</p><h4>المميزات</h4><ul><li>شحن فوري خلال دقائق</li><li>أسعار تنافسية وعروض حصرية</li><li>دفع آمن عبر فودافون كاش</li></ul><p style="text-align:center;margin-top:10px">© 2026 أسرع من نتكم 🔥</p>`},
   privacy:{title:"سياسة الخصوصية", body:`<h4>جمع البيانات</h4><p>نحتفظ فقط بالبيانات الضرورية لتنفيذ طلبك (الاسم، البريد، رقم الهاتف، Player ID).</p><h4>استخدام البيانات</h4><p>تُستخدم بياناتك حصراً لتنفيذ الطلبات وتحسين الخدمة. لا نشاركها مع أي طرف ثالث.</p><h4>حقوقك</h4><p>يمكنك طلب حذف بياناتك في أي وقت عبر الدعم الفني.</p>`},
   terms:{title:"شروط الاستخدام", body:`<h4>الاستخدام</h4><p>باستخدامك للمتجر فأنت توافق على تقديم بيانات دقيقة وصحيحة.</p><h4>الطلبات</h4><p>الطلبات غير قابلة للاسترداد بعد تنفيذ الشحن. يتم الالتزام بأسعار الباقات المنشورة.</p><h4>المسؤولية</h4><p>المتجر غير مسؤول عن أي مشاكل ناتجة عن بيانات خاطئة أدخلها العميل.</p>`},
   refund:{title:"سياسة الاسترجاع", body:`<h4>قبل التنفيذ</h4><p>يمكنك إلغاء الطلب واسترداد المبلغ كاملاً قبل بدء التنفيذ.</p><h4>بعد التنفيذ</h4><p>لا يمكن الاسترجاع بعد شحن الباقة بنجاح على الحساب.</p><h4>حالات خاصة</h4><p>في حال فشل الشحن بسبب خطأ من المتجر، سيتم الاسترداد كاملاً أو إعادة الشحن مجاناً.</p>`},
