@@ -39,6 +39,40 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 .sub{font-size:10px;color:var(--sub)}
 .balance-check-box{background:rgba(56,189,248,.08);border:1px dashed var(--a);border-radius:12px;padding:10px;margin-bottom:10px;text-align:center;display:none}
 .balance-check-box b{color:var(--gold);font-size:15px}
+
+/* شبكة عرض مستويات الـ VIP الـ 13 في لوحة الإدارة */
+.vip-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 4px;
+}
+.vip-admin-card {
+  background: var(--inner);
+  border: 1px solid var(--bd2);
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
+}
+.vip-admin-card img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  margin-bottom: 4px;
+}
+.vip-admin-card b {
+  font-size: 10px;
+  color: var(--gold);
+  display: block;
+}
+.vip-admin-card small {
+  font-size: 8.5px;
+  color: var(--sub);
+}
 </style>
 </head>
 <body>
@@ -52,6 +86,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
   </header>
 
   <div class="stats" id="stats"></div>
+
+  <!-- قسم معاينة وإدارة مستويات الـ VIP الـ 13 -->
+  <div class="form">
+    <div class="ttl" style="margin-top:0;color:var(--gold)">⭐ معاينة مستويات وسارات الـ VIP (13 مستوى)</div>
+    <div class="vip-admin-grid" id="vipAdminGrid"></div>
+  </div>
 
   <!-- قسم إدارة رصيد المحفظة -->
   <div class="form">
@@ -108,6 +148,35 @@ try {
 
 const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 let tt;function toast(m){const e=document.getElementById("toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
+
+/* ═══════════ تعريف الـ 13 مستوى VIP في لوحة الإدارة ═══════════ */
+const VIP_TIERS = [
+  { level: 1, name: "VIP 1", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
+  { level: 2, name: "VIP 2", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
+  { level: 3, name: "VIP 3", minSpent: 1200, img: "https://cdn.imagetourls.com/uploads/tyImg/cXNbsRzr.png" },
+  { level: 4, name: "VIP 4", minSpent: 2500, img: "https://cdn.imagetourls.com/uploads/tyImg/SVNPoba3.png" },
+  { level: 5, name: "VIP 5", minSpent: 5000, img: "https://cdn.imagetourls.com/uploads/tyImg/AlK2w8zC.png" },
+  { level: 6, name: "VIP 6", minSpent: 10000, img: "https://cdn.imagetourls.com/uploads/tyImg/FLernsRD.png" },
+  { level: 7, name: "VIP 7", minSpent: 20000, img: "https://cdn.imagetourls.com/uploads/tyImg/SaSlSsaq.png" },
+  { level: 8, name: "VIP 8", minSpent: 35000, img: "https://cdn.imagetourls.com/uploads/tyImg/16V1uWe0B.png" },
+  { level: 9, name: "VIP 9", minSpent: 55000, img: "https://cdn.imagetourls.com/uploads/tyImg/gFPBMTSC.png" },
+  { level: 10, name: "VIP 10", minSpent: 80000, img: "https://cdn.imagetourls.com/uploads/tyImg/YH8kULrk.png" },
+  { level: 11, name: "VIP 11", minSpent: 120000, img: "https://cdn.imagetourls.com/uploads/tyImg/m2poaFnt.png" },
+  { level: 12, name: "VIP 12", minSpent: 180000, img: "https://cdn.imagetourls.com/uploads/tyImg/m7f3ea8I.png" },
+  { level: 13, name: "VIP 13 👑", minSpent: 250000, img: "https://cdn.imagetourls.com/uploads/tyImg/33eqWdHw.png" }
+];
+
+function renderAdminVipTiers(){
+  const grid = document.getElementById("vipAdminGrid");
+  if(!grid) return;
+  grid.innerHTML = VIP_TIERS.map(t=>`
+    <div class="vip-admin-card">
+      <img src="${t.img}" alt="${t.name}">
+      <b>${t.name}</b>
+      <small>${t.minSpent} ج.م</small>
+    </div>
+  `).join("");
+}
 
 const STATUS_MAP = {
   pending:{t:"في انتظار الدفع",c:"st-pending"},
@@ -187,7 +256,6 @@ function processBalanceChange(type){
       document.getElementById("currentBalanceDisplay").textContent = nw.toFixed(2) + " ج.م";
       document.getElementById("balanceCheckResult").style.display = "block";
       
-      // إذا كانت عملية "شحن" (إضافة)، نقوم بإرسال إشعار تلقائي للعميل بالمكافأة 🎉
       if(type === "add"){
         const notifId = "notif_" + Date.now();
         db.ref('notifications/' + targetId + '/' + notifId).set({
@@ -238,6 +306,7 @@ function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 document.getElementById("reset").onclick = ()=>{ if(confirm("هل أنت متأكد من تصفير الإحصائيات؟")){ ["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0")); renderStats(); toast("✅ تم التصفير"); } };
 
 renderStats();
+renderAdminVipTiers();
 renderAdminOrders();
 </script>
 </body>
