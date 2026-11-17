@@ -1163,7 +1163,7 @@ function renderAdminOrders(){
   db.ref('orders').limitToLast(20).once('value').then(s=>{
     const data = s.val()||{};
     const flat = [];
-    Object.entries(data).forEach(([uid, orders])=>{ Object.entries(orders||{}).forEach(([oid,o])=>flat.push({uid,oid,...o})); });
+    Object.entries(data).forEach(([uid,orders])=>{ Object.entries(orders||{}).forEach(([oid,o])=>flat.push({uid,oid,...o})); });
     flat.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
     if(!flat.length){ $("#adminOrders").innerHTML='<p class="sub" style="padding:10px">لا توجد طلبات</p>'; return; }
     $("#adminOrders").innerHTML = flat.slice(0,20).map(o=>`
