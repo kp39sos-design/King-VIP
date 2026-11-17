@@ -534,7 +534,32 @@ function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
 function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
 
-/* ═══════════ User / Wallet & DB Listener with Instant Toast Alert ═══════════ */
+/* تشغيل صوت تنبيه قصير (Ding) عند وصول الشحن */
+function playDingSound(){
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // نغمة D5
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15); // انتقال لـ A5
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.4);
+  } catch(e){}
+}
+
+/* طلب إذن الإشعارات من المتصفح/النظام */
+function requestSystemNotificationPermission(){
+  if("Notification" in window && Notification.permission === "default"){
+    Notification.requestPermission();
+  }
+}
+
+/* ═══════════ User / Wallet & DB Listener ═══════════ */
 let userWallet=0, userPoints=0, user=null;
 let uniqueUid = store.get("user_unique_id","");
 function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
@@ -553,6 +578,15 @@ function listenWallet(){
     if(lastKnownWallet !== null && newWallet > lastKnownWallet){
       const addedAmount = newWallet - lastKnownWallet;
       toast(`🚀 مبروك! تمت إضافة (${addedAmount} ج.م) لحسابك بنجاح!`);
+      playDingSound();
+      
+      // إرسال إشعار حقيقي في شريط إشعارات الهاتف فوق برة التطبيق
+      if("Notification" in window && Notification.permission === "granted"){
+        new Notification("REAL STORE 🔥", {
+          body: `مبروك! تم شحن محفظتك بمبلغ (${addedAmount} ج.م) بنجاح من مدير التطبيق.`,
+          icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+        });
+      }
     }
     
     userWallet = newWallet;
@@ -608,15 +642,16 @@ function checkRedirectResult() {
       updateUserUI(); 
       renderProfile(); 
       toast("✅ تم تسجيل الدخول بنجاح");
+      requestSystemNotificationPermission();
     }
   }).catch((error) => {
     toast("❌ خطأ في تسجيل الدخول: " + error.message);
   });
 }
 
-$("#loginBtn").onclick = loginGoogle;
-$("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); loginGoogle(); };
-$("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); };
+$("#loginBtn").onclick = ()=>{ requestSystemNotificationPermission(); loginGoogle(); };
+$("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); loginGoogle(); };
+$("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
 $("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 $("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 
@@ -755,7 +790,6 @@ function renderNotifs(){
   $("#notifItems").innerHTML = notifs.map(n=>`<div class="nd-item ${n.read?'':'unread'}"><small>${new Date(n.time||0).toLocaleString('ar-EG')}</small><b>${esc(n.title||"")}</b><p>${esc(n.body||"")}</p></div>`).join("");
 }
 
-// تعديل زر الجرس ليقوم بفتح الدرج وتحويل جميع الإشعارات إلى "مقروءة" (لإخفاء الرقم الأحمر)
 $("#notifBtn").onclick = ()=>{ 
   renderNotifs(); 
   $("#notifDrawer").classList.add("on"); 
