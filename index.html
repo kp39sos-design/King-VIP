@@ -218,7 +218,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 #searchHist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .schip{background:var(--inner);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--sub);cursor:pointer}
 
-/* تصميم كارت وشارة الـ VIP المميزة بالـ 13 تصميم الجديدة */
+/* تصميم كارت وشارة الـ VIP بـ 13 مستوى */
 .vip-badge-box {
   background: linear-gradient(135deg, rgba(217,155,22,0.12), rgba(147,51,234,0.12));
   border: 1px solid var(--gold);
@@ -233,12 +233,12 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .vip-avatar-badge {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--gold);
-  box-shadow: 0 0 14px rgba(217,155,22,0.5);
-  background: #111;
+  object-fit: contain;
+  background: transparent;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5), 0 0 12px rgba(255,209,102,0.3);
   flex-shrink: 0;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.8));
 }
 .vip-info-text b {
   color: var(--gold);
@@ -397,12 +397,11 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <section id="orders" class="sec"><div class="ttl">📋 طلباتي</div><div id="ordersList"></div></section>
 <section id="favorites" class="sec"><div class="ttl">❤️ المفضلة</div><div class="grid" id="favGrid"></div></section>
 
-<!-- القسم المصمم باحترافية للملف الشخصي مع أيقونات الـ 13 مستوى الجديدة -->
+<!-- الملف الشخصي مع شارة الـ VIP الـ 3D -->
 <section id="profile" class="sec">
   <div class="ttl">👤 الملف الشخصي</div>
   <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
     
-    <!-- صورة البروفايل الاساسية -->
     <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
       <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
     </div>
@@ -410,7 +409,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
     <b id="profName" style="font-size:16px; font-weight:900; display:block; margin-bottom:2px">زائر</b>
     <small id="profEmail" style="color:var(--sub); font-size:11px; display:block; margin-bottom:14px">-</small>
     
-    <!-- كارت مستوى الـ VIP والأيقونة الخاصة بالمستوى -->
     <div class="vip-badge-box" id="vipCardBox">
       <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
       <div style="flex:1" class="vip-info-text">
@@ -423,7 +421,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
       </div>
     </div>
 
-    <!-- معلومات الحساب بشكل منظم واحترافي -->
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">
       <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
         <small style="font-size:9.5px; color:var(--sub)">ID الحساب</small>
@@ -446,7 +443,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
       </div>
     </div>
 
-    <!-- كود الإحالة -->
     <div class="info" style="text-align:start; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px; margin-bottom:12px;">
       <small style="font-size:9.5px; color:var(--sub)">كود الإحالة (شارك واربح)</small>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
@@ -579,7 +575,7 @@ try {
     db = firebase.database();
     firebaseOK = true;
   }
-} catch(e){ console.warn("Firebase init failed:", e.message); }
+} catch(e){ console.warn("Firebase init failed:", e); }
 
 /* ═══════════ Config ═══════════ */
 const CFG={
@@ -651,7 +647,7 @@ function requestSystemNotificationPermission(){
   }
 }
 
-/* ═══════════ مستويات الـ VIP الـ 13 (بالتصاميم التي أرسلتها) ═══════════ */
+/* ═══════════ مستويات الـ VIP الـ 13 ═══════════ */
 const VIP_TIERS = [
   { level: 1, name: "VIP 1 - مبتدئ", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
   { level: 2, name: "VIP 2 - برونزي", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
@@ -900,7 +896,8 @@ const STATUS_MAP = {
 function saveOrder(o){
   if(!firebaseOK || !db) return;
   const oid = "REAL-" + Date.now().toString(36).toUpperCase();
-  const payload = { items:o.items||[], total:o.total||0, status:o.status||"pending", createdAt:Date.now(), name:store.get("custom_username","")||(user?user.displayName:"زائر"), email:user?user.email:"" };
+  const userName = store.get("custom_username","") || (user?user.displayName:"زائر");
+  const payload = { items:o.items||[], total:o.total||0, status:o.status||"pending", createdAt:Date.now(), name:userName, email:user?user.email:"" };
   db.ref('orders/'+uniqueUid+'/'+oid).set(payload).catch(err=>console.warn("Save order:",err));
   if(db) db.ref('notifications/'+uniqueUid+'/'+oid).set({title:"طلب جديد",body:"تم استلام طلبك برقم "+oid,time:Date.now(),read:false}).catch(()=>{});
 }
@@ -1389,6 +1386,22 @@ renderHero();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
+
+/* كود تسجيل الزوار التلقائي في قاعدة البيانات ليعمل مع admin.html */
+document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if(typeof firebaseOK !== "undefined" && firebaseOK && typeof db !== "undefined" && db) {
+      const vKey = "visit_" + Date.now() + "_" + Math.floor(Math.random()*1000);
+      db.ref('visitors/' + vKey).set({
+        uid: typeof uniqueUid !== "undefined" ? uniqueUid : "GUEST",
+        name: (typeof store !== "undefined" ? store.get("custom_username","") : "") || (typeof user !== "undefined" && user ? user.displayName : "زائر"),
+        email: (typeof user !== "undefined" && user && user.email) ? user.email : "غير مسجل",
+        userAgent: navigator.userAgent,
+        time: Date.now()
+      }).catch(()=>{});
+    }
+  } catch(e) {}
+});
 </script>
 </body>
 </html>
