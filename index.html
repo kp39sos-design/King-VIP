@@ -787,11 +787,44 @@ function loginGoogle(){
   auth.signInWithRedirect(provider).catch(err => { toast("❌ " + err.message); });
 }
 
-function checkRedirectResult() {
+// دالة للبحث عن الـ ID القديم الخاص بالإيميل في قاعدة البيانات أو إنشائه لو أول مرة
+async function getOrCreateUserUniqueId(email, googleUid) {
+  if (!db) return store.get("user_unique_id", genUid());
+  
+  const cleanEmail = email.replace(/[.#$[\]]/g, "_");
+  const emailRef = db.ref('email_to_id/' + cleanEmail);
+  
+  return new Promise((resolve) => {
+    emailRef.once('value').then(async (snapshot) => {
+      if (snapshot.exists()) {
+        // لو الإيميل ده ليه ID قديم متسجل قبل كده، نرجعه فوراً عشان الرصيد ما يتصفرش!
+        const existingId = snapshot.val();
+        store.set("user_unique_id", existingId);
+        resolve(existingId);
+      } else {
+        // لو أول مرة يسجل بالإيميل ده، نشوف لو عنده ID قديم متخزن محلياً أو نعمله واحد جديد
+        let currentId = store.get("user_unique_id", "");
+        if (!currentId || currentId.startsWith("GUEST")) {
+          currentId = "REAL-" + Math.floor(100000 + Math.random()*900000);
+        }
+        store.set("user_unique_id", currentId);
+        // نربط الإيميل بالـ ID ده في قاعدة البيانات للأبد
+        await emailRef.set(currentId);
+        resolve(currentId);
+      }
+    });
+  });
+}
+
+// تعديل دالة تحقق تسجيل الدخول (Redirect)
+async function checkRedirectResult() {
   if(!firebaseOK || !auth) return;
-  auth.getRedirectResult().then((result) => {
+  auth.getRedirectResult().then(async (result) => {
     if (result.user) {
       user = result.user;
+      // ربط الإيميل بالـ ID الثابت
+      uniqueUid = await getOrCreateUserUniqueId(user.email, user.uid);
+      
       if(db) {
         db.ref('users/'+uniqueUid+'/profile').set({
           name: user.displayName, 
@@ -802,12 +835,29 @@ function checkRedirectResult() {
       }
       updateUserUI(); 
       renderProfile(); 
+      listenWallet();
       toast("✅ تم تسجيل الدخول بنجاح");
       requestSystemNotificationPermission();
     }
   }).catch((error) => {
     toast("❌ خطأ في تسجيل الدخول: " + error.message);
   });
+}
+
+// تعديل مراقب حالة المستخدم (Auth State Changed)
+if(firebaseOK && auth){
+  auth.onAuthStateChanged(async (u)=>{ 
+    user = u; 
+    if(user && user.email) {
+      uniqueUid = await getOrCreateUserUniqueId(user.email, user.uid);
+    }
+    updateUserUI(); 
+    listenWallet(); 
+    renderProfile(); 
+  });
+  checkRedirectResult();
+} else {
+  listenWallet();
 }
 
 $("#loginBtn").onclick = ()=>{ 
@@ -822,13 +872,6 @@ $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotif
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
 $("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 $("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
-
-if(firebaseOK && auth){
-  auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
-  checkRedirectResult();
-} else {
-  listenWallet();
-}
 
 function renderProfile(){
   $("#profName").textContent = store.get("custom_username","") || (user?user.displayName:"زائر");
@@ -1407,14 +1450,12 @@ function renderHero(){
 // دمج الاستماع للبنرات (عام أو فردي للمستخدم الحالي)
 function listenHeroBanners(){
   if(!firebaseOK || !db) { renderHero(); return; }
-  // جلب الفردي أولاً إن وجد
   db.ref('users_custom/' + uniqueUid + '/heroSlides').on('value', usnap => {
     const customSlides = usnap.val();
     if(customSlides && Array.isArray(customSlides) && customSlides.length > 0) {
       heroSlides = customSlides;
       renderHero();
     } else {
-      // لو مفيش فردي، نسمع العام
       db.ref('settings/heroSlides').on('value', s=>{
         const data = s.val();
         if(data && Array.isArray(data) && data.length > 0) heroSlides = data;
