@@ -36,6 +36,7 @@
   .btn { width: 100%; background: var(--primary); color: #fff; padding: 11px; border-radius: 10px; font-weight: 800; font-size: 12.5px; border: none; cursor: pointer; }
   .btn-gold { background: var(--gold); color: #382000; }
   .btn-danger { background: var(--danger); color: #fff; }
+  .btn-success { background: var(--success); color: #fff; }
   .banner-row { display: flex; align-items: center; gap: 8px; background: var(--inner); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 8px; }
   .banner-row img { width: 70px; height: 35px; object-fit: cover; border-radius: 6px; background: #000; }
   .banner-row input { flex: 1; margin: 0; font-size: 11px; direction: ltr; }
@@ -54,7 +55,44 @@
     <p>متجر أسرع من نتكم | التحكم الكامل (عام & فردي)</p>
   </header>
 
-  <!-- 1. تغيير الـ ID -->
+  <!-- 1. شحن وإنقاص رصيد العميل (الفلوس) -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-wallet"></i> إدارة رصيد المحفظة (إضافة أو خصم فلوس)</h3>
+    <div class="form-group"><input id="walletTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
+    <div class="form-group"><input id="walletAmount" class="input-control" type="number" placeholder="المبلغ (ج.م)"></div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-success" id="addBalanceBtn"><i class="fa-solid fa-plus-circle"></i> إضافة رصيد (شحن)</button>
+      <button class="btn btn-danger" id="deductBalanceBtn"><i class="fa-solid fa-minus-circle"></i> خصم رصيد (إنقاص)</button>
+    </div>
+    <div id="walletFeedback" class="feedback"></div>
+  </div>
+
+  <!-- 2. إدارة وتعديل مستوى الـ VIP -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-crown"></i> إدارة مستويات الـ VIP (ترقية أو تنزيل)</h3>
+    <div class="form-group"><input id="vipTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
+    <div class="form-group">
+      <select id="vipNewLevel" class="input-control">
+        <option value="0">VIP 1 - مبتدئ (0 ج.م)</option>
+        <option value="500">VIP 2 - برونزي (500 ج.م)</option>
+        <option value="1200">VIP 3 - فضي (1200 ج.م)</option>
+        <option value="2500">VIP 4 - ذهبي (2500 ج.م)</option>
+        <option value="5000">VIP 5 - بلاتيني (5000 ج.م)</option>
+        <option value="10000">VIP 6 - ماسي (10000 ج.م)</option>
+        <option value="20000">VIP 7 - اسطوري (20000 ج.م)</option>
+        <option value="35000">VIP 8 - محترف (35000 ج.م)</option>
+        <option value="55000">VIP 9 - خبير (55000 ج.م)</option>
+        <option value="80000">VIP 10 - زعيم (80000 ج.م)</option>
+        <option value="120000">VIP 11 - ملك (120000 ج.م)</option>
+        <option value="180000">VIP 12 - امبراطور (180000 ج.م)</option>
+        <option value="250000">VIP 13 - الإلهي 👑 (250000 ج.م)</option>
+      </select>
+    </div>
+    <button class="btn btn-gold" id="updateVipBtn">👑 تحديث مستوى الـ VIP للعميل</button>
+    <div id="vipFeedback" class="feedback"></div>
+  </div>
+
+  <!-- 3. تغيير الـ ID -->
   <div class="section-card">
     <h3><i class="fa-solid fa-id-card"></i> تغيير وتحديث الـ ID للمستخدم</h3>
     <div class="form-group"><input id="oldUserUid" class="input-control" placeholder="الـ ID القديم (REAL-XXXXXX)" style="direction:ltr"></div>
@@ -63,7 +101,7 @@
     <div id="uidChangeFeedback" class="feedback"></div>
   </div>
 
-  <!-- 2. البنرات (عام أو فردي) -->
+  <!-- 4. البنرات (عام أو فردي) -->
   <div class="section-card">
     <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة</h3>
     <div class="form-group">
@@ -82,7 +120,7 @@
     <div id="bannersFeedback" class="feedback"></div>
   </div>
 
-  <!-- 3. الأسعار (عام أو فردي) -->
+  <!-- 5. الأسعار (عام أو فردي) -->
   <div class="section-card">
     <h3><i class="fa-solid fa-tags"></i> تعديل أسعار الألعاب</h3>
     <div class="form-group">
@@ -113,16 +151,7 @@
     <div id="pricesFeedback" class="feedback"></div>
   </div>
 
-  <!-- 4. شحن الرصيد -->
-  <div class="section-card">
-    <h3><i class="fa-solid fa-bolt"></i> شحن رصيد للعميل</h3>
-    <div class="form-group"><input id="adminTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
-    <div class="form-group"><input id="adminAmount" class="input-control" type="number" placeholder="المبلغ (ج.م)"></div>
-    <button class="btn btn-gold" id="adminSendBalanceBtn">🚀 شحن الرصيد فوراً</button>
-    <div id="adminFeedback" class="feedback"></div>
-  </div>
-
-  <!-- 5. الحظر الفوري -->
+  <!-- 6. الحظر الفوري -->
   <div class="section-card" style="border-color:rgba(239,68,68,0.4);">
     <h3 style="color:var(--danger)"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين (إغلاق فوري للموقع)</h3>
     <div class="form-group"><input id="banTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
@@ -138,7 +167,7 @@
     <div id="bannedUsersList" style="max-height:150px;overflow-y:auto"></div>
   </div>
 
-  <!-- 6. الدعم الفني -->
+  <!-- 7. الدعم الفني -->
   <div class="section-card">
     <h3><i class="fa-solid fa-headset"></i> تذاكر الدعم الفني</h3>
     <div id="adminTicketsList"><p class="label-sub">جاري التحميل...</p></div>
@@ -173,7 +202,47 @@ const DEFAULT_GAMES_DATA = {
  roblox:[["80 Robux",60],["500 Robux",265],["1000 Robux",525]]
 };
 
-// 1. تغيير الـ ID
+// 1. إدارة رصيد المحفظة (إضافة أو إنقاص الفلوس)
+function modifyWallet(isAdd) {
+  const uid = document.getElementById('walletTargetUid').value.trim();
+  const amt = parseFloat(document.getElementById('walletAmount').value);
+  const fb = document.getElementById('walletFeedback');
+  if(!uid || isNaN(amt)){ fb.style.color="var(--danger)"; fb.textContent="❌ أدخل ID صحيح ومبلغ صحيح"; return; }
+  
+  db.ref('users/'+uid+'/wallet').once('value').then(s => {
+    let cur = s.val() || 0;
+    let nw = isAdd ? cur + amt : cur - amt;
+    if(nw < 0) nw = 0; // عدم السماح بأن يصبح الرصيد بالسالب
+    
+    db.ref('users/'+uid+'/wallet').set(nw).then(() => {
+      fb.style.color = "var(--success)";
+      fb.textContent = isAdd ? `✅ تم إضافة (${amt} ج.م) لحساب العميل. الرصيد الحالي: (${nw} ج.م)` : `✅ تم خصم (${amt} ج.م) من حساب العميل. الرصيد الحالي: (${nw} ج.م)`;
+      document.getElementById('walletTargetUid').value = "";
+      document.getElementById('walletAmount').value = "";
+    });
+  });
+}
+document.getElementById('addBalanceBtn').onclick = () => modifyWallet(true);
+document.getElementById('deductBalanceBtn').onclick = () => modifyWallet(false);
+
+// 2. إدارة وتعديل مستوى الـ VIP للعميل
+document.getElementById('updateVipBtn').onclick = () => {
+  const uid = document.getElementById('vipTargetUid').value.trim();
+  const minSpent = parseFloat(document.getElementById('vipNewLevel').value);
+  const fb = document.getElementById('vipFeedback');
+  if(!uid){ fb.style.color="var(--danger)"; fb.textContent="❌ أدخل ID العميل"; return; }
+
+  db.ref('users/'+uid+'/totalSpent').set(minSpent).then(() => {
+    fb.style.color = "var(--success)";
+    fb.textContent = `✅ تم تحديث مستوى الـ VIP للـ ID: (${uid}) بنجاح!`;
+    document.getElementById('vipTargetUid').value = "";
+  }).catch(err => {
+    fb.style.color = "var(--danger)";
+    fb.textContent = "❌ خطأ: " + err.message;
+  });
+};
+
+// 3. تغيير الـ ID
 document.getElementById('changeUserUidBtn').onclick = () => {
   const oldUid = document.getElementById('oldUserUid').value.trim();
   const newUid = document.getElementById('newUserUid').value.trim();
@@ -193,7 +262,7 @@ document.getElementById('changeUserUidBtn').onclick = () => {
   });
 };
 
-// 2. البنرات (عام / فردي)
+// 4. البنرات (عام / فردي)
 let currentBanners = [];
 const bannerMode = document.getElementById('bannerTargetMode');
 const bannerUidGroup = document.getElementById('bannerUidGroup');
@@ -243,7 +312,7 @@ document.getElementById('saveBannersBtn').onclick = () => {
   });
 };
 
-// 3. الأسعار (عام / فردي)
+// 5. الأسعار (عام / فردي)
 let allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
 const priceMode = document.getElementById('priceTargetMode');
 const priceUidGroup = document.getElementById('priceUidGroup');
@@ -293,24 +362,7 @@ document.getElementById('savePricesBtn').onclick = () => {
   });
 };
 
-// 4. شحن الرصيد
-document.getElementById('adminSendBalanceBtn').onclick = () => {
-  const uid = document.getElementById('adminTargetUid').value.trim();
-  const amt = parseFloat(document.getElementById('adminAmount').value);
-  const fb = document.getElementById('adminFeedback');
-  if(!uid || isNaN(amt)){ fb.style.color="var(--danger)"; fb.textContent="❌ بيانات غير صحيحة"; return; }
-  db.ref('users/'+uid+'/wallet').once('value').then(s => {
-    const cur = s.val()||0, nw = cur + amt;
-    db.ref('users/'+uid+'/wallet').set(nw).then(() => {
-      fb.style.color = "var(--success)";
-      fb.textContent = `✅ شُحن (${amt} ج.م) للـ ID: (${uid})`;
-      document.getElementById('adminTargetUid').value="";
-      document.getElementById('adminAmount').value="";
-    });
-  });
-};
-
-// 5. الحظر الفوري (يحدث حقل isBlocked عند العميل ليتقفل في أقل من ثانية)
+// 6. الحظر الفوري
 document.getElementById('banUserBtn').onclick = () => {
   const uid = document.getElementById('banTargetUid').value.trim();
   const duration = document.getElementById('banDuration').value;
@@ -354,7 +406,7 @@ function loadBanned(){
 }
 loadBanned();
 
-// 6. الدعم الفني
+// 7. الدعم الفني
 db.ref('admin_tickets').on('value', s => {
   const box = document.getElementById('adminTicketsList');
   const val = s.val()||{};
