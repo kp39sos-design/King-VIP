@@ -122,9 +122,9 @@
     <div id="adminFeedback" class="feedback"></div>
   </div>
 
-  <!-- 5. الحظر -->
+  <!-- 5. الحظر الفوري -->
   <div class="section-card" style="border-color:rgba(239,68,68,0.4);">
-    <h3 style="color:var(--danger)"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين</h3>
+    <h3 style="color:var(--danger)"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين (إغلاق فوري للموقع)</h3>
     <div class="form-group"><input id="banTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
     <div class="form-group">
       <select id="banDuration" class="input-control" style="color:var(--danger)">
@@ -132,7 +132,7 @@
         <option value="permanent">⛔ حظر دائم (للأبد)</option>
       </select>
     </div>
-    <button class="btn btn-danger" id="banUserBtn">⚠️ تنفيذ الحظر</button>
+    <button class="btn btn-danger" id="banUserBtn">⚠️ تنفيذ الحظر وإغلاق الموقع لديه</button>
     <div id="banFeedback" class="feedback"></div>
     <h4 style="font-size:12px;color:var(--danger);margin:12px 0 6px;">🚫 المحظورون حالياً</h4>
     <div id="bannedUsersList" style="max-height:150px;overflow-y:auto"></div>
@@ -310,17 +310,26 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
   });
 };
 
-// 5. الحظر
+// 5. الحظر الفوري (يحدث حقل isBlocked عند العميل ليتقفل في أقل من ثانية)
 document.getElementById('banUserBtn').onclick = () => {
   const uid = document.getElementById('banTargetUid').value.trim();
   const duration = document.getElementById('banDuration').value;
   const fb = document.getElementById('banFeedback');
   if(!uid){ fb.style.color="var(--danger)"; fb.textContent="❌ أدخل ID العميل"; return; }
   let banUntil = duration === "365" ? Date.now() + (365*24*60*60*1000) : "permanent";
-  db.ref('banned_users/'+uid).set({bannedAt:Date.now(), banUntil}).then(()=>{
-    fb.style.color = "var(--success)"; fb.textContent = `✅ تم حظر (${uid})`;
+  
+  const updates = {};
+  updates['users/' + uid + '/isBlocked'] = true;
+  updates['banned_users/' + uid] = {bannedAt: Date.now(), banUntil};
+
+  db.ref().update(updates).then(()=>{
+    fb.style.color = "var(--success)"; 
+    fb.textContent = `✅ تم حظر (${uid}) وإغلاق الموقع لديه فوراً!`;
     document.getElementById('banTargetUid').value="";
     loadBanned();
+  }).catch(err => {
+    fb.style.color = "var(--danger)";
+    fb.textContent = "❌ خطأ: " + err.message;
   });
 };
 
@@ -333,7 +342,12 @@ function loadBanned(){
     box.innerHTML = arr.map(([uid]) => `
       <div class="ticket-box" style="display:flex;justify-content:space-between;align-items:center;padding:8px">
         <b style="color:var(--danger);direction:ltr">${uid}</b>
-        <button class="btn" style="width:auto;padding:4px 8px;font-size:10px;background:var(--success)" onclick="db.ref('banned_users/${uid}').remove().then(()=>loadBanned())">فك الحظر</button>
+        <button class="btn" style="width:auto;padding:4px 8px;font-size:10px;background:var(--success)" onclick="
+          const updates = {};
+          updates['users/${uid}/isBlocked'] = null;
+          updates['banned_users/${uid}'] = null;
+          db.ref().update(updates).then(()=>loadBanned());
+        ">فك الحظر</button>
       </div>
     `).join("");
   });
@@ -354,7 +368,7 @@ db.ref('admin_tickets').on('value', s => {
       <input id="rep_${id}" class="input-control" placeholder="اكتب رد الإدارة..." value="${esc(t.reply||'')}" style="margin-bottom:4px">
       <button class="btn" style="padding:6px;font-size:11px" onclick="
         const r=document.getElementById('rep_${id}').value;
-        Promise.all([db.ref('support_tickets/${t.uid}/${id}/reply').set(r), db.ref('admin_tickets/${id}/reply').set(r)]).then(()=>alert('✅ تم إرسال الرد'))
+        Promise.all([db.ref('support_tickets/${t.uid}/${id}/reply').set(r), db.ref('admin_tickets/${id}/reply').set(r), db.ref('support_tickets/${t.uid}/${id}/readByClient').set(false)]).then(()=>alert('✅ تم إرسال الرد'))
       ">إرسال الرد</button>
     </div>
   `).join("");
