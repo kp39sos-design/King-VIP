@@ -1,125 +1,147 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>أسرع من نتكم | لوحة الإدارة الاحترافية 👑</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم الاحترافية | أسرع من نتكم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-:root{--bg:#080B18;--card:#12182B;--inner:#0C1224;--tx:#F8FAFF;--sub:#A1AEC8;--a:#38BDF8;--b:#A78BFA;--gold:#FFD166;--ok:#34D399;--bd:rgba(56,189,248,.20);--bd2:rgba(167,139,250,.45);--g1:linear-gradient(135deg,#0284C7,#7C3AED);--g2:linear-gradient(135deg,#FFD700,#FF8A00)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--tx);font-family:Cairo,sans-serif;min-height:100vh;padding:16px;display:flex;justify-content:center}
-.admin-wrap{width:100%;max-width:680px}
-h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-align:center}
-.card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
-.card h3{font-size:14px;font-weight:900;color:var(--a);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px;border-radius:12px;margin-bottom:8px;font-size:12px}
-select.in{appearance:none;cursor:pointer}
-.btn{width:100%;background:var(--g1);color:#fff;padding:11px;border-radius:12px;font-weight:900;font-size:13px;border:0;cursor:pointer}
-.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:800;border:0;cursor:pointer;flex-shrink:0}
-.sub{font-size:10px;color:var(--sub)}
-.banner-row{display:flex;align-items:center;gap:10px;background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px}
-.banner-row img{width:80px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--bd2);background:#000}
-.banner-row input{flex:1;margin:0;font-size:11px;direction:ltr}
-.ticket-card{background:var(--inner);border:1px solid var(--bd2);border-radius:12px;padding:12px;margin-bottom:10px}
-.price-box{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:10px}
-.price-item{display:flex;align-items:center;gap:8px;margin-top:6px}
-.price-item span{flex:1;font-size:11.5px;font-weight:700}
-.price-item input{width:100px;margin:0;padding:6px;font-size:11px;text-align:center}
+  :root {
+    --bg: #030712;
+    --card: #0F172A;
+    --inner: #1E293B;
+    --tx: #F8FAFC;
+    --sub: #94A3B8;
+    --primary: #0284C7;
+    --accent: #8B5CF6;
+    --gold: #F59E0B;
+    --success: #10B981;
+    --danger: #EF4444;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+  body { background: var(--bg); color: var(--tx); min-height: 100vh; padding: 20px 12px; display: flex; justify-content: center; }
+  .wrapper { width: 100%; max-width: 650px; }
+  header { text-align: center; margin-bottom: 20px; }
+  header h1 { font-size: 20px; font-weight: 900; color: var(--gold); }
+  header p { font-size: 11px; color: var(--sub); margin-top: 4px; }
+  .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+  .section-card h3 { font-size: 13.5px; font-weight: 800; color: #38BDF8; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .form-group { margin-bottom: 10px; }
+  .label-sub { font-size: 10.5px; font-weight: 700; color: var(--sub); display: block; margin-bottom: 4px; }
+  .input-control { width: 100%; background: var(--inner); border: 1px solid var(--border); color: var(--tx); padding: 11px 12px; border-radius: 10px; font-size: 12px; }
+  .input-control:focus { border-color: #38BDF8; outline: none; }
+  select.input-control { appearance: none; cursor: pointer; }
+  .btn { width: 100%; background: var(--primary); color: #fff; padding: 11px; border-radius: 10px; font-weight: 800; font-size: 12.5px; border: none; cursor: pointer; }
+  .btn-gold { background: var(--gold); color: #382000; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .banner-row { display: flex; align-items: center; gap: 8px; background: var(--inner); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 8px; }
+  .banner-row img { width: 70px; height: 35px; object-fit: cover; border-radius: 6px; background: #000; }
+  .banner-row input { flex: 1; margin: 0; font-size: 11px; direction: ltr; }
+  .price-item { display: flex; align-items: center; gap: 8px; margin-top: 6px; background: var(--inner); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); }
+  .price-item span { flex: 1; font-size: 11.5px; font-weight: 700; }
+  .price-item input { width: 90px; margin: 0; padding: 6px; font-size: 11px; text-align: center; }
+  .feedback { font-size: 11px; font-weight: 700; margin-top: 6px; }
+  .ticket-box { background: var(--inner); border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 
-<div class="admin-wrap">
-  <h1>👑 لوحة التحكم وإدارة متجر أسرع من نتكم 🔥</h1>
+<div class="wrapper">
+  <header>
+    <h1>👑 لوحة التحكم والإدارة المتقدمة</h1>
+    <p>متجر أسرع من نتكم | التحكم الكامل (عام & فردي)</p>
+  </header>
 
-  <!-- قسم إدارة البنرات -->
-  <div class="card">
-    <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة المتحركة (Hero Banners)</h3>
-    <div id="bannersListContainer" style="margin-bottom:12px"></div>
-    <button class="btn" id="addNewBannerRowBtn" style="background:var(--inner);border:1px dashed var(--a);color:var(--a);margin-bottom:12px"><i class="fa-solid fa-plus"></i> إضافة بنر جديد</button>
-    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات</button>
-    <div id="bannersFeedback" style="font-size:11px;font-weight:700;margin-top:8px"></div>
+  <!-- 1. تغيير الـ ID -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-id-card"></i> تغيير وتحديث الـ ID للمستخدم</h3>
+    <div class="form-group"><input id="oldUserUid" class="input-control" placeholder="الـ ID القديم (REAL-XXXXXX)" style="direction:ltr"></div>
+    <div class="form-group"><input id="newUserUid" class="input-control" placeholder="الـ ID الجديد (REAL-YYYYYY)" style="direction:ltr"></div>
+    <button class="btn" id="changeUserUidBtn">🔄 تنفيذ ونقل البيانات للـ ID الجديد</button>
+    <div id="uidChangeFeedback" class="feedback"></div>
   </div>
 
-  <!-- قسم تعديل أسعار الألعاب والباقات -->
-  <div class="card">
-    <h3><i class="fa-solid fa-tags"></i> تعديل أسعار الباقات والألعاب</h3>
-    <select id="adminGameSelect" class="in" style="font-weight:800">
-      <option value="pubg">PUBG Mobile (ببجي)</option>
-      <option value="mlbb">Mobile Legends (موبايل ليجند)</option>
-      <option value="ff">Free Fire (فري فاير)</option>
-      <option value="arena">Arena Breakout (ارينا بريك اوت)</option>
-      <option value="yalla">يلا لودو</option>
-      <option value="tiktok">TikTok (تيك توك)</option>
-      <option value="gangstar">Gangstar (جانجستر)</option>
-      <option value="weplay">WePlay (وي بلاي)</option>
-      <option value="roblox">Roblox (روبلوكس)</option>
-    </select>
-    <div id="gamePricesEditorContainer"></div>
-    <button class="btn" id="savePricesBtn" style="background:var(--g2);color:#382000;margin-top:10px">💾 حفظ وتحديث أسعار هذه اللعبة</button>
-    <div id="pricesFeedback" style="font-size:11px;font-weight:700;margin-top:8px"></div>
+  <!-- 2. البنرات (عام أو فردي) -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة</h3>
+    <div class="form-group">
+      <span class="label-sub">وضع التعديل:</span>
+      <select id="bannerTargetMode" class="input-control">
+        <option value="global">🌍 عام (لكل المتجر)</option>
+        <option value="custom">👤 فردي (لـ ID عميل معين)</option>
+      </select>
+    </div>
+    <div class="form-group" id="bannerUidGroup" style="display:none;">
+      <input id="bannerTargetUid" class="input-control" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
+    </div>
+    <div id="bannersListContainer" style="margin-bottom:10px"></div>
+    <button class="btn" id="addNewBannerRowBtn" style="background:var(--inner);border:1px dashed #38BDF8;color:#38BDF8;margin-bottom:10px"><i class="fa-solid fa-plus"></i> إضافة بنر</button>
+    <button class="btn" id="saveBannersBtn">💾 حفظ البنرات</button>
+    <div id="bannersFeedback" class="feedback"></div>
   </div>
 
-  <!-- قسم شحن الرصيد للعميل -->
-  <div class="card">
-    <h3><i class="fa-solid fa-bolt"></i> شحن رصيد للعميل عبر الـ ID</h3>
-    <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
-    <input id="adminAmount" class="in" type="number" placeholder="المبلغ المراد إضافته (ج.م)">
-    <button class="btn" id="adminSendBalanceBtn" style="background:var(--g2);color:#382000">🚀 شحن رصيد العميل فوراً</button>
-    <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+  <!-- 3. الأسعار (عام أو فردي) -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-tags"></i> تعديل أسعار الألعاب</h3>
+    <div class="form-group">
+      <span class="label-sub">وضع التعديل:</span>
+      <select id="priceTargetMode" class="input-control">
+        <option value="global">🌍 عام (أسعار المتجر للجميع)</option>
+        <option value="custom">👤 فردي (أسعار خاصة لـ ID معين)</option>
+      </select>
+    </div>
+    <div class="form-group" id="priceUidGroup" style="display:none;">
+      <input id="priceTargetUid" class="input-control" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
+    </div>
+    <div class="form-group">
+      <select id="adminGameSelect" class="input-control">
+        <option value="pubg">PUBG Mobile (ببجي)</option>
+        <option value="mlbb">Mobile Legends (موبايل ليجند)</option>
+        <option value="ff">Free Fire (فري فاير)</option>
+        <option value="arena">Arena Breakout (ارينا بريك اوت)</option>
+        <option value="yalla">يلا لودو</option>
+        <option value="tiktok">TikTok (تيك توك)</option>
+        <option value="gangstar">Gangstar (جانجستر)</option>
+        <option value="weplay">WePlay (وي بلاي)</option>
+        <option value="roblox">Roblox (روبلوكس)</option>
+      </select>
+    </div>
+    <div id="gamePricesEditorContainer" style="max-height:200px;overflow-y:auto;margin-bottom:10px"></div>
+    <button class="btn btn-gold" id="savePricesBtn">💾 حفظ الأسعار</button>
+    <div id="pricesFeedback" class="feedback"></div>
   </div>
 
-  <!-- قسم ترقية مستوى الـ VIP للعميل (من 1 إلى 13) -->
-  <div class="card">
-    <h3><i class="fa-solid fa-crown" style="color:var(--gold)"></i> ترقية مستوى VIP للعميل (من 1 إلى 13)</h3>
-    <p class="sub" style="margin-bottom:8px">أدخل ID العميل، ثم اختر مستوى الـ VIP المطلوب من القائمة لترقيته فوراً.</p>
-    <input id="adminVipTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
-    
-    <select id="adminVipLevelSelect" class="in" style="font-weight:800; color:var(--gold)">
-      <option value="0">⭐ VIP 1 - مبتدئ (0 ج.م)</option>
-      <option value="500">⭐ VIP 2 - برونزي (500 ج.م)</option>
-      <option value="1200">⭐ VIP 3 - فضي (1,200 ج.م)</option>
-      <option value="2500">⭐ VIP 4 - ذهبي (2,500 ج.م)</option>
-      <option value="5000">⭐ VIP 5 - بلاتيني (5,000 ج.م)</option>
-      <option value="10000">⭐ VIP 6 - ماسي (10,000 ج.م)</option>
-      <option value="20000">⭐ VIP 7 - اسطوري (20,000 ج.م)</option>
-      <option value="35000">⭐ VIP 8 - محترف (35,000 ج.م)</option>
-      <option value="55000">⭐ VIP 9 - خبير (55,000 ج.م)</option>
-      <option value="80000">⭐ VIP 10 - زعيم (80,000 ج.م)</option>
-      <option value="120000">⭐ VIP 11 - ملك (120,000 ج.م)</option>
-      <option value="180000">⭐ VIP 12 - امبراطور (180,000 ج.م)</option>
-      <option value="250000">👑 VIP 13 - الإلهي (250,000 ج.م)</option>
-    </select>
-
-    <button class="btn" id="adminUpdateVipBtn" style="background:var(--g2);color:#382000">⭐ ترقية مستوى الـ VIP للعميل فوراً</button>
-    <div id="adminVipFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+  <!-- 4. شحن الرصيد -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-bolt"></i> شحن رصيد للعميل</h3>
+    <div class="form-group"><input id="adminTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
+    <div class="form-group"><input id="adminAmount" class="input-control" type="number" placeholder="المبلغ (ج.م)"></div>
+    <button class="btn btn-gold" id="adminSendBalanceBtn">🚀 شحن الرصيد فوراً</button>
+    <div id="adminFeedback" class="feedback"></div>
   </div>
 
-  <!-- قسم إدارة حظر المستخدمين (جديد) -->
-  <div class="card" style="border-color:rgba(239,68,68,0.4)">
-    <h3 style="color:#EF4444"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين المخالفين</h3>
-    <p class="sub" style="margin-bottom:8px">أدخل ID العميل واختر مدة الحظر (سنة أو للأبد) لحظر وصوله للمتجر.</p>
-    <input id="banTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
-    
-    <select id="banDuration" class="in" style="font-weight:800; color:#EF4444">
-      <option value="365">⏳ حظر لمدة سنة واحدة</option>
-      <option value="permanent">⛔ حظر للأبد (دائم)</option>
-    </select>
-
-    <button class="btn" id="banUserBtn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff">⚠️ تنفيذ الحظر على العميل فوراً</button>
-    <div id="banFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
-
-    <h4 style="font-size:12px;color:#EF4444;margin:14px 0 6px">🚫 قائمة المستخدمين المحظورين حالياً</h4>
-    <div id="bannedUsersList" style="max-height:180px;overflow-y:auto"></div>
+  <!-- 5. الحظر -->
+  <div class="section-card" style="border-color:rgba(239,68,68,0.4);">
+    <h3 style="color:var(--danger)"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين</h3>
+    <div class="form-group"><input id="banTargetUid" class="input-control" placeholder="ID العميل (REAL-XXXXXX)" style="direction:ltr"></div>
+    <div class="form-group">
+      <select id="banDuration" class="input-control" style="color:var(--danger)">
+        <option value="365">⏳ حظر لمدة سنة</option>
+        <option value="permanent">⛔ حظر دائم (للأبد)</option>
+      </select>
+    </div>
+    <button class="btn btn-danger" id="banUserBtn">⚠️ تنفيذ الحظر</button>
+    <div id="banFeedback" class="feedback"></div>
+    <h4 style="font-size:12px;color:var(--danger);margin:12px 0 6px;">🚫 المحظورون حالياً</h4>
+    <div id="bannedUsersList" style="max-height:150px;overflow-y:auto"></div>
   </div>
 
-  <!-- قسم تذاكر الدعم الفني -->
-  <div class="card">
-    <h3><i class="fa-solid fa-headset"></i> تذاكر وشكاوي العملاء (الدعم الفني)</h3>
-    <div id="adminTicketsList"><p class="sub">جاري تحميل التذاكر...</p></div>
+  <!-- 6. الدعم الفني -->
+  <div class="section-card">
+    <h3><i class="fa-solid fa-headset"></i> تذاكر الدعم الفني</h3>
+    <div id="adminTicketsList"><p class="label-sub">جاري التحميل...</p></div>
   </div>
 </div>
 
@@ -137,239 +159,206 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const esc = s => String(s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 const DEFAULT_GAMES_DATA = {
- pubg:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]],
- mlbb:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]],
- ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]],
- arena:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522],["1580 + 1580 Bonds",1292],["3200 + 3200 Bonds",2574],["6500 + 6500 Bonds",5138],["اختيار المبتدئين",61],["امتيازات الحقيبة المضادة للرصاص",163],["امتيازات القضايا المركبة",471],["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية",61],["تفعيل تذكرة المعركة المميزة الشهرية",215],["حزمة تذكرة المعركة المميزة ربع السنوية",625]],
- yalla:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]],
- tiktok:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]],
- gangstar:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]],
- weplay:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]],
- roblox:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]
+ pubg:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99]],
+ mlbb:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120]],
+ ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150]],
+ arena:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522]],
+ yalla:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480]],
+ tiktok:[["500 عملة",330],["800 عملة",520],["1000 عملة",620]],
+ gangstar:[["60 ماسة",57.5],["300 + 20",247.5]],
+ weplay:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200]],
+ roblox:[["80 Robux",60],["500 Robux",265],["1000 Robux",525]]
 };
 
-let allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
+// 1. تغيير الـ ID
+document.getElementById('changeUserUidBtn').onclick = () => {
+  const oldUid = document.getElementById('oldUserUid').value.trim();
+  const newUid = document.getElementById('newUserUid').value.trim();
+  const fb = document.getElementById('uidChangeFeedback');
+  if(!oldUid || !newUid){ fb.style.color="var(--danger)"; fb.textContent="❌ أدخل الـ ID القديم والجديد"; return; }
+  db.ref('users/' + oldUid).once('value').then(snap => {
+    if(!snap.exists()){ fb.style.color="var(--danger)"; fb.textContent="❌ الـ ID القديم غير موجود"; return; }
+    const updates = {};
+    updates['users/' + newUid] = snap.val();
+    updates['users/' + oldUid] = null;
+    db.ref().update(updates).then(() => {
+      fb.style.color = "var(--success)";
+      fb.textContent = `✅ تم تغيير الـ ID بنجاح إلى (${newUid})`;
+      document.getElementById('oldUserUid').value = "";
+      document.getElementById('newUserUid').value = "";
+    });
+  });
+};
 
-// إدارة البنرات
+// 2. البنرات (عام / فردي)
 let currentBanners = [];
-function renderAdminBannersUI(){
-  const container = document.getElementById('bannersListContainer');
-  if(!currentBanners.length){ container.innerHTML = '<p class="sub">لا توجد بنرات</p>'; return; }
-  container.innerHTML = currentBanners.map((url, idx) => `
+const bannerMode = document.getElementById('bannerTargetMode');
+const bannerUidGroup = document.getElementById('bannerUidGroup');
+const bannerTargetUid = document.getElementById('bannerTargetUid');
+
+bannerMode.onchange = (e) => {
+  bannerUidGroup.style.display = e.target.value === 'custom' ? 'block' : 'none';
+  loadBanners();
+};
+bannerTargetUid.onchange = loadBanners;
+
+function renderBannersUI(){
+  const box = document.getElementById('bannersListContainer');
+  if(!currentBanners.length){ box.innerHTML = '<p class="label-sub">لا توجد بنرات</p>'; return; }
+  box.innerHTML = currentBanners.map((url, i) => `
     <div class="banner-row">
-      <img src="${url || 'https://via.placeholder.com/80x40'}" alt="Preview" onerror="this.src='https://via.placeholder.com/80x40'">
-      <input type="text" class="in banner-input" data-index="${idx}" value="${esc(url)}" placeholder="رابط صورة البنر" oninput="updatePreviewImage(this)">
-      <button class="btn-danger" onclick="removeBannerRow(${idx})"><i class="fa-solid fa-trash"></i> حذف</button>
+      <img src="${url || 'https://via.placeholder.com/70x35'}" onerror="this.src='https://via.placeholder.com/70x35'">
+      <input type="text" class="input-control banner-input" value="${esc(url)}" placeholder="رابط البنر" oninput="this.previousElementSibling.src=this.value">
+      <button class="btn btn-danger" style="width:auto;padding:6px 10px;font-size:10px" onclick="currentBanners.splice(${i},1);renderBannersUI()">حذف</button>
     </div>
   `).join("");
 }
-window.updatePreviewImage = function(input){
-  const imgTag = input.previousElementSibling;
-  if(imgTag && imgTag.tagName === 'IMG') imgTag.src = input.value.trim() || 'https://via.placeholder.com/80x40';
-};
-window.removeBannerRow = function(index){
-  collectBannersFromDOM();
-  currentBanners.splice(index, 1);
-  renderAdminBannersUI();
-};
-function collectBannersFromDOM(){
-  const inputs = document.querySelectorAll('.banner-input');
-  currentBanners = Array.from(inputs).map(inp => inp.value.trim()).filter(v => v.length > 0);
-}
+
 document.getElementById('addNewBannerRowBtn').onclick = () => {
-  collectBannersFromDOM();
   currentBanners.push("");
-  renderAdminBannersUI();
+  renderBannersUI();
 };
 
-db.ref('settings/heroSlides').once('value', s => {
-  const data = s.val();
-  currentBanners = (data && Array.isArray(data)) ? data.map(b => b.img) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", "https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png"];
-  renderAdminBannersUI();
-});
+function loadBanners(){
+  let path = bannerMode.value === 'custom' ? 'users_custom/' + bannerTargetUid.value.trim() + '/heroSlides' : 'settings/heroSlides';
+  if(bannerMode.value === 'custom' && !bannerTargetUid.value.trim()){ currentBanners=[]; renderBannersUI(); return; }
+  db.ref(path).once('value', s => {
+    const val = s.val();
+    currentBanners = (val && Array.isArray(val)) ? val.map(b => b.img) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png"];
+    renderBannersUI();
+  });
+}
+loadBanners();
 
 document.getElementById('saveBannersBtn').onclick = () => {
-  collectBannersFromDOM();
+  const inputs = document.querySelectorAll('.banner-input');
+  currentBanners = Array.from(inputs).map(i => i.value.trim()).filter(v=>v);
+  let path = bannerMode.value === 'custom' ? 'users_custom/' + bannerTargetUid.value.trim() + '/heroSlides' : 'settings/heroSlides';
   const fb = document.getElementById('bannersFeedback');
-  const slidesObject = currentBanners.map((link, index) => ({ img: link, title: `Banner ${index + 1}` }));
-  db.ref('settings/heroSlides').set(slidesObject).then(() => {
-    fb.style.color = "var(--ok)"; fb.textContent = "✅ تم تحديث البنرات بنجاح!";
-  }).catch(err => { fb.style.color = "#EF4444"; fb.textContent = "❌ " + err.message; });
+  db.ref(path).set(currentBanners.map((img,i)=>({img, title:`Banner ${i+1}`}))).then(()=>{
+    fb.style.color = "var(--success)"; fb.textContent = "✅ تم حفظ البنرات بنجاح!";
+  });
 };
 
-// تعديل أسعار الألعاب
-function renderGamePriceEditor(gameKey){
-  const container = document.getElementById('gamePricesEditorContainer');
+// 3. الأسعار (عام / فردي)
+let allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
+const priceMode = document.getElementById('priceTargetMode');
+const priceUidGroup = document.getElementById('priceUidGroup');
+const priceTargetUid = document.getElementById('priceTargetUid');
+
+priceMode.onchange = (e) => {
+  priceUidGroup.style.display = e.target.value === 'custom' ? 'block' : 'none';
+  loadPrices();
+};
+priceTargetUid.onchange = loadPrices;
+
+function renderPricesUI(gameKey){
+  const box = document.getElementById('gamePricesEditorContainer');
   const items = allGamesPrices[gameKey] || [];
-  container.innerHTML = items.map((item, idx) => `
+  box.innerHTML = items.map((it, idx) => `
     <div class="price-item">
-      <span>${esc(item[0])}</span>
-      <input type="number" step="any" class="in price-input" data-pkg-idx="${idx}" value="${item[1]}">
+      <span>${esc(it[0])}</span>
+      <input type="number" step="any" class="input-control price-input" data-idx="${idx}" value="${it[1]}">
       <span style="font-size:10px;color:var(--sub)">ج.م</span>
     </div>
   `).join("");
 }
 
-db.ref('settings/gamesPrices').once('value', s => {
-  const data = s.val();
-  if(data) allGamesPrices = {...DEFAULT_GAMES_DATA, ...data};
-  renderGamePriceEditor(document.getElementById('adminGameSelect').value);
-});
-
-document.getElementById('adminGameSelect').onchange = (e) => {
-  renderGamePriceEditor(e.target.value);
-};
+function loadPrices(){
+  let path = priceMode.value === 'custom' ? 'users_custom/' + priceTargetUid.value.trim() + '/gamesPrices' : 'settings/gamesPrices';
+  if(priceMode.value === 'custom' && !priceTargetUid.value.trim()){ allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA)); renderPricesUI(document.getElementById('adminGameSelect').value); return; }
+  db.ref(path).once('value', s => {
+    const val = s.val();
+    allGamesPrices = val ? {...DEFAULT_GAMES_DATA, ...val} : JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
+    renderPricesUI(document.getElementById('adminGameSelect').value);
+  });
+}
+loadPrices();
+document.getElementById('adminGameSelect').onchange = (e) => renderPricesUI(e.target.value);
 
 document.getElementById('savePricesBtn').onclick = () => {
   const gameKey = document.getElementById('adminGameSelect').value;
-  const inputs = document.querySelectorAll('.price-input');
-  const fb = document.getElementById('pricesFeedback');
-  
-  inputs.forEach((inp, idx) => {
+  document.querySelectorAll('.price-input').forEach(inp => {
+    const idx = inp.getAttribute('data-idx');
     const val = parseFloat(inp.value);
-    if(!isNaN(val) && allGamesPrices[gameKey][idx]){
-      allGamesPrices[gameKey][idx][1] = val;
-    }
+    if(!isNaN(val)) allGamesPrices[gameKey][idx][1] = val;
   });
-
-  db.ref('settings/gamesPrices').set(allGamesPrices).then(() => {
-    fb.style.color = "var(--ok)";
-    fb.textContent = "✅ تم تحديث أسعار هذه اللعبة بنجاح في المتجر!";
-  }).catch(err => {
-    fb.style.color = "#EF4444";
-    fb.textContent = "❌ خطأ: " + err.message;
+  let path = priceMode.value === 'custom' ? 'users_custom/' + priceTargetUid.value.trim() + '/gamesPrices' : 'settings/gamesPrices';
+  const fb = document.getElementById('pricesFeedback');
+  db.ref(path).set(allGamesPrices).then(()=>{
+    fb.style.color = "var(--success)"; fb.textContent = "✅ تم حفظ الأسعار بنجاح!";
   });
 };
 
-// شحن رصيد
+// 4. شحن الرصيد
 document.getElementById('adminSendBalanceBtn').onclick = () => {
-  const targetId = document.getElementById('adminTargetUid').value.trim();
-  const amount = parseFloat(document.getElementById('adminAmount').value);
+  const uid = document.getElementById('adminTargetUid').value.trim();
+  const amt = parseFloat(document.getElementById('adminAmount').value);
   const fb = document.getElementById('adminFeedback');
-  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
-  if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
-  
-  db.ref('users/'+targetId+'/wallet').once('value').then(s=>{
-    const cur = s.val()||0, nw = cur + amount;
-    db.ref('users/'+targetId+'/wallet').set(nw).then(()=>{
-      fb.style.color = "var(--ok)";
-      fb.textContent = `✅ شُحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! رصيده: (${nw} ج.م)`;
+  if(!uid || isNaN(amt)){ fb.style.color="var(--danger)"; fb.textContent="❌ بيانات غير صحيحة"; return; }
+  db.ref('users/'+uid+'/wallet').once('value').then(s => {
+    const cur = s.val()||0, nw = cur + amt;
+    db.ref('users/'+uid+'/wallet').set(nw).then(() => {
+      fb.style.color = "var(--success)";
+      fb.textContent = `✅ شُحن (${amt} ج.م) للـ ID: (${uid})`;
       document.getElementById('adminTargetUid').value="";
       document.getElementById('adminAmount').value="";
-    }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+    });
   });
 };
 
-// ترقية الـ VIP
-document.getElementById('adminUpdateVipBtn').onclick = () => {
-  const targetId = document.getElementById('adminVipTargetUid').value.trim();
-  const selectedSpent = parseFloat(document.getElementById('adminVipLevelSelect').value);
-  const fb = document.getElementById('adminVipFeedback');
-  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
-  
-  db.ref('users/'+targetId+'/totalSpent').set(selectedSpent).then(()=>{
-    fb.style.color = "var(--ok)";
-    fb.textContent = `⭐ تم ترقية العميل (${targetId}) للمستوى المطلوب بنجاح!`;
-    document.getElementById('adminVipTargetUid').value="";
-  }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
-};
-
-// إدارة حظر المستخدمين (جديد)
+// 5. الحظر
 document.getElementById('banUserBtn').onclick = () => {
-  const targetId = document.getElementById('banTargetUid').value.trim();
+  const uid = document.getElementById('banTargetUid').value.trim();
   const duration = document.getElementById('banDuration').value;
   const fb = document.getElementById('banFeedback');
-  
-  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
-
-  let banUntil = "permanent";
-  if(duration === "365"){
-    banUntil = Date.now() + (365 * 24 * 60 * 60 * 1000); // سنة من الآن بالمللي ثانية
-  }
-
-  db.ref('banned_users/' + targetId).set({
-    bannedAt: Date.now(),
-    banUntil: banUntil,
-    reason: "مخالفة شروط الاستخدام"
-  }).then(()=>{
-    fb.style.color = "var(--ok)";
-    fb.textContent = `✅ تم حظر العميل (${targetId}) بنجاح.`;
-    document.getElementById('banTargetUid').value = "";
-    loadBannedUsers();
-  }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
-};
-
-function loadBannedUsers(){
-  const box = document.getElementById('bannedUsersList');
-  if(!box) return;
-  
-  db.ref('banned_users').once('value').then(s=>{
-    const data = s.val() || {};
-    const arr = Object.entries(data);
-    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:6px">لا يوجد أي مستخدمين محظورين حالياً</p>'; return; }
-
-    box.innerHTML = arr.map(([uid, info])=>{
-      const durationTxt = info.banUntil === "permanent" ? "دائم (للأبد) ⛔" : "ينتهي في: " + new Date(info.banUntil).toLocaleDateString('ar-EG');
-      return `<div style="background:var(--inner);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <b style="color:#EF4444;direction:ltr;display:block">${uid}</b>
-          <small style="color:var(--sub)">${durationTxt}</small>
-        </div>
-        <button class="btn-danger" style="background:var(--ok);padding:5px 10px;font-size:10px" onclick="unbanUser('${uid}')">فك الحظر ✅</button>
-      </div>`;
-    }).join("");
+  if(!uid){ fb.style.color="var(--danger)"; fb.textContent="❌ أدخل ID العميل"; return; }
+  let banUntil = duration === "365" ? Date.now() + (365*24*60*60*1000) : "permanent";
+  db.ref('banned_users/'+uid).set({bannedAt:Date.now(), banUntil}).then(()=>{
+    fb.style.color = "var(--success)"; fb.textContent = `✅ تم حظر (${uid})`;
+    document.getElementById('banTargetUid').value="";
+    loadBanned();
   });
-}
-
-window.unbanUser = function(uid){
-  db.ref('banned_users/' + uid).remove().then(()=>{
-    alert("✅ تم رفع الحظر عن العميل بنجاح");
-    loadBannedUsers();
-  }).catch(err=>alert("❌ " + err.message));
 };
 
-// تذاكر الدعم الفني
-function loadAdminTickets(){
-  db.ref('admin_tickets').on('value', s => {
-    const data = s.val() || {};
-    const arr = Object.entries(data).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
-    const box = document.getElementById('adminTicketsList');
-    if(!arr.length){ box.innerHTML = '<p class="sub">لا توجد تذاكر دعم فني حالياً</p>'; return; }
-    
-    box.innerHTML = arr.map(([id, t]) => `
-      <div class="ticket-card">
-        <div style="display:flex;justify-content:space-between;font-weight:900;margin-bottom:4px">
-          <span style="color:var(--a)">${esc(t.name)} (${esc(t.uid)})</span>
-          <span style="font-size:10px;color:var(--sub)">${new Date(t.time).toLocaleString('ar-EG')}</span>
-        </div>
-        <b style="font-size:12.5px;color:var(--gold)">العنوان: ${esc(t.subject)}</b>
-        <p style="margin:6px 0;color:var(--tx)">الرسالة: ${esc(t.message)}</p>
-        <div style="margin-top:8px">
-          <input id="reply_${id}" class="in" placeholder="اكتب رد الإدارة هنا..." value="${esc(t.reply||'')}" style="margin-bottom:4px">
-          <button class="btn" style="padding:6px;font-size:11px" onclick="sendAdminReply('${esc(t.uid)}','${esc(id)}')">💬 إرسال الرد للعميل</button>
-        </div>
+function loadBanned(){
+  db.ref('banned_users').once('value', s => {
+    const box = document.getElementById('bannedUsersList');
+    const val = s.val()||{};
+    const arr = Object.entries(val);
+    if(!arr.length){ box.innerHTML='<p class="label-sub">لا يوجد محظورين</p>'; return; }
+    box.innerHTML = arr.map(([uid]) => `
+      <div class="ticket-box" style="display:flex;justify-content:space-between;align-items:center;padding:8px">
+        <b style="color:var(--danger);direction:ltr">${uid}</b>
+        <button class="btn" style="width:auto;padding:4px 8px;font-size:10px;background:var(--success)" onclick="db.ref('banned_users/${uid}').remove().then(()=>loadBanned())">فك الحظر</button>
       </div>
     `).join("");
   });
 }
+loadBanned();
 
-window.sendAdminReply = function(uid, ticketId){
-  const replyText = document.getElementById('reply_' + ticketId).value.trim();
-  if(!replyText) return alert("اكتب الرد أولاً");
-  
-  Promise.all([
-    db.ref('support_tickets/'+uid+'/'+ticketId+'/reply').set(replyText),
-    db.ref('admin_tickets/'+ticketId+'/reply').set(replyText)
-  ]).then(()=>{
-    alert("✅ تم إرسال الرد للعميل بنجاح!");
-  }).catch(err => alert("❌ خطأ: " + err.message));
-};
-
-loadBannedUsers();
-loadAdminTickets();
+// 6. الدعم الفني
+db.ref('admin_tickets').on('value', s => {
+  const box = document.getElementById('adminTicketsList');
+  const val = s.val()||{};
+  const arr = Object.entries(val).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
+  if(!arr.length){ box.innerHTML='<p class="label-sub">لا توجد تذاكر</p>'; return; }
+  box.innerHTML = arr.map(([id, t]) => `
+    <div class="ticket-box">
+      <div style="font-weight:800;margin-bottom:4px;color:#38BDF8">${esc(t.name)} (${esc(t.uid)})</div>
+      <b style="font-size:12px;color:var(--gold)">العنوان: ${esc(t.subject)}</b>
+      <p style="font-size:11.5px;margin:4px 0">${esc(t.message)}</p>
+      <input id="rep_${id}" class="input-control" placeholder="اكتب رد الإدارة..." value="${esc(t.reply||'')}" style="margin-bottom:4px">
+      <button class="btn" style="padding:6px;font-size:11px" onclick="
+        const r=document.getElementById('rep_${id}').value;
+        Promise.all([db.ref('support_tickets/${t.uid}/${id}/reply').set(r), db.ref('admin_tickets/${id}/reply').set(r)]).then(()=>alert('✅ تم إرسال الرد'))
+      ">إرسال الرد</button>
+    </div>
+  `).join("");
+});
 </script>
 </body>
 </html>
