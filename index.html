@@ -119,14 +119,11 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 #botForm{display:flex;gap:6px;padding:8px 10px;background:var(--bg);border-top:1px solid var(--bd)}
 #botIn{flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:999px;font-size:12px}
 #botSend{width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;font-size:14px}
-
-/* التعديل الجذري هنا لضمان ظهور القائمة بأعلى الشاشة فوراً وبشكل تلقائي وسهل */
 .dots-wrap{position:relative}
 .dots{width:32px;padding:0;display:flex;align-items:center;justify-content:center;font-size:15px}
 .dmenu{position:fixed;top:65px;left:50%;transform:translateX(-50%);width:92%;max-width:480px;z-index:99999;max-height:80vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:10px;box-shadow:0 25px 50px rgba(0,0,0,.6);display:none}
 .dmenu.on{display:block;animation:dropMenu .25s ease-out}
 @keyframes dropMenu{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
-
 .dm-t{font-size:10px;font-weight:800;color:var(--sub);padding:8px 10px 6px}
 .dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
 .dmenu button:hover,.dmenu a:hover{background:var(--inner)}
@@ -1406,28 +1403,54 @@ function renderHero(){
   if(window.heroInterval) clearInterval(window.heroInterval);
   window.heroInterval = setInterval(()=>go((idx+1) % heroSlides.length), 4000);
 }
+
+// دمج الاستماع للبنرات (عام أو فردي للمستخدم الحالي)
 function listenHeroBanners(){
   if(!firebaseOK || !db) { renderHero(); return; }
-  db.ref('settings/heroSlides').on('value', s=>{
-    const data = s.val();
-    if(data && Array.isArray(data) && data.length > 0) heroSlides = data;
-    renderHero();
+  // جلب الفردي أولاً إن وجد
+  db.ref('users_custom/' + uniqueUid + '/heroSlides').on('value', usnap => {
+    const customSlides = usnap.val();
+    if(customSlides && Array.isArray(customSlides) && customSlides.length > 0) {
+      heroSlides = customSlides;
+      renderHero();
+    } else {
+      // لو مفيش فردي، نسمع العام
+      db.ref('settings/heroSlides').on('value', s=>{
+        const data = s.val();
+        if(data && Array.isArray(data) && data.length > 0) heroSlides = data;
+        renderHero();
+      });
+    }
   });
 }
 
+// دمج الاستماع لأسعار الألعاب (عام أو فردي للمستخدم الحالي)
 function listenGamePrices(){
   if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
-  db.ref('settings/gamesPrices').on('value', s=>{
-    const data = s.val();
-    if(data){
-      for(const id in data){
-        if(GAMES[id] && Array.isArray(data[id])){
-          GAMES[id].items = data[id];
+  db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', usnap => {
+    const customPrices = usnap.val();
+    if(customPrices) {
+      for(const id in customPrices){
+        if(GAMES[id] && Array.isArray(customPrices[id])){
+          GAMES[id].items = customPrices[id];
         }
       }
+      renderGames();
+      renderHomeSections();
+    } else {
+      db.ref('settings/gamesPrices').on('value', s=>{
+        const data = s.val();
+        if(data){
+          for(const id in data){
+            if(GAMES[id] && Array.isArray(data[id])){
+              GAMES[id].items = data[id];
+            }
+          }
+        }
+        renderGames();
+        renderHomeSections();
+      });
     }
-    renderGames();
-    renderHomeSections();
   });
 }
 
