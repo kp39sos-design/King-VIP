@@ -60,7 +60,6 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .fav-btn{position:absolute;top:6px;inset-inline-end:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:11px;z-index:5;display:flex;align-items:center;justify-content:center}
 .fav-btn.on{color:#EF4444}
 .pay,.form{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:14px}
-.pay h3{font-size:13.5px;margin-bottom:8px}
 .copy{width:100%;margin-top:8px;background:var(--g1);color:#fff;padding:9px;border-radius:10px;font-weight:800;font-size:12px}
 .wa{display:block;text-align:center;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800;font-size:12px;width:100%}
 .in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px;border-radius:12px;margin-bottom:8px;font-size:12px}
@@ -173,8 +172,8 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px;background:transparent;color:var(--sub);font-size:9px;font-weight:800;position:relative}
 .bn-btn i{font-size:17px}
 .bn-btn.on{color:var(--a)}
-#cartDrawer,#notifDrawer{position:fixed;inset:0;z-index:9950;background:rgba(3,4,7,.65);display:none;justify-content:flex-end}
-#cartDrawer.on,#notifDrawer.on{display:flex}
+#cartDrawer,#notifDrawer,#supportModal{position:fixed;inset:0;z-index:9950;background:rgba(3,4,7,.65);display:none;justify-content:flex-end}
+#cartDrawer.on,#notifDrawer.on,#supportModal.on{display:flex}
 .cd-body{width:100%;max-width:400px;background:var(--modal);border-inline-start:1px solid var(--bd2);display:flex;flex-direction:column;height:100vh;max-height:100vh}
 .cd-head{padding:14px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
 .cd-head h3{font-size:14px;font-weight:900}
@@ -305,7 +304,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
     <div class="dots-wrap">
       <button class="ibtn dots" id="dotsBtn" aria-label="Menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
       <div class="dmenu" id="dMenu">
-        <div class="dm-t">خدمة العملاء والتواصل</div>
+        <div class="dm-t">خدمة العملاء والدعم</div>
         <div id="uBox">
           <span id="uName"></span>
           <span id="uMail"></span>
@@ -330,16 +329,15 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
         <button data-act="favorites"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المفضلة</span></button>
         <button data-act="track"><span class="di" style="--c:#10B981"><i class="fa-solid fa-magnifying-glass-location"></i></span><span>تتبع طلب</span></button>
         <button id="editNameItem" style="display:none" data-act="editName"><span class="di" style="--c:#2563EB"><i class="fa-solid fa-user-pen"></i></span><span>تعديل اسم المستخدم</span></button>
-        <button data-act="support"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span>خدمة العملاء (واتساب)</span></button>
+        <button data-act="supportChat"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-headset"></i></span><span>إرسال شكوى أو مشكلة للدعم 💬</span></button>
+        <button data-act="support"><span class="di" style="--c:#22C55E"><i class="fa-brands fa-whatsapp"></i></span><span>الدعم (واتساب)</span></button>
         <button data-act="bot"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-robot"></i></span><span>اسأل «ذكي» المساعد</span></button>
         <a href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener"><span class="di" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i></span><span>مجموعتنا على فيسبوك</span></a>
         <a href="https://t.me/ReAL_126" target="_blank" rel="noopener"><span class="di" style="--c:#229ED9"><i class="fa-brands fa-telegram"></i></span><span>التليجرام</span></a>
-        <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" rel="noopener"><span class="di" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i></span><span>الواتساب</span></a>
         <button data-act="request"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-box"></i></span><span>طلب منتج</span></button>
         <button data-act="about"><span class="di" style="--c:#06B6D4"><i class="fa-solid fa-circle-info"></i></span><span>معلومات عن التطبيق</span></button>
         <button data-act="privacy"><span class="di" style="--c:#8B5CF6"><i class="fa-solid fa-shield-halved"></i></span><span>سياسة الخصوصية</span></button>
         <button data-act="terms"><span class="di" style="--c:#64748B"><i class="fa-solid fa-file-contract"></i></span><span>شروط الاستخدام</span></button>
-        <button data-act="refund"><span class="di" style="--c:#0EA5E9"><i class="fa-solid fa-rotate-left"></i></span><span>سياسة الاسترجاع</span></button>
         <button data-act="faq"><span class="di" style="--c:#F97316"><i class="fa-solid fa-circle-question"></i></span><span>الأسئلة الشائعة</span></button>
         <button id="logoutItem" style="display:none" data-act="logout"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></span><span>تسجيل الخروج</span></button>
       </div>
@@ -455,23 +453,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
   </div>
 </section>
 
-<section id="admin" class="sec">
-  <div class="ttl" style="color:var(--gold)">👑 لوحة الإدارة</div>
-  <div class="form">
-    <div class="stats" id="stats" style="margin-bottom:12px"></div>
-    <div style="background:var(--inner);border:1px solid var(--bd2);border-radius:14px;padding:12px;margin-bottom:12px">
-      <b style="display:block;font-size:12.5px;color:var(--a);margin-bottom:8px">⚡ شحن رصيد تلقائي للعميل عبر الـ ID</b>
-      <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
-      <input id="adminAmount" class="in" type="number" placeholder="المبلغ">
-      <button class="copy" id="adminSendBalanceBtn" style="background:var(--g2);color:#382000">🚀 شحن رصيد العميل فوراً</button>
-      <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px;min-height:16px"></div>
-    </div>
-    <div class="ttl" style="font-size:12px">📦 إدارة الطلبات</div>
-    <div id="adminOrders" style="font-size:11px"></div>
-    <button class="copy" id="reset" style="margin-top:12px">🔄 إعادة ضبط الإحصائيات</button>
-  </div>
-</section>
-
 <div style="text-align:center;margin:16px 0 8px"><button class="app-help-btn" id="appHelpBtn" style="display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd2);color:var(--a);padding:6px 14px;border-radius:99px;font-size:11px;font-weight:800"><i class="fa-solid fa-circle-question" style="color:var(--gold)"></i> عن التطبيق ومعلومات المتجر</button></div>
 
 <footer>
@@ -497,6 +478,14 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <div id="notifDrawer"><div class="cd-body">
   <div class="cd-head"><h3>🔔 الإشعارات</h3><button class="x" id="notifClose">×</button></div>
   <div class="cd-items" id="notifItems"></div>
+</div></div>
+
+<!-- نافذة إرسال شكوى أو مشكلة للدعم الفني -->
+<div id="supportModal" class="modal"><div class="mb" style="max-width:400px">
+  <div class="mh"><h2>💬 إرسال شكوى أو مشكلة للدعم</h2><button class="x" id="supportModalClose">×</button></div>
+  <input id="supportSubject" class="in" placeholder="موضوع المشكلة (مثال: تأخر شحن شدات)">
+  <textarea id="supportMsg" class="in" placeholder="اكتب تفاصيل المشكلة أو الاستفسار هنا بوضوح..." style="min-height:90px"></textarea>
+  <button class="order" id="sendSupportTicketBtn">🚀 إرسال للإدارة فوراً</button>
 </div></div>
 
 <div id="botDock">
@@ -525,11 +514,6 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
   <div class="info"><small>الدعم الفني</small><button class="copy" data-copy="support">📋 نسخ رقم الدعم</button></div>
   <div class="info"><small>📸 رفع إيصال التحويل (اختياري)</small><input type="file" id="receiptFile" accept="image/*" style="margin-top:6px;font-size:10px"></div>
   <button class="order" id="confirm">✅ تأكيد عملية الشحن</button>
-</div></div>
-
-<div id="gameModal" class="modal"><div class="mb">
-  <div class="mh"><h2 id="gmTitle"></h2><button class="x" id="gmClose">×</button></div>
-  <div id="gmBody"></div>
 </div></div>
 
 <div id="aboutModal" class="modal"><div class="mb" style="max-width:440px">
@@ -686,7 +670,6 @@ function calculateVipLevel(spent) {
 
 function updateVipUI() {
   const { currentTier, nextTier } = calculateVipLevel(userTotalSpent);
-  
   $("#vipTierName").textContent = currentTier.name;
   $("#vipTierImg").src = currentTier.img;
   
@@ -699,7 +682,6 @@ function updateVipUI() {
   } else {
     $("#vipNextTarget").textContent = "لقد وصلت إلى أعلى قمة في مستويات الـ VIP! 👑";
   }
-  
   $("#vipProgressFill").style.width = progress + "%";
   $("#profSpent").textContent = userTotalSpent.toFixed(2) + " ج.م";
 }
@@ -770,27 +752,20 @@ function checkRedirectResult() {
       user = result.user;
       if(db) {
         db.ref('users/'+uniqueUid+'/profile').set({
-          name: user.displayName, 
-          email: user.email, 
-          photo: user.photoURL, 
-          updated: Date.now()
+          name: user.displayName, email: user.email, photo: user.photoURL, updated: Date.now()
         }).catch(()=>{});
       }
-      updateUserUI(); 
-      renderProfile(); 
-      toast("✅ تم تسجيل الدخول بنجاح");
+      updateUserUI(); renderProfile(); toast("✅ تم تسجيل الدخول بنجاح");
       requestSystemNotificationPermission();
     }
-  }).catch((error) => {
-    toast("❌ خطأ في تسجيل الدخول: " + error.message);
-  });
+  }).catch((error) => { toast("❌ خطأ: " + error.message); });
 }
 
 $("#loginBtn").onclick = ()=>{ requestSystemNotificationPermission(); loginGoogle(); };
 $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); loginGoogle(); };
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
-$("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
-$("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
+$("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } };
+$("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } };
 
 if(firebaseOK && auth){
   auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
@@ -829,7 +804,7 @@ $("#adminSendBalanceBtn").onclick = ()=>{
     const cur = s.val()||0, nw = cur + amount;
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
-      fb.textContent = `✅ شُحن (${amount}) للـ ID: (${targetId}) رصيده: (${nw})`;
+      fb.textContent = `✅ شُحن (${amount}) للـ ID: (${targetId})`;
       toast("🚀 تم الشحن");
       $("#adminTargetUid").value=""; $("#adminAmount").value="";
     }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
@@ -899,12 +874,12 @@ function saveOrder(o){
   const userName = store.get("custom_username","") || (user?user.displayName:"زائر");
   const payload = { items:o.items||[], total:o.total||0, status:o.status||"pending", createdAt:Date.now(), name:userName, email:user?user.email:"" };
   db.ref('orders/'+uniqueUid+'/'+oid).set(payload).catch(err=>console.warn("Save order:",err));
-  if(db) db.ref('notifications/'+uniqueUid+'/'+oid).set({title:"طلب جديد",body:"تم استلام طلبك برقم "+oid,time:Date.now(),read:false}).catch(()=>{});
+  db.ref('notifications/'+uniqueUid+'/'+oid).set({title:"طلب جديد",body:"تم استلام طلبك برقم "+oid,time:Date.now(),read:false}).catch(()=>{});
 }
 
 function renderOrders(){
   const box = $("#ordersList");
-  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">سجّل دخولك لعرض طلباتك (يتطلب Firebase)</p>'; return; }
+  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">سجّل دخولك لعرض طلباتك</p>'; return; }
   box.innerHTML = '<p class="sub" style="text-align:center;padding:10px">جاري التحميل...</p>';
   db.ref('orders/'+uniqueUid).once('value').then(s=>{
     const data = s.val() || {};
@@ -942,17 +917,11 @@ function renderNotifs(){
 }
 
 $("#notifBtn").onclick = ()=>{ 
-  renderNotifs(); 
-  $("#notifDrawer").classList.add("on"); 
+  renderNotifs(); $("#notifDrawer").classList.add("on"); 
   if(firebaseOK && db && uniqueUid && notifs.length > 0){
-    notifs.forEach(n => {
-      if(!n.read){
-        db.ref('notifications/' + uniqueUid + '/' + n.id + '/read').set(true).catch(()=>{});
-      }
-    });
+    notifs.forEach(n => { if(!n.read) db.ref('notifications/' + uniqueUid + '/' + n.id + '/read').set(true).catch(()=>{}); });
   }
 };
-
 $("#notifClose").onclick = ()=>$("#notifDrawer").classList.remove("on");
 $("#notifDrawer").onclick = e=>{ if(e.target.id==="notifDrawer") $("#notifDrawer").classList.remove("on"); };
 
@@ -963,7 +932,7 @@ function toggleFav(title){ const i = favs.indexOf(title); if(i>=0) favs.splice(i
 function renderFavs(){
   if(!favs.length){ $("#favGrid").innerHTML = '<p class="sub" style="grid-column:span 2;text-align:center;padding:20px">لا توجد منتجات مفضلة</p>'; return; }
   const items = REG.filter(r=>favs.includes(r.title));
-  if(!items.length){ $("#favGrid").innerHTML = '<p class="sub" style="grid-column:span 2;text-align:center;padding:20px">المنتجات المفضلة غير متاحة</p>'; return; }
+  if(!items.length){ $("#favGrid").innerHTML = '<p class="sub" style="grid-column:span 2;text-align:center;padding:20px">غير متاحة</p>'; return; }
   $("#favGrid").innerHTML = items.map(it=>{
     const i = REG.indexOf(it);
     return `<div class="pr"><div class="pn">${esc(it.title)}</div><div class="pp"><small>السعر</small><span>${fmtPrice(it.base)} ${CFG.cur[currency]}</span></div><button class="buy" data-buy="${i}">شراء</button></div>`;
@@ -1039,11 +1008,7 @@ function renderHomeSections(){
 }
 document.addEventListener("click", e=>{
   const el = e.target.closest("[data-openhome]");
-  if(el){
-    const id = el.dataset.openhome;
-    showSec("games");
-    setTimeout(()=>{ togglePk(id); }, 100);
-  }
+  if(el){ showSec("games"); setTimeout(()=>{ togglePk(el.dataset.openhome); }, 100); }
 });
 
 function subtabs(sec,data,render,def){
@@ -1227,16 +1192,14 @@ $$(".lang-btn[data-lang]").forEach(b=>{
   b.onclick = ()=>{
     lang = b.dataset.lang; store.set("lang", lang);
     $$(".lang-btn[data-lang]").forEach(x=>x.classList.toggle("on", x === b));
-    applyLang();
-    toast("🌐 " + (lang==="ar"?"العربية":lang==="en"?"English":"日本語"));
+    applyLang(); toast("🌐 " + (lang==="ar"?"العربية":lang==="en"?"English":"日本語"));
   };
 });
 $$("#currencySelector .lang-btn").forEach(b=>{
   b.onclick = ()=>{
     currency = b.dataset.cur; store.set("currency", currency);
     $$("#currencySelector .lang-btn").forEach(x=>x.classList.toggle("on", x === b));
-    renderGames(); renderSubs(); updateWalletUI(); renderFavs();
-    toast("💱 تم تغيير العملة");
+    renderGames(); renderSubs(); updateWalletUI(); renderFavs(); toast("💱 تم تغيير العملة");
   };
 });
 
@@ -1248,7 +1211,8 @@ document.addEventListener("click", e=>{
   if(act === "profile") showSec("profile");
   else if(act === "orders") showSec("orders");
   else if(act === "favorites") showSec("favorites");
-  else if(act === "track"){ $("#trackModal").classList.add("on"); }
+  else if(act === "track") $("#trackModal").classList.add("on");
+  else if(act === "supportChat") $("#supportModal").classList.add("on");
   else if(act === "support") openWA("السلام عليكم 👋 أحتاج مساعدة");
   else if(act === "bot"){ $("#botPanel").classList.add("on"); botInit(); }
   else if(act === "request") showSec("request");
@@ -1260,6 +1224,34 @@ document.addEventListener("click", e=>{
   else if(act === "logout"){ if(firebaseOK && auth) auth.signOut(); user = null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }
   else if(act === "editName"){ $("#customNameInput").value = store.get("custom_username",""); $("#nameModal").classList.add("on"); }
 });
+
+/* إرسال تذكرة أو شكوى الدعم الفني من العميل */
+$("#sendSupportTicketBtn").onclick = ()=>{
+  const subject = $("#supportSubject").value.trim();
+  const message = $("#supportMsg").value.trim();
+  if(!subject || !message){ toast("⚠️ أملأ جميع الحقول من فضلك"); return; }
+  if(!firebaseOK || !db){ toast("⚠️ Firebase غير مفعّل"); return; }
+
+  const ticketId = "TICKET-" + Date.now().toString(36).toUpperCase();
+  const userName = store.get("custom_username","") || (user ? user.displayName : "زائر");
+  const userEmail = user ? user.email : "غير مسجل";
+
+  db.ref('support_tickets/' + uniqueUid + '/' + ticketId).set({
+    ticketId: ticketId, uid: uniqueUid, name: userName, email: userEmail,
+    subject: subject, message: message, status: "pending", time: Date.now()
+  }).then(()=>{
+    toast("✅ تم إرسال شكواك للدعم الفني بنجاح!");
+    db.ref('notifications/' + uniqueUid + '/notif_' + Date.now()).set({
+      title: "🎫 تم استلام شكواك",
+      body: `تم إرسال رسالتك للدعم الفني برقم (${ticketId}). سنرد عليك قريباً!`,
+      time: Date.now(), read: false
+    }).catch(()=>{});
+    $("#supportSubject").value = ""; $("#supportMsg").value = "";
+    $("#supportModal").classList.remove("on");
+  }).catch(err=>{ toast("❌ خطأ: " + err.message); });
+};
+$("#supportModalClose").onclick = ()=>$("#supportModal").classList.remove("on");
+$("#supportModal").onclick = e=>{ if(e.target.id==="supportModal") $("#supportModal").classList.remove("on"); };
 
 $("#saveNameBtn").onclick = ()=>{
   const v = $("#customNameInput").value.trim();
@@ -1387,7 +1379,7 @@ startOfferTimer();
 renderSearchHist();
 listenNotifs();
 
-/* كود تسجيل الزوار التلقائي في قاعدة البيانات ليعمل مع admin.html */
+/* تسجيل الزوار التلقائي في قاعدة البيانات ليعمل مع admin.html */
 document.addEventListener("DOMContentLoaded", () => {
   try {
     if(typeof firebaseOK !== "undefined" && firebaseOK && typeof db !== "undefined" && db) {
