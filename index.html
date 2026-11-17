@@ -547,11 +547,9 @@ let lastKnownWallet = null;
 function listenWallet(){
   if(!firebaseOK || !db || !uniqueUid) return;
   
-  // الاستماع المباشر لتغيرات الرصيد وإظهار رسالة فورية عند الشحن
   db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{
     const newWallet = s.val() || 0;
     
-    // إذا زاد الرصيد عن القيمة السابقة، تظهر رسالة منبثقة للمستخدم فوراً
     if(lastKnownWallet !== null && newWallet > lastKnownWallet){
       const addedAmount = newWallet - lastKnownWallet;
       toast(`🚀 مبروك! تمت إضافة (${addedAmount} ج.م) لحسابك بنجاح!`);
@@ -756,7 +754,21 @@ function renderNotifs(){
   if(!notifs.length){ $("#notifItems").innerHTML='<p class="sub" style="text-align:center;padding:20px">لا توجد إشعارات</p>'; return; }
   $("#notifItems").innerHTML = notifs.map(n=>`<div class="nd-item ${n.read?'':'unread'}"><small>${new Date(n.time||0).toLocaleString('ar-EG')}</small><b>${esc(n.title||"")}</b><p>${esc(n.body||"")}</p></div>`).join("");
 }
-$("#notifBtn").onclick = ()=>{ renderNotifs(); $("#notifDrawer").classList.add("on"); };
+
+// تعديل زر الجرس ليقوم بفتح الدرج وتحويل جميع الإشعارات إلى "مقروءة" (لإخفاء الرقم الأحمر)
+$("#notifBtn").onclick = ()=>{ 
+  renderNotifs(); 
+  $("#notifDrawer").classList.add("on"); 
+  
+  if(firebaseOK && db && uniqueUid && notifs.length > 0){
+    notifs.forEach(n => {
+      if(!n.read){
+        db.ref('notifications/' + uniqueUid + '/' + n.id + '/read').set(true).catch(()=>{});
+      }
+    });
+  }
+};
+
 $("#notifClose").onclick = ()=>$("#notifDrawer").classList.remove("on");
 $("#notifDrawer").onclick = e=>{ if(e.target.id==="notifDrawer") $("#notifDrawer").classList.remove("on"); };
 
