@@ -217,6 +217,53 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .page-body p{color:var(--sub);margin-bottom:6px}
 #searchHist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .schip{background:var(--inner);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--sub);cursor:pointer}
+
+/* تصميم كارت وشارة الـ VIP المميزة بالـ 13 تصميم الجديدة */
+.vip-badge-box {
+  background: linear-gradient(135deg, rgba(217,155,22,0.12), rgba(147,51,234,0.12));
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: start;
+}
+.vip-avatar-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 14px rgba(217,155,22,0.5);
+  background: #111;
+  flex-shrink: 0;
+}
+.vip-info-text b {
+  color: var(--gold);
+  font-size: 13.5px;
+  display: block;
+}
+.vip-info-text small {
+  color: var(--sub);
+  font-size: 10px;
+}
+.vip-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--inner);
+  border-radius: 3px;
+  margin-top: 6px;
+  overflow: hidden;
+  border: 1px solid var(--bd);
+}
+.vip-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #D99B16, #2563EB);
+  width: 0%;
+  transition: width 0.4s ease;
+}
 </style>
 </head>
 <body>
@@ -350,18 +397,65 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <section id="orders" class="sec"><div class="ttl">📋 طلباتي</div><div id="ordersList"></div></section>
 <section id="favorites" class="sec"><div class="ttl">❤️ المفضلة</div><div class="grid" id="favGrid"></div></section>
 
+<!-- القسم المصمم باحترافية للملف الشخصي مع أيقونات الـ 13 مستوى الجديدة -->
 <section id="profile" class="sec">
   <div class="ttl">👤 الملف الشخصي</div>
-  <div class="form" style="text-align:center">
-    <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:80px;height:80px;border-radius:50%;border:3px solid var(--a);margin:0 auto 8px;display:block;object-fit:cover">
-    <b id="profName" style="font-size:14px;display:block;margin-bottom:2px">زائر</b>
-    <small id="profEmail" style="color:var(--sub);font-size:10.5px;display:block;margin-bottom:10px">-</small>
-    <div class="info" style="text-align:start"><small>ID الحساب</small><b id="profId" style="direction:ltr;color:var(--a)">------</b></div>
-    <div class="info" style="text-align:start"><small>رصيد المحفظة</small><b id="profWallet">0.00 ج.م</b></div>
-    <div class="info" style="text-align:start"><small>نقاط الولاء</small><b id="profPoints">0 نقطة</b></div>
-    <div class="info" style="text-align:start"><small>مستوى الولاء</small><b id="profLevel">🥉 Bronze</b></div>
-    <div class="info" style="text-align:start"><small>كود الإحالة (شارك واربح)</small><b id="profRef" style="direction:ltr;color:var(--gold)">------</b><button class="copy" id="copyRefBtn" style="margin-top:6px">📋 نسخ كود الإحالة</button></div>
-    <button class="order" id="profLogout" style="margin-top:10px">🚪 تسجيل الخروج</button>
+  <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
+    
+    <!-- صورة البروفايل الاساسية -->
+    <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
+      <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
+    </div>
+
+    <b id="profName" style="font-size:16px; font-weight:900; display:block; margin-bottom:2px">زائر</b>
+    <small id="profEmail" style="color:var(--sub); font-size:11px; display:block; margin-bottom:14px">-</small>
+    
+    <!-- كارت مستوى الـ VIP والأيقونة الخاصة بالمستوى -->
+    <div class="vip-badge-box" id="vipCardBox">
+      <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
+      <div style="flex:1" class="vip-info-text">
+        <small style="color:var(--sub); font-size:9.5px; font-weight:700">مستوى العضوية الحالي</small>
+        <b id="vipTierName" style="color:var(--gold); font-size:13.5px; margin:2px 0">⭐ VIP 1 - مبتدئ</b>
+        <div class="vip-progress-bar">
+          <div class="vip-progress-fill" id="vipProgressFill"></div>
+        </div>
+        <small id="vipNextTarget" style="display:block; margin-top:4px; font-size:9.5px; color:var(--sub)">الشحن القادم للترقية: --</small>
+      </div>
+    </div>
+
+    <!-- معلومات الحساب بشكل منظم واحترافي -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">ID الحساب</small>
+        <b id="profId" style="direction:ltr; color:var(--a); font-size:12px; display:block; margin-top:2px">------</b>
+      </div>
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">رصيد المحفظة</small>
+        <b id="profWallet" style="color:var(--ok); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:12px;">
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">نقاط الولاء (+4%)</small>
+        <b id="profPoints" style="color:var(--b); font-size:12px; display:block; margin-top:2px">0 نقطة</b>
+      </div>
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">إجمالي المشتريات</small>
+        <b id="profSpent" style="color:var(--tx); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
+      </div>
+    </div>
+
+    <!-- كود الإحالة -->
+    <div class="info" style="text-align:start; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px; margin-bottom:12px;">
+      <small style="font-size:9.5px; color:var(--sub)">كود الإحالة (شارك واربح)</small>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+        <b id="profRef" style="direction:ltr; color:var(--gold); font-size:12px">------</b>
+        <button class="copy" id="copyRefBtn" style="margin:0; width:auto; padding:5px 12px; font-size:10px; border-radius:8px;">📋 نسخ</button>
+      </div>
+    </div>
+
+    <button class="order" id="profLogout" style="background:linear-gradient(135deg,#EF4444,#DC2626); color:#fff; border-radius:14px; padding:11px; font-weight:900; font-size:12px; box-shadow:0 4px 12px rgba(239,68,68,0.3);">🚪 تسجيل الخروج</button>
   </div>
 </section>
 
@@ -534,15 +628,14 @@ function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
 function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
 
-/* تشغيل صوت تنبيه قصير (Ding) عند وصول الشحن */
 function playDingSound(){
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = "sine";
-    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // نغمة D5
-    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15); // انتقال لـ A5
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
     gain.gain.setValueAtTime(0.15, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
     osc.connect(gain);
@@ -552,19 +645,68 @@ function playDingSound(){
   } catch(e){}
 }
 
-/* طلب إذن الإشعارات من المتصفح/النظام */
 function requestSystemNotificationPermission(){
   if("Notification" in window && Notification.permission === "default"){
     Notification.requestPermission();
   }
 }
 
-/* ═══════════ User / Wallet & DB Listener ═══════════ */
+/* ═══════════ مستويات الـ VIP الـ 13 (بالتصاميم التي أرسلتها) ═══════════ */
+const VIP_TIERS = [
+  { level: 1, name: "VIP 1 - مبتدئ", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
+  { level: 2, name: "VIP 2 - برونزي", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
+  { level: 3, name: "VIP 3 - فضي", minSpent: 1200, img: "https://cdn.imagetourls.com/uploads/tyImg/cXNbsRzr.png" },
+  { level: 4, name: "VIP 4 - ذهبي", minSpent: 2500, img: "https://cdn.imagetourls.com/uploads/tyImg/SVNPoba3.png" },
+  { level: 5, name: "VIP 5 - بلاتيني", minSpent: 5000, img: "https://cdn.imagetourls.com/uploads/tyImg/AlK2w8zC.png" },
+  { level: 6, name: "VIP 6 - ماسي", minSpent: 10000, img: "https://cdn.imagetourls.com/uploads/tyImg/FLernsRD.png" },
+  { level: 7, name: "VIP 7 - اسطوري", minSpent: 20000, img: "https://cdn.imagetourls.com/uploads/tyImg/SaSlSsaq.png" },
+  { level: 8, name: "VIP 8 - محترف", minSpent: 35000, img: "https://cdn.imagetourls.com/uploads/tyImg/16V1uWe0B.png" },
+  { level: 9, name: "VIP 9 - خبير", minSpent: 55000, img: "https://cdn.imagetourls.com/uploads/tyImg/gFPBMTSC.png" },
+  { level: 10, name: "VIP 10 - زعيم", minSpent: 80000, img: "https://cdn.imagetourls.com/uploads/tyImg/YH8kULrk.png" },
+  { level: 11, name: "VIP 11 - ملك", minSpent: 120000, img: "https://cdn.imagetourls.com/uploads/tyImg/m2poaFnt.png" },
+  { level: 12, name: "VIP 12 - امبراطور", minSpent: 180000, img: "https://cdn.imagetourls.com/uploads/tyImg/m7f3ea8I.png" },
+  { level: 13, name: "VIP 13 - الإلهي 👑", minSpent: 250000, img: "https://cdn.imagetourls.com/uploads/tyImg/33eqWdHw.png" }
+];
+
+let userTotalSpent = parseFloat(store.get("user_total_spent", "0")) || 0;
 let userWallet=0, userPoints=0, user=null;
 let uniqueUid = store.get("user_unique_id","");
 function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
 if(!uniqueUid){ uniqueUid = genUid(); store.set("user_unique_id", uniqueUid); }
 function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[currency]; $("#walletBalance").textContent=txt; $("#profWallet").textContent=txt; }
+
+function calculateVipLevel(spent) {
+  let currentTier = VIP_TIERS[0];
+  let nextTier = VIP_TIERS[1] || VIP_TIERS[0];
+
+  for (let i = 0; i < VIP_TIERS.length; i++) {
+    if (spent >= VIP_TIERS[i].minSpent) {
+      currentTier = VIP_TIERS[i];
+      nextTier = VIP_TIERS[i + 1] || VIP_TIERS[i];
+    }
+  }
+  return { currentTier, nextTier };
+}
+
+function updateVipUI() {
+  const { currentTier, nextTier } = calculateVipLevel(userTotalSpent);
+  
+  $("#vipTierName").textContent = currentTier.name;
+  $("#vipTierImg").src = currentTier.img;
+  
+  let progress = 100;
+  if (currentTier.level < 13) {
+    const span = nextTier.minSpent - currentTier.minSpent;
+    const currentSpan = userTotalSpent - currentTier.minSpent;
+    progress = Math.min(100, Math.max(0, (currentSpan / span) * 100));
+    $("#vipNextTarget").textContent = `الشحن القادم للترقية إلى ${nextTier.name} (باقي ${(nextTier.minSpent - userTotalSpent).toFixed(2)} ج.م)`;
+  } else {
+    $("#vipNextTarget").textContent = "لقد وصلت إلى أعلى قمة في مستويات الـ VIP! 👑";
+  }
+  
+  $("#vipProgressFill").style.width = progress + "%";
+  $("#profSpent").textContent = userTotalSpent.toFixed(2) + " ج.م";
+}
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
@@ -574,13 +716,10 @@ function listenWallet(){
   
   db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{
     const newWallet = s.val() || 0;
-    
     if(lastKnownWallet !== null && newWallet > lastKnownWallet){
       const addedAmount = newWallet - lastKnownWallet;
       toast(`🚀 مبروك! تمت إضافة (${addedAmount} ج.م) لحسابك بنجاح!`);
       playDingSound();
-      
-      // إرسال إشعار حقيقي في شريط إشعارات الهاتف فوق برة التطبيق
       if("Notification" in window && Notification.permission === "granted"){
         new Notification("REAL STORE 🔥", {
           body: `مبروك! تم شحن محفظتك بمبلغ (${addedAmount} ج.م) بنجاح من مدير التطبيق.`,
@@ -588,7 +727,6 @@ function listenWallet(){
         });
       }
     }
-    
     userWallet = newWallet;
     lastKnownWallet = newWallet;
     updateWalletUI();
@@ -596,13 +734,16 @@ function listenWallet(){
 
   db.ref('users/' + uniqueUid + '/points').on('value', s=>{
     userPoints = s.val() || 0;
-    const lv = userPoints>=10000?"👑 VIP":userPoints>=5000?"💎 Diamond":userPoints>=2000?"🥇 Gold":userPoints>=500?"🥈 Silver":"🥉 Bronze";
     $("#profPoints").textContent = userPoints + " نقطة";
-    $("#profLevel").textContent = lv;
+  });
+
+  db.ref('users/' + uniqueUid + '/totalSpent').on('value', s=>{
+    userTotalSpent = s.val() || 0;
+    store.set("user_total_spent", userTotalSpent);
+    updateVipUI();
   });
 }
 
-/* ═══════════ Auth (Redirect Mode) ═══════════ */
 function updateUserUI(){
   const box = $("#uBox");
   if(user){
@@ -669,6 +810,7 @@ function renderProfile(){
   $("#profRef").textContent = "REF-" + uniqueUid.replace("REAL-","");
   $("#profImg").src = user&&user.photoURL ? user.photoURL : "https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png";
   updateWalletUI();
+  updateVipUI();
 }
 $("#copyRefBtn").onclick = ()=>copy($("#profRef").textContent);
 $("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
@@ -730,6 +872,18 @@ $("#cartCheckout").onclick = ()=>{
   let msg = "🛒 *طلب متعدد*\n━━━━━━━━━━━━━━━\n";
   cart.forEach((it,i)=>{ msg += `\n${i+1}) ${it.title}\n   الكمية: ${it.qty}\n   السعر: ${fmtPrice(it.price*it.qty)} ${CFG.cur[currency]}\n`; });
   msg += `\n━━━━━━━━━━━━━━━\n💰 *الإجمالي:* ${fmtPrice(total)} ${CFG.cur[currency]}\n👤 *العميل:* ${store.get("custom_username","")||(user?user.displayName:"")||"زائر"}\n🆔 *ID:* ${uniqueUid}\n⚡ من ${CFG.storeName} 🔥`;
+  
+  const cashbackBonus = total * 0.04;
+  userTotalSpent += total;
+  userPoints += Math.floor(cashbackBonus * 10);
+  store.set("user_total_spent", userTotalSpent);
+  store.set("user_points", userPoints);
+  if(firebaseOK && db && uniqueUid){
+    db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
+    db.ref('users/' + uniqueUid + '/points').set(userPoints);
+  }
+  updateVipUI();
+
   saveOrder({items:cart, total, status:"pending"});
   stat.inc("ord"); openWA(msg); cart=[]; saveCart(); renderCart(); $("#cartDrawer").classList.remove("on");
 };
@@ -793,7 +947,6 @@ function renderNotifs(){
 $("#notifBtn").onclick = ()=>{ 
   renderNotifs(); 
   $("#notifDrawer").classList.add("on"); 
-  
   if(firebaseOK && db && uniqueUid && notifs.length > 0){
     notifs.forEach(n => {
       if(!n.read){
@@ -868,7 +1021,6 @@ function filterGames(){
   $("#noRes").style.display = n?"none":"block";
 }
 
-/* Search history */
 function renderSearchHist(){
   let h = [];
   try { h = JSON.parse(store.get("search_hist","[]")) || []; } catch(e){ h = []; }
@@ -882,7 +1034,6 @@ $("#q").addEventListener("change", ()=>{
   if(!h.includes(v)) h.push(v); store.set("search_hist", JSON.stringify(h.slice(-10))); renderSearchHist();
 });
 
-/* Home sections */
 function renderHomeSections(){
   const arr = Object.entries(GAMES);
   $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
@@ -911,7 +1062,6 @@ const R={
 const SRC = { cards:[CARDS,"google"], recharge:[RECH,"vodafone"], shabab:[SHAB,"eg"] };
 function renderSubs(){ for(const s in SRC) subtabs(s, SRC[s][0], R[s], SRC[s][1]); }
 
-/* Tabs */
 const TABS = [["games","🎮 الألعاب"],["cards","💳 بطاقات هدايا"],["recharge","⚡ شحن سريع"],["shabab","🪙 شباب كونات"],["soon","🔜 قريباً"],["request","📦 طلب منتج"]];
 function renderTabs(){
   const cur = $(".tab.on")?.dataset.sec || "games";
@@ -935,7 +1085,6 @@ document.addEventListener("click", e=>{
   const cp = e.target.closest("[data-copy]"); if(cp) return copy(CFG[cp.dataset.copy]);
 });
 
-/* Admin orders view */
 function renderAdminOrders(){
   if(!firebaseOK || !db){ $("#adminOrders").innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
   db.ref('orders').limitToLast(20).once('value').then(s=>{
@@ -965,7 +1114,6 @@ window.setOrderStatus = function(uid, oid, status){
   }).catch(err=>toast("❌ " + err.message));
 };
 
-/* ═══════════ Order Modal ═══════════ */
 let sel=null, activeDiscount = CFG.discount, appliedPromoCode="";
 function openOrder(i){
   sel = REG[i]; if(!sel) return;
@@ -1016,12 +1164,25 @@ $("#confirm").onclick = ()=>{
   msg += "👤 *العميل:* "+userName+"\n";
   msg += "🔑 *ID:* "+uniqueUid+"\n";
   msg += "━━━━━━━━━━━━━━━\n⚡ من "+CFG.storeName+" 🔥";
+
+  if(finalPrice > 0){
+    const cashbackBonus = finalPrice * 0.04;
+    userTotalSpent += finalPrice;
+    userPoints += Math.floor(cashbackBonus * 10);
+    store.set("user_total_spent", userTotalSpent);
+    store.set("user_points", userPoints);
+    if(firebaseOK && db && uniqueUid){
+      db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
+      db.ref('users/' + uniqueUid + '/points').set(userPoints);
+    }
+    updateVipUI();
+  }
+
   saveOrder({items:[{title:sel.title, qty:1, price:finalPrice}], total:finalPrice, status:"pending"});
   if(sel.need === "id") store.set("lastId", need);
   stat.inc("ord"); openWA(msg); closeModal();
 };
 
-/* ═══════════ Request Form ═══════════ */
 $("#sendReq").onclick = ()=>{
   const name = $("#rName").value.trim(), phone = $("#rPhone").value.trim();
   if(!name) return toast("⚠️ اكتب اسم المنتج");
@@ -1030,7 +1191,6 @@ $("#sendReq").onclick = ()=>{
   openWA(msg);
 };
 
-/* ═══════════ About / Policy / FAQ ═══════════ */
 const PAGES = {
   about:{title:"معلومات عن التطبيق", body:`<p><b>🔥 أسرع من نتكم</b> متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان.</p><h4>المميزات</h4><ul><li>شحن فوري خلال دقائق</li><li>أسعار تنافسية وعروض حصرية</li><li>دفع آمن عبر فودافون كاش</li></ul><p style="text-align:center;margin-top:10px">© 2026 أسرع من نتكم 🔥</p>`},
   privacy:{title:"سياسة الخصوصية", body:`<h4>جمع البيانات</h4><p>نحتفظ فقط بالبيانات الضرورية لتنفيذ طلبك (الاسم، البريد، رقم الهاتف، Player ID).</p><h4>استخدام البيانات</h4><p>تُستخدم بياناتك حصراً لتنفيذ الطلبات وتحسين الخدمة. لا نشاركها مع أي طرف ثالث.</p><h4>حقوقك</h4><p>يمكنك طلب حذف بياناتك في أي وقت عبر الدعم الفني.</p>`},
@@ -1049,7 +1209,6 @@ $("#closeAboutBtn").onclick = ()=>$("#aboutModal").classList.remove("on");
 $("#aboutMx").onclick = ()=>$("#aboutModal").classList.remove("on");
 $("#aboutModal").onclick = e=>{ if(e.target.id==="aboutModal") $("#aboutModal").classList.remove("on"); };
 
-/* ═══════════ Language & theme ═══════════ */
 function applyLang(){
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
@@ -1084,7 +1243,6 @@ $$("#currencySelector .lang-btn").forEach(b=>{
   };
 });
 
-/* Menu actions */
 $("#dotsBtn").onclick = ()=>{ $("#dMenu").classList.toggle("on"); };
 document.addEventListener("click", e=>{
   if(!e.target.closest(".dots-wrap")) $("#dMenu").classList.remove("on");
@@ -1106,7 +1264,6 @@ document.addEventListener("click", e=>{
   else if(act === "editName"){ $("#customNameInput").value = store.get("custom_username",""); $("#nameModal").classList.add("on"); }
 });
 
-/* Name modal */
 $("#saveNameBtn").onclick = ()=>{
   const v = $("#customNameInput").value.trim();
   if(!v) return toast("⚠️ أدخل اسماً");
@@ -1116,7 +1273,6 @@ $("#saveNameBtn").onclick = ()=>{
 $("#nameMx").onclick = ()=>$("#nameModal").classList.remove("on");
 $("#nameModal").onclick = e=>{ if(e.target.id==="nameModal") $("#nameModal").classList.remove("on"); };
 
-/* Track modal */
 $("#trackBtn").onclick = ()=>{
   const oid = $("#trackInput").value.trim();
   if(!oid) return toast("⚠️ أدخل رقم الطلب");
@@ -1139,19 +1295,15 @@ $("#trackBtn").onclick = ()=>{
 $("#trackMx").onclick = ()=>$("#trackModal").classList.remove("on");
 $("#trackModal").onclick = e=>{ if(e.target.id==="trackModal") $("#trackModal").classList.remove("on"); };
 
-/* Admin reset */
 $("#reset").onclick = ()=>{ if(confirm("هل أنت متأكد من تصفير الإحصائيات؟")){ ["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0")); renderStats(); toast("✅ تم التصفير"); } };
 
-/* Secret */
 let sc = 0;
 $$(".secret").forEach(el=>el.onclick = ()=>{ if(++sc >= 5){ sc = 0; $("#tabs").dataset.secret = "1"; renderTabs(); toast("👑 مرحباً بك في لوحة الإدارة"); } });
 
-/* Splash */
 function hideSplash(){ const s = $("#splash"); if(s){ s.classList.add("hide"); setTimeout(()=>s.remove(), 450); } }
 $("#skip").onclick = hideSplash;
 setTimeout(hideSplash, 4000);
 
-/* Hero slider (New Banners) */
 const heroSlides = [
   {img:"https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", title:"Banner 1"},
   {img:"https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png", title:"Banner 2"},
@@ -1174,7 +1326,6 @@ function renderHero(){
   setInterval(()=>go((idx+1) % heroSlides.length), 4000);
 }
 
-/* Offer timer */
 function startOfferTimer(){
   const end = Date.now() + 24*60*60*1000;
   setInterval(()=>{
@@ -1186,13 +1337,11 @@ function startOfferTimer(){
   }, 1000);
 }
 
-/* Ticker */
 const tickerMsgs = ["⚡ شحن فوري خلال دقائق","🔥 عروض حصرية على PUBG","💎 أسعار لا تقبل المنافسة","🚀 اطلب الآن واستلم فورا"];
 setInterval(()=>{
   const el = $("#tickerText"); if(el) el.textContent = tickerMsgs[Math.floor(Math.random()*tickerMsgs.length)];
 }, 4000);
 
-/* Bot Assistant */
 const KB = [
   {k:["ازاي اطلب","كيف اطلب","الشراء"],a:"اختر اللعبة، اضغط عرض الباقات، ثم شراء، وأدخل الـ ID الخاص بك لفتح واتساب بالطلب."},
   {k:["فودافون كاش","الدفع","ادفع ازاي"],a:"الدفع يتم عن طريق التحويل لرقم فودافون كاش الخاص بالمتجر المعروض في قسم الشحن."},
@@ -1228,21 +1377,18 @@ document.addEventListener("click", e=>{
   if(chip){ $("#botIn").value = chip.dataset.botchip; $("#botForm").requestSubmit(); }
 });
 
-/* Back to Top */
 window.onscroll = ()=>{
   if(window.scrollY > 300) $("#backTop").classList.add("on");
   else $("#backTop").classList.remove("on");
 };
 $("#backTop").onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
 
-/* Initializers */
 setTheme(store.get("theme", "light"));
 applyLang();
 renderHero();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
-
 </script>
 </body>
 </html>
