@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080B18">
-<title>أسرع من نتكم | لوحة الإدارة الكبرى 👑</title>
+<title>أسرع من نتكم | لوحة الإدارة المبسطة والمحترفة 👑</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -17,7 +17,6 @@ button,input,textarea,select{font-family:inherit}button{border:0;cursor:pointer;
 .brand-t{background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:14px}
 header{display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:12px;border-radius:16px;background:var(--card);border:1px solid var(--bd2)}
 .ibtn{height:34px;min-width:34px;padding:0 10px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
-.badge{background:#EF4444;color:#fff;font-size:9px;font-weight:900;padding:2px 6px;border-radius:8px;margin-inline-start:6px}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex-shrink:0;background:var(--card);color:var(--sub);border:1px solid var(--bd);padding:8px 14px;border-radius:14px;font-weight:800;font-size:11px;cursor:pointer}
@@ -47,6 +46,9 @@ textarea.in{min-height:80px;resize:none}
 #loginGate{position:fixed;inset:0;z-index:99999;background:#050711;display:flex;align-items:center;justify-content:center;padding:16px}
 .login-box{width:100%;max-width:380px;background:var(--card);border:1px solid var(--bd2);border-radius:24px;padding:24px;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,.9)}
 .login-box h2{font-size:18px;margin-bottom:8px;color:var(--gold)}
+.banner-row{display:flex;align-items:center;gap:8px;background:var(--inner);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:8px}
+.banner-row img{width:60px;height:30px;object-fit:cover;border-radius:6px;background:#000}
+.price-row{display:flex;gap:6px;align-items:center;margin-bottom:6px;background:var(--inner);padding:6px;border-radius:8px}
 </style>
 </head>
 <body>
@@ -55,8 +57,8 @@ textarea.in{min-height:80px;resize:none}
   <div class="login-box">
     <div style="font-size:45px;margin-bottom:10px">👑</div>
     <h2>لوحة إدارة أسرع من نتكم</h2>
-    <p style="font-size:11.5px;color:var(--sub);margin-bottom:16px">أدخل كلمة مرور المشرف للمتابعة بأمان</p>
-    <input id="adminPassInput" class="in" type="password" placeholder="كلمة المرور الإدارية" style="text-align:center">
+    <p style="font-size:11.5px;color:var(--sub);margin-bottom:16px">أدخل كلمة مرور المشرف (admin1234)</p>
+    <input id="adminPassInput" class="in" type="password" placeholder="كلمة المرور" style="text-align:center">
     <button class="btn gold" id="adminLoginBtn">🔓 دخول لوحة الإدارة</button>
   </div>
 </div>
@@ -74,45 +76,35 @@ textarea.in{min-height:80px;resize:none}
 
 <nav class="tabs">
   <button class="tab on" data-sec="overview">📊 نظرة عامة</button>
-  <button class="tab" data-sec="orders">📦 إدارة الطلبات</button>
-  <button class="tab" data-sec="balance">⚡ شحن الرصيد</button>
-  <button class="tab" data-sec="users">👥 العملاء والحظر</button>
-  <button class="tab" data-sec="coupons">🎫 الكوبونات</button>
-  <button class="tab" data-sec="tickets">🎧 تذاكر الدعم</button>
-  <button class="tab" data-sec="prices">🎮 تعديل الأسعار</button>
+  <button class="tab" data-sec="orders">📦 الطلبات</button>
+  <button class="tab" data-sec="balance">⚡ الرصيد</button>
+  <button class="tab" data-sec="vip">👑 ترقية VIP</button>
   <button class="tab" data-sec="banners">🖼️ البانرات</button>
-  <button class="tab" data-sec="settings">⚙️ الإعدادات والصيانة</button>
+  <button class="tab" data-sec="prices">🎮 الأسعار</button>
+  <button class="tab" data-sec="coupons">🎫 الكوبونات</button>
+  <button class="tab" data-sec="tickets">🎧 الدعم</button>
+  <button class="tab" data-sec="settings">⚙️ الصيانة</button>
 </nav>
 
 <!-- 1. نظرة عامة -->
 <section id="overview" class="sec on">
-  <div class="stats-grid" id="statsGrid">
+  <div class="stats-grid">
     <div class="stat-box"><small>إجمالي الطلبات</small><b id="stOrdersCount">0</b></div>
     <div class="stat-box"><small>إجمالي المبيعات</small><b id="stTotalRevenue">0.00 ج.م</b></div>
     <div class="stat-box"><small>العملاء المسجلين</small><b id="stUsersCount">0</b></div>
     <div class="stat-box"><small>التذاكر المفتوحة</small><b id="stTicketsCount">0</b></div>
   </div>
   <div class="card">
-    <div class="ttl" style="margin-top:0">⚡ العمليات السريعة</div>
-    <button class="btn" onclick="switchSec('balance')">شحن رصيد سريع للعميل</button>
-    <button class="btn gold" onclick="switchSec('orders')" style="margin-top:8px">مراجعة الطلبات المعلقة</button>
+    <div class="ttl" style="margin-top:0">⚡ اختصارات سريعة</div>
+    <button class="btn" onclick="switchSec('balance')">شحن رصيد للعميل</button>
+    <button class="btn gold" onclick="switchSec('vip')" style="margin-top:8px">👑 ترقية مستوى VIP للعميل</button>
     <button class="btn danger" onclick="toggleMaintenanceQuick()" style="margin-top:8px">🛠️ تبديل وضع الصيانة السريع</button>
   </div>
 </section>
 
-<!-- 2. إدارة الطلبات -->
+<!-- 2. الطلبات -->
 <section id="orders" class="sec">
   <div class="ttl" style="margin-top:0">📦 إدارة الطلبات الواردة</div>
-  <div style="display:flex;gap:6px;margin-bottom:10px">
-    <select id="orderFilterStatus" class="in" style="margin:0">
-      <option value="all">جميع الطلبات</option>
-      <option value="pending">في انتظار الدفع</option>
-      <option value="paid">تم استلام الدفع</option>
-      <option value="processing">جاري التنفيذ</option>
-      <option value="done">تم التنفيذ</option>
-      <option value="rejected">مرفوض</option>
-    </select>
-  </div>
   <div id="adminOrdersList"></div>
 </section>
 
@@ -127,68 +119,86 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 4. العملاء والحظر -->
-<section id="users" class="sec">
-  <div class="ttl" style="margin-top:0">👥 إدارة العملاء وحظر الحسابات</div>
-  <div id="adminUsersList"></div>
+<!-- 4. ترقية VIP (من 1 إلى 13) -->
+<section id="vip" class="sec">
+  <div class="ttl" style="margin-top:0">👑 إدارة وترقية مستويات الـ VIP (1 إلى 13)</div>
+  <div class="card">
+    <input id="vipTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
+    <select id="vipNewLevelSelect" class="in">
+      <option value="0">VIP 1 - مبتدئ (0 ج.م)</option>
+      <option value="500">VIP 2 - برونزي (500 ج.م)</option>
+      <option value="1200">VIP 3 - فضي (1200 ج.م)</option>
+      <option value="2500">VIP 4 - ذهبي (2500 ج.م)</option>
+      <option value="5000">VIP 5 - بلاتيني (5000 ج.م)</option>
+      <option value="10000">VIP 6 - ماسي (10000 ج.م)</option>
+      <option value="20000">VIP 7 - اسطوري (20000 ج.م)</option>
+      <option value="35000">VIP 8 - محترف (35000 ج.م)</option>
+      <option value="55000">VIP 9 - خبير (55000 ج.م)</option>
+      <option value="80000">VIP 10 - زعيم (80000 ج.م)</option>
+      <option value="120000">VIP 11 - ملك (120000 ج.م)</option>
+      <option value="180000">VIP 12 - امبراطور (180000 ج.م)</option>
+      <option value="250000">VIP 13 - الإلهي 👑 (250000 ج.م)</option>
+    </select>
+    <button class="btn gold" id="updateVipActionBtn">⭐ تطبيق وترقية مستوى الـ VIP للعميل فوراً</button>
+    <div id="vipFeedback" style="font-size:11px;font-weight:700;margin-top:8px;min-height:16px"></div>
+  </div>
 </section>
 
-<!-- 5. الكوبونات -->
-<section id="coupons" class="sec">
-  <div class="ttl" style="margin-top:0">🎫 إدارة الكوبونات والخصومات</div>
+<!-- 5. البانرات عبر روابط سهلة -->
+<section id="banners" class="sec">
+  <div class="ttl" style="margin-top:0">🖼️ إضافة وتعديل البانرات عبر الروابط</div>
   <div class="card">
-    <input id="couponCodeInput" class="in" placeholder="كود الكوبون (مثال: PROMO50)" style="text-transform:uppercase">
+    <div id="bannersEditorContainer"></div>
+    <button class="btn" id="addNewBannerRow" style="background:var(--inner);border:1px dashed var(--a);color:var(--a);margin-bottom:10px"><i class="fa-solid fa-plus"></i> إضافة رابط بانر جديد</button>
+    <button class="btn gold" id="saveBannersActionBtn">💾 حفظ ونشر البانرات للجميع</button>
+  </div>
+</section>
+
+<!-- 6. تعديل الأسعار بكل سلاسة -->
+<section id="prices" class="sec">
+  <div class="ttl" style="margin-top:0">🎮 تعديل أسعار الألعاب</div>
+  <div class="card">
+    <select id="priceGameSelect" class="in">
+      <option value="pubg">PUBG Mobile (ببجي)</option>
+      <option value="mlbb">Mobile Legends (موبايل ليجند)</option>
+      <option value="ff">Free Fire (فري فاير)</option>
+      <option value="arena">Arena Breakout (ارينا بريك اوت)</option>
+      <option value="yalla">يلا لودو</option>
+      <option value="tiktok">TikTok (تيك توك)</option>
+      <option value="gangstar">Gangstar (جانجستر)</option>
+      <option value="weplay">WePlay (وي بلاي)</option>
+      <option value="roblox">Roblox (روبلوكس)</option>
+    </select>
+    <div id="gamePricesListContainer" style="max-height:220px;overflow-y:auto;margin-bottom:10px"></div>
+    <button class="btn gold" id="savePricesActionBtn">💾 حفظ أسعار اللعبة في المتجر</button>
+  </div>
+</section>
+
+<!-- 7. الكوبونات -->
+<section id="coupons" class="sec">
+  <div class="ttl" style="margin-top:0">🎫 إدارة الكوبونات</div>
+  <div class="card">
+    <input id="couponCodeInput" class="in" placeholder="كود الكوبون (مثال: BESO47)" style="text-transform:uppercase">
     <input id="couponDiscountInput" class="in" type="number" placeholder="نسبة الخصم % (مثال: 10 تعني 10%)">
-    <input id="couponUsesInput" class="in" type="number" placeholder="عدد مرات الاستخدام المتاحة">
     <button class="btn" id="createCouponBtn">➕ إنشاء أو تحديث الكوبون</button>
   </div>
   <div id="adminCouponsList"></div>
 </section>
 
-<!-- 6. تذاكر الدعم -->
+<!-- 8. تذاكر الدعم -->
 <section id="tickets" class="sec">
-  <div class="ttl" style="margin-top:0">🎧 تذاكر الدعم الفني للعملاء</div>
+  <div class="ttl" style="margin-top:0">🎧 تذاكر الدعم الفني</div>
   <div id="adminTicketsList"></div>
-</section>
-
-<!-- 7. تعديل الأسعار -->
-<section id="prices" class="sec">
-  <div class="ttl" style="margin-top:0">🎮 تعديل أسعار الألعاب والباقات</div>
-  <div class="card">
-    <select id="priceGameSelect" class="in">
-      <option value="pubg">PUBG Mobile</option>
-      <option value="mlbb">Mobile Legends</option>
-      <option value="ff">Free Fire</option>
-      <option value="arena">Arena Breakout</option>
-      <option value="yalla">يلا لودو</option>
-      <option value="tiktok">TikTok</option>
-      <option value="gangstar">Gangstar</option>
-      <option value="weplay">WePlay</option>
-      <option value="roblox">Roblox</option>
-    </select>
-    <textarea id="priceJsonInput" class="in" placeholder="JSON الباقات (يتم تحميل الباقات الحالية تلقائياً عند الاختيار)" style="min-height:150px;direction:ltr"></textarea>
-    <button class="btn" id="savePricesBtn">💾 حفظ وتحديث أسعار اللعبة في المتجر فوراً</button>
-  </div>
-</section>
-
-<!-- 8. البانرات -->
-<section id="banners" class="sec">
-  <div class="ttl" style="margin-top:0">🖼️ إدارة بانرات العروض المتحركة (Hero)</div>
-  <div class="card">
-    <textarea id="bannersJsonInput" class="in" placeholder="روابط الصور بصيغة JSON" style="min-height:120px;direction:ltr"></textarea>
-    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البانرات للجميع</button>
-  </div>
 </section>
 
 <!-- 9. الإعدادات والصيانة -->
 <section id="settings" class="sec">
-  <div class="ttl" style="margin-top:0">⚙️ إعدادات المتجر العامة وصيانة النظام</div>
+  <div class="ttl" style="margin-top:0">⚙️ إعدادات المتجر والصيانة</div>
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <b>وضع الصيانة العامة للمتجر</b>
       <button class="btn danger" id="toggleMaintenanceBtn" style="width:auto;padding:6px 14px">تفعيل الصيانة</button>
     </div>
-    <div style="font-size:10.5px;color:var(--sub);margin-bottom:14px">عند تفعيل وضع الصيانة، سيظهر شاشة صيانة لجميع العملاء الذين يفتحون المتجر.</div>
     <input id="whatsappNumberInput" class="in" placeholder="رقم واتساب الإدارة (بدون +)">
     <button class="btn" id="saveSettingsBtn">💾 حفظ الإعدادات</button>
   </div>
@@ -197,7 +207,6 @@ textarea.in{min-height:80px;resize:none}
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
@@ -238,10 +247,7 @@ $("#adminLoginBtn").onclick = ()=>{
     toast("❌ كلمة المرور غير صحيحة");
   }
 };
-$("#logoutAdminBtn").onclick = ()=>{
-  localStorage.removeItem("admin_logged");
-  location.reload();
-};
+$("#logoutAdminBtn").onclick = ()=>{ localStorage.removeItem("admin_logged"); location.reload(); };
 
 function switchSec(id){
   $$(".sec").forEach(s=>s.classList.toggle("on", s.id===id));
@@ -261,11 +267,10 @@ const STATUS_MAP = {
 function initAdminDashboard(){
   if(!db) return;
   loadOverviewAndOrders();
-  loadUsers();
   loadCoupons();
   loadTickets();
-  loadPricesData();
-  loadBannersData();
+  loadBannersUI();
+  loadPricesUI();
   loadSettings();
 }
 
@@ -286,10 +291,7 @@ function loadOverviewAndOrders(){
     $("#stOrdersCount").textContent = totalOrders;
     $("#stTotalRevenue").textContent = totalRevenue.toFixed(2) + " ج.م";
 
-    const filterVal = $("#orderFilterStatus").value;
-    const filtered = filterVal === "all" ? flat : flat.filter(o => o.status === filterVal);
-
-    $("#adminOrdersList").innerHTML = filtered.length ? filtered.map(o => `
+    $("#adminOrdersList").innerHTML = flat.length ? flat.map(o => `
       <div class="list-item">
         <div class="top"><span>${esc(o.oid)}</span><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
         <div style="font-size:10px;color:var(--sub);margin-bottom:4px">العميل: ${esc(o.name||o.uid)} • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</div>
@@ -299,101 +301,161 @@ function loadOverviewAndOrders(){
           ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
         </select>
       </div>
-    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد طلبات مطابقة</p>';
+    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد طلبات</p>';
   });
 
   db.ref('users').on('value', s => {
-    const users = s.val() || {};
-    $("#stUsersCount").textContent = Object.keys(users).length;
+    $("#stUsersCount").textContent = Object.keys(s.val() || {}).length;
   });
 }
-
-$("#orderFilterStatus").onchange = loadOverviewAndOrders;
 
 window.updateOrderStatus = function(uid, oid, status){
   db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
     db.ref('notifications/'+uid+'/'+('status_'+Date.now())).set({
-      title: "تحديث حالة الطلب",
-      body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status]||{}).t}`,
-      time: Date.now(),
-      read: false
+      title: "تحديث حالة الطلب", body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status]||{}).t}`, time: Date.now(), read: false
     }).catch(()=>{});
     toast("✅ تم تحديث حالة الطلب");
-  }).catch(err=>toast("❌ " + err.message));
+  });
 };
 
 $("#sendBalanceActionBtn").onclick = ()=>{
   const targetUid = $("#targetUidInput").value.trim();
   const amount = parseFloat($("#targetAmountInput").value);
   const fb = $("#balanceFeedback");
-  if(!targetUid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
-  if(!amount || isNaN(amount)){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل مبلغ صالح"; return; }
-
-  const ref = db.ref('users/'+targetUid+'/wallet');
-  ref.once('value').then(s => {
-    const cur = s.val() || 0;
-    const nw = cur + amount;
-    ref.set(nw).then(()=>{
-      fb.style.color = "var(--ok)";
-      fb.textContent = `✅ تمت إضافة (${amount} ج.م) بنجاح للـ ID: (${targetUid}) رصيده الحالي: (${nw} ج.م)`;
-      toast("🚀 تم شحن الرصيد");
-      $("#targetUidInput").value = "";
-      $("#targetAmountInput").value = "";
-    }).catch(err => { fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
+  if(!targetUid || isNaN(amount)){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID صحيح ومبلغ صحيح"; return; }
+  
+  db.ref('users/'+targetUid+'/wallet').once('value').then(s => {
+    const nw = (s.val() || 0) + amount;
+    db.ref('users/'+targetUid+'/wallet').set(nw).then(()=>{
+      fb.style.color = "var(--ok)"; fb.textContent = `✅ تم الشحن بنجاح! الرصيد الحالي: ${nw} ج.م`;
+      $("#targetUidInput").value=""; $("#targetAmountInput").value="";
+      toast("🚀 تم الشحن");
+    });
   });
 };
 
-function loadUsers(){
-  db.ref('users').on('value', s => {
-    const users = s.val() || {};
-    const arr = Object.entries(users);
-    $("#adminUsersList").innerHTML = arr.length ? arr.map(([uid, u]) => `
-      <div class="list-item">
-        <div class="top"><span>${esc(u.profile?.name || uid)}</span><span style="color:var(--ok)">رصيد: ${(u.wallet||0).toFixed(2)} ج.م</span></div>
-        <div style="font-size:10px;color:var(--sub);margin-bottom:6px">ID: ${esc(uid)} • البريد: ${esc(u.profile?.email||'غير متوفر')}</div>
-        <div style="display:flex;gap:6px">
-          <button class="btn ${u.isBlocked?'':'danger'}" style="padding:6px;font-size:10.5px" onclick="toggleBlockUser('${esc(uid)}', ${!u.isBlocked})">${u.isBlocked?'🔓 إلغاء الحظر':'🚫 حظر العميل'}</button>
-        </div>
-      </div>
-    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد حسابات مسجلة</p>';
+// 👑 ترقية VIP من 1 إلى 13 بدون أخطاء
+$("#updateVipActionBtn").onclick = ()=>{
+  const uid = $("#vipTargetUid").value.trim();
+  const minSpent = parseFloat($("#vipNewLevelSelect").value);
+  const fb = $("#vipFeedback");
+  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
+
+  db.ref('users/'+uid+'/totalSpent').set(minSpent).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `✅ تم ترقية مستوى الـ VIP للعميل بنجاح!`;
+    $("#vipTargetUid").value = "";
+    toast("👑 تم تحديث مستوى VIP");
+  }).catch(err => {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ خطأ: " + err.message;
+  });
+};
+
+// 🖼️ البانرات عبر روابط سهلة
+let currentBannersList = [];
+function renderBannersEditor(){
+  const box = $("#bannersEditorContainer");
+  box.innerHTML = currentBannersList.map((url, i) => `
+    <div class="banner-row">
+      <img src="${url || 'https://via.placeholder.com/60x30'}" onerror="this.src='https://via.placeholder.com/60x30'">
+      <input type="text" class="in banner-url-input" value="${esc(url)}" placeholder="رابط صورة البنر (URL)" style="margin:0;direction:ltr" oninput="this.previousElementSibling.src=this.value">
+      <button class="btn danger" style="width:auto;padding:6px 10px" onclick="currentBannersList.splice(${i},1);renderBannersEditor()">حذف</button>
+    </div>
+  `).join("");
+}
+
+$("#addNewBannerRow").onclick = ()=>{
+  currentBannersList.push("");
+  renderBannersEditor();
+};
+
+function loadBannersUI(){
+  db.ref('settings/heroSlides').once('value', s => {
+    const val = s.val();
+    currentBannersList = (val && Array.isArray(val)) ? val.map(b => b.img) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png"];
+    renderBannersEditor();
   });
 }
 
-window.toggleBlockUser = function(uid, blockState){
-  db.ref('users/'+uid+'/isBlocked').set(blockState).then(()=>{
-    toast(blockState ? "🚫 تم حظر العميل بنجاح" : "🔓 تم إلغاء حظر العميل");
-  }).catch(err=>toast("❌ " + err.message));
+$("#saveBannersActionBtn").onclick = ()=>{
+  const inputs = $$('.banner-url-input');
+  currentBannersList = Array.from(inputs).map(i => i.value.trim()).filter(v=>v);
+  const formatted = currentBannersList.map((img, i) => ({img, title: `Banner ${i+1}`}));
+  db.ref('settings/heroSlides').set(formatted).then(()=>{
+    toast("✅ تم حفظ البانرات ونشرها بنجاح!");
+  });
+};
+
+// 🎮 الأسعار
+let currentGamePrices = [];
+const DEFAULT_GAMES_PRICES = {
+  pubg:[["30 UC",28.99],["60 UC",52.99],["300 + 1500 UC",1204.99],["6300 + 18000 UC",14404.99]],
+  mlbb:[["13 + 1 Diamonds",25],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120]],
+  ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100]],
+  arena:[["60 + 60 Bonds",61],["310 + 310 Bonds",266]],
+  yalla:[["830 ID",110],["2320 ID",260]],
+  tiktok:[["500 عملة",330],["1000 عملة",620]],
+  gangstar:[["60 ماسة",57.5],["300 + 20",247.5]],
+  weplay:[["300 ذهب",30],["600 ذهب",55]],
+  roblox:[["80 Robux",60],["500 Robux",265]]
+};
+
+function renderPricesEditor(){
+  const box = $("#gamePricesListContainer");
+  box.innerHTML = currentGamePrices.map((item, idx) => `
+    <div class="price-row">
+      <input type="text" class="in pkg-name" value="${esc(item[0])}" style="margin:0;flex:2" placeholder="اسم الباقة">
+      <input type="number" step="any" class="in pkg-price" value="${item[1]}" style="margin:0;flex:1;text-align:center" placeholder="السعر">
+      <span style="font-size:10px;color:var(--sub)">ج.م</span>
+    </div>
+  `).join("");
+}
+
+function loadPricesUI(){
+  const gKey = $("#priceGameSelect").value;
+  db.ref('settings/gamesPrices/'+gKey).once('value', s => {
+    const val = s.val();
+    currentGamePrices = val ? JSON.parse(JSON.stringify(val)) : (DEFAULT_GAMES_PRICES[gKey] || []);
+    renderPricesEditor();
+  });
+}
+$("#priceGameSelect").onchange = loadPricesUI;
+
+$("#savePricesActionBtn").onclick = ()=>{
+  const gKey = $("#priceGameSelect").value;
+  const names = $$('.pkg-name'), prices = $$('.pkg-price');
+  const newArr = [];
+  for(let i=0; i<names.length; i++){
+    const n = names[i].value.trim();
+    const p = parseFloat(prices[i].value);
+    if(n && !isNaN(p)) newArr.push([n, p]);
+  }
+  db.ref('settings/gamesPrices/'+gKey).set(newArr).then(()=>{
+    toast("✅ تم تحديث أسعار اللعبة في المتجر فوراً!");
+  });
 };
 
 function loadCoupons(){
   db.ref('coupons').on('value', s => {
     const coupons = s.val() || {};
-    const arr = Object.entries(coupons);
-    $("#adminCouponsList").innerHTML = arr.length ? arr.map(([code, c]) => `
+    $("#adminCouponsList").innerHTML = Object.entries(coupons).length ? Object.entries(coupons).map(([code, c]) => `
       <div class="list-item">
         <div class="top"><span style="color:var(--gold)">${esc(code)}</span><span>خصم: ${c.discount}%</span></div>
-        <div style="font-size:10px;color:var(--sub);margin-bottom:6px">مرات الاستخدام المتاحة: ${c.uses ?? 'غير محدود'}</div>
-        <button class="btn danger" style="padding:5px;font-size:10px" onclick="deleteCoupon('${esc(code)}')">🗑️ حذف الكوبون</button>
+        <button class="btn danger" style="padding:5px;font-size:10px" onclick="db.ref('coupons/${esc(code)}').remove()">🗑️ حذف</button>
       </div>
-    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد كوبونات مفعلة</p>';
+    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد كوبونات</p>';
   });
 }
 
 $("#createCouponBtn").onclick = ()=>{
   const code = $("#couponCodeInput").value.trim().toUpperCase();
   const discount = parseFloat($("#couponDiscountInput").value);
-  const uses = parseInt($("#couponUsesInput").value) || null;
-  if(!code || isNaN(discount)){ toast("⚠️ أدخل كود الخصم والنسبة بشكل صحيح"); return; }
-  db.ref('coupons/'+code).set({ discount, uses, active: true }).then(()=>{
-    toast("✅ تم حفظ الكوبون بنجاح");
-    $("#couponCodeInput").value = "";
-    $("#couponDiscountInput").value = "";
-    $("#couponUsesInput").value = "";
-  }).catch(err=>toast("❌ " + err.message));
-};
-
-window.deleteCoupon = function(code){
-  db.ref('coupons/'+code).remove().then(()=>toast("🗑️ تم حذف الكوبون"));
+  if(!code || isNaN(discount)){ toast("⚠️ أدخل الكود والنسبة"); return; }
+  db.ref('coupons/'+code).set({ discount, active: true }).then(()=>{
+    toast("✅ تم حفظ الكوبون");
+    $("#couponCodeInput.value = ''; #couponDiscountInput.value = '';");
+  });
 };
 
 function loadTickets(){
@@ -401,87 +463,25 @@ function loadTickets(){
     const tickets = s.val() || {};
     const arr = Object.entries(tickets).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
     $("#stTicketsCount").textContent = arr.filter(t=>!t[1].reply).length;
-
     $("#adminTicketsList").innerHTML = arr.length ? arr.map(([id, t]) => `
       <div class="list-item" style="border-color:${t.reply?'var(--ok)':'var(--gold)'}">
-        <div class="top"><span>${esc(t.subject)}</span><span style="font-size:10px">${esc(t.name||t.uid)}</span></div>
+        <div class="top"><span>${esc(t.subject)}</span><span>${esc(t.name||t.uid)}</span></div>
         <p style="color:var(--sub);margin:6px 0">${esc(t.message)}</p>
-        ${t.reply ? `<div style="background:var(--card);padding:6px;border-radius:8px;margin-bottom:6px;color:var(--ok)"><b>الرد السابق:</b> ${esc(t.reply)}</div>` : ''}
-        <textarea id="reply_${id}" class="in" placeholder="اكتب ردك للعميل هنا..." style="margin-bottom:6px;min-height:60px"></textarea>
-        <button class="btn" style="padding:7px;font-size:11px" onclick="sendTicketReply('${esc(t.uid)}','${esc(id)}')">💬 إرسال الرد للعميل</button>
+        ${t.reply ? `<div style="background:var(--card);padding:6px;border-radius:8px;margin-bottom:6px;color:var(--ok)"><b>الرد:</b> ${esc(t.reply)}</div>` : ''}
+        <textarea id="reply_${id}" class="in" placeholder="اكتب ردك هنا..." style="margin-bottom:6px;min-height:50px"></textarea>
+        <button class="btn" style="padding:7px;font-size:11px" onclick="
+          const r=$('#reply_${id}').value.trim();
+          if(!r) return toast('اكتب الرد');
+          Promise.all([
+            db.ref('support_tickets/${esc(t.uid)}/${esc(id)}/reply').set(r),
+            db.ref('support_tickets/${esc(t.uid)}/${esc(id)}/readByClient').set(false),
+            db.ref('admin_tickets/${esc(id)}/reply').set(r)
+          ]).then(()=>toast('✅ تم الرد'))
+        ">💬 إرسال الرد</button>
       </div>
-    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد تذاكر دعم فني</p>';
+    `).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد تذاكر</p>';
   });
 }
-
-window.sendTicketReply = function(uid, tid){
-  const replyText = $("#reply_"+tid).value.trim();
-  if(!replyText) return toast("⚠️ اكتب نص الرد أولاً");
-  
-  db.ref('support_tickets/'+uid+'/'+tid+'/reply').set(replyText);
-  db.ref('support_tickets/'+uid+'/'+tid+'/readByClient').set(false);
-  db.ref('admin_tickets/'+tid+'/reply').set(replyText).then(()=>{
-    toast("✅ تم إرسال الرد للعميل بنجاح");
-    $("#reply_"+tid).value = "";
-  }).catch(err=>toast("❌ " + err.message));
-};
-
-const defaultGamesPrices = {
-  pubg: [["30 UC", 28.99], ["60 UC", 52.99], ["300 + 1500 UC", 1204.99]],
-  mlbb: [["13 + 1 Diamonds", 25], ["51 + 5 Diamonds", 65]],
-  ff: [["50 جوهرة", 25], ["100 جوهرة", 50]],
-  arena: [["60 + 60 Bonds", 61], ["310 + 310 Bonds", 266]],
-  yalla: [["830 ID", 110], ["2320 ID", 260]],
-  tiktok: [["500 عملة", 330], ["1000 عملة", 620]],
-  gangstar: [["60 ماسة", 57.5], ["300 + 20", 247.5]],
-  weplay: [["300 ذهب", 30], ["600 ذهب", 55]],
-  roblox: [["80 Robux", 60], ["500 Robux", 265]]
-};
-
-function loadPricesData(){
-  const gId = $("#priceGameSelect").value;
-  db.ref('settings/gamesPrices/'+gId).once('value').then(s => {
-    const val = s.val() || defaultGamesPrices[gId];
-    $("#priceJsonInput").value = JSON.stringify(val, null, 2);
-  });
-}
-$("#priceGameSelect").onchange = loadPricesData;
-
-$("#savePricesBtn").onclick = ()=>{
-  const gId = $("#priceGameSelect").value;
-  try {
-    const parsed = JSON.parse($("#priceJsonInput").value);
-    db.ref('settings/gamesPrices/'+gId).set(parsed).then(()=>{
-      toast("✅ تم تحديث الأسعار بنجاح لجميع العملاء");
-    }).catch(err=>toast("❌ " + err.message));
-  } catch(e){
-    toast("❌ صيغة JSON غير صحيحة، تأكد من الأقواس والفاصلات");
-  }
-};
-
-const defaultBanners = [
-  {img:"https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", title:"Banner 1"},
-  {img:"https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png", title:"Banner 2"},
-  {img:"https://cdn.imagetourls.com/uploads/tyImg/swbD7etT.png", title:"Banner 3"}
-];
-
-function loadBannersData(){
-  db.ref('settings/heroSlides').once('value').then(s => {
-    const val = s.val() || defaultBanners;
-    $("#bannersJsonInput").value = JSON.stringify(val, null, 2);
-  });
-}
-
-$("#saveBannersBtn").onclick = ()=>{
-  try {
-    const parsed = JSON.parse($("#bannersJsonInput").value);
-    db.ref('settings/heroSlides').set(parsed).then(()=>{
-      toast("✅ تم تحديث البانرات بنجاح");
-    }).catch(err=>toast("❌ " + err.message));
-  } catch(e){
-    toast("❌ صيغة JSON غير صحيحة");
-  }
-};
 
 function loadSettings(){
   db.ref('settings/maintenance').on('value', s => {
@@ -490,33 +490,20 @@ function loadSettings(){
     btn.textContent = m ? "إيقاف الصيانة" : "تفعيل الصيانة";
     btn.className = m ? "btn" : "btn danger";
   });
-  db.ref('settings/whatsapp').once('value', s => {
-    if(s.val()) $("#whatsappNumberInput").value = s.val();
-  });
+  db.ref('settings/whatsapp').once('value', s => { if(s.val()) $("#whatsappNumberInput").value = s.val(); });
 }
 
 $("#toggleMaintenanceBtn").onclick = ()=>{
   db.ref('settings/maintenance').once('value').then(s => {
-    const cur = s.val() === true;
-    db.ref('settings/maintenance').set(!cur).then(()=>{
-      toast(!cur ? "🛠️ تم تفعيل وضع الصيانة في المتجر" : "🟢 تم إيقاف وضع الصيانة");
-    });
+    db.ref('settings/maintenance').set(!(s.val() === true)).then(()=>toast("🛠️ تم تحديث حالة الصيانة"));
   });
 };
-
-window.toggleMaintenanceQuick = function(){
-  db.ref('settings/maintenance').once('value').then(s => {
-    const cur = s.val() === true;
-    db.ref('settings/maintenance').set(!cur).then(()=>{
-      toast(!cur ? "🛠️ تم تفعيل وضع الصيانة" : "🟢 تم إيقاف الصيانة");
-    });
-  });
-};
+window.toggleMaintenanceQuick = ()=> $("#toggleMaintenanceBtn").click();
 
 $("#saveSettingsBtn").onclick = ()=>{
   const wa = $("#whatsappNumberInput").value.trim();
   if(wa) db.ref('settings/whatsapp').set(wa);
-  toast("✅ تم حفظ الإعدادات بنجاح");
+  toast("✅ تم الحفظ");
 };
 </script>
 </body>
