@@ -24,7 +24,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .skip{background:var(--g1);color:#fff;padding:9px 24px;border-radius:22px;font-weight:800;font-size:12px}
 header{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:10px 12px;margin-bottom:12px;border-radius:16px;background:var(--card);border:1px solid var(--bd2)}
 .brand{display:flex;align-items:center;gap:8px;min-width:0}
-.avatar{width:38px;height:38px;border-radius:50%;border:2px solid var(--a);object-fit:cover}
+.avatar{width:38px;height:38px;border-radius:50%;border:2px solid var(--a);object-fit:cover;cursor:pointer}
 .ctl{display:flex;gap:5px;align-items:center}
 .ibtn{height:32px;min-width:32px;padding:0 8px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:10px;font-weight:800;position:relative;display:inline-flex;align-items:center;justify-content:center}
 .badge{position:absolute;top:-4px;inset-inline-end:-4px;background:#EF4444;color:#fff;font-size:9px;font-weight:900;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
@@ -85,10 +85,10 @@ textarea.in{min-height:75px;resize:none}
 .err{border-color:#EF4444!important}
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9998;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;font-weight:600}
-.wallet-box{background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(147,51,234,.1));border:1px solid var(--bd2);border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.wallet-info small{color:var(--sub);font-size:10px;font-weight:700}
-.wallet-info b{font-size:16px;color:var(--a);display:block}
-.wallet-btn{background:var(--g1);color:#fff;padding:8px 14px;border-radius:12px;font-size:11px;font-weight:900}
+.wallet-box{background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(147,51,234,.15));border:1px solid var(--bd2);border-radius:18px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 25px rgba(37,99,235,.12)}
+.wallet-info small{color:var(--sub);font-size:10.5px;font-weight:700}
+.wallet-info b{font-size:18px;color:var(--a);display:block;margin-top:2px}
+.wallet-btn{background:var(--g1);color:#fff;padding:9px 16px;border-radius:12px;font-size:11.5px;font-weight:900;box-shadow:0 4px 12px rgba(37,99,235,.3)}
 #liveTicker{background:var(--card);border:1px solid var(--bd2);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;overflow:hidden}
 #liveTicker i{color:var(--ok);animation:pulseDot 1.5s infinite}
 @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
@@ -119,10 +119,14 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 #botForm{display:flex;gap:6px;padding:8px 10px;background:var(--bg);border-top:1px solid var(--bd)}
 #botIn{flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:999px;font-size:12px}
 #botSend{width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;font-size:14px}
+
+/* التعديل الجذري هنا لضمان ظهور القائمة بأعلى الشاشة فوراً وبشكل تلقائي وسهل */
 .dots-wrap{position:relative}
 .dots{width:32px;padding:0;display:flex;align-items:center;justify-content:center;font-size:15px}
-.dmenu{position:absolute;top:40px;inset-inline-end:0;z-index:995;min-width:240px;max-height:80vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:16px;padding:6px;box-shadow:0 20px 45px rgba(0,0,0,.5);display:none}
-.dmenu.on{display:block}
+.dmenu{position:fixed;top:65px;left:50%;transform:translateX(-50%);width:92%;max-width:480px;z-index:99999;max-height:80vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:10px;box-shadow:0 25px 50px rgba(0,0,0,.6);display:none}
+.dmenu.on{display:block;animation:dropMenu .25s ease-out}
+@keyframes dropMenu{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+
 .dm-t{font-size:10px;font-weight:800;color:var(--sub);padding:8px 10px 6px}
 .dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
 .dmenu button:hover,.dmenu a:hover{background:var(--inner)}
@@ -252,9 +256,12 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <div id="app">
 <header>
   <div class="brand">
-    <img class="avatar" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png">
-    <div><span class="brand-t secret">أسرع من نتكم 🔥</span> <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
-    <div class="sub">متجر الشحن الأسرع والأرخص 💎</div></div>
+    <img class="avatar" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" onclick="showSec('profile')">
+    <div>
+      <span class="brand-t secret" onclick="showSec('profile')">أسرع من نتكم 🔥</span> 
+      <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
+      <div class="sub">متجر الشحن الأسرع والأرخص 💎</div>
+    </div>
   </div>
   <div class="ctl">
     <button class="ibtn" id="loginBtn" aria-label="Login"><i class="fa-brands fa-google"></i></button>
@@ -310,8 +317,11 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <div id="liveTicker"><i class="fa-solid fa-bolt"></i><span id="tickerText">⚡ جاري تحميل أحدث العروض وعمليات الشحن الفورية</span></div>
 
 <div class="wallet-box">
-  <div class="wallet-info"><small>رصيد المحفظة الحالي</small><b id="walletBalance">0.00 ج.م</b></div>
-  <button class="wallet-btn" id="topupWalletBtn">شحن المحفظة</button>
+  <div class="wallet-info">
+    <small><i class="fa-solid fa-wallet" style="color:var(--a)"></i> رصيد المحفظة الحالي</small>
+    <b id="walletBalance">0.00 ج.م</b>
+  </div>
+  <button class="wallet-btn" id="topupWalletBtn"><i class="fa-solid fa-plus-circle"></i> شحن الرصيد</button>
 </div>
 
 <section id="hero" aria-label="العروض">
@@ -358,7 +368,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <section id="favorites" class="sec"><div class="ttl">❤️ المفضلة</div><div class="grid" id="favGrid"></div></section>
 
 <section id="profile" class="sec">
-  <div class="ttl">👤 الملف الشخصي</div>
+  <div class="ttl">👤 الملف الشخصي (ORIGIWHFTW)</div>
   <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
     <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
       <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
@@ -380,8 +390,11 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">
       <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
-        <small style="font-size:9.5px; color:var(--sub)">ID الحساب</small>
-        <b id="profId" style="direction:ltr; color:var(--a); font-size:12px; display:block; margin-top:2px">------</b>
+        <small style="font-size:9.5px; color:var(--sub)">ID الحساب (قابل للنسخ)</small>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+          <b id="profId" style="direction:ltr; color:var(--a); font-size:11px">------</b>
+          <button class="copy" id="copyProfIdBtn" style="margin:0; width:auto; padding:3px 8px; font-size:9.5px; border-radius:6px;">📋 نسخ</button>
+        </div>
       </div>
       <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
         <small style="font-size:9.5px; color:var(--sub)">رصيد المحفظة</small>
@@ -664,7 +677,6 @@ function updateVipUI() {
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
-// نظام مراقبة الحظر الفوري للعميل
 function listenUserBlockStatus(){
   if(!firebaseOK || !db || !uniqueUid) return;
   db.ref('users/' + uniqueUid + '/isBlocked').on('value', snapshot => {
@@ -771,6 +783,7 @@ function updateUserUI(){
     $("#editNameItem").style.display = "none";
   }
 }
+
 function loginGoogle(){
   if(!firebaseOK || !auth){ toast("⚠️ Firebase غير مفعّل — تصفح كزائر"); return; }
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -800,7 +813,14 @@ function checkRedirectResult() {
   });
 }
 
-$("#loginBtn").onclick = ()=>{ requestSystemNotificationPermission(); loginGoogle(); };
+$("#loginBtn").onclick = ()=>{ 
+  if(user){
+    showSec("profile");
+  } else {
+    requestSystemNotificationPermission(); 
+    loginGoogle(); 
+  }
+};
 $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); loginGoogle(); };
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
 $("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
@@ -815,7 +835,7 @@ if(firebaseOK && auth){
 
 function renderProfile(){
   $("#profName").textContent = store.get("custom_username","") || (user?user.displayName:"زائر");
-  $("#profEmail").textContent = user?user.email:"سجّل دخولك";
+  $("#profEmail").textContent = user?user.email:"سجّل دخولك بجيميل";
   $("#profId").textContent = uniqueUid;
   $("#profRef").textContent = "REF-" + uniqueUid.replace("REAL-","");
   $("#profImg").src = user&&user.photoURL ? user.photoURL : "https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png";
@@ -824,6 +844,7 @@ function renderProfile(){
 }
 $("#copyRefBtn").onclick = ()=>copy($("#profRef").textContent);
 $("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
+$("#copyProfIdBtn").onclick = ()=>copy(uniqueUid);
 
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
 function renderStats(){ $("#stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join(""); }
@@ -1475,7 +1496,7 @@ startOfferTimer();
 renderSearchHist();
 listenNotifs();
 listenSupportTicketReplies(); 
-listenUserBlockStatus(); // <--- تشغيل نظام مراقبة الحظر اللحظي
+listenUserBlockStatus();
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
