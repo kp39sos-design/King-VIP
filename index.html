@@ -471,7 +471,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 const firebaseConfig = {
   apiKey: "AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain: "real-store-c91ec.firebaseapp.com",
-  databaseURL: "https://real-store-a99a0-default-rtdb.firebaseio.com",
+  databaseURL: "https://real-store-c91ec-default-rtdb.firebaseio.com",
   projectId: "real-store-c91ec",
   storageBucket: "real-store-c91ec.appspot.com",
   messagingSenderId: "315828860330",
@@ -534,7 +534,7 @@ function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
 function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
 
-/* ═══════════ User / Wallet ═══════════ */
+/* ═══════════ User / Wallet & DB Listener ═══════════ */
 let userWallet=0, userPoints=0, user=null;
 let uniqueUid = store.get("user_unique_id","");
 function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
@@ -544,9 +544,18 @@ function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[cur
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
 function listenWallet(){
-  if(!firebaseOK || !db) return;
-  db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{ userWallet = s.val()||0; updateWalletUI(); });
-  db.ref('users/' + uniqueUid + '/points').on('value', s=>{ userPoints = s.val()||0; const lv = userPoints>=10000?"👑 VIP":userPoints>=5000?"💎 Diamond":userPoints>=2000?"🥇 Gold":userPoints>=500?"🥈 Silver":"🥉 Bronze"; $("#profPoints").textContent = userPoints + " نقطة"; $("#profLevel").textContent = lv; });
+  if(!firebaseOK || !db || !uniqueUid) return;
+  // الاستماع المباشر لتغيرات الرصيد في قاعدة البيانات بناءً على الـ ID الخاص بالمستخدم
+  db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{
+    userWallet = s.val() || 0;
+    updateWalletUI();
+  });
+  db.ref('users/' + uniqueUid + '/points').on('value', s=>{
+    userPoints = s.val() || 0;
+    const lv = userPoints>=10000?"👑 VIP":userPoints>=5000?"💎 Diamond":userPoints>=2000?"🥇 Gold":userPoints>=500?"🥈 Silver":"🥉 Bronze";
+    $("#profPoints").textContent = userPoints + " نقطة";
+    $("#profLevel").textContent = lv;
+  });
 }
 
 /* ═══════════ Auth (Redirect Mode) ═══════════ */
@@ -598,12 +607,15 @@ function checkRedirectResult() {
 $("#loginBtn").onclick = loginGoogle;
 $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); loginGoogle(); };
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); };
-$("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الدخول"); }); } else { toast("لم يتم تسجيل الدخول"); } };
+$("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 $("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 
 if(firebaseOK && auth){
   auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
   checkRedirectResult();
+} else {
+  // حتى لو لم يسجل الدخول بجيميل، نقوم بتشغيل استماع المحفظة للـ ID الخاص به
+  listenWallet();
 }
 
 function renderProfile(){
