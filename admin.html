@@ -53,7 +53,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 
   <div class="stats" id="stats"></div>
 
-  <!-- قسم إدارة رصيد المحفظة (شحن / خصم / الاستعلام) -->
+  <!-- قسم إدارة رصيد المحفظة -->
   <div class="form">
     <div class="ttl" style="margin-top:0;color:var(--gold)">⚡ إدارة رصيد محفظة العميل</div>
     
@@ -123,7 +123,7 @@ function renderStats(){
   document.getElementById("stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join("");
 }
 
-// 1. زر الاستعلام عن رصيد العميل (تشوف معه كام حالياً)
+// 1. زر الاستعلام عن رصيد العميل
 document.getElementById("checkBalanceBtn").onclick = ()=>{
   const targetId = document.getElementById("adminTargetUid").value.trim();
   const fb = document.getElementById("adminFeedback");
@@ -174,7 +174,7 @@ function processBalanceChange(type){
       nw = cur + amount;
     } else {
       nw = cur - amount;
-      if(nw < 0) nw = 0; // منع نزول الرصيد تحت الصفر
+      if(nw < 0) nw = 0;
     }
     
     ref.set(nw).then(()=>{
@@ -187,6 +187,17 @@ function processBalanceChange(type){
       document.getElementById("currentBalanceDisplay").textContent = nw.toFixed(2) + " ج.م";
       document.getElementById("balanceCheckResult").style.display = "block";
       
+      // إذا كانت عملية "شحن" (إضافة)، نقوم بإرسال إشعار تلقائي للعميل بالمكافأة 🎉
+      if(type === "add"){
+        const notifId = "notif_" + Date.now();
+        db.ref('notifications/' + targetId + '/' + notifId).set({
+          title: "🎁 مكافأة شحن جديدة من REAL STORE",
+          body: `مبروك! لقد حصلت على مكافأة شحن بقيمة (${amount} ج.م) من مدير التطبيق REAL STORE 🔥`,
+          time: Date.now(),
+          read: false
+        }).catch(()=>{});
+      }
+
       document.getElementById("adminAmount").value = "";
     }).catch(err=>{ fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
   });
