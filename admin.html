@@ -45,7 +45,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
   <div class="g-card">
     <h2 style="font-size:18px;margin-bottom:8px">👑 لوحة إدارة REAL STORE</h2>
     <p class="sub" style="margin-bottom:16px">أدخل كلمة المرور الخاصة بالمدير للمتابعة</p>
-    <input type="password" id="adminPasswordInput" class="in" placeholder="كلمة المرور (مثال: 123456)" style="text-align:center;font-weight:800;letter-spacing:2px">
+    <input type="password" id="adminPasswordInput" class="in" placeholder="كلمة المرور (123456)" style="text-align:center;font-weight:800;letter-spacing:2px">
     <button class="gbtn" id="loginPassBtn">🔓 دخول لوحة التحكم</button>
   </div>
 </div>
@@ -97,7 +97,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 const $ = s => document.querySelector(s);
-const ADMIN_PASS = "123456"; // يمكنك تغيير كلمة المرور هذه من هنا في أي وقت
+const ADMIN_PASS = "123456";
 
 function toast(m){ const e=$("#toast"); e.textContent=m; e.style.display="block"; setTimeout(()=>e.style.display="none",2500); }
 const esc = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -111,7 +111,6 @@ const STATUS_MAP = {
   cancelled:{t:"ملغي",c:"st-cancelled"}
 };
 
-// التحقق من حالة الدخول المخزنة مسبقاً في المتصفح
 if(localStorage.getItem("admin_logged") === "true"){
   $("#gate").style.display = "none";
   $("#app").style.display = "block";
