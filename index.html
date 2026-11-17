@@ -217,52 +217,12 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .page-body p{color:var(--sub);margin-bottom:6px}
 #searchHist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .schip{background:var(--inner);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--sub);cursor:pointer}
-
-.vip-badge-box {
-  background: linear-gradient(135deg, rgba(217,155,22,0.12), rgba(147,51,234,0.12));
-  border: 1px solid var(--gold);
-  border-radius: 18px;
-  padding: 14px;
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: start;
-}
-.vip-avatar-badge {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  background: transparent;
-  border: none !important;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5), 0 0 12px rgba(255,209,102,0.3);
-  flex-shrink: 0;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.8));
-}
-.vip-info-text b {
-  color: var(--gold);
-  font-size: 13.5px;
-  display: block;
-}
-.vip-info-text small {
-  color: var(--sub);
-  font-size: 10px;
-}
-.vip-progress-bar {
-  width: 100%;
-  height: 6px;
-  background: var(--inner);
-  border-radius: 3px;
-  margin-top: 6px;
-  overflow: hidden;
-  border: 1px solid var(--bd);
-}
-.vip-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #D99B16, #2563EB);
-  width: 0%;
-  transition: width 0.4s ease;
-}
+.vip-badge-box{background:linear-gradient(135deg,rgba(217,155,22,0.12),rgba(147,51,234,0.12));border:1px solid var(--gold);border-radius:18px;padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;text-align:start}
+.vip-avatar-badge{width:56px;height:56px;object-fit:contain;background:transparent;border:none!important;box-shadow:0 6px 16px rgba(0,0,0,0.5),0 0 12px rgba(255,209,102,0.3);flex-shrink:0;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.8))}
+.vip-info-text b{color:var(--gold);font-size:13.5px;display:block}
+.vip-info-text small{color:var(--sub);font-size:10px}
+.vip-progress-bar{width:100%;height:6px;background:var(--inner);border-radius:3px;margin-top:6px;overflow:hidden;border:1px solid var(--bd)}
+.vip-progress-fill{height:100%;background:linear-gradient(90deg,#D99B16,#2563EB);width:0%;transition:width 0.4s ease}
 </style>
 </head>
 <body>
@@ -400,11 +360,9 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <section id="profile" class="sec">
   <div class="ttl">👤 الملف الشخصي</div>
   <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
-    
     <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
       <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
     </div>
-
     <b id="profName" style="font-size:16px; font-weight:900; display:block; margin-bottom:2px">زائر</b>
     <small id="profEmail" style="color:var(--sub); font-size:11px; display:block; margin-bottom:14px">-</small>
     
@@ -594,7 +552,6 @@ const IMG="https://www.image2url.com/r2/default/images/";
 const imgUrl=u=>u.startsWith("http")?u:IMG+u;
 const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.jpg",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 
-// القاموس الافتراضي للألعاب والأسعار
 let GAMES={
  pubg:{n:"PUBG Mobile",k:"ببجي",img:"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp",gl:"#FFB800",items:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]]},
  mlbb:{n:"Mobile Legends",k:"موبايل ليجند",img:"1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg",gl:"#00D9FF",items:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]]},
@@ -737,6 +694,32 @@ function listenWallet(){
     userTotalSpent = s.val() || 0;
     store.set("user_total_spent", userTotalSpent);
     updateVipUI();
+  });
+}
+
+// مراقبة ردود الدعم الفني الحية داخل التطبيق مع الإشعار الصوتي والنصي
+let lastCheckedTicketReplies = {};
+function listenSupportTicketReplies(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('support_tickets/' + uniqueUid).on('value', s => {
+    const tickets = s.val() || {};
+    Object.entries(tickets).forEach(([tid, t]) => {
+      if(t.reply && lastCheckedTicketReplies[tid] !== t.reply){
+        if(lastCheckedTicketReplies[tid] !== undefined){
+          toast("💬 رد جديد من الدعم الفني: " + t.subject);
+          playDingSound();
+          if("Notification" in window && Notification.permission === "granted"){
+            new Notification("أسرع من نتكم 🔥 - رد الدعم الفني", {
+              body: "رد الإدارة: " + t.reply,
+              icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+            });
+          }
+        }
+        lastCheckedTicketReplies[tid] = t.reply;
+      } else if(!t.reply) {
+        lastCheckedTicketReplies[tid] = "";
+      }
+    });
   });
 }
 
@@ -1372,7 +1355,6 @@ function listenHeroBanners(){
   });
 }
 
-// جلب الأسعار المحدثة من Firebase فوراً
 function listenGamePrices(){
   if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
   db.ref('settings/gamesPrices').on('value', s=>{
@@ -1453,6 +1435,7 @@ listenGamePrices();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
+listenSupportTicketReplies(); // تفعيل مراقبة ردود الدعم الفني الحية داخل التطبيق
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
