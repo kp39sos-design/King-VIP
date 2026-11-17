@@ -529,12 +529,12 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}ca
 let lang=store.get("lang","ar"); if(!["ar","en","ja"].includes(lang)) lang="ar";
 let currency=store.get("currency","ar"); if(!["ar","en","ja"].includes(currency)) currency="ar";
 const fmtPrice=n=>(n*(CFG.rates[currency]||1)).toLocaleString("en",{minimumFractionDigits:currency==="ja"?0:2,maximumFractionDigits:currency==="ja"?0:2});
-let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",2000)}
+let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
 function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){toast("❌ لم يتم النسخ")}};if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok).catch(fail);else fail()}
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
 function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
 
-/* ═══════════ User / Wallet & DB Listener ═══════════ */
+/* ═══════════ User / Wallet & DB Listener with Instant Toast Alert ═══════════ */
 let userWallet=0, userPoints=0, user=null;
 let uniqueUid = store.get("user_unique_id","");
 function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
@@ -543,13 +543,25 @@ function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[cur
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
+let lastKnownWallet = null;
 function listenWallet(){
   if(!firebaseOK || !db || !uniqueUid) return;
-  // الاستماع المباشر لتغيرات الرصيد في قاعدة البيانات بناءً على الـ ID الخاص بالمستخدم
+  
+  // الاستماع المباشر لتغيرات الرصيد وإظهار رسالة فورية عند الشحن
   db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{
-    userWallet = s.val() || 0;
+    const newWallet = s.val() || 0;
+    
+    // إذا زاد الرصيد عن القيمة السابقة، تظهر رسالة منبثقة للمستخدم فوراً
+    if(lastKnownWallet !== null && newWallet > lastKnownWallet){
+      const addedAmount = newWallet - lastKnownWallet;
+      toast(`🚀 مبروك! تمت إضافة (${addedAmount} ج.م) لحسابك بنجاح!`);
+    }
+    
+    userWallet = newWallet;
+    lastKnownWallet = newWallet;
     updateWalletUI();
   });
+
   db.ref('users/' + uniqueUid + '/points').on('value', s=>{
     userPoints = s.val() || 0;
     const lv = userPoints>=10000?"👑 VIP":userPoints>=5000?"💎 Diamond":userPoints>=2000?"🥇 Gold":userPoints>=500?"🥈 Silver":"🥉 Bronze";
@@ -614,7 +626,6 @@ if(firebaseOK && auth){
   auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
   checkRedirectResult();
 } else {
-  // حتى لو لم يسجل الدخول بجيميل، نقوم بتشغيل استماع المحفظة للـ ID الخاص به
   listenWallet();
 }
 
