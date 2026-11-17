@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
@@ -47,7 +46,6 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
   <!-- قسم تعديل أسعار الألعاب والباقات -->
   <div class="card">
     <h3><i class="fa-solid fa-tags"></i> تعديل أسعار الباقات والألعاب</h3>
-    <p class="sub" style="margin-bottom:10px">اختر اللعبة، ثم عدل سعر أي باقة واضغط حفظ لتتحدث فوراً للمستخدمين.</p>
     <select id="adminGameSelect" class="in" style="font-weight:800">
       <option value="pubg">PUBG Mobile (ببجي)</option>
       <option value="mlbb">Mobile Legends (موبايل ليجند)</option>
@@ -71,6 +69,16 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
     <input id="adminAmount" class="in" type="number" placeholder="المبلغ المراد إضافته (ج.م)">
     <button class="btn" id="adminSendBalanceBtn" style="background:var(--g2);color:#382000">🚀 شحن رصيد العميل فوراً</button>
     <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+  </div>
+
+  <!-- قسم ترقية مستوى الـ VIP للعميل -->
+  <div class="card">
+    <h3><i class="fa-solid fa-crown" style="color:var(--gold)"></i> ترقية وتعلي مستوى VIP للعميل</h3>
+    <p class="sub" style="margin-bottom:8px">أدخل ID العميل والمبلغ المطلوب تعيينه كمجموع مشتريات (Total Spent) لرفع مستواه للـ VIP المناسب تلقائياً.</p>
+    <input id="adminVipTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
+    <input id="adminVipSpentAmount" class="in" type="number" placeholder="إجمالي المشتريات المراد ضبطه (مثال: 5000 للوصول لـ VIP 5)">
+    <button class="btn" id="adminUpdateVipBtn" style="background:var(--g2);color:#382000">⭐ ترقية وضبط مستوى VIP للعميل فوراً</button>
+    <div id="adminVipFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
   </div>
 
   <!-- قسم تذاكر الدعم الفني -->
@@ -157,7 +165,7 @@ document.getElementById('saveBannersBtn').onclick = () => {
   }).catch(err => { fb.style.color = "#EF4444"; fb.textContent = "❌ " + err.message; });
 };
 
-// إدارة وتعديل أسعار الألعاب في لوحة الإدارة
+// إدارة وتعديل أسعار الألعاب
 function renderGamePriceEditor(gameKey){
   const container = document.getElementById('gamePricesEditorContainer');
   const items = allGamesPrices[gameKey] || [];
@@ -219,6 +227,22 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
       document.getElementById('adminAmount').value="";
     }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
   });
+};
+
+// ترقية مستوى الـ VIP للعميل عبر تعديل مجموع مشترياته (Total Spent)
+document.getElementById('adminUpdateVipBtn').onclick = () => {
+  const targetId = document.getElementById('adminVipTargetUid').value.trim();
+  const spentAmount = parseFloat(document.getElementById('adminVipSpentAmount').value);
+  const fb = document.getElementById('adminVipFeedback');
+  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
+  if(isNaN(spentAmount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح لمشتريات VIP"; return; }
+  
+  db.ref('users/'+targetId+'/totalSpent').set(spentAmount).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `⭐ تم تعيين إجمالي مشتريات العميل (${targetId}) إلى (${spentAmount} ج.م) وترقية مستواه بنجاح!`;
+    document.getElementById('adminVipTargetUid').value="";
+    document.getElementById('adminVipSpentAmount').value="";
+  }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
 };
 
 // تذاكر الدعم الفني
