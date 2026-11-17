@@ -674,6 +674,21 @@ function updateVipUI() {
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
+function listenMaintenanceMode(){
+  if(!firebaseOK || !db) return;
+  db.ref('settings/maintenance').on('value', s => {
+    if(s.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed; inset:0; background:#030712; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; font-family:Cairo,sans-serif; z-index:999999;">
+          <div style="font-size:60px; margin-bottom:15px;">🛠️</div>
+          <h1 style="color:#F59E0B; font-size:24px; margin-bottom:10px;">المتجر تحت الصيانة حالياً</h1>
+          <p style="color:#94A3B8; font-size:13.5px; max-width:340px; line-height:1.7;">نقوم حالياً بإجراء تحديثات وتحسينات لخدمتكم. سنعود للعمل قريباً جداً، شكراً لتفهمكم!</p>
+        </div>
+      `;
+    }
+  });
+}
+
 function listenUserBlockStatus(){
   if(!firebaseOK || !db || !uniqueUid) return;
   db.ref('users/' + uniqueUid + '/isBlocked').on('value', snapshot => {
@@ -1198,10 +1213,36 @@ function updateModalPrice(){
 $("#applyPromoBtn").onclick = ()=>{
   const code = $("#promoCodeInput").value.trim().toUpperCase();
   const fb = $("#promoFeedback");
-  if(code === "BESO47"){ activeDiscount = 0.01; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
-  else if(code === "BESO41O" || code === "BESO410"){ activeDiscount = 0.10; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
-  else if(!code){ fb.style.color="var(--sub)"; fb.textContent="⚠️ أدخل الكود أولاً"; }
-  else { activeDiscount = CFG.discount; appliedPromoCode = ""; updateModalPrice(); fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح"; }
+  
+  if(!firebaseOK || !db){
+    if(code === "BESO47"){ activeDiscount = 0.01; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+    else if(code === "BESO41O" || code === "BESO410"){ activeDiscount = 0.10; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+    else { fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح"; }
+    return;
+  }
+
+  db.ref('coupons/' + code).once('value').then(s => {
+    const coupon = s.val();
+    if(coupon && coupon.active !== false) {
+      if(coupon.expiresAt && Date.now() > coupon.expiresAt) {
+        fb.style.color = "#EF4444"; fb.textContent = "❌ انتهت صلاحية هذا الكوبون";
+        return;
+      }
+      if(coupon.uses && coupon.uses <= 0) {
+        fb.style.color = "#EF4444"; fb.textContent = "❌ لقد نفاذ استخدام هذا الكوبون";
+        return;
+      }
+      const discVal = parseFloat(coupon.discount) || 0.05;
+      activeDiscount = discVal > 1 ? discVal / 100 : discVal;
+      appliedPromoCode = code;
+      updateModalPrice();
+      fb.style.color = "var(--ok)"; fb.textContent = "✅ تم تفعيل كود الخصم بنجاح!"; toast("🎉 تم تفعيل الخصم");
+    } else {
+      if(code === "BESO47"){ activeDiscount = 0.01; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+      else if(code === "BESO41O" || code === "BESO410"){ activeDiscount = 0.10; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+      else { activeDiscount = CFG.discount; appliedPromoCode = ""; updateModalPrice(); fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح أو منتهي"; }
+    }
+  });
 };
 const closeModal = ()=>$("#modal").classList.remove("on");
 $("#mx").onclick = closeModal;
@@ -1552,6 +1593,7 @@ renderSearchHist();
 listenNotifs();
 listenSupportTicketReplies(); 
 listenUserBlockStatus();
+listenMaintenanceMode();
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
