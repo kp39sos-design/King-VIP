@@ -1217,7 +1217,6 @@ $("#sendSupportTicketBtn").onclick = ()=>{
     reply: ""
   };
   db.ref('support_tickets/'+uniqueUid+'/'+ticketId).set(ticketData).then(()=>{
-    // نسخة للوحة الإدارة العامة
     db.ref('admin_tickets/'+ticketId).set(ticketData).catch(()=>{});
     toast("✅ تم إرسال تذكرة الدعم بنجاح");
     $("#supportSubject").value = "";
@@ -1343,7 +1342,8 @@ function hideSplash(){ const s = $("#splash"); if(s){ s.classList.add("hide"); s
 $("#skip").onclick = hideSplash;
 setTimeout(hideSplash, 4000);
 
-const heroSlides = [
+// نظام البنرات الديناميكي المتصل بـ Firebase
+let heroSlides = [
   {img:"https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", title:"Banner 1"},
   {img:"https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png", title:"Banner 2"},
   {img:"https://cdn.imagetourls.com/uploads/tyImg/swbD7etT.png", title:"Banner 3"},
@@ -1362,7 +1362,18 @@ function renderHero(){
     idx = n;
   };
   d.onclick = e=>{ const b = e.target.closest("[data-slide]"); if(b) go(+b.dataset.slide); };
-  setInterval(()=>go((idx+1) % heroSlides.length), 4000);
+  if(window.heroInterval) clearInterval(window.heroInterval);
+  window.heroInterval = setInterval(()=>go((idx+1) % heroSlides.length), 4000);
+}
+function listenHeroBanners(){
+  if(!firebaseOK || !db) { renderHero(); return; }
+  db.ref('settings/heroSlides').on('value', s=>{
+    const data = s.val();
+    if(data && Array.isArray(data) && data.length > 0){
+      heroSlides = data;
+    }
+    renderHero();
+  });
 }
 
 function startOfferTimer(){
@@ -1424,7 +1435,7 @@ $("#backTop").onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
 
 setTheme(store.get("theme", "light"));
 applyLang();
-renderHero();
+listenHeroBanners();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
