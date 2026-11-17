@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080B18">
-<title>أسرع من نتكم | لوحة الإدارة المبسطة والمحترفة 👑</title>
+<title>أسرع من نتكم | لوحة الإدارة المحترفة 👑</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -79,6 +79,7 @@ textarea.in{min-height:80px;resize:none}
   <button class="tab" data-sec="orders">📦 الطلبات</button>
   <button class="tab" data-sec="balance">⚡ الرصيد</button>
   <button class="tab" data-sec="vip">👑 ترقية VIP</button>
+  <button class="tab" data-sec="ban">🚫 حظر المستخدمين</button>
   <button class="tab" data-sec="banners">🖼️ البانرات</button>
   <button class="tab" data-sec="prices">🎮 الأسعار</button>
   <button class="tab" data-sec="coupons">🎫 الكوبونات</button>
@@ -97,7 +98,7 @@ textarea.in{min-height:80px;resize:none}
   <div class="card">
     <div class="ttl" style="margin-top:0">⚡ اختصارات سريعة</div>
     <button class="btn" onclick="switchSec('balance')">شحن رصيد للعميل</button>
-    <button class="btn gold" onclick="switchSec('vip')" style="margin-top:8px">👑 ترقية مستوى VIP للعميل</button>
+    <button class="btn gold" onclick="switchSec('ban')" style="margin-top:8px">🚫 حظر أو رفع الحظر عن مستخدم</button>
     <button class="btn danger" onclick="toggleMaintenanceQuick()" style="margin-top:8px">🛠️ تبديل وضع الصيانة السريع</button>
   </div>
 </section>
@@ -119,7 +120,7 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 4. ترقية VIP (من 1 إلى 13) -->
+<!-- 4. ترقية VIP -->
 <section id="vip" class="sec">
   <div class="ttl" style="margin-top:0">👑 إدارة وترقية مستويات الـ VIP (1 إلى 13)</div>
   <div class="card">
@@ -144,7 +145,22 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 5. البانرات عبر روابط سهلة -->
+<!-- 5. حظر ورفع الحظر عن المستخدمين عبر الـ ID -->
+<section id="ban" class="sec">
+  <div class="ttl" style="margin-top:0">🚫 حظر ورفع الحظر عن المستخدمين بالـ ID</div>
+  <div class="card">
+    <input id="banTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button class="btn danger" id="banUserBtn" style="flex:1">🚫 حظر المستخدم</button>
+      <button class="btn" id="unbanUserBtn" style="flex:1;background:var(--ok);color:#032914">🔓 رفع الحظر</button>
+    </div>
+    <div id="banFeedback" style="font-size:11px;font-weight:700;margin-top:8px;min-height:16px"></div>
+  </div>
+  <div class="ttl">📋 قائمة الحسابات المحظورة حالياً</div>
+  <div id="blockedUsersList"></div>
+</section>
+
+<!-- 6. البانرات -->
 <section id="banners" class="sec">
   <div class="ttl" style="margin-top:0">🖼️ إضافة وتعديل البانرات عبر الروابط</div>
   <div class="card">
@@ -154,7 +170,7 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 6. تعديل الأسعار بكل سلاسة -->
+<!-- 7. الأسعار -->
 <section id="prices" class="sec">
   <div class="ttl" style="margin-top:0">🎮 تعديل أسعار الألعاب</div>
   <div class="card">
@@ -174,7 +190,7 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 7. الكوبونات -->
+<!-- 8. الكوبونات -->
 <section id="coupons" class="sec">
   <div class="ttl" style="margin-top:0">🎫 إدارة الكوبونات</div>
   <div class="card">
@@ -185,13 +201,13 @@ textarea.in{min-height:80px;resize:none}
   <div id="adminCouponsList"></div>
 </section>
 
-<!-- 8. تذاكر الدعم -->
+<!-- 9. تذاكر الدعم -->
 <section id="tickets" class="sec">
   <div class="ttl" style="margin-top:0">🎧 تذاكر الدعم الفني</div>
   <div id="adminTicketsList"></div>
 </section>
 
-<!-- 9. الإعدادات والصيانة -->
+<!-- 10. الإعدادات والصيانة -->
 <section id="settings" class="sec">
   <div class="ttl" style="margin-top:0">⚙️ إعدادات المتجر والصيانة</div>
   <div class="card">
@@ -272,6 +288,7 @@ function initAdminDashboard(){
   loadBannersUI();
   loadPricesUI();
   loadSettings();
+  loadBlockedUsersList();
 }
 
 function loadOverviewAndOrders(){
@@ -334,7 +351,6 @@ $("#sendBalanceActionBtn").onclick = ()=>{
   });
 };
 
-// 👑 ترقية VIP من 1 إلى 13 بدون أخطاء
 $("#updateVipActionBtn").onclick = ()=>{
   const uid = $("#vipTargetUid").value.trim();
   const minSpent = parseFloat($("#vipNewLevelSelect").value);
@@ -352,7 +368,61 @@ $("#updateVipActionBtn").onclick = ()=>{
   });
 };
 
-// 🖼️ البانرات عبر روابط سهلة
+// 🚫 حظر ورفع الحظر عن طريق الـ ID
+$("#banUserBtn").onclick = ()=>{
+  const uid = $("#banTargetUid").value.trim();
+  const fb = $("#banFeedback");
+  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
+
+  db.ref('users/'+uid+'/isBlocked').set(true).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `🚫 تم حظر المستخدم (${uid}) بنجاح من فتح الموقع!`;
+    $("#banTargetUid").value = "";
+    toast("🚫 تم حظر المستخدم");
+  }).catch(err => {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ " + err.message;
+  });
+};
+
+$("#unbanUserBtn").onclick = ()=>{
+  const uid = $("#banTargetUid").value.trim();
+  const fb = $("#banFeedback");
+  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
+
+  db.ref('users/'+uid+'/isBlocked').set(false).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `🔓 تم رفع الحظر عن المستخدم (${uid}) بنجاح!`;
+    $("#banTargetUid").value = "";
+    toast("🔓 تم رفع الحظر");
+  }).catch(err => {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ " + err.message;
+  });
+};
+
+function loadBlockedUsersList(){
+  db.ref('users').on('value', s => {
+    const users = s.val() || {};
+    const blocked = Object.entries(users).filter(([uid, u]) => u.isBlocked === true);
+    const box = $("#blockedUsersList");
+    if(!blocked.length){
+      box.innerHTML = '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد حسابات محظورة حالياً</p>';
+      return;
+    }
+    box.innerHTML = blocked.map(([uid, u]) => `
+      <div class="list-item" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <b>${esc(u.profile?.name || uid)}</b>
+          <div style="font-size:10px;color:var(--sub);direction:ltr">ID: ${esc(uid)}</div>
+        </div>
+        <button class="btn" style="width:auto;padding:6px 12px;background:var(--ok);color:#032914;font-size:10px" onclick="db.ref('users/${esc(uid)}/isBlocked').set(false);toast('🔓 تم رفع الحظر')">رفع الحظر</button>
+      </div>
+    `).join("");
+  });
+}
+
+// 🖼️ البانرات
 let currentBannersList = [];
 function renderBannersEditor(){
   const box = $("#bannersEditorContainer");
@@ -365,10 +435,7 @@ function renderBannersEditor(){
   `).join("");
 }
 
-$("#addNewBannerRow").onclick = ()=>{
-  currentBannersList.push("");
-  renderBannersEditor();
-};
+$("#addNewBannerRow").onclick = ()=>{ currentBannersList.push(""); renderBannersEditor(); };
 
 function loadBannersUI(){
   db.ref('settings/heroSlides').once('value', s => {
@@ -382,9 +449,7 @@ $("#saveBannersActionBtn").onclick = ()=>{
   const inputs = $$('.banner-url-input');
   currentBannersList = Array.from(inputs).map(i => i.value.trim()).filter(v=>v);
   const formatted = currentBannersList.map((img, i) => ({img, title: `Banner ${i+1}`}));
-  db.ref('settings/heroSlides').set(formatted).then(()=>{
-    toast("✅ تم حفظ البانرات ونشرها بنجاح!");
-  });
+  db.ref('settings/heroSlides').set(formatted).then(()=>toast("✅ تم حفظ البانرات بنجاح!"));
 };
 
 // 🎮 الأسعار
@@ -431,9 +496,7 @@ $("#savePricesActionBtn").onclick = ()=>{
     const p = parseFloat(prices[i].value);
     if(n && !isNaN(p)) newArr.push([n, p]);
   }
-  db.ref('settings/gamesPrices/'+gKey).set(newArr).then(()=>{
-    toast("✅ تم تحديث أسعار اللعبة في المتجر فوراً!");
-  });
+  db.ref('settings/gamesPrices/'+gKey).set(newArr).then(()=>toast("✅ تم تحديث أسعار اللعبة فوراً!"));
 };
 
 function loadCoupons(){
@@ -454,7 +517,7 @@ $("#createCouponBtn").onclick = ()=>{
   if(!code || isNaN(discount)){ toast("⚠️ أدخل الكود والنسبة"); return; }
   db.ref('coupons/'+code).set({ discount, active: true }).then(()=>{
     toast("✅ تم حفظ الكوبون");
-    $("#couponCodeInput.value = ''; #couponDiscountInput.value = '';");
+    $("#couponCodeInput").value = ''; $("#couponDiscountInput").value = '';
   });
 };
 
