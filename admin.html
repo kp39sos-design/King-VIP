@@ -40,37 +40,43 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 .balance-check-box{background:rgba(56,189,248,.08);border:1px dashed var(--a);border-radius:12px;padding:10px;margin-bottom:10px;text-align:center;display:none}
 .balance-check-box b{color:var(--gold);font-size:15px}
 
-/* شبكة عرض مستويات الـ VIP */
+/* شبكة عرض مستويات الـ VIP 3D بدون إطارات */
 .vip-admin-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  max-height: 220px;
+  gap: 12px;
+  max-height: 260px;
   overflow-y: auto;
-  padding: 4px;
+  padding: 6px;
 }
 .vip-admin-card {
   background: var(--inner);
-  border: 1px solid var(--bd2);
-  border-radius: 12px;
-  padding: 8px;
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .vip-admin-card img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--gold);
-  margin-bottom: 4px;
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  background: transparent;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px rgba(255,209,102,0.25);
+  margin-bottom: 6px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
 }
 .vip-admin-card b {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--gold);
   display: block;
 }
 .vip-admin-card small {
-  font-size: 8.5px;
+  font-size: 9px;
   color: var(--sub);
 }
 </style>
@@ -86,6 +92,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
   </header>
 
   <div class="stats" id="stats"></div>
+
+  <!-- سجل الزوار والعملاء النشطين لحظة بلحظة -->
+  <div class="form">
+    <div class="ttl" style="margin-top:0;color:var(--gold)">👥 سجل زوار وعملاء الموقع (Live Activity)</div>
+    <div id="liveVisitorsList" style="font-size:11px;max-height:220px;overflow-y:auto"></div>
+  </div>
 
   <!-- قسم التحكم اليدوي في مستوى الـ VIP للعميل -->
   <div class="form">
@@ -112,7 +124,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 
   <!-- قسم معاينة مستويات الـ VIP الـ 13 -->
   <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">🖼️ دليل مستويات الـ VIP الـ 13</div>
+    <div class="ttl" style="margin-top:0;color:var(--gold)">🖼️ دليل مستويات الـ VIP الـ 13 (3D حقيقي)</div>
     <div class="vip-admin-grid" id="vipAdminGrid"></div>
   </div>
 
@@ -122,10 +134,8 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
     
     <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-894685)" style="direction:ltr">
     
-    <!-- زر الاستعلام عن الرصيد الحالي -->
     <button class="btn btn-primary" id="checkBalanceBtn" style="margin-bottom:10px;background:linear-gradient(135deg,#059669,#10B981)"><i class="fa-solid fa-wallet"></i> فحص ومعرفة رصيد العميل الحالي</button>
     
-    <!-- صندوق عرض الرصيد بعد الفحص -->
     <div id="balanceCheckResult" class="balance-check-box">
       <span class="sub" style="display:block">رصيد العميل الحالي في المحفظة:</span>
       <b id="currentBalanceDisplay">0.00 ج.م</b>
@@ -200,7 +210,27 @@ function renderAdminVipTiers(){
   `).join("");
 }
 
-// زر تحديث مستوى الـ VIP للعميل يدويًا
+// جلب وعرض تفاصيل الزوار والعملاء النشطين لحظة بلحظة من قاعدة البيانات
+function renderLiveVisitors(){
+  const box = document.getElementById("liveVisitorsList");
+  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
+  
+  db.ref('visitors').limitToLast(10).once('value').then(s=>{
+    const data = s.val() || {};
+    const arr = Object.entries(data).reverse();
+    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد زيارات مسجلة حتى الآن</p>'; return; }
+    
+    box.innerHTML = arr.map(([id, v])=>`
+      <div class="order-card" style="margin-bottom:6px">
+        <div class="oc-top"><b>ID: ${esc(v.uid || "زائر")}</b><span class="status-pill st-paid">${esc(v.device || "متصفح")}</span></div>
+        <small class="sub">👤 الاسم: ${esc(v.name || "زائر غير مسجل")} | 📧 الإيميل: ${esc(v.email || "غير متوفر")}</small><br>
+        <small class="sub">🌐 المتصفح/الجهاز: ${esc(v.userAgent || navigator.userAgent)}</small><br>
+        <small class="sub">⏰ وقت الزيارة: ${new Date(v.time || Date.now()).toLocaleString('ar-EG')}</small>
+      </div>
+    `).join("");
+  }).catch(err=>{ box.innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
+}
+
 document.getElementById("updateVipBtn").onclick = ()=>{
   const targetId = document.getElementById("vipTargetUid").value.trim();
   const newSpent = parseFloat(document.getElementById("vipSelectLevel").value);
@@ -216,7 +246,6 @@ document.getElementById("updateVipBtn").onclick = ()=>{
     fb.textContent = `✅ تم تحديث مستوى الـ VIP للـ ID: (${targetId}) بنجاح!`;
     toast("👑 تم تعديل مستوى العميل بنجاح");
     
-    // إرسال إشعار للعميل بترقية مستواه أو تعديله
     const notifId = "notif_vip_" + Date.now();
     db.ref('notifications/' + targetId + '/' + notifId).set({
       title: "⭐ تحديث مستوى الحساب",
@@ -318,7 +347,7 @@ function renderAdminOrders(){
     document.getElementById("adminOrders").innerHTML = flat.map(o=>`
       <div class="order-card">
         <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
-        <small class="sub">${esc(o.uid)} • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
+        <small class="sub">👤 ${esc(o.name || "عميل")} (${esc(o.uid)}) • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
         <div style="font-size:11px;margin:4px 0">${(o.items||[]).map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")}</div>
         <b style="color:var(--gold)">${(o.total||0).toFixed(2)} ج.م</b>
         <select onchange="setOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
@@ -343,6 +372,7 @@ document.getElementById("reset").onclick = ()=>{ if(confirm("هل أنت متأ�
 
 renderStats();
 renderAdminVipTiers();
+renderLiveVisitors();
 renderAdminOrders();
 </script>
 </body>
