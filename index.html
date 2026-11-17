@@ -787,7 +787,6 @@ function loginGoogle(){
   auth.signInWithRedirect(provider).catch(err => { toast("❌ " + err.message); });
 }
 
-// دالة للبحث عن الـ ID القديم الخاص بالإيميل في قاعدة البيانات أو إنشائه لو أول مرة
 async function getOrCreateUserUniqueId(email, googleUid) {
   if (!db) return store.get("user_unique_id", genUid());
   
@@ -797,18 +796,15 @@ async function getOrCreateUserUniqueId(email, googleUid) {
   return new Promise((resolve) => {
     emailRef.once('value').then(async (snapshot) => {
       if (snapshot.exists()) {
-        // لو الإيميل ده ليه ID قديم متسجل قبل كده، نرجعه فوراً عشان الرصيد ما يتصفرش!
         const existingId = snapshot.val();
         store.set("user_unique_id", existingId);
         resolve(existingId);
       } else {
-        // لو أول مرة يسجل بالإيميل ده، نشوف لو عنده ID قديم متخزن محلياً أو نعمله واحد جديد
         let currentId = store.get("user_unique_id", "");
         if (!currentId || currentId.startsWith("GUEST")) {
           currentId = "REAL-" + Math.floor(100000 + Math.random()*900000);
         }
         store.set("user_unique_id", currentId);
-        // نربط الإيميل بالـ ID ده في قاعدة البيانات للأبد
         await emailRef.set(currentId);
         resolve(currentId);
       }
@@ -816,13 +812,11 @@ async function getOrCreateUserUniqueId(email, googleUid) {
   });
 }
 
-// تعديل دالة تحقق تسجيل الدخول (Redirect)
 async function checkRedirectResult() {
   if(!firebaseOK || !auth) return;
   auth.getRedirectResult().then(async (result) => {
     if (result.user) {
       user = result.user;
-      // ربط الإيميل بالـ ID الثابت
       uniqueUid = await getOrCreateUserUniqueId(user.email, user.uid);
       
       if(db) {
@@ -844,7 +838,6 @@ async function checkRedirectResult() {
   });
 }
 
-// تعديل مراقب حالة المستخدم (Auth State Changed)
 if(firebaseOK && auth){
   auth.onAuthStateChanged(async (u)=>{ 
     user = u; 
@@ -1447,7 +1440,6 @@ function renderHero(){
   window.heroInterval = setInterval(()=>go((idx+1) % heroSlides.length), 4000);
 }
 
-// دمج الاستماع للبنرات (عام أو فردي للمستخدم الحالي)
 function listenHeroBanners(){
   if(!firebaseOK || !db) { renderHero(); return; }
   db.ref('users_custom/' + uniqueUid + '/heroSlides').on('value', usnap => {
@@ -1465,7 +1457,6 @@ function listenHeroBanners(){
   });
 }
 
-// دمج الاستماع لأسعار الألعاب (عام أو فردي للمستخدم الحالي)
 function listenGamePrices(){
   if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
   db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', usnap => {
