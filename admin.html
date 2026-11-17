@@ -93,6 +93,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 
   <div class="stats" id="stats"></div>
 
+  <!-- قسم رسائل الدعم الفني والشكاوى الواردة -->
+  <div class="form">
+    <div class="ttl" style="margin-top:0;color:var(--gold)">💬 رسائل الدعم الفني والشكاوى الواردة</div>
+    <div id="supportTicketsList" style="font-size:11px;max-height:260px;overflow-y:auto"></div>
+  </div>
+
   <!-- سجل الزوار والعملاء النشطين لحظة بلحظة -->
   <div class="form">
     <div class="ttl" style="margin-top:0;color:var(--gold)">👥 سجل زوار وعملاء الموقع (Live Activity)</div>
@@ -131,23 +137,17 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
   <!-- قسم إدارة رصيد المحفظة -->
   <div class="form">
     <div class="ttl" style="margin-top:0;color:var(--gold)">⚡ إدارة رصيد محفظة العميل</div>
-    
     <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-894685)" style="direction:ltr">
-    
     <button class="btn btn-primary" id="checkBalanceBtn" style="margin-bottom:10px;background:linear-gradient(135deg,#059669,#10B981)"><i class="fa-solid fa-wallet"></i> فحص ومعرفة رصيد العميل الحالي</button>
-    
     <div id="balanceCheckResult" class="balance-check-box">
       <span class="sub" style="display:block">رصيد العميل الحالي في المحفظة:</span>
       <b id="currentBalanceDisplay">0.00 ج.م</b>
     </div>
-
     <input id="adminAmount" class="in" type="number" placeholder="المبلغ (القيمة)" step="0.01">
-    
     <div style="display:flex;gap:8px">
       <button class="btn btn-gold" id="adminSendBalanceBtn" style="flex:1">➕ شحن رصيد فوراً</button>
       <button class="btn btn-danger" id="adminDeductBalanceBtn" style="flex:1">➖ خصم رصيد</button>
     </div>
-    
     <div id="adminFeedback" style="font-size:11.5px;font-weight:700;margin-top:8px;min-height:18px;text-align:center"></div>
   </div>
 
@@ -210,54 +210,93 @@ function renderAdminVipTiers(){
   `).join("");
 }
 
-// جلب وعرض تفاصيل الزوار والعملاء النشطين لحظة بلحظة من قاعدة البيانات
+// عرض رسائل الدعم الفني والشكاوى
+function renderSupportTickets(){
+  const box = document.getElementById("supportTicketsList");
+  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
+  
+  db.ref('support_tickets').once('value').then(s=>{
+    const data = s.val() || {};
+    const flat = [];
+    Object.entries(data).forEach(([uid, tickets])=>{
+      Object.entries(tickets || {}).forEach(([tid, t])=>{
+        flat.push({uid, tid, ...t});
+      });
+    });
+    flat.sort((a,b)=>(b.time||0)-(a.time||0));
+    if(!flat.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد رسائل دعم فني حالياً</p>'; return; }
+    
+    box.innerHTML = flat.map(t=>{
+      const statusClass = t.status === "resolved" ? "st-done" : "st-pending";
+      const statusText = t.status === "resolved" ? "تم الحل ✅" : "قيد المعالجة ⏳";
+      return `
+        <div class="order-card" style="margin-bottom:8px">
+          <div class="oc-top">
+            <b>${esc(t.ticketId)}</b>
+            <span class="status-pill ${statusClass}">${statusText}</span>
+          </div>
+          <small class="sub">👤 ${esc(t.name)} | ID: ${esc(t.uid)}</small><br>
+          <small class="sub">📌 الموضوع: <b>${esc(t.subject || "مشكلة دعم فني")}</b></small>
+          <p style="margin:6px 0;padding:6px;background:var(--card);border-radius:8px;font-size:11.5px">${esc(t.message)}</p>
+          <small class="sub">⏰ ${new Date(t.time || Date.now()).toLocaleString('ar-EG')}</small>
+          <select onchange="updateTicketStatus('${esc(t.uid)}','${esc(t.tid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
+            <option value="pending" ${t.status==="pending"?"selected":""}>قيد المعالجة ⏳</option>
+            <option value="resolved" ${t.status==="resolved"?"selected":""}>تم حل المشكلة ✅</option>
+          </select>
+        </div>
+      `;
+    }).join("");
+  }).catch(err=>{ box.innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
+}
+
+window.updateTicketStatus = function(uid, tid, status){
+  if(!firebaseOK || !db) return;
+  db.ref('support_tickets/'+uid+'/'+tid+'/status').set(status).then(()=>{
+    db.ref('notifications/'+uid+'/'+('ticket_'+Date.now())).set({
+      title: "🎫 تحديث بخصوص شكواك",
+      body: `تم تحديث حالة تذكرة الدعم الفني الخاصة بك إلى: (${status === 'resolved' ? 'تم الحل ✅' : 'قيد المعالجة ⏳'})`,
+      time: Date.now(),
+      read: false
+    }).catch(()=>{});
+    toast("✅ تم تحديث حالة الشكوى");
+    renderSupportTickets();
+  }).catch(err=>toast("❌ " + err.message));
+};
+
 function renderLiveVisitors(){
   const box = document.getElementById("liveVisitorsList");
   if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
-  
   db.ref('visitors').limitToLast(10).once('value').then(s=>{
     const data = s.val() || {};
     const arr = Object.entries(data).reverse();
-    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد زيارات مسجلة حتى الآن</p>'; return; }
-    
+    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد زيارات مسجلة</p>'; return; }
     box.innerHTML = arr.map(([id, v])=>`
       <div class="order-card" style="margin-bottom:6px">
-        <div class="oc-top"><b>ID: ${esc(v.uid || "زائر")}</b><span class="status-pill st-paid">${esc(v.device || "متصفح")}</span></div>
-        <small class="sub">👤 الاسم: ${esc(v.name || "زائر غير مسجل")} | 📧 الإيميل: ${esc(v.email || "غير متوفر")}</small><br>
-        <small class="sub">🌐 المتصفح/الجهاز: ${esc(v.userAgent || navigator.userAgent)}</small><br>
-        <small class="sub">⏰ وقت الزيارة: ${new Date(v.time || Date.now()).toLocaleString('ar-EG')}</small>
+        <div class="oc-top"><b>ID: ${esc(v.uid || "زائر")}</b><span class="status-pill st-paid">نشط</span></div>
+        <small class="sub">👤 الاسم: ${esc(v.name || "زائر")} | 📧 الإيميل: ${esc(v.email || "غير مسجل")}</small><br>
+        <small class="sub">⏰ الوقت: ${new Date(v.time || Date.now()).toLocaleString('ar-EG')}</small>
       </div>
     `).join("");
-  }).catch(err=>{ box.innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
+  }).catch(()=>{});
 }
 
 document.getElementById("updateVipBtn").onclick = ()=>{
   const targetId = document.getElementById("vipTargetUid").value.trim();
   const newSpent = parseFloat(document.getElementById("vipSelectLevel").value);
   const fb = document.getElementById("vipFeedback");
-  
   if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
   if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  
-  fb.style.color="var(--sub)"; fb.textContent="⏳ جاري تحديث مستوى العميل...";
-  
   db.ref('users/'+targetId+'/totalSpent').set(newSpent).then(()=>{
     fb.style.color = "var(--ok)";
     fb.textContent = `✅ تم تحديث مستوى الـ VIP للـ ID: (${targetId}) بنجاح!`;
     toast("👑 تم تعديل مستوى العميل بنجاح");
-    
-    const notifId = "notif_vip_" + Date.now();
-    db.ref('notifications/' + targetId + '/' + notifId).set({
+    db.ref('notifications/' + targetId + '/notif_vip_' + Date.now()).set({
       title: "⭐ تحديث مستوى الحساب",
       body: `مبروك! لقد قام مدير التطبيق بتحديث مستوى عضويتك في REAL STORE 🔥`,
-      time: Date.now(),
-      read: false
+      time: Date.now(), read: false
     }).catch(()=>{});
-
     document.getElementById("vipTargetUid").value = "";
-  }).catch(err=>{
-    fb.style.color = "var(--err)"; fb.textContent="❌ " + err.message;
-  });
+  }).catch(err=>{ fb.style.color = "var(--err)"; fb.textContent="❌ " + err.message; });
 };
 
 const STATUS_MAP = {
@@ -278,22 +317,15 @@ document.getElementById("checkBalanceBtn").onclick = ()=>{
   const targetId = document.getElementById("adminTargetUid").value.trim();
   const fb = document.getElementById("adminFeedback");
   const box = document.getElementById("balanceCheckResult");
-  
   if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
   if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  
-  fb.style.color="var(--sub)"; fb.textContent="⏳ جاري فحص رصيد العميل...";
-  
   db.ref('users/'+targetId+'/wallet').once('value').then(s=>{
     const bal = s.val() || 0;
     document.getElementById("currentBalanceDisplay").textContent = bal.toFixed(2) + " ج.م";
     box.style.display = "block";
     fb.style.color = "var(--ok)";
     fb.textContent = `✅ تم جلب رصيد الـ ID بنجاح`;
-  }).catch(err=>{
-    box.style.display = "none";
-    fb.style.color = "var(--err)"; fb.textContent="❌ " + err.message;
-  });
+  }).catch(err=>{ box.style.display = "none"; fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
 };
 
 document.getElementById("adminSendBalanceBtn").onclick = ()=>processBalanceChange("add");
@@ -303,32 +335,25 @@ function processBalanceChange(type){
   const targetId = document.getElementById("adminTargetUid").value.trim();
   const amount = parseFloat(document.getElementById("adminAmount").value);
   const fb = document.getElementById("adminFeedback");
-  
   if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
   if(!amount || isNaN(amount) || amount <= 0){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل مبلغ صحيح أكبر من الصفر"; return; }
   if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  
   const ref = db.ref('users/'+targetId+'/wallet');
   ref.once('value').then(s=>{
     const cur = s.val() || 0;
     let nw = type === "add" ? cur + amount : Math.max(0, cur - amount);
-    
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
       const actionTxt = type === "add" ? "إضافة" : "خصم";
-      fb.textContent = `✅ تم ${actionTxt} (${amount}) بنجاح للـ ID: (${targetId}) | الرصيد الحالي: (${nw} ج.م)`;
-      toast(type === "add" ? "🚀 تم الشحن بنجاح" : "⚠️ تم خصم المبلغ بنجاح");
-      
+      fb.textContent = `✅ تم ${actionTxt} (${amount}) بنجاح | الرصيد الحالي: (${nw} ج.م)`;
+      toast(type === "add" ? "🚀 تم الشحن بنجاح" : "⚠️ تم الخصم بنجاح");
       document.getElementById("currentBalanceDisplay").textContent = nw.toFixed(2) + " ج.م";
       document.getElementById("balanceCheckResult").style.display = "block";
-      
       if(type === "add"){
-        const notifId = "notif_" + Date.now();
-        db.ref('notifications/' + targetId + '/' + notifId).set({
+        db.ref('notifications/' + targetId + '/notif_' + Date.now()).set({
           title: "🎁 مكافأة شحن جديدة من REAL STORE",
-          body: `مبروك! لقد حصلت على مكافأة شحن بقيمة (${amount} ج.م) من مدير التطبيق REAL STORE 🔥`,
-          time: Date.now(),
-          read: false
+          body: `مبروك! لقد حصلت على رصيد بقيمة (${amount} ج.م) من مدير التطبيق 🔥`,
+          time: Date.now(), read: false
         }).catch(()=>{});
       }
       document.getElementById("adminAmount").value = "";
@@ -372,6 +397,7 @@ document.getElementById("reset").onclick = ()=>{ if(confirm("هل أنت متأ�
 
 renderStats();
 renderAdminVipTiers();
+renderSupportTickets();
 renderLiveVisitors();
 renderAdminOrders();
 </script>
