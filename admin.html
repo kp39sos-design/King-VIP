@@ -16,10 +16,12 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
 .card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
 .card h3{font-size:14px;font-weight:900;color:var(--a);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px;border-radius:12px;margin-bottom:8px;font-size:12px}
-textarea.in{min-height:90px;resize:none}
 .btn{width:100%;background:var(--g1);color:#fff;padding:11px;border-radius:12px;font-weight:900;font-size:13px;border:0;cursor:pointer}
+.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:800;border:0;cursor:pointer;flex-shrink:0}
 .sub{font-size:10px;color:var(--sub)}
-.order-card{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px;font-size:11.5px}
+.banner-row{display:flex;align-items:center;gap:10px;background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px}
+.banner-row img{width:80px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--bd2);background:#000}
+.banner-row input{flex:1;margin:0;font-size:11px;direction:ltr}
 .ticket-card{background:var(--inner);border:1px solid var(--bd2);border-radius:12px;padding:12px;margin-bottom:10px}
 </style>
 </head>
@@ -28,13 +30,16 @@ textarea.in{min-height:90px;resize:none}
 <div class="admin-wrap">
   <h1>👑 لوحة التحكم وإدارة متجر أسرع من نتكم 🔥</h1>
 
-  <!-- قسم إدارة البنرات -->
+  <!-- قسم إدارة البنرات الاحترافي -->
   <div class="card">
     <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة المتحركة (Hero Banners)</h3>
-    <p class="sub" style="margin-bottom:8px">أدخل رابط كل صورة في سطر منفصل لتحديث البنرات فوراً في المتجر الرئيسي.</p>
-    <textarea id="adminBannersInput" class="in" placeholder="https://..."></textarea>
-    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات فوراً</button>
-    <div id="bannersFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+    <p class="sub" style="margin-bottom:12px">تحكم كامل: أضف بنر جديد، عدل الرابط، أو احذف أي بنر بدون التأثير على البنرات الأخرى.</p>
+    
+    <div id="bannersListContainer" style="margin-bottom:12px"></div>
+    
+    <button class="btn" id="addNewBannerRowBtn" style="background:var(--inner);border:1px dashed var(--a);color:var(--a);margin-bottom:12px"><i class="fa-solid fa-plus"></i> إضافة بنر جديد</button>
+    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات فوراً في المتجر</button>
+    <div id="bannersFeedback" style="font-size:11px;font-weight:700;margin-top:8px"></div>
   </div>
 
   <!-- قسم شحن الرصيد للعميل -->
@@ -69,34 +74,84 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-// حفظ البنرات
+let currentBanners = [];
+
+function renderAdminBannersUI(){
+  const container = document.getElementById('bannersListContainer');
+  if(!currentBanners.length){
+    container.innerHTML = '<p class="sub" style="text-align:center;padding:10px">لا توجد بنرات مضافة حالياً. اضغط "إضافة بنر جديد"</p>';
+    return;
+  }
+  container.innerHTML = currentBanners.map((url, idx) => `
+    <div class="banner-row">
+      <img src="${url || 'https://via.placeholder.com/80x40'}" alt="Preview" onerror="this.src='https://via.placeholder.com/80x40'">
+      <input type="text" class="in banner-input" data-index="${idx}" value="${esc(url)}" placeholder="رابط صورة البنر https://..." oninput="updatePreviewImage(this, ${idx})">
+      <button class="btn-danger" onclick="removeBannerRow(${idx})"><i class="fa-solid fa-trash"></i> حذف</button>
+    </div>
+  `).join("");
+}
+
+window.updatePreviewImage = function(input, idx){
+  const imgTag = input.previousElementSibling;
+  if(imgTag && imgTag.tagName === 'IMG'){
+    imgTag.src = input.value.trim() || 'https://via.placeholder.com/80x40';
+  }
+};
+
+window.removeBannerRow = function(index){
+  collectBannersFromDOM();
+  currentBanners.splice(index, 1);
+  renderAdminBannersUI();
+};
+
+function collectBannersFromDOM(){
+  const inputs = document.querySelectorAll('.banner-input');
+  currentBanners = Array.from(inputs).map(inp => inp.value.trim()).filter(v => v.length > 0);
+}
+
+document.getElementById('addNewBannerRowBtn').onclick = () => {
+  collectBannersFromDOM();
+  currentBanners.push("");
+  renderAdminBannersUI();
+};
+
+// جلب البنرات من Firebase
+db.ref('settings/heroSlides').once('value', s => {
+  const data = s.val();
+  if(data && Array.isArray(data)){
+    currentBanners = data.map(b => b.img);
+  } else {
+    currentBanners = [
+      "https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png",
+      "https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png"
+    ];
+  }
+  renderAdminBannersUI();
+});
+
+// حفظ وترتيب البنرات في Firebase
 document.getElementById('saveBannersBtn').onclick = () => {
-  const rawText = document.getElementById('adminBannersInput').value.trim();
+  collectBannersFromDOM();
   const fb = document.getElementById('bannersFeedback');
-  if(!rawText) { fb.style.color="#EF4444"; fb.textContent="❌ أدخل رابط صورة واحدة على الأقل"; return; }
-  
-  const links = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-  const slidesObject = links.map((link, index) => ({
+  if(!currentBanners.length){
+    fb.style.color="#EF4444";
+    fb.textContent="❌ يجب إدخال بنر واحد على الأقل";
+    return;
+  }
+
+  const slidesObject = currentBanners.map((link, index) => ({
     img: link,
     title: `Banner ${index + 1}`
   }));
 
   db.ref('settings/heroSlides').set(slidesObject).then(() => {
     fb.style.color = "var(--ok)";
-    fb.textContent = "✅ تم تحديث البنرات بنجاح وتطبيقها في المتجر!";
+    fb.textContent = "✅ تم تحديث وحفظ البنرات بنجاح، وستظهر في المتجر بدون أي تأثير على باقي الأقسام!";
   }).catch(err => {
     fb.style.color = "#EF4444";
     fb.textContent = "❌ خطأ: " + err.message;
   });
 };
-
-// جلب البنرات الحالية لعرضها في الـ textarea عند فتح اللوحة
-db.ref('settings/heroSlides').once('value', s => {
-  const data = s.val();
-  if(data && Array.isArray(data)){
-    document.getElementById('adminBannersInput').value = data.map(b => b.img).join('\n');
-  }
-});
 
 // شحن رصيد للعميل
 document.getElementById('adminSendBalanceBtn').onclick = () => {
@@ -118,7 +173,7 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
   });
 };
 
-// جلب وعرض تذاكر الدعم الفني للرد عليها
+// تذاكر الدعم الفني
 function loadAdminTickets(){
   db.ref('admin_tickets').on('value', s => {
     const data = s.val() || {};
@@ -147,7 +202,6 @@ window.sendAdminReply = function(uid, ticketId){
   const replyText = document.getElementById('reply_' + ticketId).value.trim();
   if(!replyText) return alert("اكتب الرد أولاً");
   
-  // تحديث الرد في تذكرة المستخدم وتذكرة الإدارة
   Promise.all([
     db.ref('support_tickets/'+uid+'/'+ticketId+'/reply').set(replyText),
     db.ref('admin_tickets/'+ticketId+'/reply').set(replyText)
