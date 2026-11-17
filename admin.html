@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
@@ -23,6 +24,10 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
 .banner-row img{width:80px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--bd2);background:#000}
 .banner-row input{flex:1;margin:0;font-size:11px;direction:ltr}
 .ticket-card{background:var(--inner);border:1px solid var(--bd2);border-radius:12px;padding:12px;margin-bottom:10px}
+.price-box{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:10px}
+.price-item{display:flex;align-items:center;gap:8px;margin-top:6px}
+.price-item span{flex:1;font-size:11.5px;font-weight:700}
+.price-item input{width:100px;margin:0;padding:6px;font-size:11px;text-align:center}
 </style>
 </head>
 <body>
@@ -30,16 +35,33 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
 <div class="admin-wrap">
   <h1>👑 لوحة التحكم وإدارة متجر أسرع من نتكم 🔥</h1>
 
-  <!-- قسم إدارة البنرات الاحترافي -->
+  <!-- قسم إدارة البنرات -->
   <div class="card">
     <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة المتحركة (Hero Banners)</h3>
-    <p class="sub" style="margin-bottom:12px">تحكم كامل: أضف بنر جديد، عدل الرابط، أو احذف أي بنر بدون التأثير على البنرات الأخرى.</p>
-    
     <div id="bannersListContainer" style="margin-bottom:12px"></div>
-    
     <button class="btn" id="addNewBannerRowBtn" style="background:var(--inner);border:1px dashed var(--a);color:var(--a);margin-bottom:12px"><i class="fa-solid fa-plus"></i> إضافة بنر جديد</button>
-    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات فوراً في المتجر</button>
+    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات</button>
     <div id="bannersFeedback" style="font-size:11px;font-weight:700;margin-top:8px"></div>
+  </div>
+
+  <!-- قسم تعديل أسعار الألعاب والباقات -->
+  <div class="card">
+    <h3><i class="fa-solid fa-tags"></i> تعديل أسعار الباقات والألعاب</h3>
+    <p class="sub" style="margin-bottom:10px">اختر اللعبة، ثم عدل سعر أي باقة واضغط حفظ لتتحدث فوراً للمستخدمين.</p>
+    <select id="adminGameSelect" class="in" style="font-weight:800">
+      <option value="pubg">PUBG Mobile (ببجي)</option>
+      <option value="mlbb">Mobile Legends (موبايل ليجند)</option>
+      <option value="ff">Free Fire (فري فاير)</option>
+      <option value="arena">Arena Breakout (ارينا بريك اوت)</option>
+      <option value="yalla">يلا لودو</option>
+      <option value="tiktok">TikTok (تيك توك)</option>
+      <option value="gangstar">Gangstar (جانجستر)</option>
+      <option value="weplay">WePlay (وي بلاي)</option>
+      <option value="roblox">Roblox (روبلوكس)</option>
+    </select>
+    <div id="gamePricesEditorContainer"></div>
+    <button class="btn" id="savePricesBtn" style="background:var(--g2);color:#382000;margin-top:10px">💾 حفظ وتحديث أسعار هذه اللعبة</button>
+    <div id="pricesFeedback" style="font-size:11px;font-weight:700;margin-top:8px"></div>
   </div>
 
   <!-- قسم شحن الرصيد للعميل -->
@@ -51,7 +73,7 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
     <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
   </div>
 
-  <!-- قسم تذاكر الدعم الفني المباشر -->
+  <!-- قسم تذاكر الدعم الفني -->
   <div class="card">
     <h3><i class="fa-solid fa-headset"></i> تذاكر وشكاوي العملاء (الدعم الفني)</h3>
     <div id="adminTicketsList"><p class="sub">جاري تحميل التذاكر...</p></div>
@@ -74,79 +96,105 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-let currentBanners = [];
+const DEFAULT_GAMES_DATA = {
+ pubg:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]],
+ mlbb:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]],
+ ff:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]],
+ arena:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522],["1580 + 1580 Bonds",1292],["3200 + 3200 Bonds",2574],["6500 + 6500 Bonds",5138],["اختيار المبتدئين",61],["امتيازات الحقيبة المضادة للرصاص",163],["امتيازات القضايا المركبة",471],["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية",61],["تفعيل تذكرة المعركة المميزة الشهرية",215],["حزمة تذكرة المعركة المميزة ربع السنوية",625]],
+ yalla:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]],
+ tiktok:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]],
+ gangstar:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]],
+ weplay:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]],
+ roblox:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]
+};
 
+let allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
+
+// إدارة البنرات في لوحة الإدارة
+let currentBanners = [];
 function renderAdminBannersUI(){
   const container = document.getElementById('bannersListContainer');
-  if(!currentBanners.length){
-    container.innerHTML = '<p class="sub" style="text-align:center;padding:10px">لا توجد بنرات مضافة حالياً. اضغط "إضافة بنر جديد"</p>';
-    return;
-  }
+  if(!currentBanners.length){ container.innerHTML = '<p class="sub">لا توجد بنرات</p>'; return; }
   container.innerHTML = currentBanners.map((url, idx) => `
     <div class="banner-row">
       <img src="${url || 'https://via.placeholder.com/80x40'}" alt="Preview" onerror="this.src='https://via.placeholder.com/80x40'">
-      <input type="text" class="in banner-input" data-index="${idx}" value="${esc(url)}" placeholder="رابط صورة البنر https://..." oninput="updatePreviewImage(this, ${idx})">
+      <input type="text" class="in banner-input" data-index="${idx}" value="${esc(url)}" placeholder="رابط صورة البنر" oninput="updatePreviewImage(this)">
       <button class="btn-danger" onclick="removeBannerRow(${idx})"><i class="fa-solid fa-trash"></i> حذف</button>
     </div>
   `).join("");
 }
-
-window.updatePreviewImage = function(input, idx){
+window.updatePreviewImage = function(input){
   const imgTag = input.previousElementSibling;
-  if(imgTag && imgTag.tagName === 'IMG'){
-    imgTag.src = input.value.trim() || 'https://via.placeholder.com/80x40';
-  }
+  if(imgTag && imgTag.tagName === 'IMG') imgTag.src = input.value.trim() || 'https://via.placeholder.com/80x40';
 };
-
 window.removeBannerRow = function(index){
   collectBannersFromDOM();
   currentBanners.splice(index, 1);
   renderAdminBannersUI();
 };
-
 function collectBannersFromDOM(){
   const inputs = document.querySelectorAll('.banner-input');
   currentBanners = Array.from(inputs).map(inp => inp.value.trim()).filter(v => v.length > 0);
 }
-
 document.getElementById('addNewBannerRowBtn').onclick = () => {
   collectBannersFromDOM();
   currentBanners.push("");
   renderAdminBannersUI();
 };
 
-// جلب البنرات من Firebase
 db.ref('settings/heroSlides').once('value', s => {
   const data = s.val();
-  if(data && Array.isArray(data)){
-    currentBanners = data.map(b => b.img);
-  } else {
-    currentBanners = [
-      "https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png",
-      "https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png"
-    ];
-  }
+  currentBanners = (data && Array.isArray(data)) ? data.map(b => b.img) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", "https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png"];
   renderAdminBannersUI();
 });
 
-// حفظ وترتيب البنرات في Firebase
 document.getElementById('saveBannersBtn').onclick = () => {
   collectBannersFromDOM();
   const fb = document.getElementById('bannersFeedback');
-  if(!currentBanners.length){
-    fb.style.color="#EF4444";
-    fb.textContent="❌ يجب إدخال بنر واحد على الأقل";
-    return;
-  }
-
-  const slidesObject = currentBanners.map((link, index) => ({
-    img: link,
-    title: `Banner ${index + 1}`
-  }));
-
+  const slidesObject = currentBanners.map((link, index) => ({ img: link, title: `Banner ${index + 1}` }));
   db.ref('settings/heroSlides').set(slidesObject).then(() => {
+    fb.style.color = "var(--ok)"; fb.textContent = "✅ تم تحديث البنرات بنجاح!";
+  }).catch(err => { fb.style.color = "#EF4444"; fb.textContent = "❌ " + err.message; });
+};
+
+// إدارة وتعديل أسعار الألعاب في لوحة الإدارة
+function renderGamePriceEditor(gameKey){
+  const container = document.getElementById('gamePricesEditorContainer');
+  const items = allGamesPrices[gameKey] || [];
+  container.innerHTML = items.map((item, idx) => `
+    <div class="price-item">
+      <span>${esc(item[0])}</span>
+      <input type="number" step="any" class="in price-input" data-pkg-idx="${idx}" value="${item[1]}">
+      <span style="font-size:10px;color:var(--sub)">ج.م</span>
+    </div>
+  `).join("");
+}
+
+db.ref('settings/gamesPrices').once('value', s => {
+  const data = s.val();
+  if(data) allGamesPrices = {...DEFAULT_GAMES_DATA, ...data};
+  renderGamePriceEditor(document.getElementById('adminGameSelect').value);
+});
+
+document.getElementById('adminGameSelect').onchange = (e) => {
+  renderGamePriceEditor(e.target.value);
+};
+
+document.getElementById('savePricesBtn').onclick = () => {
+  const gameKey = document.getElementById('adminGameSelect').value;
+  const inputs = document.querySelectorAll('.price-input');
+  const fb = document.getElementById('pricesFeedback');
+  
+  inputs.forEach((inp, idx) => {
+    const val = parseFloat(inp.value);
+    if(!isNaN(val) && allGamesPrices[gameKey][idx]){
+      allGamesPrices[gameKey][idx][1] = val;
+    }
+  });
+
+  db.ref('settings/gamesPrices').set(allGamesPrices).then(() => {
     fb.style.color = "var(--ok)";
-    fb.textContent = "✅ تم تحديث وحفظ البنرات بنجاح، وستظهر في المتجر بدون أي تأثير على باقي الأقسام!";
+    fb.textContent = "✅ تم تحديث أسعار هذه اللعبة بنجاح في المتجر!";
   }).catch(err => {
     fb.style.color = "#EF4444";
     fb.textContent = "❌ خطأ: " + err.message;
@@ -166,7 +214,7 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
     const cur = s.val()||0, nw = cur + amount;
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
-      fb.textContent = `✅ شُحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! رصيده الحالي: (${nw} ج.م)`;
+      fb.textContent = `✅ شُحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! رصيده: (${nw} ج.م)`;
       document.getElementById('adminTargetUid').value="";
       document.getElementById('adminAmount').value="";
     }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
