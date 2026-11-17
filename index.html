@@ -288,7 +288,7 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
         <button data-act="orders"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-receipt"></i></span><span>طلباتي</span></button>
         <button data-act="favorites"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المفضلة</span></button>
         <button data-act="track"><span class="di" style="--c:#10B981"><i class="fa-solid fa-magnifying-glass-location"></i></span><span>تتبع طلب</span></button>
-        <button data-act="supportDesk"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span>رسالة دعم فني محترف</span></button>
+        <button data-act="supportDesk" style="position:relative"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span>رسالة دعم فني محترف</span><span class="badge" id="supportBadge" style="display:none; inset-inline-end:10px; top:50%; transform:translateY(-50%)">0</span></button>
         <button id="editNameItem" style="display:none" data-act="editName"><span class="di" style="--c:#2563EB"><i class="fa-solid fa-user-pen"></i></span><span>تعديل اسم المستخدم</span></button>
         <button data-act="support"><span class="di" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i></span><span>خدمة العملاء (واتساب)</span></button>
         <button data-act="bot"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-robot"></i></span><span>اسأل «ذكي» المساعد</span></button>
@@ -697,29 +697,44 @@ function listenWallet(){
   });
 }
 
-// مراقبة ردود الدعم الفني الحية داخل التطبيق مع الإشعار الصوتي والنصي
+// نظام مراقبة وتنبيهات الردود والعداد الأحمر (Badge) لزر الدعم الفني المباشر
 let lastCheckedTicketReplies = {};
 function listenSupportTicketReplies(){
   if(!firebaseOK || !db || !uniqueUid) return;
   db.ref('support_tickets/' + uniqueUid).on('value', s => {
     const tickets = s.val() || {};
+    let unreadRepliesCount = 0;
+
     Object.entries(tickets).forEach(([tid, t]) => {
-      if(t.reply && lastCheckedTicketReplies[tid] !== t.reply){
-        if(lastCheckedTicketReplies[tid] !== undefined){
-          toast("💬 رد جديد من الدعم الفني: " + t.subject);
-          playDingSound();
-          if("Notification" in window && Notification.permission === "granted"){
-            new Notification("أسرع من نتكم 🔥 - رد الدعم الفني", {
-              body: "رد الإدارة: " + t.reply,
-              icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
-            });
+      if(t.reply && !t.readByClient){
+        unreadRepliesCount++;
+        if(lastCheckedTicketReplies[tid] !== t.reply){
+          if(lastCheckedTicketReplies[tid] !== undefined){
+            toast("💬 وصلك رد جديد من الدعم الفني بخصوص: " + t.subject);
+            playDingSound();
+            if("Notification" in window && Notification.permission === "granted"){
+              new Notification("أسرع من نتكم 🔥 - رد الدعم الفني", {
+                body: "رد الإدارة: " + t.reply,
+                icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+              });
+            }
           }
+          lastCheckedTicketReplies[tid] = t.reply;
         }
-        lastCheckedTicketReplies[tid] = t.reply;
       } else if(!t.reply) {
         lastCheckedTicketReplies[tid] = "";
       }
     });
+
+    const badgeEl = $("#supportBadge");
+    if(badgeEl){
+      if(unreadRepliesCount > 0){
+        badgeEl.style.display = "flex";
+        badgeEl.textContent = unreadRepliesCount;
+      } else {
+        badgeEl.style.display = "none";
+      }
+    }
   });
 }
 
@@ -1169,6 +1184,14 @@ function loadUserSupportTickets(){
   if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
   db.ref('support_tickets/'+uniqueUid).once('value').then(s=>{
     const data = s.val()||{};
+    
+    // وضع علامة مقروء للعميل وتصفير العداد الأحمر فور الفتح
+    Object.keys(data).forEach(tid => {
+      if(data[tid].reply && !data[tid].readByClient){
+        db.ref('support_tickets/'+uniqueUid+'/'+tid+'/readByClient').set(true).catch(()=>{});
+      }
+    });
+
     const arr = Object.entries(data).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
     if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:8px">لا توجد تذاكر سابقة</p>'; return; }
     box.innerHTML = arr.map(([id, t])=>`
@@ -1196,7 +1219,8 @@ $("#sendSupportTicketBtn").onclick = ()=>{
     subject: subject,
     message: message,
     time: Date.now(),
-    reply: ""
+    reply: "",
+    readByClient: true
   };
   db.ref('support_tickets/'+uniqueUid+'/'+ticketId).set(ticketData).then(()=>{
     db.ref('admin_tickets/'+ticketId).set(ticketData).catch(()=>{});
@@ -1435,7 +1459,7 @@ listenGamePrices();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
-listenSupportTicketReplies(); // تفعيل مراقبة ردود الدعم الفني الحية داخل التطبيق
+listenSupportTicketReplies(); // تشغيل مراقبة الردود والعداد الأحمر للعميل
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
