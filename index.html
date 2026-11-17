@@ -664,6 +664,23 @@ function updateVipUI() {
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
 
+// نظام مراقبة الحظر الفوري للعميل
+function listenUserBlockStatus(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('users/' + uniqueUid + '/isBlocked').on('value', snapshot => {
+    if(snapshot.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed; inset:0; background:#030712; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; font-family:Cairo,sans-serif; z-index:999999;">
+          <div style="font-size:60px; margin-bottom:15px;">🚫</div>
+          <h1 style="color:#EF4444; font-size:24px; margin-bottom:10px;">عذراً، تم حظر حسابك</h1>
+          <p style="color:#94A3B8; font-size:13.5px; max-width:340px; line-height:1.7;">لقد قامت إدارة متجر أسرع من نتكم بحظر هذا الحساب من استخدام الخدمات. إذا كنت تعتقد أن هذا خطأ، تواصل معنا.</p>
+        </div>
+      `;
+      if(auth) auth.signOut().catch(()=>{});
+    }
+  });
+}
+
 let lastKnownWallet = null;
 function listenWallet(){
   if(!firebaseOK || !db || !uniqueUid) return;
@@ -697,7 +714,6 @@ function listenWallet(){
   });
 }
 
-// نظام مراقبة وتنبيهات الردود والعداد الأحمر (Badge) لزر الدعم الفني المباشر
 let lastCheckedTicketReplies = {};
 function listenSupportTicketReplies(){
   if(!firebaseOK || !db || !uniqueUid) return;
@@ -1185,7 +1201,6 @@ function loadUserSupportTickets(){
   db.ref('support_tickets/'+uniqueUid).once('value').then(s=>{
     const data = s.val()||{};
     
-    // وضع علامة مقروء للعميل وتصفير العداد الأحمر فور الفتح
     Object.keys(data).forEach(tid => {
       if(data[tid].reply && !data[tid].readByClient){
         db.ref('support_tickets/'+uniqueUid+'/'+tid+'/readByClient').set(true).catch(()=>{});
@@ -1459,7 +1474,8 @@ listenGamePrices();
 startOfferTimer();
 renderSearchHist();
 listenNotifs();
-listenSupportTicketReplies(); // تشغيل مراقبة الردود والعداد الأحمر للعميل
+listenSupportTicketReplies(); 
+listenUserBlockStatus(); // <--- تشغيل نظام مراقبة الحظر اللحظي
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
