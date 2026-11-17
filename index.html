@@ -1,113 +1,539 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>لوحة الإدارة | أسرع من نتكم 🔥</title>
+<meta name="theme-color" content="#2563EB">
+<title>أسرع من نتكم | شحن جميع الألعاب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-:root{color-scheme:dark;--bg:#080B18;--card:#12182B;--inner:#0C1224;--tx:#F8FAFF;--sub:#A1AEC8;--a:#38BDF8;--b:#A78BFA;--gold:#FFD166;--ok:#34D399;--bd:rgba(56,189,248,.20);--bd2:rgba(167,139,250,.45);--g1:linear-gradient(135deg,#0284C7,#7C3AED);--g2:linear-gradient(135deg,#FFD700,#FF8A00);--modal:#12182B;--sh:0 12px 24px -6px rgba(0,0,0,.8)}
+:root{color-scheme:light;--bg:#F4F6FF;--card:#FFFFFF;--inner:#EDF1FF;--tx:#151B35;--sub:#68738D;--a:#2563EB;--b:#9333EA;--gold:#D99B16;--ok:#16A34A;--bd:rgba(37,99,235,.18);--bd2:rgba(147,51,234,.38);--g1:linear-gradient(135deg,#2563EB,#9333EA);--g2:linear-gradient(135deg,#FFD166,#F59E0B);--modal:#FFFFFF;--sh:0 8px 18px -4px rgba(0,0,0,.08)}
+[data-theme="dark"]{color-scheme:dark;--bg:#080B18;--card:#12182B;--inner:#0C1224;--tx:#F8FAFF;--sub:#A1AEC8;--a:#38BDF8;--b:#A78BFA;--gold:#FFD166;--ok:#34D399;--bd:rgba(56,189,248,.20);--bd2:rgba(167,139,250,.45);--g1:linear-gradient(135deg,#0284C7,#7C3AED);--g2:linear-gradient(135deg,#FFD700,#FF8A00);--modal:#12182B;--sh:0 12px 24px -6px rgba(0,0,0,.8)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:#030712;color:var(--tx);font-family:Cairo,sans-serif;min-height:100vh;display:flex;justify-content:center}
 #app{width:100%;max-width:520px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden;padding:14px 12px 90px}
 button,input,textarea,select{font-family:inherit}button{border:0;cursor:pointer;background:transparent;color:inherit}a{text-decoration:none;color:inherit}
-.brand-t{background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;font-size:15px}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;margin-bottom:14px;border-radius:18px;background:var(--card);border:1px solid var(--bd2)}
-.ttl{font-size:15px;font-weight:900;margin:12px 0 8px;border-inline-start:4px solid var(--a);padding-inline-start:9px;color:var(--gold)}
-.form,.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:var(--sh)}
-.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:12px;margin-bottom:8px;font-size:12px}
-.btn{width:100%;background:var(--g1);color:#fff;padding:10px;border-radius:12px;font-weight:900;font-size:12px;box-shadow:0 4px 15px rgba(56,189,248,.3)}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.brand-t{background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:13px;cursor:pointer}
+.sub{font-size:9px;font-weight:600;color:var(--sub)}
+#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity .4s}
+#splash.hide{opacity:0;pointer-events:none}
+#splash img{width:85px;height:85px;border-radius:22px;border:2px solid var(--a)}
+.skip{background:var(--g1);color:#fff;padding:9px 24px;border-radius:22px;font-weight:800;font-size:12px}
+header{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:10px 12px;margin-bottom:12px;border-radius:16px;background:var(--card);border:1px solid var(--bd2)}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.avatar{width:38px;height:38px;border-radius:50%;border:2px solid var(--a);object-fit:cover;cursor:pointer}
+.ctl{display:flex;gap:5px;align-items:center}
+.ibtn{height:32px;min-width:32px;padding:0 8px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:10px;font-weight:800;position:relative;display:inline-flex;align-items:center;justify-content:center}
+.badge{position:absolute;top:-4px;inset-inline-end:-4px;background:#EF4444;color:#fff;font-size:9px;font-weight:900;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.search{position:relative;margin:6px 0 12px}
+.search input{width:100%;padding:11px 38px;border-radius:16px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:12.5px}
+.search i{position:absolute;top:50%;transform:translateY(-50%);color:var(--a);inset-inline-start:14px;font-size:13px}
+.tabs,.subtabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
+.tab,.subtab{flex-shrink:0;background:var(--card);color:var(--sub);border:1px solid var(--bd);padding:8px 14px;border-radius:14px;font-weight:800;font-size:11.5px}
+.subtab{padding:6px 12px;font-size:10.5px;border-radius:16px;display:flex;align-items:center;gap:6px}
+.subtab img{width:22px;height:22px;border-radius:6px;object-fit:contain;background:#fff;padding:1px}
+.tab.on,.subtab.on{background:var(--g1);color:#fff;border-color:transparent}
+.sec{display:none}.sec.on{display:block;animation:fi .3s}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ttl{font-size:15px;font-weight:900;margin:8px 0;border-inline-start:4px solid var(--a);padding-inline-start:9px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gw{display:flex;flex-direction:column}.gw.open{grid-column:span 2}
+.gc{background:linear-gradient(145deg,#172554,#111827);border:1px solid rgba(56,189,248,.20);border-radius:18px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.35)}
+.gi{height:116px;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle,rgba(56,189,248,.20),transparent 65%),#0B1020;overflow:hidden}
+.gi img{width:84px;height:84px;object-fit:cover;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:#0B1020;position:relative;z-index:2}
+.gi .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.6);filter:blur(16px) saturate(1.5);opacity:.38;border:0;border-radius:0;z-index:0}
+.gn{padding:10px 12px}
+.gn b{display:block;font-size:12px;color:#fff}.gn small{display:block;color:#94a3b8;font-size:9.5px;margin:2px 0 8px;font-weight:600}
+.open-b{width:100%;background:var(--g1);color:#fff;padding:8px;border-radius:10px;font-weight:800;font-size:10.5px}
+.pk{display:none;margin-top:8px;background:var(--inner);border:1px solid var(--bd2);border-radius:16px;padding:10px}
+.gw.open .pk{display:block;animation:fi .3s}
+.pr{background:linear-gradient(145deg,var(--card),var(--inner));border:1px solid var(--bd2);border-radius:14px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 20px rgba(0,0,0,.12);position:relative}
+.pn{font-weight:800;font-size:10.5px;min-height:26px;display:flex;align-items:center;line-height:1.3;color:var(--tx)}
+.pp{background:linear-gradient(135deg,rgba(255,209,102,.15),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.35);color:var(--gold);padding:5px 7px;border-radius:10px;font-size:11.5px;font-weight:900;display:flex;justify-content:space-between;align-items:center;gap:4px;margin:5px 0 6px}
+.pp small{font-size:8.5px;opacity:.85}
+.buy{width:100%;background:var(--g2);color:#382000;border-radius:8px;padding:7px;font-weight:900;font-size:10.5px;box-shadow:0 2px 8px rgba(245,158,11,.35)}
+.buy:active{transform:scale(.96)}
+.fav-btn{position:absolute;top:6px;inset-inline-end:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:11px;z-index:5;display:flex;align-items:center;justify-content:center}
+.fav-btn.on{color:#EF4444}
+.pay,.form{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:14px}
+.pay h3{font-size:13.5px;margin-bottom:8px}
+.copy{width:100%;margin-top:8px;background:var(--g1);color:#fff;padding:9px;border-radius:10px;font-weight:800;font-size:12px}
+.wa{display:block;text-align:center;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800;font-size:12px;width:100%}
+.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px;border-radius:12px;margin-bottom:8px;font-size:12px}
+textarea.in{min-height:75px;resize:none}
+.soon{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.sc{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:15px 8px;text-align:center}
+.sc i{font-size:24px;background:linear-gradient(135deg,#06B6D4,#9333EA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.sc h3{font-size:12.5px}.sc p{font-size:9.5px;color:var(--sub)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .st{background:var(--inner);border:1px solid var(--bd);border-radius:14px;padding:12px;text-align:center}
 .st b{display:block;font-size:18px;color:var(--a)}.st span{font-size:10px;color:var(--sub)}
-.order-card{background:var(--inner);border:1px solid var(--bd);border-radius:14px;padding:10px;margin-bottom:8px;font-size:11.5px}
-.oc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.modal{position:fixed;inset:0;z-index:990;background:rgba(2,6,23,.85);display:none;align-items:center;justify-content:center;padding:10px}
+.modal.on{display:flex}
+.mb{width:100%;max-width:460px;max-height:90vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:16px}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.mh h2{font-size:15px}
+.x{width:30px;height:30px;border-radius:50%;background:var(--inner);color:var(--tx);font-size:16px}
+.info{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px}
+.info small{color:var(--sub);font-size:10px}.info b{display:block;font-size:13px}
+.disc{border:1px dashed var(--gold);border-radius:12px;padding:12px;text-align:center;margin-bottom:8px;background:rgba(245,158,11,.08)}
+.disc .n{font-size:20px;font-weight:900;color:var(--gold)}.disc .o{font-size:11px;color:var(--sub);text-decoration:line-through}
+.order{width:100%;background:var(--g2);color:#382000;padding:11px;border-radius:12px;font-weight:900;font-size:12px}
+.err{border-color:#EF4444!important}
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9998;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;font-weight:600}
+.wallet-box{background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(147,51,234,.15));border:1px solid var(--bd2);border-radius:18px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 25px rgba(37,99,235,.12)}
+.wallet-info small{color:var(--sub);font-size:10.5px;font-weight:700}
+.wallet-info b{font-size:18px;color:var(--a);display:block;margin-top:2px}
+.wallet-btn{background:var(--g1);color:#fff;padding:9px 16px;border-radius:12px;font-size:11.5px;font-weight:900;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+#liveTicker{background:var(--card);border:1px solid var(--bd2);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;overflow:hidden}
+#liveTicker i{color:var(--ok);animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+#tickerText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx)}
+.reviews-grid{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.review-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px}
+.review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.review-name{font-weight:900;font-size:12px;color:var(--tx)}
+.review-stars{color:var(--gold);font-size:11px}
+.review-text{font-size:11px;color:var(--sub);line-height:1.6}
+#botDock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:900;pointer-events:none}
+#botFab{pointer-events:auto;position:absolute;bottom:88px;inset-inline-end:14px;width:56px;height:56px;border-radius:50%;background:var(--g1);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,99,235,.45);animation:botPulse 2.4s infinite;z-index:2}
+@keyframes botPulse{0%,100%{box-shadow:0 8px 20px rgba(37,99,235,.45),0 0 0 0 rgba(56,189,248,.5)}50%{box-shadow:0 8px 20px rgba(37,99,235,.45),0 0 0 12px rgba(56,189,248,0)}}
+#botPanel{pointer-events:auto;display:none;flex-direction:column;height:min(80vh,580px);background:var(--modal);border:1px solid var(--bd2);border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45);overflow:hidden;position:absolute;bottom:0;left:0;right:0}
+#botPanel.on{display:flex}
+.bh{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--g1);color:#fff}
+.bav{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.bh b{font-size:14px;display:block}.bh small{font-size:10px;opacity:.9}
+.bh .on-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ADE80;margin-inline-end:4px}
+#botClose{margin-inline-start:auto;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font-size:16px}
+#botMsgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.bm{max-width:88%;padding:9px 12px;border-radius:14px;font-size:12px;line-height:1.7;white-space:pre-line;word-break:break-word}
+.bm.b{align-self:flex-start;background:var(--card);border:1px solid var(--bd);border-start-start-radius:4px}
+.bm.u{align-self:flex-end;background:var(--g1);color:#fff;border-start-end-radius:4px}
+#botChips{display:flex;gap:6px;overflow-x:auto;padding:8px 10px 2px;background:var(--bg);scrollbar-width:none}
+#botChips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;background:var(--card);color:var(--a);border:1px solid var(--bd2);padding:6px 11px;border-radius:999px;font-size:10.5px;font-weight:700}
+#botForm{display:flex;gap:6px;padding:8px 10px;background:var(--bg);border-top:1px solid var(--bd)}
+#botIn{flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:999px;font-size:12px}
+#botSend{width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;font-size:14px}
+
+/* التعديل الجذري هنا لضمان ظهور القائمة بأعلى الشاشة فوراً وبشكل تلقائي وسهل */
+.dots-wrap{position:relative}
+.dots{width:32px;padding:0;display:flex;align-items:center;justify-content:center;font-size:15px}
+.dmenu{position:fixed;top:65px;left:50%;transform:translateX(-50%);width:92%;max-width:480px;z-index:99999;max-height:80vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:10px;box-shadow:0 25px 50px rgba(0,0,0,.6);display:none}
+.dmenu.on{display:block;animation:dropMenu .25s ease-out}
+@keyframes dropMenu{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+
+.dm-t{font-size:10px;font-weight:800;color:var(--sub);padding:8px 10px 6px}
+.dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
+.dmenu button:hover,.dmenu a:hover{background:var(--inner)}
+.di{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:var(--c);flex-shrink:0}
+.dm-lang{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 8px 8px}
+.lang-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:11px;background:var(--inner);color:var(--tx);font-size:10px;font-weight:800;border:1px solid var(--bd)}
+.lang-btn .flag{font-size:15px;line-height:1}
+.lang-btn.on{background:var(--g1);color:#fff;border-color:transparent}
+.dm-divider{height:1px;background:var(--bd);margin:4px 8px}
+#loginBtn{padding:0 6px}
+#uBox{display:none;padding:8px 10px 10px;border-bottom:1px solid var(--bd);margin-bottom:4px}
+#uName{display:block;font-size:12px;font-weight:800}
+#uMail{display:block;font-size:10px;color:var(--sub);direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis}
+.user-id-box{display:flex;align-items:center;justify-content:space-between;background:var(--inner);border:1px solid var(--bd2);border-radius:8px;padding:4px 8px;margin-top:6px;font-size:10.5px;direction:ltr}
+.user-id-box b{color:var(--a)}
+#gate{position:fixed;inset:0;z-index:9990;display:none;flex-direction:column;align-items:center;justify-content:center;padding:26px 18px;overflow:hidden;text-align:center;background:radial-gradient(circle at 18% 12%,rgba(37,99,235,.55),transparent 45%),radial-gradient(circle at 82% 88%,rgba(147,51,234,.55),transparent 45%),#04060d}
+#gate.on{display:flex}
+.g-card{position:relative;z-index:1;width:100%;max-width:360px;background:linear-gradient(160deg,rgba(20,28,48,.88),rgba(10,15,30,.92));border:1px solid rgba(120,170,255,.22);border-radius:26px;padding:26px 20px 20px;box-shadow:0 30px 70px -22px rgba(0,0,0,.85)}
+.g-logo{position:relative;width:96px;height:96px;border-radius:24px;border:2px solid rgba(255,255,255,.35);box-shadow:0 16px 32px rgba(0,0,0,.65);display:block;object-fit:cover;margin:0 auto 14px}
+#gate h2{font-size:19px;font-weight:900;color:#fff;margin-bottom:6px}
+#gate p{font-size:12px;color:#A5B4D0;font-weight:600;max-width:290px;margin:0 auto 18px;line-height:1.75}
+.gbtn{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:300px;margin:0 auto 10px;padding:13px 18px;border-radius:16px;background:linear-gradient(180deg,#ffffff 0%,#eef2f8 100%);color:#1f1f1f;font-weight:800;font-size:14px;border:1px solid #d0d7e2;box-shadow:0 2px 0 #c3cbd8,0 12px 24px -8px rgba(37,99,235,.45)}
+.gbtn-content{position:relative;display:flex;align-items:center;gap:10px}
+.gbtn.guest{background:linear-gradient(135deg,#2563EB,#9333EA);color:#fff;border:1px solid rgba(255,255,255,.2);font-size:13.5px}
+.gbtn.guest i{font-size:15px;color:#FFD166}
+.g-secure{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:#8b9ab8;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+#hero{display:block;margin:0 0 12px}
+.hs-v{position:relative;aspect-ratio:16/7;max-height:260px;border-radius:20px;overflow:hidden;background:#0B1020;box-shadow:0 14px 30px -10px rgba(37,99,235,.5)}
+.hs-s{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity .6s}
+.hs-s img{max-width:100%;max-height:100%;object-fit:contain}
+.hs-s::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#1e3a8a,#581c87,#0f172a);z-index:-1}
+.hs-d{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:9px}
+.hs-d button{width:7px;height:7px;padding:0;border-radius:99px;background:var(--bd2);transition:width .35s,background .35s}
+.hs-d button.on{width:22px;background:var(--g1)}
+.home-sec{margin:18px 0 4px}
+.home-sec h3{font-size:14px;font-weight:900;color:var(--tx);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.home-sec h3 i{color:var(--a)}
+.hs-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.hs-row::-webkit-scrollbar{display:none}
+.mini-card{flex-shrink:0;width:115px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:8px;text-align:center;cursor:pointer}
+.mini-card img{width:60px;height:60px;object-fit:cover;border-radius:12px;margin:0 auto 6px;display:block}
+.mini-card b{display:block;font-size:10.5px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-card small{display:block;font-size:9px;color:var(--sub);margin-top:2px}
+.offer-timer{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.12));border:1px dashed var(--gold);border-radius:14px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.offer-timer b{font-size:12px;color:var(--gold)}
+.offer-timer .td{font-size:13px;font-weight:900;color:var(--tx);letter-spacing:1px;direction:ltr}
+#bottomNav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--modal);border-top:1px solid var(--bd2);display:flex;z-index:850;box-shadow:0 -8px 25px rgba(0,0,0,.25);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px;background:transparent;color:var(--sub);font-size:9px;font-weight:800;position:relative}
+.bn-btn i{font-size:17px}
+.bn-btn.on{color:var(--a)}
+#cartDrawer,#notifDrawer{position:fixed;inset:0;z-index:9950;background:rgba(3,4,7,.65);display:none;justify-content:flex-end}
+#cartDrawer.on,#notifDrawer.on{display:flex}
+.cd-body{width:100%;max-width:400px;background:var(--modal);border-inline-start:1px solid var(--bd2);display:flex;flex-direction:column;height:100vh;max-height:100vh}
+.cd-head{padding:14px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.cd-head h3{font-size:14px;font-weight:900}
+.cd-items{flex:1;overflow-y:auto;padding:12px}
+.cd-item{display:flex;gap:8px;background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:8px;align-items:center}
+.cd-item b{font-size:11px;flex:1;line-height:1.4}
+.cd-item .qty{display:flex;align-items:center;gap:4px}
+.cd-item .qty button{width:22px;height:22px;border-radius:50%;background:var(--card);border:1px solid var(--bd);font-size:12px;font-weight:900}
+.cd-item .qty span{font-size:11px;font-weight:900;min-width:16px;text-align:center}
+.cd-item .del{color:#EF4444;font-size:14px;background:transparent;width:24px;height:24px}
+.cd-foot{padding:12px;border-top:1px solid var(--bd);background:var(--inner)}
+.cd-total{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:8px}
+.cd-total b{color:var(--gold);font-size:14px}
+.nd-item{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px}
+.nd-item small{font-size:9.5px;color:var(--sub)}
+.nd-item b{display:block;font-size:11.5px;margin:2px 0}
+.nd-item p{font-size:10.5px;color:var(--sub);line-height:1.5}
+.order-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
+.order-card .oc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.order-card .oc-top b{font-size:11px;color:var(--a);direction:ltr}
+.order-card .oc-top small{font-size:9.5px;color:var(--sub)}
 .status-pill{padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:900}
 .st-pending{background:rgba(245,158,11,.15);color:#D97706}
-.st-paid{background:rgba(37,99,235,.15);color:#38BDF8}
-.st-processing{background:rgba(147,51,234,.15);color:#A78BFA}
-.st-done{background:rgba(22,163,74,.15);color:#34D399}
+.st-paid{background:rgba(37,99,235,.15);color:#2563EB}
+.st-processing{background:rgba(147,51,234,.15);color:#9333EA}
+.st-done{background:rgba(22,163,74,.15);color:#16A34A}
 .st-rejected,.st-cancelled{background:rgba(239,68,68,.15);color:#EF4444}
-#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:9998;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;box-shadow:0 8px 20px rgba(0,0,0,.5)}
-.dots-wrap{position:relative}
-.ibtn{height:34px;min-width:34px;padding:0 8px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
-.dmenu{position:absolute;top:44px;inset-inline-end:0;z-index:99999;min-width:240px;max-height:75vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:16px;padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.8);display:none}
-.dmenu.on{display:block}
-.dmenu button{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
-.dmenu button:hover{background:var(--inner)}
-.di{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;background:var(--c);flex-shrink:0}
+.oc-progress{display:flex;justify-content:space-between;margin-top:8px;position:relative}
+.oc-progress::before{content:"";position:absolute;top:9px;left:6px;right:6px;height:2px;background:var(--bd)}
+.oc-dot{width:18px;height:18px;border-radius:50%;background:var(--inner);border:2px solid var(--bd);z-index:1;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--sub)}
+.oc-dot.on{background:var(--g1);border-color:transparent;color:#fff}
+#backTop{position:fixed;bottom:88px;inset-inline-start:14px;width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;z-index:855;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,99,235,.4)}
+#backTop.on{display:flex}
+.faq-item{border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.faq-item summary{padding:10px;font-size:11.5px;font-weight:800;cursor:pointer;background:var(--inner)}
+.faq-item[open] summary{background:var(--a);color:#fff}
+.faq-item p{padding:10px;font-size:11px;color:var(--sub);line-height:1.7}
+.page-body{font-size:11.5px;line-height:1.8;color:var(--tx);padding:2px 0}
+.page-body h4{font-size:12.5px;color:var(--a);margin:10px 0 4px}
+.page-body p{color:var(--sub);margin-bottom:6px}
+#searchHist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.schip{background:var(--inner);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--sub);cursor:pointer}
+.vip-badge-box{background:linear-gradient(135deg,rgba(217,155,22,0.12),rgba(147,51,234,0.12));border:1px solid var(--gold);border-radius:18px;padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;text-align:start}
+.vip-avatar-badge{width:56px;height:56px;object-fit:contain;background:transparent;border:none!important;box-shadow:0 6px 16px rgba(0,0,0,0.5),0 0 12px rgba(255,209,102,0.3);flex-shrink:0;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.8))}
+.vip-info-text b{color:var(--gold);font-size:13.5px;display:block}
+.vip-info-text small{color:var(--sub);font-size:10px}
+.vip-progress-bar{width:100%;height:6px;background:var(--inner);border-radius:3px;margin-top:6px;overflow:hidden;border:1px solid var(--bd)}
+.vip-progress-fill{height:100%;background:linear-gradient(90deg,#D99B16,#2563EB);width:0%;transition:width 0.4s ease}
 </style>
 </head>
 <body>
 
-<div id="toast" role="status"></div>
+<div id="splash">
+  <img src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="">
+  <div class="brand-t" style="font-size:18px">أسرع من نتكم 🔥</div>
+  <div class="sub">متجر الشحن الأسرع والأرخص 💎</div>
+  <button class="skip" id="skip">تخطي</button>
+</div>
 
-<div id="app">
-  <header>
-    <div>
-      <span class="brand-t">لوحة الإدارة | أسرع من نتكم 🔥</span>
-      <div style="font-size:10px;color:var(--sub)">إدارة المتجر والعملاء والطلبات</div>
-    </div>
-    <div class="dots-wrap">
-      <button class="ibtn" id="adminMenuBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-      <div class="dmenu" id="adminMenu">
-        <button onclick="switchTab('overview')"><span class="di" style="--c:#38BDF8"><i class="fa-solid fa-chart-line"></i></span><span>الإحصائيات العامة</span></button>
-        <button onclick="switchTab('orders')"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-receipt"></i></span><span>إدارة الطلبات</span></button>
-        <button onclick="switchTab('balance')"><span class="di" style="--c:#10B981"><span class="fa-solid fa-wallet"></i></span><span>شحن رصيد للعميل</span></button>
-        <button onclick="switchTab('users')"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-users-slash"></i></span><span>قائمة الحظر والعملاء</span></button>
-        <button onclick="switchTab('tickets')"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-headset"></i></span><span>تذاكر الدعم الفني</span></button>
-      </div>
-    </div>
-  </header>
-
-  <!-- تبويب الإحصائيات -->
-  <div id="tab-overview" class="tab-content">
-    <div class="ttl">📊 إحصائيات المتجر</div>
-    <div class="stats" id="statsGrid"></div>
-  </div>
-
-  <!-- تبويب الطلبات -->
-  <div id="tab-orders" class="tab-content" style="display:none">
-    <div class="ttl">📦 إدارة طلبات العملاء</div>
-    <div id="adminOrdersList"></div>
-  </div>
-
-  <!-- تبويب شحن الرصيد -->
-  <div id="tab-balance" class="tab-content" style="display:none">
-    <div class="ttl">⚡ شحن رصيد تلقائي للعميل</div>
-    <div class="form">
-      <input id="targetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
-      <input id="targetAmount" class="in" type="number" placeholder="المبلغ المراد شحنه">
-      <button class="btn" id="sendBalanceBtn">🚀 شحن رصيد العميل فوراً</button>
-      <div id="balanceFeedback" style="font-size:11px;font-weight:700;margin-top:6px;min-height:16px"></div>
-    </div>
-  </div>
-
-  <!-- تبويب الحظر والعملاء -->
-  <div id="tab-users" class="tab-content" style="display:none">
-    <div class="ttl">🚫 إدارة المستخدمين وقائمة الحظر</div>
-    <div class="form">
-      <input id="banUidInput" class="in" placeholder="أدخل ID العميل للحظر/فك الحظر (REAL-XXXXXX)" style="direction:ltr">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-        <button class="btn" id="banUserBtn" style="background:linear-gradient(135deg,#EF4444,#DC2626)">🚫 حظر المستخدم</button>
-        <button class="btn" id="unbanUserBtn" style="background:linear-gradient(135deg,#10B981,#059669)">✅ فك الحظر</button>
-      </div>
-      <div id="banFeedback" style="font-size:11px;font-weight:700;margin-top:6px;min-height:16px"></div>
-    </div>
-    <div class="ttl" style="font-size:13px">قائمة المستخدمين المسجلين حالياً</div>
-    <div id="allUsersList"></div>
-  </div>
-
-  <!-- تبويب تذاكر الدعم -->
-  <div id="tab-tickets" class="tab-content" style="display:none">
-    <div class="ttl">🎧 تذاكر الدعم الفني الواردة</div>
-    <div id="adminTicketsList"></div>
+<div id="gate">
+  <div class="g-card">
+    <img class="g-logo" src="https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png" alt="">
+    <h2>أهلاً بيك في أسرع من نتكم 🔥</h2>
+    <p>اختر طريقة الدخول للمتابعة إلى المتجر</p>
+    <button class="gbtn guest" id="guestBtn"><span class="gbtn-content"><i class="fa-solid fa-compass"></i><span>تصفح المتجر بدون تسجيل 🚀</span></span></button>
+    <button class="gbtn" id="gBtn"><span class="gbtn-content">
+      <svg viewBox="0 0 48 48" width="20" height="20"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      <span>تسجيل الدخول بجيميل</span></span></button>
+    <div class="g-secure"><i class="fa-solid fa-lock"></i><span>تسجيل آمن ومشفر بواسطة Google</span></div>
   </div>
 </div>
 
+<div id="toast" role="status"></div>
+
+<div id="app">
+<header>
+  <div class="brand">
+    <img class="avatar" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" onclick="showSec('profile')">
+    <div>
+      <span class="brand-t secret" onclick="showSec('profile')">أسرع من نتكم 🔥</span> 
+      <i class="fa-solid fa-circle-check" style="color:var(--a);font-size:10px"></i>
+      <div class="sub">متجر الشحن الأسرع والأرخص 💎</div>
+    </div>
+  </div>
+  <div class="ctl">
+    <button class="ibtn" id="loginBtn" aria-label="Login"><i class="fa-brands fa-google"></i></button>
+    <button class="ibtn" id="notifBtn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="badge" id="notifBadge" style="display:none">0</span></button>
+    <button class="ibtn" id="cartBtn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge" style="display:none">0</span></button>
+    <button class="ibtn" id="theme" aria-label="Theme"><i class="fa-solid fa-moon"></i></button>
+    <div class="dots-wrap">
+      <button class="ibtn dots" id="dotsBtn" aria-label="Menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      <div class="dmenu" id="dMenu">
+        <div class="dm-t">خدمة العملاء والتواصل</div>
+        <div id="uBox">
+          <span id="uName"></span>
+          <span id="uMail"></span>
+          <div class="user-id-box"><span>ID: <b id="uUniqueId">------</b></span><button class="ibtn" id="copyUserIdBtn" style="height:22px;font-size:9px;padding:0 6px">نسخ</button></div>
+        </div>
+        <div class="dm-t">العملة</div>
+        <div class="dm-lang" id="currencySelector">
+          <button class="lang-btn on" data-cur="ar">🇪🇬 جنيه</button>
+          <button class="lang-btn" data-cur="en">🇺🇸 دولار</button>
+          <button class="lang-btn" data-cur="ja">🇯🇵 ين</button>
+        </div>
+        <div class="dm-divider"></div>
+        <div class="dm-t">اللغة</div>
+        <div class="dm-lang">
+          <button class="lang-btn" data-lang="ar"><span class="flag">🇪🇬</span><span>العربية</span></button>
+          <button class="lang-btn" data-lang="en"><span class="flag">🇺🇸</span><span>English</span></button>
+          <button class="lang-btn" data-lang="ja"><span class="flag">🇯🇵</span><span>日本語</span></button>
+        </div>
+        <div class="dm-divider"></div>
+        <button data-act="profile"><span class="di" style="--c:#2563EB"><i class="fa-solid fa-user"></i></span><span>الملف الشخصي</span></button>
+        <button data-act="orders"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-receipt"></i></span><span>طلباتي</span></button>
+        <button data-act="favorites"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المفضلة</span></button>
+        <button data-act="track"><span class="di" style="--c:#10B981"><i class="fa-solid fa-magnifying-glass-location"></i></span><span>تتبع طلب</span></button>
+        <button data-act="supportDesk" style="position:relative"><span class="di" style="--c:#22C55E"><i class="fa-solid fa-headset"></i></span><span>رسالة دعم فني محترف</span><span class="badge" id="supportBadge" style="display:none; inset-inline-end:10px; top:50%; transform:translateY(-50%)">0</span></button>
+        <button id="editNameItem" style="display:none" data-act="editName"><span class="di" style="--c:#2563EB"><i class="fa-solid fa-user-pen"></i></span><span>تعديل اسم المستخدم</span></button>
+        <button data-act="support"><span class="di" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i></span><span>خدمة العملاء (واتساب)</span></button>
+        <button data-act="bot"><span class="di" style="--c:#A78BFA"><i class="fa-solid fa-robot"></i></span><span>اسأل «ذكي» المساعد</span></button>
+        <a href="https://www.facebook.com/share/g/1GuX3V5JRS/" target="_blank" rel="noopener"><span class="di" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i></span><span>مجموعتنا على فيسبوك</span></a>
+        <a href="https://t.me/ReAL_126" target="_blank" rel="noopener"><span class="di" style="--c:#229ED9"><i class="fa-brands fa-telegram"></i></span><span>التليجرام</span></a>
+        <a href="https://whatsapp.com/channel/0029VbDaOQME50Us7xuBgu1c" target="_blank" rel="noopener"><span class="di" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i></span><span>الواتساب</span></a>
+        <button data-act="request"><span class="di" style="--c:#F59E0B"><i class="fa-solid fa-box"></i></span><span>طلب منتج</span></button>
+        <button data-act="about"><span class="di" style="--c:#06B6D4"><i class="fa-solid fa-circle-info"></i></span><span>معلومات عن التطبيق</span></button>
+        <button data-act="privacy"><span class="di" style="--c:#8B5CF6"><i class="fa-solid fa-shield-halved"></i></span><span>سياسة الخصوصية</span></button>
+        <button data-act="terms"><span class="di" style="--c:#64748B"><i class="fa-solid fa-file-contract"></i></span><span>شروط الاستخدام</span></button>
+        <button data-act="refund"><span class="di" style="--c:#0EA5E9"><i class="fa-solid fa-rotate-left"></i></span><span>سياسة الاسترجاع</span></button>
+        <button data-act="faq"><span class="di" style="--c:#F97316"><i class="fa-solid fa-circle-question"></i></span><span>الأسئلة الشائعة</span></button>
+        <button id="logoutItem" style="display:none" data-act="logout"><span class="di" style="--c:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></span><span>تسجيل الخروج</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="liveTicker"><i class="fa-solid fa-bolt"></i><span id="tickerText">⚡ جاري تحميل أحدث العروض وعمليات الشحن الفورية</span></div>
+
+<div class="wallet-box">
+  <div class="wallet-info">
+    <small><i class="fa-solid fa-wallet" style="color:var(--a)"></i> رصيد المحفظة الحالي</small>
+    <b id="walletBalance">0.00 ج.م</b>
+  </div>
+  <button class="wallet-btn" id="topupWalletBtn"><i class="fa-solid fa-plus-circle"></i> شحن الرصيد</button>
+</div>
+
+<section id="hero" aria-label="العروض">
+  <div class="hs-v" id="hsV"></div>
+  <div class="hs-d" id="hsD"></div>
+</section>
+
+<nav class="tabs" id="tabs"></nav>
+
+<section id="games" class="sec on">
+  <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="ابحث عن لعبة أو تطبيق..." autocomplete="off"></div>
+  <div id="searchHist"></div>
+  <div class="home-sec"><h3><i class="fa-solid fa-fire"></i> الأكثر مبيعاً 🔥</h3><div class="hs-row" id="bestsellers"></div></div>
+  <div class="home-sec"><h3><i class="fa-solid fa-star"></i> الألعاب الأكثر طلباً</h3><div class="hs-row" id="topgames"></div></div>
+  <div class="home-sec"><h3><i class="fa-solid fa-clock"></i> عروض محدودة</h3>
+    <div class="offer-timer"><b>⏰ ينتهي العرض بعد</b><span class="td" id="offerTimer">--:--:--</span></div>
+    <div class="hs-row" id="limitedoffers"></div>
+  </div>
+  <div class="ttl">🎮 الألعاب</div>
+  <div class="grid" id="gameGrid"></div>
+  <p id="noRes" class="sub" style="display:none;text-align:center;padding:20px">لا توجد نتائج</p>
+  <div class="ttl" style="margin-top:20px">آراء وتقييمات العملاء الموثقة</div>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="review-top"><span class="review-name">محمود عبد الله (ببجي)</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div><div class="review-text">"خدمة صاروخية! طلبت 60 شدة ووصلتني خلال دقيقتين بالضبط على الايدي."</div></div>
+    <div class="review-card"><div class="review-top"><span class="review-name">كريم الهواري (فري فاير)</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div><div class="review-text">"أسعار أرخص بكتير من أي مكان تاني، والتحويل اتقبل في ثواني."</div></div>
+  </div>
+</section>
+
+<section id="cards" class="sec"><div class="ttl">💳 بطاقات هدايا</div><div class="subtabs" id="st-cards"></div><div id="out-cards"></div></section>
+<section id="recharge" class="sec"><div class="ttl">⚡ شحن سريع</div><div class="subtabs" id="st-recharge"></div><div id="out-recharge"></div></section>
+<section id="shabab" class="sec"><div class="ttl">🪙 شباب كونات</div><div class="subtabs" id="st-shabab"></div><div id="out-shabab"></div></section>
+<section id="soon" class="sec"><div class="ttl">🔜 قريباً</div><div class="soon" id="soonGrid"></div></section>
+<section id="request" class="sec"><div class="ttl">📦 طلب منتج</div>
+  <div class="form">
+    <input id="rName" class="in" placeholder="اسم المنتج" maxlength="80">
+    <input id="rType" class="in" placeholder="نوع المنتج" maxlength="60">
+    <input id="rPhone" class="in" placeholder="رقم الهاتف" type="tel" inputmode="tel" maxlength="20">
+    <textarea id="rDet" class="in" placeholder="اكتب تفاصيل طلبك" maxlength="500"></textarea>
+    <button class="wa" id="sendReq">💬 إرسال الطلب على واتساب</button>
+  </div>
+</section>
+
+<section id="orders" class="sec"><div class="ttl">📋 طلباتي</div><div id="ordersList"></div></section>
+<section id="favorites" class="sec"><div class="ttl">❤️ المفضلة</div><div class="grid" id="favGrid"></div></section>
+
+<section id="profile" class="sec">
+  <div class="ttl">👤 الملف الشخصي (ORIGIWHFTW)</div>
+  <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
+    <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
+      <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
+    </div>
+    <b id="profName" style="font-size:16px; font-weight:900; display:block; margin-bottom:2px">زائر</b>
+    <small id="profEmail" style="color:var(--sub); font-size:11px; display:block; margin-bottom:14px">-</small>
+    
+    <div class="vip-badge-box" id="vipCardBox">
+      <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
+      <div style="flex:1" class="vip-info-text">
+        <small style="color:var(--sub); font-size:9.5px; font-weight:700">مستوى العضوية الحالي</small>
+        <b id="vipTierName" style="color:var(--gold); font-size:13.5px; margin:2px 0">⭐ VIP 1 - مبتدئ</b>
+        <div class="vip-progress-bar">
+          <div class="vip-progress-fill" id="vipProgressFill"></div>
+        </div>
+        <small id="vipNextTarget" style="display:block; margin-top:4px; font-size:9.5px; color:var(--sub)">الشحن القادم للترقية: --</small>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">ID الحساب (قابل للنسخ)</small>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+          <b id="profId" style="direction:ltr; color:var(--a); font-size:11px">------</b>
+          <button class="copy" id="copyProfIdBtn" style="margin:0; width:auto; padding:3px 8px; font-size:9.5px; border-radius:6px;">📋 نسخ</button>
+        </div>
+      </div>
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">رصيد المحفظة</small>
+        <b id="profWallet" style="color:var(--ok); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:12px;">
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">نقاط الولاء (+4%)</small>
+        <b id="profPoints" style="color:var(--b); font-size:12px; display:block; margin-top:2px">0 نقطة</b>
+      </div>
+      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
+        <small style="font-size:9.5px; color:var(--sub)">إجمالي المشتريات</small>
+        <b id="profSpent" style="color:var(--tx); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
+      </div>
+    </div>
+
+    <div class="info" style="text-align:start; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px; margin-bottom:12px;">
+      <small style="font-size:9.5px; color:var(--sub)">كود الإحالة (شارك واربح)</small>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+        <b id="profRef" style="direction:ltr; color:var(--gold); font-size:12px">------</b>
+        <button class="copy" id="copyRefBtn" style="margin:0; width:auto; padding:5px 12px; font-size:10px; border-radius:8px;">📋 نسخ</button>
+      </div>
+    </div>
+
+    <button class="order" id="profLogout" style="background:linear-gradient(135deg,#EF4444,#DC2626); color:#fff; border-radius:14px; padding:11px; font-weight:900; font-size:12px; box-shadow:0 4px 12px rgba(239,68,68,0.3);">🚪 تسجيل الخروج</button>
+  </div>
+</section>
+
+<section id="admin" class="sec">
+  <div class="ttl" style="color:var(--gold)">👑 لوحة الإدارة</div>
+  <div class="form">
+    <div class="stats" id="stats" style="margin-bottom:12px"></div>
+    <div style="background:var(--inner);border:1px solid var(--bd2);border-radius:14px;padding:12px;margin-bottom:12px">
+      <b style="display:block;font-size:12.5px;color:var(--a);margin-bottom:8px">⚡ شحن رصيد تلقائي للعميل عبر الـ ID</b>
+      <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
+      <input id="adminAmount" class="in" type="number" placeholder="المبلغ">
+      <button class="copy" id="adminSendBalanceBtn" style="background:var(--g2);color:#382000">🚀 شحن رصيد العميل فوراً</button>
+      <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px;min-height:16px"></div>
+    </div>
+    <div class="ttl" style="font-size:12px">📦 إدارة الطلبات</div>
+    <div id="adminOrders" style="font-size:11px"></div>
+    <button class="copy" id="reset" style="margin-top:12px">🔄 إعادة ضبط الإحصائيات</button>
+  </div>
+</section>
+
+<div style="text-align:center;margin:16px 0 8px"><button class="app-help-btn" id="appHelpBtn" style="display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd2);color:var(--a);padding:6px 14px;border-radius:99px;font-size:11px;font-weight:800"><i class="fa-solid fa-circle-question" style="color:var(--gold)"></i> عن التطبيق ومعلومات المتجر</button></div>
+
+<footer>
+  <span class="brand-t secret">أسرع من نتكم 🔥</span>
+  <div class="sub">متجر الشحن الأسرع والأرخص 💎</div>
+  <div style="margin-top:4px">تسليم سريع بعد تأكيد الدفع</div>
+</footer>
+</div>
+
+<nav id="bottomNav">
+  <button class="bn-btn on" data-nav="games"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
+  <button class="bn-btn" data-nav="orders"><i class="fa-solid fa-receipt"></i><span>طلباتي</span></button>
+  <button class="bn-btn" data-nav="favorites"><i class="fa-solid fa-heart"></i><span>المفضلة</span></button>
+  <button class="bn-btn" data-nav="profile"><i class="fa-solid fa-user"></i><span>حسابي</span></button>
+</nav>
+
+<div id="cartDrawer"><div class="cd-body">
+  <div class="cd-head"><h3>🛒 سلة المشتريات</h3><button class="x" id="cartClose">×</button></div>
+  <div class="cd-items" id="cartItems"></div>
+  <div class="cd-foot"><div class="cd-total"><span>الإجمالي</span><b id="cartTotal">0.00 ج.م</b></div><button class="order" id="cartCheckout" style="width:100%">✅ إتمام الشراء</button></div>
+</div></div>
+
+<div id="notifDrawer"><div class="cd-body">
+  <div class="cd-head"><h3>🔔 الإشعارات</h3><button class="x" id="notifClose">×</button></div>
+  <div class="cd-items" id="notifItems"></div>
+</div></div>
+
+<div id="botDock">
+  <button id="botFab" aria-label="Chat"><i class="fa-solid fa-robot"></i></button>
+  <div id="botPanel">
+    <div class="bh"><div class="bav">🤖</div><div><b>ذكي</b><small><span class="on-dot"></span>مساعد أسرع من نتكم</small></div><button id="botClose">×</button></div>
+    <div id="botMsgs"></div>
+    <div id="botChips"></div>
+    <form id="botForm" autocomplete="off"><input id="botIn" placeholder="اكتب سؤالك..." maxlength="200"><button id="botSend" type="submit"><i class="fa-solid fa-paper-plane"></i></button></form>
+  </div>
+</div>
+
+<button id="backTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div id="modal" class="modal"><div class="mb">
+  <div class="mh"><h2>تأكيد عملية الشحن</h2><button class="x" id="mx">×</button></div>
+  <div id="mImgBox"></div>
+  <div class="info"><small>المنتج</small><b id="mProd"></b></div>
+  <div class="disc" id="mDisc"><small>السعر بعد الخصم</small><div class="n" id="mPrice"></div><div class="o" id="mOld"></div></div>
+  <div class="info" style="display:flex;gap:6px;align-items:center">
+    <input id="promoCodeInput" class="in" placeholder="كود الخصم" style="margin:0;font-size:11px">
+    <button class="buy" id="applyPromoBtn" style="width:105px;padding:9px">تطبيق الكود</button>
+  </div>
+  <div id="promoFeedback" style="font-size:10px;font-weight:700;margin:-4px 0 8px 4px;min-height:14px"></div>
+  <div class="info" id="mNeedBox"><small id="mNeedLbl"></small><input id="mNeed" class="in" style="margin:6px 0 0" maxlength="40"></div>
+  <div class="info"><small>الدعم الفني</small><button class="copy" data-copy="support">📋 نسخ رقم الدعم</button></div>
+  <div class="info"><small>📸 رفع إيصال التحويل (اختياري)</small><input type="file" id="receiptFile" accept="image/*" style="margin-top:6px;font-size:10px"></div>
+  <button class="order" id="confirm">✅ تأكيد عملية الشحن</button>
+</div></div>
+
+<div id="supportModal" class="modal"><div class="mb" style="max-width:440px">
+  <div class="mh"><h2>🎧 تذاكر الدعم الفني المباشر</h2><button class="x" id="supportMx">×</button></div>
+  <p class="sub" style="margin-bottom:10px">ارسل استفسارك أو مشكلتك للإدارة، وسيتم الرد عليك في أقرب وقت.</p>
+  <input id="supportSubject" class="in" placeholder="عنوان المشكلة أو الطلب (مثال: تأخر شحن شدات)" maxlength="80">
+  <textarea id="supportMessageText" class="in" placeholder="اكتب تفاصيل مشكلتك بوضوح..." style="min-height:90px"></textarea>
+  <button class="order" id="sendSupportTicketBtn" style="background:var(--g1);color:#fff;margin-bottom:12px">🚀 إرسال تذكرة الدعم للإدارة</button>
+  <div class="ttl" style="font-size:12px;margin-bottom:6px">تذاكري السابقة</div>
+  <div id="userSupportTicketsList" style="max-height:180px;overflow-y:auto"></div>
+</div></div>
+
+<div id="gameModal" class="modal"><div class="mb">
+  <div class="mh"><h2 id="gmTitle"></h2><button class="x" id="gmClose">×</button></div>
+  <div id="gmBody"></div>
+</div></div>
+
+<div id="aboutModal" class="modal"><div class="mb" style="max-width:440px">
+  <div class="mh"><h2><span id="aboutTitle">معلومات</span></h2><button class="x" id="aboutMx">×</button></div>
+  <div id="aboutBody" class="page-body"></div>
+  <button class="order" id="closeAboutBtn" style="margin-top:12px">حسناً، فهمت</button>
+</div></div>
+
+<div id="nameModal" class="modal"><div class="mb" style="max-width:380px;text-align:center">
+  <div class="mh"><h2>تعديل اسم المستخدم</h2><button class="x" id="nameMx">×</button></div>
+  <p class="sub" style="margin-bottom:10px">اكتب اسمك المفضّل ليظهر في حسابك</p>
+  <input id="customNameInput" class="in" maxlength="40" style="text-align:center;font-weight:800">
+  <button class="order" id="saveNameBtn" style="margin-top:10px">💾 حفظ الاسم</button>
+</div></div>
+
+<div id="trackModal" class="modal"><div class="mb" style="max-width:440px">
+  <div class="mh"><h2>🔍 تتبع الطلب</h2><button class="x" id="trackMx">×</button></div>
+  <input id="trackInput" class="in" placeholder="رقم الطلب (REAL-XXXXXX)" style="direction:ltr">
+  <button class="order" id="trackBtn" style="margin-bottom:10px">🔎 تتبع</button>
+  <div id="trackResult"></div>
+</div></div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
@@ -120,50 +546,375 @@ const firebaseConfig = {
   messagingSenderId: "315828860330",
   appId: "1:315828860330:web:3b2fb64a105ebb1ae627d3"
 };
-let db=null, firebaseOK=false;
+let auth=null, db=null, firebaseOK=false;
 try {
   if(typeof firebase !== "undefined"){
     if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
     db = firebase.database();
     firebaseOK = true;
   }
 } catch(e){ console.warn("Firebase init failed:", e); }
 
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
+const CFG={
+  wa:"201044049390", pay:"01044049390", support:"01017954664",
+  discount:0.05, storeName:"أسرع من نتكم",
+  rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
+};
+const IMG="https://www.image2url.com/r2/default/images/";
+const imgUrl=u=>u.startsWith("http")?u:IMG+u;
+const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.jpg",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 
-// قائمة الـ 3 نقاط العلوية الفورية
-$("#adminMenuBtn").onclick = (e)=>{ e.stopPropagation(); $("#adminMenu").classList.toggle("on"); };
-document.addEventListener("click", (e)=>{ if(!e.target.closest(".dots-wrap")) $("#adminMenu").classList.remove("on"); });
+let GAMES={
+ pubg:{n:"PUBG Mobile",k:"ببجي",img:"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp",gl:"#FFB800",items:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]]},
+ mlbb:{n:"Mobile Legends",k:"موبايل ليجند",img:"1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg",gl:"#00D9FF",items:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]]},
+ ff:{n:"Free Fire",k:"فري فاير",img:"1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp",gl:"#FF4D00",items:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]]},
+ arena:{n:"Arena Breakout",k:"ارينا بريك اوت",img:"https://cdn.imagetourls.com/uploads/tyImg/5o64IKfT.webp",gl:"#10B981",items:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522],["1580 + 1580 Bonds",1292],["3200 + 3200 Bonds",2574],["6500 + 6500 Bonds",5138],["اختيار المبتدئين",61,"https://cdn.imagetourls.com/uploads/tyImg/18kK3zTAs.jpg"],["امتيازات الحقيبة المضادة للرصاص",163,"https://cdn.imagetourls.com/uploads/tyImg/13WLSTv6c.jpg"],["امتيازات القضايا المركبة",471,"https://cdn.imagetourls.com/uploads/tyImg/1hQguTBQn.jpg"],["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية",61,"https://cdn.imagetourls.com/uploads/tyImg/1g0iATQiR.jpg"],["تفعيل تذكرة المعركة المميزة الشهرية",215,"https://cdn.imagetourls.com/uploads/tyImg/1gFhuKgwX.jpg"],["حزمة تذكرة المعركة المميزة ربع السنوية",625,"https://cdn.imagetourls.com/uploads/tyImg/dNqNEyMT.jpg"]]},
+ yalla:{n:"يلا لودو",k:"yalla ludo",img:"1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png",gl:"#0088FF",items:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]]},
+ tiktok:{noid:1,n:"TikTok",k:"تيك توك",img:"1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png",gl:"#FE2C55",items:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]]},
+ gangstar:{n:"Gangstar",k:"جانجستر",img:"1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp",gl:"#8B5CF6",items:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]]},
+ weplay:{n:"WePlay",k:"وي بلاي",img:"1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg",gl:"#EC4899",items:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]]},
+ roblox:{noid:1,n:"Roblox",k:"روبلوكس",img:"1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png",gl:"#EF4444",items:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]}
+};
+const US=[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]];
+const CARDS={google:{n:"Google Play",items:US},itunes:{n:"iTunes",items:US},steam:{n:"Steam",items:[["بطاقة 5$ global",270],["بطاقة 10$ global",525],["بطاقة 20$ global",1040],["بطاقة 50$ global",2580]]}};
 
-window.switchTab = function(tabName){
-  $$(".tab-content").forEach(el => el.style.display = "none");
-  const target = $("#tab-" + tabName);
-  if(target) target.style.display = "block";
-  $("#adminMenu").classList.remove("on");
-  if(tabName === "orders") loadAdminOrders();
-  if(tabName === "users") loadAllUsers();
-  if(tabName === "tickets") loadAdminTickets();
+const RECH={
+  vodafone:{n:"Vodafone",img:"https://cdn.imagetourls.com/uploads/tyImg/7fiMx3MJ.webp",items:["شحن رصيد Vodafone","شحن كروت فكة Vodafone"]},
+  we:{n:"WE",img:"https://cdn.imagetourls.com/uploads/tyImg/1dDn2rei3.jpg",items:["شحن رصيد WE","شحن كروت فكة WE"]},
+  etisalat:{n:"اتصالات",img:"https://cdn.imagetourls.com/uploads/tyImg/qlv47BMu.jpg",items:["شحن رصيد اتصالات","شحن كروت فكة اتصالات"]}
 };
 
-function loadStats(){
-  if(!firebaseOK || !db) return;
-  db.ref('orders').once('value').then(s=>{
-    let totalOrders = 0, totalRevenue = 0;
-    const ordersData = s.val() || {};
-    Object.values(ordersData).forEach(userOrders => {
-      Object.values(userOrders || {}).forEach(o => {
-        totalOrders++;
-        if(o.status === "done") totalRevenue += (o.total || 0);
-      });
-    });
-    $("#statsGrid").innerHTML = `
-      <div class="st"><span>إجمالي الطلبات</span><b>${totalOrders}</b></div>
-      <div class="st"><span>إجمالي المبيعات (المنفذة)</span><b>${totalRevenue.toFixed(2)} ج.م</b></div>
-    `;
+const mk=(a,u,m)=>a.map(v=>[v+" "+u,v*m]);
+const SHAB={eg:{n:"🇪🇬 مصر",items:mk([100,300,500,1000,2000,3000],"جنيه",750)},jo:{n:"🇯🇴 الأردن",items:mk([10,20,30,40,50],"دينار",45000)},sa:{n:"🇸🇦 السعودية",items:mk([100,200,300,400,500],"ريال",9000)}};
+const SOON=[["fa-brands fa-fort-awesome","Fortnite"],["fa-solid fa-crosshairs","Call of Duty"],["fa-solid fa-gamepad","Valorant"],["fa-solid fa-film","Netflix"],["fa-solid fa-fire","Free Fire MAX"]];
+
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let lang=store.get("lang","ar"); if(!["ar","en","ja"].includes(lang)) lang="ar";
+let currency=store.get("currency","ar"); if(!["ar","en","ja"].includes(currency)) currency="ar";
+const fmtPrice=n=>(n*(CFG.rates[currency]||1)).toLocaleString("en",{minimumFractionDigits:currency==="ja"?0:2,maximumFractionDigits:currency==="ja"?0:2});
+let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
+function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){toast("❌ لم يتم النسخ")}};if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok).catch(fail);else fail()}
+function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
+function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
+
+function playDingSound(){
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.4);
+  } catch(e){}
+}
+
+function requestSystemNotificationPermission(){
+  if("Notification" in window && Notification.permission === "default"){
+    Notification.requestPermission();
+  }
+}
+
+const VIP_TIERS = [
+  { level: 1, name: "VIP 1 - مبتدئ", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
+  { level: 2, name: "VIP 2 - برونزي", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
+  { level: 3, name: "VIP 3 - فضي", minSpent: 1200, img: "https://cdn.imagetourls.com/uploads/tyImg/cXNbsRzr.png" },
+  { level: 4, name: "VIP 4 - ذهبي", minSpent: 2500, img: "https://cdn.imagetourls.com/uploads/tyImg/SVNPoba3.png" },
+  { level: 5, name: "VIP 5 - بلاتيني", minSpent: 5000, img: "https://cdn.imagetourls.com/uploads/tyImg/AlK2w8zC.png" },
+  { level: 6, name: "VIP 6 - ماسي", minSpent: 10000, img: "https://cdn.imagetourls.com/uploads/tyImg/FLernsRD.png" },
+  { level: 7, name: "VIP 7 - اسطوري", minSpent: 20000, img: "https://cdn.imagetourls.com/uploads/tyImg/SaSlSsaq.png" },
+  { level: 8, name: "VIP 8 - محترف", minSpent: 35000, img: "https://cdn.imagetourls.com/uploads/tyImg/16V1uWe0B.png" },
+  { level: 9, name: "VIP 9 - خبير", minSpent: 55000, img: "https://cdn.imagetourls.com/uploads/tyImg/gFPBMTSC.png" },
+  { level: 10, name: "VIP 10 - زعيم", minSpent: 80000, img: "https://cdn.imagetourls.com/uploads/tyImg/YH8kULrk.png" },
+  { level: 11, name: "VIP 11 - ملك", minSpent: 120000, img: "https://cdn.imagetourls.com/uploads/tyImg/m2poaFnt.png" },
+  { level: 12, name: "VIP 12 - امبراطور", minSpent: 180000, img: "https://cdn.imagetourls.com/uploads/tyImg/m7f3ea8I.png" },
+  { level: 13, name: "VIP 13 - الإلهي 👑", minSpent: 250000, img: "https://cdn.imagetourls.com/uploads/tyImg/33eqWdHw.png" }
+];
+
+let userTotalSpent = parseFloat(store.get("user_total_spent", "0")) || 0;
+let userWallet=0, userPoints=0, user=null;
+let uniqueUid = store.get("user_unique_id","");
+function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
+if(!uniqueUid){ uniqueUid = genUid(); store.set("user_unique_id", uniqueUid); }
+function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[currency]; $("#walletBalance").textContent=txt; $("#profWallet").textContent=txt; }
+
+function calculateVipLevel(spent) {
+  let currentTier = VIP_TIERS[0];
+  let nextTier = VIP_TIERS[1] || VIP_TIERS[0];
+  for (let i = 0; i < VIP_TIERS.length; i++) {
+    if (spent >= VIP_TIERS[i].minSpent) {
+      currentTier = VIP_TIERS[i];
+      nextTier = VIP_TIERS[i + 1] || VIP_TIERS[i];
+    }
+  }
+  return { currentTier, nextTier };
+}
+
+function updateVipUI() {
+  const { currentTier, nextTier } = calculateVipLevel(userTotalSpent);
+  $("#vipTierName").textContent = currentTier.name;
+  $("#vipTierImg").src = currentTier.img;
+  let progress = 100;
+  if (currentTier.level < 13) {
+    const span = nextTier.minSpent - currentTier.minSpent;
+    const currentSpan = userTotalSpent - currentTier.minSpent;
+    progress = Math.min(100, Math.max(0, (currentSpan / span) * 100));
+    $("#vipNextTarget").textContent = `الشحن القادم للترقية إلى ${nextTier.name} (باقي ${(nextTier.minSpent - userTotalSpent).toFixed(2)} ج.م)`;
+  } else {
+    $("#vipNextTarget").textContent = "لقد وصلت إلى أعلى قمة في مستويات الـ VIP! 👑";
+  }
+  $("#vipProgressFill").style.width = progress + "%";
+  $("#profSpent").textContent = userTotalSpent.toFixed(2) + " ج.م";
+}
+
+$("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
+
+function listenUserBlockStatus(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('users/' + uniqueUid + '/isBlocked').on('value', snapshot => {
+    if(snapshot.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed; inset:0; background:#030712; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; font-family:Cairo,sans-serif; z-index:999999;">
+          <div style="font-size:60px; margin-bottom:15px;">🚫</div>
+          <h1 style="color:#EF4444; font-size:24px; margin-bottom:10px;">عذراً، تم حظر حسابك</h1>
+          <p style="color:#94A3B8; font-size:13.5px; max-width:340px; line-height:1.7;">لقد قامت إدارة متجر أسرع من نتكم بحظر هذا الحساب من استخدام الخدمات. إذا كنت تعتقد أن هذا خطأ، تواصل معنا.</p>
+        </div>
+      `;
+      if(auth) auth.signOut().catch(()=>{});
+    }
   });
 }
+
+let lastKnownWallet = null;
+function listenWallet(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('users/' + uniqueUid + '/wallet').on('value', s=>{
+    const newWallet = s.val() || 0;
+    if(lastKnownWallet !== null && newWallet > lastKnownWallet){
+      const addedAmount = newWallet - lastKnownWallet;
+      toast(`🚀 مبروك! تمت إضافة (${addedAmount} ج.م) لحسابك بنجاح!`);
+      playDingSound();
+      if("Notification" in window && Notification.permission === "granted"){
+        new Notification("REAL STORE 🔥", {
+          body: `مبروك! تم شحن محفظتك بمبلغ (${addedAmount} ج.م) بنجاح من مدير التطبيق.`,
+          icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+        });
+      }
+    }
+    userWallet = newWallet;
+    lastKnownWallet = newWallet;
+    updateWalletUI();
+  });
+
+  db.ref('users/' + uniqueUid + '/points').on('value', s=>{
+    userPoints = s.val() || 0;
+    $("#profPoints").textContent = userPoints + " نقطة";
+  });
+
+  db.ref('users/' + uniqueUid + '/totalSpent').on('value', s=>{
+    userTotalSpent = s.val() || 0;
+    store.set("user_total_spent", userTotalSpent);
+    updateVipUI();
+  });
+}
+
+let lastCheckedTicketReplies = {};
+function listenSupportTicketReplies(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('support_tickets/' + uniqueUid).on('value', s => {
+    const tickets = s.val() || {};
+    let unreadRepliesCount = 0;
+
+    Object.entries(tickets).forEach(([tid, t]) => {
+      if(t.reply && !t.readByClient){
+        unreadRepliesCount++;
+        if(lastCheckedTicketReplies[tid] !== t.reply){
+          if(lastCheckedTicketReplies[tid] !== undefined){
+            toast("💬 وصلك رد جديد من الدعم الفني بخصوص: " + t.subject);
+            playDingSound();
+            if("Notification" in window && Notification.permission === "granted"){
+              new Notification("أسرع من نتكم 🔥 - رد الدعم الفني", {
+                body: "رد الإدارة: " + t.reply,
+                icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+              });
+            }
+          }
+          lastCheckedTicketReplies[tid] = t.reply;
+        }
+      } else if(!t.reply) {
+        lastCheckedTicketReplies[tid] = "";
+      }
+    });
+
+    const badgeEl = $("#supportBadge");
+    if(badgeEl){
+      if(unreadRepliesCount > 0){
+        badgeEl.style.display = "flex";
+        badgeEl.textContent = unreadRepliesCount;
+      } else {
+        badgeEl.style.display = "none";
+      }
+    }
+  });
+}
+
+function updateUserUI(){
+  const box = $("#uBox");
+  if(user){
+    box.style.display = "block";
+    $("#uName").textContent = store.get("custom_username","") || user.displayName || "مستخدم";
+    $("#uMail").textContent = user.email || "";
+    $("#uUniqueId").textContent = uniqueUid;
+    $("#loginBtn").innerHTML = user.photoURL ? `<img src="${user.photoURL}" style="width:26px;height:26px;border-radius:50%;object-fit:cover">` : '<i class="fa-solid fa-user"></i>';
+    $("#logoutItem").style.display = "flex";
+    $("#editNameItem").style.display = "flex";
+  } else {
+    box.style.display = "none";
+    $("#loginBtn").innerHTML = '<i class="fa-brands fa-google"></i>';
+    $("#logoutItem").style.display = "none";
+    $("#editNameItem").style.display = "none";
+  }
+}
+
+function loginGoogle(){
+  if(!firebaseOK || !auth){ toast("⚠️ Firebase غير مفعّل — تصفح كزائر"); return; }
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithRedirect(provider).catch(err => { toast("❌ " + err.message); });
+}
+
+function checkRedirectResult() {
+  if(!firebaseOK || !auth) return;
+  auth.getRedirectResult().then((result) => {
+    if (result.user) {
+      user = result.user;
+      if(db) {
+        db.ref('users/'+uniqueUid+'/profile').set({
+          name: user.displayName, 
+          email: user.email, 
+          photo: user.photoURL, 
+          updated: Date.now()
+        }).catch(()=>{});
+      }
+      updateUserUI(); 
+      renderProfile(); 
+      toast("✅ تم تسجيل الدخول بنجاح");
+      requestSystemNotificationPermission();
+    }
+  }).catch((error) => {
+    toast("❌ خطأ في تسجيل الدخول: " + error.message);
+  });
+}
+
+$("#loginBtn").onclick = ()=>{ 
+  if(user){
+    showSec("profile");
+  } else {
+    requestSystemNotificationPermission(); 
+    loginGoogle(); 
+  }
+};
+$("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); loginGoogle(); };
+$("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
+$("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
+$("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
+
+if(firebaseOK && auth){
+  auth.onAuthStateChanged(u=>{ user = u; updateUserUI(); listenWallet(); renderProfile(); });
+  checkRedirectResult();
+} else {
+  listenWallet();
+}
+
+function renderProfile(){
+  $("#profName").textContent = store.get("custom_username","") || (user?user.displayName:"زائر");
+  $("#profEmail").textContent = user?user.email:"سجّل دخولك بجيميل";
+  $("#profId").textContent = uniqueUid;
+  $("#profRef").textContent = "REF-" + uniqueUid.replace("REAL-","");
+  $("#profImg").src = user&&user.photoURL ? user.photoURL : "https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png";
+  updateWalletUI();
+  updateVipUI();
+}
+$("#copyRefBtn").onclick = ()=>copy($("#profRef").textContent);
+$("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
+$("#copyProfIdBtn").onclick = ()=>copy(uniqueUid);
+
+const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
+function renderStats(){ $("#stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join(""); }
+if(!store.get("st_init")){ store.set("st_init","1"); stat.inc("visits"); stat.inc("unique"); }
+
+$("#adminSendBalanceBtn").onclick = ()=>{
+  const targetId = $("#adminTargetUid").value.trim();
+  const amount = parseFloat($("#adminAmount").value);
+  const fb = $("#adminFeedback");
+  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
+  if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
+  if(!firebaseOK || !db){ fb.style.color="#EF4444"; fb.textContent="❌ Firebase غير مفعّل"; return; }
+  const ref = db.ref('users/'+targetId+'/wallet');
+  ref.once('value').then(s=>{
+    const cur = s.val()||0, nw = cur + amount;
+    ref.set(nw).then(()=>{
+      fb.style.color = "var(--ok)";
+      fb.textContent = `✅ شُحن (${amount}) للـ ID: (${targetId}) رصيده: (${nw})`;
+      toast("🚀 تم الشحن");
+      $("#adminTargetUid").value=""; $("#adminAmount").value="";
+    }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+  });
+};
+
+let cart = [];
+try { cart = JSON.parse(store.get("cart","[]")) || []; } catch(e){ cart = []; }
+function saveCart(){ store.set("cart", JSON.stringify(cart)); updateCartBadge(); }
+function updateCartBadge(){ const n = cart.reduce((a,b)=>a+b.qty,0); const b = $("#cartBadge"); if(n>0){ b.style.display="flex"; b.textContent=n; } else b.style.display="none"; }
+function addToCart(item){ const ex = cart.find(c=>c.title===item.title); if(ex) ex.qty++; else cart.push({...item, qty:1}); saveCart(); toast("✅ أضيف للسلة"); renderCart(); }
+function renderCart(){
+  if(!cart.length){ $("#cartItems").innerHTML = '<p class="sub" style="text-align:center;padding:20px">السلة فارغة</p>'; $("#cartTotal").textContent="0.00 "+CFG.cur[currency]; return; }
+  $("#cartItems").innerHTML = cart.map((it,i)=>`
+    <div class="cd-item">
+      <b>${esc(it.title)}</b>
+      <div class="qty"><button data-cart-dec="${i}">−</button><span>${it.qty}</span><button data-cart-inc="${i}">+</button></div>
+      <button class="del" data-cart-del="${i}"><i class="fa-solid fa-trash"></i></button>
+    </div>`).join("");
+  const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
+  $("#cartTotal").textContent = fmtPrice(total) + " " + CFG.cur[currency];
+}
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-cart-dec],[data-cart-inc],[data-cart-del]"); if(!el) return;
+  if(el.dataset.cartInc!=null){ cart[+el.dataset.cartInc].qty++; saveCart(); renderCart(); }
+  if(el.dataset.cartDec!=null){ const i=+el.dataset.cartDec; cart[i].qty--; if(cart[i].qty<=0) cart.splice(i,1); saveCart(); renderCart(); }
+  if(el.dataset.cartDel!=null){ cart.splice(+el.dataset.cartDel,1); saveCart(); renderCart(); }
+});
+$("#cartBtn").onclick = ()=>{ renderCart(); $("#cartDrawer").classList.add("on"); };
+$("#cartClose").onclick = ()=>$("#cartDrawer").classList.remove("on");
+$("#cartDrawer").onclick = e=>{ if(e.target.id==="cartDrawer") $("#cartDrawer").classList.remove("on"); };
+$("#cartCheckout").onclick = ()=>{
+  if(!cart.length) return toast("السلة فارغة");
+  const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
+  let msg = "🛒 *طلب متعدد*\n━━━━━━━━━━━━━━━\n";
+  cart.forEach((it,i)=>{ msg += `\n${i+1}) ${it.title}\n   الكمية: ${it.qty}\n   السعر: ${fmtPrice(it.price*it.qty)} ${CFG.cur[currency]}\n`; });
+  msg += `\n━━━━━━━━━━━━━━━\n💰 *الإجمالي:* ${fmtPrice(total)} ${CFG.cur[currency]}\n👤 *العميل:* ${store.get("custom_username","")||(user?user.displayName:"")||"زائر"}\n🆔 *ID:* ${uniqueUid}\n⚡ من ${CFG.storeName} 🔥`;
+  
+  const cashbackBonus = total * 0.04;
+  userTotalSpent += total;
+  userPoints += Math.floor(cashbackBonus * 10);
+  store.set("user_total_spent", userTotalSpent);
+  store.set("user_points", userPoints);
+  if(firebaseOK && db && uniqueUid){
+    db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
+    db.ref('users/' + uniqueUid + '/points').set(userPoints);
+  }
+  updateVipUI();
+
+  saveOrder({items:cart, total, status:"pending"});
+  stat.inc("ord"); openWA(msg); cart=[]; saveCart(); renderCart(); $("#cartDrawer").classList.remove("on");
+};
 
 const STATUS_MAP = {
   pending:{t:"في انتظار الدفع",c:"st-pending"},
@@ -173,153 +924,594 @@ const STATUS_MAP = {
   rejected:{t:"مرفوض",c:"st-rejected"},
   cancelled:{t:"ملغي",c:"st-cancelled"}
 };
+function saveOrder(o){
+  if(!firebaseOK || !db) return;
+  const oid = "REAL-" + Date.now().toString(36).toUpperCase();
+  const userName = store.get("custom_username","") || (user?user.displayName:"زائر");
+  const payload = { items:o.items||[], total:o.total||0, status:o.status||"pending", createdAt:Date.now(), name:userName, email:user?user.email:"" };
+  db.ref('orders/'+uniqueUid+'/'+oid).set(payload).catch(err=>console.warn("Save order:",err));
+  if(db) db.ref('notifications/'+uniqueUid+'/'+oid).set({title:"طلب جديد",body:"تم استلام طلبك برقم "+oid,time:Date.now(),read:false}).catch(()=>{});
+}
 
-function loadAdminOrders(){
-  if(!firebaseOK || !db){ $("#adminOrdersList").innerHTML='<p style="font-size:11px;color:var(--sub)">Firebase غير مفعّل</p>'; return; }
-  db.ref('orders').limitToLast(30).once('value').then(s=>{
+function renderOrders(){
+  const box = $("#ordersList");
+  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">سجّل دخولك لعرض طلباتك (يتطلب Firebase)</p>'; return; }
+  box.innerHTML = '<p class="sub" style="text-align:center;padding:10px">جاري التحميل...</p>';
+  db.ref('orders/'+uniqueUid).once('value').then(s=>{
+    const data = s.val() || {};
+    const arr = Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+    if(!arr.length){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">لا توجد طلبات</p>'; return; }
+    box.innerHTML = arr.map(([oid,o])=>{
+      const st = STATUS_MAP[o.status]||STATUS_MAP.pending;
+      const steps = ["pending","paid","processing","done"];
+      const idx = steps.indexOf(o.status);
+      return `<div class="order-card">
+        <div class="oc-top"><b>${esc(oid)}</b><span class="status-pill ${st.c}">${st.t}</span></div>
+        <small>${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
+        <div style="margin:6px 0">${(o.items||[]).map(it=>`<div style="font-size:11px">• ${esc(it.title)} ×${it.qty||1}</div>`).join("")}</div>
+        <b style="color:var(--gold);font-size:13px">${fmtPrice(o.total||0)} ${CFG.cur[currency]}</b>
+        <div class="oc-progress">${steps.map((s,i)=>`<div class="oc-dot ${i<=idx?'on':''}">${i<=idx?'✓':''}</div>`).join("")}</div>
+      </div>`;
+    }).join("");
+  }).catch(err=>{ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">خطأ: '+esc(err.message)+'</p>'; });
+}
+
+let notifs = [];
+function listenNotifs(){
+  if(!firebaseOK || !db) return;
+  db.ref('notifications/'+uniqueUid).on('value', s=>{
+    const d = s.val()||{}; notifs = Object.entries(d).map(([id,n])=>({id,...n})).sort((a,b)=>(b.time||0)-(a.time||0));
+    const unread = notifs.filter(n=>!n.read).length;
+    const b = $("#notifBadge"); if(unread>0){ b.style.display="flex"; b.textContent=unread; } else b.style.display="none";
+    renderNotifs();
+  });
+}
+function renderNotifs(){
+  if(!notifs.length){ $("#notifItems").innerHTML='<p class="sub" style="text-align:center;padding:20px">لا توجد إشعارات</p>'; return; }
+  $("#notifItems").innerHTML = notifs.map(n=>`<div class="nd-item ${n.read?'':'unread'}"><small>${new Date(n.time||0).toLocaleString('ar-EG')}</small><b>${esc(n.title||"")}</b><p>${esc(n.body||"")}</p></div>`).join("");
+}
+
+$("#notifBtn").onclick = ()=>{ 
+  renderNotifs(); 
+  $("#notifDrawer").classList.add("on"); 
+  if(firebaseOK && db && uniqueUid && notifs.length > 0){
+    notifs.forEach(n => {
+      if(!n.read){
+        db.ref('notifications/' + uniqueUid + '/' + n.id + '/read').set(true).catch(()=>{});
+      }
+    });
+  }
+};
+
+$("#notifClose").onclick = ()=>$("#notifDrawer").classList.remove("on");
+$("#notifDrawer").onclick = e=>{ if(e.target.id==="notifDrawer") $("#notifDrawer").classList.remove("on"); };
+
+let favs = [];
+try { favs = JSON.parse(store.get("favs","[]")) || []; } catch(e){ favs = []; }
+function toggleFav(title){ const i = favs.indexOf(title); if(i>=0) favs.splice(i,1); else favs.push(title); store.set("favs", JSON.stringify(favs)); toast(i>=0?"💔 حُذفت من المفضلة":"❤️ أُضيفت للمفضلة"); renderFavs(); }
+function renderFavs(){
+  if(!favs.length){ $("#favGrid").innerHTML = '<p class="sub" style="grid-column:span 2;text-align:center;padding:20px">لا توجد منتجات مفضلة</p>'; return; }
+  const items = REG.filter(r=>favs.includes(r.title));
+  if(!items.length){ $("#favGrid").innerHTML = '<p class="sub" style="grid-column:span 2;text-align:center;padding:20px">المنتجات المفضلة غير متاحة</p>'; return; }
+  $("#favGrid").innerHTML = items.map(it=>{
+    const i = REG.indexOf(it);
+    return `<div class="pr"><div class="pn">${esc(it.title)}</div><div class="pp"><small>السعر</small><span>${fmtPrice(it.base)} ${CFG.cur[currency]}</span></div><button class="buy" data-buy="${i}">شراء</button></div>`;
+  }).join("");
+}
+
+const REG=[];
+function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc){
+  imgSrc = imgSrc || '';
+  const i = REG.push({title,label,base,need,imgSrc}) - 1;
+  const price = base==null ? "" : `<div class="pp"><small>${qtyMode?"الكمية":"السعر"}</small><span>${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${qtyMode?"كوين":CFG.cur[currency]}</small></span></div>`;
+  const imgTag = imgSrc ? `<img src="${imgSrc}" alt="" style="width:100%;height:120px;object-fit:contain;background:var(--card);border-radius:10px;margin-bottom:6px;padding:4px" loading="lazy">` : '';
+  const isFav = favs.includes(title);
+  return `<div class="pr" data-title="${esc(title)}">
+    <button class="fav-btn ${isFav?'on':''}" data-fav="${esc(title)}" aria-label="fav"><i class="fa-solid fa-heart"></i></button>
+    ${imgTag}<div class="pn">${esc(label)}</div>${price}
+    <button class="buy" data-buy="${i}">${base==null?"طلب الشحن":"شراء الآن"}</button></div>`;
+}
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-fav]"); if(el){ e.stopPropagation(); toggleFav(el.dataset.fav); el.classList.toggle("on"); }
+  const b = e.target.closest("[data-buy]"); if(b){ openOrder(+b.dataset.buy); }
+});
+
+function renderGames(){
+  $("#gameGrid").innerHTML = Object.entries(GAMES).map(([id,g])=>{
+    const src = imgUrl(g.img);
+    return `<div class="gw" id="w-${id}" data-name="${esc((g.n+" "+g.k).toLowerCase())}">
+    <div class="gc"><div class="gi"><img class="ghost" alt="" loading="lazy" src="${src}"><img loading="lazy" width="84" height="84" alt="${esc(g.n)}" src="${src}" onerror="this.style.visibility='hidden'"></div>
+    <div class="gn"><b>${esc(g.n)}</b><small>${g.items.length} باقة</small>
+    <button class="open-b" data-open="${id}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>عرض الباقات</span></button></div></div>
+    <div class="pk" id="pk-${id}"></div></div>`;
+  }).join("");
+  filterGames();
+}
+function renderPackages(id){
+  const g = GAMES[id];
+  const ic = ICON[id] ? `<img src="${ICON[id]}" alt="" loading="lazy">` : '<i class="fa-solid fa-coins"></i>';
+  $("#pk-"+id).innerHTML = '<div class="grid">' + g.items.map(item=>{
+    const l = item[0], p = item[1], im = item[2]||'';
+    return productCard(g.n+" - "+l, l, p, g.noid?null:"id", ic, false, im);
+  }).join("") + "</div>";
+}
+function togglePk(id){
+  const w = $("#w-"+id), was = w.classList.contains("open");
+  $$(".gw.open").forEach(x=>{ x.classList.remove("open"); const b=$(".open-b",x); if(b){ b.setAttribute("aria-expanded","false"); const sp=$("span",b); if(sp) sp.textContent="عرض الباقات"; } });
+  if(!was){ stat.inc("pk"); renderPackages(id); w.classList.add("open"); const b=$(".open-b",w); b.setAttribute("aria-expanded","true"); $("span",b).textContent="إغلاق الباقات"; setTimeout(()=>w.scrollIntoView({behavior:"auto",block:"start"}),50); }
+}
+function filterGames(){
+  const q = normSearch($("#q").value); let n=0;
+  $$("#gameGrid .gw").forEach(w=>{ const ok = !q || normSearch(w.dataset.name).includes(q); w.style.display = ok?"flex":"none"; if(ok) n++; });
+  $("#noRes").style.display = n?"none":"block";
+}
+
+function renderSearchHist(){
+  let h = [];
+  try { h = JSON.parse(store.get("search_hist","[]")) || []; } catch(e){ h = []; }
+  if(!h.length){ $("#searchHist").innerHTML=""; return; }
+  $("#searchHist").innerHTML = h.slice(-6).map(q=>`<span class="schip" data-hist="${esc(q)}">${esc(q)}</span>`).join("");
+}
+document.addEventListener("click", e=>{ const el = e.target.closest("[data-hist]"); if(el){ $("#q").value = el.dataset.hist; filterGames(); } });
+$("#q").addEventListener("change", ()=>{
+  const v = $("#q").value.trim(); if(!v) return;
+  let h = []; try{ h = JSON.parse(store.get("search_hist","[]")) || []; }catch(e){ h=[]; }
+  if(!h.includes(v)) h.push(v); store.set("search_hist", JSON.stringify(h.slice(-10))); renderSearchHist();
+});
+
+function renderHomeSections(){
+  const arr = Object.entries(GAMES);
+  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
+  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${g.items.length} باقة</small></div>`).join("");
+  $("#limitedoffers").innerHTML = arr.filter(([id])=>["pubg","ff","arena"].includes(id)).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">-${Math.round(CFG.discount*100)}%</small></div>`).join("");
+}
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-openhome]");
+  if(el){
+    const id = el.dataset.openhome;
+    showSec("games");
+    setTimeout(()=>{ togglePk(id); }, 100);
+  }
+});
+
+function subtabs(sec,data,render,def){
+  const box = $("#st-"+sec); const cur = box.dataset.cur || def; box.dataset.cur = cur;
+  box.innerHTML = Object.entries(data).map(([k,v])=>`<button class="subtab${k===cur?" on":""}" data-sub="${sec}:${k}">${v.img?`<img src="${v.img}" alt="">`:""}<span>${esc(v.n)}</span></button>`).join("");
+  render(cur);
+}
+const R={
+  cards:k=>{ $("#out-cards").innerHTML = '<div class="grid">' + CARDS[k].items.map(([l,p])=>productCard(CARDS[k].n+" - "+l, l, p, null, '', false)).join("") + "</div>"; },
+  recharge:k=>{ $("#out-recharge").innerHTML = '<div class="grid">' + RECH[k].items.map(l=>productCard(l, l, null, "phone", '', false, RECH[k].img)).join("") + "</div>"; },
+  shabab:k=>{ $("#out-shabab").innerHTML = '<div class="grid">' + SHAB[k].items.map(([l,p])=>productCard("شباب كونات - "+l, l, p, "id", '', true)).join("") + "</div>"; }
+};
+const SRC = { cards:[CARDS,"google"], recharge:[RECH,"vodafone"], shabab:[SHAB,"eg"] };
+function renderSubs(){ for(const s in SRC) subtabs(s, SRC[s][0], R[s], SRC[s][1]); }
+
+const TABS = [["games","🎮 الألعاب"],["cards","💳 بطاقات هدايا"],["recharge","⚡ شحن سريع"],["shabab","🪙 شباب كونات"],["soon","🔜 قريباً"],["request","📦 طلب منتج"]];
+function renderTabs(){
+  const cur = $(".tab.on")?.dataset.sec || "games";
+  const list = TABS.concat($("#tabs").dataset.secret ? [["admin","👑 لوحة الإدارة"]] : []);
+  $("#tabs").innerHTML = list.map(([id,label])=>`<button class="tab${id===cur?" on":""}" data-sec="${id}">${label}</button>`).join("");
+}
+function showSec(id){
+  $$(".sec").forEach(s=>s.classList.toggle("on", s.id===id));
+  $$(".tab").forEach(b=>b.classList.toggle("on", b.dataset.sec===id));
+  $$("#bottomNav .bn-btn").forEach(b=>b.classList.toggle("on", b.dataset.nav===id));
+  if(id==="admin"){ renderStats(); renderAdminOrders(); }
+  if(id==="orders") renderOrders();
+  if(id==="favorites") renderFavs();
+  if(id==="profile") renderProfile();
+}
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-sec]"); if(el) return showSec(el.dataset.sec);
+  const bn = e.target.closest("[data-nav]"); if(bn) return showSec(bn.dataset.nav);
+  const op = e.target.closest("[data-open]"); if(op) return togglePk(op.dataset.open);
+  const sub = e.target.closest("[data-sub]"); if(sub){ const [s,k] = sub.dataset.sub.split(":"); $("#st-"+s).dataset.cur = k; $$(".subtab", $("#st-"+s)).forEach(b=>b.classList.toggle("on", b===sub)); return R[s](k); }
+  const cp = e.target.closest("[data-copy]"); if(cp) return copy(CFG[cp.dataset.copy]);
+});
+
+function renderAdminOrders(){
+  if(!firebaseOK || !db){ $("#adminOrders").innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
+  db.ref('orders').limitToLast(20).once('value').then(s=>{
     const data = s.val()||{};
     const flat = [];
     Object.entries(data).forEach(([uid, orders])=>{ Object.entries(orders||{}).forEach(([oid,o])=>flat.push({uid,oid,...o})); });
     flat.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-    if(!flat.length){ $("#adminOrdersList").innerHTML='<p style="font-size:11px;color:var(--sub);padding:10px">لا توجد طلبات حتى الآن</p>'; return; }
-    $("#adminOrdersList").innerHTML = flat.map(o=>`
+    if(!flat.length){ $("#adminOrders").innerHTML='<p class="sub" style="padding:10px">لا توجد طلبات</p>'; return; }
+    $("#adminOrders").innerHTML = flat.slice(0,20).map(o=>`
       <div class="order-card">
         <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
-        <div style="font-size:10px;color:var(--sub);margin-bottom:4px">العميل: ${esc(o.name||o.uid)}</div>
+        <small>${esc(o.uid)} • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
         <div style="font-size:11px;margin:4px 0">${(o.items||[]).map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")}</div>
-        <b style="color:var(--gold)">${(o.total||0).toFixed(2)} ج.م</b>
-        <select onchange="updateOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
+        <b style="color:var(--gold)">${fmtPrice(o.total||0)} ${CFG.cur[currency]}</b>
+        <select onchange="setOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--inner);border:1px solid var(--bd);color:var(--tx);font-size:11px">
           ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
         </select>
-      </div>
-    `).join("");
-  });
+      </div>`).join("");
+  }).catch(err=>{ $("#adminOrders").innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
 }
-
-window.updateOrderStatus = function(uid, oid, status){
+window.setOrderStatus = function(uid, oid, status){
   if(!firebaseOK || !db) return;
   db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
     db.ref('notifications/'+uid+'/'+('status_'+Date.now())).set({title:"تحديث حالة الطلب",body:"تم تغيير حالة الطلب "+oid+" إلى: "+(STATUS_MAP[status]||{}).t,time:Date.now(),read:false}).catch(()=>{});
-    toast("✅ تم تحديث الحالة بنجاح");
-    loadAdminOrders();
+    toast("✅ تم تحديث الحالة");
+    renderAdminOrders();
   }).catch(err=>toast("❌ " + err.message));
 };
 
-$("#sendBalanceBtn").onclick = ()=>{
-  const uid = $("#targetUid").value.trim();
-  const amount = parseFloat($("#targetAmount").value);
-  const fb = $("#balanceFeedback");
-  if(!uid){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
-  if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
-  if(!firebaseOK || !db){ fb.style.color="#EF4444"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  
-  const ref = db.ref('users/'+uid+'/wallet');
-  ref.once('value').then(s=>{
-    const cur = s.val()||0, nw = cur + amount;
-    ref.set(nw).then(()=>{
-      fb.style.color = "var(--ok)";
-      fb.textContent = `✅ تم شحن مبلغ (${amount}) للعميل (${uid}) وأصبح رصيده: (${nw})`;
-      toast("🚀 تم شحن الرصيد بنجاح");
-      $("#targetUid").value=""; $("#targetAmount").value="";
-    }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
-  });
+let sel=null, activeDiscount = CFG.discount, appliedPromoCode="";
+function openOrder(i){
+  sel = REG[i]; if(!sel) return;
+  const hasP = sel.base != null;
+  $("#mProd").textContent = sel.title;
+  $("#mImgBox").innerHTML = sel.imgSrc ? `<img src="${sel.imgSrc}" alt="" class="modal-pimg" style="width:75px;height:75px;object-fit:contain;background:var(--card);border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block;padding:2px" loading="lazy">` : "";
+  $("#mDisc").style.display = hasP ? "block" : "none";
+  activeDiscount = CFG.discount; appliedPromoCode = "";
+  $("#promoCodeInput").value = ""; $("#promoFeedback").textContent = "";
+  updateModalPrice();
+  $("#mNeedBox").style.display = sel.need ? "block" : "none";
+  $("#mNeedLbl").textContent = sel.need === "phone" ? "رقم الهاتف المراد شحنه" : "ايدي اللاعب (Player ID)";
+  $("#mNeed").value = sel.need === "id" ? store.get("lastId","") : "";
+  $("#mNeed").classList.remove("err");
+  $("#modal").classList.add("on");
+}
+function updateModalPrice(){
+  if(sel.base == null) return;
+  const finalPrice = sel.base * (1 - activeDiscount);
+  $("#mPrice").textContent = fmtPrice(finalPrice) + " " + CFG.cur[currency];
+  $("#mOld").textContent = "السعر الأصلي: " + fmtPrice(sel.base) + " " + CFG.cur[currency];
+  $("#mOld").style.display = "block";
+}
+$("#applyPromoBtn").onclick = ()=>{
+  const code = $("#promoCodeInput").value.trim().toUpperCase();
+  const fb = $("#promoFeedback");
+  if(code === "BESO47"){ activeDiscount = 0.01; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+  else if(code === "BESO41O" || code === "BESO410"){ activeDiscount = 0.10; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
+  else if(!code){ fb.style.color="var(--sub)"; fb.textContent="⚠️ أدخل الكود أولاً"; }
+  else { activeDiscount = CFG.discount; appliedPromoCode = ""; updateModalPrice(); fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح"; }
+};
+const closeModal = ()=>$("#modal").classList.remove("on");
+$("#mx").onclick = closeModal;
+$("#modal").onclick = e=>{ if(e.target.id==="modal") closeModal(); };
+
+$("#confirm").onclick = ()=>{
+  if(!sel) return;
+  const need = $("#mNeed").value.trim();
+  if(sel.need && need.length < 3){ $("#mNeed").classList.add("err"); $("#mNeed").focus(); toast("⚠️ أدخل البيانات المطلوبة"); return; }
+  const finalPrice = sel.base != null ? sel.base * (1 - activeDiscount) : 0;
+  const priceTxt = sel.base != null ? fmtPrice(finalPrice) + " " + CFG.cur[currency] : "";
+  const userName = store.get("custom_username","") || (user?user.displayName:"") || "زائر";
+  let msg = "🛒 *طلب شحن جديد*\n━━━━━━━━━━━━━━━\n";
+  msg += "🎮 *المنتج:* "+sel.title+"\n";
+  if(priceTxt) msg += "💰 *السعر:* "+priceTxt+"\n";
+  if(appliedPromoCode) msg += "🏷️ *كود:* "+appliedPromoCode+"\n";
+  if(sel.need) msg += "🆔 *البيانات:* "+need+"\n";
+  msg += "👤 *العميل:* "+userName+"\n";
+  msg += "🔑 *ID:* "+uniqueUid+"\n";
+  msg += "━━━━━━━━━━━━━━━\n⚡ من "+CFG.storeName+" 🔥";
+
+  if(finalPrice > 0){
+    const cashbackBonus = finalPrice * 0.04;
+    userTotalSpent += finalPrice;
+    userPoints += Math.floor(cashbackBonus * 10);
+    store.set("user_total_spent", userTotalSpent);
+    store.set("user_points", userPoints);
+    if(firebaseOK && db && uniqueUid){
+      db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
+      db.ref('users/' + uniqueUid + '/points').set(userPoints);
+    }
+    updateVipUI();
+  }
+
+  saveOrder({items:[{title:sel.title, qty:1, price:finalPrice}], total:finalPrice, status:"pending"});
+  if(sel.need === "id") store.set("lastId", need);
+  stat.inc("ord"); openWA(msg); closeModal();
 };
 
-function setUserBlock(isBlocked){
-  const uid = $("#banUidInput").value.trim();
-  const fb = $("#banFeedback");
-  if(!uid){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
-  if(!firebaseOK || !db){ fb.style.color="#EF4444"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  
-  db.ref('users/'+uid+'/isBlocked').set(isBlocked).then(()=>{
-    fb.style.color = isBlocked ? "#EF4444" : "#10B981";
-    fb.textContent = isBlocked ? `🚫 تم حظر العميل (${uid}) فوراً بنجاح` : `✅ تم فك الحظر عن العميل (${uid}) بنجاح`;
-    toast(isBlocked ? "🚫 تم الحظر بنجاح" : "✅ تم فك الحظر");
-    $("#banUidInput").value = "";
-    loadAllUsers();
-  }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
-}
-
-$("#banUserBtn").onclick = ()=>setUserBlock(true);
-$("#unbanUserBtn").onclick = ()=>setUserBlock(false);
-
-function loadAllUsers(){
-  const box = $("#allUsersList");
-  if(!firebaseOK || !db){ box.innerHTML='<p style="font-size:11px;color:var(--sub)">Firebase غير مفعّل</p>'; return; }
-  db.ref('users').once('value').then(s=>{
-    const users = s.val()||{};
-    const arr = Object.entries(users);
-    if(!arr.length){ box.innerHTML='<p style="font-size:11px;color:var(--sub);padding:10px">لا توجد حسابات مسجلة حتى الآن</p>'; return; }
-    box.innerHTML = arr.map(([uid, u])=>{
-      const isBanned = u.isBlocked === true;
-      const name = (u.profile && u.profile.name) ? u.profile.name : "مستخدم";
-      const email = (u.profile && u.profile.email) ? u.profile.email : "-";
-      return `
-        <div class="order-card" style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <b style="color:var(--a);direction:ltr;display:block">${esc(uid)}</b>
-            <div style="font-size:11px">${esc(name)}</div>
-            <div style="font-size:9.5px;color:var(--sub);direction:ltr">${esc(email)}</div>
-            <div style="margin-top:4px"><span class="status-pill ${isBanned?'st-rejected':'st-done'}">${isBanned?'محظور 🚫':'نشط ✅'}</span></div>
-          </div>
-          <div>
-            <button onclick="quickToggleBan('${esc(uid)}', ${!isBanned})" style="padding:6px 10px;border-radius:8px;font-size:10.5px;font-weight:900;background:${isBanned?'#10B981':'#EF4444'};color:#fff">
-              ${isBanned?'فك الحظر':'حظر'}
-            </button>
-          </div>
-        </div>
-      `;
-    }).join("");
-  });
-}
-
-window.quickToggleBan = function(uid, shouldBlock){
-  if(!firebaseOK || !db) return;
-  db.ref('users/'+uid+'/isBlocked').set(shouldBlock).then(()=>{
-    toast(shouldBlock ? "🚫 تم حظر المستخدم" : "✅ تم فك الحظر");
-    loadAllUsers();
-  });
+$("#sendReq").onclick = ()=>{
+  const name = $("#rName").value.trim(), phone = $("#rPhone").value.trim();
+  if(!name) return toast("⚠️ اكتب اسم المنتج");
+  if(!/^[+\d\s-]{8,20}$/.test(phone)) return toast("⚠️ رقم هاتف غير صحيح");
+  const msg = "السلام عليكم 👋\n\nطلب منتج من "+CFG.storeName+" 🔥\n\nالمنتج: "+name+"\nالنوع: "+$("#rType").value+"\nالهاتف: "+phone+"\nالتفاصيل: "+$("#rDet").value;
+  openWA(msg);
 };
 
-function loadAdminTickets(){
-  const box = $("#adminTicketsList");
-  if(!firebaseOK || !db){ box.innerHTML='<p style="font-size:11px;color:var(--sub)">Firebase غير مفعّل</p>'; return; }
-  db.ref('admin_tickets').once('value').then(s=>{
-    const tickets = s.val()||{};
-    const arr = Object.entries(tickets).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
-    if(!arr.length){ box.innerHTML='<p style="font-size:11px;color:var(--sub);padding:10px">لا توجد تذاكر دعم فني</p>'; return; }
-    box.innerHTML = arr.map(([tid, t])=>`
-      <div class="order-card">
-        <div class="oc-top"><b>${esc(t.subject)}</b><span style="font-size:9.5px;color:var(--sub)">${esc(t.uid)}</span></div>
-        <div style="font-size:10px;color:var(--gold);margin-bottom:4px">المرسل: ${esc(t.name||"-")}</div>
-        <p style="color:var(--tx);margin:4px 0">${esc(t.message)}</p>
-        ${t.reply ? `<div style="background:var(--card);border:1px solid var(--bd2);border-radius:8px;padding:6px;margin:6px 0;color:var(--ok)"><b>ردك:</b> ${esc(t.reply)}</div>` : ''}
-        <div style="display:flex;gap:6px;margin-top:6px">
-          <input id="reply-${tid}" class="in" placeholder="اكتب الرد هنا..." style="margin:0;font-size:11px" value="${esc(t.reply||"")}">
-          <button onclick="sendTicketReply('${esc(t.uid)}','${esc(tid)}')" style="padding:6px 12px;border-radius:8px;background:var(--g1);color:#fff;font-weight:900;font-size:11px;white-space:nowrap">إرسال الرد</button>
-        </div>
+function loadUserSupportTickets(){
+  const box = $("#userSupportTicketsList");
+  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
+  db.ref('support_tickets/'+uniqueUid).once('value').then(s=>{
+    const data = s.val()||{};
+    
+    Object.keys(data).forEach(tid => {
+      if(data[tid].reply && !data[tid].readByClient){
+        db.ref('support_tickets/'+uniqueUid+'/'+tid+'/readByClient').set(true).catch(()=>{});
+      }
+    });
+
+    const arr = Object.entries(data).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
+    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:8px">لا توجد تذاكر سابقة</p>'; return; }
+    box.innerHTML = arr.map(([id, t])=>`
+      <div style="background:var(--inner);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:6px;font-size:11px">
+        <div style="display:flex;justify-content:space-between;font-weight:800;color:var(--a)"><span>${esc(t.subject)}</span><span style="color:${t.reply?'var(--ok)':'var(--gold)'}">${t.reply?'تم الرد ✅':'قيد الانتظار ⏳'}</span></div>
+        <p style="color:var(--sub);margin:4px 0">${esc(t.message)}</p>
+        ${t.reply ? `<div style="background:var(--card);border:1px solid var(--bd2);border-radius:8px;padding:6px;margin-top:4px;color:var(--ok)"><b>رد الإدارة:</b> ${esc(t.reply)}</div>` : ''}
       </div>
     `).join("");
   });
 }
 
-window.sendTicketReply = function(uid, tid){
-  const replyText = $("#reply-"+tid).value.trim();
-  if(!replyText) return toast("⚠️ اكتب الرد أولاً");
-  if(!firebaseOK || !db) return;
-  
-  const updates = {};
-  updates['support_tickets/'+uid+'/'+tid+'/reply'] = replyText;
-  updates['support_tickets/'+uid+'/'+tid+'/readByClient'] = false;
-  updates['admin_tickets/'+tid+'/reply'] = replyText;
-
-  db.ref().update(updates).then(()=>{
-    toast("✅ تم إرسال الرد للعميل بنجاح");
-    loadAdminTickets();
+$("#sendSupportTicketBtn").onclick = ()=>{
+  const subject = $("#supportSubject").value.trim();
+  const message = $("#supportMessageText").value.trim();
+  if(!subject || !message) return toast("⚠️ أدخل عنوان الرسالة والتفاصيل");
+  if(!firebaseOK || !db){ toast("⚠️ Firebase غير مفعّل"); return; }
+  const ticketId = "TICK-" + Date.now().toString(36).toUpperCase();
+  const userName = store.get("custom_username","") || (user?user.displayName:"زائر");
+  const ticketData = {
+    id: ticketId,
+    uid: uniqueUid,
+    name: userName,
+    email: user?user.email:"",
+    subject: subject,
+    message: message,
+    time: Date.now(),
+    reply: "",
+    readByClient: true
+  };
+  db.ref('support_tickets/'+uniqueUid+'/'+ticketId).set(ticketData).then(()=>{
+    db.ref('admin_tickets/'+ticketId).set(ticketData).catch(()=>{});
+    toast("✅ تم إرسال تذكرة الدعم بنجاح");
+    $("#supportSubject").value = "";
+    $("#supportMessageText").value = "";
+    loadUserSupportTickets();
   }).catch(err=>toast("❌ " + err.message));
 };
 
-loadStats();
+$("#supportMx").onclick = ()=>$("#supportModal").classList.remove("on");
+$("#supportModal").onclick = e=>{ if(e.target.id==="supportModal") $("#supportModal").classList.remove("on"); };
+
+const PAGES = {
+  about:{title:"معلومات عن التطبيق", body:`<p><b>🔥 أسرع من نتكم</b> متجرك المتكامل والأسرع لشحن شدات الألعاب، البطاقات الرقمية، رصيد الاتصالات، وشباب كونات بأفضل الأسعار وأعلى معايير الأمان.</p><h4>المميزات</h4><ul><li>شحن فوري خلال دقائق</li><li>أسعار تنافسية وعروض حصرية</li><li>دفع آمن عبر فودافون كاش</li></ul><p style="text-align:center;margin-top:10px">© 2026 أسرع من نتكم 🔥</p>`},
+  privacy:{title:"سياسة الخصوصية", body:`<h4>جمع البيانات</h4><p>نحتفظ فقط بالبيانات الضرورية لتنفيذ طلبك (الاسم، البريد، رقم الهاتف، Player ID).</p><h4>استخدام البيانات</h4><p>تُستخدم بياناتك حصراً لتنفيذ الطلبات وتحسين الخدمة. لا نشاركها مع أي طرف ثالث.</p><h4>حقوقك</h4><p>يمكنك طلب حذف بياناتك في أي وقت عبر الدعم الفني.</p>`},
+  terms:{title:"شروط الاستخدام", body:`<h4>الاستخدام</h4><p>باستخدامك للمتجر فأنت توافق على تقديم بيانات دقيقة وصحيحة.</p><h4>الطلبات</h4><p>الطلبات غير قابلة للاسترداد بعد تنفيذ الشحن. يتم الالتزام بأسعار الباقات المنشورة.</p><h4>المسؤولية</h4><p>المتجر غير مسؤول عن أي مشاكل ناتجة عن بيانات خاطئة أدخلها العميل.</p>`},
+  refund:{title:"سياسة الاسترجاع", body:`<h4>قبل التنفيذ</h4><p>يمكنك إلغاء الطلب واسترداد المبلغ كاملاً قبل بدء التنفيذ.</p><h4>بعد التنفيذ</h4><p>لا يمكن الاسترجاع بعد شحن الباقة بنجاح على الحساب.</p><h4>حالات خاصة</h4><p>في حال فشل الشحن بسبب خطأ من المتجر، سيتم الاسترداد كاملاً أو إعادة الشحن مجاناً.</p>`},
+  faq:{title:"الأسئلة الشائعة", body:`<details class="faq-item" open><summary>كيف أطلب؟</summary><p>اختر اللعبة → الباقة → أدخل Player ID → ادفع عبر فودافون كاش → أرسل الإيصال على واتساب.</p></details><details class="faq-item"><summary>مدة التنفيذ؟</summary><p>عادة 5-15 دقيقة بعد تأكيد الدفع.</p></details><details class="faq-item"><summary>طرق الدفع؟</summary><p>فودافون كاش حالياً (InstaPay والمحافظ الإلكترونية قريباً).</p></details><details class="faq-item"><summary>ماذا لو أخطأت في Player ID؟</summary><p>تواصل فوراً مع الدعم قبل بدء التنفيذ.</p></details>`}
+};
+function openAbout(key){
+  const p = PAGES[key] || PAGES.about;
+  $("#aboutTitle").textContent = p.title;
+  $("#aboutBody").innerHTML = p.body;
+  $("#aboutModal").classList.add("on");
+}
+$("#appHelpBtn").onclick = ()=>openAbout("about");
+$("#closeAboutBtn").onclick = ()=>$("#aboutModal").classList.remove("on");
+$("#aboutMx").onclick = ()=>$("#aboutModal").classList.remove("on");
+$("#aboutModal").onclick = e=>{ if(e.target.id==="aboutModal") $("#aboutModal").classList.remove("on"); };
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  $$(".lang-btn[data-lang]").forEach(b=>b.classList.toggle("on", b.dataset.lang === lang));
+  $("#soonGrid").innerHTML = SOON.map(([ic,n])=>`<div class="sc"><i class="${ic}"></i><h3>${esc(n)}</h3><p>قريباً</p></div>`).join("");
+  renderTabs(); renderGames(); renderSubs(); renderStats(); renderHomeSections();
+  REG.length = 0; 
+  renderHomeSections(); renderGames(); renderSubs();
+  renderFavs();
+}
+function setTheme(m){
+  document.documentElement.dataset.theme = m; store.set("theme", m);
+  $("#theme").innerHTML = m === "dark" ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+  const mt = $('meta[name=theme-color]'); if(mt) mt.content = m === "dark" ? "#080B18" : "#2563EB";
+}
+$("#theme").onclick = ()=>setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+
+$$(".lang-btn[data-lang]").forEach(b=>{
+  b.onclick = ()=>{
+    lang = b.dataset.lang; store.set("lang", lang);
+    $$(".lang-btn[data-lang]").forEach(x=>x.classList.toggle("on", x === b));
+    applyLang();
+    toast("🌐 " + (lang==="ar"?"العربية":lang==="en"?"English":"日本語"));
+  };
+});
+$$("#currencySelector .lang-btn").forEach(b=>{
+  b.onclick = ()=>{
+    currency = b.dataset.cur; store.set("currency", currency);
+    $$("#currencySelector .lang-btn").forEach(x=>x.classList.toggle("on", x === b));
+    renderGames(); renderSubs(); updateWalletUI(); renderFavs();
+    toast("💱 تم تغيير العملة");
+  };
+});
+
+$("#dotsBtn").onclick = ()=>{ $("#dMenu").classList.toggle("on"); };
+document.addEventListener("click", e=>{
+  if(!e.target.closest(".dots-wrap")) $("#dMenu").classList.remove("on");
+  const el = e.target.closest("[data-act]"); if(!el) return;
+  const act = el.dataset.act; $("#dMenu").classList.remove("on");
+  if(act === "profile") showSec("profile");
+  else if(act === "orders") showSec("orders");
+  else if(act === "favorites") showSec("favorites");
+  else if(act === "track"){ $("#trackModal").classList.add("on"); }
+  else if(act === "supportDesk"){ loadUserSupportTickets(); $("#supportModal").classList.add("on"); }
+  else if(act === "support") openWA("السلام عليكم 👋 أحتاج مساعدة");
+  else if(act === "bot"){ $("#botPanel").classList.add("on"); botInit(); }
+  else if(act === "request") showSec("request");
+  else if(act === "about") openAbout("about");
+  else if(act === "privacy") openAbout("privacy");
+  else if(act === "terms") openAbout("terms");
+  else if(act === "refund") openAbout("refund");
+  else if(act === "faq") openAbout("faq");
+  else if(act === "logout"){ if(firebaseOK && auth) auth.signOut(); user = null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }
+  else if(act === "editName"){ $("#customNameInput").value = store.get("custom_username",""); $("#nameModal").classList.add("on"); }
+});
+
+$("#saveNameBtn").onclick = ()=>{
+  const v = $("#customNameInput").value.trim();
+  if(!v) return toast("⚠️ أدخل اسماً");
+  store.set("custom_username", v);
+  updateUserUI(); renderProfile(); $("#nameModal").classList.remove("on"); toast("✅ تم الحفظ");
+};
+$("#nameMx").onclick = ()=>$("#nameModal").classList.remove("on");
+$("#nameModal").onclick = e=>{ if(e.target.id==="nameModal") $("#nameModal").classList.remove("on"); };
+
+$("#trackBtn").onclick = ()=>{
+  const oid = $("#trackInput").value.trim();
+  if(!oid) return toast("⚠️ أدخل رقم الطلب");
+  if(!firebaseOK || !db){ $("#trackResult").innerHTML='<p class="sub">Firebase غير مفعّل</p>'; return; }
+  $("#trackResult").innerHTML = '<p class="sub">بحث...</p>';
+  db.ref('orders').once('value').then(s=>{
+    const data = s.val()||{};
+    let found = null;
+    Object.entries(data).forEach(([uid,orders])=>{ if(orders && orders[oid]) found = {uid, order:orders[oid]}; });
+    if(!found){ $("#trackResult").innerHTML='<p class="sub">❌ لم يتم العثور على الطلب</p>'; return; }
+    const st = STATUS_MAP[found.order.status]||STATUS_MAP.pending;
+    $("#trackResult").innerHTML = `<div class="order-card">
+      <div class="oc-top"><b>${esc(oid)}</b><span class="status-pill ${st.c}">${st.t}</span></div>
+      <small>${new Date(found.order.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
+      <div style="font-size:11px;margin:4px 0">${(found.order.items||[]).map(it=>`• ${esc(it.title)}`).join("<br>")}</div>
+      <b style="color:var(--gold)">${fmtPrice(found.order.total||0)} ${CFG.cur[currency]}</b>
+    </div>`;
+  }).catch(err=>{ $("#trackResult").innerHTML='<p class="sub">'+esc(err.message)+'</p>'; });
+};
+$("#trackMx").onclick = ()=>$("#trackModal").classList.remove("on");
+$("#trackModal").onclick = e=>{ if(e.target.id==="trackModal") $("#trackModal").classList.remove("on"); };
+
+$("#reset").onclick = ()=>{ if(confirm("هل أنت متأكد من تصفير الإحصائيات؟")){ ["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0")); renderStats(); toast("✅ تم التصفير"); } };
+
+let sc = 0;
+$$(".secret").forEach(el=>el.onclick = ()=>{ if(++sc >= 5){ sc = 0; $("#tabs").dataset.secret = "1"; renderTabs(); toast("👑 مرحباً بك في لوحة الإدارة"); } });
+
+function hideSplash(){ const s = $("#splash"); if(s){ s.classList.add("hide"); setTimeout(()=>s.remove(), 450); } }
+$("#skip").onclick = hideSplash;
+setTimeout(hideSplash, 4000);
+
+let heroSlides = [
+  {img:"https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png", title:"Banner 1"},
+  {img:"https://cdn.imagetourls.com/uploads/tyImg/qgdGG7D4.png", title:"Banner 2"},
+  {img:"https://cdn.imagetourls.com/uploads/tyImg/swbD7etT.png", title:"Banner 3"},
+  {img:"https://cdn.imagetourls.com/uploads/tyImg/LJv03YtR.png", title:"Banner 4"},
+  {img:"https://cdn.imagetourls.com/uploads/tyImg/jMDCy25v.png", title:"Banner 5"}
+];
+function renderHero(){
+  const v = $("#hsV"), d = $("#hsD");
+  v.innerHTML = heroSlides.map((s,i)=>`<div class="hs-s" style="opacity:${i===0?1:0}"><img src="${s.img}" alt="${esc(s.title)}" loading="lazy"></div>`).join("");
+  d.innerHTML = heroSlides.map((_,i)=>`<button class="${i===0?"on":""}" data-slide="${i}"></button>`).join("");
+  let idx = 0;
+  const go = (n)=>{
+    const slides = $$(".hs-s", v), dots = $$("button", d);
+    slides.forEach((s,i)=>s.style.opacity = i===n?1:0);
+    dots.forEach((b,i)=>b.classList.toggle("on", i===n));
+    idx = n;
+  };
+  d.onclick = e=>{ const b = e.target.closest("[data-slide]"); if(b) go(+b.dataset.slide); };
+  if(window.heroInterval) clearInterval(window.heroInterval);
+  window.heroInterval = setInterval(()=>go((idx+1) % heroSlides.length), 4000);
+}
+function listenHeroBanners(){
+  if(!firebaseOK || !db) { renderHero(); return; }
+  db.ref('settings/heroSlides').on('value', s=>{
+    const data = s.val();
+    if(data && Array.isArray(data) && data.length > 0) heroSlides = data;
+    renderHero();
+  });
+}
+
+function listenGamePrices(){
+  if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
+  db.ref('settings/gamesPrices').on('value', s=>{
+    const data = s.val();
+    if(data){
+      for(const id in data){
+        if(GAMES[id] && Array.isArray(data[id])){
+          GAMES[id].items = data[id];
+        }
+      }
+    }
+    renderGames();
+    renderHomeSections();
+  });
+}
+
+function startOfferTimer(){
+  const end = Date.now() + 24*60*60*1000;
+  setInterval(()=>{
+    const diff = Math.max(0, end - Date.now());
+    const h = String(Math.floor(diff/3600000)).padStart(2,"0");
+    const m = String(Math.floor(diff%3600000/60000)).padStart(2,"0");
+    const s = String(Math.floor(diff%60000/1000)).padStart(2,"0");
+    const el = $("#offerTimer"); if(el) el.textContent = h+":"+m+":"+s;
+  }, 1000);
+}
+
+const tickerMsgs = ["⚡ شحن فوري خلال دقائق","🔥 عروض حصرية على PUBG","💎 أسعار لا تقبل المنافسة","🚀 اطلب الآن واستلم فورا"];
+setInterval(()=>{
+  const el = $("#tickerText"); if(el) el.textContent = tickerMsgs[Math.floor(Math.random()*tickerMsgs.length)];
+}, 4000);
+
+const KB = [
+  {k:["ازاي اطلب","كيف اطلب","الشراء"],a:"اختر اللعبة، اضغط عرض الباقات، ثم شراء، وأدخل الـ ID الخاص بك لفتح واتساب بالطلب."},
+  {k:["فودافون كاش","الدفع","ادفع ازاي"],a:"الدفع يتم عن طريق التحويل لرقم فودافون كاش الخاص بالمتجر المعروض في قسم الشحن."},
+  {k:["الوقت","التسليم","كام بتاخد وقت"],a:"التسليم فوري وصاروخي خلال 5 إلى 15 دقيقة بعد تأكيد التحويل."},
+  {k:["من أنت","من صاحب","المتجر"],a:"أنا «ذكي» مساعد متجر أسرع من نتكم 🔥."}
+];
+function botInit(){
+  const bm = $("#botMsgs");
+  if(bm.children.length === 0){
+    bm.innerHTML = '<div class="bm b">أهلاً بك! 👋 أنا «ذكي» مساعد متجر أسرع من نتكم. كيف يمكنني مساعدتك اليوم؟</div>';
+    $("#botChips").innerHTML = ['ازاي اطلب؟', 'طرق الدفع', 'وقت التسليم'].map(c=>`<button class="chip" data-botchip="${c}">${c}</button>`).join("");
+  }
+}
+$("#botFab").onclick = ()=>{ $("#botPanel").classList.add("on"); botInit(); };
+$("#botClose").onclick = ()=>$("#botPanel").classList.remove("on");
+$("#botForm").onsubmit = e=>{
+  e.preventDefault();
+  const inp = $("#botIn"), txt = inp.value.trim(); if(!txt) return;
+  inp.value = "";
+  const bm = $("#botMsgs");
+  bm.innerHTML += `<div class="bm u">${esc(txt)}</div>`;
+  setTimeout(()=>{
+    let ans = "مفهمتش سؤالك كويس، يمكنك التواصل مع الدعم الفني مباشرة عبر الواتساب.";
+    const found = KB.find(k=>k.k.some(w=>txt.includes(w)));
+    if(found) ans = found.a;
+    bm.innerHTML += `<div class="bm b">${esc(ans)}</div>`;
+    bm.scrollTop = bm.scrollHeight;
+  }, 300);
+  bm.scrollTop = bm.scrollHeight;
+};
+document.addEventListener("click", e=>{
+  const chip = e.target.closest("[data-botchip]");
+  if(chip){ $("#botIn").value = chip.dataset.botchip; $("#botForm").requestSubmit(); }
+});
+
+window.onscroll = ()=>{
+  if(window.scrollY > 300) $("#backTop").classList.add("on");
+  else $("#backTop").classList.remove("on");
+};
+$("#backTop").onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
+
+setTheme(store.get("theme", "light"));
+applyLang();
+listenHeroBanners();
+listenGamePrices();
+startOfferTimer();
+renderSearchHist();
+listenNotifs();
+listenSupportTicketReplies(); 
+listenUserBlockStatus();
+
+document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if(typeof firebaseOK !== "undefined" && firebaseOK && typeof db !== "undefined" && db) {
+      const vKey = "visit_" + Date.now() + "_" + Math.floor(Math.random()*1000);
+      db.ref('visitors/' + vKey).set({
+        uid: typeof uniqueUid !== "undefined" ? uniqueUid : "GUEST",
+        name: (typeof store !== "undefined" ? store.get("custom_username","") : "") || (typeof user !== "undefined" && user ? user.displayName : "زائر"),
+        email: (typeof user !== "undefined" && user && user.email) ? user.email : "غير مسجل",
+        userAgent: navigator.userAgent,
+        time: Date.now()
+      }).catch(()=>{});
+    }
+  } catch(e) {}
+});
 </script>
 </body>
 </html>
