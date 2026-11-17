@@ -79,7 +79,7 @@ textarea.in{min-height:80px;resize:none}
   <button class="tab" data-sec="orders">📦 الطلبات</button>
   <button class="tab" data-sec="balance">⚡ الرصيد</button>
   <button class="tab" data-sec="vip">👑 ترقية VIP</button>
-  <button class="tab" data-sec="ban">🚫 حظر المستخدمين</button>
+  <button class="tab" data-sec="ban">🚫 الحظر</button>
   <button class="tab" data-sec="banners">🖼️ البانرات</button>
   <button class="tab" data-sec="prices">🎮 الأسعار</button>
   <button class="tab" data-sec="coupons">🎫 الكوبونات</button>
@@ -97,8 +97,8 @@ textarea.in{min-height:80px;resize:none}
   </div>
   <div class="card">
     <div class="ttl" style="margin-top:0">⚡ اختصارات سريعة</div>
-    <button class="btn" onclick="switchSec('balance')">شحن رصيد للعميل</button>
-    <button class="btn gold" onclick="switchSec('ban')" style="margin-top:8px">🚫 حظر أو رفع الحظر عن مستخدم</button>
+    <button class="btn" onclick="switchSec('balance')">إضافة أو خصم رصيد للعميل</button>
+    <button class="btn gold" onclick="switchSec('vip')" style="margin-top:8px">👑 ترقية مستوى VIP للعميل</button>
     <button class="btn danger" onclick="toggleMaintenanceQuick()" style="margin-top:8px">🛠️ تبديل وضع الصيانة السريع</button>
   </div>
 </section>
@@ -109,13 +109,17 @@ textarea.in{min-height:80px;resize:none}
   <div id="adminOrdersList"></div>
 </section>
 
-<!-- 3. شحن الرصيد -->
+<!-- 3. شحن وخصم الرصيد -->
 <section id="balance" class="sec">
-  <div class="ttl" style="margin-top:0">⚡ شحن رصيد للعميل عبر الـ ID</div>
+  <div class="ttl" style="margin-top:0">⚡ إضافة أو خصم رصيد للعميل عبر الـ ID</div>
   <div class="card">
     <input id="targetUidInput" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
-    <input id="targetAmountInput" class="in" type="number" placeholder="المبلغ المراد إضافته (مثال: 100)">
-    <button class="btn gold" id="sendBalanceActionBtn">🚀 تنفيذ الشحن الفوري</button>
+    <select id="balanceActionType" class="in">
+      <option value="add">➕ زيادة الرصيد (شحن)</option>
+      <option value="sub">➖ إنقاص/خصم الرصيد</option>
+    </select>
+    <input id="targetAmountInput" class="in" type="number" placeholder="المبلغ (مثال: 100)">
+    <button class="btn gold" id="sendBalanceActionBtn">🚀 تنفيذ العملية فوراً</button>
     <div id="balanceFeedback" style="font-size:11px;font-weight:700;margin-top:8px;min-height:16px"></div>
   </div>
 </section>
@@ -145,7 +149,7 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 5. حظر ورفع الحظر عن المستخدمين عبر الـ ID -->
+<!-- 5. حظر ورفع الحظر -->
 <section id="ban" class="sec">
   <div class="ttl" style="margin-top:0">🚫 حظر ورفع الحظر عن المستخدمين بالـ ID</div>
   <div class="card">
@@ -207,7 +211,7 @@ textarea.in{min-height:80px;resize:none}
   <div id="adminTicketsList"></div>
 </section>
 
-<!-- 10. الإعدادات والصيانة -->
+<!-- 10. الصيانة -->
 <section id="settings" class="sec">
   <div class="ttl" style="margin-top:0">⚙️ إعدادات المتجر والصيانة</div>
   <div class="card">
@@ -335,18 +339,25 @@ window.updateOrderStatus = function(uid, oid, status){
   });
 };
 
+// ⚡ زيادة أو خصم رصيد العميل عبر الـ ID
 $("#sendBalanceActionBtn").onclick = ()=>{
   const targetUid = $("#targetUidInput").value.trim();
   const amount = parseFloat($("#targetAmountInput").value);
+  const actionType = $("#balanceActionType").value;
   const fb = $("#balanceFeedback");
+  
   if(!targetUid || isNaN(amount)){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID صحيح ومبلغ صحيح"; return; }
   
   db.ref('users/'+targetUid+'/wallet').once('value').then(s => {
-    const nw = (s.val() || 0) + amount;
-    db.ref('users/'+targetUid+'/wallet').set(nw).then(()=>{
-      fb.style.color = "var(--ok)"; fb.textContent = `✅ تم الشحن بنجاح! الرصيد الحالي: ${nw} ج.م`;
+    let currentWallet = s.val() || 0;
+    let newWallet = actionType === "add" ? currentWallet + amount : currentWallet - amount;
+    if(newWallet < 0) newWallet = 0; // عدم السماح بنزول الرصيد تحت الصفر
+    
+    db.ref('users/'+targetUid+'/wallet').set(newWallet).then(()=>{
+      fb.style.color = "var(--ok)"; 
+      fb.textContent = `✅ تم ${actionType === "add" ? "إضافة" : "خصم"} المبلغ بنجاح! الرصيد الحالي: ${newWallet} ج.م`;
       $("#targetUidInput").value=""; $("#targetAmountInput").value="";
-      toast("🚀 تم الشحن");
+      toast("🚀 تمت العملية بنجاح");
     });
   });
 };
@@ -368,7 +379,6 @@ $("#updateVipActionBtn").onclick = ()=>{
   });
 };
 
-// 🚫 حظر ورفع الحظر عن طريق الـ ID
 $("#banUserBtn").onclick = ()=>{
   const uid = $("#banTargetUid").value.trim();
   const fb = $("#banFeedback");
