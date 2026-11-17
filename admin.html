@@ -119,14 +119,14 @@ textarea.in{min-height:80px;resize:none}
       <option value="sub">➖ إنقاص/خصم الرصيد</option>
     </select>
     <input id="targetAmountInput" class="in" type="number" placeholder="المبلغ (مثال: 100)">
-    <button class="btn gold" id="sendBalanceActionBtn">🚀 تنفيذ العملية فوراً</button>
+    <button class="btn gold" id="sendBalanceActionBtn">🚀 تنفيذ العملية وإرسال إشعار للعميل</button>
     <div id="balanceFeedback" style="font-size:11px;font-weight:700;margin-top:8px;min-height:16px"></div>
   </div>
 </section>
 
 <!-- 4. ترقية VIP -->
 <section id="vip" class="sec">
-  <div class="ttl" style="margin-top:0">👑 إدارة وترقية مستويات الـ VIP (1 إلى 13)</div>
+  <div class="ttl" style="margin-top:0">👑 ترقية مستويات الـ VIP (1 إلى 13)</div>
   <div class="card">
     <input id="vipTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
     <select id="vipNewLevelSelect" class="in">
@@ -144,7 +144,7 @@ textarea.in{min-height:80px;resize:none}
       <option value="180000">VIP 12 - امبراطور (180000 ج.م)</option>
       <option value="250000">VIP 13 - الإلهي 👑 (250000 ج.م)</option>
     </select>
-    <button class="btn gold" id="updateVipActionBtn">⭐ تطبيق وترقية مستوى الـ VIP للعميل فوراً</button>
+    <button class="btn gold" id="updateVipActionBtn">⭐ ترقية VIP وإرسال إشعار للعميل</button>
     <div id="vipFeedback" style="font-size:11px;font-weight:700;margin-top:8px;min-height:16px"></div>
   </div>
 </section>
@@ -170,7 +170,7 @@ textarea.in{min-height:80px;resize:none}
   <div class="card">
     <div id="bannersEditorContainer"></div>
     <button class="btn" id="addNewBannerRow" style="background:var(--inner);border:1px dashed var(--a);color:var(--a);margin-bottom:10px"><i class="fa-solid fa-plus"></i> إضافة رابط بانر جديد</button>
-    <button class="btn gold" id="saveBannersActionBtn">💾 حفظ ونشر البانرات للجميع</button>
+    <button class="btn gold" id="saveBannersActionBtn">💾 حفظ ونشر البانرات للجميع فوراً</button>
   </div>
 </section>
 
@@ -332,14 +332,18 @@ function loadOverviewAndOrders(){
 
 window.updateOrderStatus = function(uid, oid, status){
   db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('status_'+Date.now())).set({
-      title: "تحديث حالة الطلب", body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status]||{}).t}`, time: Date.now(), read: false
-    }).catch(()=>{});
-    toast("✅ تم تحديث حالة الطلب");
+    // إرسال إشعار فوري للعميل
+    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+      title: "تحديث حالة الطلب",
+      body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status]||{}).t}`,
+      time: Date.now(),
+      read: false
+    });
+    toast("✅ تم تحديث حالة الطلب وإرسال التنبيه للعميل");
   });
 };
 
-// ⚡ زيادة أو خصم رصيد العميل عبر الـ ID
+// ⚡ زيادة أو خصم رصيد العميل عبر الـ ID مع إرسال إشعار فوري
 $("#sendBalanceActionBtn").onclick = ()=>{
   const targetUid = $("#targetUidInput").value.trim();
   const amount = parseFloat($("#targetAmountInput").value);
@@ -351,17 +355,30 @@ $("#sendBalanceActionBtn").onclick = ()=>{
   db.ref('users/'+targetUid+'/wallet').once('value').then(s => {
     let currentWallet = s.val() || 0;
     let newWallet = actionType === "add" ? currentWallet + amount : currentWallet - amount;
-    if(newWallet < 0) newWallet = 0; // عدم السماح بنزول الرصيد تحت الصفر
+    if(newWallet < 0) newWallet = 0;
     
     db.ref('users/'+targetUid+'/wallet').set(newWallet).then(()=>{
+      // إرسال إشعار فوري لمحفظة المستخدم لتظهر عنده في الموقع
+      const notifMsg = actionType === "add" 
+        ? `تم إضافة رصيد بقيمة (${amount} ج.م) إلى محفظتك بنجاح! 🚀` 
+        : `تم خصم مبلغ (${amount} ج.م) من محفظتك الإدارية.`;
+        
+      db.ref('notifications/'+targetUid+'/'+('notif_'+Date.now())).set({
+        title: "تحديث في الرصيد 💰",
+        body: notifMsg,
+        time: Date.now(),
+        read: false
+      });
+
       fb.style.color = "var(--ok)"; 
-      fb.textContent = `✅ تم ${actionType === "add" ? "إضافة" : "خصم"} المبلغ بنجاح! الرصيد الحالي: ${newWallet} ج.م`;
+      fb.textContent = `✅ تم ${actionType === "add" ? "إضافة" : "خصم"} المبلغ وإرسال الإشعار للعميل! الرصيد الحالي: ${newWallet} ج.م`;
       $("#targetUidInput").value=""; $("#targetAmountInput").value="";
       toast("🚀 تمت العملية بنجاح");
     });
   });
 };
 
+// 👑 ترقية الـ VIP مع إرسال إشعار فوري للعميل
 $("#updateVipActionBtn").onclick = ()=>{
   const uid = $("#vipTargetUid").value.trim();
   const minSpent = parseFloat($("#vipNewLevelSelect").value);
@@ -369,24 +386,40 @@ $("#updateVipActionBtn").onclick = ()=>{
   if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
 
   db.ref('users/'+uid+'/totalSpent').set(minSpent).then(()=>{
+    // إرسال إشعار فوري بترقية الـ VIP
+    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+      title: "مبروك ترقية الـ VIP! 👑",
+      body: `تم ترقية حسابك إلى مستوى VIP جديد بنجاح من قبل الإدارة! استمتع بمزاياك الجديدة.`,
+      time: Date.now(),
+      read: false
+    });
+
     fb.style.color = "var(--ok)";
-    fb.textContent = `✅ تم ترقية مستوى الـ VIP للعميل بنجاح!`;
+    fb.textContent = `✅ تم ترقية مستوى الـ VIP للعميل وإرسال الإشعار بنجاح!`;
     $("#vipTargetUid").value = "";
-    toast("👑 تم تحديث مستوى VIP");
+    toast("👑 تم تحديث مستوى VIP وإرسال الإشعار");
   }).catch(err => {
     fb.style.color = "var(--err)";
     fb.textContent = "❌ خطأ: " + err.message;
   });
 };
 
+// 🚫 حظر المستخدم مع إرسال إشعار
 $("#banUserBtn").onclick = ()=>{
   const uid = $("#banTargetUid").value.trim();
   const fb = $("#banFeedback");
   if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
 
   db.ref('users/'+uid+'/isBlocked').set(true).then(()=>{
+    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+      title: "تنبيه هام 🚫",
+      body: `تم تقييد حسابك وحظره من قبل الإدارة.`,
+      time: Date.now(),
+      read: false
+    });
+
     fb.style.color = "var(--ok)";
-    fb.textContent = `🚫 تم حظر المستخدم (${uid}) بنجاح من فتح الموقع!`;
+    fb.textContent = `🚫 تم حظر المستخدم (${uid}) بنجاح!`;
     $("#banTargetUid").value = "";
     toast("🚫 تم حظر المستخدم");
   }).catch(err => {
@@ -401,6 +434,13 @@ $("#unbanUserBtn").onclick = ()=>{
   if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
 
   db.ref('users/'+uid+'/isBlocked').set(false).then(()=>{
+    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+      title: "فك الحظر ✅",
+      body: `تم رفع الحظر عن حسابك بنجاح. أهلاً بك مجدداً!`,
+      time: Date.now(),
+      read: false
+    });
+
     fb.style.color = "var(--ok)";
     fb.textContent = `🔓 تم رفع الحظر عن المستخدم (${uid}) بنجاح!`;
     $("#banTargetUid").value = "";
@@ -432,7 +472,7 @@ function loadBlockedUsersList(){
   });
 }
 
-// 🖼️ البانرات
+// 🖼️ البانرات (عند حفظها، يتم تحديثها فوراً في الواجهة الرئيسية لكل المستخدمين)
 let currentBannersList = [];
 function renderBannersEditor(){
   const box = $("#bannersEditorContainer");
@@ -459,7 +499,9 @@ $("#saveBannersActionBtn").onclick = ()=>{
   const inputs = $$('.banner-url-input');
   currentBannersList = Array.from(inputs).map(i => i.value.trim()).filter(v=>v);
   const formatted = currentBannersList.map((img, i) => ({img, title: `Banner ${i+1}`}));
-  db.ref('settings/heroSlides').set(formatted).then(()=>toast("✅ تم حفظ البانرات بنجاح!"));
+  db.ref('settings/heroSlides').set(formatted).then(()=>{
+    toast("✅ تم حفظ البانرات ونشرها للجميع فوراً في الموقع!");
+  });
 };
 
 // 🎮 الأسعار
@@ -506,7 +548,7 @@ $("#savePricesActionBtn").onclick = ()=>{
     const p = parseFloat(prices[i].value);
     if(n && !isNaN(p)) newArr.push([n, p]);
   }
-  db.ref('settings/gamesPrices/'+gKey).set(newArr).then(()=>toast("✅ تم تحديث أسعار اللعبة فوراً!"));
+  db.ref('settings/gamesPrices/'+gKey).set(newArr).then(()=>toast("✅ تم تحديث أسعار اللعبة في المتجر فوراً!"));
 };
 
 function loadCoupons(){
