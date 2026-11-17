@@ -16,8 +16,8 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 .brand{font-weight:900;font-size:15px;background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .ttl{font-size:14px;font-weight:900;margin:14px 0 8px;border-inline-start:4px solid var(--a);padding-inline-start:8px}
 .form{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:14px}
-.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px 14px;border-radius:12px;margin-bottom:10px;font-size:12.5px;font-family:inherit}
-.in:focus{outline:2px solid var(--a)}
+.in, select{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px 14px;border-radius:12px;margin-bottom:10px;font-size:12.5px;font-family:inherit}
+.in:focus, select:focus{outline:2px solid var(--a)}
 .btn{width:100%;padding:11px;border-radius:12px;font-weight:900;font-size:12.5px;cursor:pointer;border:0;transition:transform .1s}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--g1);color:#fff}
@@ -40,7 +40,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 .balance-check-box{background:rgba(56,189,248,.08);border:1px dashed var(--a);border-radius:12px;padding:10px;margin-bottom:10px;text-align:center;display:none}
 .balance-check-box b{color:var(--gold);font-size:15px}
 
-/* شبكة عرض مستويات الـ VIP الـ 13 في لوحة الإدارة */
+/* شبكة عرض مستويات الـ VIP */
 .vip-admin-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -87,9 +87,32 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 
   <div class="stats" id="stats"></div>
 
-  <!-- قسم معاينة وإدارة مستويات الـ VIP الـ 13 -->
+  <!-- قسم التحكم اليدوي في مستوى الـ VIP للعميل -->
   <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">⭐ معاينة مستويات وسارات الـ VIP (13 مستوى)</div>
+    <div class="ttl" style="margin-top:0;color:var(--gold)">⭐ ترقية أو خفض مستوى العميل (VIP Control)</div>
+    <input id="vipTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-894685)" style="direction:ltr">
+    <select id="vipSelectLevel" class="in">
+      <option value="0">VIP 1 - مبتدئ (0 ج.م)</option>
+      <option value="500">VIP 2 - برونزي (500 ج.م)</option>
+      <option value="1200">VIP 3 - فضي (1,200 ج.م)</option>
+      <option value="2500">VIP 4 - ذهبي (2,500 ج.م)</option>
+      <option value="5000">VIP 5 - بلاتيني (5,000 ج.م)</option>
+      <option value="10000">VIP 6 - ماسي (10,000 ج.م)</option>
+      <option value="20000">VIP 7 - اسطوري (20,000 ج.م)</option>
+      <option value="35000">VIP 8 - محترف (35,000 ج.م)</option>
+      <option value="55000">VIP 9 - خبير (55,000 ج.م)</option>
+      <option value="80000">VIP 10 - زعيم (80,000 ج.م)</option>
+      <option value="120000">VIP 11 - ملك (120,000 ج.م)</option>
+      <option value="180000">VIP 12 - امبراطور (180,000 ج.م)</option>
+      <option value="250000">VIP 13 - الإلهي 👑 (250,000 ج.م)</option>
+    </select>
+    <button class="btn btn-gold" id="updateVipBtn">🚀 تحديث مستوى الـ VIP للعميل فوراً</button>
+    <div id="vipFeedback" style="font-size:11.5px;font-weight:700;margin-top:8px;min-height:18px;text-align:center"></div>
+  </div>
+
+  <!-- قسم معاينة مستويات الـ VIP الـ 13 -->
+  <div class="form">
+    <div class="ttl" style="margin-top:0;color:var(--gold)">🖼️ دليل مستويات الـ VIP الـ 13</div>
     <div class="vip-admin-grid" id="vipAdminGrid"></div>
   </div>
 
@@ -149,7 +172,6 @@ try {
 const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 let tt;function toast(m){const e=document.getElementById("toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
 
-/* ═══════════ تعريف الـ 13 مستوى VIP في لوحة الإدارة ═══════════ */
 const VIP_TIERS = [
   { level: 1, name: "VIP 1", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
   { level: 2, name: "VIP 2", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
@@ -178,6 +200,37 @@ function renderAdminVipTiers(){
   `).join("");
 }
 
+// زر تحديث مستوى الـ VIP للعميل يدويًا
+document.getElementById("updateVipBtn").onclick = ()=>{
+  const targetId = document.getElementById("vipTargetUid").value.trim();
+  const newSpent = parseFloat(document.getElementById("vipSelectLevel").value);
+  const fb = document.getElementById("vipFeedback");
+  
+  if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
+  if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
+  
+  fb.style.color="var(--sub)"; fb.textContent="⏳ جاري تحديث مستوى العميل...";
+  
+  db.ref('users/'+targetId+'/totalSpent').set(newSpent).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `✅ تم تحديث مستوى الـ VIP للـ ID: (${targetId}) بنجاح!`;
+    toast("👑 تم تعديل مستوى العميل بنجاح");
+    
+    // إرسال إشعار للعميل بترقية مستواه أو تعديله
+    const notifId = "notif_vip_" + Date.now();
+    db.ref('notifications/' + targetId + '/' + notifId).set({
+      title: "⭐ تحديث مستوى الحساب",
+      body: `مبروك! لقد قام مدير التطبيق بتحديث مستوى عضويتك في REAL STORE 🔥`,
+      time: Date.now(),
+      read: false
+    }).catch(()=>{});
+
+    document.getElementById("vipTargetUid").value = "";
+  }).catch(err=>{
+    fb.style.color = "var(--err)"; fb.textContent="❌ " + err.message;
+  });
+};
+
 const STATUS_MAP = {
   pending:{t:"في انتظار الدفع",c:"st-pending"},
   paid:{t:"تم استلام الدفع",c:"st-paid"},
@@ -192,7 +245,6 @@ function renderStats(){
   document.getElementById("stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join("");
 }
 
-// 1. زر الاستعلام عن رصيد العميل
 document.getElementById("checkBalanceBtn").onclick = ()=>{
   const targetId = document.getElementById("adminTargetUid").value.trim();
   const fb = document.getElementById("adminFeedback");
@@ -215,15 +267,8 @@ document.getElementById("checkBalanceBtn").onclick = ()=>{
   });
 };
 
-// 2. زر شحن الرصيد
-document.getElementById("adminSendBalanceBtn").onclick = ()=>{
-  processBalanceChange("add");
-};
-
-// 3. زر خصم الرصيد
-document.getElementById("adminDeductBalanceBtn").onclick = ()=>{
-  processBalanceChange("deduct");
-};
+document.getElementById("adminSendBalanceBtn").onclick = ()=>processBalanceChange("add");
+document.getElementById("adminDeductBalanceBtn").onclick = ()=>processBalanceChange("deduct");
 
 function processBalanceChange(type){
   const targetId = document.getElementById("adminTargetUid").value.trim();
@@ -237,14 +282,7 @@ function processBalanceChange(type){
   const ref = db.ref('users/'+targetId+'/wallet');
   ref.once('value').then(s=>{
     const cur = s.val() || 0;
-    let nw = 0;
-    
-    if(type === "add"){
-      nw = cur + amount;
-    } else {
-      nw = cur - amount;
-      if(nw < 0) nw = 0;
-    }
+    let nw = type === "add" ? cur + amount : Math.max(0, cur - amount);
     
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
@@ -252,7 +290,6 @@ function processBalanceChange(type){
       fb.textContent = `✅ تم ${actionTxt} (${amount}) بنجاح للـ ID: (${targetId}) | الرصيد الحالي: (${nw} ج.م)`;
       toast(type === "add" ? "🚀 تم الشحن بنجاح" : "⚠️ تم خصم المبلغ بنجاح");
       
-      // تحديث صندوق العرض الفوري
       document.getElementById("currentBalanceDisplay").textContent = nw.toFixed(2) + " ج.م";
       document.getElementById("balanceCheckResult").style.display = "block";
       
@@ -265,7 +302,6 @@ function processBalanceChange(type){
           read: false
         }).catch(()=>{});
       }
-
       document.getElementById("adminAmount").value = "";
     }).catch(err=>{ fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
   });
