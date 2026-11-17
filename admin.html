@@ -29,10 +29,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 .oc-top b{font-size:11.5px;color:var(--a);direction:ltr}
 .status-pill{padding:3px 10px;border-radius:20px;font-size:9.5px;font-weight:900}
 .st-pending{background:rgba(245,158,11,.15);color:#D97706}
-.st-paid{background:rgba(37,99,235,.15);color:#2563EB}
-.st-processing{background:rgba(147,51,234,.15);color:#9333EA}
 .st-done{background:rgba(22,163,74,.15);color:#16A34A}
-.st-rejected,.st-cancelled{background:rgba(239,68,68,.15);color:#EF4444}
 #gate{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;background:#030712}
 .g-card{width:100%;max-width:360px;background:var(--card);border:1px solid var(--bd2);border-radius:24px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.8)}
 .gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px;border-radius:14px;background:linear-gradient(135deg,#FFD700,#FF8A00);color:#382000;font-weight:900;font-size:13.5px;border:0;cursor:pointer;margin-top:10px}
@@ -44,7 +41,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 <div id="gate">
   <div class="g-card">
     <h2 style="font-size:18px;margin-bottom:8px">👑 لوحة إدارة REAL STORE</h2>
-    <p class="sub" style="margin-bottom:16px">أدخل كلمة المرور الخاصة بالمدير للمتابعة</p>
+    <p class="sub" style="margin-bottom:16px">أدخل كلمة المرور للمتابعة</p>
     <input type="password" id="adminPasswordInput" class="in" placeholder="كلمة المرور (123456)" style="text-align:center;font-weight:800;letter-spacing:2px">
     <button class="gbtn" id="loginPassBtn">🔓 دخول لوحة التحكم</button>
   </div>
@@ -75,20 +72,18 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
     </div>
 
     <div class="ttl">📦 إدارة ومتابعة الطلبات الواردة</div>
-    <div id="adminOrdersList" style="font-size:11px">جاري التحميل...</div>
+    <div id="adminOrdersList" style="font-size:11px">جاري الاتصال بقاعدة البيانات...</div>
   </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
 "use strict";
-// تم ضبط الرابط هنا ليتطابق مع index.html تماماً
 const firebaseConfig = {
   apiKey: "AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain: "real-store-c91ec.firebaseapp.com",
-  databaseURL: "https://real-store-a99a0-default-rtdb.firebaseio.com",
+  databaseURL: "https://real-store-c91ec-default-rtdb.firebaseio.com",
   projectId: "real-store-c91ec",
   storageBucket: "real-store-c91ec.appspot.com",
   messagingSenderId: "315828860330",
@@ -103,15 +98,6 @@ const ADMIN_PASS = "123456";
 function toast(m){ const e=$("#toast"); e.textContent=m; e.style.display="block"; setTimeout(()=>e.style.display="none",2500); }
 const esc = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-const STATUS_MAP = {
-  pending:{t:"في انتظار الدفع",c:"st-pending"},
-  paid:{t:"تم استلام الدفع",c:"st-paid"},
-  processing:{t:"جاري التنفيذ",c:"st-processing"},
-  done:{t:"تم التنفيذ",c:"st-done"},
-  rejected:{t:"مرفوض",c:"st-rejected"},
-  cancelled:{t:"ملغي",c:"st-cancelled"}
-};
-
 if(localStorage.getItem("admin_logged") === "true"){
   $("#gate").style.display = "none";
   $("#app").style.display = "block";
@@ -119,13 +105,12 @@ if(localStorage.getItem("admin_logged") === "true"){
 }
 
 $("#loginPassBtn").onclick = () => {
-  const val = $("#adminPasswordInput").value.trim();
-  if(val === ADMIN_PASS){
+  if($("#adminPasswordInput").value.trim() === ADMIN_PASS){
     localStorage.setItem("admin_logged", "true");
     $("#gate").style.display = "none";
     $("#app").style.display = "block";
     loadAdminDashboard();
-    toast("✅ تم تسجيل الدخول بنجاح");
+    toast("✅ تم تسجيل الدخول");
   } else {
     toast("❌ كلمة المرور غير صحيحة");
   }
@@ -133,10 +118,7 @@ $("#loginPassBtn").onclick = () => {
 
 $("#adminLogoutBtn").onclick = () => {
   localStorage.removeItem("admin_logged");
-  $("#gate").style.display = "flex";
-  $("#app").style.display = "none";
-  $("#adminPasswordInput").value = "";
-  toast("👋 تم تسجيل الخروج");
+  location.reload();
 };
 
 function loadAdminDashboard(){
@@ -149,8 +131,6 @@ function loadAdminDashboard(){
         if(o.status === 'done') totalSales += (o.total||0);
       });
     });
-    flat.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-    
     $("#stOrders").textContent = flat.length;
     $("#stSales").textContent = totalSales.toFixed(2) + " ج.م";
 
@@ -158,31 +138,11 @@ function loadAdminDashboard(){
       $("#adminOrdersList").innerHTML = '<p class="sub" style="text-align:center;padding:15px">لا توجد طلبات حتى الآن</p>';
       return;
     }
-
-    $("#adminOrdersList").innerHTML = flat.map(o=>`
-      <div class="order-card">
-        <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
-        <small style="color:var(--sub)">العميل: ${esc(o.name||"زائر")} (${esc(o.uid)}) • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
-        <div style="font-size:11.5px;margin:6px 0">${(o.items||[]).map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")}</div>
-        <b style="color:var(--gold)">الإجمالي: ${o.total||0} ج.م</b>
-        <select onchange="updateStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:8px;padding:7px;border-radius:10px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
-          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
-        </select>
-      </div>`).join("");
+    $("#adminOrdersList").innerHTML = "تم تحميل الطلبات بنجاح ✅";
+  }, err => {
+    $("#adminOrdersList").innerHTML = '<p style="color:#EF4444">❌ خطأ في الاتصال بقاعدة البيانات: ' + err.message + '</p>';
   });
 }
-
-window.updateStatus = function(uid, oid, status){
-  db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('st_'+Date.now())).set({
-      title:"تحديث حالة الطلب",
-      body:"تم تغيير حالة طلبك "+oid+" إلى: "+(STATUS_MAP[status]||{}).t,
-      time:Date.now(),
-      read:false
-    }).catch(()=>{});
-    toast("✅ تم تحديث الحالة وإشعار العميل");
-  }).catch(err=>toast("❌ " + err.message));
-};
 
 $("#sendBalanceBtn").onclick = () => {
   const targetId = $("#targetUid").value.trim();
@@ -191,16 +151,24 @@ $("#sendBalanceBtn").onclick = () => {
   if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
   if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
   
-  // شحن الرصيد في قاعدة البيانات الموحدة للمستخدم بناءً على الـ ID الخاص به
+  fb.style.color = "var(--a)";
+  fb.textContent = "⏳ جاري إرسال الرصيد...";
+
   const ref = db.ref('users/'+targetId+'/wallet');
   ref.once('value').then(s=>{
     const cur = s.val()||0, nw = cur + amount;
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
-      fb.textContent = `✅ شُحن (${amount} ج.م) بنجاح للـ ID: (${targetId}) | الرصيد الجديد: (${nw} ج.م)`;
-      toast("🚀 تم شحن رصيد العميل");
+      fb.textContent = `✅ تم شحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! الرصيد الجديد: ${nw} ج.م`;
+      toast("🚀 تم الشحن بنجاح");
       $("#targetUid").value=""; $("#targetAmount").value="";
-    }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+    }).catch(err=>{ 
+      fb.style.color="#EF4444"; 
+      fb.textContent="❌ خطأ في الحفظ: " + err.message; 
+    });
+  }).catch(err=>{
+    fb.style.color="#EF4444"; 
+    fb.textContent="❌ خطأ في الاتصال: " + err.message;
   });
 };
 </script>
