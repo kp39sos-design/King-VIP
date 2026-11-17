@@ -1,166 +1,61 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>أسرع من نتكم | لوحة الإدارة 👑</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>أسرع من نتكم | لوحة الإدارة الاحترافية 👑</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-:root{color-scheme:dark;--bg:#080B18;--card:#12182B;--inner:#0C1224;--tx:#F8FAFF;--sub:#A1AEC8;--a:#38BDF8;--b:#A78BFA;--gold:#FFD166;--ok:#34D399;--err:#EF4444;--bd:rgba(56,189,248,.20);--bd2:rgba(167,139,250,.45);--g1:linear-gradient(135deg,#0284C7,#7C3AED);--g2:linear-gradient(135deg,#FFD700,#FF8A00);--modal:#12182B;--sh:0 12px 24px -6px rgba(0,0,0,.8)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--tx);font-family:Cairo,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:12px}
-#app{width:100%;max-width:520px;min-height:100vh;position:relative}
-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--card);border:1px solid var(--bd2);border-radius:18px;margin-bottom:14px}
-.brand{font-weight:900;font-size:15px;background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.ttl{font-size:14px;font-weight:900;margin:14px 0 8px;border-inline-start:4px solid var(--a);padding-inline-start:8px}
-.form{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:14px}
-.in, select{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px 14px;border-radius:12px;margin-bottom:10px;font-size:12.5px;font-family:inherit}
-.in:focus, select:focus{outline:2px solid var(--a)}
-.btn{width:100%;padding:11px;border-radius:12px;font-weight:900;font-size:12.5px;cursor:pointer;border:0;transition:transform .1s}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:var(--g1);color:#fff}
-.btn-danger{background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;margin-top:6px}
-.btn-gold{background:var(--g2);color:#382000}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
-.st{background:var(--inner);border:1px solid var(--bd);border-radius:14px;padding:12px;text-align:center}
-.st b{display:block;font-size:18px;color:var(--a)}.st span{font-size:10.5px;color:var(--sub)}
-.order-card{background:var(--inner);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
-.oc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.oc-top b{font-size:11.5px;color:var(--a);direction:ltr}
-.status-pill{padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:900}
-.st-pending{background:rgba(245,158,11,.15);color:#D97706}
-.st-paid{background:rgba(37,99,235,.15);color:#38BDF8}
-.st-processing{background:rgba(147,51,234,.15);color:#A78BFA}
-.st-done{background:rgba(22,163,74,.15);color:#34D399}
-.st-rejected,.st-cancelled{background:rgba(239,68,68,.15);color:#EF4444}
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--card);border:1px solid var(--a);color:var(--tx);padding:9px 20px;border-radius:20px;font-weight:800;font-size:11.5px;display:none;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+:root{--bg:#080B18;--card:#12182B;--inner:#0C1224;--tx:#F8FAFF;--sub:#A1AEC8;--a:#38BDF8;--b:#A78BFA;--gold:#FFD166;--ok:#34D399;--bd:rgba(56,189,248,.20);--bd2:rgba(167,139,250,.45);--g1:linear-gradient(135deg,#0284C7,#7C3AED);--g2:linear-gradient(135deg,#FFD700,#FF8A00)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:Cairo,sans-serif;min-height:100vh;padding:16px;display:flex;justify-content:center}
+.admin-wrap{width:100%;max-width:680px}
+h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-align:center}
+.card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.card h3{font-size:14px;font-weight:900;color:var(--a);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px;border-radius:12px;margin-bottom:8px;font-size:12px}
+textarea.in{min-height:90px;resize:none}
+.btn{width:100%;background:var(--g1);color:#fff;padding:11px;border-radius:12px;font-weight:900;font-size:13px;border:0;cursor:pointer}
 .sub{font-size:10px;color:var(--sub)}
-.balance-check-box{background:rgba(56,189,248,.08);border:1px dashed var(--a);border-radius:12px;padding:10px;margin-bottom:10px;text-align:center;display:none}
-.balance-check-box b{color:var(--gold);font-size:15px}
-
-/* شبكة عرض مستويات الـ VIP 3D بدون إطارات */
-.vip-admin-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-height: 260px;
-  overflow-y: auto;
-  padding: 6px;
-}
-.vip-admin-card {
-  background: var(--inner);
-  border: 1px solid var(--bd);
-  border-radius: 14px;
-  padding: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.vip-admin-card img {
-  width: 55px;
-  height: 55px;
-  object-fit: contain;
-  background: transparent;
-  border: none !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px rgba(255,209,102,0.25);
-  margin-bottom: 6px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
-}
-.vip-admin-card b {
-  font-size: 11px;
-  color: var(--gold);
-  display: block;
-}
-.vip-admin-card small {
-  font-size: 9px;
-  color: var(--sub);
-}
+.order-card{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px;font-size:11.5px}
+.ticket-card{background:var(--inner);border:1px solid var(--bd2);border-radius:12px;padding:12px;margin-bottom:10px}
 </style>
 </head>
 <body>
 
-<div id="toast" role="status"></div>
+<div class="admin-wrap">
+  <h1>👑 لوحة التحكم وإدارة متجر أسرع من نتكم 🔥</h1>
 
-<div id="app">
-  <header>
-    <div class="brand">👑 لوحة إدارة أسرع من نتكم</div>
-    <span class="sub" style="color:var(--ok)"><i class="fa-solid fa-circle" style="font-size:8px"></i> متصل</span>
-  </header>
-
-  <div class="stats" id="stats"></div>
-
-  <!-- قسم رسائل الدعم الفني والشكاوى الواردة -->
-  <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">💬 رسائل الدعم الفني والشكاوى الواردة</div>
-    <div id="supportTicketsList" style="font-size:11px;max-height:260px;overflow-y:auto"></div>
+  <!-- قسم إدارة البنرات -->
+  <div class="card">
+    <h3><i class="fa-solid fa-images"></i> إدارة بنرات الواجهة المتحركة (Hero Banners)</h3>
+    <p class="sub" style="margin-bottom:8px">أدخل رابط كل صورة في سطر منفصل لتحديث البنرات فوراً في المتجر الرئيسي.</p>
+    <textarea id="adminBannersInput" class="in" placeholder="https://..."></textarea>
+    <button class="btn" id="saveBannersBtn">💾 حفظ وتحديث البنرات فوراً</button>
+    <div id="bannersFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
   </div>
 
-  <!-- سجل الزوار والعملاء النشطين لحظة بلحظة -->
-  <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">👥 سجل زوار وعملاء الموقع (Live Activity)</div>
-    <div id="liveVisitorsList" style="font-size:11px;max-height:220px;overflow-y:auto"></div>
+  <!-- قسم شحن الرصيد للعميل -->
+  <div class="card">
+    <h3><i class="fa-solid fa-bolt"></i> شحن رصيد للعميل عبر الـ ID</h3>
+    <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
+    <input id="adminAmount" class="in" type="number" placeholder="المبلغ المراد إضافته (ج.م)">
+    <button class="btn" id="adminSendBalanceBtn" style="background:var(--g2);color:#382000">🚀 شحن رصيد العميل فوراً</button>
+    <div id="adminFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
   </div>
 
-  <!-- قسم التحكم اليدوي في مستوى الـ VIP للعميل -->
-  <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">⭐ ترقية أو خفض مستوى العميل (VIP Control)</div>
-    <input id="vipTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-894685)" style="direction:ltr">
-    <select id="vipSelectLevel" class="in">
-      <option value="0">VIP 1 - مبتدئ (0 ج.م)</option>
-      <option value="500">VIP 2 - برونزي (500 ج.م)</option>
-      <option value="1200">VIP 3 - فضي (1,200 ج.م)</option>
-      <option value="2500">VIP 4 - ذهبي (2,500 ج.م)</option>
-      <option value="5000">VIP 5 - بلاتيني (5,000 ج.م)</option>
-      <option value="10000">VIP 6 - ماسي (10,000 ج.م)</option>
-      <option value="20000">VIP 7 - اسطوري (20,000 ج.م)</option>
-      <option value="35000">VIP 8 - محترف (35,000 ج.م)</option>
-      <option value="55000">VIP 9 - خبير (55,000 ج.م)</option>
-      <option value="80000">VIP 10 - زعيم (80,000 ج.م)</option>
-      <option value="120000">VIP 11 - ملك (120,000 ج.م)</option>
-      <option value="180000">VIP 12 - امبراطور (180,000 ج.م)</option>
-      <option value="250000">VIP 13 - الإلهي 👑 (250,000 ج.م)</option>
-    </select>
-    <button class="btn btn-gold" id="updateVipBtn">🚀 تحديث مستوى الـ VIP للعميل فوراً</button>
-    <div id="vipFeedback" style="font-size:11.5px;font-weight:700;margin-top:8px;min-height:18px;text-align:center"></div>
+  <!-- قسم تذاكر الدعم الفني المباشر -->
+  <div class="card">
+    <h3><i class="fa-solid fa-headset"></i> تذاكر وشكاوي العملاء (الدعم الفني)</h3>
+    <div id="adminTicketsList"><p class="sub">جاري تحميل التذاكر...</p></div>
   </div>
-
-  <!-- قسم معاينة مستويات الـ VIP الـ 13 -->
-  <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">🖼️ دليل مستويات الـ VIP الـ 13 (3D حقيقي)</div>
-    <div class="vip-admin-grid" id="vipAdminGrid"></div>
-  </div>
-
-  <!-- قسم إدارة رصيد المحفظة -->
-  <div class="form">
-    <div class="ttl" style="margin-top:0;color:var(--gold)">⚡ إدارة رصيد محفظة العميل</div>
-    <input id="adminTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-894685)" style="direction:ltr">
-    <button class="btn btn-primary" id="checkBalanceBtn" style="margin-bottom:10px;background:linear-gradient(135deg,#059669,#10B981)"><i class="fa-solid fa-wallet"></i> فحص ومعرفة رصيد العميل الحالي</button>
-    <div id="balanceCheckResult" class="balance-check-box">
-      <span class="sub" style="display:block">رصيد العميل الحالي في المحفظة:</span>
-      <b id="currentBalanceDisplay">0.00 ج.م</b>
-    </div>
-    <input id="adminAmount" class="in" type="number" placeholder="المبلغ (القيمة)" step="0.01">
-    <div style="display:flex;gap:8px">
-      <button class="btn btn-gold" id="adminSendBalanceBtn" style="flex:1">➕ شحن رصيد فوراً</button>
-      <button class="btn btn-danger" id="adminDeductBalanceBtn" style="flex:1">➖ خصم رصيد</button>
-    </div>
-    <div id="adminFeedback" style="font-size:11.5px;font-weight:700;margin-top:8px;min-height:18px;text-align:center"></div>
-  </div>
-
-  <div class="ttl">📦 إدارة الطلبات الحديثة</div>
-  <div id="adminOrders" style="font-size:11px"></div>
-
-  <button class="btn btn-primary" id="reset" style="margin-top:14px;background:rgba(239,68,68,.2);color:#EF4444;border:1px solid rgba(239,68,68,.4)">🔄 إعادة ضبط الإحصائيات</button>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-"use strict";
 const firebaseConfig = {
   apiKey: "AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain: "real-store-c91ec.firebaseapp.com",
@@ -170,236 +65,98 @@ const firebaseConfig = {
   messagingSenderId: "315828860330",
   appId: "1:315828860330:web:3b2fb64a105ebb1ae627d3"
 };
-let db=null, firebaseOK=false;
-try {
-  if(typeof firebase !== "undefined"){
-    if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    db = firebase.database();
-    firebaseOK = true;
-  }
-} catch(e){ console.warn("Firebase init:", e); }
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-let tt;function toast(m){const e=document.getElementById("toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
-
-const VIP_TIERS = [
-  { level: 1, name: "VIP 1", minSpent: 0, img: "https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" },
-  { level: 2, name: "VIP 2", minSpent: 500, img: "https://cdn.imagetourls.com/uploads/tyImg/tXFKFYRF.png" },
-  { level: 3, name: "VIP 3", minSpent: 1200, img: "https://cdn.imagetourls.com/uploads/tyImg/cXNbsRzr.png" },
-  { level: 4, name: "VIP 4", minSpent: 2500, img: "https://cdn.imagetourls.com/uploads/tyImg/SVNPoba3.png" },
-  { level: 5, name: "VIP 5", minSpent: 5000, img: "https://cdn.imagetourls.com/uploads/tyImg/AlK2w8zC.png" },
-  { level: 6, name: "VIP 6", minSpent: 10000, img: "https://cdn.imagetourls.com/uploads/tyImg/FLernsRD.png" },
-  { level: 7, name: "VIP 7", minSpent: 20000, img: "https://cdn.imagetourls.com/uploads/tyImg/SaSlSsaq.png" },
-  { level: 8, name: "VIP 8", minSpent: 35000, img: "https://cdn.imagetourls.com/uploads/tyImg/16V1uWe0B.png" },
-  { level: 9, name: "VIP 9", minSpent: 55000, img: "https://cdn.imagetourls.com/uploads/tyImg/gFPBMTSC.png" },
-  { level: 10, name: "VIP 10", minSpent: 80000, img: "https://cdn.imagetourls.com/uploads/tyImg/YH8kULrk.png" },
-  { level: 11, name: "VIP 11", minSpent: 120000, img: "https://cdn.imagetourls.com/uploads/tyImg/m2poaFnt.png" },
-  { level: 12, name: "VIP 12", minSpent: 180000, img: "https://cdn.imagetourls.com/uploads/tyImg/m7f3ea8I.png" },
-  { level: 13, name: "VIP 13 👑", minSpent: 250000, img: "https://cdn.imagetourls.com/uploads/tyImg/33eqWdHw.png" }
-];
-
-function renderAdminVipTiers(){
-  const grid = document.getElementById("vipAdminGrid");
-  if(!grid) return;
-  grid.innerHTML = VIP_TIERS.map(t=>`
-    <div class="vip-admin-card">
-      <img src="${t.img}" alt="${t.name}">
-      <b>${t.name}</b>
-      <small>${t.minSpent} ج.م</small>
-    </div>
-  `).join("");
-}
-
-// عرض رسائل الدعم الفني والشكاوى
-function renderSupportTickets(){
-  const box = document.getElementById("supportTicketsList");
-  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
+// حفظ البنرات
+document.getElementById('saveBannersBtn').onclick = () => {
+  const rawText = document.getElementById('adminBannersInput').value.trim();
+  const fb = document.getElementById('bannersFeedback');
+  if(!rawText) { fb.style.color="#EF4444"; fb.textContent="❌ أدخل رابط صورة واحدة على الأقل"; return; }
   
-  db.ref('support_tickets').once('value').then(s=>{
-    const data = s.val() || {};
-    const flat = [];
-    Object.entries(data).forEach(([uid, tickets])=>{
-      Object.entries(tickets || {}).forEach(([tid, t])=>{
-        flat.push({uid, tid, ...t});
-      });
-    });
-    flat.sort((a,b)=>(b.time||0)-(a.time||0));
-    if(!flat.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد رسائل دعم فني حالياً</p>'; return; }
-    
-    box.innerHTML = flat.map(t=>{
-      const statusClass = t.status === "resolved" ? "st-done" : "st-pending";
-      const statusText = t.status === "resolved" ? "تم الحل ✅" : "قيد المعالجة ⏳";
-      return `
-        <div class="order-card" style="margin-bottom:8px">
-          <div class="oc-top">
-            <b>${esc(t.ticketId)}</b>
-            <span class="status-pill ${statusClass}">${statusText}</span>
-          </div>
-          <small class="sub">👤 ${esc(t.name)} | ID: ${esc(t.uid)}</small><br>
-          <small class="sub">📌 الموضوع: <b>${esc(t.subject || "مشكلة دعم فني")}</b></small>
-          <p style="margin:6px 0;padding:6px;background:var(--card);border-radius:8px;font-size:11.5px">${esc(t.message)}</p>
-          <small class="sub">⏰ ${new Date(t.time || Date.now()).toLocaleString('ar-EG')}</small>
-          <select onchange="updateTicketStatus('${esc(t.uid)}','${esc(t.tid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
-            <option value="pending" ${t.status==="pending"?"selected":""}>قيد المعالجة ⏳</option>
-            <option value="resolved" ${t.status==="resolved"?"selected":""}>تم حل المشكلة ✅</option>
-          </select>
-        </div>
-      `;
-    }).join("");
-  }).catch(err=>{ box.innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
-}
+  const links = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const slidesObject = links.map((link, index) => ({
+    img: link,
+    title: `Banner ${index + 1}`
+  }));
 
-window.updateTicketStatus = function(uid, tid, status){
-  if(!firebaseOK || !db) return;
-  db.ref('support_tickets/'+uid+'/'+tid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('ticket_'+Date.now())).set({
-      title: "🎫 تحديث بخصوص شكواك",
-      body: `تم تحديث حالة تذكرة الدعم الفني الخاصة بك إلى: (${status === 'resolved' ? 'تم الحل ✅' : 'قيد المعالجة ⏳'})`,
-      time: Date.now(),
-      read: false
-    }).catch(()=>{});
-    toast("✅ تم تحديث حالة الشكوى");
-    renderSupportTickets();
-  }).catch(err=>toast("❌ " + err.message));
-};
-
-function renderLiveVisitors(){
-  const box = document.getElementById("liveVisitorsList");
-  if(!firebaseOK || !db){ box.innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
-  db.ref('visitors').limitToLast(10).once('value').then(s=>{
-    const data = s.val() || {};
-    const arr = Object.entries(data).reverse();
-    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:10px;text-align:center">لا توجد زيارات مسجلة</p>'; return; }
-    box.innerHTML = arr.map(([id, v])=>`
-      <div class="order-card" style="margin-bottom:6px">
-        <div class="oc-top"><b>ID: ${esc(v.uid || "زائر")}</b><span class="status-pill st-paid">نشط</span></div>
-        <small class="sub">👤 الاسم: ${esc(v.name || "زائر")} | 📧 الإيميل: ${esc(v.email || "غير مسجل")}</small><br>
-        <small class="sub">⏰ الوقت: ${new Date(v.time || Date.now()).toLocaleString('ar-EG')}</small>
-      </div>
-    `).join("");
-  }).catch(()=>{});
-}
-
-document.getElementById("updateVipBtn").onclick = ()=>{
-  const targetId = document.getElementById("vipTargetUid").value.trim();
-  const newSpent = parseFloat(document.getElementById("vipSelectLevel").value);
-  const fb = document.getElementById("vipFeedback");
-  if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
-  if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  db.ref('users/'+targetId+'/totalSpent').set(newSpent).then(()=>{
+  db.ref('settings/heroSlides').set(slidesObject).then(() => {
     fb.style.color = "var(--ok)";
-    fb.textContent = `✅ تم تحديث مستوى الـ VIP للـ ID: (${targetId}) بنجاح!`;
-    toast("👑 تم تعديل مستوى العميل بنجاح");
-    db.ref('notifications/' + targetId + '/notif_vip_' + Date.now()).set({
-      title: "⭐ تحديث مستوى الحساب",
-      body: `مبروك! لقد قام مدير التطبيق بتحديث مستوى عضويتك في REAL STORE 🔥`,
-      time: Date.now(), read: false
-    }).catch(()=>{});
-    document.getElementById("vipTargetUid").value = "";
-  }).catch(err=>{ fb.style.color = "var(--err)"; fb.textContent="❌ " + err.message; });
+    fb.textContent = "✅ تم تحديث البنرات بنجاح وتطبيقها في المتجر!";
+  }).catch(err => {
+    fb.style.color = "#EF4444";
+    fb.textContent = "❌ خطأ: " + err.message;
+  });
 };
 
-const STATUS_MAP = {
-  pending:{t:"في انتظار الدفع",c:"st-pending"},
-  paid:{t:"تم استلام الدفع",c:"st-paid"},
-  processing:{t:"جاري التنفيذ",c:"st-processing"},
-  done:{t:"تم التنفيذ",c:"st-done"},
-  rejected:{t:"مرفوض",c:"st-rejected"},
-  cancelled:{t:"ملغي",c:"st-cancelled"}
-};
+// جلب البنرات الحالية لعرضها في الـ textarea عند فتح اللوحة
+db.ref('settings/heroSlides').once('value', s => {
+  const data = s.val();
+  if(data && Array.isArray(data)){
+    document.getElementById('adminBannersInput').value = data.map(b => b.img).join('\n');
+  }
+});
 
-const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0};
-function renderStats(){
-  document.getElementById("stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join("");
-}
-
-document.getElementById("checkBalanceBtn").onclick = ()=>{
-  const targetId = document.getElementById("adminTargetUid").value.trim();
-  const fb = document.getElementById("adminFeedback");
-  const box = document.getElementById("balanceCheckResult");
-  if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
-  if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
-  db.ref('users/'+targetId+'/wallet').once('value').then(s=>{
-    const bal = s.val() || 0;
-    document.getElementById("currentBalanceDisplay").textContent = bal.toFixed(2) + " ج.م";
-    box.style.display = "block";
-    fb.style.color = "var(--ok)";
-    fb.textContent = `✅ تم جلب رصيد الـ ID بنجاح`;
-  }).catch(err=>{ box.style.display = "none"; fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
-};
-
-document.getElementById("adminSendBalanceBtn").onclick = ()=>processBalanceChange("add");
-document.getElementById("adminDeductBalanceBtn").onclick = ()=>processBalanceChange("deduct");
-
-function processBalanceChange(type){
-  const targetId = document.getElementById("adminTargetUid").value.trim();
-  const amount = parseFloat(document.getElementById("adminAmount").value);
-  const fb = document.getElementById("adminFeedback");
-  if(!targetId){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
-  if(!amount || isNaN(amount) || amount <= 0){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل مبلغ صحيح أكبر من الصفر"; return; }
-  if(!firebaseOK || !db){ fb.style.color="var(--err)"; fb.textContent="❌ Firebase غير مفعّل"; return; }
+// شحن رصيد للعميل
+document.getElementById('adminSendBalanceBtn').onclick = () => {
+  const targetId = document.getElementById('adminTargetUid').value.trim();
+  const amount = parseFloat(document.getElementById('adminAmount').value);
+  const fb = document.getElementById('adminFeedback');
+  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
+  if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
+  
   const ref = db.ref('users/'+targetId+'/wallet');
   ref.once('value').then(s=>{
-    const cur = s.val() || 0;
-    let nw = type === "add" ? cur + amount : Math.max(0, cur - amount);
+    const cur = s.val()||0, nw = cur + amount;
     ref.set(nw).then(()=>{
       fb.style.color = "var(--ok)";
-      const actionTxt = type === "add" ? "إضافة" : "خصم";
-      fb.textContent = `✅ تم ${actionTxt} (${amount}) بنجاح | الرصيد الحالي: (${nw} ج.م)`;
-      toast(type === "add" ? "🚀 تم الشحن بنجاح" : "⚠️ تم الخصم بنجاح");
-      document.getElementById("currentBalanceDisplay").textContent = nw.toFixed(2) + " ج.م";
-      document.getElementById("balanceCheckResult").style.display = "block";
-      if(type === "add"){
-        db.ref('notifications/' + targetId + '/notif_' + Date.now()).set({
-          title: "🎁 مكافأة شحن جديدة من REAL STORE",
-          body: `مبروك! لقد حصلت على رصيد بقيمة (${amount} ج.م) من مدير التطبيق 🔥`,
-          time: Date.now(), read: false
-        }).catch(()=>{});
-      }
-      document.getElementById("adminAmount").value = "";
-    }).catch(err=>{ fb.style.color="var(--err)"; fb.textContent="❌ " + err.message; });
+      fb.textContent = `✅ شُحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! رصيده الحالي: (${nw} ج.م)`;
+      document.getElementById('adminTargetUid').value="";
+      document.getElementById('adminAmount').value="";
+    }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+  });
+};
+
+// جلب وعرض تذاكر الدعم الفني للرد عليها
+function loadAdminTickets(){
+  db.ref('admin_tickets').on('value', s => {
+    const data = s.val() || {};
+    const arr = Object.entries(data).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
+    const box = document.getElementById('adminTicketsList');
+    if(!arr.length){ box.innerHTML = '<p class="sub">لا توجد تذاكر دعم فني حالياً</p>'; return; }
+    
+    box.innerHTML = arr.map(([id, t]) => `
+      <div class="ticket-card">
+        <div style="display:flex;justify-content:space-between;font-weight:900;margin-bottom:4px">
+          <span style="color:var(--a)">${esc(t.name)} (${esc(t.uid)})</span>
+          <span style="font-size:10px;color:var(--sub)">${new Date(t.time).toLocaleString('ar-EG')}</span>
+        </div>
+        <b style="font-size:12.5px;color:var(--gold)">العنوان: ${esc(t.subject)}</b>
+        <p style="margin:6px 0;color:var(--tx)">الرسالة: ${esc(t.message)}</p>
+        <div style="margin-top:8px">
+          <input id="reply_${id}" class="in" placeholder="اكتب رد الإدارة هنا..." value="${esc(t.reply||'')}" style="margin-bottom:4px">
+          <button class="btn" style="padding:6px;font-size:11px" onclick="sendAdminReply('${esc(t.uid)}','${esc(id)}')">💬 إرسال الرد للعميل</button>
+        </div>
+      </div>
+    `).join("");
   });
 }
 
-function renderAdminOrders(){
-  if(!firebaseOK || !db){ document.getElementById("adminOrders").innerHTML = '<p class="sub">Firebase غير مفعّل</p>'; return; }
-  db.ref('orders').limitToLast(15).once('value').then(s=>{
-    const data = s.val()||{};
-    const flat = [];
-    Object.entries(data).forEach(([uid, orders])=>{ Object.entries(orders||{}).forEach(([oid,o])=>flat.push({uid,oid,...o})); });
-    flat.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-    if(!flat.length){ document.getElementById("adminOrders").innerHTML='<p class="sub" style="padding:10px">لا توجد طلبات</p>'; return; }
-    document.getElementById("adminOrders").innerHTML = flat.map(o=>`
-      <div class="order-card">
-        <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
-        <small class="sub">👤 ${esc(o.name || "عميل")} (${esc(o.uid)}) • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
-        <div style="font-size:11px;margin:4px 0">${(o.items||[]).map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")}</div>
-        <b style="color:var(--gold)">${(o.total||0).toFixed(2)} ج.م</b>
-        <select onchange="setOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font-size:11px">
-          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
-        </select>
-      </div>`).join("");
-  }).catch(err=>{ document.getElementById("adminOrders").innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
-}
-
-window.setOrderStatus = function(uid, oid, status){
-  if(!firebaseOK || !db) return;
-  db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('status_'+Date.now())).set({title:"تحديث حالة الطلب",body:"تم تغيير حالة الطلب "+oid+" إلى: "+(STATUS_MAP[status]||{}).t,time:Date.now(),read:false}).catch(()=>{});
-    toast("✅ تم تحديث الحالة");
-    renderAdminOrders();
-  }).catch(err=>toast("❌ " + err.message));
+window.sendAdminReply = function(uid, ticketId){
+  const replyText = document.getElementById('reply_' + ticketId).value.trim();
+  if(!replyText) return alert("اكتب الرد أولاً");
+  
+  // تحديث الرد في تذكرة المستخدم وتذكرة الإدارة
+  Promise.all([
+    db.ref('support_tickets/'+uid+'/'+ticketId+'/reply').set(replyText),
+    db.ref('admin_tickets/'+ticketId+'/reply').set(replyText)
+  ]).then(()=>{
+    alert("✅ تم إرسال الرد للعميل بنجاح!");
+  }).catch(err => alert("❌ خطأ: " + err.message));
 };
 
-function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-
-document.getElementById("reset").onclick = ()=>{ if(confirm("هل أنت متأكد من تصفير الإحصائيات؟")){ ["visits","unique","pk","ord"].forEach(k=>store.set("st_"+k,"0")); renderStats(); toast("✅ تم التصفير"); } };
-
-renderStats();
-renderAdminVipTiers();
-renderSupportTickets();
-renderLiveVisitors();
-renderAdminOrders();
+loadAdminTickets();
 </script>
 </body>
 </html>
