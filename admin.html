@@ -84,6 +84,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
 "use strict";
+// تم ضبط الرابط هنا ليتطابق مع index.html تماماً
 const firebaseConfig = {
   apiKey: "AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain: "real-store-c91ec.firebaseapp.com",
@@ -190,6 +191,7 @@ $("#sendBalanceBtn").onclick = () => {
   if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
   if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
   
+  // شحن الرصيد في قاعدة البيانات الموحدة للمستخدم بناءً على الـ ID الخاص به
   const ref = db.ref('users/'+targetId+'/wallet');
   ref.once('value').then(s=>{
     const cur = s.val()||0, nw = cur + amount;
