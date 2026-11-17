@@ -16,6 +16,7 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
 .card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
 .card h3{font-size:14px;font-weight:900;color:var(--a);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:11px;border-radius:12px;margin-bottom:8px;font-size:12px}
+select.in{appearance:none;cursor:pointer}
 .btn{width:100%;background:var(--g1);color:#fff;padding:11px;border-radius:12px;font-weight:900;font-size:13px;border:0;cursor:pointer}
 .btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:800;border:0;cursor:pointer;flex-shrink:0}
 .sub{font-size:10px;color:var(--sub)}
@@ -73,28 +74,46 @@ h1{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:14px;text-alig
 
   <!-- قسم ترقية مستوى الـ VIP للعميل (من 1 إلى 13) -->
   <div class="card">
-    <h3><i class="fa-solid fa-crown" style="color:var(--gold)"></i> ترقية وتعلي مستوى VIP للعميل (من 1 إلى 13)</h3>
+    <h3><i class="fa-solid fa-crown" style="color:var(--gold)"></i> ترقية مستوى VIP للعميل (من 1 إلى 13)</h3>
     <p class="sub" style="margin-bottom:8px">أدخل ID العميل، ثم اختر مستوى الـ VIP المطلوب من القائمة لترقيته فوراً.</p>
     <input id="adminVipTargetUid" class="in" placeholder="أدخل ID العميل (مثال: REAL-123456)" style="direction:ltr">
     
     <select id="adminVipLevelSelect" class="in" style="font-weight:800; color:var(--gold)">
-      <option value="0">⭐ VIP 1 - مبتدئ (الحد الأدنى: 0 ج.م)</option>
-      <option value="500">⭐ VIP 2 - برونزي (الحد الأدنى: 500 ج.م)</option>
-      <option value="1200">⭐ VIP 3 - فضي (الحد الأدنى: 1,200 ج.م)</option>
-      <option value="2500">⭐ VIP 4 - ذهبي (الحد الأدنى: 2,500 ج.م)</option>
-      <option value="5000">⭐ VIP 5 - بلاتيني (الحد الأدنى: 5,000 ج.م)</option>
-      <option value="10000">⭐ VIP 6 - ماسي (الحد الأدنى: 10,000 ج.م)</option>
-      <option value="20000">⭐ VIP 7 - اسطوري (الحد الأدنى: 20,000 ج.م)</option>
-      <option value="35000">⭐ VIP 8 - محترف (الحد الأدنى: 35,000 ج.م)</option>
-      <option value="55000">⭐ VIP 9 - خبير (الحد الأدنى: 55,000 ج.م)</option>
-      <option value="80000">⭐ VIP 10 - زعيم (الحد الأدنى: 80,000 ج.م)</option>
-      <option value="120000">⭐ VIP 11 - ملك (الحد الأدنى: 120,000 ج.م)</option>
-      <option value="180000">⭐ VIP 12 - امبراطور (الحد الأدنى: 180,000 ج.م)</option>
-      <option value="250000">👑 VIP 13 - الإلهي (الحد الأدنى: 250,000 ج.م)</option>
+      <option value="0">⭐ VIP 1 - مبتدئ (0 ج.م)</option>
+      <option value="500">⭐ VIP 2 - برونزي (500 ج.م)</option>
+      <option value="1200">⭐ VIP 3 - فضي (1,200 ج.م)</option>
+      <option value="2500">⭐ VIP 4 - ذهبي (2,500 ج.م)</option>
+      <option value="5000">⭐ VIP 5 - بلاتيني (5,000 ج.م)</option>
+      <option value="10000">⭐ VIP 6 - ماسي (10,000 ج.م)</option>
+      <option value="20000">⭐ VIP 7 - اسطوري (20,000 ج.م)</option>
+      <option value="35000">⭐ VIP 8 - محترف (35,000 ج.م)</option>
+      <option value="55000">⭐ VIP 9 - خبير (55,000 ج.م)</option>
+      <option value="80000">⭐ VIP 10 - زعيم (80,000 ج.م)</option>
+      <option value="120000">⭐ VIP 11 - ملك (120,000 ج.م)</option>
+      <option value="180000">⭐ VIP 12 - امبراطور (180,000 ج.م)</option>
+      <option value="250000">👑 VIP 13 - الإلهي (250,000 ج.م)</option>
     </select>
 
     <button class="btn" id="adminUpdateVipBtn" style="background:var(--g2);color:#382000">⭐ ترقية مستوى الـ VIP للعميل فوراً</button>
     <div id="adminVipFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+  </div>
+
+  <!-- قسم إدارة حظر المستخدمين (جديد) -->
+  <div class="card" style="border-color:rgba(239,68,68,0.4)">
+    <h3 style="color:#EF4444"><i class="fa-solid fa-ban"></i> إدارة حظر المستخدمين المخالفين</h3>
+    <p class="sub" style="margin-bottom:8px">أدخل ID العميل واختر مدة الحظر (سنة أو للأبد) لحظر وصوله للمتجر.</p>
+    <input id="banTargetUid" class="in" placeholder="أدخل ID العميل (REAL-XXXXXX)" style="direction:ltr">
+    
+    <select id="banDuration" class="in" style="font-weight:800; color:#EF4444">
+      <option value="365">⏳ حظر لمدة سنة واحدة</option>
+      <option value="permanent">⛔ حظر للأبد (دائم)</option>
+    </select>
+
+    <button class="btn" id="banUserBtn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff">⚠️ تنفيذ الحظر على العميل فوراً</button>
+    <div id="banFeedback" style="font-size:11px;font-weight:700;margin-top:6px"></div>
+
+    <h4 style="font-size:12px;color:#EF4444;margin:14px 0 6px">🚫 قائمة المستخدمين المحظورين حالياً</h4>
+    <div id="bannedUsersList" style="max-height:180px;overflow-y:auto"></div>
   </div>
 
   <!-- قسم تذاكر الدعم الفني -->
@@ -134,7 +153,7 @@ const DEFAULT_GAMES_DATA = {
 
 let allGamesPrices = JSON.parse(JSON.stringify(DEFAULT_GAMES_DATA));
 
-// إدارة البنرات في لوحة الإدارة
+// إدارة البنرات
 let currentBanners = [];
 function renderAdminBannersUI(){
   const container = document.getElementById('bannersListContainer');
@@ -181,7 +200,7 @@ document.getElementById('saveBannersBtn').onclick = () => {
   }).catch(err => { fb.style.color = "#EF4444"; fb.textContent = "❌ " + err.message; });
 };
 
-// إدارة وتعديل أسعار الألعاب
+// تعديل أسعار الألعاب
 function renderGamePriceEditor(gameKey){
   const container = document.getElementById('gamePricesEditorContainer');
   const items = allGamesPrices[gameKey] || [];
@@ -225,7 +244,7 @@ document.getElementById('savePricesBtn').onclick = () => {
   });
 };
 
-// شحن رصيد للعميل
+// شحن رصيد
 document.getElementById('adminSendBalanceBtn').onclick = () => {
   const targetId = document.getElementById('adminTargetUid').value.trim();
   const amount = parseFloat(document.getElementById('adminAmount').value);
@@ -233,10 +252,9 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
   if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل"; return; }
   if(!amount || isNaN(amount)){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل مبلغ صحيح"; return; }
   
-  const ref = db.ref('users/'+targetId+'/wallet');
-  ref.once('value').then(s=>{
+  db.ref('users/'+targetId+'/wallet').once('value').then(s=>{
     const cur = s.val()||0, nw = cur + amount;
-    ref.set(nw).then(()=>{
+    db.ref('users/'+targetId+'/wallet').set(nw).then(()=>{
       fb.style.color = "var(--ok)";
       fb.textContent = `✅ شُحن (${amount} ج.م) للـ ID: (${targetId}) بنجاح! رصيده: (${nw} ج.م)`;
       document.getElementById('adminTargetUid').value="";
@@ -245,7 +263,7 @@ document.getElementById('adminSendBalanceBtn').onclick = () => {
   });
 };
 
-// ترقية مستوى الـ VIP للعميل من خلال قائمة مستويات (1 إلى 13)
+// ترقية الـ VIP
 document.getElementById('adminUpdateVipBtn').onclick = () => {
   const targetId = document.getElementById('adminVipTargetUid').value.trim();
   const selectedSpent = parseFloat(document.getElementById('adminVipLevelSelect').value);
@@ -257,6 +275,60 @@ document.getElementById('adminUpdateVipBtn').onclick = () => {
     fb.textContent = `⭐ تم ترقية العميل (${targetId}) للمستوى المطلوب بنجاح!`;
     document.getElementById('adminVipTargetUid').value="";
   }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+};
+
+// إدارة حظر المستخدمين (جديد)
+document.getElementById('banUserBtn').onclick = () => {
+  const targetId = document.getElementById('banTargetUid').value.trim();
+  const duration = document.getElementById('banDuration').value;
+  const fb = document.getElementById('banFeedback');
+  
+  if(!targetId){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل ID العميل أولاً"; return; }
+
+  let banUntil = "permanent";
+  if(duration === "365"){
+    banUntil = Date.now() + (365 * 24 * 60 * 60 * 1000); // سنة من الآن بالمللي ثانية
+  }
+
+  db.ref('banned_users/' + targetId).set({
+    bannedAt: Date.now(),
+    banUntil: banUntil,
+    reason: "مخالفة شروط الاستخدام"
+  }).then(()=>{
+    fb.style.color = "var(--ok)";
+    fb.textContent = `✅ تم حظر العميل (${targetId}) بنجاح.`;
+    document.getElementById('banTargetUid').value = "";
+    loadBannedUsers();
+  }).catch(err=>{ fb.style.color="#EF4444"; fb.textContent="❌ " + err.message; });
+};
+
+function loadBannedUsers(){
+  const box = document.getElementById('bannedUsersList');
+  if(!box) return;
+  
+  db.ref('banned_users').once('value').then(s=>{
+    const data = s.val() || {};
+    const arr = Object.entries(data);
+    if(!arr.length){ box.innerHTML = '<p class="sub" style="padding:6px">لا يوجد أي مستخدمين محظورين حالياً</p>'; return; }
+
+    box.innerHTML = arr.map(([uid, info])=>{
+      const durationTxt = info.banUntil === "permanent" ? "دائم (للأبد) ⛔" : "ينتهي في: " + new Date(info.banUntil).toLocaleDateString('ar-EG');
+      return `<div style="background:var(--inner);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <b style="color:#EF4444;direction:ltr;display:block">${uid}</b>
+          <small style="color:var(--sub)">${durationTxt}</small>
+        </div>
+        <button class="btn-danger" style="background:var(--ok);padding:5px 10px;font-size:10px" onclick="unbanUser('${uid}')">فك الحظر ✅</button>
+      </div>`;
+    }).join("");
+  });
+}
+
+window.unbanUser = function(uid){
+  db.ref('banned_users/' + uid).remove().then(()=>{
+    alert("✅ تم رفع الحظر عن العميل بنجاح");
+    loadBannedUsers();
+  }).catch(err=>alert("❌ " + err.message));
 };
 
 // تذاكر الدعم الفني
@@ -296,6 +368,7 @@ window.sendAdminReply = function(uid, ticketId){
   }).catch(err => alert("❌ خطأ: " + err.message));
 };
 
+loadBannedUsers();
 loadAdminTickets();
 </script>
 </body>
