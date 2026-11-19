@@ -1865,13 +1865,31 @@ function rebuildGamesFromFirebase(){
 let _rbT;
 function scheduleRebuild(){ clearTimeout(_rbT); _rbT = setTimeout(rebuildGamesFromFirebase, 80); }
 
+const GCACHE="games_cache_v1";
+function saveGamesCache(){ store.set(GCACHE, JSON.stringify({c:catalogGamesRaw,p:globalGamesPrices})); }
 function listenGamePrices(){
-  if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
-  db.ref('settings/catalog_games').on('value', snap=>{ catalogGamesRaw = snap.val() || {}; scheduleRebuild(); });
-  db.ref('settings/gamesPrices').on('value', snap=>{ globalGamesPrices = snap.val() || {}; scheduleRebuild(); });
-  if(uniqueUid){
-    db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', snap=>{ userGamesPrices = snap.val() || {}; scheduleRebuild(); });
-  }
+  // 1) اعرض آخر نسخة محفوظة فوراً (تمنع الرجوع للأسعار القديمة عند الـ Refresh)
+  try{ const c = JSON.parse(store.get(GCACHE,"null")); if(c){ catalogGamesRaw = c.c || {}; globalGamesPrices = c.p || {}; } }catch(e){}
+  rebuildGamesFromFirebase();
+  if(!firebaseOK || !db) return;
+  // 2) استمع للتحديثات، وأعد الاستماع بعد تسجيل الدخول أو عند فشل الصلاحيات
+  let retryT, attached = [];
+  const attach = ()=>{
+    clearTimeout(retryT);
+    attached.forEach(r=>{ try{ r.off(); }catch(e){} }); attached = [];
+    const fail = name => e => { console.warn(name, e && e.message); retryT = setTimeout(attach, 4000); };
+    const r1 = db.ref('settings/catalog_games'), r2 = db.ref('settings/gamesPrices');
+    r1.on('value', snap=>{ catalogGamesRaw = snap.val() || {}; saveGamesCache(); scheduleRebuild(); }, fail("catalog_games"));
+    r2.on('value', snap=>{ globalGamesPrices = snap.val() || {}; saveGamesCache(); scheduleRebuild(); }, fail("gamesPrices"));
+    attached.push(r1, r2);
+    if(uniqueUid){
+      const r3 = db.ref('users_custom/' + uniqueUid + '/gamesPrices');
+      r3.on('value', snap=>{ userGamesPrices = snap.val() || {}; scheduleRebuild(); }, ()=>{});
+      attached.push(r3);
+    }
+  };
+  attach();
+  if(auth && auth.onAuthStateChanged) auth.onAuthStateChanged(()=>setTimeout(attach, 300));
 }
 function startOfferTimer(){
   const end = Date.now() + 24*60*60*1000;
