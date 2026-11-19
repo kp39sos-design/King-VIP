@@ -386,11 +386,6 @@ function unlockAdminUI() {
   initAdminDashboard();
 }
 
-try {
-  if (localStorage.getItem("admin_logged") === "true") {
-    unlockAdminUI();
-  }
-} catch (e) {}
 
 $("#adminLoginBtn").onclick = () => {
   if ($("#adminPassInput").value === ADMIN_PASS) {
@@ -793,10 +788,10 @@ $("#gmSaveGameBtn").onclick = () => {
     db.ref("settings/catalog_games/_deleted").set(adminDeletedGameIds),
     db.ref("settings/gamesPrices/" + key).set(parsedItems)
   ]).then(() => {
-    fb.style.color = "var(--ok)";
-    fb.textContent = "✅ تم حفظ اللعبة وتحديثها في المتجر فوراً!";
     toast("✅ تم حفظ اللعبة ونشرها في المتجر");
     resetGameForm();
+    fb.style.color = "var(--ok)";
+    fb.textContent = "✅ تم حفظ اللعبة وتحديثها في المتجر فوراً!";
   }).catch(err => {
     setErrLabel("حفظ لعبة: " + err.message);
     fb.style.color = "var(--err)";
@@ -1310,6 +1305,10 @@ $("#saveSettingsBtn").onclick = () => {
   if (!wa) return toast("❌ أدخل رقم واتساب");
   db.ref('settings/whatsapp').set(wa).then(() => toast("✅ تم حفظ رقم الواتساب")).catch(err => toast("❌ " + err.message));
 };
+
+try {
+  if (localStorage.getItem("admin_logged") === "true") unlockAdminUI();
+} catch (e) { setErrLabel("تحميل: " + e.message); console.error(e); }
 </script>
 </body>
 </html>
