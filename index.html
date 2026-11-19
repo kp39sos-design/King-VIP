@@ -247,6 +247,32 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .vip-info-text small{color:var(--sub);font-size:10px}
 .vip-progress-bar{width:100%;height:6px;background:var(--inner);border-radius:3px;margin-top:6px;overflow:hidden;border:1px solid var(--bd)}
 .vip-progress-fill{height:100%;background:linear-gradient(90deg,#D99B16,#2563EB);width:0%;transition:width 0.4s ease}
+
+#profile.on{display:block;position:fixed;top:0;bottom:calc(62px + env(safe-area-inset-bottom,0px));left:0;right:0;margin:0 auto;width:100%;max-width:520px;background:var(--bg);z-index:840;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 12px 90px;animation:pfIn .28s ease}
+@keyframes pfIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+body.pf-open{overflow:hidden}
+.pf-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) 0 10px;background:var(--bg);font-size:14px;font-weight:900}
+.pf-back{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--bd);color:var(--a);display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.pf-hero{position:relative;text-align:center;background:var(--card);border:1px solid var(--bd2);border-radius:24px;padding:0 16px 18px;margin-bottom:12px;overflow:hidden;box-shadow:var(--sh)}
+.pf-cover{height:84px;margin:0 -16px;background:var(--g1);position:relative}
+.pf-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.25),transparent 55%)}
+.pf-av{width:96px;height:96px;margin:-48px auto 8px;border-radius:50%;padding:3px;background:var(--g2);position:relative;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.pf-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--card);background:var(--card)}
+.pf-name{display:block;font-size:17px;font-weight:900}
+.pf-mail{display:block;color:var(--sub);font-size:11px;margin:2px 0 4px}
+.pf-login{display:none;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:12px;border-radius:14px;background:#fff;color:#1f2937;font-weight:900;font-size:12.5px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.pf-login i{color:#EA4335;font-size:16px}
+.pf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px}
+.pf-stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;text-align:start;display:flex;flex-direction:column;gap:3px;min-width:0}
+.pf-stat i{font-size:15px;margin-bottom:2px}.pf-stat small{font-size:9.5px;color:var(--sub);font-weight:700}.pf-stat b{font-size:13px;font-weight:900;overflow:hidden;text-overflow:ellipsis}
+.pf-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pf-mini{background:var(--inner);border:1px solid var(--bd);color:var(--a);border-radius:8px;padding:3px 8px;font-size:10px;font-weight:800}
+.pf-ref{display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(135deg,rgba(217,155,22,.12),rgba(147,51,234,.10));border:1px dashed var(--gold);border-radius:16px;padding:12px;margin-bottom:10px}
+.pf-ref small{font-size:10px;color:var(--sub);font-weight:700}
+.pf-menu{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden}
+.pf-menu button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;font-size:12.5px;font-weight:800;color:var(--tx);text-align:start;border-bottom:1px solid var(--bd)}
+.pf-menu button:last-child{border-bottom:0}.pf-menu button>span:nth-child(2){flex:1}.pf-menu button>i{color:var(--sub);font-size:11px}
+.pf-ic{width:34px;height:34px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;color:#fff;background:var(--c,#2563EB);font-size:14px}
 </style>
 </head>
 <body>
@@ -387,62 +413,52 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 <section id="orders" class="sec"><div class="ttl">📋 طلباتي</div><div id="ordersList"></div></section>
 <section id="favorites" class="sec"><div class="ttl">❤️ المفضلة</div><div class="grid" id="favGrid"></div></section>
 
-<section id="profile" class="sec">
-  <div class="ttl">👤 الملف الشخصي (ORIGIWHFTW)</div>
-  <div class="form" style="text-align:center; background:var(--card); border:1px solid var(--bd2); border-radius:24px; padding:18px; box-shadow:var(--sh);">
-    <div style="position:relative; width:88px; height:88px; margin:0 auto 10px;">
-      <img id="profImg" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png" style="width:100%; height:100%; border-radius:50%; border:3px solid var(--a); object-fit:cover; box-shadow:0 8px 20px rgba(37,99,235,.3);">
-    </div>
-    <b id="profName" style="font-size:16px; font-weight:900; display:block; margin-bottom:2px">زائر</b>
-    <small id="profEmail" style="color:var(--sub); font-size:11px; display:block; margin-bottom:14px">-</small>
-    
-    <div class="vip-badge-box" id="vipCardBox">
-      <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
-      <div style="flex:1" class="vip-info-text">
-        <small style="color:var(--sub); font-size:9.5px; font-weight:700">مستوى العضوية الحالي</small>
-        <b id="vipTierName" style="color:var(--gold); font-size:13.5px; margin:2px 0">⭐ VIP 1 - مبتدئ</b>
-        <div class="vip-progress-bar">
-          <div class="vip-progress-fill" id="vipProgressFill"></div>
-        </div>
-        <small id="vipNextTarget" style="display:block; margin-top:4px; font-size:9.5px; color:var(--sub)">الشحن القادم للترقية: --</small>
-      </div>
-    </div>
-
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">
-      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
-        <small style="font-size:9.5px; color:var(--sub)">ID الحساب (قابل للنسخ)</small>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
-          <b id="profId" style="direction:ltr; color:var(--a); font-size:11px">------</b>
-          <button class="copy" id="copyProfIdBtn" style="margin:0; width:auto; padding:3px 8px; font-size:9.5px; border-radius:6px;">📋 نسخ</button>
-        </div>
-      </div>
-      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
-        <small style="font-size:9.5px; color:var(--sub)">رصيد المحفظة</small>
-        <b id="profWallet" style="color:var(--ok); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
-      </div>
-    </div>
-
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:12px;">
-      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
-        <small style="font-size:9.5px; color:var(--sub)">نقاط الولاء (+4%)</small>
-        <b id="profPoints" style="color:var(--b); font-size:12px; display:block; margin-top:2px">0 نقطة</b>
-      </div>
-      <div class="info" style="text-align:start; margin:0; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px;">
-        <small style="font-size:9.5px; color:var(--sub)">إجمالي المشتريات</small>
-        <b id="profSpent" style="color:var(--tx); font-size:12px; display:block; margin-top:2px">0.00 ج.م</b>
-      </div>
-    </div>
-
-    <div class="info" style="text-align:start; background:var(--inner); border:1px solid var(--bd); border-radius:14px; padding:10px; margin-bottom:12px;">
-      <small style="font-size:9.5px; color:var(--sub)">كود الإحالة (شارك واربح)</small>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
-        <b id="profRef" style="direction:ltr; color:var(--gold); font-size:12px">------</b>
-        <button class="copy" id="copyRefBtn" style="margin:0; width:auto; padding:5px 12px; font-size:10px; border-radius:8px;">📋 نسخ</button>
-      </div>
-    </div>
-
-    <button class="order" id="profLogout" style="background:linear-gradient(135deg,#EF4444,#DC2626); color:#fff; border-radius:14px; padding:11px; font-weight:900; font-size:12px; box-shadow:0 4px 12px rgba(239,68,68,0.3);">🚪 تسجيل الخروج</button>
+<section id="profile" class="sec" aria-label="الملف الشخصي">
+  <div class="pf-bar">
+    <button class="pf-back" id="profBack" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+    <b>👤 الملف الشخصي</b>
+    <button class="pf-back" data-act="editName" aria-label="تعديل الاسم"><i class="fa-solid fa-pen"></i></button>
   </div>
+
+  <div class="pf-hero">
+    <div class="pf-cover"></div>
+    <div class="pf-av"><img id="profImg" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png"></div>
+    <b id="profName" class="pf-name">زائر</b>
+    <small id="profEmail" class="pf-mail">-</small>
+    <button class="pf-login" id="profLogin"><i class="fa-brands fa-google"></i> تسجيل الدخول بجيميل</button>
+  </div>
+
+  <div class="vip-badge-box" id="vipCardBox">
+    <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
+    <div style="flex:1" class="vip-info-text">
+      <small style="color:var(--sub);font-size:9.5px;font-weight:700">مستوى العضوية الحالي</small>
+      <b id="vipTierName" style="color:var(--gold);font-size:13.5px;margin:2px 0;display:block">⭐ VIP 1 - مبتدئ</b>
+      <div class="vip-progress-bar"><div class="vip-progress-fill" id="vipProgressFill"></div></div>
+      <small id="vipNextTarget" style="display:block;margin-top:4px;font-size:9.5px;color:var(--sub)">الشحن القادم للترقية: --</small>
+    </div>
+  </div>
+
+  <div class="pf-grid">
+    <div class="pf-stat"><i class="fa-solid fa-wallet" style="color:var(--ok)"></i><small>رصيد المحفظة</small><b id="profWallet" style="color:var(--ok)">0.00 ج.م</b></div>
+    <div class="pf-stat"><i class="fa-solid fa-star" style="color:var(--b)"></i><small>نقاط الولاء (+4%)</small><b id="profPoints" style="color:var(--b)">0 نقطة</b></div>
+    <div class="pf-stat"><i class="fa-solid fa-bag-shopping" style="color:var(--a)"></i><small>إجمالي المشتريات</small><b id="profSpent">0.00 ج.م</b></div>
+    <div class="pf-stat"><i class="fa-solid fa-fingerprint" style="color:var(--a)"></i><small>ID الحساب</small>
+      <div class="pf-row"><b id="profId" style="direction:ltr;color:var(--a);font-size:11px">------</b><button class="pf-mini" id="copyProfIdBtn">📋</button></div></div>
+  </div>
+
+  <div class="pf-ref">
+    <div><small>🎁 كود الإحالة (شارك واربح)</small><b id="profRef" style="direction:ltr;color:var(--gold);display:block;font-size:13px;margin-top:2px">------</b></div>
+    <button class="pf-mini" id="copyRefBtn" style="padding:8px 14px">📋 نسخ</button>
+  </div>
+
+  <div class="pf-menu">
+    <button data-sec="orders"><span class="pf-ic" style="--c:#2563EB"><i class="fa-solid fa-receipt"></i></span><span>طلباتي</span><i class="fa-solid fa-chevron-left"></i></button>
+    <button data-sec="favorites"><span class="pf-ic" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المفضلة</span><i class="fa-solid fa-chevron-left"></i></button>
+    <button data-act="editName"><span class="pf-ic" style="--c:#9333EA"><i class="fa-solid fa-user-pen"></i></span><span>تعديل الاسم</span><i class="fa-solid fa-chevron-left"></i></button>
+    <button data-act="supportDesk"><span class="pf-ic" style="--c:#0EA5E9"><i class="fa-solid fa-headset"></i></span><span>الدعم الفني</span><i class="fa-solid fa-chevron-left"></i></button>
+  </div>
+
+  <button class="order" id="profLogout" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;border-radius:14px;padding:12px;font-weight:900;font-size:12px;box-shadow:0 4px 12px rgba(239,68,68,.3);margin-top:12px">🚪 تسجيل الخروج</button>
 </section>
 
 <section id="admin" class="sec">
@@ -923,10 +939,35 @@ function updateUserUI(){
   }
 }
 
-function loginGoogle(){
+const INAPP_UA=/FBAN|FBAV|Instagram|MicroMessenger|Snapchat|TikTok|musical_ly|; wv\)|\bLine\//i;
+let loginBusy=false;
+function authErrMsg(err){
+  const c=(err&&err.code)||"";
+  if(c==="auth/popup-closed-by-user"||c==="auth/cancelled-popup-request"||c==="auth/user-cancelled") return "";
+  if(c==="auth/unauthorized-domain") return "⚠️ هذا الدومين غير مصرّح: أضفه من Firebase ← Authentication ← Settings ← Authorized domains";
+  if(c==="auth/operation-not-allowed") return "⚠️ فعّل Google من Firebase ← Authentication ← Sign-in method";
+  if(c==="auth/network-request-failed") return "⚠️ تأكد من اتصال الإنترنت وحاول مرة أخرى";
+  if(c==="auth/popup-blocked") return "⚠️ اسمح بالنوافذ المنبثقة ثم حاول مرة أخرى";
+  return "❌ تعذر تسجيل الدخول" + (err&&err.message ? ": " + err.message : "");
+}
+async function loginGoogle(){
+  if(location.protocol==="file:"){ toast("⚠️ افتح الموقع من رابط https وليس كملف على الجهاز"); return; }
   if(!firebaseOK || !auth){ toast("⚠️ Firebase غير مفعّل — تصفح كزائر"); return; }
+  if(INAPP_UA.test(navigator.userAgent)){ toast("⚠️ جوجل لا يسمح بالدخول داخل هذا المتصفح، افتح الرابط في Chrome أو Safari"); return; }
+  if(loginBusy) return; loginBusy=true;
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider).catch(err => { toast("❌ " + err.message); });
+  provider.setCustomParameters({prompt:"select_account"});
+  try{
+    await auth.signInWithPopup(provider);
+    toast("✅ تم تسجيل الدخول بنجاح");
+  }catch(err){
+    const c=(err&&err.code)||"";
+    let e2=err;
+    if(["auth/popup-blocked","auth/operation-not-supported-in-this-environment","auth/web-storage-unsupported"].includes(c)){
+      try{ await auth.signInWithRedirect(provider); loginBusy=false; return; }catch(x){ e2=x; }
+    }
+    const m=authErrMsg(e2); if(m) toast(m);
+  }finally{ loginBusy=false; }
 }
 
 async function getOrCreateUserUniqueId(email, googleUid) {
@@ -950,7 +991,7 @@ async function getOrCreateUserUniqueId(email, googleUid) {
         await emailRef.set(currentId);
         resolve(currentId);
       }
-    });
+    }).catch(()=>resolve(store.get("user_unique_id", genUid())));
   });
 }
 
@@ -986,6 +1027,7 @@ if(firebaseOK && auth){
     user = u; 
     if(user && user.email) {
       uniqueUid = await getOrCreateUserUniqueId(user.email, user.uid);
+      if(db) db.ref('users/'+uniqueUid+'/profile').update({ name:user.displayName||"", email:user.email, photo:user.photoURL||"", updated:Date.now() }).catch(()=>{});
     }
     updateUserUI(); 
     listenWallet(); 
@@ -1009,7 +1051,7 @@ $("#loginBtn").onclick = ()=>{
 $("#gBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); loginGoogle(); };
 $("#guestBtn").onclick = ()=>{ $("#gate").classList.remove("on"); requestSystemNotificationPermission(); };
 $("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
-$("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); showSec("games"); }); } else { toast("لم يتم تسجيل الدخول"); } };
+$("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); renderProfile(); showSec("games"); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 
 function renderProfile(){
   $("#profName").textContent = store.get("custom_username","") || (user?user.displayName:"زائر");
@@ -1019,7 +1061,12 @@ function renderProfile(){
   $("#profImg").src = user&&user.photoURL ? user.photoURL : "https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png";
   updateWalletUI();
   updateVipUI();
+  const lg = $("#profLogin"), lo = $("#profLogout");
+  if(lg) lg.style.display = user ? "none" : "flex";
+  if(lo) lo.style.display = user ? "block" : "none";
 }
+$("#profBack").onclick = ()=>showSec("games");
+$("#profLogin").onclick = ()=>{ requestSystemNotificationPermission(); loginGoogle(); };
 $("#copyRefBtn").onclick = ()=>copy($("#profRef").textContent);
 $("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
 $("#copyProfIdBtn").onclick = ()=>copy(uniqueUid);
@@ -1314,7 +1361,11 @@ function showSec(id){
   if(id==="orders") renderOrders();
   if(id==="favorites") renderFavs();
   if(id==="profile") renderProfile();
+  document.body.classList.toggle("pf-open", id==="profile");
+  if(id==="profile"){ const pf=$("#profile"); if(pf) pf.scrollTop=0; }
+  else if(["orders","favorites","request","admin"].includes(id)) window.scrollTo({top:0,behavior:"smooth"});
 }
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && $("#profile").classList.contains("on")) showSec("games"); });
 document.addEventListener("click", e=>{
   const el = e.target.closest("[data-sec]"); if(el) return showSec(el.dataset.sec);
   const bn = e.target.closest("[data-nav]"); if(bn) return showSec(bn.dataset.nav);
