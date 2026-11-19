@@ -63,7 +63,8 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .pay h3{font-size:13.5px;margin-bottom:8px}
 .copy{width:100%;margin-top:8px;background:var(--g1);color:#fff;padding:9px;border-radius:10px;font-weight:800;font-size:12px}
 .wa{display:block;text-align:center;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800;font-size:12px;width:100%}
-.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px;border-radius:12px;margin-bottom:8px;font-size:12px}
+.in{width:100%;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:9px 11px;border-radius:11px;margin-bottom:7px;font-size:12px}
+.in[readonly]{opacity:.85;background:var(--card);font-weight:800}
 textarea.in{min-height:75px;resize:none}
 .soon{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .sc{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:15px 8px;text-align:center}
@@ -74,15 +75,37 @@ textarea.in{min-height:75px;resize:none}
 .st b{display:block;font-size:18px;color:var(--a)}.st span{font-size:10px;color:var(--sub)}
 .modal{position:fixed;inset:0;z-index:990;background:rgba(2,6,23,.85);display:none;align-items:center;justify-content:center;padding:10px}
 .modal.on{display:flex}
-.mb{width:100%;max-width:460px;max-height:90vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:16px}
-.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.mh h2{font-size:15px}
-.x{width:30px;height:30px;border-radius:50%;background:var(--inner);color:var(--tx);font-size:16px}
-.info{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:8px}
-.info small{color:var(--sub);font-size:10px}.info b{display:block;font-size:13px}
-.disc{border:1px dashed var(--gold);border-radius:12px;padding:12px;text-align:center;margin-bottom:8px;background:rgba(245,158,11,.08)}
-.disc .n{font-size:20px;font-weight:900;color:var(--gold)}.disc .o{font-size:11px;color:var(--sub);text-decoration:line-through}
-.order{width:100%;background:var(--g2);color:#382000;padding:11px;border-radius:12px;font-weight:900;font-size:12px}
+.mb{width:100%;max-width:440px;max-height:90vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:14px}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.mh h2{font-size:14.5px;font-weight:900}
+.x{width:28px;height:28px;border-radius:50%;background:var(--inner);color:var(--tx);font-size:15px;flex-shrink:0}
+.info{background:var(--inner);border:1px solid var(--bd);border-radius:11px;padding:8px 10px;margin-bottom:7px}
+.info small{color:var(--sub);font-size:10px;display:block;margin-bottom:3px;font-weight:700}.info b{display:block;font-size:12.5px}
+.order{width:100%;background:var(--g2);color:#382000;padding:10px;border-radius:11px;font-weight:900;font-size:12px}
+.order:disabled{opacity:.55;cursor:not-allowed}
 .err{border-color:#EF4444!important}
+
+/* نظام الخطوتين المدمج لنافذة الدفع */
+.step-bar{display:flex;gap:6px;margin-bottom:10px}
+.step-pill{flex:1;padding:6px 8px;border-radius:10px;background:var(--inner);border:1px solid var(--bd);font-size:10.5px;font-weight:800;color:var(--sub);text-align:center;cursor:pointer;transition:.2s}
+.step-pill.on{background:var(--g1);color:#fff;border-color:transparent}
+.pkg-summary-strip{display:flex;align-items:center;gap:10px;background:var(--inner);border:1px solid var(--bd2);border-radius:12px;padding:8px 10px;margin-bottom:9px}
+.pkg-summary-strip img{width:42px;height:42px;border-radius:10px;object-fit:contain;background:var(--card);border:1px solid var(--bd);padding:2px;flex-shrink:0}
+.pkg-summary-info{flex:1;min-width:0}
+.pkg-summary-info small{display:block;font-size:9.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkg-summary-info b{display:block;font-size:12px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkg-summary-price{text-align:end;flex-shrink:0}
+.pkg-summary-price b{display:block;font-size:13.5px;font-weight:900;color:var(--gold)}
+.pkg-summary-price s{display:block;font-size:9.5px;color:var(--sub)}
+.pay-box{background:linear-gradient(135deg,rgba(239,68,68,.07),rgba(37,99,235,.07));border:1px solid var(--bd2);border-radius:12px;padding:10px;margin-bottom:8px}
+.pay-row{display:flex;justify-content:space-between;align-items:center;margin:3px 0;font-size:11px}
+.pay-num-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);border:1px solid var(--bd2);border-radius:9px;padding:7px 10px;margin:6px 0}
+.pay-num-bar b{font-size:15px;color:var(--a);letter-spacing:.5px;direction:ltr}
+.pay-warn{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.3);color:#EF4444;border-radius:9px;padding:6px 9px;font-size:10px;font-weight:800;line-height:1.45;margin-top:5px}
+.upload-box{display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--a);background:var(--card);border-radius:10px;padding:9px;cursor:pointer;font-size:11px;font-weight:800;color:var(--a);text-align:center}
+.receipt-preview{width:100%;max-height:110px;object-fit:contain;border-radius:8px;border:1px solid var(--bd2);background:var(--card);margin-top:6px;display:none}
+.step-actions{display:flex;gap:7px;margin-top:6px}
+.btn-back{background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 14px;border-radius:11px;font-weight:800;font-size:11.5px;flex-shrink:0}
+
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9998;background:var(--modal);border:1px solid var(--a);color:var(--tx);padding:8px 18px;border-radius:20px;font-weight:800;font-size:11px;display:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;font-weight:600}
 .wallet-box{background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(147,51,234,.15));border:1px solid var(--bd2);border-radius:18px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 25px rgba(37,99,235,.12)}
@@ -194,14 +217,14 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 .nd-item b{display:block;font-size:11.5px;margin:2px 0}
 .nd-item p{font-size:10.5px;color:var(--sub);line-height:1.5}
 .order-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
-.order-card .oc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.order-card .oc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;flex-wrap:wrap}
 .order-card .oc-top b{font-size:11px;color:var(--a);direction:ltr}
 .order-card .oc-top small{font-size:9.5px;color:var(--sub)}
 .status-pill{padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:900}
-.st-pending{background:rgba(245,158,11,.15);color:#D97706}
-.st-paid{background:rgba(37,99,235,.15);color:#2563EB}
-.st-processing{background:rgba(147,51,234,.15);color:#9333EA}
-.st-done{background:rgba(22,163,74,.15);color:#16A34A}
+.st-pending,.st-awaiting_payment{background:rgba(245,158,11,.15);color:#D97706}
+.st-paid,.st-reviewing{background:rgba(37,99,235,.15);color:#2563EB}
+.st-processing,.st-charging{background:rgba(147,51,234,.15);color:#9333EA}
+.st-done,.st-completed{background:rgba(22,163,74,.15);color:#16A34A}
 .st-rejected,.st-cancelled{background:rgba(239,68,68,.15);color:#EF4444}
 .oc-progress{display:flex;justify-content:space-between;margin-top:8px;position:relative}
 .oc-progress::before{content:"";position:absolute;top:9px;left:6px;right:6px;height:2px;background:var(--bd)}
@@ -478,20 +501,87 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 
 <button id="backTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
+<!-- نافذة الدفع وإرسال طلب الشحن المدمجة (خطوتان) -->
 <div id="modal" class="modal"><div class="mb">
-  <div class="mh"><h2>تأكيد عملية الشحن</h2><button class="x" id="mx">×</button></div>
-  <div id="mImgBox"></div>
-  <div class="info"><small>المنتج</small><b id="mProd"></b></div>
-  <div class="disc" id="mDisc"><small>السعر بعد الخصم</small><div class="n" id="mPrice"></div><div class="o" id="mOld"></div></div>
-  <div class="info" style="display:flex;gap:6px;align-items:center">
-    <input id="promoCodeInput" class="in" placeholder="كود الخصم" style="margin:0;font-size:11px">
-    <button class="buy" id="applyPromoBtn" style="width:105px;padding:9px">تطبيق الكود</button>
+  <div class="mh"><h2>💳 إتمام الشحن والدفع</h2><button class="x" id="mx">×</button></div>
+
+  <div class="step-bar">
+    <div class="step-pill on" id="stepTab1">1️⃣ بيانات التحويل</div>
+    <div class="step-pill" id="stepTab2">2️⃣ تأكيد وإيصال الدفع</div>
   </div>
-  <div id="promoFeedback" style="font-size:10px;font-weight:700;margin:-4px 0 8px 4px;min-height:14px"></div>
-  <div class="info" id="mNeedBox"><small id="mNeedLbl"></small><input id="mNeed" class="in" style="margin:6px 0 0" maxlength="40"></div>
-  <div class="info"><small>الدعم الفني</small><button class="copy" data-copy="support">📋 نسخ رقم الدعم</button></div>
-  <div class="info"><small>📸 رفع إيصال التحويل (اختياري)</small><input type="file" id="receiptFile" accept="image/*" style="margin-top:6px;font-size:10px"></div>
-  <button class="order" id="confirm">✅ تأكيد عملية الشحن</button>
+
+  <!-- شريط ملخص الباقة والسعر الثابت -->
+  <div class="pkg-summary-strip">
+    <img id="mThumbImg" src="" alt="" style="display:none">
+    <div class="pkg-summary-info">
+      <small id="payGameTop"></small>
+      <b id="payPkgTop"></b>
+    </div>
+    <div class="pkg-summary-price">
+      <b id="mPrice"></b>
+      <s id="mOld"></s>
+    </div>
+  </div>
+
+  <!-- الخطوة 1: بيانات التحويل -->
+  <div id="payStep1">
+    <div class="pay-box">
+      <div class="pay-row"><span>وسيلة الدفع:</span><b id="payMethodName" style="color:var(--gold)">فودافون كاش</b></div>
+      <div class="pay-row" id="payOwnerRow" style="display:none"><span>صاحب المحفظة:</span><b id="payOwnerName"></b></div>
+      <div class="pay-num-bar">
+        <div>
+          <small style="font-size:9.5px;color:var(--sub);display:block">حوّل إلى رقم فودافون كاش التالي</small>
+          <b id="payNumberDisplay">01044049390</b>
+        </div>
+        <button type="button" class="buy" id="copyPayNumberBtn" style="width:auto;padding:7px 12px">📋 نسخ الرقم</button>
+      </div>
+      <div class="pay-row"><span>المبلغ المطلوب تحويله بالضبط:</span><b id="payExactAmount" style="color:var(--ok);font-size:13.5px"></b></div>
+      <div class="pay-warn">⚠️ يجب تحويل نفس المبلغ المطلوب بالضبط ثم الضغط على «التالي» لرفع صورة الإيصال.</div>
+    </div>
+
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+      <input id="promoCodeInput" class="in" placeholder="كود خصم (اختياري)" style="margin:0;font-size:11px">
+      <button type="button" class="buy" id="applyPromoBtn" style="width:95px;padding:9px">تطبيق</button>
+    </div>
+    <div id="promoFeedback" style="font-size:10px;font-weight:700;margin-bottom:6px;min-height:14px"></div>
+
+    <button type="button" class="order" id="goStep2Btn">التالي: إدخال بياناتي ورفع الإيصال ⬅️</button>
+  </div>
+
+  <!-- الخطوة 2: بيانات العميل + رقم المحوّل منه + الإيصال -->
+  <div id="payStep2" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;background:var(--inner);border:1px solid var(--bd);border-radius:10px;padding:6px 10px;margin-bottom:7px;font-size:10.5px">
+      <span>🆔 حسابك: <b id="payClientIdText" style="color:var(--a);direction:ltr"></b></span>
+      <span>💰 المطلوب: <b id="payStep2AmountText" style="color:var(--ok)"></b></span>
+    </div>
+
+    <div class="info">
+      <small>👤 اسم العميل</small>
+      <input id="payClientName" class="in" style="margin:0" placeholder="اكتب اسمك الكامل" maxlength="60">
+    </div>
+
+    <div class="info" id="mNeedBox">
+      <small id="mNeedLbl">🎯 ايدي اللاعب (Player ID)</small>
+      <input id="mNeed" class="in" style="margin:0" maxlength="50">
+    </div>
+
+    <div class="info">
+      <small>📱 رقم المحفظة / الهاتف الذي حوّلت منه (11 رقم — إجباري)</small>
+      <input id="paySenderPhone" class="in" type="tel" inputmode="numeric" maxlength="11" placeholder="مثال: 010xxxxxxxx" style="margin:0;direction:ltr;text-align:right">
+    </div>
+
+    <div class="info">
+      <small>📸 صورة إيصال التحويل (Screenshot — إجباري)</small>
+      <label for="receiptFile" class="upload-box"><i class="fa-solid fa-cloud-arrow-up"></i> <span id="receiptLabelTxt">اضغط لاختيار صورة إيصال التحويل</span></label>
+      <input type="file" id="receiptFile" accept="image/*" style="display:none">
+      <img id="receiptPreview" class="receipt-preview" alt="معاينة الإيصال">
+    </div>
+
+    <div class="step-actions">
+      <button type="button" class="btn-back" id="backStep1Btn">➡️ رجوع</button>
+      <button type="button" class="order" id="confirm" style="flex:1">🚀 إرسال طلب الشحن</button>
+    </div>
+  </div>
 </div></div>
 
 <div id="supportModal" class="modal"><div class="mb" style="max-width:440px">
@@ -554,7 +644,7 @@ try {
 } catch(e){ console.warn("Firebase init failed:", e); }
 
 const CFG={
-  wa:"201044049390", pay:"01044049390", support:"01017954664",
+  wa:"201044049390", pay:"01044049390", payOwner:"", payMethod:"فودافون كاش", support:"01017954664",
   discount:0.05, storeName:"أسرع من نتكم",
   rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
 };
@@ -577,9 +667,9 @@ const US=[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر 
 const CARDS={google:{n:"Google Play",items:US},itunes:{n:"iTunes",items:US},steam:{n:"Steam",items:[["بطاقة 5$ global",270],["بطاقة 10$ global",525],["بطاقة 20$ global",1040],["بطاقة 50$ global",2580]]}};
 
 const RECH={
-  vodafone:{n:"Vodafone",img:"https://cdn.imagetourls.com/uploads/tyImg/7fiMx3MJ.webp",items:["شحن رصيد Vodafone","شحن كروت فكة Vodafone"]},
-  we:{n:"WE",img:"https://cdn.imagetourls.com/uploads/tyImg/1dDn2rei3.jpg",items:["شحن رصيد WE","شحن كروت فكة WE"]},
-  etisalat:{n:"اتصالات",img:"https://cdn.imagetourls.com/uploads/tyImg/qlv47BMu.jpg",items:["شحن رصيد اتصالات","شحن كروت فكة اتصالات"]}
+  vodafone:{n:"Vodafone",img:"https://cdn.imagetourls.com/uploads/tyImg/7fiMx3MJ.webp",items:[["شحن رصيد Vodafone",30],["شحن كروت فكة Vodafone",25]]},
+  we:{n:"WE",img:"https://cdn.imagetourls.com/uploads/tyImg/1dDn2rei3.jpg",items:[["شحن رصيد WE",30],["شحن كروت فكة WE",25]]},
+  etisalat:{n:"اتصالات",img:"https://cdn.imagetourls.com/uploads/tyImg/qlv47BMu.jpg",items:[["شحن رصيد اتصالات",30],["شحن كروت فكة اتصالات",25]]}
 };
 
 const mk=(a,u,m)=>a.map(v=>[v+" "+u,v*m]);
@@ -592,8 +682,12 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}ca
 let lang=store.get("lang","ar"); if(!["ar","en","ja"].includes(lang)) lang="ar";
 let currency=store.get("currency","ar"); if(!["ar","en","ja"].includes(currency)) currency="ar";
 const fmtPrice=n=>(n*(CFG.rates[currency]||1)).toLocaleString("en",{minimumFractionDigits:currency==="ja"?0:2,maximumFractionDigits:currency==="ja"?0:2});
-let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3000)}
-function copy(txt){const ok=()=>toast("✅ تم النسخ"),fail=()=>{try{const a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){toast("❌ لم يتم النسخ")}};if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok).catch(fail);else fail()}
+let tt;function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(tt);tt=setTimeout(()=>e.style.display="none",3400)}
+function copy(txt, customMsg){
+  const ok=()=>toast(customMsg || "✅ تم النسخ");
+  const fail=()=>{try{const a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){toast("❌ لم يتم النسخ")}};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok).catch(fail);else fail();
+}
 function openWA(text){const u="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(text);try{window.open(u,"_blank","noopener")||(location.href=u)}catch(e){location.href=u}}
 function normSearch(s){return String(s||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim()}
 
@@ -673,6 +767,34 @@ function updateVipUI() {
 }
 
 $("#topupWalletBtn").onclick = ()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥");
+
+function listenPaymentSettings(){
+  if(!firebaseOK || !db) return;
+  db.ref('settings/payment').on('value', s => {
+    const p = s.val();
+    if(p){
+      if(p.number) CFG.pay = String(p.number).trim();
+      if(p.methodName) CFG.payMethod = String(p.methodName).trim();
+      CFG.payOwner = p.ownerName ? String(p.ownerName).trim() : "";
+      refreshPaymentModalUI();
+    }
+  });
+}
+
+function refreshPaymentModalUI(){
+  $("#payMethodName").textContent = CFG.payMethod || "فودافون كاش";
+  $("#payNumberDisplay").textContent = CFG.pay || "01044049390";
+  if(CFG.payOwner){
+    $("#payOwnerRow").style.display = "flex";
+    $("#payOwnerName").textContent = CFG.payOwner;
+  } else {
+    $("#payOwnerRow").style.display = "none";
+  }
+}
+
+$("#copyPayNumberBtn").onclick = ()=>{
+  copy(CFG.pay || "01044049390", "تم نسخ رقم التحويل بنجاح");
+};
 
 function listenMaintenanceMode(){
   if(!firebaseOK || !db) return;
@@ -845,6 +967,7 @@ async function checkRedirectResult() {
       updateUserUI(); 
       renderProfile(); 
       listenWallet();
+      listenOrdersRealtime();
       toast("✅ تم تسجيل الدخول بنجاح");
       requestSystemNotificationPermission();
     }
@@ -861,11 +984,13 @@ if(firebaseOK && auth){
     }
     updateUserUI(); 
     listenWallet(); 
+    listenOrdersRealtime();
     renderProfile(); 
   });
   checkRedirectResult();
 } else {
   listenWallet();
+  listenOrdersRealtime();
 }
 
 $("#loginBtn").onclick = ()=>{ 
@@ -895,7 +1020,7 @@ $("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
 $("#copyProfIdBtn").onclick = ()=>copy(uniqueUid);
 
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
-function renderStats(){ $("#stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الواتساب"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join(""); }
+function renderStats(){ $("#stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الشحن"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join(""); }
 if(!store.get("st_init")){ store.set("st_init","1"); stat.inc("visits"); stat.inc("unique"); }
 
 $("#adminSendBalanceBtn").onclick = ()=>{
@@ -945,63 +1070,95 @@ $("#cartDrawer").onclick = e=>{ if(e.target.id==="cartDrawer") $("#cartDrawer").
 $("#cartCheckout").onclick = ()=>{
   if(!cart.length) return toast("السلة فارغة");
   const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
-  let msg = "🛒 *طلب متعدد*\n━━━━━━━━━━━━━━━\n";
-  cart.forEach((it,i)=>{ msg += `\n${i+1}) ${it.title}\n   الكمية: ${it.qty}\n   السعر: ${fmtPrice(it.price*it.qty)} ${CFG.cur[currency]}\n`; });
-  msg += `\n━━━━━━━━━━━━━━━\n💰 *الإجمالي:* ${fmtPrice(total)} ${CFG.cur[currency]}\n👤 *العميل:* ${store.get("custom_username","")||(user?user.displayName:"")||"زائر"}\n🆔 *ID:* ${uniqueUid}\n⚡ من ${CFG.storeName} 🔥`;
-  
-  const cashbackBonus = total * 0.04;
-  userTotalSpent += total;
-  userPoints += Math.floor(cashbackBonus * 10);
-  store.set("user_total_spent", userTotalSpent);
-  store.set("user_points", userPoints);
-  if(firebaseOK && db && uniqueUid){
-    db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
-    db.ref('users/' + uniqueUid + '/points').set(userPoints);
-  }
-  updateVipUI();
-
-  saveOrder({items:cart, total, status:"pending"});
-  stat.inc("ord"); openWA(msg); cart=[]; saveCart(); renderCart(); $("#cartDrawer").classList.remove("on");
+  const summaryLabel = cart.map(it=>`${it.title} (×${it.qty})`).join(" + ");
+  const firstItem = cart[0] || {};
+  $("#cartDrawer").classList.remove("on");
+  openOrderWithData({
+    title: summaryLabel,
+    gameName: firstItem.gameName || "سلة المشتريات",
+    pkgName: summaryLabel,
+    base: total,
+    need: "id",
+    imgSrc: firstItem.imgSrc || "",
+    isCart: true
+  });
 };
 
 const STATUS_MAP = {
-  pending:{t:"في انتظار الدفع",c:"st-pending"},
-  paid:{t:"تم استلام الدفع",c:"st-paid"},
-  processing:{t:"جاري التنفيذ",c:"st-processing"},
-  done:{t:"تم التنفيذ",c:"st-done"},
-  rejected:{t:"مرفوض",c:"st-rejected"},
-  cancelled:{t:"ملغي",c:"st-cancelled"}
+  awaiting_payment:{t:"🟠 انتظار تأكيد الدفع",c:"st-awaiting_payment",step:0},
+  pending:{t:"🟠 انتظار تأكيد الدفع",c:"st-awaiting_payment",step:0},
+  reviewing:{t:"🔵 جاري مراجعة التحويل",c:"st-reviewing",step:1},
+  paid:{t:"🔵 جاري مراجعة التحويل",c:"st-reviewing",step:1},
+  charging:{t:"🟣 جاري تنفيذ الشحن",c:"st-charging",step:2},
+  processing:{t:"🟣 جاري تنفيذ الشحن",c:"st-charging",step:2},
+  completed:{t:"🟢 تم الشحن بنجاح",c:"st-completed",step:3},
+  done:{t:"🟢 تم الشحن بنجاح",c:"st-completed",step:3},
+  rejected:{t:"🔴 تم رفض الطلب",c:"st-rejected",step:-1},
+  cancelled:{t:"🔴 تم رفض الطلب",c:"st-rejected",step:-1}
 };
-function saveOrder(o){
-  if(!firebaseOK || !db) return;
-  const oid = "REAL-" + Date.now().toString(36).toUpperCase();
-  const userName = store.get("custom_username","") || (user?user.displayName:"زائر");
-  const payload = { items:o.items||[], total:o.total||0, status:o.status||"pending", createdAt:Date.now(), name:userName, email:user?user.email:"" };
-  db.ref('orders/'+uniqueUid+'/'+oid).set(payload).catch(err=>console.warn("Save order:",err));
-  if(db) db.ref('notifications/'+uniqueUid+'/'+oid).set({title:"طلب جديد",body:"تم استلام طلبك برقم "+oid,time:Date.now(),read:false}).catch(()=>{});
+
+let clientOrdersCache = [];
+let lastOrderStatuses = {};
+let isInitialOrdersLoad = true;
+
+function listenOrdersRealtime(){
+  if(!firebaseOK || !db || !uniqueUid) return;
+  db.ref('orders/'+uniqueUid).on('value', s=>{
+    const data = s.val() || {};
+    const arr = Object.entries(data).map(([oid, o])=>({oid, ...o})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+    arr.forEach(o=>{
+      const prevStatus = lastOrderStatuses[o.oid];
+      if(!isInitialOrdersLoad && prevStatus && prevStatus !== o.status){
+        const stObj = STATUS_MAP[o.status] || STATUS_MAP.awaiting_payment;
+        if(o.status === "completed" || o.status === "done"){
+          toast("🎉 تم شحن طلبك بنجاح، نتمنى لك تجربة ممتعة!");
+          playDingSound();
+        } else {
+          toast(`🔔 تحديث حالة الطلب (${o.oid}): ${stObj.t}`);
+          playDingSound();
+        }
+        if("Notification" in window && Notification.permission === "granted"){
+          new Notification("أسرع من نتكم 🔥", {
+            body: (o.status === "completed" || o.status === "done")
+              ? "🎉 تم شحن طلبك بنجاح، نتمنى لك تجربة ممتعة!"
+              : `تم تحديث حالة طلبك (${o.oid}) إلى: ${stObj.t}`,
+            icon: "https://www.image2url.com/r2/default/images/1790757615223-4a6d683c-74eb-42ea-88c5-9c835df1047e.png"
+          });
+        }
+      }
+      lastOrderStatuses[o.oid] = o.status;
+    });
+    isInitialOrdersLoad = false;
+    clientOrdersCache = arr;
+    if($("#orders") && $("#orders").classList.contains("on")) renderOrders();
+  });
 }
 
 function renderOrders(){
   const box = $("#ordersList");
   if(!firebaseOK || !db){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">سجّل دخولك لعرض طلباتك (يتطلب Firebase)</p>'; return; }
-  box.innerHTML = '<p class="sub" style="text-align:center;padding:10px">جاري التحميل...</p>';
-  db.ref('orders/'+uniqueUid).once('value').then(s=>{
-    const data = s.val() || {};
-    const arr = Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-    if(!arr.length){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">لا توجد طلبات</p>'; return; }
-    box.innerHTML = arr.map(([oid,o])=>{
-      const st = STATUS_MAP[o.status]||STATUS_MAP.pending;
-      const steps = ["pending","paid","processing","done"];
-      const idx = steps.indexOf(o.status);
-      return `<div class="order-card">
-        <div class="oc-top"><b>${esc(oid)}</b><span class="status-pill ${st.c}">${st.t}</span></div>
-        <small>${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
-        <div style="margin:6px 0">${(o.items||[]).map(it=>`<div style="font-size:11px">• ${esc(it.title)} ×${it.qty||1}</div>`).join("")}</div>
-        <b style="color:var(--gold);font-size:13px">${fmtPrice(o.total||0)} ${CFG.cur[currency]}</b>
-        <div class="oc-progress">${steps.map((s,i)=>`<div class="oc-dot ${i<=idx?'on':''}">${i<=idx?'✓':''}</div>`).join("")}</div>
-      </div>`;
-    }).join("");
-  }).catch(err=>{ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">خطأ: '+esc(err.message)+'</p>'; });
+  const arr = clientOrdersCache;
+  if(!arr.length){ box.innerHTML = '<p class="sub" style="text-align:center;padding:20px">لا توجد طلبات حتى الآن</p>'; return; }
+  box.innerHTML = arr.map(o=>{
+    const st = STATUS_MAP[o.status] || STATUS_MAP.awaiting_payment;
+    const steps = ["awaiting_payment","reviewing","charging","completed"];
+    const idx = st.step;
+    const isDone = o.status === "completed" || o.status === "done";
+    return `<div class="order-card">
+      <div class="oc-top"><b>#${esc(o.oid)}</b><span class="status-pill ${st.c}">${st.t}</span></div>
+      <small>${esc(o.createdAtText || new Date(o.createdAt||Date.now()).toLocaleString('ar-EG'))}</small>
+      <div style="margin:6px 0;font-size:11px;line-height:1.6">
+        ${o.gameName ? `<div>🎮 <b>اللعبة:</b> ${esc(o.gameName)}</div>` : ''}
+        ${o.pkgName ? `<div>📦 <b>الباقة:</b> ${esc(o.pkgName)}</div>` : ''}
+        ${o.playerId ? `<div>🆔 <b>بيانات الشحن:</b> <span style="direction:ltr;display:inline-block">${esc(o.playerId)}</span></div>` : ''}
+        ${o.senderPhone ? `<div>📱 <b>رقم التحويل المرسل منه:</b> <span style="direction:ltr;display:inline-block">${esc(o.senderPhone)}</span></div>` : ''}
+        ${!o.gameName && Array.isArray(o.items) ? o.items.map(it=>`<div>• ${esc(it.title)} ×${it.qty||1}</div>`).join("") : ''}
+      </div>
+      <b style="color:var(--gold);font-size:13px">${fmtPrice(o.price || o.total || 0)} ${CFG.cur[currency]}</b>
+      ${isDone ? `<div style="margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(22,163,74,.14);border:1px solid rgba(22,163,74,.35);color:var(--ok);font-size:11px;font-weight:800">🎉 تم شحن طلبك بنجاح، نتمنى لك تجربة ممتعة!</div>` : ''}
+      <div class="oc-progress">${steps.map((s,i)=>`<div class="oc-dot ${idx>=0 && i<=idx?'on':''}">${idx>=0 && i<=idx?'✓':''}</div>`).join("")}</div>
+    </div>`;
+  }).join("");
 }
 
 let notifs = [];
@@ -1048,9 +1205,9 @@ function renderFavs(){
 }
 
 const REG=[];
-function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc){
+function productCard(title,label,base,need,iconHtml,qtyMode,imgSrc,gameName,pkgName){
   imgSrc = imgSrc || '';
-  const i = REG.push({title,label,base,need,imgSrc}) - 1;
+  const i = REG.push({title,label,base,need,imgSrc,gameName:gameName||title,pkgName:pkgName||label}) - 1;
   const price = base==null ? "" : `<div class="pp"><small>${qtyMode?"الكمية":"السعر"}</small><span>${qtyMode?base.toLocaleString("en"):fmtPrice(base)} <small>${qtyMode?"كوين":CFG.cur[currency]}</small></span></div>`;
   const imgTag = imgSrc ? `<img src="${imgSrc}" alt="" style="width:100%;height:120px;object-fit:contain;background:var(--card);border-radius:10px;margin-bottom:6px;padding:4px" loading="lazy">` : '';
   const isFav = favs.includes(title);
@@ -1079,8 +1236,8 @@ function renderPackages(id){
   const g = GAMES[id];
   const ic = ICON[id] ? `<img src="${ICON[id]}" alt="" loading="lazy">` : '<i class="fa-solid fa-coins"></i>';
   $("#pk-"+id).innerHTML = '<div class="grid">' + g.items.map(item=>{
-    const l = item[0], p = item[1], im = item[2]||'';
-    return productCard(g.n+" - "+l, l, p, g.noid?null:"id", ic, false, im);
+    const l = item[0], p = item[1], im = item[2]||imgUrl(g.img);
+    return productCard(g.n+" - "+l, l, p, g.noid?null:"id", ic, false, im, g.n, l);
   }).join("") + "</div>";
 }
 function togglePk(id){
@@ -1128,9 +1285,9 @@ function subtabs(sec,data,render,def){
   render(cur);
 }
 const R={
-  cards:k=>{ $("#out-cards").innerHTML = '<div class="grid">' + CARDS[k].items.map(([l,p])=>productCard(CARDS[k].n+" - "+l, l, p, null, '', false)).join("") + "</div>"; },
-  recharge:k=>{ $("#out-recharge").innerHTML = '<div class="grid">' + RECH[k].items.map(l=>productCard(l, l, null, "phone", '', false, RECH[k].img)).join("") + "</div>"; },
-  shabab:k=>{ $("#out-shabab").innerHTML = '<div class="grid">' + SHAB[k].items.map(([l,p])=>productCard("شباب كونات - "+l, l, p, "id", '', true)).join("") + "</div>"; }
+  cards:k=>{ $("#out-cards").innerHTML = '<div class="grid">' + CARDS[k].items.map(([l,p])=>productCard(CARDS[k].n+" - "+l, l, p, null, '', false, '', "بطاقات "+CARDS[k].n, l)).join("") + "</div>"; },
+  recharge:k=>{ $("#out-recharge").innerHTML = '<div class="grid">' + RECH[k].items.map(([l,p])=>productCard("شحن "+RECH[k].n+" - "+l, l, p, "phone", '', false, RECH[k].img, "شحن "+RECH[k].n, l)).join("") + "</div>"; },
+  shabab:k=>{ $("#out-shabab").innerHTML = '<div class="grid">' + SHAB[k].items.map(([l,p])=>productCard("شباب كونات "+SHAB[k].n+" - "+l, l, p, "id", '', true, '', "شباب كونات "+SHAB[k].n, l)).join("") + "</div>"; }
 };
 const SRC = { cards:[CARDS,"google"], recharge:[RECH,"vodafone"], shabab:[SHAB,"eg"] };
 function renderSubs(){ for(const s in SRC) subtabs(s, SRC[s][0], R[s], SRC[s][1]); }
@@ -1168,56 +1325,135 @@ function renderAdminOrders(){
     if(!flat.length){ $("#adminOrders").innerHTML='<p class="sub" style="padding:10px">لا توجد طلبات</p>'; return; }
     $("#adminOrders").innerHTML = flat.slice(0,20).map(o=>`
       <div class="order-card">
-        <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
+        <div class="oc-top"><b>${esc(o.oid)}</b><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.awaiting_payment).c}">${(STATUS_MAP[o.status]||STATUS_MAP.awaiting_payment).t}</span></div>
         <small>${esc(o.uid)} • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
-        <div style="font-size:11px;margin:4px 0">${(o.items||[]).map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")}</div>
-        <b style="color:var(--gold)">${fmtPrice(o.total||0)} ${CFG.cur[currency]}</b>
-        <select onchange="setOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" style="width:100%;margin-top:6px;padding:6px;border-radius:8px;background:var(--inner);border:1px solid var(--bd);color:var(--tx);font-size:11px">
-          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
-        </select>
+        <div style="font-size:11px;margin:4px 0">${esc(o.gameName||"")} - ${esc(o.pkgName||"")}</div>
+        <b style="color:var(--gold)">${fmtPrice(o.price||o.total||0)} ${CFG.cur[currency]}</b>
       </div>`).join("");
   }).catch(err=>{ $("#adminOrders").innerHTML = '<p class="sub">'+esc(err.message)+'</p>'; });
 }
-window.setOrderStatus = function(uid, oid, status){
-  if(!firebaseOK || !db) return;
-  db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('status_'+Date.now())).set({title:"تحديث حالة الطلب",body:"تم تغيير حالة الطلب "+oid+" إلى: "+(STATUS_MAP[status]||{}).t,time:Date.now(),read:false}).catch(()=>{});
-    toast("✅ تم تحديث الحالة");
-    renderAdminOrders();
-  }).catch(err=>toast("❌ " + err.message));
-};
 
-let sel=null, activeDiscount = CFG.discount, appliedPromoCode="";
+let sel=null, activeDiscount = CFG.discount, appliedPromoCode="", receiptBase64="", isSubmittingOrder=false;
+
+function switchPayStep(step){
+  const isS1 = step === 1;
+  $("#payStep1").style.display = isS1 ? "block" : "none";
+  $("#payStep2").style.display = isS1 ? "none" : "block";
+  $("#stepTab1").classList.toggle("on", isS1);
+  $("#stepTab2").classList.toggle("on", !isS1);
+}
+$("#stepTab1").onclick = ()=>switchPayStep(1);
+$("#stepTab2").onclick = ()=>switchPayStep(2);
+$("#goStep2Btn").onclick = ()=>switchPayStep(2);
+$("#backStep1Btn").onclick = ()=>switchPayStep(1);
+
 function openOrder(i){
-  sel = REG[i]; if(!sel) return;
-  const hasP = sel.base != null;
-  $("#mProd").textContent = sel.title;
-  $("#mImgBox").innerHTML = sel.imgSrc ? `<img src="${sel.imgSrc}" alt="" class="modal-pimg" style="width:75px;height:75px;object-fit:contain;background:var(--card);border-radius:14px;border:2px solid var(--bd2);margin:0 auto 8px;display:block;padding:2px" loading="lazy">` : "";
-  $("#mDisc").style.display = hasP ? "block" : "none";
-  activeDiscount = CFG.discount; appliedPromoCode = "";
-  $("#promoCodeInput").value = ""; $("#promoFeedback").textContent = "";
-  updateModalPrice();
+  const item = REG[i]; if(!item) return;
+  openOrderWithData(item);
+}
+
+function openOrderWithData(item){
+  sel = {...item};
+  if(sel.base == null) sel.base = 30;
+  refreshPaymentModalUI();
+
+  const thumb = $("#mThumbImg");
+  if(sel.imgSrc){
+    thumb.src = sel.imgSrc;
+    thumb.style.display = "block";
+  } else {
+    thumb.src = "";
+    thumb.style.display = "none";
+  }
+
+  activeDiscount = CFG.discount;
+  appliedPromoCode = "";
+  receiptBase64 = "";
+  isSubmittingOrder = false;
+  $("#confirm").disabled = false;
+  $("#promoCodeInput").value = "";
+  $("#promoFeedback").textContent = "";
+  $("#receiptFile").value = "";
+  $("#receiptLabelTxt").textContent = "اضغط لاختيار صورة إيصال التحويل";
+  const prev = $("#receiptPreview");
+  prev.src = "";
+  prev.style.display = "none";
+
+  $("#payGameTop").textContent = sel.gameName || sel.title;
+  $("#payPkgTop").textContent = sel.pkgName || sel.label || sel.title;
+  $("#payClientIdText").textContent = uniqueUid;
+  $("#payClientName").value = store.get("custom_username","") || (user?user.displayName:"") || "";
+  $("#paySenderPhone").value = store.get("lastSenderPhone","") || "";
+
   $("#mNeedBox").style.display = sel.need ? "block" : "none";
-  $("#mNeedLbl").textContent = sel.need === "phone" ? "رقم الهاتف المراد شحنه" : "ايدي اللاعب (Player ID)";
+  $("#mNeedLbl").textContent = sel.need === "phone" ? "📞 رقم الهاتف المراد شحنه" : "🎯 ايدي اللاعب (Player ID)";
+  $("#mNeed").placeholder = sel.need === "phone" ? "أدخل رقم الهاتف المراد شحنه" : "أدخل ايدي الحساب بدقة";
   $("#mNeed").value = sel.need === "id" ? store.get("lastId","") : "";
+
   $("#mNeed").classList.remove("err");
+  $("#payClientName").classList.remove("err");
+  $("#paySenderPhone").classList.remove("err");
+
+  updateModalPrice();
+  switchPayStep(1);
   $("#modal").classList.add("on");
 }
-function updateModalPrice(){
-  if(sel.base == null) return;
-  const finalPrice = sel.base * (1 - activeDiscount);
-  $("#mPrice").textContent = fmtPrice(finalPrice) + " " + CFG.cur[currency];
-  $("#mOld").textContent = "السعر الأصلي: " + fmtPrice(sel.base) + " " + CFG.cur[currency];
-  $("#mOld").style.display = "block";
+
+function getFinalAmountRaw(){
+  return Number((sel.base * (1 - activeDiscount)).toFixed(2));
 }
+
+function updateModalPrice(){
+  if(!sel || sel.base == null) return;
+  const finalPrice = getFinalAmountRaw();
+  const formatted = fmtPrice(finalPrice) + " " + CFG.cur[currency];
+  $("#mPrice").textContent = formatted;
+  $("#mOld").textContent = fmtPrice(sel.base) + " " + CFG.cur[currency];
+  $("#payExactAmount").textContent = formatted;
+  $("#payStep2AmountText").textContent = formatted;
+}
+
+$("#receiptFile").onchange = function(e){
+  const file = e.target.files && e.target.files[0];
+  const prev = $("#receiptPreview");
+  receiptBase64 = "";
+  if(!file){
+    prev.src=""; prev.style.display="none";
+    $("#receiptLabelTxt").textContent = "اضغط لاختيار صورة إيصال التحويل";
+    return;
+  }
+  if(!file.type.startsWith("image/")){
+    toast("⚠️ يرجى اختيار صورة صحيحة للإيصال");
+    this.value = "";
+    prev.style.display = "none";
+    return;
+  }
+  if(file.size > 4 * 1024 * 1024){
+    toast("⚠️ حجم الصورة كبير جدًا (الحد الأقصى 4 ميجابايت)");
+    this.value = "";
+    prev.style.display = "none";
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    receiptBase64 = ev.target.result;
+    prev.src = receiptBase64;
+    prev.style.display = "block";
+    $("#receiptLabelTxt").textContent = "✅ تم إرفاق صورة الإيصال (اضغط للتغيير)";
+    toast("✅ تم تحميل صورة الإيصال");
+  };
+  reader.readAsDataURL(file);
+};
+
 $("#applyPromoBtn").onclick = ()=>{
   const code = $("#promoCodeInput").value.trim().toUpperCase();
   const fb = $("#promoFeedback");
-  
+  if(!code){ fb.style.color="#EF4444"; fb.textContent="❌ أدخل كود الخصم أولاً"; return; }
+
   if(!firebaseOK || !db){
     if(code === "BESO47"){ activeDiscount = 0.01; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
     else if(code === "BESO41O" || code === "BESO410"){ activeDiscount = 0.10; appliedPromoCode = code; updateModalPrice(); fb.style.color="var(--ok)"; fb.textContent="✅ تم تفعيل كود الخصم"; toast("🎉 تم تفعيل الخصم"); }
-    else { fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح"; }
+    else { activeDiscount = CFG.discount; appliedPromoCode = ""; updateModalPrice(); fb.style.color="#EF4444"; fb.textContent="❌ كود غير صحيح"; }
     return;
   }
 
@@ -1244,42 +1480,118 @@ $("#applyPromoBtn").onclick = ()=>{
     }
   });
 };
+
 const closeModal = ()=>$("#modal").classList.remove("on");
 $("#mx").onclick = closeModal;
 $("#modal").onclick = e=>{ if(e.target.id==="modal") closeModal(); };
 
 $("#confirm").onclick = ()=>{
-  if(!sel) return;
+  if(!sel || isSubmittingOrder) return;
+  const clientName = $("#payClientName").value.trim();
   const need = $("#mNeed").value.trim();
-  if(sel.need && need.length < 3){ $("#mNeed").classList.add("err"); $("#mNeed").focus(); toast("⚠️ أدخل البيانات المطلوبة"); return; }
-  const finalPrice = sel.base != null ? sel.base * (1 - activeDiscount) : 0;
-  const priceTxt = sel.base != null ? fmtPrice(finalPrice) + " " + CFG.cur[currency] : "";
-  const userName = store.get("custom_username","") || (user?user.displayName:"") || "زائر";
-  let msg = "🛒 *طلب شحن جديد*\n━━━━━━━━━━━━━━━\n";
-  msg += "🎮 *المنتج:* "+sel.title+"\n";
-  if(priceTxt) msg += "💰 *السعر:* "+priceTxt+"\n";
-  if(appliedPromoCode) msg += "🏷️ *كود:* "+appliedPromoCode+"\n";
-  if(sel.need) msg += "🆔 *البيانات:* "+need+"\n";
-  msg += "👤 *العميل:* "+userName+"\n";
-  msg += "🔑 *ID:* "+uniqueUid+"\n";
-  msg += "━━━━━━━━━━━━━━━\n⚡ من "+CFG.storeName+" 🔥";
+  const senderPhone = $("#paySenderPhone").value.trim().replace(/\s+/g, "");
 
-  if(finalPrice > 0){
-    const cashbackBonus = finalPrice * 0.04;
-    userTotalSpent += finalPrice;
-    userPoints += Math.floor(cashbackBonus * 10);
-    store.set("user_total_spent", userTotalSpent);
-    store.set("user_points", userPoints);
-    if(firebaseOK && db && uniqueUid){
-      db.ref('users/' + uniqueUid + '/totalSpent').set(userTotalSpent);
-      db.ref('users/' + uniqueUid + '/points').set(userPoints);
-    }
-    updateVipUI();
+  if(!clientName){
+    $("#payClientName").classList.add("err");
+    $("#payClientName").focus();
+    toast("⚠️ يرجى إدخال اسم العميل");
+    return;
+  }
+  $("#payClientName").classList.remove("err");
+
+  if(sel.need && need.length < 3){
+    $("#mNeed").classList.add("err");
+    $("#mNeed").focus();
+    toast("⚠️ يرجى إدخال بيانات الشحن المطلوبة");
+    return;
+  }
+  $("#mNeed").classList.remove("err");
+
+  if(!/^01[0125][0-9]{8}$/.test(senderPhone)){
+    $("#paySenderPhone").classList.add("err");
+    $("#paySenderPhone").focus();
+    toast("⚠️ أدخل رقم المحفظة المحوّل منها بشكل صحيح (11 رقم)");
+    return;
+  }
+  $("#paySenderPhone").classList.remove("err");
+
+  if(!receiptBase64){
+    toast("⚠️ يجب رفع صورة إيصال التحويل أولاً قبل إرسال الطلب");
+    return;
   }
 
-  saveOrder({items:[{title:sel.title, qty:1, price:finalPrice}], total:finalPrice, status:"pending"});
-  if(sel.need === "id") store.set("lastId", need);
-  stat.inc("ord"); openWA(msg); closeModal();
+  if(!firebaseOK || !db){
+    toast("❌ تعذر الاتصال بقاعدة البيانات، يرجى المحاولة لاحقًا");
+    return;
+  }
+
+  isSubmittingOrder = true;
+  $("#confirm").disabled = true;
+
+  const finalPrice = getFinalAmountRaw();
+  const formattedPrice = fmtPrice(finalPrice) + " " + CFG.cur[currency];
+  const orderId = "REAL-" + Date.now().toString(36).toUpperCase();
+  const nowDate = new Date();
+  const dateText = nowDate.toLocaleString("ar-EG");
+
+  const orderPayload = {
+    orderId: orderId,
+    clientId: uniqueUid,
+    uid: uniqueUid,
+    clientName: clientName,
+    name: clientName,
+    email: user ? user.email : "",
+    gameName: sel.gameName || sel.title,
+    pkgName: sel.pkgName || sel.label || sel.title,
+    price: finalPrice,
+    total: finalPrice,
+    priceFormatted: formattedPrice,
+    transferNumber: CFG.pay,
+    senderPhone: senderPhone,
+    paymentMethod: CFG.payMethod || "فودافون كاش",
+    playerId: need || "",
+    promoCode: appliedPromoCode || "",
+    receiptImage: receiptBase64,
+    createdAt: Date.now(),
+    createdAtText: dateText,
+    status: "awaiting_payment",
+    statusLabel: "🟠 في انتظار مراجعة الدفع",
+    items: sel.isCart ? cart : [{title: sel.title, qty: 1, price: finalPrice}]
+  };
+
+  db.ref("orders/" + uniqueUid + "/" + orderId).set(orderPayload).then(()=>{
+    if(finalPrice > 0){
+      const cashbackBonus = finalPrice * 0.04;
+      userTotalSpent += finalPrice;
+      userPoints += Math.floor(cashbackBonus * 10);
+      store.set("user_total_spent", userTotalSpent);
+      store.set("user_points", userPoints);
+      db.ref("users/" + uniqueUid + "/totalSpent").set(userTotalSpent).catch(()=>{});
+      db.ref("users/" + uniqueUid + "/points").set(userPoints).catch(()=>{});
+      updateVipUI();
+    }
+
+    store.set("lastSenderPhone", senderPhone);
+    if(sel.need === "id") store.set("lastId", need);
+    if(sel.isCart){ cart = []; saveCart(); renderCart(); }
+    stat.inc("ord");
+
+    db.ref("notifications/" + uniqueUid + "/" + orderId).set({
+      title: "تم استلام طلب الشحن #" + orderId,
+      body: `الطلب (${orderPayload.pkgName}) بقيمة ${formattedPrice} قيد المراجعة الآن.`,
+      time: Date.now(),
+      read: false
+    }).catch(()=>{});
+
+    toast("✅ تم إرسال طلب الشحن بنجاح وجاري مراجعة الدفع");
+    closeModal();
+    showSec("orders");
+    renderOrders();
+  }).catch(err=>{
+    isSubmittingOrder = false;
+    $("#confirm").disabled = false;
+    toast("❌ حدث خطأ أثناء إرسال الطلب: " + err.message);
+  });
 };
 
 $("#sendReq").onclick = ()=>{
@@ -1349,7 +1661,7 @@ const PAGES = {
   privacy:{title:"سياسة الخصوصية", body:`<h4>جمع البيانات</h4><p>نحتفظ فقط بالبيانات الضرورية لتنفيذ طلبك (الاسم، البريد، رقم الهاتف، Player ID).</p><h4>استخدام البيانات</h4><p>تُستخدم بياناتك حصراً لتنفيذ الطلبات وتحسين الخدمة. لا نشاركها مع أي طرف ثالث.</p><h4>حقوقك</h4><p>يمكنك طلب حذف بياناتك في أي وقت عبر الدعم الفني.</p>`},
   terms:{title:"شروط الاستخدام", body:`<h4>الاستخدام</h4><p>باستخدامك للمتجر فأنت توافق على تقديم بيانات دقيقة وصحيحة.</p><h4>الطلبات</h4><p>الطلبات غير قابلة للاسترداد بعد تنفيذ الشحن. يتم الالتزام بأسعار الباقات المنشورة.</p><h4>المسؤولية</h4><p>المتجر غير مسؤول عن أي مشاكل ناتجة عن بيانات خاطئة أدخلها العميل.</p>`},
   refund:{title:"سياسة الاسترجاع", body:`<h4>قبل التنفيذ</h4><p>يمكنك إلغاء الطلب واسترداد المبلغ كاملاً قبل بدء التنفيذ.</p><h4>بعد التنفيذ</h4><p>لا يمكن الاسترجاع بعد شحن الباقة بنجاح على الحساب.</p><h4>حالات خاصة</h4><p>في حال فشل الشحن بسبب خطأ من المتجر، سيتم الاسترداد كاملاً أو إعادة الشحن مجاناً.</p>`},
-  faq:{title:"الأسئلة الشائعة", body:`<details class="faq-item" open><summary>كيف أطلب؟</summary><p>اختر اللعبة → الباقة → أدخل Player ID → ادفع عبر فودافون كاش → أرسل الإيصال على واتساب.</p></details><details class="faq-item"><summary>مدة التنفيذ؟</summary><p>عادة 5-15 دقيقة بعد تأكيد الدفع.</p></details><details class="faq-item"><summary>طرق الدفع؟</summary><p>فودافون كاش حالياً (InstaPay والمحافظ الإلكترونية قريباً).</p></details><details class="faq-item"><summary>ماذا لو أخطأت في Player ID؟</summary><p>تواصل فوراً مع الدعم قبل بدء التنفيذ.</p></details>`}
+  faq:{title:"الأسئلة الشائعة", body:`<details class="faq-item" open><summary>كيف أطلب؟</summary><p>اختر اللعبة → الباقة → حوّل المبلغ عبر فودافون كاش → اكتب رقمك المحوّل منه وارفع صورة الإيصال وأرسل الطلب.</p></details><details class="faq-item"><summary>مدة التنفيذ؟</summary><p>عادة 5-15 دقيقة بعد تأكيد الدفع.</p></details><details class="faq-item"><summary>طرق الدفع؟</summary><p>فودافون كاش حالياً (InstaPay والمحافظ الإلكترونية قريباً).</p></details><details class="faq-item"><summary>ماذا لو أخطأت في Player ID؟</summary><p>تواصل فوراً مع الدعم عبر تذاكر الدعم الفني قبل بدء التنفيذ.</p></details>`}
 };
 function openAbout(key){
   const p = PAGES[key] || PAGES.about;
@@ -1367,9 +1679,8 @@ function applyLang(){
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   $$(".lang-btn[data-lang]").forEach(b=>b.classList.toggle("on", b.dataset.lang === lang));
   $("#soonGrid").innerHTML = SOON.map(([ic,n])=>`<div class="sc"><i class="${ic}"></i><h3>${esc(n)}</h3><p>قريباً</p></div>`).join("");
-  renderTabs(); renderGames(); renderSubs(); renderStats(); renderHomeSections();
   REG.length = 0; 
-  renderHomeSections(); renderGames(); renderSubs();
+  renderTabs(); renderHomeSections(); renderGames(); renderSubs(); renderStats();
   renderFavs();
 }
 function setTheme(m){
@@ -1391,7 +1702,8 @@ $$("#currencySelector .lang-btn").forEach(b=>{
   b.onclick = ()=>{
     currency = b.dataset.cur; store.set("currency", currency);
     $$("#currencySelector .lang-btn").forEach(x=>x.classList.toggle("on", x === b));
-    renderGames(); renderSubs(); updateWalletUI(); renderFavs();
+    REG.length = 0;
+    renderHomeSections(); renderGames(); renderSubs(); updateWalletUI(); renderFavs();
     toast("💱 تم تغيير العملة");
   };
 });
@@ -1437,12 +1749,12 @@ $("#trackBtn").onclick = ()=>{
     let found = null;
     Object.entries(data).forEach(([uid,orders])=>{ if(orders && orders[oid]) found = {uid, order:orders[oid]}; });
     if(!found){ $("#trackResult").innerHTML='<p class="sub">❌ لم يتم العثور على الطلب</p>'; return; }
-    const st = STATUS_MAP[found.order.status]||STATUS_MAP.pending;
+    const st = STATUS_MAP[found.order.status]||STATUS_MAP.awaiting_payment;
     $("#trackResult").innerHTML = `<div class="order-card">
       <div class="oc-top"><b>${esc(oid)}</b><span class="status-pill ${st.c}">${st.t}</span></div>
       <small>${new Date(found.order.createdAt||Date.now()).toLocaleString('ar-EG')}</small>
-      <div style="font-size:11px;margin:4px 0">${(found.order.items||[]).map(it=>`• ${esc(it.title)}`).join("<br>")}</div>
-      <b style="color:var(--gold)">${fmtPrice(found.order.total||0)} ${CFG.cur[currency]}</b>
+      <div style="font-size:11px;margin:4px 0">${esc(found.order.gameName||"")} - ${esc(found.order.pkgName||"")}</div>
+      <b style="color:var(--gold)">${fmtPrice(found.order.price||found.order.total||0)} ${CFG.cur[currency]}</b>
     </div>`;
   }).catch(err=>{ $("#trackResult").innerHTML='<p class="sub">'+esc(err.message)+'</p>'; });
 };
@@ -1508,6 +1820,7 @@ function listenGamePrices(){
           GAMES[id].items = customPrices[id];
         }
       }
+      REG.length = 0;
       renderGames();
       renderHomeSections();
     } else {
@@ -1520,6 +1833,7 @@ function listenGamePrices(){
             }
           }
         }
+        REG.length = 0;
         renderGames();
         renderHomeSections();
       });
@@ -1544,8 +1858,8 @@ setInterval(()=>{
 }, 4000);
 
 const KB = [
-  {k:["ازاي اطلب","كيف اطلب","الشراء"],a:"اختر اللعبة، اضغط عرض الباقات، ثم شراء، وأدخل الـ ID الخاص بك لفتح واتساب بالطلب."},
-  {k:["فودافون كاش","الدفع","ادفع ازاي"],a:"الدفع يتم عن طريق التحويل لرقم فودافون كاش الخاص بالمتجر المعروض في قسم الشحن."},
+  {k:["ازاي اطلب","كيف اطلب","الشراء"],a:"اختر اللعبة، اضغط عرض الباقات، ثم شراء الآن، وحوّل المبلغ المطلوب إلى فودافون كاش واكتب رقمك المحوّل منه وارفع صورة الإيصال داخل الموقع."},
+  {k:["فودافون كاش","الدفع","ادفع ازاي"],a:"الدفع يتم عبر فودافون كاش برقم التحويل المعروض في نافذة الدفع، ثم إدخال رقم المحفظة المحوّل منها ورفع صورة الإيصال ومتابعة الطلب من صفحة طلباتي."},
   {k:["الوقت","التسليم","كام بتاخد وقت"],a:"التسليم فوري وصاروخي خلال 5 إلى 15 دقيقة بعد تأكيد التحويل."},
   {k:["من أنت","من صاحب","المتجر"],a:"أنا «ذكي» مساعد متجر أسرع من نتكم 🔥."}
 ];
@@ -1565,7 +1879,7 @@ $("#botForm").onsubmit = e=>{
   const bm = $("#botMsgs");
   bm.innerHTML += `<div class="bm u">${esc(txt)}</div>`;
   setTimeout(()=>{
-    let ans = "مفهمتش سؤالك كويس، يمكنك التواصل مع الدعم الفني مباشرة عبر الواتساب.";
+    let ans = "مفهمتش سؤالك كويس، يمكنك إرسال تذكرة دعم فني مباشرة من القائمة.";
     const found = KB.find(k=>k.k.some(w=>txt.includes(w)));
     if(found) ans = found.a;
     bm.innerHTML += `<div class="bm b">${esc(ans)}</div>`;
@@ -1586,6 +1900,8 @@ $("#backTop").onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
 
 setTheme(store.get("theme", "light"));
 applyLang();
+refreshPaymentModalUI();
+listenPaymentSettings();
 listenHeroBanners();
 listenGamePrices();
 startOfferTimer();
