@@ -47,7 +47,7 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .gi img{width:84px;height:84px;object-fit:cover;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:#0B1020;position:relative;z-index:2}
 .gi .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.6);filter:blur(16px) saturate(1.5);opacity:.38;border:0;border-radius:0;z-index:0}
 .gn{padding:10px 12px}
-.gn b{display:block;font-size:12px;color:#fff}.gn small{display:block;color:#94a3b8;font-size:9.5px;margin:2px 0 8px;font-weight:600}
+.gc{border-color:var(--gl,rgba(56,189,248,.20))}.gbd{position:absolute;top:8px;inset-inline-start:8px;z-index:3;font-size:9px;font-weight:900;padding:2px 8px;border-radius:99px;color:#fff;margin-bottom:3px}.gbd.n{background:#10B981}.gbd.h{background:#EF4444;top:30px}.gbd.n:only-of-type{top:8px}.gds{display:-webkit-box;font-style:normal;color:#cbd5e1;font-size:9.5px;margin:-4px 0 8px;line-height:1.5;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.gn b{display:block;font-size:12px;color:#fff}.gn small{display:block;color:#94a3b8;font-size:9.5px;margin:2px 0 8px;font-weight:600}
 .open-b{width:100%;background:var(--g1);color:#fff;padding:8px;border-radius:10px;font-weight:800;font-size:10.5px}
 .pk{display:none;margin-top:8px;background:var(--inner);border:1px solid var(--bd2);border-radius:16px;padding:10px}
 .gw.open .pk{display:block;animation:fi .3s}
@@ -649,7 +649,8 @@ const CFG={
   rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
 };
 const IMG="https://www.image2url.com/r2/default/images/";
-const imgUrl=u=>u.startsWith("http")?u:IMG+u;
+const DEF_IMG=IMG+"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp";
+const imgUrl=u=>{u=String(u||"").trim();if(!u)return DEF_IMG;return /^(https?:\/\/|data:image\/|\/\/)/i.test(u)?u:IMG+u};
 const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.jpg",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 
 let GAMES={
@@ -663,6 +664,8 @@ let GAMES={
  weplay:{n:"WePlay",k:"وي بلاي",img:"1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg",gl:"#EC4899",items:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]]},
  roblox:{noid:1,n:"Roblox",k:"روبلوكس",img:"1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png",gl:"#EF4444",items:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]}
 };
+const BASE_META={pubg:{cat:"أكشن وباتل رويال",desc:"شحن شدات ببجي موبايل الفوري على ID",isHot:1},mlbb:{cat:"موبا واستراتيجية",desc:"شحن جواهر موبايل ليجند بأسرع وقت",isHot:1},ff:{cat:"أكشن وباتل رويال",desc:"شحن جواهر فري فاير رسمي وفوري",isHot:1},arena:{cat:"أكشن وباتل رويال",desc:"شحن بوندز وتذاكر المعركة لارينا بريك اوت",isNew:1},yalla:{cat:"ألعاب جماعية وترفيه",desc:"شحن ذهب و VIP يلا لودو فوري"},tiktok:{cat:"تطبيقات وبث مباشر",desc:"شحن عملات تيك توك بأفضل الأسعار"},gangstar:{cat:"أكشن وعالم مفتوح",desc:"شحن ماسات جانجستر فيغاس مباشرة"},weplay:{cat:"ألعاب جماعية وترفيه",desc:"شحن ذهب وبطاقات وي بلاي بسهولة"},roblox:{cat:"إبداع ومغامرات",desc:"شحن روبوكس وباقات روبلوكس المتنوعة"}};
+Object.keys(GAMES).forEach((id,i)=>{Object.assign(GAMES[id],BASE_META[id]||{},{order:i+1})});
 const BASE_GAMES=JSON.parse(JSON.stringify(GAMES));
 let catalogGamesRaw={}, globalGamesPrices={}, userGamesPrices={};
 const US=[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]];
@@ -1225,12 +1228,13 @@ document.addEventListener("click", e=>{
 
 function renderGames(){
   $("#gameGrid").innerHTML = Object.entries(GAMES).map(([id,g])=>{
-    const src = imgUrl(g.img);
-    return `<div class="gw" id="w-${id}" data-name="${esc((g.n+" "+g.k).toLowerCase())}">
-    <div class="gc"><div class="gi"><img class="ghost" alt="" loading="lazy" src="${src}"><img loading="lazy" width="84" height="84" alt="${esc(g.n)}" src="${src}" onerror="this.style.visibility='hidden'"></div>
-    <div class="gn"><b>${esc(g.n)}</b><small>${g.items.length} باقة</small>
-    <button class="open-b" data-open="${id}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>عرض الباقات</span></button></div></div>
-    <div class="pk" id="pk-${id}"></div></div>`;
+    const src = imgUrl(g.img), sid = esc(id);
+    const badges = (g.isNew?'<span class="gbd n">NEW</span>':'')+(g.isHot?'<span class="gbd h">🔥 HOT</span>':'');
+    return `<div class="gw" id="w-${sid}" data-name="${esc((g.n+" "+(g.k||"")+" "+(g.cat||"")).toLowerCase())}">
+    <div class="gc" style="--gl:${esc(g.gl||"#38BDF8")}"><div class="gi">${badges}<img class="ghost" alt="" loading="lazy" src="${esc(src)}"><img loading="lazy" width="84" height="84" alt="${esc(g.n)}" src="${esc(src)}" onerror="this.onerror=null;this.src='${DEF_IMG}'"></div>
+    <div class="gn"><b>${esc(g.n)}</b><small>${g.items.length} باقة${g.cat?" • "+esc(g.cat):""}</small>${g.desc?`<em class="gds">${esc(g.desc)}</em>`:""}
+    <button class="open-b" data-open="${sid}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>عرض الباقات</span></button></div></div>
+    <div class="pk" id="pk-${sid}"></div></div>`;
   }).join("");
   filterGames();
 }
@@ -1267,10 +1271,12 @@ $("#q").addEventListener("change", ()=>{
 });
 
 function renderHomeSections(){
-  const arr = Object.entries(GAMES);
-  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
-  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${g.items.length} باقة</small></div>`).join("");
-  $("#limitedoffers").innerHTML = arr.filter(([id])=>["pubg","ff","arena"].includes(id)).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">-${Math.round(CFG.discount*100)}%</small></div>`).join("");
+  const arr = Object.entries(GAMES).filter(([,g])=>g.items&&g.items.length);
+  const hot = arr.filter(([,g])=>g.isHot), offers = arr.filter(([,g])=>g.isHot||g.isNew);
+  const card = (id,g,sub)=>`<div class="mini-card" data-openhome="${esc(id)}"><img src="${esc(imgUrl(g.img))}" loading="lazy" alt="" onerror="this.onerror=null;this.src='${DEF_IMG}'"><b>${esc(g.n)}</b>${sub}</div>`;
+  $("#bestsellers").innerHTML = (hot.length?hot:arr).slice(0,5).map(([id,g])=>card(id,g,`<small>من ${fmtPrice(Math.min(...g.items.map(i=>+i[1]||0)))} ${CFG.cur[currency]}</small>`)).join("");
+  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>card(id,g,`<small>${g.items.length} باقة</small>`)).join("");
+  $("#limitedoffers").innerHTML = offers.slice(0,6).map(([id,g])=>card(id,g,`<small style="color:#EF4444;font-weight:800">${g.isNew?"جديد • ":""}-${Math.round(CFG.discount*100)}%</small>`)).join("");
 }
 document.addEventListener("click", e=>{
   const el = e.target.closest("[data-openhome]");
@@ -1812,53 +1818,59 @@ function listenHeroBanners(){
   });
 }
 
+const toArr=v=>Array.isArray(v)?v:(v&&typeof v==="object"?Object.values(v):[]);
 function rebuildGamesFromFirebase(){
-  // Rebuild from the original catalog to avoid stale mutations across Firebase updates.
   const next = JSON.parse(JSON.stringify(BASE_GAMES));
-  const deleted = Array.isArray(catalogGamesRaw._deleted) ? catalogGamesRaw._deleted : [];
+  const deleted = toArr(catalogGamesRaw._deleted);
   deleted.forEach(id => { delete next[id]; });
-
   Object.entries(catalogGamesRaw || {}).forEach(([id, g]) => {
-    if(id === "_deleted" || !g || typeof g !== "object" || g.active === false) return;
+    if(id === "_deleted" || !g || typeof g !== "object") return;
+    if(g.active === false){ delete next[id]; return; }
+    if(deleted.includes(id)) return;
     const base = next[id] || {};
+    const ord = Number(g.order);
     next[id] = {
       ...base, ...g,
       n: g.n || base.n || id,
       k: g.k || g.cat || base.k || "",
+      cat: g.cat || base.cat || "",
+      desc: g.desc !== undefined ? g.desc : (base.desc || ""),
       img: g.img || base.img || "",
       gl: g.gl || base.gl || "#8B5CF6",
-      noid: g.noid || base.noid || 0,
-      items: Array.isArray(g.items) ? g.items : (base.items || [])
+      noid: (g.noid !== undefined ? g.noid : base.noid) ? 1 : 0,
+      isNew: g.isNew !== undefined ? !!g.isNew : !!base.isNew,
+      isHot: g.isHot !== undefined ? !!g.isHot : !!base.isHot,
+      order: (g.order != null && isFinite(ord)) ? ord : (base.order || 9999),
+      items: g.items ? toArr(g.items) : (base.items || [])
     };
   });
-
-  // Global admin prices override catalog item prices; user overrides remain highest priority.
+  // أسعار الأدمن العامة تتفوق على أسعار الكتالوج، وأسعار المستخدم الخاصة أعلى أولوية
   Object.entries(next).forEach(([id, g]) => {
-    if(Array.isArray(globalGamesPrices[id])) g.items = globalGamesPrices[id];
-    if(Array.isArray(userGamesPrices[id])) g.items = userGamesPrices[id];
+    if(globalGamesPrices[id]) g.items = toArr(globalGamesPrices[id]);
+    if(userGamesPrices[id]) g.items = toArr(userGamesPrices[id]);
+    g.items = g.items.map(toArr).filter(it => it[0] && isFinite(parseFloat(it[1]))).map(it => { it[1] = parseFloat(it[1]); return it; });
+    if(!g.items.length) delete next[id];
   });
-  GAMES = next;
+  const openId = ($(".gw.open")||{}).id;
+  GAMES = Object.fromEntries(Object.entries(next).sort((a,b)=>(a[1].order||9999)-(b[1].order||9999)));
   REG.length = 0;
   renderGames();
   renderHomeSections();
+  try{ renderSubs(); }catch(e){}
+  if(openId){
+    const id = openId.slice(2), w = $("#w-"+id);
+    if(GAMES[id] && w){ renderPackages(id); w.classList.add("open"); const b=$(".open-b",w); if(b){ b.setAttribute("aria-expanded","true"); const sp=$("span",b); if(sp) sp.textContent="إغلاق الباقات"; } }
+  }
 }
-
+let _rbT;
+function scheduleRebuild(){ clearTimeout(_rbT); _rbT = setTimeout(rebuildGamesFromFirebase, 80); }
 
 function listenGamePrices(){
   if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
-  db.ref('settings/catalog_games').on('value', snap=>{
-    catalogGamesRaw = snap.val() || {};
-    rebuildGamesFromFirebase();
-  });
-  db.ref('settings/gamesPrices').on('value', snap=>{
-    globalGamesPrices = snap.val() || {};
-    rebuildGamesFromFirebase();
-  });
+  db.ref('settings/catalog_games').on('value', snap=>{ catalogGamesRaw = snap.val() || {}; scheduleRebuild(); });
+  db.ref('settings/gamesPrices').on('value', snap=>{ globalGamesPrices = snap.val() || {}; scheduleRebuild(); });
   if(uniqueUid){
-    db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', snap=>{
-      userGamesPrices = snap.val() || {};
-      rebuildGamesFromFirebase();
-    });
+    db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', snap=>{ userGamesPrices = snap.val() || {}; scheduleRebuild(); });
   }
 }
 function startOfferTimer(){
