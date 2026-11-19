@@ -56,7 +56,7 @@ textarea.in{min-height:80px;resize:none}
 .gm-img-preview-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:8px}
 .gm-img-preview-box img{width:68px;height:68px;object-fit:cover;border-radius:14px;background:#0B1020;border:1px solid var(--bd2);flex-shrink:0}
 .gm-upload-lbl{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--card);border:1.5px dashed var(--a);color:var(--a);padding:8px 12px;border-radius:11px;font-size:11px;font-weight:800;cursor:pointer;width:100%;margin-bottom:8px}
-.gm-checks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.gm-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
 .gm-chk{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:7px 6px;font-size:10.5px;font-weight:800;cursor:pointer}
 .gm-chk input{accent-color:#38BDF8}
 .gm-pkg-item{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:7px}
@@ -69,7 +69,7 @@ textarea.in{min-height:80px;resize:none}
 .gm-badge.off{background:rgba(239,68,68,.16);color:#EF4444}
 .gm-badge.new{background:rgba(16,185,129,.18);color:#10B981}
 .gm-badge.hot{background:rgba(239,68,68,.18);color:#F87171}
-.gm-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.gm-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gm-row{display:flex;gap:6px;align-items:center;margin-bottom:8px}.gm-row .in{margin:0}.gm-color{width:48px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--inner);padding:2px;cursor:pointer;flex-shrink:0}.gm-stats{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}.gm-stats span{background:var(--inner);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;font-size:10px;font-weight:800;color:var(--sub)}
 .gm-preview-box{background:var(--card);border:1px dashed var(--bd2);border-radius:12px;padding:8px;margin-bottom:10px;font-size:10.5px;color:var(--sub)}
 </style>
 </head>
@@ -144,6 +144,10 @@ textarea.in{min-height:80px;resize:none}
       <input id="gmName" class="in" placeholder="اسم اللعبة (مثال: Call of Duty Mobile)" maxlength="80">
       <input id="gmKeywords" class="in" placeholder="كلمات البحث / الاسم البديل (مثال: كول اوف ديوتي cod)" maxlength="120">
       <input id="gmCategory" class="in" placeholder="تصنيف اللعبة (مثال: أكشن وباتل رويال)" maxlength="60">
+      <div class="gm-row">
+        <input type="color" id="gmGlow" class="gm-color" value="#8B5CF6" title="لون بطاقة اللعبة">
+        <input id="gmOrder" class="in" type="number" min="1" placeholder="الترتيب في المتجر (1 يظهر أولاً)" style="flex:1">
+      </div>
       <textarea id="gmDesc" class="in" placeholder="وصف مختصر للعبة يظهر للعملاء..." maxlength="200" style="min-height:60px"></textarea>
 
       <div class="gm-img-preview-box">
@@ -161,6 +165,7 @@ textarea.in{min-height:80px;resize:none}
         <label class="gm-chk"><input type="checkbox" id="gmActive" checked><span>تفعيل بالمتجر</span></label>
         <label class="gm-chk"><input type="checkbox" id="gmIsNew"><span>علامة NEW</span></label>
         <label class="gm-chk"><input type="checkbox" id="gmIsHot"><span>علامة HOT</span></label>
+        <label class="gm-chk"><input type="checkbox" id="gmNoId"><span>بدون طلب ID</span></label>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;margin-bottom:10px">
@@ -168,6 +173,7 @@ textarea.in{min-height:80px;resize:none}
           <b style="font-size:11.5px;color:var(--gold)">💎 أسعار وباقات اللعبة</b>
           <button type="button" class="btn sm gold" id="gmAddPkgBtn">+ إضافة باقة</button>
         </div>
+        <div class="gm-row"><input id="gmBulkPct" class="in" type="number" step="any" placeholder="تعديل كل الأسعار بنسبة % (مثال: 5 أو -10)" style="flex:1"><button type="button" class="btn sm" id="gmBulkBtn">تطبيق</button></div>
         <div id="gmPackagesEditor"></div>
       </div>
 
@@ -178,6 +184,8 @@ textarea.in{min-height:80px;resize:none}
     </div>
 
     <div class="ttl" style="font-size:13px">📋 قائمة الألعاب الحالية في المتجر</div>
+    <div class="gm-stats" id="gmStats"></div>
+    <div class="gm-row"><button type="button" class="btn sm" id="gmExportBtn" style="flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--a)">📤 نسخ احتياطي JSON</button></div>
     <input id="gmSearchList" class="in" placeholder="ابحث في الألعاب المضافة..." oninput="renderAdminGamesList()">
     <div id="gmGamesList"></div>
   </div>
@@ -292,7 +300,7 @@ textarea.in{min-height:80px;resize:none}
 "use strict";
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 function setErrLabel(msg) {
   const el = $("#lastErrText");
@@ -402,6 +410,7 @@ $("#logoutAdminBtn").onclick = () => {
 };
 
 function switchSec(id) {
+  if (id === "prices" && typeof loadPricesUI === "function" && adminInitialized) setTimeout(loadPricesUI, 0);
   $$(".sec").forEach(s => s.classList.toggle("on", s.id === id));
   $$(".tab").forEach(t => t.classList.toggle("on", t.dataset.sec === id));
 }
@@ -456,20 +465,23 @@ function listenGamesCatalogAdmin() {
       next[id] = {
         ...(next[id] || {}),
         ...g,
-        n: g.n || id,
-        k: g.k || g.cat || "",
-        cat: g.cat || g.k || "",
-        desc: g.desc || "",
+        n: g.n || (next[id] && next[id].n) || id,
+        k: g.k || g.cat || (next[id] && next[id].k) || "",
+        cat: g.cat || g.k || (next[id] && next[id].cat) || "",
+        desc: g.desc !== undefined ? g.desc : ((next[id] && next[id].desc) || ""),
         img: g.img || (next[id] && next[id].img) || DEFAULT_GAME_IMG,
+        gl: g.gl || (next[id] && next[id].gl) || "#8B5CF6",
+        noid: (g.noid !== undefined ? g.noid : (next[id] && next[id].noid)) ? 1 : 0,
+        order: Number.isFinite(Number(g.order)) && g.order != null ? Number(g.order) : ((next[id] && next[id].order) || 9999),
         active: g.active !== false,
-        isNew: Boolean(g.isNew),
-        isHot: Boolean(g.isHot),
-        items: Array.isArray(g.items) ? g.items : ((next[id] && next[id].items) || [])
+        isNew: g.isNew !== undefined ? Boolean(g.isNew) : Boolean(next[id] && next[id].isNew),
+        isHot: g.isHot !== undefined ? Boolean(g.isHot) : Boolean(next[id] && next[id].isHot),
+        items: g.items ? (Array.isArray(g.items) ? g.items : Object.values(g.items)) : ((next[id] && next[id].items) || [])
       };
     });
     adminCatalogGames = next;
-    renderAdminGamesList();
-    refreshPriceGameSelect();
+    clearTimeout(window._gmRT);
+    window._gmRT = setTimeout(() => { renderAdminGamesList(); refreshPriceGameSelect(); }, 60);
   }, err => setErrLabel("الألعاب: " + err.message));
 }
 
@@ -552,7 +564,7 @@ $("#gmImageFile").onchange = function(e) {
   const file = e.target.files && e.target.files[0];
   if (!file) return;
   if (!file.type.startsWith("image/")) { toast("⚠️ اختر ملف صورة صحيح"); this.value = ""; return; }
-  compressImageFile(file, 520, 0.78, (err, dataUrl) => {
+  compressImageFile(file, 400, 0.72, (err, dataUrl) => {
     if (err) { toast("❌ " + err.message); return; }
     $("#gmImageUrl").value = dataUrl;
     $("#gmUploadTxt").textContent = "✅ تم اختيار الصورة من الهاتف (اضغط للتغيير)";
@@ -565,7 +577,7 @@ window.handleGmPkgFile = function(idx, inputEl) {
   const file = inputEl.files && inputEl.files[0];
   if (!file || !file.type.startsWith("image/")) return toast("⚠️ اختر صورة صحيحة");
   syncDraftPackagesFromDOM();
-  compressImageFile(file, 400, 0.75, (err, dataUrl) => {
+  compressImageFile(file, 320, 0.7, (err, dataUrl) => {
     if (err) return toast("❌ " + err.message);
     gmDraftPackages[idx].img = dataUrl;
     renderGmPackagesEditor();
@@ -601,13 +613,51 @@ window.updateGameFormPreview = function() {
   `;
 };
 
-["#gmName", "#gmCategory", "#gmDesc", "#gmActive", "#gmIsNew", "#gmIsHot"].forEach(sel => {
+["#gmName", "#gmCategory", "#gmDesc", "#gmActive", "#gmIsNew", "#gmIsHot", "#gmNoId", "#gmGlow", "#gmOrder"].forEach(sel => {
   const el = $(sel);
   if (el) {
     el.addEventListener("input", updateGameFormPreview);
     el.addEventListener("change", updateGameFormPreview);
   }
 });
+
+$("#gmBulkBtn").onclick = () => {
+  const pct = parseFloat($("#gmBulkPct").value);
+  if (isNaN(pct) || pct <= -100) return toast("⚠️ أدخل نسبة صحيحة");
+  syncDraftPackagesFromDOM();
+  gmDraftPackages.forEach(p => { const n = parseFloat(p.price); if (!isNaN(n)) p.price = String(Math.round(n * (1 + pct / 100) * 100) / 100); });
+  renderGmPackagesEditor(); updateGameFormPreview();
+  toast("✅ تم تعديل الأسعار بنسبة " + pct + "% (اضغط حفظ للنشر)");
+};
+$("#gmExportBtn").onclick = () => {
+  const txt = JSON.stringify(adminCatalogGames, null, 1);
+  (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => toast("✅ تم نسخ بيانات الألعاب")).catch(() => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([txt], { type: "application/json" }));
+    a.download = "games-backup.json"; a.click();
+  });
+};
+window.duplicateGameAdmin = function(id) {
+  startEditGame(id);
+  $("#gmEditKey").value = "";
+  $("#gmName").value = ($("#gmName").value || "") + " (نسخة)";
+  $("#gmOrder").value = "";
+  $("#gmFormTitle").textContent = "📄 نسخ لعبة (احفظ لإنشائها)";
+  updateGameFormPreview();
+};
+window.moveGameAdmin = function(id, dir) {
+  if (!db) return;
+  const ids = sortedGameEntries().map(e => e[0]);
+  const i = ids.indexOf(id), j = i + dir;
+  if (i < 0 || j < 0 || j >= ids.length) return;
+  [ids[i], ids[j]] = [ids[j], ids[i]];
+  const upd = {};
+  ids.forEach((k, n) => { upd["settings/catalog_games/" + k + "/order"] = n + 1; });
+  db.ref().update(upd).then(() => toast("↕️ تم تغيير الترتيب")).catch(err => toast("❌ " + err.message));
+};
+function sortedGameEntries() {
+  return Object.entries(adminCatalogGames).sort((a, b) => (a[1].order || 9999) - (b[1].order || 9999));
+}
 
 function resetGameForm() {
   $("#gmEditKey").value = "";
@@ -622,6 +672,9 @@ function resetGameForm() {
   $("#gmActive").checked = true;
   $("#gmIsNew").checked = false;
   $("#gmIsHot").checked = false;
+  $("#gmNoId").checked = false;
+  $("#gmGlow").value = "#8B5CF6";
+  $("#gmOrder").value = "";
   $("#gmFeedback").textContent = "";
   gmDraftPackages = [{ name: "", price: "", img: "" }];
   renderGmPackagesEditor();
@@ -644,6 +697,9 @@ window.startEditGame = function(gameKey) {
   $("#gmActive").checked = g.active !== false;
   $("#gmIsNew").checked = Boolean(g.isNew);
   $("#gmIsHot").checked = Boolean(g.isHot);
+  $("#gmNoId").checked = Boolean(g.noid);
+  $("#gmGlow").value = /^#[0-9a-f]{6}$/i.test(g.gl || "") ? g.gl : "#8B5CF6";
+  $("#gmOrder").value = g.order && g.order !== 9999 ? g.order : "";
   $("#gmFeedback").textContent = "";
 
   const items = Array.isArray(g.items) ? g.items : [];
@@ -710,6 +766,10 @@ $("#gmSaveGameBtn").onclick = () => {
   }
 
   const existing = adminCatalogGames[key] || {};
+  if (!$("#gmEditKey").value) {
+    const dup = Object.values(adminCatalogGames).find(g => (g.n || "").trim().toLowerCase() === name.toLowerCase());
+    if (dup && !confirm("⚠️ توجد لعبة بنفس الاسم بالفعل. هل تريد إضافتها كلعبة جديدة؟")) return;
+  }
   const gameObj = {
     n: name,
     k: keywords || cat || name,
@@ -719,7 +779,9 @@ $("#gmSaveGameBtn").onclick = () => {
     active: active,
     isNew: isNew,
     isHot: isHot,
-    noid: existing.noid ? 1 : 0,
+    noid: $("#gmNoId").checked ? 1 : 0,
+    gl: $("#gmGlow").value || "#8B5CF6",
+    order: parseInt($("#gmOrder").value, 10) || (existing.order && existing.order !== 9999 ? existing.order : Object.keys(adminCatalogGames).length + 1),
     items: parsedItems,
     updatedAt: Date.now()
   };
@@ -734,7 +796,7 @@ $("#gmSaveGameBtn").onclick = () => {
     fb.style.color = "var(--ok)";
     fb.textContent = "✅ تم حفظ اللعبة وتحديثها في المتجر فوراً!";
     toast("✅ تم حفظ اللعبة ونشرها في المتجر");
-    if (!$("#gmEditKey").value) resetGameForm();
+    resetGameForm();
   }).catch(err => {
     setErrLabel("حفظ لعبة: " + err.message);
     fb.style.color = "var(--err)";
@@ -783,7 +845,10 @@ function renderAdminGamesList() {
   const box = $("#gmGamesList");
   if (!box) return;
   const q = ($("#gmSearchList")?.value || "").trim().toLowerCase();
-  const entries = Object.entries(adminCatalogGames).filter(([id, g]) => {
+  const all = sortedGameEntries();
+  const st = $("#gmStats");
+  if (st) st.innerHTML = `<span>الكل: ${all.length}</span><span style="color:var(--ok)">ظاهرة: ${all.filter(e => e[1].active !== false).length}</span><span style="color:var(--err)">مخفية: ${all.filter(e => e[1].active === false).length}</span><span>باقات: ${all.reduce((n, e) => n + (e[1].items || []).length, 0)}</span>`;
+  const entries = all.filter(([id, g]) => {
     if (!g) return false;
     if (!q) return true;
     return ((g.n || "") + " " + (g.k || "") + " " + (g.cat || "") + " " + id).toLowerCase().includes(q);
@@ -805,7 +870,7 @@ function renderAdminGamesList() {
             <div style="font-weight:900;font-size:12.5px;color:var(--tx)">${esc(g.n)}</div>
             <div style="font-size:10px;color:var(--sub);margin:2px 0">${esc(g.cat || g.k || "ألعاب")} • ${pkgs.length} باقة</div>
             <div>
-              <span class="gm-badge ${isActive ? 'on' : 'off'}">${isActive ? 'ظاهرة للعملاء' : 'مخفية'}</span>
+              <span class="gm-badge" style="background:${esc(g.gl || '#8B5CF6')}33;color:${esc(g.gl || '#8B5CF6')}">●</span>${g.noid ? '<span class="gm-badge off" style="background:rgba(161,174,200,.15);color:var(--sub)">بدون ID</span>' : ''}<span class="gm-badge ${isActive ? 'on' : 'off'}">${isActive ? 'ظاهرة للعملاء' : 'مخفية'}</span>
               ${g.isNew ? '<span class="gm-badge new">NEW</span>' : ''}
               ${g.isHot ? '<span class="gm-badge hot">HOT</span>' : ''}
             </div>
@@ -819,6 +884,11 @@ function renderAdminGamesList() {
           <button type="button" class="btn sm" onclick="startEditGame('${esc(id)}')"><i class="fa-solid fa-pen"></i> تعديل</button>
           <button type="button" class="btn sm" style="background:var(--card);border:1px solid var(--bd);color:var(--gold)" onclick="toggleGameActiveAdmin('${esc(id)}')">${isActive ? '🙈 إخفاء' : '👁️ إظهار'}</button>
           <button type="button" class="btn sm danger" onclick="deleteGameAdmin('${esc(id)}')"><i class="fa-solid fa-trash"></i> حذف</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:6px">
+          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:var(--a)" onclick="moveGameAdmin('${esc(id)}',-1)">⬆️ أعلى</button>
+          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:var(--a)" onclick="moveGameAdmin('${esc(id)}',1)">⬇️ أسفل</button>
+          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:var(--a)" onclick="duplicateGameAdmin('${esc(id)}')">📄 نسخ</button>
         </div>
         <div style="display:flex;gap:6px;margin-top:6px">
           <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:${g.isNew ? '#10B981' : 'var(--sub)'}" onclick="toggleGameFlagAdmin('${esc(id)}','isNew')">NEW ${g.isNew ? '✓' : ''}</button>
@@ -1048,7 +1118,7 @@ function renderBannersEditor() {
   const box = $("#bannersEditorContainer");
   box.innerHTML = currentBannersList.map((url, i) => `
     <div class="banner-row">
-      <img src="${esc(url) || 'https://via.placeholder.com/60x30'}" onerror="this.src='https://via.placeholder.com/60x30'">
+      <img src="${esc(url) || 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2760%27 height=%2730%27%3E%3Crect width=%2760%27 height=%2730%27 fill=%27%23222%27/%3E%3C/svg%3E'}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2760%27 height=%2730%27%3E%3Crect width=%2760%27 height=%2730%27 fill=%27%23222%27/%3E%3C/svg%3E'">
       <input type="text" class="in banner-url-input" value="${esc(url)}" placeholder="رابط صورة البنر (URL)" style="margin:0;direction:ltr" oninput="this.previousElementSibling.src=this.value">
       <button class="btn danger" style="width:auto;padding:6px 10px" onclick="currentBannersList.splice(${i},1);renderBannersEditor()">حذف</button>
     </div>
@@ -1078,13 +1148,20 @@ $("#saveBannersActionBtn").onclick = () => {
 
 let currentGamePrices = [];
 
+function syncPricesFromDOM() {
+  currentGamePrices = $$('#gamePricesListContainer .price-row').map(r => {
+    const a = [$('.pkg-name', r).value, parseFloat($('.pkg-price', r).value) || 0];
+    if (r.dataset.img) a.push(r.dataset.img);
+    return a;
+  });
+}
 function renderPricesEditor() {
   const box = $("#gamePricesListContainer");
   box.innerHTML = currentGamePrices.map((item, idx) => `
-    <div class="price-row">
+    <div class="price-row" data-img="${esc(item[2] || '')}">
       <input type="text" class="in pkg-name" value="${esc(item[0])}" style="margin:0;flex:2" placeholder="اسم الباقة">
       <input type="number" step="any" class="in pkg-price" value="${esc(item[1])}" style="margin:0;flex:1;text-align:center" placeholder="السعر">
-      <button type="button" class="btn sm danger" onclick="currentGamePrices.splice(${idx},1);renderPricesEditor()">✕</button>
+      <button type="button" class="btn sm danger" onclick="syncPricesFromDOM();currentGamePrices.splice(${idx},1);renderPricesEditor()">✕</button>
     </div>
   `).join("");
 }
@@ -1115,10 +1192,11 @@ $("#savePricesActionBtn").onclick = () => {
   const gameId = $("#priceGameSelect").value;
   if (!gameId) return toast("⚠️ اختر لعبة أولاً");
   const rows = $$('#gamePricesListContainer .price-row');
-  const updated = rows.map((r, idx) => {
-    const oldExtra = (currentGamePrices[idx] && currentGamePrices[idx][2]) ? [currentGamePrices[idx][2]] : [];
-    return [$('.pkg-name', r).value.trim(), parseFloat($('.pkg-price', r).value) || 0, ...oldExtra];
+  const updated = rows.map(r => {
+    const img = r.dataset.img ? [r.dataset.img] : [];
+    return [$('.pkg-name', r).value.trim(), parseFloat($('.pkg-price', r).value) || 0, ...img];
   }).filter(x => x[0]);
+  if (!updated.length) return toast("⚠️ أضف باقة واحدة على الأقل");
 
   const ops = [db.ref('settings/gamesPrices/' + gameId).set(updated)];
   if (adminCatalogGames[gameId]) {
