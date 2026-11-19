@@ -42,16 +42,12 @@ header{display:flex;justify-content:space-between;align-items:center;gap:6px;pad
 .ttl{font-size:15px;font-weight:900;margin:8px 0;border-inline-start:4px solid var(--a);padding-inline-start:9px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .gw{display:flex;flex-direction:column}.gw.open{grid-column:span 2}
-.gc{background:linear-gradient(145deg,#172554,#111827);border:1px solid rgba(56,189,248,.20);border-radius:18px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.35);position:relative}
+.gc{background:linear-gradient(145deg,#172554,#111827);border:1px solid rgba(56,189,248,.20);border-radius:18px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.35)}
 .gi{height:116px;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle,rgba(56,189,248,.20),transparent 65%),#0B1020;overflow:hidden}
 .gi img{width:84px;height:84px;object-fit:cover;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:#0B1020;position:relative;z-index:2}
 .gi .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.6);filter:blur(16px) saturate(1.5);opacity:.38;border:0;border-radius:0;z-index:0}
-.g-tags{position:absolute;top:7px;inset-inline-start:7px;z-index:4;display:flex;gap:4px;flex-wrap:wrap}
-.g-tag{font-size:8.5px;font-weight:900;padding:2px 7px;border-radius:99px;letter-spacing:.3px;box-shadow:0 3px 8px rgba(0,0,0,.35)}
-.g-tag.new{background:#10B981;color:#fff}
-.g-tag.hot{background:#EF4444;color:#fff}
 .gn{padding:10px 12px}
-.gn b{display:block;font-size:12px;color:#fff}.gn small{display:block;color:#94a3b8;font-size:9.5px;margin:2px 0 8px;font-weight:600;line-height:1.4}
+.gn b{display:block;font-size:12px;color:#fff}.gn small{display:block;color:#94a3b8;font-size:9.5px;margin:2px 0 8px;font-weight:600}
 .open-b{width:100%;background:var(--g1);color:#fff;padding:8px;border-radius:10px;font-weight:800;font-size:10.5px}
 .pk{display:none;margin-top:8px;background:var(--inner);border:1px solid var(--bd2);border-radius:16px;padding:10px}
 .gw.open .pk{display:block;animation:fi .3s}
@@ -653,26 +649,22 @@ const CFG={
   rates:{ar:1,en:0.032,ja:4.9}, cur:{ar:"ج.م",en:"$",ja:"¥"}
 };
 const IMG="https://www.image2url.com/r2/default/images/";
-const imgUrl=u=>{
-  const s=String(u||"").trim();
-  if(!s) return IMG+"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp";
-  return (/^(https?:\/\/|data:image\/)/i.test(s)) ? s : IMG+s;
-};
+const imgUrl=u=>u.startsWith("http")?u:IMG+u;
 const ICON={pubg:IMG+"1790736705625-992fb09c-48c8-4d84-a562-879994bb9b09.png",mlbb:IMG+"1790740425527-d80bf8d1-5975-43d7-adbf-f456ec23b92f.jpg",ff:IMG+"1790737473591-13750b77-dec3-4cbb-9a3c-e5378673f756.png",tiktok:IMG+"1790739982665-97de3607-26f4-4381-8014-8af4fcbd0f75.png"};
 
 let GAMES={
- pubg:{n:"PUBG Mobile",k:"ببجي",desc:"شحن شدات ببجي موبايل الفوري على ID",cat:"أكشن وباتل رويال",active:true,isNew:false,isHot:true,img:"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp",gl:"#FFB800",items:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]]},
- mlbb:{n:"Mobile Legends",k:"موبايل ليجند",desc:"شحن جواهر موبايل ليجند بأسرع وقت",cat:"موبا واستراتيجية",active:true,isNew:false,isHot:true,img:"1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg",gl:"#00D9FF",items:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]]},
- ff:{n:"Free Fire",k:"فري فاير",desc:"شحن جواهر فري فاير رسمي وفوري",cat:"أكشن وباتل رويال",active:true,isNew:false,isHot:true,img:"1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp",gl:"#FF4D00",items:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]]},
- arena:{n:"Arena Breakout",k:"ارينا بريك اوت",desc:"شحن بوندز وتذاكر المعركة لارينا بريك اوت",cat:"أكشن وباتل رويال",active:true,isNew:true,isHot:false,img:"https://cdn.imagetourls.com/uploads/tyImg/5o64IKfT.webp",gl:"#10B981",items:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522],["1580 + 1580 Bonds",1292],["3200 + 3200 Bonds",2574],["6500 + 6500 Bonds",5138],["اختيار المبتدئين",61,"https://cdn.imagetourls.com/uploads/tyImg/18kK3zTAs.jpg"],["امتيازات الحقيبة المضادة للرصاص",163,"https://cdn.imagetourls.com/uploads/tyImg/13WLSTv6c.jpg"],["امتيازات القضايا المركبة",471,"https://cdn.imagetourls.com/uploads/tyImg/1hQguTBQn.jpg"],["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية",61,"https://cdn.imagetourls.com/uploads/tyImg/1g0iATQiR.jpg"],["تفعيل تذكرة المعركة المميزة الشهرية",215,"https://cdn.imagetourls.com/uploads/tyImg/1gFhuKgwX.jpg"],["حزمة تذكرة المعركة المميزة ربع السنوية",625,"https://cdn.imagetourls.com/uploads/tyImg/dNqNEyMT.jpg"]]},
- yalla:{n:"يلا لودو",k:"yalla ludo",desc:"شحن ذهب و VIP يلا لودو فوري",cat:"ألعاب جماعية وترفيه",active:true,isNew:false,isHot:false,img:"1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png",gl:"#0088FF",items:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]]},
- tiktok:{noid:1,n:"TikTok",k:"تيك توك",desc:"شحن عملات تيك توك بأفضل الأسعار",cat:"تطبيقات وبث مباشر",active:true,isNew:false,isHot:false,img:"1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png",gl:"#FE2C55",items:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]]},
- gangstar:{n:"Gangstar",k:"جانجستر",desc:"شحن ماسات جانجستر فيغاس مباشرة",cat:"أكشن وعالم مفتوح",active:true,isNew:false,isHot:false,img:"1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp",gl:"#8B5CF6",items:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]]},
- weplay:{n:"WePlay",k:"وي بلاي",desc:"شحن ذهب وبطاقات وي بلاي بسهولة",cat:"ألعاب جماعية وترفيه",active:true,isNew:false,isHot:false,img:"1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg",gl:"#EC4899",items:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]]},
- roblox:{noid:1,n:"Roblox",k:"روبلوكس",desc:"شحن روبوكس وباقات روبلوكس المتنوعة",cat:"إبداع ومغامرات",active:true,isNew:false,isHot:false,img:"1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png",gl:"#EF4444",items:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]}
+ pubg:{n:"PUBG Mobile",k:"ببجي",img:"1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp",gl:"#FFB800",items:[["30 UC",28.99],["60 UC",52.99],["25 + 300 UC",244.99],["60 + 600 UC",484.99],["300 + 1500 UC",1204.99],["850 + 3000 UC",2404.99],["2100 + 6000 UC",4804.99],["4200 + 12000 UC",9604.99],["6300 + 18000 UC",14404.99],["8400 + 24000 UC",19204.99],["10500 + 30000 UC",24004.99],["12600 + 36000 UC",28804.99],["21000 + 60000 UC",48004.99]]},
+ mlbb:{n:"Mobile Legends",k:"موبايل ليجند",img:"1787234994077-9bd1c6d4-0170-40cb-803c-2832266d2102.jpg",gl:"#00D9FF",items:[["13 + 1 Diamonds",25],["20 + 2 Diamonds",30],["51 + 5 Diamonds",65],["102 + 10 Diamonds",120],["153 + 15 Diamonds",180],["203 + 20 Diamonds",235],["303 + 33 Diamonds",350],["504 + 66 Diamonds",580],["1007 + 156 Diamonds",1150],["2015 + 383 Diamonds",2300],["5035 + 1007 Diamonds",5730]]},
+ ff:{n:"Free Fire",k:"فري فاير",img:"1787234654157-8837d1ff-65f5-4fac-8b04-46be4b2e520f.webp",gl:"#FF4D00",items:[["50 جوهرة",25],["100 جوهرة",50],["210 جوهرة",100],["310 جوهرة",150],["520 جوهرة",250],["1060 جوهرة",500],["2200 جوهرة",1000]]},
+ arena:{n:"Arena Breakout",k:"ارينا بريك اوت",img:"https://cdn.imagetourls.com/uploads/tyImg/5o64IKfT.webp",gl:"#10B981",items:[["60 + 60 Bonds",61],["310 + 310 Bonds",266],["630 + 630 Bonds",522],["1580 + 1580 Bonds",1292],["3200 + 3200 Bonds",2574],["6500 + 6500 Bonds",5138],["اختيار المبتدئين",61,"https://cdn.imagetourls.com/uploads/tyImg/18kK3zTAs.jpg"],["امتيازات الحقيبة المضادة للرصاص",163,"https://cdn.imagetourls.com/uploads/tyImg/13WLSTv6c.jpg"],["امتيازات القضايا المركبة",471,"https://cdn.imagetourls.com/uploads/tyImg/1hQguTBQn.jpg"],["بطاقة تفعيل تذكرة المعركة المتقدمة الشهرية",61,"https://cdn.imagetourls.com/uploads/tyImg/1g0iATQiR.jpg"],["تفعيل تذكرة المعركة المميزة الشهرية",215,"https://cdn.imagetourls.com/uploads/tyImg/1gFhuKgwX.jpg"],["حزمة تذكرة المعركة المميزة ربع السنوية",625,"https://cdn.imagetourls.com/uploads/tyImg/dNqNEyMT.jpg"]]},
+ yalla:{n:"يلا لودو",k:"yalla ludo",img:"1787235159508-838a2af2-8b90-4e88-8190-187a33fd36e7.png",gl:"#0088FF",items:[["830 ID",110],["2320 ID",260],["3150 ID",370],["5150 ID",480],["VIP 🦅 الفارس",500],["7480 ID",740],["8300 ID",850],["10300 ID",960],["13580 ID",1200],["VIP 👑 اللواء",1500],["16700 ID",1570],["18700 ID",1680],["21000 ID",1950],["27640 ID",2400],["32790 ID",2880],["37900 ID",3360],["43090 ID",3840],["55800 ID",4800],["69380 ID",6000],["74530 ID",6500],["111600 ID",9600],["168860 ID",14400],["223200 ID",19200],["283460 ID",24000]]},
+ tiktok:{noid:1,n:"TikTok",k:"تيك توك",img:"1787235314525-3b37b8c8-b3ca-47b3-a43f-4920261f933d.png",gl:"#FE2C55",items:[["500 عملة",330],["800 عملة",520],["1000 عملة",620],["1400 عملة",860],["2000 عملة",1220],["3500 عملة",2120],["5000 عملة",3020],["7500 عملة",4520],["10000 عملة",5920],["17500 عملة",10320],["20000 عملة",11820],["30000 عملة",17620],["50000 عملة",29520]]},
+ gangstar:{n:"Gangstar",k:"جانجستر",img:"1787234202116-f80a24ea-ce64-404e-b0fb-27a6517bdcc3.webp",gl:"#8B5CF6",items:[["60 ماسة",57.5],["300 + 20",247.5],["680 + 60",485],["1280 + 220",960],["3280 + 580",2385],["6480 + 1280",4760]]},
+ weplay:{n:"WePlay",k:"وي بلاي",img:"1788067218662-cef50912-1148-414f-a905-6563de6912bc.jpg",gl:"#EC4899",items:[["300 ذهب",30],["600 ذهب",55],["1800 ذهب",200],["3000 + 600 بونص",280],["VIP الشهر الأول",410],["Fun Card Level 10",610],["10000 + 2000 بونص",680],["VIP الشهر الثاني",1110],["Fun Card Level 50",3010],["50000 + 10000 بونص",3010],["VIP 12 شهر",4510],["100000 + 20000 بونص",6010],["25000 + 50000 بونص",15010]]},
+ roblox:{noid:1,n:"Roblox",k:"روبلوكس",img:"1789311515539-337dceec-4004-4c34-82ce-1a1755d17cb0.png",gl:"#EF4444",items:[["80 Robux",60],["200~300 Robux / 2~3$",200],["500 Robux",265],["400 Robux / 5$",315],["1000 Robux",525],["1000 Robux / 10$",540],["2000 Robux",1000],["2500 Robux / 25$",1350],["4500 Robux",2250],["5250 Robux / 50$",2650],["10000 Robux",4800],["22500 Robux",9650]]}
 };
-const BASE_GAMES = JSON.parse(JSON.stringify(GAMES));
-
+const BASE_GAMES=JSON.parse(JSON.stringify(GAMES));
+let catalogGamesRaw={}, globalGamesPrices={}, userGamesPrices={};
 const US=[["بطاقة 5$ متجر أمريكي",275],["بطاقة 10$ متجر أمريكي",530],["بطاقة 25$ متجر أمريكي",1320],["بطاقة 50$ متجر أمريكي",2600]];
 const CARDS={google:{n:"Google Play",items:US},itunes:{n:"iTunes",items:US},steam:{n:"Steam",items:[["بطاقة 5$ global",270],["بطاقة 10$ global",525],["بطاقة 20$ global",1040],["بطاقة 50$ global",2580]]}};
 
@@ -1232,39 +1224,28 @@ document.addEventListener("click", e=>{
 });
 
 function renderGames(){
-  const entries = Object.entries(GAMES).filter(([,g])=>g && g.active !== false);
-  $("#gameGrid").innerHTML = entries.map(([id,g])=>{
+  $("#gameGrid").innerHTML = Object.entries(GAMES).map(([id,g])=>{
     const src = imgUrl(g.img);
-    const metaLine = [g.cat, g.desc].filter(Boolean).join(" • ") || `${(g.items||[]).length} باقة`;
-    const badges = `${g.isNew?'<span class="g-tag new">NEW</span>':''}${g.isHot?'<span class="g-tag hot">HOT</span>':''}`;
-    return `<div class="gw" id="w-${esc(id)}" data-name="${esc(((g.n||"")+" "+(g.k||"")+" "+(g.cat||"")+" "+(g.desc||"")).toLowerCase())}">
-    <div class="gc">
-      ${badges?`<div class="g-tags">${badges}</div>`:''}
-      <div class="gi"><img class="ghost" alt="" loading="lazy" src="${src}"><img loading="lazy" width="84" height="84" alt="${esc(g.n)}" src="${src}" onerror="this.style.visibility='hidden'"></div>
-      <div class="gn"><b>${esc(g.n)}</b><small>${esc(metaLine)}</small>
-      <button class="open-b" data-open="${esc(id)}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>عرض الباقات (${(g.items||[]).length})</span></button></div>
-    </div>
-    <div class="pk" id="pk-${esc(id)}"></div></div>`;
+    return `<div class="gw" id="w-${id}" data-name="${esc((g.n+" "+g.k).toLowerCase())}">
+    <div class="gc"><div class="gi"><img class="ghost" alt="" loading="lazy" src="${src}"><img loading="lazy" width="84" height="84" alt="${esc(g.n)}" src="${src}" onerror="this.style.visibility='hidden'"></div>
+    <div class="gn"><b>${esc(g.n)}</b><small>${g.items.length} باقة</small>
+    <button class="open-b" data-open="${id}" aria-expanded="false"><i class="fa-solid fa-gamepad"></i> <span>عرض الباقات</span></button></div></div>
+    <div class="pk" id="pk-${id}"></div></div>`;
   }).join("");
   filterGames();
 }
 function renderPackages(id){
   const g = GAMES[id];
-  if(!g) return;
   const ic = ICON[id] ? `<img src="${ICON[id]}" alt="" loading="lazy">` : '<i class="fa-solid fa-coins"></i>';
-  const items = Array.isArray(g.items) ? g.items : [];
-  $("#pk-"+id).innerHTML = items.length
-    ? ('<div class="grid">' + items.map(item=>{
-        const l = item[0], p = item[1], im = item[2] ? imgUrl(item[2]) : imgUrl(g.img);
-        return productCard(g.n+" - "+l, l, p, g.noid?null:"id", ic, false, im, g.n, l);
-      }).join("") + "</div>")
-    : '<p class="sub" style="text-align:center;padding:12px">لا توجد باقات متاحة حالياً</p>';
+  $("#pk-"+id).innerHTML = '<div class="grid">' + g.items.map(item=>{
+    const l = item[0], p = item[1], im = item[2]||imgUrl(g.img);
+    return productCard(g.n+" - "+l, l, p, g.noid?null:"id", ic, false, im, g.n, l);
+  }).join("") + "</div>";
 }
 function togglePk(id){
-  const w = $("#w-"+id); if(!w) return;
-  const was = w.classList.contains("open");
+  const w = $("#w-"+id), was = w.classList.contains("open");
   $$(".gw.open").forEach(x=>{ x.classList.remove("open"); const b=$(".open-b",x); if(b){ b.setAttribute("aria-expanded","false"); const sp=$("span",b); if(sp) sp.textContent="عرض الباقات"; } });
-  if(!was){ stat.inc("pk"); renderPackages(id); w.classList.add("open"); const b=$(".open-b",w); if(b){ b.setAttribute("aria-expanded","true"); const sp=$("span",b); if(sp) sp.textContent="إغلاق الباقات"; } setTimeout(()=>w.scrollIntoView({behavior:"auto",block:"start"}),50); }
+  if(!was){ stat.inc("pk"); renderPackages(id); w.classList.add("open"); const b=$(".open-b",w); b.setAttribute("aria-expanded","true"); $("span",b).textContent="إغلاق الباقات"; setTimeout(()=>w.scrollIntoView({behavior:"auto",block:"start"}),50); }
 }
 function filterGames(){
   const q = normSearch($("#q").value); let n=0;
@@ -1286,12 +1267,10 @@ $("#q").addEventListener("change", ()=>{
 });
 
 function renderHomeSections(){
-  const arr = Object.entries(GAMES).filter(([,g])=>g && g.active !== false);
-  const firstPrice = g => (g.items && g.items[0] && g.items[0][1]!=null) ? `من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}` : `${(g.items||[]).length} باقة`;
-  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${esc(id)}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>${firstPrice(g)}</small></div>`).join("");
-  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-openhome="${esc(id)}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${(g.items||[]).length} باقة</small></div>`).join("");
-  const hotOrOffers = arr.filter(([id,g])=>g.isHot || g.isNew || ["pubg","ff","arena"].includes(id));
-  $("#limitedoffers").innerHTML = hotOrOffers.map(([id,g])=>`<div class="mini-card" data-openhome="${esc(id)}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">${g.isHot?'HOT 🔥':g.isNew?'NEW ✨':'-'+Math.round(CFG.discount*100)+'%'}</small></div>`).join("");
+  const arr = Object.entries(GAMES);
+  $("#bestsellers").innerHTML = arr.slice(0,5).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small>من ${fmtPrice(g.items[0][1])} ${CFG.cur[currency]}</small></div>`).join("");
+  $("#topgames").innerHTML = arr.slice(0,6).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.k||g.n)}</b><small>${g.items.length} باقة</small></div>`).join("");
+  $("#limitedoffers").innerHTML = arr.filter(([id])=>["pubg","ff","arena"].includes(id)).map(([id,g])=>`<div class="mini-card" data-openhome="${id}"><img src="${imgUrl(g.img)}" loading="lazy" alt=""><b>${esc(g.n)}</b><small style="color:#EF4444;font-weight:800">-${Math.round(CFG.discount*100)}%</small></div>`).join("");
 }
 document.addEventListener("click", e=>{
   const el = e.target.closest("[data-openhome]");
@@ -1833,74 +1812,55 @@ function listenHeroBanners(){
   });
 }
 
-let catalogSnapshot = null, globalPricesSnapshot = null, userPricesSnapshot = null;
-function applyCatalogAndPrices(){
-  const openIds = $$(".gw.open").map(w=>w.id.replace(/^w-/,""));
-  const nextGames = JSON.parse(JSON.stringify(BASE_GAMES));
+function rebuildGamesFromFirebase(){
+  // Rebuild from the original catalog to avoid stale mutations across Firebase updates.
+  const next = JSON.parse(JSON.stringify(BASE_GAMES));
+  const deleted = Array.isArray(catalogGamesRaw._deleted) ? catalogGamesRaw._deleted : [];
+  deleted.forEach(id => { delete next[id]; });
 
-  if(catalogSnapshot && typeof catalogSnapshot === "object"){
-    // إذا تم حفظ كتالوج موحد في Firebase، ندمجه مع الحفاظ على أي لعبة محذوفة صراحةً
-    const deletedSet = new Set(Array.isArray(catalogSnapshot._deleted) ? catalogSnapshot._deleted : []);
-    deletedSet.forEach(k => { delete nextGames[k]; });
-    Object.entries(catalogSnapshot).forEach(([id, g]) => {
-      if(id === "_deleted" || !g || typeof g !== "object") return;
-      nextGames[id] = {
-        ...(nextGames[id] || {}),
-        ...g,
-        n: g.n || (nextGames[id] && nextGames[id].n) || id,
-        k: g.k || g.cat || "",
-        desc: g.desc || "",
-        cat: g.cat || g.k || "",
-        img: g.img || (nextGames[id] && nextGames[id].img) || "",
-        active: g.active !== false,
-        isNew: Boolean(g.isNew),
-        isHot: Boolean(g.isHot),
-        items: Array.isArray(g.items) ? g.items : ((nextGames[id] && nextGames[id].items) || [])
-      };
-    });
-  }
+  Object.entries(catalogGamesRaw || {}).forEach(([id, g]) => {
+    if(id === "_deleted" || !g || typeof g !== "object" || g.active === false) return;
+    const base = next[id] || {};
+    next[id] = {
+      ...base, ...g,
+      n: g.n || base.n || id,
+      k: g.k || g.cat || base.k || "",
+      img: g.img || base.img || "",
+      gl: g.gl || base.gl || "#8B5CF6",
+      noid: g.noid || base.noid || 0,
+      items: Array.isArray(g.items) ? g.items : (base.items || [])
+    };
+  });
 
-  const priceOverrides = userPricesSnapshot || globalPricesSnapshot;
-  if(priceOverrides && typeof priceOverrides === "object"){
-    for(const id in priceOverrides){
-      if(nextGames[id] && Array.isArray(priceOverrides[id])){
-        nextGames[id].items = priceOverrides[id];
-      }
-    }
-  }
-
-  GAMES = nextGames;
+  // Global admin prices override catalog item prices; user overrides remain highest priority.
+  Object.entries(next).forEach(([id, g]) => {
+    if(Array.isArray(globalGamesPrices[id])) g.items = globalGamesPrices[id];
+    if(Array.isArray(userGamesPrices[id])) g.items = userGamesPrices[id];
+  });
+  GAMES = next;
   REG.length = 0;
   renderGames();
   renderHomeSections();
-  renderFavs();
-  openIds.forEach(id=>{
-    const w = $("#w-"+id);
-    if(w){
-      renderPackages(id);
-      w.classList.add("open");
-      const b = $(".open-b", w);
-      if(b){ b.setAttribute("aria-expanded","true"); const sp = $("span", b); if(sp) sp.textContent = "إغلاق الباقات"; }
-    }
-  });
 }
+
 
 function listenGamePrices(){
-  if(!firebaseOK || !db){ applyCatalogAndPrices(); return; }
-  db.ref('settings/catalog_games').on('value', s => {
-    catalogSnapshot = s.val() || null;
-    applyCatalogAndPrices();
+  if(!firebaseOK || !db){ renderGames(); renderHomeSections(); return; }
+  db.ref('settings/catalog_games').on('value', snap=>{
+    catalogGamesRaw = snap.val() || {};
+    rebuildGamesFromFirebase();
   });
-  db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', usnap => {
-    userPricesSnapshot = usnap.val() || null;
-    applyCatalogAndPrices();
+  db.ref('settings/gamesPrices').on('value', snap=>{
+    globalGamesPrices = snap.val() || {};
+    rebuildGamesFromFirebase();
   });
-  db.ref('settings/gamesPrices').on('value', s => {
-    globalPricesSnapshot = s.val() || null;
-    applyCatalogAndPrices();
-  });
+  if(uniqueUid){
+    db.ref('users_custom/' + uniqueUid + '/gamesPrices').on('value', snap=>{
+      userGamesPrices = snap.val() || {};
+      rebuildGamesFromFirebase();
+    });
+  }
 }
-
 function startOfferTimer(){
   const end = Date.now() + 24*60*60*1000;
   setInterval(()=>{
