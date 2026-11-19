@@ -15,8 +15,9 @@ body{background:var(--bg);color:var(--tx);font-family:Cairo,sans-serif;min-heigh
 #app{width:100%;max-width:520px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden;padding:14px 12px 90px}
 button,input,textarea,select{font-family:inherit}button{border:0;cursor:pointer;background:transparent;color:inherit}a{text-decoration:none;color:inherit}
 .brand-t{background:linear-gradient(90deg,#06B6D4,#9333EA,#D99B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:14px}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:12px;border-radius:16px;background:var(--card);border:1px solid var(--bd2)}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:10px;border-radius:16px;background:var(--card);border:1px solid var(--bd2)}
 .ibtn{height:34px;min-width:34px;padding:0 10px;border-radius:50px;background:var(--card);color:var(--a);border:1px solid var(--bd);font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.diag-bar{background:var(--inner);border:1px solid var(--bd);border-radius:12px;padding:7px 10px;margin-bottom:10px;font-size:10.5px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex-shrink:0;background:var(--card);color:var(--sub);border:1px solid var(--bd);padding:8px 14px;border-radius:14px;font-weight:800;font-size:11px;cursor:pointer}
@@ -43,7 +44,7 @@ textarea.in{min-height:80px;resize:none}
 .st-processing{background:rgba(147,51,234,.15);color:#9333EA}
 .st-done{background:rgba(22,163,74,.15);color:#16A34A}
 .st-rejected,.st-cancelled{background:rgba(239,68,68,.15);color:#EF4444}
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--card);border:1px solid var(--a);color:var(--tx);padding:9px 20px;border-radius:20px;font-weight:800;font-size:11.5px;display:none;box-shadow:0 10px 25px rgba(0,0,0,.8)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--card);border:1px solid var(--a);color:var(--tx);padding:9px 20px;border-radius:20px;font-weight:800;font-size:11.5px;display:none;box-shadow:0 10px 25px rgba(0,0,0,.8);max-width:92vw;text-align:center}
 #loginGate{position:fixed;inset:0;z-index:99999;background:#050711;display:flex;align-items:center;justify-content:center;padding:16px}
 .login-box{width:100%;max-width:380px;background:var(--card);border:1px solid var(--bd2);border-radius:24px;padding:24px;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,.9)}
 .login-box h2{font-size:18px;margin-bottom:8px;color:var(--gold)}
@@ -51,7 +52,6 @@ textarea.in{min-height:80px;resize:none}
 .banner-row img{width:60px;height:30px;object-fit:cover;border-radius:6px;background:#000}
 .price-row{display:flex;gap:6px;align-items:center;margin-bottom:6px;background:var(--inner);padding:6px;border-radius:8px;flex-wrap:wrap}
 
-/* أنماط قسم إدارة الألعاب */
 .gm-form-box{background:var(--inner);border:1px solid var(--bd2);border-radius:16px;padding:12px;margin-bottom:14px}
 .gm-img-preview-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:8px}
 .gm-img-preview-box img{width:68px;height:68px;object-fit:cover;border-radius:14px;background:#0B1020;border:1px solid var(--bd2);flex-shrink:0}
@@ -96,6 +96,11 @@ textarea.in{min-height:80px;resize:none}
   <button class="ibtn" id="logoutAdminBtn"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
 </header>
 
+<div class="diag-bar">
+  <span id="dbStatusText">⏳ فحص اتصال Firebase...</span>
+  <span id="lastErrText" style="color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:55%">جاهز</span>
+</div>
+
 <nav class="tabs">
   <button class="tab on" data-sec="overview">📊 نظرة عامة</button>
   <button class="tab" data-sec="gamesManager">🎮 إدارة الألعاب</button>
@@ -110,7 +115,6 @@ textarea.in{min-height:80px;resize:none}
   <button class="tab" data-sec="settings">⚙️ الصيانة</button>
 </nav>
 
-<!-- 1. نظرة عامة -->
 <section id="overview" class="sec on">
   <div class="stats-grid">
     <div class="stat-box"><small>إجمالي الطلبات</small><b id="stOrdersCount">0</b></div>
@@ -127,10 +131,8 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 🎮 إدارة الألعاب -->
 <section id="gamesManager" class="sec">
   <div class="ttl" style="margin-top:0">🎮 إدارة الألعاب</div>
-
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:6px;flex-wrap:wrap">
       <b id="gmFormTitle" style="font-size:13px;color:var(--a)">➕ إضافة لعبة جديدة</b>
@@ -181,13 +183,11 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 2. الطلبات -->
 <section id="orders" class="sec">
   <div class="ttl" style="margin-top:0">📦 إدارة الطلبات الواردة</div>
   <div id="adminOrdersList"></div>
 </section>
 
-<!-- 3. شحن وخصم الرصيد -->
 <section id="balance" class="sec">
   <div class="ttl" style="margin-top:0">⚡ إضافة أو خصم رصيد للعميل عبر الـ ID</div>
   <div class="card">
@@ -202,7 +202,6 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 4. ترقية VIP -->
 <section id="vip" class="sec">
   <div class="ttl" style="margin-top:0">👑 ترقية مستويات الـ VIP (1 إلى 13)</div>
   <div class="card">
@@ -227,7 +226,6 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 5. حظر ورفع الحظر -->
 <section id="ban" class="sec">
   <div class="ttl" style="margin-top:0">🚫 حظر ورفع الحظر عن المستخدمين بالـ ID</div>
   <div class="card">
@@ -242,7 +240,6 @@ textarea.in{min-height:80px;resize:none}
   <div id="blockedUsersList"></div>
 </section>
 
-<!-- 6. البانرات -->
 <section id="banners" class="sec">
   <div class="ttl" style="margin-top:0">🖼️ إضافة وتعديل البانرات عبر الروابط</div>
   <div class="card">
@@ -252,7 +249,6 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 7. الأسعار -->
 <section id="prices" class="sec">
   <div class="ttl" style="margin-top:0">🎮 تعديل أسعار الألعاب</div>
   <div class="card">
@@ -262,7 +258,6 @@ textarea.in{min-height:80px;resize:none}
   </div>
 </section>
 
-<!-- 8. الكوبونات -->
 <section id="coupons" class="sec">
   <div class="ttl" style="margin-top:0">🎫 إدارة الكوبونات</div>
   <div class="card">
@@ -273,13 +268,11 @@ textarea.in{min-height:80px;resize:none}
   <div id="adminCouponsList"></div>
 </section>
 
-<!-- 9. تذاكر الدعم -->
 <section id="tickets" class="sec">
   <div class="ttl" style="margin-top:0">🎧 تذاكر الدعم الفني</div>
   <div id="adminTicketsList"></div>
 </section>
 
-<!-- 10. الصيانة -->
 <section id="settings" class="sec">
   <div class="ttl" style="margin-top:0">⚙️ إعدادات المتجر والصيانة</div>
   <div class="card">
@@ -291,13 +284,34 @@ textarea.in{min-height:80px;resize:none}
     <button class="btn" id="saveSettingsBtn">💾 حفظ الإعدادات</button>
   </div>
 </section>
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function setErrLabel(msg) {
+  const el = $("#lastErrText");
+  if (el) el.textContent = msg || "جاهز";
+}
+
+function toast(m) {
+  const e = $("#toast");
+  if (!e) return;
+  e.textContent = m;
+  e.style.display = "block";
+  clearTimeout(window._admToastT);
+  window._admToastT = setTimeout(() => { e.style.display = "none"; }, 3400);
+}
+
+window.onerror = function(message, source, lineno) {
+  setErrLabel("خطأ: " + message + " (" + lineno + ")");
+};
+
 const firebaseConfig = {
   apiKey: "AIzaSyAMdGfiAhH1xmG0qETz3KU-nxhua1V4baM",
   authDomain: "real-store-c91ec.firebaseapp.com",
@@ -307,22 +321,24 @@ const firebaseConfig = {
   messagingSenderId: "315828860330",
   appId: "1:315828860330:web:3b2fb64a105ebb1ae627d3"
 };
-let db=null;
+let db = null;
 try {
-  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-  db = firebase.database();
-} catch(e){}
+  if (typeof firebase !== "undefined") {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+  }
+} catch (err) {
+  setErrLabel("Firebase Init: " + err.message);
+}
 
 const ADMIN_PASS = "admin1234";
 const IMG_BASE = "https://www.image2url.com/r2/default/images/";
 const DEFAULT_GAME_IMG = IMG_BASE + "1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp";
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(window._admToastT);window._admToastT=setTimeout(()=>e.style.display="none",3200)}
-function resolveImgSrc(u){
-  const s=String(u||"").trim();
-  if(!s) return DEFAULT_GAME_IMG;
-  return (/^(https?:\/\/|data:image\/)/i.test(s)) ? s : IMG_BASE+s;
+
+function resolveImgSrc(u) {
+  const s = String(u || "").trim();
+  if (!s) return DEFAULT_GAME_IMG;
+  return (/^(https?:\/\/|data:image\/)/i.test(s)) ? s : IMG_BASE + s;
 }
 
 const DEFAULT_GAMES_PRICES = {
@@ -351,32 +367,45 @@ const BUILTIN_GAMES_META = {
 
 let adminCatalogGames = JSON.parse(JSON.stringify(BUILTIN_GAMES_META));
 let adminDeletedGameIds = [];
-let gmDraftPackages = [{name:"", price:"", img:""}];
+let gmDraftPackages = [{ name: "", price: "", img: "" }];
+let adminInitialized = false;
 
-if(localStorage.getItem("admin_logged") === "true"){
+function unlockAdminUI() {
+  if (adminInitialized) return;
+  adminInitialized = true;
   $("#loginGate").style.display = "none";
   $("#app").style.display = "block";
   initAdminDashboard();
 }
 
-$("#adminLoginBtn").onclick = ()=>{
-  if($("#adminPassInput").value === ADMIN_PASS){
-    localStorage.setItem("admin_logged", "true");
-    $("#loginGate").style.display = "none";
-    $("#app").style.display = "block";
+try {
+  if (localStorage.getItem("admin_logged") === "true") {
+    unlockAdminUI();
+  }
+} catch (e) {}
+
+$("#adminLoginBtn").onclick = () => {
+  if ($("#adminPassInput").value === ADMIN_PASS) {
+    try { localStorage.setItem("admin_logged", "true"); } catch (e) {}
     toast("✅ تم تسجيل دخول المشرف بنجاح");
-    initAdminDashboard();
+    unlockAdminUI();
   } else {
     toast("❌ كلمة المرور غير صحيحة");
   }
 };
-$("#logoutAdminBtn").onclick = ()=>{ localStorage.removeItem("admin_logged"); location.reload(); };
+$("#adminPassInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") $("#adminLoginBtn").click();
+});
+$("#logoutAdminBtn").onclick = () => {
+  try { localStorage.removeItem("admin_logged"); } catch (e) {}
+  location.reload();
+};
 
-function switchSec(id){
-  $$(".sec").forEach(s=>s.classList.toggle("on", s.id===id));
-  $$(".tab").forEach(t=>t.classList.toggle("on", t.dataset.sec===id));
+function switchSec(id) {
+  $$(".sec").forEach(s => s.classList.toggle("on", s.id === id));
+  $$(".tab").forEach(t => t.classList.toggle("on", t.dataset.sec === id));
 }
-$$(".tab").forEach(t=>t.onclick = ()=>switchSec(t.dataset.sec));
+$$(".tab").forEach(t => { t.onclick = () => switchSec(t.dataset.sec); });
 
 const STATUS_MAP = {
   awaiting_payment:{t:"🟠 انتظار تأكيد الدفع",c:"st-pending"},
@@ -391,8 +420,20 @@ const STATUS_MAP = {
   cancelled:{t:"ملغي",c:"st-cancelled"}
 };
 
-function initAdminDashboard(){
-  if(!db) return;
+function initAdminDashboard() {
+  renderAdminGamesList();
+  renderGmPackagesEditor();
+  updateGameFormPreview();
+  if (!db) {
+    $("#dbStatusText").textContent = "⚠️ Firebase غير متصل";
+    setErrLabel("تحقق من الإنترنت أو SDK");
+    toast("⚠️ تعذر الاتصال بـ Firebase");
+    return;
+  }
+  db.ref(".info/connected").on("value", s => {
+    const ok = Boolean(s.val());
+    $("#dbStatusText").textContent = ok ? "🟢 متصل بـ Firebase" : "🟠 جاري الاتصال بـ Firebase...";
+  });
   loadOverviewAndOrders();
   listenGamesCatalogAdmin();
   loadCoupons();
@@ -401,18 +442,17 @@ function initAdminDashboard(){
   loadPricesUI();
   loadSettings();
   loadBlockedUsersList();
-  renderGmPackagesEditor();
-  updateGameFormPreview();
 }
 
-function listenGamesCatalogAdmin(){
+function listenGamesCatalogAdmin() {
+  if (!db) return;
   db.ref('settings/catalog_games').on('value', s => {
     const raw = s.val() || {};
     const next = JSON.parse(JSON.stringify(BUILTIN_GAMES_META));
     adminDeletedGameIds = Array.isArray(raw._deleted) ? raw._deleted.slice() : [];
     adminDeletedGameIds.forEach(k => { delete next[k]; });
     Object.entries(raw).forEach(([id, g]) => {
-      if(id === "_deleted" || !g || typeof g !== "object") return;
+      if (id === "_deleted" || !g || typeof g !== "object") return;
       next[id] = {
         ...(next[id] || {}),
         ...g,
@@ -430,20 +470,20 @@ function listenGamesCatalogAdmin(){
     adminCatalogGames = next;
     renderAdminGamesList();
     refreshPriceGameSelect();
-  });
+  }, err => setErrLabel("الألعاب: " + err.message));
 }
 
-function refreshPriceGameSelect(){
+function refreshPriceGameSelect() {
   const sel = $("#priceGameSelect");
-  if(!sel) return;
+  if (!sel) return;
   const prev = sel.value;
-  sel.innerHTML = Object.entries(adminCatalogGames).map(([id,g])=>`<option value="${esc(id)}">${esc(g.n)} (${(g.items||[]).length} باقة)</option>`).join("");
-  if(prev && adminCatalogGames[prev]) sel.value = prev;
+  sel.innerHTML = Object.entries(adminCatalogGames).map(([id, g]) => `<option value="${esc(id)}">${esc(g.n)} (${(g.items || []).length} باقة)</option>`).join("");
+  if (prev && adminCatalogGames[prev]) sel.value = prev;
 }
 
-function syncDraftPackagesFromDOM(){
+function syncDraftPackagesFromDOM() {
   const rows = $$("#gmPackagesEditor .gm-pkg-item");
-  gmDraftPackages = rows.map(r=>{
+  gmDraftPackages = rows.map(r => {
     const name = ($(".gm-pkg-name", r)?.value || "").trim();
     const price = ($(".gm-pkg-price", r)?.value || "").toString().trim();
     const img = ($(".gm-pkg-img", r)?.value || "").trim();
@@ -451,10 +491,11 @@ function syncDraftPackagesFromDOM(){
   });
 }
 
-function renderGmPackagesEditor(){
+function renderGmPackagesEditor() {
   const box = $("#gmPackagesEditor");
-  if(!gmDraftPackages.length) gmDraftPackages = [{name:"", price:"", img:""}];
-  box.innerHTML = gmDraftPackages.map((p, idx)=>`
+  if (!box) return;
+  if (!gmDraftPackages.length) gmDraftPackages = [{ name: "", price: "", img: "" }];
+  box.innerHTML = gmDraftPackages.map((p, idx) => `
     <div class="gm-pkg-item">
       <div class="gm-pkg-top">
         <input type="text" class="in gm-pkg-name" value="${esc(p.name)}" placeholder="اسم الباقة (مثال: 60 شدة)" style="margin:0;flex:1.6" oninput="updateGameFormPreview()">
@@ -472,22 +513,22 @@ function renderGmPackagesEditor(){
   `).join("");
 }
 
-window.removeGmPkg = function(idx){
+window.removeGmPkg = function(idx) {
   syncDraftPackagesFromDOM();
   gmDraftPackages.splice(idx, 1);
-  if(!gmDraftPackages.length) gmDraftPackages = [{name:"", price:"", img:""}];
+  if (!gmDraftPackages.length) gmDraftPackages = [{ name: "", price: "", img: "" }];
   renderGmPackagesEditor();
   updateGameFormPreview();
 };
 
-$("#gmAddPkgBtn").onclick = ()=>{
+$("#gmAddPkgBtn").onclick = () => {
   syncDraftPackagesFromDOM();
-  gmDraftPackages.push({name:"", price:"", img:""});
+  gmDraftPackages.push({ name: "", price: "", img: "" });
   renderGmPackagesEditor();
   updateGameFormPreview();
 };
 
-function compressImageFile(file, maxSize, quality, cb){
+function compressImageFile(file, maxSize, quality, cb) {
   const reader = new FileReader();
   reader.onload = ev => {
     const img = new Image();
@@ -498,8 +539,7 @@ function compressImageFile(file, maxSize, quality, cb){
       canvas.height = Math.max(1, Math.round((img.height || 200) * ratio));
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL("image/jpeg", quality);
-      cb(null, dataUrl);
+      cb(null, canvas.toDataURL("image/jpeg", quality));
     };
     img.onerror = () => cb(new Error("تعذر قراءة الصورة"));
     img.src = ev.target.result;
@@ -508,12 +548,12 @@ function compressImageFile(file, maxSize, quality, cb){
   reader.readAsDataURL(file);
 }
 
-$("#gmImageFile").onchange = function(e){
+$("#gmImageFile").onchange = function(e) {
   const file = e.target.files && e.target.files[0];
-  if(!file) return;
-  if(!file.type.startsWith("image/")){ toast("⚠️ اختر ملف صورة صحيح"); this.value=""; return; }
-  compressImageFile(file, 520, 0.78, (err, dataUrl)=>{
-    if(err){ toast("❌ " + err.message); return; }
+  if (!file) return;
+  if (!file.type.startsWith("image/")) { toast("⚠️ اختر ملف صورة صحيح"); this.value = ""; return; }
+  compressImageFile(file, 520, 0.78, (err, dataUrl) => {
+    if (err) { toast("❌ " + err.message); return; }
     $("#gmImageUrl").value = dataUrl;
     $("#gmUploadTxt").textContent = "✅ تم اختيار الصورة من الهاتف (اضغط للتغيير)";
     updateGameFormPreview();
@@ -521,12 +561,12 @@ $("#gmImageFile").onchange = function(e){
   });
 };
 
-window.handleGmPkgFile = function(idx, inputEl){
+window.handleGmPkgFile = function(idx, inputEl) {
   const file = inputEl.files && inputEl.files[0];
-  if(!file || !file.type.startsWith("image/")) return toast("⚠️ اختر صورة صحيحة");
+  if (!file || !file.type.startsWith("image/")) return toast("⚠️ اختر صورة صحيحة");
   syncDraftPackagesFromDOM();
-  compressImageFile(file, 400, 0.75, (err, dataUrl)=>{
-    if(err) return toast("❌ " + err.message);
+  compressImageFile(file, 400, 0.75, (err, dataUrl) => {
+    if (err) return toast("❌ " + err.message);
     gmDraftPackages[idx].img = dataUrl;
     renderGmPackagesEditor();
     updateGameFormPreview();
@@ -534,16 +574,16 @@ window.handleGmPkgFile = function(idx, inputEl){
   });
 };
 
-window.updateGameFormPreview = function(){
+window.updateGameFormPreview = function() {
   const name = ($("#gmName").value || "").trim() || "اسم اللعبة";
   const cat = ($("#gmCategory").value || "").trim() || "تصنيف اللعبة";
   const desc = ($("#gmDesc").value || "").trim() || "وصف مختصر للعبة";
   const imgSrc = resolveImgSrc($("#gmImageUrl").value);
   const prevImg = $("#gmCoverPreview");
-  if(prevImg) prevImg.src = imgSrc;
+  if (prevImg) prevImg.src = imgSrc;
 
   syncDraftPackagesFromDOM();
-  const validPkgs = gmDraftPackages.filter(p=>p.name && p.price!=="" && !isNaN(parseFloat(p.price)));
+  const validPkgs = gmDraftPackages.filter(p => p.name && p.price !== "" && !isNaN(parseFloat(p.price)));
   const tags = [
     $("#gmActive").checked ? '<span class="gm-badge on">مفعّلة</span>' : '<span class="gm-badge off">مخفية</span>',
     $("#gmIsNew").checked ? '<span class="gm-badge new">NEW</span>' : '',
@@ -561,12 +601,15 @@ window.updateGameFormPreview = function(){
   `;
 };
 
-["#gmCategory","#gmDesc","#gmActive","#gmIsNew","#gmIsHot"].forEach(sel=>{
-  $(sel).addEventListener("input", updateGameFormPreview);
-  $(sel).addEventListener("change", updateGameFormPreview);
+["#gmName", "#gmCategory", "#gmDesc", "#gmActive", "#gmIsNew", "#gmIsHot"].forEach(sel => {
+  const el = $(sel);
+  if (el) {
+    el.addEventListener("input", updateGameFormPreview);
+    el.addEventListener("change", updateGameFormPreview);
+  }
 });
 
-function resetGameForm(){
+function resetGameForm() {
   $("#gmEditKey").value = "";
   $("#gmFormTitle").textContent = "➕ إضافة لعبة جديدة";
   $("#gmName").value = "";
@@ -580,15 +623,15 @@ function resetGameForm(){
   $("#gmIsNew").checked = false;
   $("#gmIsHot").checked = false;
   $("#gmFeedback").textContent = "";
-  gmDraftPackages = [{name:"", price:"", img:""}];
+  gmDraftPackages = [{ name: "", price: "", img: "" }];
   renderGmPackagesEditor();
   updateGameFormPreview();
 }
 $("#gmResetFormBtn").onclick = resetGameForm;
 
-window.startEditGame = function(gameKey){
+window.startEditGame = function(gameKey) {
   const g = adminCatalogGames[gameKey];
-  if(!g) return toast("⚠️ اللعبة غير موجودة");
+  if (!g) return toast("⚠️ اللعبة غير موجودة");
   $("#gmEditKey").value = gameKey;
   $("#gmFormTitle").textContent = "✏️ تعديل لعبة: " + (g.n || gameKey);
   $("#gmName").value = g.n || "";
@@ -605,19 +648,19 @@ window.startEditGame = function(gameKey){
 
   const items = Array.isArray(g.items) ? g.items : [];
   gmDraftPackages = items.length
-    ? items.map(it=>({
+    ? items.map(it => ({
         name: String(it[0] || ""),
         price: it[1] != null ? String(it[1]) : "",
         img: it[2] ? String(it[2]) : ""
       }))
-    : [{name:"", price:"", img:""}];
+    : [{ name: "", price: "", img: "" }];
   renderGmPackagesEditor();
   updateGameFormPreview();
-  $("#gamesManager").scrollIntoView({behavior:"smooth", block:"start"});
+  $("#gamesManager").scrollIntoView({ behavior: "smooth", block: "start" });
   toast("✏️ تم تحميل بيانات اللعبة للتعديل");
 };
 
-$("#gmSaveGameBtn").onclick = ()=>{
+$("#gmSaveGameBtn").onclick = () => {
   const fb = $("#gmFeedback");
   const name = ($("#gmName").value || "").trim();
   const keywords = ($("#gmKeywords").value || "").trim();
@@ -628,7 +671,7 @@ $("#gmSaveGameBtn").onclick = ()=>{
   const isNew = $("#gmIsNew").checked;
   const isHot = $("#gmIsHot").checked;
 
-  if(!name){
+  if (!name) {
     fb.style.color = "var(--err)";
     fb.textContent = "❌ يرجى إدخال اسم اللعبة أولاً";
     return toast("⚠️ أدخل اسم اللعبة");
@@ -636,32 +679,32 @@ $("#gmSaveGameBtn").onclick = ()=>{
 
   syncDraftPackagesFromDOM();
   const parsedItems = [];
-  for(const p of gmDraftPackages){
-    if(!p.name && (p.price === "" || isNaN(parseFloat(p.price)))) continue;
+  for (const p of gmDraftPackages) {
+    if (!p.name && (p.price === "" || isNaN(parseFloat(p.price)))) continue;
     const priceNum = parseFloat(p.price);
-    if(!p.name || isNaN(priceNum) || priceNum < 0){
+    if (!p.name || isNaN(priceNum) || priceNum < 0) {
       fb.style.color = "var(--err)";
       fb.textContent = "❌ تأكد من إدخال اسم وسعر صحيح لكل باقة";
       return toast("⚠️ راجع بيانات الباقات");
     }
-    if(p.img) parsedItems.push([p.name, priceNum, p.img]);
+    if (p.img) parsedItems.push([p.name, priceNum, p.img]);
     else parsedItems.push([p.name, priceNum]);
   }
 
-  if(!parsedItems.length){
+  if (!parsedItems.length) {
     fb.style.color = "var(--err)";
     fb.textContent = "❌ أضف باقة واحدة على الأقل مع سعرها";
     return toast("⚠️ أضف باقة واحدة على الأقل");
   }
 
-  if(!db){
+  if (!db) {
     fb.style.color = "var(--err)";
     fb.textContent = "❌ تعذر الاتصال بـ Firebase";
     return;
   }
 
   let key = ($("#gmEditKey").value || "").trim();
-  if(!key){
+  if (!key) {
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "") || "game";
     key = slug + "_" + Date.now().toString(36);
   }
@@ -687,70 +730,71 @@ $("#gmSaveGameBtn").onclick = ()=>{
     db.ref("settings/catalog_games/" + key).set(gameObj),
     db.ref("settings/catalog_games/_deleted").set(adminDeletedGameIds),
     db.ref("settings/gamesPrices/" + key).set(parsedItems)
-  ]).then(()=>{
+  ]).then(() => {
     fb.style.color = "var(--ok)";
     fb.textContent = "✅ تم حفظ اللعبة وتحديثها في المتجر فوراً!";
     toast("✅ تم حفظ اللعبة ونشرها في المتجر");
-    if(!$("#gmEditKey").value) resetGameForm();
-  }).catch(err=>{
+    if (!$("#gmEditKey").value) resetGameForm();
+  }).catch(err => {
+    setErrLabel("حفظ لعبة: " + err.message);
     fb.style.color = "var(--err)";
     fb.textContent = "❌ خطأ أثناء الحفظ: " + err.message;
     toast("❌ " + err.message);
   });
 };
 
-window.toggleGameActiveAdmin = function(gameKey){
+window.toggleGameActiveAdmin = function(gameKey) {
   const g = adminCatalogGames[gameKey];
-  if(!g || !db) return;
+  if (!g || !db) return;
   const nextActive = g.active === false;
-  db.ref("settings/catalog_games/" + gameKey + "/active").set(nextActive).then(()=>{
+  db.ref("settings/catalog_games/" + gameKey + "/active").set(nextActive).then(() => {
     toast(nextActive ? "👁️ تم إظهار اللعبة في المتجر" : "🙈 تم إخفاء اللعبة مؤقتاً عن العملاء");
-  });
+  }).catch(err => toast("❌ " + err.message));
 };
 
-window.toggleGameFlagAdmin = function(gameKey, flagKey){
+window.toggleGameFlagAdmin = function(gameKey, flagKey) {
   const g = adminCatalogGames[gameKey];
-  if(!g || !db) return;
+  if (!g || !db) return;
   const nextVal = !Boolean(g[flagKey]);
-  db.ref("settings/catalog_games/" + gameKey + "/" + flagKey).set(nextVal).then(()=>{
+  db.ref("settings/catalog_games/" + gameKey + "/" + flagKey).set(nextVal).then(() => {
     toast("✅ تم تحديث العلامة (" + flagKey.toUpperCase() + ")");
-  });
+  }).catch(err => toast("❌ " + err.message));
 };
 
-window.deleteGameAdmin = function(gameKey){
+window.deleteGameAdmin = function(gameKey) {
   const g = adminCatalogGames[gameKey];
   const label = (g && g.n) ? g.n : gameKey;
-  if(!confirm(`هل أنت متأكد من حذف لعبة "${label}" نهائياً من المتجر؟`)) return;
-  if(!db) return;
+  if (!confirm(`هل أنت متأكد من حذف لعبة "${label}" نهائياً من المتجر؟`)) return;
+  if (!db) return;
 
-  if(!adminDeletedGameIds.includes(gameKey)) adminDeletedGameIds.push(gameKey);
+  if (!adminDeletedGameIds.includes(gameKey)) adminDeletedGameIds.push(gameKey);
 
   Promise.all([
     db.ref("settings/catalog_games/" + gameKey).remove(),
     db.ref("settings/catalog_games/_deleted").set(adminDeletedGameIds),
     db.ref("settings/gamesPrices/" + gameKey).remove()
-  ]).then(()=>{
-    if($("#gmEditKey").value === gameKey) resetGameForm();
+  ]).then(() => {
+    if ($("#gmEditKey").value === gameKey) resetGameForm();
     toast("🗑️ تم حذف اللعبة نهائياً");
-  }).catch(err=>toast("❌ " + err.message));
+  }).catch(err => toast("❌ " + err.message));
 };
 
-function renderAdminGamesList(){
+function renderAdminGamesList() {
   const box = $("#gmGamesList");
-  if(!box) return;
+  if (!box) return;
   const q = ($("#gmSearchList")?.value || "").trim().toLowerCase();
-  const entries = Object.entries(adminCatalogGames).filter(([id,g])=>{
-    if(!g) return false;
-    if(!q) return true;
-    return ((g.n||"")+" "+(g.k||"")+" "+(g.cat||"")+" "+id).toLowerCase().includes(q);
+  const entries = Object.entries(adminCatalogGames).filter(([id, g]) => {
+    if (!g) return false;
+    if (!q) return true;
+    return ((g.n || "") + " " + (g.k || "") + " " + (g.cat || "") + " " + id).toLowerCase().includes(q);
   });
 
-  if(!entries.length){
+  if (!entries.length) {
     box.innerHTML = '<p style="text-align:center;color:var(--sub);padding:14px">لا توجد ألعاب مطابقة</p>';
     return;
   }
 
-  box.innerHTML = entries.map(([id,g])=>{
+  box.innerHTML = entries.map(([id, g]) => {
     const isActive = g.active !== false;
     const pkgs = Array.isArray(g.items) ? g.items : [];
     return `
@@ -761,40 +805,42 @@ function renderAdminGamesList(){
             <div style="font-weight:900;font-size:12.5px;color:var(--tx)">${esc(g.n)}</div>
             <div style="font-size:10px;color:var(--sub);margin:2px 0">${esc(g.cat || g.k || "ألعاب")} • ${pkgs.length} باقة</div>
             <div>
-              <span class="gm-badge ${isActive?'on':'off'}">${isActive?'ظاهرة للعملاء':'مخفية'}</span>
-              ${g.isNew?'<span class="gm-badge new">NEW</span>':''}
-              ${g.isHot?'<span class="gm-badge hot">HOT</span>':''}
+              <span class="gm-badge ${isActive ? 'on' : 'off'}">${isActive ? 'ظاهرة للعملاء' : 'مخفية'}</span>
+              ${g.isNew ? '<span class="gm-badge new">NEW</span>' : ''}
+              ${g.isHot ? '<span class="gm-badge hot">HOT</span>' : ''}
             </div>
           </div>
         </div>
         ${g.desc ? `<div style="font-size:10.5px;color:var(--sub);margin-bottom:6px">${esc(g.desc)}</div>` : ''}
         <div style="font-size:10px;color:var(--gold);line-height:1.5">
-          ${pkgs.slice(0,4).map(p=>`• ${esc(p[0])}: <b>${esc(p[1])} ج.م</b>`).join(" | ")}${pkgs.length>4?` (+${pkgs.length-4})`:''}
+          ${pkgs.slice(0, 4).map(p => `• ${esc(p[0])}: <b>${esc(p[1])} ج.م</b>`).join(" | ")}${pkgs.length > 4 ? ` (+${pkgs.length - 4})` : ''}
         </div>
         <div class="gm-actions">
           <button type="button" class="btn sm" onclick="startEditGame('${esc(id)}')"><i class="fa-solid fa-pen"></i> تعديل</button>
-          <button type="button" class="btn sm" style="background:var(--card);border:1px solid var(--bd);color:var(--gold)" onclick="toggleGameActiveAdmin('${esc(id)}')">${isActive?'🙈 إخفاء':'👁️ إظهار'}</button>
+          <button type="button" class="btn sm" style="background:var(--card);border:1px solid var(--bd);color:var(--gold)" onclick="toggleGameActiveAdmin('${esc(id)}')">${isActive ? '🙈 إخفاء' : '👁️ إظهار'}</button>
           <button type="button" class="btn sm danger" onclick="deleteGameAdmin('${esc(id)}')"><i class="fa-solid fa-trash"></i> حذف</button>
         </div>
         <div style="display:flex;gap:6px;margin-top:6px">
-          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:${g.isNew?'#10B981':'var(--sub)'}" onclick="toggleGameFlagAdmin('${esc(id)}','isNew')">NEW ${g.isNew?'✓':''}</button>
-          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:${g.isHot?'#F87171':'var(--sub)'}" onclick="toggleGameFlagAdmin('${esc(id)}','isHot')">HOT ${g.isHot?'✓':''}</button>
+          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:${g.isNew ? '#10B981' : 'var(--sub)'}" onclick="toggleGameFlagAdmin('${esc(id)}','isNew')">NEW ${g.isNew ? '✓' : ''}</button>
+          <button type="button" class="btn sm" style="flex:1;background:var(--card);border:1px solid var(--bd);color:${g.isHot ? '#F87171' : 'var(--sub)'}" onclick="toggleGameFlagAdmin('${esc(id)}','isHot')">HOT ${g.isHot ? '✓' : ''}</button>
         </div>
       </div>
     `;
   }).join("");
 }
 
-function loadOverviewAndOrders(){
+function loadOverviewAndOrders() {
+  if (!db) return;
   db.ref('orders').on('value', snapshot => {
     const data = snapshot.val() || {};
     let totalOrders = 0, totalRevenue = 0;
     const flat = [];
     Object.entries(data).forEach(([uid, orders]) => {
       Object.entries(orders || {}).forEach(([oid, o]) => {
+        if (!o || typeof o !== "object") return;
         totalOrders++;
         const amt = parseFloat(o.total != null ? o.total : o.price) || 0;
-        if(o.status === "done" || o.status === "completed" || o.status === "paid") totalRevenue += amt;
+        if (o.status === "done" || o.status === "completed" || o.status === "paid") totalRevenue += amt;
         flat.push({ uid, oid, ...o });
       });
     });
@@ -806,87 +852,104 @@ function loadOverviewAndOrders(){
     $("#adminOrdersList").innerHTML = flat.length ? flat.map(o => {
       const amt = parseFloat(o.total != null ? o.total : o.price) || 0;
       const itemsHtml = Array.isArray(o.items) && o.items.length
-        ? o.items.map(it=>`• ${esc(it.title)} ×${it.qty||1}`).join("<br>")
-        : `${esc(o.gameName||"")} - ${esc(o.pkgName||"")}`;
+        ? o.items.map(it => `• ${esc(it.title)} ×${it.qty || 1}`).join("<br>")
+        : `${esc(o.gameName || "")} - ${esc(o.pkgName || "")}`;
       return `
       <div class="list-item">
-        <div class="top"><span>${esc(o.oid)}</span><span class="status-pill ${(STATUS_MAP[o.status]||STATUS_MAP.pending).c}">${(STATUS_MAP[o.status]||STATUS_MAP.pending).t}</span></div>
-        <div style="font-size:10px;color:var(--sub);margin-bottom:4px">العميل: ${esc(o.clientName||o.name||o.uid)} • ${new Date(o.createdAt||Date.now()).toLocaleString('ar-EG')}</div>
+        <div class="top"><span>${esc(o.oid)}</span><span class="status-pill ${(STATUS_MAP[o.status] || STATUS_MAP.pending).c}">${(STATUS_MAP[o.status] || STATUS_MAP.pending).t}</span></div>
+        <div style="font-size:10px;color:var(--sub);margin-bottom:4px">العميل: ${esc(o.clientName || o.name || o.uid)} • ${new Date(o.createdAt || Date.now()).toLocaleString('ar-EG')}</div>
         <div style="margin:4px 0">${itemsHtml}</div>
         <b style="color:var(--gold);display:block;margin-bottom:6px">${amt.toFixed(2)} ج.م</b>
         <select onchange="updateOrderStatus('${esc(o.uid)}','${esc(o.oid)}',this.value)" class="in" style="margin:0;padding:6px;font-size:11px">
-          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v.t}</option>`).join("")}
+          ${Object.entries(STATUS_MAP).map(([k, v]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${v.t}</option>`).join("")}
         </select>
       </div>
-    `; }).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد طلبات</p>';
-  });
+    `;
+    }).join('') : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد طلبات</p>';
+  }, err => setErrLabel("الطلبات: " + err.message));
 
   db.ref('users').on('value', s => {
     $("#stUsersCount").textContent = Object.keys(s.val() || {}).length;
-  });
+  }, () => {});
 }
 
-window.updateOrderStatus = function(uid, oid, status){
-  db.ref('orders/'+uid+'/'+oid+'/status').set(status).then(()=>{
-    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+window.updateOrderStatus = function(uid, oid, status) {
+  if (!db) return;
+  db.ref('orders/' + uid + '/' + oid + '/status').set(status).then(() => {
+    db.ref('notifications/' + uid + '/' + ('notif_' + Date.now())).set({
       title: "تحديث حالة الطلب",
-      body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status]||{}).t}`,
+      body: `تم تغيير حالة طلبك (${oid}) إلى: ${(STATUS_MAP[status] || {}).t || status}`,
       time: Date.now(),
       read: false
-    });
+    }).catch(() => {});
     toast("✅ تم تحديث حالة الطلب وإرسال التنبيه للعميل");
-  });
+  }).catch(err => toast("❌ " + err.message));
 };
 
-$("#sendBalanceActionBtn").onclick = ()=>{
+$("#sendBalanceActionBtn").onclick = () => {
   const targetUid = $("#targetUidInput").value.trim();
   const amount = parseFloat($("#targetAmountInput").value);
   const actionType = $("#balanceActionType").value;
   const fb = $("#balanceFeedback");
-  
-  if(!targetUid || isNaN(amount)){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID صحيح ومبلغ صحيح"; return; }
-  
-  db.ref('users/'+targetUid+'/wallet').once('value').then(s => {
-    let currentWallet = s.val() || 0;
+
+  if (!targetUid || isNaN(amount)) {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ أدخل ID صحيح ومبلغ صحيح";
+    return;
+  }
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
+
+  db.ref('users/' + targetUid + '/wallet').once('value').then(s => {
+    const currentWallet = parseFloat(s.val()) || 0;
     let newWallet = actionType === "add" ? currentWallet + amount : currentWallet - amount;
-    if(newWallet < 0) newWallet = 0;
-    
-    db.ref('users/'+targetUid+'/wallet').set(newWallet).then(()=>{
-      const notifMsg = actionType === "add" 
-        ? `تم إضافة رصيد بقيمة (${amount} ج.م) إلى محفظتك بنجاح! 🚀` 
+    if (newWallet < 0) newWallet = 0;
+
+    return db.ref('users/' + targetUid + '/wallet').set(newWallet).then(() => {
+      const notifMsg = actionType === "add"
+        ? `تم إضافة رصيد بقيمة (${amount} ج.م) إلى محفظتك بنجاح! 🚀`
         : `تم خصم مبلغ (${amount} ج.م) من محفظتك الإدارية.`;
-        
-      db.ref('notifications/'+targetUid+'/'+('notif_'+Date.now())).set({
+
+      db.ref('notifications/' + targetUid + '/' + ('notif_' + Date.now())).set({
         title: "تحديث في الرصيد 💰",
         body: notifMsg,
         time: Date.now(),
         read: false
-      });
+      }).catch(() => {});
 
-      fb.style.color = "var(--ok)"; 
+      fb.style.color = "var(--ok)";
       fb.textContent = `✅ تم ${actionType === "add" ? "إضافة" : "خصم"} المبلغ وإرسال الإشعار للعميل! الرصيد الحالي: ${newWallet} ج.م`;
-      $("#targetUidInput").value=""; $("#targetAmountInput").value="";
+      $("#targetUidInput").value = "";
+      $("#targetAmountInput").value = "";
       toast("🚀 تمت العملية بنجاح");
     });
+  }).catch(err => {
+    setErrLabel("الرصيد: " + err.message);
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ " + err.message;
   });
 };
 
-$("#updateVipActionBtn").onclick = ()=>{
+$("#updateVipActionBtn").onclick = () => {
   const uid = $("#vipTargetUid").value.trim();
   const minSpent = parseFloat($("#vipNewLevelSelect").value);
   const fb = $("#vipFeedback");
-  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID العميل"; return; }
+  if (!uid) {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ أدخل ID العميل";
+    return;
+  }
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
 
-  db.ref('users/'+uid+'/totalSpent').set(minSpent).then(()=>{
-    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+  db.ref('users/' + uid + '/totalSpent').set(minSpent).then(() => {
+    db.ref('notifications/' + uid + '/' + ('notif_' + Date.now())).set({
       title: "مبروك ترقية الـ VIP! 👑",
-      body: `تم ترقية حسابك إلى مستوى VIP جديد بنجاح من قبل الإدارة! استمتع بمزاياك الجديدة.`,
+      body: "تم ترقية حسابك إلى مستوى VIP جديد بنجاح من قبل الإدارة! استمتع بمزاياك الجديدة.",
       time: Date.now(),
       read: false
-    });
+    }).catch(() => {});
 
     fb.style.color = "var(--ok)";
-    fb.textContent = `✅ تم ترقية مستوى الـ VIP للعميل وإرسال الإشعار بنجاح!`;
+    fb.textContent = "✅ تم ترقية مستوى الـ VIP للعميل وإرسال الإشعار بنجاح!";
     $("#vipTargetUid").value = "";
     toast("👑 تم تحديث مستوى VIP وإرسال الإشعار");
   }).catch(err => {
@@ -895,18 +958,23 @@ $("#updateVipActionBtn").onclick = ()=>{
   });
 };
 
-$("#banUserBtn").onclick = ()=>{
+$("#banUserBtn").onclick = () => {
   const uid = $("#banTargetUid").value.trim();
   const fb = $("#banFeedback");
-  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
+  if (!uid) {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ أدخل ID المستخدم";
+    return;
+  }
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
 
-  db.ref('users/'+uid+'/isBlocked').set(true).then(()=>{
-    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+  db.ref('users/' + uid + '/isBlocked').set(true).then(() => {
+    db.ref('notifications/' + uid + '/' + ('notif_' + Date.now())).set({
       title: "تنبيه هام 🚫",
-      body: `تم تقييد حسابك وحظره من قبل الإدارة.`,
+      body: "تم تقييد حسابك وحظره من قبل الإدارة.",
       time: Date.now(),
       read: false
-    });
+    }).catch(() => {});
 
     fb.style.color = "var(--ok)";
     fb.textContent = `🚫 تم حظر المستخدم (${uid}) بنجاح!`;
@@ -918,18 +986,23 @@ $("#banUserBtn").onclick = ()=>{
   });
 };
 
-$("#unbanUserBtn").onclick = ()=>{
+$("#unbanUserBtn").onclick = () => {
   const uid = $("#banTargetUid").value.trim();
   const fb = $("#banFeedback");
-  if(!uid){ fb.style.color="var(--err)"; fb.textContent="❌ أدخل ID المستخدم"; return; }
+  if (!uid) {
+    fb.style.color = "var(--err)";
+    fb.textContent = "❌ أدخل ID المستخدم";
+    return;
+  }
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
 
-  db.ref('users/'+uid+'/isBlocked').set(false).then(()=>{
-    db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
+  db.ref('users/' + uid + '/isBlocked').set(false).then(() => {
+    db.ref('notifications/' + uid + '/' + ('notif_' + Date.now())).set({
       title: "فك الحظر ✅",
-      body: `تم رفع الحظر عن حسابك بنجاح. أهلاً بك مجدداً!`,
+      body: "تم رفع الحظر عن حسابك بنجاح. أهلاً بك مجدداً!",
       time: Date.now(),
       read: false
-    });
+    }).catch(() => {});
 
     fb.style.color = "var(--ok)";
     fb.textContent = `🔓 تم رفع الحظر عن المستخدم (${uid}) بنجاح!`;
@@ -941,12 +1014,20 @@ $("#unbanUserBtn").onclick = ()=>{
   });
 };
 
-function loadBlockedUsersList(){
+window.unbanUserDirect = function(uid) {
+  if (!db) return;
+  db.ref('users/' + uid + '/isBlocked').set(false).then(() => {
+    toast("🔓 تم رفع الحظر");
+  }).catch(err => toast("❌ " + err.message));
+};
+
+function loadBlockedUsersList() {
+  if (!db) return;
   db.ref('users').on('value', s => {
     const users = s.val() || {};
-    const blocked = Object.entries(users).filter(([uid, u]) => u.isBlocked === true);
+    const blocked = Object.entries(users).filter(([uid, u]) => u && u.isBlocked === true);
     const box = $("#blockedUsersList");
-    if(!blocked.length){
+    if (!blocked.length) {
       box.innerHTML = '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد حسابات محظورة حالياً</p>';
       return;
     }
@@ -956,121 +1037,139 @@ function loadBlockedUsersList(){
           <b>${esc(u.profile?.name || uid)}</b>
           <div style="font-size:10px;color:var(--sub);direction:ltr">ID: ${esc(uid)}</div>
         </div>
-        <button class="btn" style="width:auto;padding:6px 12px;background:var(--ok);color:#032914;font-size:10px" onclick="db.ref('users/${esc(uid)}/isBlocked').set(false);toast('🔓 تم رفع الحظر')">رفع الحظر</button>
+        <button class="btn" style="width:auto;padding:6px 12px;background:var(--ok);color:#032914;font-size:10px" onclick="unbanUserDirect('${esc(uid)}')">رفع الحظر</button>
       </div>
     `).join("");
-  });
+  }, () => {});
 }
 
 let currentBannersList = [];
-function renderBannersEditor(){
+function renderBannersEditor() {
   const box = $("#bannersEditorContainer");
   box.innerHTML = currentBannersList.map((url, i) => `
     <div class="banner-row">
-      <img src="${url || 'https://via.placeholder.com/60x30'}" onerror="this.src='https://via.placeholder.com/60x30'">
+      <img src="${esc(url) || 'https://via.placeholder.com/60x30'}" onerror="this.src='https://via.placeholder.com/60x30'">
       <input type="text" class="in banner-url-input" value="${esc(url)}" placeholder="رابط صورة البنر (URL)" style="margin:0;direction:ltr" oninput="this.previousElementSibling.src=this.value">
       <button class="btn danger" style="width:auto;padding:6px 10px" onclick="currentBannersList.splice(${i},1);renderBannersEditor()">حذف</button>
     </div>
   `).join("");
 }
 
-$("#addNewBannerRow").onclick = ()=>{ currentBannersList.push(""); renderBannersEditor(); };
+$("#addNewBannerRow").onclick = () => { currentBannersList.push(""); renderBannersEditor(); };
 
-function loadBannersUI(){
+function loadBannersUI() {
+  if (!db) return;
   db.ref('settings/heroSlides').once('value', s => {
     const val = s.val();
-    currentBannersList = (val && Array.isArray(val)) ? val.map(b => b.img) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png"];
+    currentBannersList = (val && Array.isArray(val)) ? val.map(b => b.img).filter(Boolean) : ["https://cdn.imagetourls.com/uploads/tyImg/vKrswo4b.png"];
     renderBannersEditor();
-  });
+  }).catch(() => {});
 }
 
-$("#saveBannersActionBtn").onclick = ()=>{
+$("#saveBannersActionBtn").onclick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
   const inputs = $$('.banner-url-input');
-  currentBannersList = Array.from(inputs).map(i => i.value.trim()).filter(v=>v);
-  const formatted = currentBannersList.map((img, i) => ({img, title: `Banner ${i+1}`}));
-  db.ref('settings/heroSlides').set(formatted).then(()=>{
+  currentBannersList = Array.from(inputs).map(i => i.value.trim()).filter(v => v);
+  const formatted = currentBannersList.map((img, i) => ({ img, title: `Banner ${i + 1}` }));
+  db.ref('settings/heroSlides').set(formatted).then(() => {
     toast("✅ تم حفظ البانرات ونشرها للجميع فوراً في الموقع!");
-  });
+  }).catch(err => toast("❌ " + err.message));
 };
 
 let currentGamePrices = [];
 
-function renderPricesEditor(){
+function renderPricesEditor() {
   const box = $("#gamePricesListContainer");
   box.innerHTML = currentGamePrices.map((item, idx) => `
     <div class="price-row">
       <input type="text" class="in pkg-name" value="${esc(item[0])}" style="margin:0;flex:2" placeholder="اسم الباقة">
-      <input type="number" step="any" class="in pkg-price" value="${item[1]}" style="margin:0;flex:1;text-align:center" placeholder="السعر">
+      <input type="number" step="any" class="in pkg-price" value="${esc(item[1])}" style="margin:0;flex:1;text-align:center" placeholder="السعر">
       <button type="button" class="btn sm danger" onclick="currentGamePrices.splice(${idx},1);renderPricesEditor()">✕</button>
     </div>
   `).join("");
 }
 
-function loadPricesUI(){
+function loadPricesUI() {
   refreshPriceGameSelect();
   const gameId = $("#priceGameSelect").value || "pubg";
-  db.ref('settings/gamesPrices/'+gameId).once('value', s => {
-    if(s.val() && Array.isArray(s.val())){
-      currentGamePrices = s.val().map(r=>Array.isArray(r)?r.slice():[r.name||"", r.price||0]);
-    } else if(adminCatalogGames[gameId] && Array.isArray(adminCatalogGames[gameId].items)){
-      currentGamePrices = adminCatalogGames[gameId].items.map(r=>Array.isArray(r)?r.slice():[r.name||"", r.price||0]);
+  if (!db) {
+    currentGamePrices = (DEFAULT_GAMES_PRICES[gameId] || []).map(r => r.slice());
+    renderPricesEditor();
+    return;
+  }
+  db.ref('settings/gamesPrices/' + gameId).once('value', s => {
+    if (s.val() && Array.isArray(s.val())) {
+      currentGamePrices = s.val().map(r => Array.isArray(r) ? r.slice() : [r.name || "", r.price || 0]);
+    } else if (adminCatalogGames[gameId] && Array.isArray(adminCatalogGames[gameId].items)) {
+      currentGamePrices = adminCatalogGames[gameId].items.map(r => Array.isArray(r) ? r.slice() : [r.name || "", r.price || 0]);
     } else {
-      currentGamePrices = (DEFAULT_GAMES_PRICES[gameId] || []).map(r=>r.slice());
+      currentGamePrices = (DEFAULT_GAMES_PRICES[gameId] || []).map(r => r.slice());
     }
     renderPricesEditor();
-  });
+  }).catch(() => {});
 }
 $("#priceGameSelect").onchange = loadPricesUI;
 
-$("#savePricesActionBtn").onclick = ()=>{
+$("#savePricesActionBtn").onclick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
   const gameId = $("#priceGameSelect").value;
+  if (!gameId) return toast("⚠️ اختر لعبة أولاً");
   const rows = $$('#gamePricesListContainer .price-row');
-  const updated = rows.map((r, i) => {
-    const oldExtra = (currentGamePrices[i] && currentGamePrices[i][2]) ? [currentGamePrices[i][2]] : [];
+  const updated = rows.map((r, idx) => {
+    const oldExtra = (currentGamePrices[idx] && currentGamePrices[idx][2]) ? [currentGamePrices[idx][2]] : [];
     return [$('.pkg-name', r).value.trim(), parseFloat($('.pkg-price', r).value) || 0, ...oldExtra];
   }).filter(x => x[0]);
 
-  const ops = [db.ref('settings/gamesPrices/'+gameId).set(updated)];
-  if(adminCatalogGames[gameId]){
-    ops.push(db.ref('settings/catalog_games/'+gameId+'/items').set(updated));
+  const ops = [db.ref('settings/gamesPrices/' + gameId).set(updated)];
+  if (adminCatalogGames[gameId]) {
+    ops.push(db.ref('settings/catalog_games/' + gameId + '/items').set(updated));
   }
-  Promise.all(ops).then(()=>{
+  Promise.all(ops).then(() => {
     toast("✅ تم حفظ وتحديث أسعار " + (adminCatalogGames[gameId]?.n || gameId) + " في المتجر!");
-  });
+  }).catch(err => toast("❌ " + err.message));
 };
 
-function loadCoupons(){
+window.deleteCouponDirect = function(code) {
+  if (!db) return;
+  db.ref('coupons/' + code).remove().then(() => toast("🗑️ تم حذف الكوبون")).catch(err => toast("❌ " + err.message));
+};
+
+function loadCoupons() {
+  if (!db) return;
   db.ref('coupons').on('value', s => {
     const c = s.val() || {};
     const list = Object.entries(c);
     $("#adminCouponsList").innerHTML = list.length ? list.map(([code, data]) => `
       <div class="list-item">
         <div class="top"><span style="color:var(--gold)">${esc(code)}</span><span style="color:var(--ok)">خصم ${esc(data.discount)}%</span></div>
-        <button class="btn danger" style="padding:5px;font-size:10px;margin-top:4px" onclick="db.ref('coupons/${esc(code)}').remove();toast('🗑️ تم حذف الكوبون')">حذف الكوبون</button>
+        <button class="btn danger" style="padding:5px;font-size:10px;margin-top:4px" onclick="deleteCouponDirect('${esc(code)}')">حذف الكوبون</button>
       </div>
     `).join("") : '<p style="text-align:center;color:var(--sub);padding:10px">لا توجد كوبونات مضافة</p>';
-  });
+  }, () => {});
 }
 
-$("#createCouponBtn").onclick = ()=>{
+$("#createCouponBtn").onclick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
   const code = $("#couponCodeInput").value.trim().toUpperCase();
   const disc = parseFloat($("#couponDiscountInput").value);
-  if(!code || isNaN(disc) || disc <= 0) return toast("❌ أدخل كود صحيح ونسبة خصم صحيحة");
-  db.ref('coupons/'+code).set({ code, discount: disc, active: true, created: Date.now() }).then(()=>{
+  if (!code || isNaN(disc) || disc <= 0) return toast("❌ أدخل كود صحيح ونسبة خصم صحيحة");
+  db.ref('coupons/' + code).set({ code, discount: disc, active: true, created: Date.now() }).then(() => {
     toast("✅ تم حفظ الكوبون بنجاح");
-    $("#couponCodeInput").value = ""; $("#couponDiscountInput").value = "";
-  });
+    $("#couponCodeInput").value = "";
+    $("#couponDiscountInput").value = "";
+  }).catch(err => toast("❌ " + err.message));
 };
 
-function loadTickets(){
+function loadTickets() {
+  if (!db) return;
   db.ref('admin_tickets').on('value', s => {
     const data = s.val() || {};
     const list = Object.entries(data);
-    $("#stTicketsCount").textContent = list.filter(x=>!x[1].reply).length;
+    $("#stTicketsCount").textContent = list.filter(x => x[1] && !x[1].reply).length;
     $("#adminTicketsList").innerHTML = list.length ? list.map(([tid, t]) => `
       <div class="list-item">
-        <div class="top"><span style="color:var(--a)">${esc(t.subject||"تذكرة دعم")}</span><small style="color:var(--sub)">${esc(t.uid)}</small></div>
-        <div style="font-size:10px;color:var(--gold);margin-bottom:4px">العميل: ${esc(t.name||"مستخدم")} • ${new Date(t.time||Date.now()).toLocaleString('ar-EG')}</div>
+        <div class="top"><span style="color:var(--a)">${esc(t.subject || "تذكرة دعم")}</span><small style="color:var(--sub)">${esc(t.uid)}</small></div>
+        <div style="font-size:10px;color:var(--gold);margin-bottom:4px">العميل: ${esc(t.name || "مستخدم")} • ${new Date(t.time || Date.now()).toLocaleString('ar-EG')}</div>
         <p style="margin:4px 0;color:var(--tx)">${esc(t.message)}</p>
         ${t.reply ? `<div style="background:var(--card);border:1px solid var(--ok);border-radius:8px;padding:6px;margin-top:6px;color:var(--ok)"><b>الرد المرسل:</b> ${esc(t.reply)}</div>` : `
           <input id="rep_${esc(tid)}" class="in" placeholder="اكتب ردك هنا..." style="margin:6px 0;padding:7px;font-size:11px">
@@ -1078,45 +1177,60 @@ function loadTickets(){
         `}
       </div>
     `).join("") : '<p style="text-align:center;color:var(--sub);padding:15px">لا توجد تذاكر دعم فني</p>';
-  });
+  }, () => {});
 }
 
-window.replyTicket = function(tid, uid, inputId){
-  const txt = document.getElementById(inputId).value.trim();
-  if(!txt) return toast("⚠️ اكتب الرد أولاً");
-  
-  db.ref('admin_tickets/'+tid+'/reply').set(txt);
-  db.ref('support_tickets/'+uid+'/'+tid+'/reply').set(txt);
-  db.ref('support_tickets/'+uid+'/'+tid+'/readByClient').set(false);
-  
-  db.ref('notifications/'+uid+'/'+('notif_'+Date.now())).set({
-    title: "رد الدعم الفني 🎧",
-    body: `تم الرد على استفسارك: "${txt}"`,
-    time: Date.now(),
-    read: false
-  });
-  
-  toast("✅ تم إرسال الرد وإشعار العميل");
+window.replyTicket = function(tid, uid, inputId) {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
+  const inp = document.getElementById(inputId);
+  const txt = inp ? inp.value.trim() : "";
+  if (!txt) return toast("⚠️ اكتب الرد أولاً");
+
+  Promise.all([
+    db.ref('admin_tickets/' + tid + '/reply').set(txt),
+    db.ref('support_tickets/' + uid + '/' + tid + '/reply').set(txt),
+    db.ref('support_tickets/' + uid + '/' + tid + '/readByClient').set(false),
+    db.ref('notifications/' + uid + '/' + ('notif_' + Date.now())).set({
+      title: "رد الدعم الفني 🎧",
+      body: `تم الرد على استفسارك: "${txt}"`,
+      time: Date.now(),
+      read: false
+    })
+  ]).then(() => {
+    toast("✅ تم إرسال الرد وإشعار العميل");
+  }).catch(err => toast("❌ " + err.message));
 };
 
 let maintenanceState = false;
-function loadSettings(){
+function loadSettings() {
+  if (!db) return;
   db.ref('settings/maintenance').on('value', s => {
     maintenanceState = s.val() === true;
-    $("#toggleMaintenanceBtn").textContent = maintenanceState ? "إلغاء وضع الصيانة" : "تفعيل الصيانة";
-    $("#toggleMaintenanceBtn").className = maintenanceState ? "btn" : "btn danger";
-    if(maintenanceState) $("#toggleMaintenanceBtn").style.background = "var(--ok)";
-    else $("#toggleMaintenanceBtn").style.background = "";
-  });
-  db.ref('settings/whatsapp').once('value', s => { if(s.val()) $("#whatsappNumberInput").value = s.val(); });
+    const btn = $("#toggleMaintenanceBtn");
+    if (!btn) return;
+    btn.textContent = maintenanceState ? "إلغاء وضع الصيانة" : "تفعيل الصيانة";
+    btn.className = maintenanceState ? "btn" : "btn danger";
+    btn.style.background = maintenanceState ? "var(--ok)" : "";
+    btn.style.color = maintenanceState ? "#032914" : "";
+  }, () => {});
+  db.ref('settings/whatsapp').once('value', s => {
+    if (s.val()) $("#whatsappNumberInput").value = s.val();
+  }).catch(() => {});
 }
 
-$("#toggleMaintenanceBtn").onclick = ()=>{ db.ref('settings/maintenance').set(!maintenanceState).then(()=>toast("✅ تم تحديث وضع الصيانة")); };
-window.toggleMaintenanceQuick = ()=>db.ref('settings/maintenance').set(!maintenanceState).then(()=>toast("✅ تم تبديل وضع الصيانة"));
-$("#saveSettingsBtn").onclick = ()=>{
+$("#toggleMaintenanceBtn").onclick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
+  db.ref('settings/maintenance').set(!maintenanceState).then(() => toast("✅ تم تحديث وضع الصيانة")).catch(err => toast("❌ " + err.message));
+};
+window.toggleMaintenanceQuick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
+  db.ref('settings/maintenance').set(!maintenanceState).then(() => toast("✅ تم تبديل وضع الصيانة")).catch(err => toast("❌ " + err.message));
+};
+$("#saveSettingsBtn").onclick = () => {
+  if (!db) return toast("❌ تعذر الاتصال بـ Firebase");
   const wa = $("#whatsappNumberInput").value.trim();
-  if(!wa) return toast("❌ أدخل رقم واتساب");
-  db.ref('settings/whatsapp').set(wa).then(()=>toast("✅ تم حفظ رقم الواتساب"));
+  if (!wa) return toast("❌ أدخل رقم واتساب");
+  db.ref('settings/whatsapp').set(wa).then(() => toast("✅ تم حفظ رقم الواتساب")).catch(err => toast("❌ " + err.message));
 };
 </script>
 </body>
