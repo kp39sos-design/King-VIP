@@ -2143,40 +2143,61 @@ setInterval(()=>{
   const el = $("#tickerText"); if(el) el.textContent = tickerMsgs[Math.floor(Math.random()*tickerMsgs.length)];
 }, 4000);
 
-const KB = [
-  {k:["ازاي اطلب","كيف اطلب","الشراء"],a:"اختر اللعبة، اضغط عرض الباقات، ثم شراء الآن، وحوّل المبلغ المطلوب إلى فودافون كاش واكتب رقمك المحوّل منه وارفع صورة الإيصال داخل الموقع."},
-  {k:["فودافون كاش","الدفع","ادفع ازاي"],a:"الدفع يتم عبر فودافون كاش برقم التحويل المعروض في نافذة الدفع، ثم إدخال رقم المحفظة المحوّل منها ورفع صورة الإيصال ومتابعة الطلب من صفحة طلباتي."},
-  {k:["الوقت","التسليم","كام بتاخد وقت"],a:"التسليم فوري وصاروخي خلال 5 إلى 15 دقيقة بعد تأكيد التحويل."},
-  {k:["من أنت","من صاحب","المتجر"],a:"أنا «ذكي» مساعد متجر أسرع من نتكم 🔥."}
-];
-function botInit(){
-  const bm = $("#botMsgs");
-  if(bm.children.length === 0){
-    bm.innerHTML = '<div class="bm b">أهلاً بك! 👋 أنا «ذكي» مساعد متجر أسرع من نتكم. كيف يمكنني مساعدتك اليوم؟</div>';
-    $("#botChips").innerHTML = ['ازاي اطلب؟', 'طرق الدفع', 'وقت التسليم'].map(c=>`<button class="chip" data-botchip="${c}">${c}</button>`).join("");
-  }
-}
-$("#botFab").onclick = ()=>{ $("#botPanel").classList.add("on"); botInit(); };
-$("#botClose").onclick = ()=>$("#botPanel").classList.remove("on");
-$("#botForm").onsubmit = e=>{
-  e.preventDefault();
-  const inp = $("#botIn"), txt = inp.value.trim(); if(!txt) return;
-  inp.value = "";
-  const bm = $("#botMsgs");
-  bm.innerHTML += `<div class="bm u">${esc(txt)}</div>`;
-  setTimeout(()=>{
-    let ans = "مفهمتش سؤالك كويس، يمكنك إرسال تذكرة دعم فني مباشرة من القائمة.";
-    const found = KB.find(k=>k.k.some(w=>txt.includes(w)));
-    if(found) ans = found.a;
-    bm.innerHTML += `<div class="bm b">${esc(ans)}</div>`;
-    bm.scrollTop = bm.scrollHeight;
-  }, 300);
-  bm.scrollTop = bm.scrollHeight;
+const BOT_DEFAULTS = {
+  enabled:true,
+  welcome:'أهلاً بك! 👋 أنا «ذكي» مساعد أسرع من نتكم. اسألني عن الطلبات والدفع والشحن والعضوية.',
+  fallback:'مش قادر أحدد الإجابة بدقة. أقدر أوصلك بالدعم الفني من مركز الدعم داخل التطبيق.',
+  quick:['ازاي اطلب؟','طرق الدفع','متابعة طلبي','مستويات VIP'],
+  knowledge:[
+    {keys:['ازاي اطلب','كيف اطلب','الشراء','اطلب ازاي'],answer:'اختار اللعبة أو الخدمة، افتح الباقة المناسبة، اضغط شراء الآن، وبعدها اتبع خطوات الدفع وارفع إثبات التحويل لو مطلوب. تقدر تتابع الحالة من «طلباتي». '},
+    {keys:['فودافون كاش','الدفع','ادفع ازاي','طرق الدفع','محفظة'],answer:'طرق الدفع المتاحة وتفاصيل التحويل بتظهر لك داخل نافذة إتمام الطلب. اتأكد من مراجعة الرقم والمبلغ قبل التحويل، واحتفظ بإيصال الدفع.'},
+    {keys:['الوقت','التسليم','كام بتاخد','امتى يوصل','الشحن'],answer:'مدة التنفيذ بتختلف حسب اللعبة والخدمة وحالة مراجعة الدفع. تابع حالة الطلب من صفحة «طلباتي»؛ ولو اتأخر افتح تذكرة دعم.'},
+    {keys:['طلبي','متابعة','تتبع','حالة الطلب','رقم الطلب'],answer:'تقدر تتابع كل طلباتك من قسم «طلباتي». لو محتاج مساعدة في طلب معين ابعت رقم الطلب للدعم الفني.'},
+    {keys:['vip','عضوية','مستوى','ترقية'],answer:'مستوى VIP ومؤشر التقدم ظاهرين في ملفك الشخصي. بعض المزايا والعروض بتتحدد حسب إعدادات المتجر.'},
+    {keys:['رصيد','المحفظة','الرصيد'],answer:'رصيدك الحالي ظاهر أعلى الصفحة وفي ملفك الشخصي. أي إضافة أو خصم لازم يظهر من خلال عملية معتمدة من إدارة المتجر.'},
+    {keys:['مشكلة','شكوى','الدعم','موظف','اكلم حد'],answer:'تقدر تتواصل مع فريقنا من «مركز الدعم الفني» وإرسال تذكرة، وسيتم الرد عليك من لوحة الإدارة.'},
+    {keys:['من أنت','من صاحب','المتجر'],answer:'أنا «ذكي» مساعد متجر أسرع من نتكم 🔥، موجود لمساعدتك في استخدام المتجر.'}
+  ]
 };
-document.addEventListener("click", e=>{
-  const chip = e.target.closest("[data-botchip]");
-  if(chip){ $("#botIn").value = chip.dataset.botchip; $("#botForm").requestSubmit(); }
-});
+let botConfig = JSON.parse(JSON.stringify(BOT_DEFAULTS));
+function listenBotSettings(){
+  if(!firebaseOK || !db) return;
+  db.ref('settings/aiBot').on('value', snap=>{
+    const v=snap.val(); if(!v || typeof v!=='object') return;
+    botConfig={...BOT_DEFAULTS,...v};
+    if(!Array.isArray(botConfig.knowledge)) botConfig.knowledge=BOT_DEFAULTS.knowledge;
+    if(!Array.isArray(botConfig.quick)) botConfig.quick=BOT_DEFAULTS.quick;
+    if(!botConfig.enabled) { const fab=$('#botFab'); if(fab) fab.title='المساعد متوقف مؤقتاً'; }
+    else { const fab=$('#botFab'); if(fab) fab.title='افتح المساعد الذكي'; }
+    if($('#botMsgs')?.children.length===0) botInit();
+  },()=>{});
+}
+function botInit(){
+  const bm=$('#botMsgs'); if(!bm || bm.children.length) return;
+  bm.innerHTML=`<div class="bm b">${esc(botConfig.welcome||BOT_DEFAULTS.welcome)}</div>`;
+  $('#botChips').innerHTML=(botConfig.quick||BOT_DEFAULTS.quick).slice(0,5).map(c=>`<button class="chip" data-botchip="${esc(c)}">${esc(c)}</button>`).join('');
+}
+function botAnswer(txt){
+  const normalized=String(txt||'').toLowerCase().replace(/[أإآ]/g,'ا').replace(/[؟?!،]/g,' ').trim();
+  const entries=[...(botConfig.knowledge||[]),...BOT_DEFAULTS.knowledge];
+  const found=entries.find(item=>(item.keys||[]).some(k=>{
+    const key=String(k).toLowerCase().replace(/[أإآ]/g,'ا').trim(); return key && normalized.includes(key);
+  }));
+  if(found) return found.answer||found.a||botConfig.fallback;
+  if(/طلب|اوردر/.test(normalized)) return 'افتح قسم «طلباتي» لمتابعة حالة الطلب. لو مش ظاهر، اتأكد إنك داخل بنفس الحساب اللي عملت منه الطلب.';
+  return botConfig.fallback||BOT_DEFAULTS.fallback;
+}
+function botAddMessage(text,type){
+  const bm=$('#botMsgs'); if(!bm) return;
+  const row=document.createElement('div'); row.className='bm '+(type==='user'?'u':'b'); row.textContent=text; bm.appendChild(row); bm.scrollTop=bm.scrollHeight;
+}
+$('#botFab').onclick=()=>{ if(botConfig.enabled===false){toast('المساعد متوقف مؤقتاً');return;} $('#botPanel').classList.add('on'); botInit(); };
+$('#botClose').onclick=()=>$('#botPanel').classList.remove('on');
+$('#botForm').onsubmit=e=>{
+  e.preventDefault(); const inp=$('#botIn'),txt=inp.value.trim(); if(!txt)return; inp.value=''; botAddMessage(txt,'user');
+  setTimeout(()=>botAddMessage(botAnswer(txt),'bot'),220);
+};
+document.addEventListener('click',e=>{const chip=e.target.closest('[data-botchip]');if(chip){$('#botIn').value=chip.dataset.botchip;$('#botForm').requestSubmit();}});
 
 window.onscroll = ()=>{
   if(window.scrollY > 300) $("#backTop").classList.add("on");
@@ -2188,6 +2209,7 @@ setTheme(store.get("theme", "light"));
 applyLang();
 refreshPaymentModalUI();
 listenPaymentSettings();
+listenBotSettings();
 listenHeroBanners();
 listenGamePrices();
 startOfferTimer();
