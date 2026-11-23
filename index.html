@@ -142,11 +142,14 @@ footer{text-align:center;padding:22px 8px 14px;color:var(--sub);font-size:10px;f
 #botForm{display:flex;gap:6px;padding:8px 10px;background:var(--bg);border-top:1px solid var(--bd)}
 #botIn{flex:1;background:var(--inner);border:1px solid var(--bd);color:var(--tx);padding:10px 12px;border-radius:999px;font-size:12px}
 #botSend{width:40px;height:40px;border-radius:50%;background:var(--g1);color:#fff;font-size:14px}
-.dots-wrap{position:relative}
-.dots{width:32px;padding:0;display:flex;align-items:center;justify-content:center;font-size:15px}
-.dmenu{position:fixed;top:65px;left:50%;transform:translateX(-50%);width:92%;max-width:480px;z-index:99999;max-height:80vh;overflow-y:auto;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:10px;box-shadow:0 25px 50px rgba(0,0,0,.6);display:none}
-.dmenu.on{display:block;animation:dropMenu .25s ease-out}
-@keyframes dropMenu{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+.dots-wrap{position:relative;z-index:1}
+.dots{width:36px;min-width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;background:linear-gradient(145deg,#2563eb,#7c3aed);border:1px solid rgba(255,255,255,.28);box-shadow:0 4px 0 rgba(2,6,23,.5),0 8px 18px rgba(37,99,235,.28)}
+.dots i{font-size:19px;line-height:1}
+/* القائمة تُنقل إلى body عبر JavaScript لتفادي قصّها داخل #app */
+.dmenu{position:fixed;top:calc(env(safe-area-inset-top,0px) + 68px);left:auto;right:max(10px,calc((100vw - 520px)/2 + 10px));transform:none;width:min(480px,calc(100vw - 20px));z-index:10020;max-height:calc(100dvh - 90px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--modal);border:1px solid var(--bd2);border-radius:20px;padding:12px;box-shadow:0 25px 50px rgba(0,0,0,.68),0 0 0 1px rgba(56,189,248,.12);display:none}
+.dmenu.on{display:block;animation:dropMenu .22s ease-out}
+@keyframes dropMenu{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:360px){.dots{width:36px;min-width:36px;height:36px}.dmenu{right:8px;width:calc(100vw - 16px);max-height:calc(100dvh - 82px)}}
 .dm-t{font-size:10px;font-weight:800;color:var(--sub);padding:8px 10px 6px}
 .dmenu button,.dmenu a{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;background:transparent;color:var(--tx);font-size:12px;font-weight:700;text-align:start}
 .dmenu button:hover,.dmenu a:hover{background:var(--inner)}
@@ -273,6 +276,115 @@ body.pf-open{overflow:hidden}
 .pf-menu button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;font-size:12.5px;font-weight:800;color:var(--tx);text-align:start;border-bottom:1px solid var(--bd)}
 .pf-menu button:last-child{border-bottom:0}.pf-menu button>span:nth-child(2){flex:1}.pf-menu button>i{color:var(--sub);font-size:11px}
 .pf-ic{width:34px;height:34px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;color:#fff;background:var(--c,#2563EB);font-size:14px}
+
+/* ===== ASRA3 3D PREMIUM LAYER (visual-only; original app logic preserved) ===== */
+:root{
+ --bg:#070b19;--card:#111a31;--inner:#0b1429;--tx:#f5f8ff;--sub:#a8b5d0;
+ --a:#38bdf8;--b:#a78bfa;--bd:rgba(94,190,255,.22);--bd2:rgba(167,139,250,.42);
+ --g1:linear-gradient(135deg,#06b6d4 0%,#4f46e5 52%,#9333ea 100%);
+ --g2:linear-gradient(135deg,#ffe08a 0%,#f59e0b 100%);
+ --modal:#101a31;--sh:0 18px 40px rgba(0,0,0,.34);
+}
+html{background:#030712;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 12% 4%,rgba(14,165,233,.19),transparent 34%),radial-gradient(ellipse at 92% 22%,rgba(124,58,237,.18),transparent 32%),#030712!important}
+#app{background:linear-gradient(160deg,rgba(13,22,43,.98),rgba(7,12,27,.99))!important;box-shadow:0 0 70px rgba(14,165,233,.10);isolation:isolate}
+#app:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(125,180,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(125,180,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+header,.wallet-box,#liveTicker,.pay,.form,.sc,.st,.review-card,.mini-card,.offer-timer{
+ background:linear-gradient(145deg,rgba(24,39,70,.96),rgba(11,19,39,.98))!important;
+ border:1px solid rgba(115,190,255,.25)!important;
+ box-shadow:0 10px 0 rgba(2,6,23,.34),0 18px 30px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.08)!important;
+}
+header{transform:perspective(900px) rotateX(1.5deg);border-radius:18px!important}
+.gc,.pr,.g-card,.mb{transform-style:preserve-3d;backface-visibility:hidden}
+.gc{background:linear-gradient(145deg,#172b53,#0b1429)!important;border:1px solid rgba(56,189,248,.3)!important;box-shadow:0 7px 0 #070d1d,0 17px 26px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.12)!important;transition:transform .28s,box-shadow .28s}
+.gi{background:radial-gradient(circle at 50% 38%,rgba(56,189,248,.32),transparent 62%),linear-gradient(145deg,#0c1b38,#101329)!important}
+.gi img{box-shadow:0 9px 18px rgba(0,0,0,.42),0 0 0 4px rgba(56,189,248,.08);transform:translateZ(14px)}
+.gn{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent)}
+.pr{background:linear-gradient(145deg,#192847,#0c1428)!important;border-color:rgba(167,139,250,.34)!important;box-shadow:0 5px 0 #070d1d,0 12px 20px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.08)!important;transition:transform .22s,box-shadow .22s}
+.tab,.subtab,.ibtn,.wallet-btn,.open-b,.buy,.copy,.wa,.order,.skip,.bn-btn,.chip,.gbtn{
+ transition:transform .18s,filter .18s,box-shadow .18s;
+}
+.tab,.subtab{box-shadow:0 4px 0 rgba(2,6,23,.35),0 8px 15px rgba(0,0,0,.16)}
+.tab.on,.subtab.on,.open-b,.wallet-btn,.copy,.skip,.gbtn.guest{box-shadow:0 5px 0 rgba(15,23,42,.55),0 10px 22px rgba(59,130,246,.28),inset 0 1px rgba(255,255,255,.22)}
+.buy,.order{box-shadow:0 4px 0 #9a5b06,0 9px 18px rgba(245,158,11,.22),inset 0 1px rgba(255,255,255,.45)}
+.modal .mb{background:linear-gradient(145deg,#172440,#0c1428)!important;box-shadow:0 25px 70px rgba(0,0,0,.6),inset 0 1px rgba(255,255,255,.08)}
+#bottomNav{background:rgba(10,17,34,.94)!important;backdrop-filter:blur(18px);border-top:1px solid rgba(56,189,248,.25);box-shadow:0 -12px 32px rgba(0,0,0,.38)}
+.bn-btn.on i{filter:drop-shadow(0 0 8px rgba(56,189,248,.7))}
+#botFab{box-shadow:0 7px 0 #172554,0 14px 26px rgba(37,99,235,.4),inset 0 1px rgba(255,255,255,.3)}
+#botPanel{background:linear-gradient(145deg,#14213d,#0a1226)!important}
+.in,.search input,#botIn{box-shadow:inset 0 3px 8px rgba(0,0,0,.18);border-color:rgba(56,189,248,.22)!important}
+.in:focus,.search input:focus,#botIn:focus{box-shadow:0 0 0 3px rgba(56,189,248,.13),inset 0 2px 6px rgba(0,0,0,.16)}
+#hero .hs-v{box-shadow:0 8px 0 #080e20,0 20px 36px rgba(37,99,235,.27),inset 0 1px rgba(255,255,255,.2);border:1px solid rgba(125,190,255,.25)}
+#splash{background:radial-gradient(circle at 50% 40%,#182d55,#070b19 65%)!important}
+@media(hover:hover) and (pointer:fine){
+ .gc:hover{transform:perspective(900px) rotateX(2deg) rotateY(-2deg) translateY(-5px);box-shadow:0 10px 0 #070d1d,0 25px 38px rgba(0,0,0,.48),0 0 24px rgba(56,189,248,.12)!important}
+ .pr:hover{transform:perspective(700px) translateY(-4px) rotateX(2deg);box-shadow:0 8px 0 #070d1d,0 18px 26px rgba(0,0,0,.3)!important}
+ .tab:hover,.subtab:hover,.ibtn:hover,.mini-card:hover{transform:translateY(-2px);filter:brightness(1.12)}
+ .buy:hover,.order:hover,.open-b:hover,.wallet-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+}
+button:active{transform:translateY(2px) scale(.98)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+/* ===== Premium 3D Profile V4 ===== */
+#profile.on{padding:0 14px calc(96px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at 50% -10%,rgba(37,99,235,.16),transparent 48%),var(--bg)}
+#profile .pf-bar{margin:0 -14px 14px;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;background:rgba(255,255,255,.76);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--bd);box-shadow:0 8px 24px rgba(15,23,42,.06)}
+[data-theme="dark"] #profile .pf-bar{background:rgba(8,11,24,.82);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+#profile .pf-bar b{font-size:15px;letter-spacing:.1px}
+#profile .pf-back{width:40px;height:40px;border-radius:14px;font-size:14px;box-shadow:0 5px 14px rgba(37,99,235,.12);transition:transform .2s,box-shadow .2s}
+#profile .pf-back:active{transform:scale(.94)}
+#profile .pf-hero{isolation:isolate;position:relative;border:1px solid rgba(56,189,248,.25);border-radius:26px;padding:0 16px 18px;margin:0 0 14px;overflow:hidden;background:linear-gradient(145deg,var(--card),var(--inner));box-shadow:0 18px 38px rgba(15,23,42,.12),inset 0 1px rgba(255,255,255,.5)}
+[data-theme="dark"] #profile .pf-hero{box-shadow:0 18px 38px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.07)}
+#profile .pf-cover{height:112px;margin:0 -16px;background:radial-gradient(circle at 18% 25%,rgba(255,255,255,.4),transparent 25%),radial-gradient(circle at 82% 75%,rgba(255,209,102,.28),transparent 28%),linear-gradient(120deg,#075985 0%,#2563EB 42%,#7C3AED 100%);overflow:hidden}
+#profile .pf-cover:before{content:"";position:absolute;inset:0;opacity:.24;background-image:linear-gradient(30deg,transparent 45%,rgba(255,255,255,.35) 46%,transparent 47%),linear-gradient(120deg,transparent 45%,rgba(255,255,255,.25) 46%,transparent 47%);background-size:34px 34px}
+#profile .pf-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(5,10,28,.28))}
+#profile .pf-av{width:104px;height:104px;margin:-54px auto 9px;padding:4px;border-radius:50%;background:linear-gradient(135deg,#67E8F9,#2563EB,#A78BFA,#FFD166);box-shadow:0 10px 26px rgba(37,99,235,.32);z-index:2}
+#profile .pf-av img{border:4px solid var(--card);display:block}
+#profile .pf-name{font-size:19px;line-height:1.5;letter-spacing:.1px}
+#profile .pf-mail{font-size:11px;direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere;margin:3px 0 8px}
+#profile .pf-status{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);color:#16A34A;font-size:10px;font-weight:900}
+#profile .pf-status:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+#profile .pf-login{margin:12px auto 0;max-width:280px;padding:12px 16px;border-radius:14px;font-size:12px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+#profile .pf-hero-actions{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+#profile .pf-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;border-radius:12px;background:var(--inner);border:1px solid var(--bd);font-size:10px;font-weight:900;color:var(--a)}
+#profile .pf-action:active{transform:scale(.97)}
+#profile .vip-badge-box{position:relative;display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:14px;border-radius:21px;background:linear-gradient(120deg,rgba(245,158,11,.13),rgba(37,99,235,.12),rgba(147,51,234,.13));border:1px solid rgba(245,158,11,.35);box-shadow:0 12px 26px rgba(15,23,42,.09);overflow:hidden}
+#profile .vip-badge-box:after{content:"VIP";position:absolute;inset-inline-end:10px;top:-13px;font-size:54px;font-weight:900;letter-spacing:-4px;color:rgba(245,158,11,.07);pointer-events:none}
+#profile .vip-avatar-badge{width:62px;height:62px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.25));z-index:1}
+#profile .vip-info-text{min-width:0;z-index:1}
+#profile #vipTierName{font-size:14px!important}
+#profile .vip-progress-bar{height:8px!important;border-radius:99px!important;background:rgba(127,127,127,.2)!important;overflow:hidden}
+#profile .vip-progress-fill{border-radius:99px!important;background:linear-gradient(90deg,#F59E0B,#FDE68A,#F59E0B)!important;box-shadow:0 0 12px rgba(245,158,11,.35)}
+#profile .pf-section-title{display:flex;align-items:center;gap:8px;margin:16px 2px 9px;font-size:12px;font-weight:900;color:var(--tx)}
+#profile .pf-section-title i{color:var(--a)}
+#profile .pf-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:12px}
+#profile .pf-stat{position:relative;min-height:91px;padding:13px;border-radius:18px;background:linear-gradient(145deg,var(--card),var(--inner));box-shadow:0 9px 20px rgba(15,23,42,.07);overflow:hidden}
+#profile .pf-stat:after{content:"";position:absolute;width:54px;height:54px;border-radius:50%;inset-inline-end:-20px;bottom:-23px;background:var(--a);opacity:.07}
+#profile .pf-stat i{font-size:17px;margin-bottom:4px}
+#profile .pf-stat small{font-size:10px}
+#profile .pf-stat b{font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+#profile .pf-stat .pf-row{width:100%;min-width:0}
+#profile .pf-stat .pf-row b{font-size:10px;white-space:nowrap;direction:ltr}
+#profile .pf-mini{min-width:30px;min-height:29px;border-radius:9px;padding:4px 8px;font-size:11px}
+#profile .pf-ref{position:relative;background:linear-gradient(120deg,rgba(245,158,11,.14),rgba(147,51,234,.12));border:1px dashed rgba(217,155,22,.7);border-radius:18px;padding:13px 14px;margin-bottom:14px;box-shadow:0 8px 18px rgba(15,23,42,.05)}
+#profile .pf-ref small{font-size:10px}
+#profile .pf-ref b{font-size:14px!important;letter-spacing:.6px}
+#profile .pf-menu-wrap{margin-bottom:14px}
+#profile .pf-menu{border-radius:19px;box-shadow:0 10px 24px rgba(15,23,42,.07)}
+#profile .pf-menu button{min-height:60px;padding:10px 13px;gap:11px;font-size:12px;transition:background .18s}
+#profile .pf-menu button:active{background:var(--inner)}
+#profile .pf-ic{width:38px;height:38px;border-radius:13px;font-size:15px;box-shadow:0 5px 12px color-mix(in srgb,var(--c,#2563EB) 25%,transparent)}
+#profile .pf-menu button>i{font-size:10px}
+#profile .pf-logout{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 8px;padding:13px;border-radius:15px;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-weight:900;font-size:12px;box-shadow:0 8px 18px rgba(239,68,68,.22)}
+#profile .pf-logout:active{transform:scale(.985)}
+#profile .pf-guest-note{margin:0 0 12px;padding:11px 13px;border-radius:14px;background:var(--inner);border:1px solid var(--bd);color:var(--sub);font-size:10px;line-height:1.8;text-align:center}
+@media(max-width:360px){#profile.on{padding-inline:10px}#profile .pf-stat{padding:10px}#profile .pf-stat b{font-size:12px}#profile .vip-badge-box{gap:8px;padding:11px}#profile .vip-avatar-badge{width:52px;height:52px}}
+@media(prefers-reduced-motion:reduce){#profile *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Account engagement cards - safe client-side badges only */
+.pf-engage{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}.pf-eng-card{background:linear-gradient(145deg,var(--card),var(--inner));border:1px solid var(--bd2);border-radius:18px;padding:13px;box-shadow:0 9px 20px rgba(15,23,42,.07)}.pf-eng-card b{display:block;font-size:12px;margin:5px 0}.pf-eng-card small{font-size:10px;color:var(--sub);line-height:1.6}.pf-checkin{width:100%;margin-top:9px;padding:9px;border-radius:11px;background:linear-gradient(110deg,#D99B16,#FDE68A);color:#382000;font-size:11px;font-weight:900}.pf-achievements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}.pf-ach{padding:11px 6px;text-align:center;border-radius:15px;background:var(--card);border:1px solid var(--bd);opacity:.48}.pf-ach.unlocked{opacity:1;border-color:rgba(217,155,22,.5);box-shadow:0 7px 16px rgba(217,155,22,.1)}.pf-ach i{font-size:20px;color:var(--gold);display:block;margin-bottom:6px}.pf-ach b{font-size:9px;display:block}.pf-ach small{font-size:8px;color:var(--sub)}
+
 </style>
 </head>
 <body>
@@ -416,49 +528,67 @@ body.pf-open{overflow:hidden}
 <section id="profile" class="sec" aria-label="الملف الشخصي">
   <div class="pf-bar">
     <button class="pf-back" id="profBack" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
-    <b>👤 الملف الشخصي</b>
+    <b>حسابي الشخصي</b>
     <button class="pf-back" data-act="editName" aria-label="تعديل الاسم"><i class="fa-solid fa-pen"></i></button>
   </div>
 
   <div class="pf-hero">
     <div class="pf-cover"></div>
-    <div class="pf-av"><img id="profImg" alt="" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png"></div>
+    <div class="pf-av"><img id="profImg" alt="الصورة الشخصية" src="https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png"></div>
     <b id="profName" class="pf-name">زائر</b>
-    <small id="profEmail" class="pf-mail">-</small>
-    <button class="pf-login" id="profLogin"><i class="fa-brands fa-google"></i> تسجيل الدخول بجيميل</button>
-  </div>
-
-  <div class="vip-badge-box" id="vipCardBox">
-    <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="VIP Badge">
-    <div style="flex:1" class="vip-info-text">
-      <small style="color:var(--sub);font-size:9.5px;font-weight:700">مستوى العضوية الحالي</small>
-      <b id="vipTierName" style="color:var(--gold);font-size:13.5px;margin:2px 0;display:block">⭐ VIP 1 - مبتدئ</b>
-      <div class="vip-progress-bar"><div class="vip-progress-fill" id="vipProgressFill"></div></div>
-      <small id="vipNextTarget" style="display:block;margin-top:4px;font-size:9.5px;color:var(--sub)">الشحن القادم للترقية: --</small>
+    <small id="profEmail" class="pf-mail">سجّل دخولك للاستفادة من كامل المميزات</small>
+    <span class="pf-status" id="profStatus">حساب زائر</span>
+    <button class="pf-login" id="profLogin"><i class="fa-brands fa-google"></i> تسجيل الدخول باستخدام Google</button>
+    <div class="pf-hero-actions">
+      <button class="pf-action" data-act="editName"><i class="fa-solid fa-user-pen"></i> تعديل الاسم</button>
+      <button class="pf-action" id="profTopupBtn"><i class="fa-solid fa-wallet"></i> شحن المحفظة</button>
+      <button class="pf-action" id="profCopyIdTop"><i class="fa-regular fa-copy"></i> نسخ رقم العضوية</button>
     </div>
   </div>
 
+  <div class="vip-badge-box" id="vipCardBox">
+    <img id="vipTierImg" class="vip-avatar-badge" src="https://cdn.imagetourls.com/uploads/tyImg/4mTwiN9w.png" alt="شارة VIP">
+    <div style="flex:1" class="vip-info-text">
+      <small style="color:var(--sub);font-size:9.5px;font-weight:700">مستوى عضويتك الحالي</small>
+      <b id="vipTierName" style="color:var(--gold);font-size:13.5px;margin:2px 0;display:block">⭐ VIP 1 - مبتدئ</b>
+      <div class="vip-progress-bar"><div class="vip-progress-fill" id="vipProgressFill"></div></div>
+      <small id="vipNextTarget" style="display:block;margin-top:5px;font-size:9.5px;color:var(--sub)">الشحن القادم للترقية: --</small>
+    </div>
+  </div>
+
+  <div class="pf-section-title"><i class="fa-solid fa-chart-pie"></i> ملخص حسابك</div>
   <div class="pf-grid">
     <div class="pf-stat"><i class="fa-solid fa-wallet" style="color:var(--ok)"></i><small>رصيد المحفظة</small><b id="profWallet" style="color:var(--ok)">0.00 ج.م</b></div>
-    <div class="pf-stat"><i class="fa-solid fa-star" style="color:var(--b)"></i><small>نقاط الولاء (+4%)</small><b id="profPoints" style="color:var(--b)">0 نقطة</b></div>
+    <div class="pf-stat"><i class="fa-solid fa-star" style="color:var(--b)"></i><small>نقاط الولاء</small><b id="profPoints" style="color:var(--b)">0 نقطة</b></div>
     <div class="pf-stat"><i class="fa-solid fa-bag-shopping" style="color:var(--a)"></i><small>إجمالي المشتريات</small><b id="profSpent">0.00 ج.م</b></div>
-    <div class="pf-stat"><i class="fa-solid fa-fingerprint" style="color:var(--a)"></i><small>ID الحساب</small>
-      <div class="pf-row"><b id="profId" style="direction:ltr;color:var(--a);font-size:11px">------</b><button class="pf-mini" id="copyProfIdBtn">📋</button></div></div>
+    <div class="pf-stat"><i class="fa-solid fa-fingerprint" style="color:var(--a)"></i><small>رقم العضوية</small>
+      <div class="pf-row"><b id="profId" style="direction:ltr;color:var(--a);font-size:11px">------</b><button class="pf-mini" id="copyProfIdBtn" aria-label="نسخ رقم العضوية"><i class="fa-regular fa-copy"></i></button></div>
+    </div>
   </div>
 
   <div class="pf-ref">
-    <div><small>🎁 كود الإحالة (شارك واربح)</small><b id="profRef" style="direction:ltr;color:var(--gold);display:block;font-size:13px;margin-top:2px">------</b></div>
-    <button class="pf-mini" id="copyRefBtn" style="padding:8px 14px">📋 نسخ</button>
+    <div><small>🎁 كود الإحالة — شارك المتجر مع أصدقائك</small><b id="profRef" style="direction:ltr;color:var(--gold);display:block;font-size:13px;margin-top:3px">------</b></div>
+    <button class="pf-mini" id="copyRefBtn" style="padding:8px 13px">نسخ الكود</button>
   </div>
 
-  <div class="pf-menu">
-    <button data-sec="orders"><span class="pf-ic" style="--c:#2563EB"><i class="fa-solid fa-receipt"></i></span><span>طلباتي</span><i class="fa-solid fa-chevron-left"></i></button>
-    <button data-sec="favorites"><span class="pf-ic" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المفضلة</span><i class="fa-solid fa-chevron-left"></i></button>
-    <button data-act="editName"><span class="pf-ic" style="--c:#9333EA"><i class="fa-solid fa-user-pen"></i></span><span>تعديل الاسم</span><i class="fa-solid fa-chevron-left"></i></button>
-    <button data-act="supportDesk"><span class="pf-ic" style="--c:#0EA5E9"><i class="fa-solid fa-headset"></i></span><span>الدعم الفني</span><i class="fa-solid fa-chevron-left"></i></button>
+  <div class="pf-section-title"><i class="fa-solid fa-calendar-check"></i> نشاطك ومكافآتك</div>
+  <div class="pf-engage">
+    <div class="pf-eng-card"><i class="fa-solid fa-calendar-day" style="color:var(--gold);font-size:20px"></i><b>تسجيل الحضور اليومي</b><small id="pfCheckinStatus">سجّل حضورك اليوم لمتابعة نشاطك.</small><button class="pf-checkin" id="pfCheckinBtn">تسجيل الحضور</button></div>
+    <div class="pf-eng-card"><i class="fa-solid fa-trophy" style="color:var(--gold);font-size:20px"></i><b>إنجازات حسابك</b><small>شارات تقديرية حسب نشاطك ومشترياتك المسجلة.</small><small id="pfAchievementCount" style="display:block;margin-top:7px;color:var(--a);font-weight:900">0 إنجاز مفتوح</small></div>
   </div>
+  <div class="pf-achievements" id="pfAchievements"></div>
 
-  <button class="order" id="profLogout" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;border-radius:14px;padding:12px;font-weight:900;font-size:12px;box-shadow:0 4px 12px rgba(239,68,68,.3);margin-top:12px">🚪 تسجيل الخروج</button>
+  <div class="pf-section-title"><i class="fa-solid fa-grid-2"></i> خدمات الحساب</div>
+  <div class="pf-menu-wrap">
+    <div class="pf-menu">
+      <button data-sec="orders"><span class="pf-ic" style="--c:#2563EB"><i class="fa-solid fa-receipt"></i></span><span>طلباتي ومتابعة الشحن</span><i class="fa-solid fa-chevron-left"></i></button>
+      <button data-sec="favorites"><span class="pf-ic" style="--c:#EF4444"><i class="fa-solid fa-heart"></i></span><span>المنتجات المفضلة</span><i class="fa-solid fa-chevron-left"></i></button>
+      <button data-act="supportDesk"><span class="pf-ic" style="--c:#0EA5E9"><i class="fa-solid fa-headset"></i></span><span>مركز الدعم الفني</span><i class="fa-solid fa-chevron-left"></i></button>
+      <button data-act="support"><span class="pf-ic" style="--c:#16A34A"><i class="fa-brands fa-whatsapp"></i></span><span>تواصل عبر واتساب</span><i class="fa-solid fa-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="pf-guest-note" id="profGuestNote">سجّل الدخول باستخدام Google لحفظ حسابك وبياناتك ومتابعة طلباتك من أي جهاز.</div>
+  <button class="pf-logout" id="profLogout"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج من الحساب</button>
 </section>
 
 <section id="admin" class="sec">
@@ -752,11 +882,11 @@ const VIP_TIERS = [
 ];
 
 let userTotalSpent = parseFloat(store.get("user_total_spent", "0")) || 0;
-let userWallet=0, userPoints=0, user=null;
+let userWallet=0, userPoints=parseInt(store.get("user_points","0"),10)||0, user=null;
 let uniqueUid = store.get("user_unique_id","");
 function genUid(){ return "REAL-" + Math.floor(100000 + Math.random()*900000); }
 if(!uniqueUid){ uniqueUid = genUid(); store.set("user_unique_id", uniqueUid); }
-function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[currency]; $("#walletBalance").textContent=txt; $("#profWallet").textContent=txt; }
+function updateWalletUI(){ const txt = userWallet.toFixed(2) + " " + CFG.cur[currency]; $("#walletBalance").textContent=txt; $("#profWallet").textContent=txt; const p=$("#profPoints"); if(p) p.textContent=(Number(userPoints)||0).toLocaleString("ar-EG")+" نقطة"; }
 
 function calculateVipLevel(spent) {
   let currentTier = VIP_TIERS[0];
@@ -870,14 +1000,16 @@ function listenWallet(){
   });
 
   db.ref('users/' + uniqueUid + '/points').on('value', s=>{
-    userPoints = s.val() || 0;
-    $("#profPoints").textContent = userPoints + " نقطة";
+    userPoints = Number(s.val()) || 0;
+    store.set("user_points", userPoints);
+    $("#profPoints").textContent = userPoints.toLocaleString("ar-EG") + " نقطة";
   });
 
   db.ref('users/' + uniqueUid + '/totalSpent').on('value', s=>{
-    userTotalSpent = s.val() || 0;
+    userTotalSpent = Number(s.val()) || 0;
     store.set("user_total_spent", userTotalSpent);
     updateVipUI();
+    const spentEl=$("#profSpent"); if(spentEl) spentEl.textContent=userTotalSpent.toFixed(2)+" ج.م";
   });
 }
 
@@ -1054,22 +1186,58 @@ $("#logoutItem").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=
 $("#profLogout").onclick = ()=>{ if(firebaseOK && auth){ auth.signOut().then(()=>{ user=null; updateUserUI(); renderProfile(); showSec("games"); toast("👋 تم تسجيل الخروج"); }); } else { toast("لم يتم تسجيل الدخول"); } };
 
 function renderProfile(){
-  $("#profName").textContent = store.get("custom_username","") || (user?user.displayName:"زائر");
-  $("#profEmail").textContent = user?user.email:"سجّل دخولك بجيميل";
-  $("#profId").textContent = uniqueUid;
-  $("#profRef").textContent = "REF-" + uniqueUid.replace("REAL-","");
+  const displayName = store.get("custom_username","") || (user?user.displayName:"زائر");
+  $("#profName").textContent = displayName;
+  $("#profEmail").textContent = user ? (user.email || "حساب Google") : "سجّل دخولك للاستفادة من كامل المميزات";
+  $("#profId").textContent = uniqueUid || "------";
+  $("#profRef").textContent = "REF-" + String(uniqueUid||"").replace("REAL-","");
   $("#profImg").src = user&&user.photoURL ? user.photoURL : "https://www.image2url.com/r2/default/images/1787411627208-4591f9bf-158c-4ee9-bb7f-a63abfe35bf6.png";
+  const status=$("#profStatus"), note=$("#profGuestNote"), logout=$("#profLogout");
+  if(status){ status.textContent=user?"عضوية مسجلة":"حساب زائر"; status.style.color=user?"#16A34A":"var(--gold)"; status.style.borderColor=user?"rgba(22,163,74,.25)":"rgba(217,155,22,.35)"; status.style.background=user?"rgba(22,163,74,.1)":"rgba(217,155,22,.10)"; }
+  if(note) note.style.display=user?"none":"block";
+  if(logout) logout.style.display=user?"flex":"none";
+  $("#profPoints").textContent=(Number(userPoints)||0).toLocaleString("ar-EG")+" نقطة";
+  $("#profSpent").textContent=(Number(userTotalSpent)||0).toFixed(2)+" ج.م";
   updateWalletUI();
   updateVipUI();
-  const lg = $("#profLogin"), lo = $("#profLogout");
+  const lg = $("#profLogin");
   if(lg) lg.style.display = user ? "none" : "flex";
-  if(lo) lo.style.display = user ? "block" : "none";
+  renderProfileEngagement();
 }
+function renderProfileEngagement(){
+  const spent=Number(userTotalSpent)||0, points=Number(userPoints)||0;
+  const badges=[
+    {icon:"fa-user-check",name:"عضو مسجل",ok:!!user,desc:"تسجيل الدخول"},
+    {icon:"fa-star",name:"جامع النقاط",ok:points>=100,desc:"100 نقطة"},
+    {icon:"fa-gem",name:"VIP",ok:spent>=500,desc:"مشتريات 500 ج.م"},
+    {icon:"fa-crown",name:"عميل مميز",ok:spent>=2000,desc:"مشتريات 2000 ج.م"},
+    {icon:"fa-bag-shopping",name:"أول طلب",ok:spent>0,desc:"إتمام أول عملية"},
+    {icon:"fa-fire",name:"نشاط مستمر",ok:(Number(store.get("pf_checkin_count","0"))||0)>=7,desc:"7 أيام حضور"}
+  ];
+  const host=$("#pfAchievements");
+  if(host) host.innerHTML=badges.map(x=>`<div class="pf-ach ${x.ok?'unlocked':''}"><i class="fa-solid ${x.icon}"></i><b>${x.name}</b><small>${x.ok?'تم الفتح':x.desc}</small></div>`).join("");
+  const count=badges.filter(x=>x.ok).length, out=$("#pfAchievementCount"); if(out) out.textContent=count+" / "+badges.length+" إنجاز مفتوح";
+  const today=new Date().toISOString().slice(0,10), last=store.get("pf_checkin_date","");
+  const status=$("#pfCheckinStatus"),btn=$("#pfCheckinBtn");
+  if(status) status.textContent=last===today?"تم تسجيل حضورك اليوم بنجاح.":"سجّل حضورك اليوم لمتابعة سلسلة نشاطك.";
+  if(btn){btn.disabled=last===today;btn.textContent=last===today?"تم التسجيل اليوم ✓":"تسجيل الحضور";btn.style.opacity=last===today?".65":"1";}
+}
+$("#pfCheckinBtn")?.addEventListener("click",()=>{
+  if(!user){toast("سجّل الدخول أولاً لحفظ حضورك");return;}
+  const today=new Date().toISOString().slice(0,10);
+  if(store.get("pf_checkin_date","")===today){toast("تم تسجيل حضورك اليوم بالفعل");return;}
+  store.set("pf_checkin_date",today);
+  store.set("pf_checkin_count",(Number(store.get("pf_checkin_count","0"))||0)+1);
+  renderProfileEngagement();toast("تم تسجيل حضورك اليوم ✓");
+});
+
 $("#profBack").onclick = ()=>showSec("games");
+$("#profTopupBtn")?.addEventListener("click",()=>openWA("السلام عليكم 👋\nعايز أشحن محفظتي في متجر أسرع من نتكم 🔥"));
 $("#profLogin").onclick = ()=>{ requestSystemNotificationPermission(); loginGoogle(); };
 $("#copyRefBtn").onclick = ()=>copy($("#profRef").textContent);
 $("#copyUserIdBtn").onclick = ()=>copy(uniqueUid);
 $("#copyProfIdBtn").onclick = ()=>copy(uniqueUid);
+$("#profCopyIdTop").onclick = ()=>copy(uniqueUid);
 
 const stat={get:k=>parseInt(store.get("st_"+k,"0"))||0,inc(k){store.set("st_"+k,this.get(k)+1);renderStats()}};
 function renderStats(){ $("#stats").innerHTML=[["visits","إجمالي الزيارات"],["unique","الزوار الفريدين"],["pk","عرض الباقات"],["ord","طلبات الشحن"]].map(([k,l])=>`<div class="st"><span>${l}</span><b>${stat.get(k)}</b></div>`).join(""); }
@@ -1767,11 +1935,27 @@ $$("#currencySelector .lang-btn").forEach(b=>{
   };
 });
 
-$("#dotsBtn").onclick = ()=>{ $("#dMenu").classList.toggle("on"); };
+// انقل القائمة مباشرة إلى body حتى لا تقصّها طبقات #app أو البنرات أو overflow.
+const dotsMenu = $("#dMenu");
+const dotsButton = $("#dotsBtn");
+if(dotsMenu && dotsMenu.parentElement !== document.body) document.body.appendChild(dotsMenu);
+function closeDotsMenu(){
+  if(dotsMenu) dotsMenu.classList.remove("on");
+  if(dotsButton) dotsButton.setAttribute("aria-expanded","false");
+}
+if(dotsButton && dotsMenu){
+  dotsButton.setAttribute("aria-haspopup","true");
+  dotsButton.setAttribute("aria-expanded","false");
+  dotsButton.onclick = e=>{
+    e.stopPropagation();
+    const opened = dotsMenu.classList.toggle("on");
+    dotsButton.setAttribute("aria-expanded",String(opened));
+  };
+}
 document.addEventListener("click", e=>{
-  if(!e.target.closest(".dots-wrap")) $("#dMenu").classList.remove("on");
+  if(!e.target.closest("#dMenu") && !e.target.closest("#dotsBtn")) closeDotsMenu();
   const el = e.target.closest("[data-act]"); if(!el) return;
-  const act = el.dataset.act; $("#dMenu").classList.remove("on");
+  const act = el.dataset.act; closeDotsMenu();
   if(act === "profile") showSec("profile");
   else if(act === "orders") showSec("orders");
   else if(act === "favorites") showSec("favorites");
@@ -1788,6 +1972,7 @@ document.addEventListener("click", e=>{
   else if(act === "logout"){ if(firebaseOK && auth) auth.signOut(); user = null; updateUserUI(); toast("👋 تم تسجيل الخروج"); }
   else if(act === "editName"){ $("#customNameInput").value = store.get("custom_username",""); $("#nameModal").classList.add("on"); }
 });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape") closeDotsMenu(); });
 
 $("#saveNameBtn").onclick = ()=>{
   const v = $("#customNameInput").value.trim();
