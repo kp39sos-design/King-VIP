@@ -69,10 +69,8 @@ textarea.in{min-height:80px;resize:none}
 .gm-badge.off{background:rgba(239,68,68,.16);color:#EF4444}
 .gm-badge.new{background:rgba(16,185,129,.18);color:#10B981}
 .gm-badge.hot{background:rgba(239,68,68,.18);color:#F87171}
-.gm-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gm-row{display:flex;gap:6px;align-items:center;margin-bottom:8px}.gm-row .in{margin:0}.gm-color{width:48px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--inner);padding:2px;cursor:pointer;flex-shrink:0}.gm-stats{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}.gm-stats span{background:var(--inner);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;font-size:10px;font-weight:800;color:var(--sub)}
-.gm-preview-box{background:var(--card);border:1px dashed var(--bd2);border-radius:12px;padding:8px;margin-bottom:10px;font-size:10.5px;color:var(--sub)}
+.gm-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gm-row{display:flex;gap:6px;align-items:center;margin-bottom:8px}.gm-row .in{margin:0}.gm-color{width:48px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--inner);padding:2px;cursor:pointer;flex-shrink:0}.gm-stats{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}.gm-stats span{background:var(--inner);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;font-size:10px;font-weight:800;color:var(--sub)}.gm-preview-box{background:var(--card);border:1px dashed var(--bd2);border-radius:12px;padding:8px;margin-bottom:10px;font-size:10.5px;color:var(--sub)}
 
-/* ===== ASRA3 3D ADMIN PREMIUM LAYER (visual-only; original admin logic preserved) ===== */
 :root{--bg:#060a17;--card:#111a30;--inner:#0a1428;--tx:#f5f8ff;--sub:#a8b5d0;--a:#38bdf8;--b:#a78bfa;--gold:#ffd166;--bd:rgba(56,189,248,.23);--bd2:rgba(167,139,250,.42);--g1:linear-gradient(135deg,#06b6d4,#4f46e5 55%,#9333ea);--g2:linear-gradient(135deg,#ffe08a,#f59e0b);--sh:0 15px 35px rgba(0,0,0,.35)}
 html{background:#030712;scroll-behavior:smooth}
 body{background:radial-gradient(ellipse at 10% 5%,rgba(14,165,233,.18),transparent 35%),radial-gradient(ellipse at 90% 35%,rgba(124,58,237,.17),transparent 34%),#030712!important}
@@ -104,7 +102,6 @@ header{transform:perspective(900px) rotateX(1.5deg)}
 }
 button:active{transform:translateY(2px) scale(.985)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
-
 </style>
 </head>
 <body>
@@ -117,6 +114,10 @@ button:active{transform:translateY(2px) scale(.985)}
     <input id="adminEmailInput" class="in" type="email" autocomplete="username" placeholder="البريد الإلكتروني للمشرف" style="text-align:center;margin-bottom:9px">
     <input id="adminPassInput" class="in" type="password" autocomplete="current-password" placeholder="كلمة المرور" style="text-align:center">
     <button class="btn gold" id="adminLoginBtn">🔐 دخول آمن</button>
+    <button type="button" class="btn" id="adminGoogleLoginBtn" style="margin-top:8px;background:#ffffff;color:#1f2937;border:1px solid #d1d5db">
+      <i class="fa-brands fa-google" style="color:#EA4335;margin-inline-end:6px"></i>
+      تسجيل الدخول باستخدام Google
+    </button>
     <p id="adminAuthMessage" role="status" style="font-size:11px;color:var(--sub);margin-top:12px">يتطلب حساب مشرف معتمد في Firebase.</p>
   </div>
 </div>
@@ -434,6 +435,7 @@ let adminCatalogGames = JSON.parse(JSON.stringify(BUILTIN_GAMES_META));
 let adminDeletedGameIds = [];
 let gmDraftPackages = [{ name: "", price: "", img: "" }];
 let adminInitialized = false;
+let googleAdminLoginBusy = false;
 
 function unlockAdminUI() {
   if (adminInitialized) return;
@@ -461,7 +463,9 @@ function authErrorMessage(error) {
     "auth/invalid-credential": "بيانات الدخول غير صحيحة.",
     "auth/too-many-requests": "محاولات كثيرة. انتظر قليلاً ثم حاول.",
     "auth/network-request-failed": "تعذر الاتصال. تحقق من الإنترنت.",
-    "auth/operation-not-allowed": "فعّل تسجيل الدخول بالبريد وكلمة المرور من Firebase."
+    "auth/operation-not-allowed": "فعّل طريقة تسجيل الدخول هذه من Firebase Authentication.",
+    "auth/unauthorized-domain": "هذا الدومين غير مضاف في Authorized domains داخل Firebase Authentication.",
+    "auth/popup-blocked": "المتصفح منع النافذة المنبثقة. سيتم المحاولة بطريقة التحويل."
   };
   return messages[code] || (error && error.message) || "تعذر تسجيل الدخول.";
 }
@@ -473,7 +477,7 @@ async function verifyAdminAndUnlock(user) {
     const snap = await db.ref("admins/" + user.uid).once("value");
     if (snap.val() !== true) {
       await auth.signOut();
-      showAuthMessage("هذا الحساب ليس ضمن قائمة المشرفين المعتمدين.", true);
+      showAuthMessage(`الحساب (${user.email || user.uid}) ليس ضمن قائمة المشرفين (admins/${user.uid} = true).`, true);
       return;
     }
     toast("✅ تم التحقق من حساب المشرف");
@@ -503,6 +507,45 @@ $("#adminLoginBtn").onclick = async () => {
   }
 };
 
+$("#adminGoogleLoginBtn").onclick = async () => {
+  if (!auth) return showAuthMessage("خدمة تسجيل الدخول غير مهيأة. تحقق من Firebase Auth.", true);
+  if (location.protocol === "file:") {
+    return showAuthMessage("افتح الصفحة من رابط https وليس كملف محلي على الهاتف.", true);
+  }
+  if (googleAdminLoginBusy) return;
+  googleAdminLoginBusy = true;
+  const gBtn = $("#adminGoogleLoginBtn");
+  gBtn.disabled = true;
+  showAuthMessage("⏳ جارٍ فتح تسجيل الدخول بحساب Google...");
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+
+  try {
+    const result = await auth.signInWithPopup(provider);
+    if (result && result.user) {
+      await verifyAdminAndUnlock(result.user);
+    }
+  } catch (error) {
+    const code = error && error.code;
+    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request" || code === "auth/user-cancelled") {
+      showAuthMessage("تم إلغاء تسجيل الدخول بحساب Google.");
+    } else if (["auth/popup-blocked", "auth/operation-not-supported-in-this-environment", "auth/web-storage-unsupported"].includes(code)) {
+      try {
+        await auth.signInWithRedirect(provider);
+        return;
+      } catch (redirErr) {
+        showAuthMessage(authErrorMessage(redirErr), true);
+      }
+    } else {
+      showAuthMessage(authErrorMessage(error), true);
+    }
+  } finally {
+    googleAdminLoginBusy = false;
+    gBtn.disabled = false;
+  }
+};
+
 ["#adminEmailInput", "#adminPassInput"].forEach(selector => {
   $(selector).addEventListener("keydown", event => {
     if (event.key === "Enter") $("#adminLoginBtn").click();
@@ -515,6 +558,12 @@ $("#logoutAdminBtn").onclick = async () => {
 };
 
 if (auth) {
+  auth.getRedirectResult().then(result => {
+    if (result && result.user) verifyAdminAndUnlock(result.user);
+  }).catch(err => {
+    if (err && err.code) showAuthMessage(authErrorMessage(err), true);
+  });
+
   auth.onAuthStateChanged(user => {
     if (user) verifyAdminAndUnlock(user);
   });
@@ -1461,7 +1510,6 @@ $("#saveSettingsBtn").onclick = () => {
 };
 
 try {
-  // لا يتم حفظ حالة دخول المشرف في localStorage؛ Firebase Auth يدير الجلسة ويتحقق من صلاحية UID.
 } catch (e) { setErrLabel("تحميل: " + e.message); console.error(e); }
 </script>
 </body>
