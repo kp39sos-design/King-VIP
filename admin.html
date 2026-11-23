@@ -148,6 +148,7 @@ button:active{transform:translateY(2px) scale(.985)}
   <button class="tab" data-sec="prices">🎮 الأسعار</button>
   <button class="tab" data-sec="coupons">🎫 الكوبونات</button>
   <button class="tab" data-sec="tickets">🎧 الدعم</button>
+  <button class="tab" data-sec="aiBot">🤖 المساعد الذكي</button>
   <button class="tab" data-sec="settings">⚙️ الصيانة</button>
 </nav>
 
@@ -315,6 +316,24 @@ button:active{transform:translateY(2px) scale(.985)}
 <section id="tickets" class="sec">
   <div class="ttl" style="margin-top:0">🎧 تذاكر الدعم الفني</div>
   <div id="adminTicketsList"></div>
+</section>
+
+<section id="aiBot" class="sec">
+  <div class="ttl" style="margin-top:0">🤖 إدارة المساعد الذكي «ذكي»</div>
+  <div class="card">
+    <p style="font-size:10.5px;color:var(--sub);line-height:1.8;margin-bottom:10px">تحكم في ردود المساعد والأسئلة السريعة التي تظهر للعملاء. هذه النسخة تستخدم قاعدة معرفة قابلة للتعديل وليست اتصالاً بنموذج ذكاء اصطناعي خارجي.</p>
+    <label style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;margin-bottom:10px"><input id="aiBotEnabled" type="checkbox" checked> تشغيل المساعد داخل المتجر</label>
+    <label style="font-size:10px;color:var(--sub)">رسالة الترحيب</label>
+    <textarea id="aiBotWelcome" class="in" maxlength="500" placeholder="رسالة الترحيب"></textarea>
+    <label style="font-size:10px;color:var(--sub)">رسالة عند عدم فهم السؤال</label>
+    <textarea id="aiBotFallback" class="in" maxlength="500" placeholder="رسالة الرد الافتراضي"></textarea>
+    <label style="font-size:10px;color:var(--sub)">الأسئلة السريعة (كل سؤال في سطر)</label>
+    <textarea id="aiBotQuick" class="in" maxlength="500" placeholder="ازاي اطلب؟&#10;طرق الدفع&#10;متابعة طلبي"></textarea>
+    <label style="font-size:10px;color:var(--sub)">قاعدة المعرفة: كل سطر بالشكل التالي: كلمات البحث مفصولة بفاصلة | الرد</label>
+    <textarea id="aiBotKnowledge" class="in" style="min-height:190px" maxlength="12000" placeholder="ازاي اطلب, الشراء | اختار اللعبة ثم الباقة واضغط شراء الآن...&#10;الدفع, فودافون كاش | تفاصيل الدفع تظهر في نافذة الطلب..."></textarea>
+    <button class="btn gold" id="saveAiBotBtn">💾 حفظ إعدادات المساعد ونشرها للمتجر</button>
+    <div id="aiBotFeedback" style="font-size:10.5px;color:var(--sub);margin-top:8px"></div>
+  </div>
 </section>
 
 <section id="settings" class="sec">
@@ -523,6 +542,41 @@ const STATUS_MAP = {
   cancelled:{t:"ملغي",c:"st-cancelled"}
 };
 
+const AI_BOT_DEFAULT_KNOWLEDGE = [
+  {keys:['ازاي اطلب','كيف اطلب','الشراء'],answer:'اختار اللعبة والباقة واضغط شراء الآن، ثم اتبع خطوات الدفع وتابع طلبك من قسم طلباتي.'},
+  {keys:['الدفع','فودافون كاش','طرق الدفع'],answer:'تفاصيل الدفع المتاحة تظهر داخل نافذة إتمام الطلب. راجع الرقم والمبلغ قبل التحويل واحتفظ بالإيصال.'},
+  {keys:['التسليم','وقت الشحن','امتى يوصل'],answer:'مدة التنفيذ تختلف حسب الخدمة ومراجعة الدفع. تابع الحالة من صفحة طلباتي.'},
+  {keys:['متابعة طلبي','حالة الطلب','تتبع'],answer:'افتح قسم طلباتي لمتابعة آخر تحديث على طلبك.'},
+  {keys:['vip','العضوية','ترقية'],answer:'مستوى VIP ومؤشر التقدم يظهران في الملف الشخصي.'},
+  {keys:['الدعم','شكوى','مشكلة'],answer:'افتح مركز الدعم الفني وأرسل تذكرة وسيتم الرد عليك.'}
+];
+function loadBotManager(){
+  if(!db)return;
+  db.ref('settings/aiBot').once('value').then(s=>{
+    const c=s.val()||{};
+    $('#aiBotEnabled').checked=c.enabled!==false;
+    $('#aiBotWelcome').value=c.welcome||'أهلاً بك! 👋 أنا «ذكي» مساعد أسرع من نتكم. اسألني عن الطلبات والدفع والشحن والعضوية.';
+    $('#aiBotFallback').value=c.fallback||'مش قادر أحدد الإجابة بدقة. أقدر أوصلك بالدعم الفني من مركز الدعم داخل التطبيق.';
+    $('#aiBotQuick').value=(c.quick||['ازاي اطلب؟','طرق الدفع','متابعة طلبي','مستويات VIP']).join('\n');
+    const list=Array.isArray(c.knowledge)&&c.knowledge.length?c.knowledge:AI_BOT_DEFAULT_KNOWLEDGE;
+    $('#aiBotKnowledge').value=list.map(x=>(x.keys||[]).join(', ')+' | '+(x.answer||'')).join('\n');
+  }).catch(e=>$('#aiBotFeedback').textContent='تعذر تحميل الإعدادات: '+e.message);
+}
+$('#saveAiBotBtn').onclick=async()=>{
+  if(!db)return toast('Firebase غير متصل');
+  const parseLines=$('#aiBotKnowledge').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const knowledge=[];
+  for(const line of parseLines){
+    const parts=line.split('|'); if(parts.length<2||!parts[0].trim()||!parts.slice(1).join('|').trim()){
+      $('#aiBotFeedback').textContent='راجع السطر: يجب كتابة كلمات البحث | الرد';return;
+    }
+    knowledge.push({keys:parts[0].split(',').map(x=>x.trim()).filter(Boolean).slice(0,12),answer:parts.slice(1).join('|').trim().slice(0,1200)});
+  }
+  const payload={enabled:$('#aiBotEnabled').checked,welcome:$('#aiBotWelcome').value.trim().slice(0,500),fallback:$('#aiBotFallback').value.trim().slice(0,500),quick:$('#aiBotQuick').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).slice(0,5),knowledge,updatedAt:Date.now(),updatedBy:auth?.currentUser?.uid||'admin'};
+  try{await db.ref('settings/aiBot').set(payload);$('#aiBotFeedback').textContent='✅ تم حفظ إعدادات المساعد. ستظهر للعملاء بعد تحميل الإعدادات.';toast('تم تحديث المساعد الذكي');}
+  catch(e){$('#aiBotFeedback').textContent='❌ فشل الحفظ: '+e.message;}
+};
+
 function initAdminDashboard() {
   renderAdminGamesList();
   renderGmPackagesEditor();
@@ -541,6 +595,7 @@ function initAdminDashboard() {
   listenGamesCatalogAdmin();
   loadCoupons();
   loadTickets();
+  loadBotManager();
   loadBannersUI();
   loadPricesUI();
   loadSettings();
