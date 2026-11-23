@@ -71,6 +71,40 @@ textarea.in{min-height:80px;resize:none}
 .gm-badge.hot{background:rgba(239,68,68,.18);color:#F87171}
 .gm-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gm-row{display:flex;gap:6px;align-items:center;margin-bottom:8px}.gm-row .in{margin:0}.gm-color{width:48px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--inner);padding:2px;cursor:pointer;flex-shrink:0}.gm-stats{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}.gm-stats span{background:var(--inner);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;font-size:10px;font-weight:800;color:var(--sub)}
 .gm-preview-box{background:var(--card);border:1px dashed var(--bd2);border-radius:12px;padding:8px;margin-bottom:10px;font-size:10.5px;color:var(--sub)}
+
+/* ===== ASRA3 3D ADMIN PREMIUM LAYER (visual-only; original admin logic preserved) ===== */
+:root{--bg:#060a17;--card:#111a30;--inner:#0a1428;--tx:#f5f8ff;--sub:#a8b5d0;--a:#38bdf8;--b:#a78bfa;--gold:#ffd166;--bd:rgba(56,189,248,.23);--bd2:rgba(167,139,250,.42);--g1:linear-gradient(135deg,#06b6d4,#4f46e5 55%,#9333ea);--g2:linear-gradient(135deg,#ffe08a,#f59e0b);--sh:0 15px 35px rgba(0,0,0,.35)}
+html{background:#030712;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 10% 5%,rgba(14,165,233,.18),transparent 35%),radial-gradient(ellipse at 90% 35%,rgba(124,58,237,.17),transparent 34%),#030712!important}
+#app{background:linear-gradient(160deg,#0d162b,#070c1b)!important;box-shadow:0 0 70px rgba(14,165,233,.09);isolation:isolate}
+#app:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(125,180,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(125,180,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+header,.card,.stat-box,.list-item,.gm-form-box,.gm-game-card,.gm-pkg-item,.gm-preview-box,.diag-bar{
+ background:linear-gradient(145deg,rgba(24,39,70,.97),rgba(10,18,37,.99))!important;
+ border:1px solid rgba(115,190,255,.24)!important;
+ box-shadow:0 7px 0 rgba(2,6,23,.42),0 17px 28px rgba(0,0,0,.27),inset 0 1px rgba(255,255,255,.07)!important;
+}
+header{transform:perspective(900px) rotateX(1.5deg)}
+.card{transform-style:preserve-3d}
+.stat-box{transition:transform .22s,box-shadow .22s}
+.stat-box b{filter:drop-shadow(0 0 8px rgba(56,189,248,.25))}
+.tab,.ibtn,.btn,.gm-chk,.gm-upload-lbl{transition:transform .18s,filter .18s,box-shadow .18s}
+.tab{box-shadow:0 4px 0 rgba(2,6,23,.4),0 8px 15px rgba(0,0,0,.18)}
+.tab.on,.btn{box-shadow:0 5px 0 rgba(4,10,25,.55),0 10px 20px rgba(37,99,235,.22),inset 0 1px rgba(255,255,255,.15)}
+.btn.gold{box-shadow:0 5px 0 #9a5b06,0 10px 20px rgba(245,158,11,.2),inset 0 1px rgba(255,255,255,.35)}
+.btn.danger{box-shadow:0 5px 0 #7f1d1d,0 10px 20px rgba(239,68,68,.2)}
+.in{background:linear-gradient(145deg,#0a1428,#101d36)!important;box-shadow:inset 0 3px 8px rgba(0,0,0,.22);border-color:rgba(56,189,248,.22)!important}
+.in:focus{box-shadow:0 0 0 3px rgba(56,189,248,.13),inset 0 2px 6px rgba(0,0,0,.16)}
+#loginGate{background:radial-gradient(circle at 15% 15%,rgba(37,99,235,.32),transparent 38%),radial-gradient(circle at 85% 85%,rgba(147,51,234,.32),transparent 38%),#030712!important}
+.login-box{background:linear-gradient(145deg,#1a2a49,#0b1428)!important;box-shadow:0 9px 0 #030712,0 28px 65px rgba(0,0,0,.65),inset 0 1px rgba(255,255,255,.1)!important;transform:perspective(900px) rotateX(2deg);border-color:rgba(125,190,255,.3)!important}
+@media(hover:hover) and (pointer:fine){
+ .card:hover{box-shadow:0 9px 0 rgba(2,6,23,.42),0 22px 34px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.07)!important}
+ .stat-box:hover{transform:perspective(700px) translateY(-4px) rotateX(3deg)}
+ .tab:hover,.ibtn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+ .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+}
+button:active{transform:translateY(2px) scale(.985)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 <body>
@@ -79,9 +113,11 @@ textarea.in{min-height:80px;resize:none}
   <div class="login-box">
     <div style="font-size:45px;margin-bottom:10px">👑</div>
     <h2>لوحة إدارة أسرع من نتكم</h2>
-    <p style="font-size:11.5px;color:var(--sub);margin-bottom:16px">أدخل كلمة مرور المشرف (admin1234)</p>
-    <input id="adminPassInput" class="in" type="password" placeholder="كلمة المرور" style="text-align:center">
-    <button class="btn gold" id="adminLoginBtn">🔓 دخول لوحة الإدارة</button>
+    <p style="font-size:11.5px;color:var(--sub);margin-bottom:16px">تسجيل دخول المشرف الآمن</p>
+    <input id="adminEmailInput" class="in" type="email" autocomplete="username" placeholder="البريد الإلكتروني للمشرف" style="text-align:center;margin-bottom:9px">
+    <input id="adminPassInput" class="in" type="password" autocomplete="current-password" placeholder="كلمة المرور" style="text-align:center">
+    <button class="btn gold" id="adminLoginBtn">🔐 دخول آمن</button>
+    <p id="adminAuthMessage" role="status" style="font-size:11px;color:var(--sub);margin-top:12px">يتطلب حساب مشرف معتمد في Firebase.</p>
   </div>
 </div>
 
@@ -296,6 +332,7 @@ textarea.in{min-height:80px;resize:none}
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 "use strict";
 const $ = (s, r = document) => r.querySelector(s);
@@ -330,16 +367,17 @@ const firebaseConfig = {
   appId: "1:315828860330:web:3b2fb64a105ebb1ae627d3"
 };
 let db = null;
+let auth = null;
 try {
   if (typeof firebase !== "undefined") {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     db = firebase.database();
+    auth = firebase.auth();
   }
 } catch (err) {
   setErrLabel("Firebase Init: " + err.message);
 }
 
-const ADMIN_PASS = "admin1234";
 const IMG_BASE = "https://www.image2url.com/r2/default/images/";
 const DEFAULT_GAME_IMG = IMG_BASE + "1787234418964-76e68daf-ff7e-448f-987f-052d946d37ca.webp";
 
@@ -386,23 +424,84 @@ function unlockAdminUI() {
   initAdminDashboard();
 }
 
+function showAuthMessage(message, isError = false) {
+  const el = $("#adminAuthMessage");
+  if (el) {
+    el.textContent = message;
+    el.style.color = isError ? "#f87171" : "var(--sub)";
+  }
+}
 
-$("#adminLoginBtn").onclick = () => {
-  if ($("#adminPassInput").value === ADMIN_PASS) {
-    try { localStorage.setItem("admin_logged", "true"); } catch (e) {}
-    toast("✅ تم تسجيل دخول المشرف بنجاح");
+function authErrorMessage(error) {
+  const code = error && error.code;
+  const messages = {
+    "auth/invalid-email": "البريد الإلكتروني غير صحيح.",
+    "auth/user-disabled": "هذا الحساب موقوف.",
+    "auth/user-not-found": "الحساب غير موجود.",
+    "auth/wrong-password": "كلمة المرور غير صحيحة.",
+    "auth/invalid-credential": "بيانات الدخول غير صحيحة.",
+    "auth/too-many-requests": "محاولات كثيرة. انتظر قليلاً ثم حاول.",
+    "auth/network-request-failed": "تعذر الاتصال. تحقق من الإنترنت.",
+    "auth/operation-not-allowed": "فعّل تسجيل الدخول بالبريد وكلمة المرور من Firebase."
+  };
+  return messages[code] || (error && error.message) || "تعذر تسجيل الدخول.";
+}
+
+async function verifyAdminAndUnlock(user) {
+  if (!user || !db) return;
+  showAuthMessage("جارٍ التحقق من صلاحيات المشرف...");
+  try {
+    const snap = await db.ref("admins/" + user.uid).once("value");
+    if (snap.val() !== true) {
+      await auth.signOut();
+      showAuthMessage("هذا الحساب ليس ضمن قائمة المشرفين المعتمدين.", true);
+      return;
+    }
+    toast("✅ تم التحقق من حساب المشرف");
     unlockAdminUI();
-  } else {
-    toast("❌ كلمة المرور غير صحيحة");
+  } catch (error) {
+    await auth.signOut();
+    showAuthMessage("تعذر التحقق من الصلاحيات. راجع قواعد Firebase. " + authErrorMessage(error), true);
+  }
+}
+
+$("#adminLoginBtn").onclick = async () => {
+  if (!auth) return showAuthMessage("خدمة تسجيل الدخول غير مهيأة. تحقق من Firebase Auth.", true);
+  const email = $("#adminEmailInput").value.trim();
+  const password = $("#adminPassInput").value;
+  if (!email || !password) return showAuthMessage("أدخل البريد الإلكتروني وكلمة المرور.", true);
+  const button = $("#adminLoginBtn");
+  button.disabled = true;
+  button.textContent = "⏳ جارٍ تسجيل الدخول...";
+  try {
+    const credential = await auth.signInWithEmailAndPassword(email, password);
+    await verifyAdminAndUnlock(credential.user);
+  } catch (error) {
+    showAuthMessage(authErrorMessage(error), true);
+  } finally {
+    button.disabled = false;
+    button.textContent = "🔐 دخول آمن";
   }
 };
-$("#adminPassInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") $("#adminLoginBtn").click();
+
+["#adminEmailInput", "#adminPassInput"].forEach(selector => {
+  $(selector).addEventListener("keydown", event => {
+    if (event.key === "Enter") $("#adminLoginBtn").click();
+  });
 });
-$("#logoutAdminBtn").onclick = () => {
-  try { localStorage.removeItem("admin_logged"); } catch (e) {}
+
+$("#logoutAdminBtn").onclick = async () => {
+  if (auth) await auth.signOut();
   location.reload();
 };
+
+if (auth) {
+  auth.onAuthStateChanged(user => {
+    if (user) verifyAdminAndUnlock(user);
+  });
+} else {
+  showAuthMessage("تعذر تحميل Firebase Authentication. تحقق من الاتصال والإنترنت.", true);
+}
 
 function switchSec(id) {
   if (id === "prices" && typeof loadPricesUI === "function" && adminInitialized) setTimeout(loadPricesUI, 0);
@@ -1307,7 +1406,7 @@ $("#saveSettingsBtn").onclick = () => {
 };
 
 try {
-  if (localStorage.getItem("admin_logged") === "true") unlockAdminUI();
+  // لا يتم حفظ حالة دخول المشرف في localStorage؛ Firebase Auth يدير الجلسة ويتحقق من صلاحية UID.
 } catch (e) { setErrLabel("تحميل: " + e.message); console.error(e); }
 </script>
 </body>
